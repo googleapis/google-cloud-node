@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as assetserviceModule from '../src';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -100,9 +100,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -222,7 +222,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.assetServiceStub, undefined);
@@ -230,12 +230,12 @@ describe('v1p7beta1.AssetServiceClient', () => {
       assert(client.assetServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.assetServiceStub);
@@ -244,14 +244,14 @@ describe('v1p7beta1.AssetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.assetServiceStub, undefined);
@@ -260,7 +260,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -268,7 +268,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -280,7 +280,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -303,7 +303,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
   describe('exportAssets', () => {
     it('invokes exportAssets without error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -335,7 +335,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
 
     it('invokes exportAssets without error using callback', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
 
     it('invokes exportAssets with call error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
 
     it('invokes exportAssets with LRO error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
 
     it('invokes checkExportAssetsProgress without error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,8 +461,8 @@ describe('v1p7beta1.AssetServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportAssetsProgress(
@@ -475,7 +475,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
 
     it('invokes checkExportAssetsProgress with error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -492,7 +492,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -541,7 +541,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -551,7 +551,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -575,7 +575,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -597,7 +597,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -625,7 +625,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -635,7 +635,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -659,7 +659,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -681,7 +681,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -709,7 +709,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -719,7 +719,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -743,7 +743,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -778,7 +778,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -813,7 +813,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
         access_level: 'accessLevelValue',
       };
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
         access_policy: 'accessPolicyValue',
       };
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -903,7 +903,7 @@ describe('v1p7beta1.AssetServiceClient', () => {
         service_perimeter: 'servicePerimeterValue',
       };
       const client = new assetserviceModule.v1p7beta1.AssetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

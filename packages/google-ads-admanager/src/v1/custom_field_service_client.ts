@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class CustomFieldServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('admanager');
@@ -64,9 +64,9 @@ export class CustomFieldServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  customFieldServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  customFieldServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CustomFieldServiceClient.
@@ -141,14 +141,14 @@ export class CustomFieldServiceClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -422,7 +422,7 @@ export class CustomFieldServiceClient {
       'google.ads.admanager.v1.CustomFieldService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -462,7 +462,7 @@ export class CustomFieldServiceClient {
           (this._protos as any).google.ads.admanager.v1.CustomFieldService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -478,7 +478,7 @@ export class CustomFieldServiceClient {
     ];
     for (const methodName of customFieldServiceStubMethods) {
       const callPromise = this.customFieldServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -674,7 +674,7 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCustomField request %j', request);
@@ -811,7 +811,7 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCustomField request %j', request);
@@ -957,7 +957,7 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchCreateCustomFields request %j', request);
@@ -1098,7 +1098,7 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'custom_field.name': request.customField!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCustomField request %j', request);
@@ -1244,7 +1244,7 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchUpdateCustomFields request %j', request);
@@ -1390,7 +1390,7 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchActivateCustomFields request %j', request);
@@ -1536,7 +1536,7 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchDeactivateCustomFields request %j', request);
@@ -1711,7 +1711,7 @@ export class CustomFieldServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1808,7 +1808,7 @@ export class CustomFieldServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomFields'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomFields stream %j', request);
@@ -1887,7 +1887,7 @@ export class CustomFieldServiceClient {
       });
     const defaultCallSettings = this._defaults['listCustomFields'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCustomFields iterate %j', request);
@@ -4458,7 +4458,7 @@ export class CustomFieldServiceClient {
    */
   close(): Promise<void> {
     if (this.customFieldServiceStub && !this._terminated) {
-      return this.customFieldServiceStub.then((stub) => {
+      return this.customFieldServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

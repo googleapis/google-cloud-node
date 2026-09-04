@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class MetadataServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -70,12 +70,12 @@ export class MetadataServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  metadataServiceStub?: Promise<{ [name: string]: Function }>;
+  metadataServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of MetadataServiceClient.
@@ -151,7 +151,7 @@ export class MetadataServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -480,15 +480,13 @@ export class MetadataServiceClient {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/ui/{name=projects/*/locations/*}',
           additional_bindings: [
-            { get: '/v1beta1/{name=projects/*/locations/*}' },
+            {get: '/v1beta1/{name=projects/*/locations/*}'},
           ],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [
-            { get: '/v1beta1/{name=projects/*}/locations' },
-          ],
+          additional_bindings: [{get: '/v1beta1/{name=projects/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
@@ -965,17 +963,15 @@ export class MetadataServiceClient {
             {
               post: '/v1beta1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
-            { post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:cancel' },
+            {post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:cancel'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            {
-              delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',
-            },
-            { delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1076,9 +1072,7 @@ export class MetadataServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1163,7 +1157,7 @@ export class MetadataServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1beta1/{name=projects/*/locations/*/operations/*}' },
+            {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
@@ -1400,18 +1394,16 @@ export class MetadataServiceClient {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1beta1/{name=onlineEvaluators/*/operations/*}' },
+            {delete: '/v1beta1/{name=onlineEvaluators/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1433,9 +1425,7 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
@@ -1463,7 +1453,7 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1488,7 +1478,7 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1504,7 +1494,7 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1517,9 +1507,7 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1550,13 +1538,11 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1beta1/{name=projects/*/locations/*/operations/*}' },
+            {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
             },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',
-            },
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
             },
@@ -1728,16 +1714,16 @@ export class MetadataServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1beta1/{name=onlineEvaluators/*/operations/*}' },
+            {get: '/v1beta1/{name=onlineEvaluators/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1753,16 +1739,12 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1772,19 +1754,15 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1809,7 +1787,7 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1822,7 +1800,7 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1838,7 +1816,7 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1869,11 +1847,9 @@ export class MetadataServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { get: '/v1beta1/{name=projects/*/locations/*}/operations' },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations',
-            },
-            { get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations' },
+            {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
             },
@@ -1955,9 +1931,7 @@ export class MetadataServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            {
-              get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations',
-            },
+            {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -2045,7 +2019,7 @@ export class MetadataServiceClient {
             {
               get: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*}/operations',
             },
-            { get: '/v1beta1/{name=onlineEvaluators/*}/operations' },
+            {get: '/v1beta1/{name=onlineEvaluators/*}/operations'},
           ],
         },
         {
@@ -2202,9 +2176,7 @@ export class MetadataServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            {
-              post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait',
-            },
+            {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',
             },
@@ -2379,7 +2351,7 @@ export class MetadataServiceClient {
             {
               post: '/v1beta1/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:wait' },
+            {post: '/v1beta1/{name=onlineEvaluators/*/operations/*}:wait'},
           ],
         },
       ];
@@ -2484,7 +2456,7 @@ export class MetadataServiceClient {
       'google.cloud.aiplatform.v1beta1.MetadataService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -2524,7 +2496,7 @@ export class MetadataServiceClient {
           (this._protos as any).google.cloud.aiplatform.v1beta1.MetadataService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -2564,7 +2536,7 @@ export class MetadataServiceClient {
     ];
     for (const methodName of metadataServiceStubMethods) {
       const callPromise = this.metadataServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -2773,7 +2745,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMetadataStore request %j', request);
@@ -2923,7 +2895,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createArtifact request %j', request);
@@ -3062,7 +3034,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getArtifact request %j', request);
@@ -3209,7 +3181,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'artifact.name': request.artifact!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateArtifact request %j', request);
@@ -3358,7 +3330,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createContext request %j', request);
@@ -3497,7 +3469,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getContext request %j', request);
@@ -3640,7 +3612,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'context.name': request.context!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateContext request %j', request);
@@ -3798,7 +3770,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         context: request.context ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addContextArtifactsAndExecutions request %j', request);
@@ -3956,7 +3928,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         context: request.context ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addContextChildren request %j', request);
@@ -4106,7 +4078,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         context: request.context ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('removeContextChildren request %j', request);
@@ -4257,7 +4229,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         context: request.context ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryContextLineageSubgraph request %j', request);
@@ -4414,7 +4386,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createExecution request %j', request);
@@ -4553,7 +4525,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExecution request %j', request);
@@ -4706,7 +4678,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'execution.name': request.execution!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateExecution request %j', request);
@@ -4857,7 +4829,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         execution: request.execution ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addExecutionEvents request %j', request);
@@ -5004,7 +4976,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         execution: request.execution ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryExecutionInputsAndOutputs request %j', request);
@@ -5166,7 +5138,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createMetadataSchema request %j', request);
@@ -5311,7 +5283,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMetadataSchema request %j', request);
@@ -5493,7 +5465,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         artifact: request.artifact ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryArtifactLineageSubgraph request %j', request);
@@ -5656,7 +5628,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5713,7 +5685,7 @@ export class MetadataServiceClient {
     this._log.info('createMetadataStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5830,7 +5802,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5887,7 +5859,7 @@ export class MetadataServiceClient {
     this._log.info('deleteMetadataStore long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6005,7 +5977,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6062,7 +6034,7 @@ export class MetadataServiceClient {
     this._log.info('deleteArtifact long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6183,7 +6155,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6240,7 +6212,7 @@ export class MetadataServiceClient {
     this._log.info('purgeArtifacts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6361,7 +6333,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6418,7 +6390,7 @@ export class MetadataServiceClient {
     this._log.info('deleteContext long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6539,7 +6511,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6596,7 +6568,7 @@ export class MetadataServiceClient {
     this._log.info('purgeContexts long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6714,7 +6686,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6771,7 +6743,7 @@ export class MetadataServiceClient {
     this._log.info('deleteExecution long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6892,7 +6864,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6949,7 +6921,7 @@ export class MetadataServiceClient {
     this._log.info('purgeExecutions long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7066,7 +7038,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7143,7 +7115,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMetadataStores stream %j', request);
@@ -7202,7 +7174,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataStores'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMetadataStores iterate %j', request);
@@ -7354,7 +7326,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7469,7 +7441,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listArtifacts stream %j', request);
@@ -7566,7 +7538,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listArtifacts iterate %j', request);
@@ -7722,7 +7694,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7841,7 +7813,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listContexts stream %j', request);
@@ -7942,7 +7914,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listContexts iterate %j', request);
@@ -8094,7 +8066,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8209,7 +8181,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExecutions stream %j', request);
@@ -8306,7 +8278,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExecutions iterate %j', request);
@@ -8422,7 +8394,7 @@ export class MetadataServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8501,7 +8473,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMetadataSchemas stream %j', request);
@@ -8562,7 +8534,7 @@ export class MetadataServiceClient {
       });
     const defaultCallSettings = this._defaults['listMetadataSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMetadataSchemas iterate %j', request);
@@ -13567,14 +13539,14 @@ export class MetadataServiceClient {
    */
   close(): Promise<void> {
     if (this.metadataServiceStub && !this._terminated) {
-      return this.metadataServiceStub.then((stub) => {
+      return this.metadataServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

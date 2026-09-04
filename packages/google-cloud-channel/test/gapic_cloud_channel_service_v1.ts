@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudchannelserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v1.CloudChannelServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudchannel.example.com');
@@ -207,7 +207,7 @@ describe('v1.CloudChannelServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'cloudchannel.example.com');
@@ -282,7 +282,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -291,14 +291,14 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(client.cloudChannelServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudChannelServiceStub);
@@ -307,15 +307,15 @@ describe('v1.CloudChannelServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -325,7 +325,7 @@ describe('v1.CloudChannelServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -334,7 +334,7 @@ describe('v1.CloudChannelServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -348,7 +348,7 @@ describe('v1.CloudChannelServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -373,7 +373,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getCustomer without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -406,7 +406,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getCustomer without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -455,7 +455,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getCustomer with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -488,7 +488,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getCustomer with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -502,7 +502,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomer(request), expectedError);
@@ -513,7 +513,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkCloudIdentityAccountsExist without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -547,7 +547,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkCloudIdentityAccountsExist without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -596,7 +596,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkCloudIdentityAccountsExist with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -632,7 +632,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkCloudIdentityAccountsExist with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -646,7 +646,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -660,7 +660,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createCustomer without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -693,7 +693,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createCustomer without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -742,7 +742,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createCustomer with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -775,7 +775,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createCustomer with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -789,7 +789,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCustomer(request), expectedError);
@@ -800,7 +800,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateCustomer without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -834,7 +834,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateCustomer without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -884,7 +884,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateCustomer with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -918,7 +918,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateCustomer with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -933,7 +933,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.customer.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCustomer(request), expectedError);
@@ -944,7 +944,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteCustomer without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -977,7 +977,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteCustomer without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1026,7 +1026,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteCustomer with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1059,7 +1059,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteCustomer with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1073,7 +1073,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCustomer(request), expectedError);
@@ -1084,7 +1084,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes importCustomer without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1117,7 +1117,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes importCustomer without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1166,7 +1166,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes importCustomer with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1199,7 +1199,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes importCustomer with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1213,7 +1213,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.importCustomer(request), expectedError);
@@ -1224,7 +1224,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getEntitlement without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1257,7 +1257,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getEntitlement without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1306,7 +1306,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getEntitlement with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1339,7 +1339,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getEntitlement with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1353,7 +1353,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEntitlement(request), expectedError);
@@ -1364,7 +1364,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getChannelPartnerLink without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1398,7 +1398,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getChannelPartnerLink without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1447,7 +1447,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getChannelPartnerLink with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1483,7 +1483,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getChannelPartnerLink with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1497,7 +1497,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1511,7 +1511,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createChannelPartnerLink without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1545,7 +1545,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createChannelPartnerLink without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1594,7 +1594,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createChannelPartnerLink with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1630,7 +1630,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createChannelPartnerLink with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1644,7 +1644,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1658,7 +1658,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateChannelPartnerLink without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1692,7 +1692,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateChannelPartnerLink without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1741,7 +1741,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateChannelPartnerLink with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1777,7 +1777,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateChannelPartnerLink with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1791,7 +1791,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1805,7 +1805,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getCustomerRepricingConfig without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1839,7 +1839,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getCustomerRepricingConfig without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1888,7 +1888,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getCustomerRepricingConfig with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1924,7 +1924,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getCustomerRepricingConfig with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1938,7 +1938,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1952,7 +1952,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createCustomerRepricingConfig without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1986,7 +1986,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createCustomerRepricingConfig without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2035,7 +2035,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createCustomerRepricingConfig with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2071,7 +2071,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createCustomerRepricingConfig with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2085,7 +2085,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2099,7 +2099,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateCustomerRepricingConfig without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2134,7 +2134,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateCustomerRepricingConfig without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2184,7 +2184,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateCustomerRepricingConfig with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2221,7 +2221,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateCustomerRepricingConfig with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2236,7 +2236,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.customerRepricingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2250,7 +2250,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteCustomerRepricingConfig without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2284,7 +2284,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteCustomerRepricingConfig without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2333,7 +2333,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteCustomerRepricingConfig with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2369,7 +2369,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteCustomerRepricingConfig with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2383,7 +2383,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2397,7 +2397,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getChannelPartnerRepricingConfig without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2431,7 +2431,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getChannelPartnerRepricingConfig without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2480,7 +2480,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getChannelPartnerRepricingConfig with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2516,7 +2516,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getChannelPartnerRepricingConfig with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2530,7 +2530,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2544,7 +2544,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createChannelPartnerRepricingConfig without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2579,7 +2579,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createChannelPartnerRepricingConfig without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2628,7 +2628,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createChannelPartnerRepricingConfig with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2664,7 +2664,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createChannelPartnerRepricingConfig with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2678,7 +2678,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2692,7 +2692,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateChannelPartnerRepricingConfig without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2728,7 +2728,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateChannelPartnerRepricingConfig without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2778,7 +2778,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateChannelPartnerRepricingConfig with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2815,7 +2815,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes updateChannelPartnerRepricingConfig with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2830,7 +2830,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.channelPartnerRepricingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2844,7 +2844,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteChannelPartnerRepricingConfig without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2879,7 +2879,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteChannelPartnerRepricingConfig without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2928,7 +2928,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteChannelPartnerRepricingConfig with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2964,7 +2964,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteChannelPartnerRepricingConfig with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2978,7 +2978,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2992,7 +2992,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes lookupOffer without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3025,7 +3025,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes lookupOffer without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3074,7 +3074,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes lookupOffer with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3107,7 +3107,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes lookupOffer with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3121,7 +3121,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.entitlement = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.lookupOffer(request), expectedError);
@@ -3132,7 +3132,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes queryEligibleBillingAccounts without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3166,7 +3166,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes queryEligibleBillingAccounts without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3215,7 +3215,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes queryEligibleBillingAccounts with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3251,7 +3251,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes queryEligibleBillingAccounts with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3265,7 +3265,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.customer = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3279,7 +3279,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes registerSubscriber without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3318,7 +3318,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes registerSubscriber without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3372,7 +3372,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes registerSubscriber with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3410,7 +3410,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes registerSubscriber with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3429,7 +3429,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.integrator = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.registerSubscriber(request), expectedError);
@@ -3440,7 +3440,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes unregisterSubscriber without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3479,7 +3479,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes unregisterSubscriber without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3533,7 +3533,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes unregisterSubscriber with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3571,7 +3571,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes unregisterSubscriber with closed client', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3590,7 +3590,7 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       request.integrator = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.unregisterSubscriber(request), expectedError);
@@ -3601,7 +3601,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes provisionCloudIdentity without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3636,7 +3636,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes provisionCloudIdentity without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3692,7 +3692,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes provisionCloudIdentity with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3728,7 +3728,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes provisionCloudIdentity with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3763,7 +3763,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkProvisionCloudIdentityProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3772,8 +3772,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkProvisionCloudIdentityProgress(
@@ -3787,7 +3787,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkProvisionCloudIdentityProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3810,7 +3810,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createEntitlement without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3845,7 +3845,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createEntitlement without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3901,7 +3901,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createEntitlement with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3934,7 +3934,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes createEntitlement with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3969,7 +3969,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkCreateEntitlementProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3978,8 +3978,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEntitlementProgress(
@@ -3993,7 +3993,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkCreateEntitlementProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4016,7 +4016,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeParameters without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4051,7 +4051,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeParameters without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4107,7 +4107,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeParameters with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4140,7 +4140,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeParameters with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4175,7 +4175,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkChangeParametersProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4184,8 +4184,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkChangeParametersProgress(
@@ -4199,7 +4199,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkChangeParametersProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4222,7 +4222,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeRenewalSettings without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4257,7 +4257,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeRenewalSettings without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4313,7 +4313,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeRenewalSettings with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4349,7 +4349,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeRenewalSettings with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4384,7 +4384,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkChangeRenewalSettingsProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4393,8 +4393,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkChangeRenewalSettingsProgress(
@@ -4408,7 +4408,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkChangeRenewalSettingsProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4431,7 +4431,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeOffer without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4465,7 +4465,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeOffer without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4521,7 +4521,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeOffer with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4554,7 +4554,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes changeOffer with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4589,7 +4589,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkChangeOfferProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4598,8 +4598,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkChangeOfferProgress(
@@ -4613,7 +4613,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkChangeOfferProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4633,7 +4633,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes startPaidService without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4668,7 +4668,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes startPaidService without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4724,7 +4724,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes startPaidService with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4757,7 +4757,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes startPaidService with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4792,7 +4792,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkStartPaidServiceProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4801,8 +4801,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartPaidServiceProgress(
@@ -4816,7 +4816,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkStartPaidServiceProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4839,7 +4839,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes suspendEntitlement without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4874,7 +4874,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes suspendEntitlement without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4930,7 +4930,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes suspendEntitlement with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4963,7 +4963,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes suspendEntitlement with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4998,7 +4998,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkSuspendEntitlementProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5007,8 +5007,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSuspendEntitlementProgress(
@@ -5022,7 +5022,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkSuspendEntitlementProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5045,7 +5045,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes cancelEntitlement without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5080,7 +5080,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes cancelEntitlement without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5136,7 +5136,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes cancelEntitlement with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5169,7 +5169,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes cancelEntitlement with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5204,7 +5204,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkCancelEntitlementProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5213,8 +5213,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCancelEntitlementProgress(
@@ -5228,7 +5228,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkCancelEntitlementProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5251,7 +5251,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes activateEntitlement without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5286,7 +5286,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes activateEntitlement without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5342,7 +5342,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes activateEntitlement with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5375,7 +5375,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes activateEntitlement with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5410,7 +5410,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkActivateEntitlementProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5419,8 +5419,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkActivateEntitlementProgress(
@@ -5434,7 +5434,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkActivateEntitlementProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5457,7 +5457,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes transferEntitlements without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5492,7 +5492,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes transferEntitlements without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5548,7 +5548,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes transferEntitlements with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5581,7 +5581,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes transferEntitlements with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5616,7 +5616,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkTransferEntitlementsProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5625,8 +5625,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkTransferEntitlementsProgress(
@@ -5640,7 +5640,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkTransferEntitlementsProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5663,7 +5663,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes transferEntitlementsToGoogle without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5698,7 +5698,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes transferEntitlementsToGoogle without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5754,7 +5754,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes transferEntitlementsToGoogle with call error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5790,7 +5790,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes transferEntitlementsToGoogle with LRO error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5825,7 +5825,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkTransferEntitlementsToGoogleProgress without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5834,8 +5834,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5850,7 +5850,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes checkTransferEntitlementsToGoogleProgress with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5873,7 +5873,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listCustomers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5908,7 +5908,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listCustomers without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5959,7 +5959,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listCustomers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5992,7 +5992,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listCustomersStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6039,16 +6039,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCustomersStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6090,16 +6090,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6135,16 +6135,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6177,9 +6177,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6188,7 +6188,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listEntitlements without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6223,7 +6223,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listEntitlements without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6274,7 +6274,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listEntitlements with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6307,7 +6307,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listEntitlementsStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6354,16 +6354,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEntitlementsStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6405,16 +6405,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntitlements without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6450,16 +6450,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntitlements with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6492,9 +6492,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6503,7 +6503,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listTransferableSkus without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6545,7 +6545,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listTransferableSkus without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6602,7 +6602,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listTransferableSkus with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6635,7 +6635,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listTransferableSkusStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6688,16 +6688,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferableSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTransferableSkusStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6739,16 +6739,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferableSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTransferableSkus without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6790,16 +6790,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTransferableSkus with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6832,9 +6832,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6843,7 +6843,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listTransferableOffers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6885,7 +6885,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listTransferableOffers without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6942,7 +6942,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listTransferableOffers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6978,7 +6978,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listTransferableOffersStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7047,7 +7047,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listTransferableOffersStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7105,7 +7105,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listTransferableOffers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7160,7 +7160,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listTransferableOffers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7209,7 +7209,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerLinks without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7251,7 +7251,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerLinks without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7284,8 +7284,7 @@ describe('v1.CloudChannelServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.channel.v1.IChannelPartnerLink[]
-              | null,
+              protos.google.cloud.channel.v1.IChannelPartnerLink[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7310,7 +7309,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerLinks with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7346,7 +7345,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerLinksStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7415,7 +7414,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerLinksStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7473,7 +7472,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listChannelPartnerLinks without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7529,7 +7528,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listChannelPartnerLinks with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7578,7 +7577,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listCustomerRepricingConfigs without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7620,7 +7619,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listCustomerRepricingConfigs without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7653,8 +7652,7 @@ describe('v1.CloudChannelServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.channel.v1.ICustomerRepricingConfig[]
-              | null,
+              protos.google.cloud.channel.v1.ICustomerRepricingConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7679,7 +7677,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listCustomerRepricingConfigs with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7715,7 +7713,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listCustomerRepricingConfigsStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7789,7 +7787,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listCustomerRepricingConfigsStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7852,7 +7850,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listCustomerRepricingConfigs without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7908,7 +7906,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listCustomerRepricingConfigs with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -7957,7 +7955,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerRepricingConfigs without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8000,7 +7998,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerRepricingConfigs without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8059,7 +8057,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerRepricingConfigs with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8095,7 +8093,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerRepricingConfigsStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8169,7 +8167,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listChannelPartnerRepricingConfigsStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8232,7 +8230,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listChannelPartnerRepricingConfigs without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8288,7 +8286,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listChannelPartnerRepricingConfigs with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8337,7 +8335,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkuGroups without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8372,7 +8370,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkuGroups without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8423,7 +8421,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkuGroups with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8456,7 +8454,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkuGroupsStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8503,16 +8501,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSkuGroupsStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8554,16 +8552,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkuGroups without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8599,16 +8597,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkuGroups with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8641,9 +8639,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkuGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8652,7 +8650,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkuGroupBillableSkus without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8688,7 +8686,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkuGroupBillableSkus without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8739,7 +8737,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkuGroupBillableSkus with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8775,7 +8773,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkuGroupBillableSkusStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8837,7 +8835,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkuGroupBillableSkusStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8894,7 +8892,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listSkuGroupBillableSkus without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8943,7 +8941,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listSkuGroupBillableSkus with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -8991,7 +8989,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listProducts without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9012,7 +9010,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listProducts without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9049,7 +9047,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listProducts with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9068,7 +9066,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listProductsStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9111,7 +9109,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listProductsStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9151,7 +9149,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listProducts without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9183,7 +9181,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listProducts with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9214,7 +9212,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkus without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9249,7 +9247,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkus without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9300,7 +9298,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkus with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9330,7 +9328,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSkusStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9374,16 +9372,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSkusStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9424,16 +9422,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkus without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9468,16 +9466,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkus with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9511,9 +9509,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9522,7 +9520,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listOffers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9557,7 +9555,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listOffers without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9608,7 +9606,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listOffers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9641,7 +9639,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listOffersStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9685,16 +9683,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listOffers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listOffersStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9735,16 +9733,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listOffers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOffers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9780,16 +9778,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listOffers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOffers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9824,9 +9822,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listOffers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9835,7 +9833,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listPurchasableSkus without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9877,7 +9875,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listPurchasableSkus without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9934,7 +9932,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listPurchasableSkus with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -9967,7 +9965,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listPurchasableSkusStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10020,16 +10018,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listPurchasableSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPurchasableSkusStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10071,16 +10069,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listPurchasableSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPurchasableSkus without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10122,16 +10120,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPurchasableSkus with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10164,9 +10162,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10175,7 +10173,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listPurchasableOffers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10217,7 +10215,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listPurchasableOffers without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10274,7 +10272,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listPurchasableOffers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10310,7 +10308,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listPurchasableOffersStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10378,7 +10376,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listPurchasableOffersStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10435,7 +10433,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listPurchasableOffers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10490,7 +10488,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listPurchasableOffers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10539,7 +10537,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSubscribers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10575,7 +10573,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSubscribers without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10624,7 +10622,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSubscribers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10662,7 +10660,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listSubscribersStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10707,16 +10705,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSubscribersStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10760,16 +10758,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubscribers without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10806,16 +10804,16 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubscribers with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10853,9 +10851,9 @@ describe('v1.CloudChannelServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10864,7 +10862,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listEntitlementChanges without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10906,7 +10904,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listEntitlementChanges without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10963,7 +10961,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listEntitlementChanges with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -10999,7 +10997,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listEntitlementChangesStream without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11068,7 +11066,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes listEntitlementChangesStream with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11126,7 +11124,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listEntitlementChanges without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11181,7 +11179,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listEntitlementChanges with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11229,7 +11227,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11252,7 +11250,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11281,7 +11279,7 @@ describe('v1.CloudChannelServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -11292,7 +11290,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11318,7 +11316,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11342,7 +11340,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11371,7 +11369,7 @@ describe('v1.CloudChannelServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -11382,7 +11380,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11408,7 +11406,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11432,7 +11430,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11461,7 +11459,7 @@ describe('v1.CloudChannelServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -11472,7 +11470,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11498,7 +11496,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11535,7 +11533,7 @@ describe('v1.CloudChannelServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11571,7 +11569,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11612,7 +11610,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11667,7 +11665,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11732,7 +11730,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11814,7 +11812,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11866,7 +11864,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -11949,7 +11947,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12014,7 +12012,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12064,7 +12062,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12105,7 +12103,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12156,7 +12154,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12207,7 +12205,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -12258,7 +12256,7 @@ describe('v1.CloudChannelServiceClient', () => {
       };
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

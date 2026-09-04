@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform, PassThrough } from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,7 +60,7 @@ export class DirectAccessServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('devicestreaming');
@@ -73,9 +73,9 @@ export class DirectAccessServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  directAccessServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  directAccessServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DirectAccessServiceClient.
@@ -151,7 +151,7 @@ export class DirectAccessServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -245,7 +245,7 @@ export class DirectAccessServiceClient {
       'google.cloud.devicestreaming.v1.DirectAccessService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -286,7 +286,7 @@ export class DirectAccessServiceClient {
             .DirectAccessService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -300,11 +300,11 @@ export class DirectAccessServiceClient {
     ];
     for (const methodName of directAccessServiceStubMethods) {
       const callPromise = this.directAccessServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -528,7 +528,7 @@ export class DirectAccessServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDeviceSession request %j', request);
@@ -674,7 +674,7 @@ export class DirectAccessServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDeviceSession request %j', request);
@@ -822,7 +822,7 @@ export class DirectAccessServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelDeviceSession request %j', request);
@@ -970,7 +970,7 @@ export class DirectAccessServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'device_session.name': request.deviceSession!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDeviceSession request %j', request);
@@ -1039,7 +1039,7 @@ export class DirectAccessServiceClient {
    * region_tag:devicestreaming_v1_generated_DirectAccessService_AdbConnect_async
    */
   adbConnect(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('adbConnect stream %j', options);
@@ -1143,7 +1143,7 @@ export class DirectAccessServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1213,7 +1213,7 @@ export class DirectAccessServiceClient {
       });
     const defaultCallSettings = this._defaults['listDeviceSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeviceSessions stream %j', request);
@@ -1265,7 +1265,7 @@ export class DirectAccessServiceClient {
       });
     const defaultCallSettings = this._defaults['listDeviceSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeviceSessions iterate %j', request);
@@ -1348,7 +1348,7 @@ export class DirectAccessServiceClient {
    */
   close(): Promise<void> {
     if (this.directAccessServiceStub && !this._terminated) {
-      return this.directAccessServiceStub.then((stub) => {
+      return this.directAccessServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

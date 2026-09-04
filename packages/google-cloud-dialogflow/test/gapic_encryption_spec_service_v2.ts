@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as encryptionspecserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -248,7 +248,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.encryptionSpecServiceStub, undefined);
@@ -256,13 +256,13 @@ describe('v2.EncryptionSpecServiceClient', () => {
       assert(client.encryptionSpecServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.encryptionSpecServiceStub);
@@ -271,15 +271,15 @@ describe('v2.EncryptionSpecServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.encryptionSpecServiceStub, undefined);
@@ -288,7 +288,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -297,7 +297,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -310,7 +310,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -334,7 +334,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getEncryptionSpec without error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -366,7 +366,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getEncryptionSpec without error using callback', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -414,7 +414,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getEncryptionSpec with error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -446,7 +446,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getEncryptionSpec with closed client', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEncryptionSpec(request), expectedError);
@@ -470,7 +470,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes initializeEncryptionSpec without error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -505,7 +505,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes initializeEncryptionSpec without error using callback', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes initializeEncryptionSpec with call error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -597,7 +597,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes initializeEncryptionSpec with LRO error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes checkInitializeEncryptionSpecProgress without error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -640,8 +640,8 @@ describe('v2.EncryptionSpecServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -656,7 +656,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes checkInitializeEncryptionSpecProgress with error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -677,7 +677,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -789,7 +789,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -838,7 +838,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -902,7 +902,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -930,7 +930,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -941,7 +941,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -966,7 +966,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -989,7 +989,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1017,7 +1017,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1028,7 +1028,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1053,7 +1053,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1076,7 +1076,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1104,7 +1104,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1115,7 +1115,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1140,7 +1140,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1176,7 +1176,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1213,7 +1213,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1291,7 +1291,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1411,7 +1411,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1503,7 +1503,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1543,7 +1543,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1607,7 +1607,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1675,7 +1675,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1802,7 +1802,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1924,7 +1924,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1971,7 +1971,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2034,7 +2034,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2114,7 +2114,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2191,7 +2191,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2253,7 +2253,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2317,7 +2317,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2396,7 +2396,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2463,7 +2463,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2547,7 +2547,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2628,7 +2628,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2694,7 +2694,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2758,7 +2758,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2823,7 +2823,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2902,7 +2902,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2967,7 +2967,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3047,7 +3047,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3131,7 +3131,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3278,7 +3278,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3420,7 +3420,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3483,7 +3483,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3564,7 +3564,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3666,7 +3666,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3772,7 +3772,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3851,7 +3851,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3931,7 +3931,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4032,7 +4032,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4116,7 +4116,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4223,7 +4223,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4329,7 +4329,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4413,7 +4413,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4493,7 +4493,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4574,7 +4574,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4680,7 +4680,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4745,7 +4745,7 @@ describe('v2.EncryptionSpecServiceClient', () => {
       };
       const client =
         new encryptionspecserviceModule.v2.EncryptionSpecServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

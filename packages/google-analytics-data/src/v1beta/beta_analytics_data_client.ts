@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class BetaAnalyticsDataClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('data');
@@ -66,10 +66,10 @@ export class BetaAnalyticsDataClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  betaAnalyticsDataStub?: Promise<{ [name: string]: Function }>;
+  betaAnalyticsDataStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of BetaAnalyticsDataClient.
@@ -145,7 +145,7 @@ export class BetaAnalyticsDataClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -262,7 +262,7 @@ export class BetaAnalyticsDataClient {
       'google.analytics.data.v1beta.BetaAnalyticsData',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -302,7 +302,7 @@ export class BetaAnalyticsDataClient {
           (this._protos as any).google.analytics.data.v1beta.BetaAnalyticsData,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -321,7 +321,7 @@ export class BetaAnalyticsDataClient {
     ];
     for (const methodName of betaAnalyticsDataStubMethods) {
       const callPromise = this.betaAnalyticsDataStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -610,7 +610,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('runReport request %j', request);
@@ -804,7 +804,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('runPivotReport request %j', request);
@@ -953,7 +953,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchRunReports request %j', request);
@@ -1108,7 +1108,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('batchRunPivotReports request %j', request);
@@ -1264,7 +1264,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMetadata request %j', request);
@@ -1445,7 +1445,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('runRealtimeReport request %j', request);
@@ -1618,7 +1618,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         property: request.property ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('checkCompatibility request %j', request);
@@ -1801,7 +1801,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryAudienceExport request %j', request);
@@ -1950,7 +1950,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAudienceExport request %j', request);
@@ -2127,7 +2127,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2184,7 +2184,7 @@ export class BetaAnalyticsDataClient {
     this._log.info('createAudienceExport long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2313,7 +2313,7 @@ export class BetaAnalyticsDataClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2388,7 +2388,7 @@ export class BetaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listAudienceExports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAudienceExports stream %j', request);
@@ -2445,7 +2445,7 @@ export class BetaAnalyticsDataClient {
       });
     const defaultCallSettings = this._defaults['listAudienceExports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAudienceExports iterate %j', request);
@@ -2776,7 +2776,7 @@ export class BetaAnalyticsDataClient {
    */
   close(): Promise<void> {
     if (this.betaAnalyticsDataStub && !this._terminated) {
-      return this.betaAnalyticsDataStub.then((stub) => {
+      return this.betaAnalyticsDataStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

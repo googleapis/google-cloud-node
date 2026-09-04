@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as migrationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.migrationServiceStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.MigrationServiceClient', () => {
       assert(client.migrationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.migrationServiceStub);
@@ -299,14 +299,14 @@ describe('v1.MigrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.migrationServiceStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.MigrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.MigrationServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.MigrationServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('batchMigrateResources', () => {
     it('invokes batchMigrateResources without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('invokes batchMigrateResources without error using callback', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('invokes batchMigrateResources with call error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('invokes batchMigrateResources with LRO error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -512,7 +512,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('invokes checkBatchMigrateResourcesProgress without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,8 +520,8 @@ describe('v1.MigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchMigrateResourcesProgress(
@@ -534,7 +534,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('invokes checkBatchMigrateResourcesProgress with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -555,7 +555,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('searchMigratableResources', () => {
     it('invokes searchMigratableResources without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -595,7 +595,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('invokes searchMigratableResources without error using callback', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -627,8 +627,7 @@ describe('v1.MigrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1.IMigratableResource[]
-              | null,
+              protos.google.cloud.aiplatform.v1.IMigratableResource[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -652,7 +651,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('invokes searchMigratableResources with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -686,7 +685,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('invokes searchMigratableResourcesStream without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +752,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('invokes searchMigratableResourcesStream with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -809,7 +808,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('uses async iteration with searchMigratableResources without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -863,7 +862,7 @@ describe('v1.MigrationServiceClient', () => {
 
     it('uses async iteration with searchMigratableResources with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -909,7 +908,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -939,7 +938,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +976,7 @@ describe('v1.MigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -987,7 +986,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1019,7 +1018,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1049,7 +1048,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1087,7 +1086,7 @@ describe('v1.MigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1097,7 +1096,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1128,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1162,7 +1161,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1200,7 +1199,7 @@ describe('v1.MigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1210,7 +1209,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1244,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1275,7 +1274,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1319,7 +1318,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1354,7 +1353,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1402,7 +1401,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,7 +1442,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1464,7 +1463,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1492,7 +1491,7 @@ describe('v1.MigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1502,7 +1501,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1526,7 +1525,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1548,7 +1547,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1576,7 +1575,7 @@ describe('v1.MigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1586,7 +1585,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1610,7 +1609,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1632,7 +1631,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1660,7 +1659,7 @@ describe('v1.MigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1670,7 +1669,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1694,7 +1693,7 @@ describe('v1.MigrationServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1729,7 +1728,7 @@ describe('v1.MigrationServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1767,7 +1766,7 @@ describe('v1.MigrationServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1854,7 +1853,7 @@ describe('v1.MigrationServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1931,7 +1930,7 @@ describe('v1.MigrationServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2006,7 +2005,7 @@ describe('v1.MigrationServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2083,7 +2082,7 @@ describe('v1.MigrationServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2148,7 +2147,7 @@ describe('v1.MigrationServiceClient', () => {
         context: 'contextValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2223,7 +2222,7 @@ describe('v1.MigrationServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2288,7 +2287,7 @@ describe('v1.MigrationServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2363,7 +2362,7 @@ describe('v1.MigrationServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2428,7 +2427,7 @@ describe('v1.MigrationServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2493,7 +2492,7 @@ describe('v1.MigrationServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2569,7 +2568,7 @@ describe('v1.MigrationServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2651,7 +2650,7 @@ describe('v1.MigrationServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2727,7 +2726,7 @@ describe('v1.MigrationServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2802,7 +2801,7 @@ describe('v1.MigrationServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2866,7 +2865,7 @@ describe('v1.MigrationServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2944,7 +2943,7 @@ describe('v1.MigrationServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3021,7 +3020,7 @@ describe('v1.MigrationServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3097,7 +3096,7 @@ describe('v1.MigrationServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3161,7 +3160,7 @@ describe('v1.MigrationServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3242,7 +3241,7 @@ describe('v1.MigrationServiceClient', () => {
         index: 'indexValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3306,7 +3305,7 @@ describe('v1.MigrationServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3369,7 +3368,7 @@ describe('v1.MigrationServiceClient', () => {
         location: 'locationValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3420,7 +3419,7 @@ describe('v1.MigrationServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3497,7 +3496,7 @@ describe('v1.MigrationServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3561,7 +3560,7 @@ describe('v1.MigrationServiceClient', () => {
         model: 'modelValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3625,7 +3624,7 @@ describe('v1.MigrationServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3705,7 +3704,7 @@ describe('v1.MigrationServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3782,7 +3781,7 @@ describe('v1.MigrationServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3889,7 +3888,7 @@ describe('v1.MigrationServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3954,7 +3953,7 @@ describe('v1.MigrationServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4030,7 +4029,7 @@ describe('v1.MigrationServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4111,7 +4110,7 @@ describe('v1.MigrationServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4176,7 +4175,7 @@ describe('v1.MigrationServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4257,7 +4256,7 @@ describe('v1.MigrationServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4334,7 +4333,7 @@ describe('v1.MigrationServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4398,7 +4397,7 @@ describe('v1.MigrationServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4478,7 +4477,7 @@ describe('v1.MigrationServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4581,7 +4580,7 @@ describe('v1.MigrationServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4705,7 +4704,7 @@ describe('v1.MigrationServiceClient', () => {
         model: 'modelValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4796,7 +4795,7 @@ describe('v1.MigrationServiceClient', () => {
         model: 'modelValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4849,7 +4848,7 @@ describe('v1.MigrationServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4912,7 +4911,7 @@ describe('v1.MigrationServiceClient', () => {
         location: 'locationValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4966,7 +4965,7 @@ describe('v1.MigrationServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5041,7 +5040,7 @@ describe('v1.MigrationServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5107,7 +5106,7 @@ describe('v1.MigrationServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5182,7 +5181,7 @@ describe('v1.MigrationServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5247,7 +5246,7 @@ describe('v1.MigrationServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5324,7 +5323,7 @@ describe('v1.MigrationServiceClient', () => {
         event: 'eventValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5411,7 +5410,7 @@ describe('v1.MigrationServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5476,7 +5475,7 @@ describe('v1.MigrationServiceClient', () => {
         study: 'studyValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5540,7 +5539,7 @@ describe('v1.MigrationServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5605,7 +5604,7 @@ describe('v1.MigrationServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5701,7 +5700,7 @@ describe('v1.MigrationServiceClient', () => {
         run: 'runValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5790,7 +5789,7 @@ describe('v1.MigrationServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5913,7 +5912,7 @@ describe('v1.MigrationServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5982,7 +5981,7 @@ describe('v1.MigrationServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6057,7 +6056,7 @@ describe('v1.MigrationServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new migrationserviceModule.v1.MigrationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

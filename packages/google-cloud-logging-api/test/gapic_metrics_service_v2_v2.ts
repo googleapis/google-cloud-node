@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as metricsservicev2Module from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.metricsServiceV2Stub, undefined);
@@ -247,12 +247,12 @@ describe('v2.MetricsServiceV2Client', () => {
       assert(client.metricsServiceV2Stub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.metricsServiceV2Stub);
@@ -261,14 +261,14 @@ describe('v2.MetricsServiceV2Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.metricsServiceV2Stub, undefined);
@@ -277,7 +277,7 @@ describe('v2.MetricsServiceV2Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2.MetricsServiceV2Client', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2.MetricsServiceV2Client', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2.MetricsServiceV2Client', () => {
   describe('getLogMetric', () => {
     it('invokes getLogMetric without error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes getLogMetric without error using callback', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes getLogMetric with error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes getLogMetric with closed client', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v2.MetricsServiceV2Client', () => {
       );
       request.metricName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLogMetric(request), expectedError);
@@ -452,7 +452,7 @@ describe('v2.MetricsServiceV2Client', () => {
   describe('createLogMetric', () => {
     it('invokes createLogMetric without error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes createLogMetric without error using callback', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes createLogMetric with error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes createLogMetric with closed client', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v2.MetricsServiceV2Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createLogMetric(request), expectedError);
@@ -584,7 +584,7 @@ describe('v2.MetricsServiceV2Client', () => {
   describe('updateLogMetric', () => {
     it('invokes updateLogMetric without error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes updateLogMetric without error using callback', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes updateLogMetric with error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes updateLogMetric with closed client', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v2.MetricsServiceV2Client', () => {
       );
       request.metricName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateLogMetric(request), expectedError);
@@ -716,7 +716,7 @@ describe('v2.MetricsServiceV2Client', () => {
   describe('deleteLogMetric', () => {
     it('invokes deleteLogMetric without error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes deleteLogMetric without error using callback', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes deleteLogMetric with error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -825,7 +825,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes deleteLogMetric with closed client', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -838,7 +838,7 @@ describe('v2.MetricsServiceV2Client', () => {
       );
       request.metricName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteLogMetric(request), expectedError);
@@ -848,7 +848,7 @@ describe('v2.MetricsServiceV2Client', () => {
   describe('listLogMetrics', () => {
     it('invokes listLogMetrics without error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes listLogMetrics without error using callback', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes listLogMetrics with error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v2.MetricsServiceV2Client', () => {
 
     it('invokes listLogMetricsStream without error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1004,15 +1004,15 @@ describe('v2.MetricsServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogMetrics.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLogMetricsStream with error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,15 +1050,15 @@ describe('v2.MetricsServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogMetrics.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLogMetrics without error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,15 +1093,15 @@ describe('v2.MetricsServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogMetrics.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLogMetrics with error', async () => {
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1133,9 +1133,9 @@ describe('v2.MetricsServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLogMetrics.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1147,7 +1147,7 @@ describe('v2.MetricsServiceV2Client', () => {
         billing_account: 'billingAccountValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1197,7 +1197,7 @@ describe('v2.MetricsServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1261,7 +1261,7 @@ describe('v2.MetricsServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1341,7 +1341,7 @@ describe('v2.MetricsServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1438,7 +1438,7 @@ describe('v2.MetricsServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v2.MetricsServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1594,7 +1594,7 @@ describe('v2.MetricsServiceV2Client', () => {
         billing_account: 'billingAccountValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1640,7 +1640,7 @@ describe('v2.MetricsServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1701,7 +1701,7 @@ describe('v2.MetricsServiceV2Client', () => {
         folder: 'folderValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1746,7 +1746,7 @@ describe('v2.MetricsServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1799,7 +1799,7 @@ describe('v2.MetricsServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1877,7 +1877,7 @@ describe('v2.MetricsServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1972,7 +1972,7 @@ describe('v2.MetricsServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2065,7 +2065,7 @@ describe('v2.MetricsServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2113,7 +2113,7 @@ describe('v2.MetricsServiceV2Client', () => {
         folder: 'folderValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2152,7 +2152,7 @@ describe('v2.MetricsServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2201,7 +2201,7 @@ describe('v2.MetricsServiceV2Client', () => {
         metric: 'metricValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2249,7 +2249,7 @@ describe('v2.MetricsServiceV2Client', () => {
         organization: 'organizationValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2295,7 +2295,7 @@ describe('v2.MetricsServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2359,7 +2359,7 @@ describe('v2.MetricsServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2439,7 +2439,7 @@ describe('v2.MetricsServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2534,7 +2534,7 @@ describe('v2.MetricsServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2627,7 +2627,7 @@ describe('v2.MetricsServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2679,7 +2679,7 @@ describe('v2.MetricsServiceV2Client', () => {
         organization: 'organizationValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2725,7 +2725,7 @@ describe('v2.MetricsServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2780,7 +2780,7 @@ describe('v2.MetricsServiceV2Client', () => {
         project: 'projectValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2818,7 +2818,7 @@ describe('v2.MetricsServiceV2Client', () => {
         project: 'projectValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2863,7 +2863,7 @@ describe('v2.MetricsServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2919,7 +2919,7 @@ describe('v2.MetricsServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2999,7 +2999,7 @@ describe('v2.MetricsServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3094,7 +3094,7 @@ describe('v2.MetricsServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3187,7 +3187,7 @@ describe('v2.MetricsServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3235,7 +3235,7 @@ describe('v2.MetricsServiceV2Client', () => {
         project: 'projectValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3274,7 +3274,7 @@ describe('v2.MetricsServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new metricsservicev2Module.v2.MetricsServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as jobserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.jobServiceStub, undefined);
@@ -285,12 +285,12 @@ describe('v1beta1.JobServiceClient', () => {
       assert(client.jobServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.jobServiceStub);
@@ -299,14 +299,14 @@ describe('v1beta1.JobServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.jobServiceStub, undefined);
@@ -315,7 +315,7 @@ describe('v1beta1.JobServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1beta1.JobServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1beta1.JobServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('createCustomJob', () => {
     it('invokes createCustomJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createCustomJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createCustomJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createCustomJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCustomJob(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getCustomJob', () => {
     it('invokes getCustomJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getCustomJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getCustomJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getCustomJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -612,7 +612,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomJob(request), expectedError);
@@ -622,7 +622,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('cancelCustomJob', () => {
     it('invokes cancelCustomJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -653,7 +653,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelCustomJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelCustomJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -731,7 +731,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelCustomJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -744,7 +744,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelCustomJob(request), expectedError);
@@ -754,7 +754,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('createDataLabelingJob', () => {
     it('invokes createDataLabelingJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createDataLabelingJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createDataLabelingJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createDataLabelingJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -893,7 +893,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getDataLabelingJob', () => {
     it('invokes getDataLabelingJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -925,7 +925,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getDataLabelingJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -972,7 +972,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getDataLabelingJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getDataLabelingJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataLabelingJob(request), expectedError);
@@ -1026,7 +1026,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('cancelDataLabelingJob', () => {
     it('invokes cancelDataLabelingJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1058,7 +1058,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelDataLabelingJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelDataLabelingJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelDataLabelingJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1165,7 +1165,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('createHyperparameterTuningJob', () => {
     it('invokes createHyperparameterTuningJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1197,7 +1197,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createHyperparameterTuningJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1244,7 +1244,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createHyperparameterTuningJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1278,7 +1278,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createHyperparameterTuningJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1291,7 +1291,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1304,7 +1304,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getHyperparameterTuningJob', () => {
     it('invokes getHyperparameterTuningJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1336,7 +1336,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getHyperparameterTuningJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1383,7 +1383,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getHyperparameterTuningJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,7 +1417,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getHyperparameterTuningJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1430,7 +1430,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1443,7 +1443,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('cancelHyperparameterTuningJob', () => {
     it('invokes cancelHyperparameterTuningJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1475,7 +1475,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelHyperparameterTuningJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1522,7 +1522,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelHyperparameterTuningJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1556,7 +1556,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelHyperparameterTuningJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1569,7 +1569,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1582,7 +1582,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('createNasJob', () => {
     it('invokes createNasJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1613,7 +1613,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createNasJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1660,7 +1660,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createNasJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1691,7 +1691,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createNasJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1704,7 +1704,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createNasJob(request), expectedError);
@@ -1714,7 +1714,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getNasJob', () => {
     it('invokes getNasJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1745,7 +1745,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getNasJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1792,7 +1792,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getNasJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1820,7 +1820,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getNasJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNasJob(request), expectedError);
@@ -1843,7 +1843,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('cancelNasJob', () => {
     it('invokes cancelNasJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1874,7 +1874,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelNasJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1921,7 +1921,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelNasJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1952,7 +1952,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelNasJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1965,7 +1965,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelNasJob(request), expectedError);
@@ -1975,7 +1975,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getNasTrialDetail', () => {
     it('invokes getNasTrialDetail without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2006,7 +2006,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getNasTrialDetail without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2053,7 +2053,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getNasTrialDetail with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2084,7 +2084,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getNasTrialDetail with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,7 +2097,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNasTrialDetail(request), expectedError);
@@ -2107,7 +2107,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('createBatchPredictionJob', () => {
     it('invokes createBatchPredictionJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2139,7 +2139,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createBatchPredictionJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2186,7 +2186,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createBatchPredictionJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2220,7 +2220,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createBatchPredictionJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2233,7 +2233,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2246,7 +2246,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getBatchPredictionJob', () => {
     it('invokes getBatchPredictionJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2278,7 +2278,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getBatchPredictionJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2325,7 +2325,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getBatchPredictionJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2359,7 +2359,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getBatchPredictionJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2372,7 +2372,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2385,7 +2385,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('cancelBatchPredictionJob', () => {
     it('invokes cancelBatchPredictionJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2417,7 +2417,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelBatchPredictionJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2464,7 +2464,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelBatchPredictionJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2498,7 +2498,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes cancelBatchPredictionJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2511,7 +2511,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2524,7 +2524,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('createModelDeploymentMonitoringJob', () => {
     it('invokes createModelDeploymentMonitoringJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2557,7 +2557,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createModelDeploymentMonitoringJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2604,7 +2604,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createModelDeploymentMonitoringJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2638,7 +2638,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes createModelDeploymentMonitoringJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2651,7 +2651,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2664,7 +2664,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getModelDeploymentMonitoringJob', () => {
     it('invokes getModelDeploymentMonitoringJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2696,7 +2696,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getModelDeploymentMonitoringJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2743,7 +2743,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getModelDeploymentMonitoringJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2777,7 +2777,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes getModelDeploymentMonitoringJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2790,7 +2790,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2803,7 +2803,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('pauseModelDeploymentMonitoringJob', () => {
     it('invokes pauseModelDeploymentMonitoringJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2836,7 +2836,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes pauseModelDeploymentMonitoringJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2883,7 +2883,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes pauseModelDeploymentMonitoringJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2917,7 +2917,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes pauseModelDeploymentMonitoringJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2930,7 +2930,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2943,7 +2943,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('resumeModelDeploymentMonitoringJob', () => {
     it('invokes resumeModelDeploymentMonitoringJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2976,7 +2976,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes resumeModelDeploymentMonitoringJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3023,7 +3023,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes resumeModelDeploymentMonitoringJob with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3057,7 +3057,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes resumeModelDeploymentMonitoringJob with closed client', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3070,7 +3070,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3083,7 +3083,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('deleteCustomJob', () => {
     it('invokes deleteCustomJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3116,7 +3116,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteCustomJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3170,7 +3170,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteCustomJob with call error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3201,7 +3201,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteCustomJob with LRO error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3234,7 +3234,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteCustomJobProgress without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3242,8 +3242,8 @@ describe('v1beta1.JobServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCustomJobProgress(
@@ -3256,7 +3256,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteCustomJobProgress with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3277,7 +3277,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('deleteDataLabelingJob', () => {
     it('invokes deleteDataLabelingJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3310,7 +3310,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteDataLabelingJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3364,7 +3364,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteDataLabelingJob with call error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3398,7 +3398,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteDataLabelingJob with LRO error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3431,7 +3431,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteDataLabelingJobProgress without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3439,8 +3439,8 @@ describe('v1beta1.JobServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDataLabelingJobProgress(
@@ -3453,7 +3453,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteDataLabelingJobProgress with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3474,7 +3474,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('deleteHyperparameterTuningJob', () => {
     it('invokes deleteHyperparameterTuningJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3507,7 +3507,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteHyperparameterTuningJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3561,7 +3561,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteHyperparameterTuningJob with call error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3595,7 +3595,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteHyperparameterTuningJob with LRO error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3628,7 +3628,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteHyperparameterTuningJobProgress without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3636,8 +3636,8 @@ describe('v1beta1.JobServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3651,7 +3651,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteHyperparameterTuningJobProgress with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3672,7 +3672,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('deleteNasJob', () => {
     it('invokes deleteNasJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3704,7 +3704,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteNasJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3758,7 +3758,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteNasJob with call error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3789,7 +3789,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteNasJob with LRO error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3822,7 +3822,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteNasJobProgress without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3830,8 +3830,8 @@ describe('v1beta1.JobServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteNasJobProgress(
@@ -3844,7 +3844,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteNasJobProgress with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3862,7 +3862,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('deleteBatchPredictionJob', () => {
     it('invokes deleteBatchPredictionJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3895,7 +3895,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteBatchPredictionJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3949,7 +3949,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteBatchPredictionJob with call error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3983,7 +3983,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteBatchPredictionJob with LRO error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4016,7 +4016,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteBatchPredictionJobProgress without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4024,8 +4024,8 @@ describe('v1beta1.JobServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4039,7 +4039,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteBatchPredictionJobProgress with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4060,7 +4060,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('updateModelDeploymentMonitoringJob', () => {
     it('invokes updateModelDeploymentMonitoringJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4095,7 +4095,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes updateModelDeploymentMonitoringJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4150,7 +4150,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes updateModelDeploymentMonitoringJob with call error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4183,7 +4183,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes updateModelDeploymentMonitoringJob with LRO error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4215,7 +4215,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkUpdateModelDeploymentMonitoringJobProgress without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4223,8 +4223,8 @@ describe('v1beta1.JobServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4238,7 +4238,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkUpdateModelDeploymentMonitoringJobProgress with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4259,7 +4259,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('deleteModelDeploymentMonitoringJob', () => {
     it('invokes deleteModelDeploymentMonitoringJob without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4293,7 +4293,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteModelDeploymentMonitoringJob without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4347,7 +4347,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteModelDeploymentMonitoringJob with call error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4379,7 +4379,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes deleteModelDeploymentMonitoringJob with LRO error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4410,7 +4410,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteModelDeploymentMonitoringJobProgress without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4418,8 +4418,8 @@ describe('v1beta1.JobServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4433,7 +4433,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes checkDeleteModelDeploymentMonitoringJobProgress with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4454,7 +4454,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('listCustomJobs', () => {
     it('invokes listCustomJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4493,7 +4493,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listCustomJobs without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4548,7 +4548,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listCustomJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4579,7 +4579,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listCustomJobsStream without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4632,15 +4632,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCustomJobsStream with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4682,15 +4682,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4731,15 +4731,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4772,9 +4772,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4782,7 +4782,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('listDataLabelingJobs', () => {
     it('invokes listDataLabelingJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4822,7 +4822,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listDataLabelingJobs without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4854,8 +4854,7 @@ describe('v1beta1.JobServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4879,7 +4878,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listDataLabelingJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4910,7 +4909,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listDataLabelingJobsStream without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4965,15 +4964,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listDataLabelingJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataLabelingJobsStream with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5017,15 +5016,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listDataLabelingJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataLabelingJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5067,15 +5066,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listDataLabelingJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataLabelingJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5108,9 +5107,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listDataLabelingJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5118,7 +5117,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('listHyperparameterTuningJobs', () => {
     it('invokes listHyperparameterTuningJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5158,7 +5157,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listHyperparameterTuningJobs without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5215,7 +5214,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listHyperparameterTuningJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5249,7 +5248,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listHyperparameterTuningJobsStream without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5321,7 +5320,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listHyperparameterTuningJobsStream with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5382,7 +5381,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('uses async iteration with listHyperparameterTuningJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5436,7 +5435,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('uses async iteration with listHyperparameterTuningJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5483,7 +5482,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('listNasJobs', () => {
     it('invokes listNasJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5522,7 +5521,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listNasJobs without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5577,7 +5576,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listNasJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5608,7 +5607,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listNasJobsStream without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5660,15 +5659,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNasJobsStream with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5711,15 +5710,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNasJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5760,15 +5759,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNasJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5802,9 +5801,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5812,7 +5811,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('listNasTrialDetails', () => {
     it('invokes listNasTrialDetails without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5852,7 +5851,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listNasTrialDetails without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5884,8 +5883,7 @@ describe('v1beta1.JobServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.INasTrialDetail[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.INasTrialDetail[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5909,7 +5907,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listNasTrialDetails with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5940,7 +5938,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listNasTrialDetailsStream without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5993,15 +5991,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasTrialDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNasTrialDetailsStream with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6043,15 +6041,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasTrialDetails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNasTrialDetails without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6093,15 +6091,15 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasTrialDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNasTrialDetails with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6134,9 +6132,9 @@ describe('v1beta1.JobServiceClient', () => {
       assert(
         (client.descriptors.page.listNasTrialDetails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6144,7 +6142,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('listBatchPredictionJobs', () => {
     it('invokes listBatchPredictionJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6184,7 +6182,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listBatchPredictionJobs without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6241,7 +6239,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listBatchPredictionJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6275,7 +6273,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listBatchPredictionJobsStream without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6344,7 +6342,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listBatchPredictionJobsStream with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6402,7 +6400,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('uses async iteration with listBatchPredictionJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6456,7 +6454,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('uses async iteration with listBatchPredictionJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6503,7 +6501,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('searchModelDeploymentMonitoringStatsAnomalies', () => {
     it('invokes searchModelDeploymentMonitoringStatsAnomalies without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6546,7 +6544,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes searchModelDeploymentMonitoringStatsAnomalies without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6605,7 +6603,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes searchModelDeploymentMonitoringStatsAnomalies with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6639,7 +6637,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes searchModelDeploymentMonitoringStatsAnomaliesStream without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6712,7 +6710,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes searchModelDeploymentMonitoringStatsAnomaliesStream with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6774,7 +6772,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('uses async iteration with searchModelDeploymentMonitoringStatsAnomalies without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6829,7 +6827,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('uses async iteration with searchModelDeploymentMonitoringStatsAnomalies with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6877,7 +6875,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('listModelDeploymentMonitoringJobs', () => {
     it('invokes listModelDeploymentMonitoringJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6918,7 +6916,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listModelDeploymentMonitoringJobs without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6975,7 +6973,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listModelDeploymentMonitoringJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7009,7 +7007,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listModelDeploymentMonitoringJobsStream without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7081,7 +7079,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('invokes listModelDeploymentMonitoringJobsStream with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7142,7 +7140,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('uses async iteration with listModelDeploymentMonitoringJobs without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7196,7 +7194,7 @@ describe('v1beta1.JobServiceClient', () => {
 
     it('uses async iteration with listModelDeploymentMonitoringJobs with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7242,7 +7240,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7272,7 +7270,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7310,7 +7308,7 @@ describe('v1beta1.JobServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7320,7 +7318,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7352,7 +7350,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7382,7 +7380,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7420,7 +7418,7 @@ describe('v1beta1.JobServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7430,7 +7428,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7462,7 +7460,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7495,7 +7493,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7533,7 +7531,7 @@ describe('v1beta1.JobServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7543,7 +7541,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7578,7 +7576,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7608,7 +7606,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7652,7 +7650,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7687,7 +7685,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7735,7 +7733,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7776,7 +7774,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7797,7 +7795,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7825,7 +7823,7 @@ describe('v1beta1.JobServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7835,7 +7833,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7859,7 +7857,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7881,7 +7879,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7909,7 +7907,7 @@ describe('v1beta1.JobServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7919,7 +7917,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7943,7 +7941,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7965,7 +7963,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7993,7 +7991,7 @@ describe('v1beta1.JobServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8003,7 +8001,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8027,7 +8025,7 @@ describe('v1beta1.JobServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8062,7 +8060,7 @@ describe('v1beta1.JobServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8100,7 +8098,7 @@ describe('v1beta1.JobServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8187,7 +8185,7 @@ describe('v1beta1.JobServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8264,7 +8262,7 @@ describe('v1beta1.JobServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8339,7 +8337,7 @@ describe('v1beta1.JobServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8416,7 +8414,7 @@ describe('v1beta1.JobServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8481,7 +8479,7 @@ describe('v1beta1.JobServiceClient', () => {
         context: 'contextValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8556,7 +8554,7 @@ describe('v1beta1.JobServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8621,7 +8619,7 @@ describe('v1beta1.JobServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8696,7 +8694,7 @@ describe('v1beta1.JobServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8761,7 +8759,7 @@ describe('v1beta1.JobServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8826,7 +8824,7 @@ describe('v1beta1.JobServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8902,7 +8900,7 @@ describe('v1beta1.JobServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8984,7 +8982,7 @@ describe('v1beta1.JobServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9059,7 +9057,7 @@ describe('v1beta1.JobServiceClient', () => {
         example_store: 'exampleStoreValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9124,7 +9122,7 @@ describe('v1beta1.JobServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9199,7 +9197,7 @@ describe('v1beta1.JobServiceClient', () => {
         extension: 'extensionValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9263,7 +9261,7 @@ describe('v1beta1.JobServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9328,7 +9326,7 @@ describe('v1beta1.JobServiceClient', () => {
         feature_monitor: 'featureMonitorValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9406,7 +9404,7 @@ describe('v1beta1.JobServiceClient', () => {
         feature_monitor_job: 'featureMonitorJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9513,7 +9511,7 @@ describe('v1beta1.JobServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9591,7 +9589,7 @@ describe('v1beta1.JobServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9668,7 +9666,7 @@ describe('v1beta1.JobServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9744,7 +9742,7 @@ describe('v1beta1.JobServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9808,7 +9806,7 @@ describe('v1beta1.JobServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9889,7 +9887,7 @@ describe('v1beta1.JobServiceClient', () => {
         index: 'indexValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9953,7 +9951,7 @@ describe('v1beta1.JobServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10016,7 +10014,7 @@ describe('v1beta1.JobServiceClient', () => {
         location: 'locationValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10067,7 +10065,7 @@ describe('v1beta1.JobServiceClient', () => {
         memory: 'memoryValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10143,7 +10141,7 @@ describe('v1beta1.JobServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10220,7 +10218,7 @@ describe('v1beta1.JobServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10284,7 +10282,7 @@ describe('v1beta1.JobServiceClient', () => {
         model: 'modelValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10348,7 +10346,7 @@ describe('v1beta1.JobServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10428,7 +10426,7 @@ describe('v1beta1.JobServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10505,7 +10503,7 @@ describe('v1beta1.JobServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10612,7 +10610,7 @@ describe('v1beta1.JobServiceClient', () => {
         model_monitor: 'modelMonitorValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10677,7 +10675,7 @@ describe('v1beta1.JobServiceClient', () => {
         model_monitoring_job: 'modelMonitoringJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10769,7 +10767,7 @@ describe('v1beta1.JobServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10834,7 +10832,7 @@ describe('v1beta1.JobServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10910,7 +10908,7 @@ describe('v1beta1.JobServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10991,7 +10989,7 @@ describe('v1beta1.JobServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11056,7 +11054,7 @@ describe('v1beta1.JobServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11137,7 +11135,7 @@ describe('v1beta1.JobServiceClient', () => {
         online_evaluator: 'onlineEvaluatorValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11202,7 +11200,7 @@ describe('v1beta1.JobServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11279,7 +11277,7 @@ describe('v1beta1.JobServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11343,7 +11341,7 @@ describe('v1beta1.JobServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11423,7 +11421,7 @@ describe('v1beta1.JobServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11526,7 +11524,7 @@ describe('v1beta1.JobServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11650,7 +11648,7 @@ describe('v1beta1.JobServiceClient', () => {
         model: 'modelValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11741,7 +11739,7 @@ describe('v1beta1.JobServiceClient', () => {
         model: 'modelValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11794,7 +11792,7 @@ describe('v1beta1.JobServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11859,7 +11857,7 @@ describe('v1beta1.JobServiceClient', () => {
         rag_data_schema: 'ragDataSchemaValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11933,7 +11931,7 @@ describe('v1beta1.JobServiceClient', () => {
         location: 'locationValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11987,7 +11985,7 @@ describe('v1beta1.JobServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12064,7 +12062,7 @@ describe('v1beta1.JobServiceClient', () => {
         rag_metadata: 'ragMetadataValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12150,7 +12148,7 @@ describe('v1beta1.JobServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12216,7 +12214,7 @@ describe('v1beta1.JobServiceClient', () => {
         runtime_revision: 'runtimeRevisionValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12313,7 +12311,7 @@ describe('v1beta1.JobServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12388,7 +12386,7 @@ describe('v1beta1.JobServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12453,7 +12451,7 @@ describe('v1beta1.JobServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12530,7 +12528,7 @@ describe('v1beta1.JobServiceClient', () => {
         event: 'eventValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12617,7 +12615,7 @@ describe('v1beta1.JobServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12682,7 +12680,7 @@ describe('v1beta1.JobServiceClient', () => {
         study: 'studyValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12746,7 +12744,7 @@ describe('v1beta1.JobServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12811,7 +12809,7 @@ describe('v1beta1.JobServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12907,7 +12905,7 @@ describe('v1beta1.JobServiceClient', () => {
         run: 'runValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12996,7 +12994,7 @@ describe('v1beta1.JobServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13119,7 +13117,7 @@ describe('v1beta1.JobServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13188,7 +13186,7 @@ describe('v1beta1.JobServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13263,7 +13261,7 @@ describe('v1beta1.JobServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new jobserviceModule.v1beta1.JobServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

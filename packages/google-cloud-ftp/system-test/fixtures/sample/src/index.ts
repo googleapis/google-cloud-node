@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { CloudFtpClient } from '@google-cloud/ftp';
+import {CloudFtpClient} from '@google-cloud/ftp';
 
 // check that the client class type name can be used
 function doStuffWithCloudFtpClient(client: CloudFtpClient) {

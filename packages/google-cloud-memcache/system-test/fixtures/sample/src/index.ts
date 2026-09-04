@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { CloudMemcacheClient } from '@google-cloud/memcache';
+import {CloudMemcacheClient} from '@google-cloud/memcache';
 
 // check that the client class type name can be used
 function doStuffWithCloudMemcacheClient(client: CloudMemcacheClient) {

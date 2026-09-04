@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as webhooksModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.webhooksStub, undefined);
@@ -245,12 +245,12 @@ describe('v3beta1.WebhooksClient', () => {
       assert(client.webhooksStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.webhooksStub);
@@ -259,14 +259,14 @@ describe('v3beta1.WebhooksClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.webhooksStub, undefined);
@@ -275,7 +275,7 @@ describe('v3beta1.WebhooksClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v3beta1.WebhooksClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v3beta1.WebhooksClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v3beta1.WebhooksClient', () => {
   describe('getWebhook', () => {
     it('invokes getWebhook without error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes getWebhook without error using callback', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes getWebhook with error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes getWebhook with closed client', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v3beta1.WebhooksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWebhook(request), expectedError);
@@ -450,7 +450,7 @@ describe('v3beta1.WebhooksClient', () => {
   describe('createWebhook', () => {
     it('invokes createWebhook without error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes createWebhook without error using callback', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -528,7 +528,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes createWebhook with error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -559,7 +559,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes createWebhook with closed client', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v3beta1.WebhooksClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createWebhook(request), expectedError);
@@ -582,7 +582,7 @@ describe('v3beta1.WebhooksClient', () => {
   describe('updateWebhook', () => {
     it('invokes updateWebhook without error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes updateWebhook without error using callback', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes updateWebhook with error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes updateWebhook with closed client', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v3beta1.WebhooksClient', () => {
       );
       request.webhook.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateWebhook(request), expectedError);
@@ -718,7 +718,7 @@ describe('v3beta1.WebhooksClient', () => {
   describe('deleteWebhook', () => {
     it('invokes deleteWebhook without error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes deleteWebhook without error using callback', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes deleteWebhook with error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -827,7 +827,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes deleteWebhook with closed client', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v3beta1.WebhooksClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteWebhook(request), expectedError);
@@ -850,7 +850,7 @@ describe('v3beta1.WebhooksClient', () => {
   describe('listWebhooks', () => {
     it('invokes listWebhooks without error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -889,7 +889,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes listWebhooks without error using callback', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -921,8 +921,7 @@ describe('v3beta1.WebhooksClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.cx.v3beta1.IWebhook[]
-              | null,
+              protos.google.cloud.dialogflow.cx.v3beta1.IWebhook[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -946,7 +945,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes listWebhooks with error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +976,7 @@ describe('v3beta1.WebhooksClient', () => {
 
     it('invokes listWebhooksStream without error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1030,15 +1029,15 @@ describe('v3beta1.WebhooksClient', () => {
       assert(
         (client.descriptors.page.listWebhooks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listWebhooksStream with error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1082,15 +1081,15 @@ describe('v3beta1.WebhooksClient', () => {
       assert(
         (client.descriptors.page.listWebhooks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWebhooks without error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,15 +1131,15 @@ describe('v3beta1.WebhooksClient', () => {
       assert(
         (client.descriptors.page.listWebhooks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWebhooks with error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1173,16 +1172,16 @@ describe('v3beta1.WebhooksClient', () => {
       assert(
         (client.descriptors.page.listWebhooks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1212,7 +1211,7 @@ describe('v3beta1.WebhooksClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1256,7 +1255,7 @@ describe('v3beta1.WebhooksClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1291,7 +1290,7 @@ describe('v3beta1.WebhooksClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1339,7 +1338,7 @@ describe('v3beta1.WebhooksClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,7 +1386,7 @@ describe('v3beta1.WebhooksClient', () => {
         agent: 'agentValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1451,7 +1450,7 @@ describe('v3beta1.WebhooksClient', () => {
         agent: 'agentValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1530,7 +1529,7 @@ describe('v3beta1.WebhooksClient', () => {
         agent: 'agentValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1609,7 +1608,7 @@ describe('v3beta1.WebhooksClient', () => {
         changelog: 'changelogValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1686,7 +1685,7 @@ describe('v3beta1.WebhooksClient', () => {
         continuous_test_result: 'continuousTestResultValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1797,7 +1796,7 @@ describe('v3beta1.WebhooksClient', () => {
         conversation: 'conversationValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1874,7 +1873,7 @@ describe('v3beta1.WebhooksClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1961,7 +1960,7 @@ describe('v3beta1.WebhooksClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2037,7 +2036,7 @@ describe('v3beta1.WebhooksClient', () => {
         environment: 'environmentValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2114,7 +2113,7 @@ describe('v3beta1.WebhooksClient', () => {
         example: 'exampleValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2202,7 +2201,7 @@ describe('v3beta1.WebhooksClient', () => {
         experiment: 'experimentValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2289,7 +2288,7 @@ describe('v3beta1.WebhooksClient', () => {
         flow: 'flowValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2365,7 +2364,7 @@ describe('v3beta1.WebhooksClient', () => {
         flow: 'flowValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2458,7 +2457,7 @@ describe('v3beta1.WebhooksClient', () => {
         generator: 'generatorValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2534,7 +2533,7 @@ describe('v3beta1.WebhooksClient', () => {
         intent: 'intentValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,7 +2607,7 @@ describe('v3beta1.WebhooksClient', () => {
         location: 'locationValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2660,7 +2659,7 @@ describe('v3beta1.WebhooksClient', () => {
         page: 'pageValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2747,7 +2746,7 @@ describe('v3beta1.WebhooksClient', () => {
         playbook: 'playbookValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2824,7 +2823,7 @@ describe('v3beta1.WebhooksClient', () => {
         version: 'versionValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2908,7 +2907,7 @@ describe('v3beta1.WebhooksClient', () => {
         project: 'projectValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2950,7 +2949,7 @@ describe('v3beta1.WebhooksClient', () => {
         session: 'sessionValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3077,7 +3076,7 @@ describe('v3beta1.WebhooksClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3222,7 +3221,7 @@ describe('v3beta1.WebhooksClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3346,7 +3345,7 @@ describe('v3beta1.WebhooksClient', () => {
         session: 'sessionValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3441,7 +3440,7 @@ describe('v3beta1.WebhooksClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3566,7 +3565,7 @@ describe('v3beta1.WebhooksClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3671,7 +3670,7 @@ describe('v3beta1.WebhooksClient', () => {
         security_settings: 'securitySettingsValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3740,7 +3739,7 @@ describe('v3beta1.WebhooksClient', () => {
         test_case: 'testCaseValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3817,7 +3816,7 @@ describe('v3beta1.WebhooksClient', () => {
         result: 'resultValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3904,7 +3903,7 @@ describe('v3beta1.WebhooksClient', () => {
         tool: 'toolValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3981,7 +3980,7 @@ describe('v3beta1.WebhooksClient', () => {
         version: 'versionValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4069,7 +4068,7 @@ describe('v3beta1.WebhooksClient', () => {
         version: 'versionValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4156,7 +4155,7 @@ describe('v3beta1.WebhooksClient', () => {
         webhook: 'webhookValue',
       };
       const client = new webhooksModule.v3beta1.WebhooksClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as entitytypesModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.entityTypesStub, undefined);
@@ -282,12 +282,12 @@ describe('v3.EntityTypesClient', () => {
       assert(client.entityTypesStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.entityTypesStub);
@@ -296,14 +296,14 @@ describe('v3.EntityTypesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.entityTypesStub, undefined);
@@ -312,7 +312,7 @@ describe('v3.EntityTypesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v3.EntityTypesClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v3.EntityTypesClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v3.EntityTypesClient', () => {
   describe('getEntityType', () => {
     it('invokes getEntityType without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes getEntityType without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes getEntityType with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes getEntityType with closed client', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v3.EntityTypesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEntityType(request), expectedError);
@@ -487,7 +487,7 @@ describe('v3.EntityTypesClient', () => {
   describe('createEntityType', () => {
     it('invokes createEntityType without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes createEntityType without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -565,7 +565,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes createEntityType with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes createEntityType with closed client', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v3.EntityTypesClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEntityType(request), expectedError);
@@ -619,7 +619,7 @@ describe('v3.EntityTypesClient', () => {
   describe('updateEntityType', () => {
     it('invokes updateEntityType without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes updateEntityType without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes updateEntityType with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -731,7 +731,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes updateEntityType with closed client', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v3.EntityTypesClient', () => {
       );
       request.entityType.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEntityType(request), expectedError);
@@ -755,7 +755,7 @@ describe('v3.EntityTypesClient', () => {
   describe('deleteEntityType', () => {
     it('invokes deleteEntityType without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes deleteEntityType without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes deleteEntityType with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes deleteEntityType with closed client', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v3.EntityTypesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteEntityType(request), expectedError);
@@ -887,7 +887,7 @@ describe('v3.EntityTypesClient', () => {
   describe('exportEntityTypes', () => {
     it('invokes exportEntityTypes without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -920,7 +920,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes exportEntityTypes without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes exportEntityTypes with call error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes exportEntityTypes with LRO error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1038,7 +1038,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes checkExportEntityTypesProgress without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,8 +1046,8 @@ describe('v3.EntityTypesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportEntityTypesProgress(
@@ -1060,7 +1060,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes checkExportEntityTypesProgress with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1081,7 +1081,7 @@ describe('v3.EntityTypesClient', () => {
   describe('importEntityTypes', () => {
     it('invokes importEntityTypes without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes importEntityTypes without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1168,7 +1168,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes importEntityTypes with call error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1199,7 +1199,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes importEntityTypes with LRO error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1232,7 +1232,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes checkImportEntityTypesProgress without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,8 +1240,8 @@ describe('v3.EntityTypesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportEntityTypesProgress(
@@ -1254,7 +1254,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes checkImportEntityTypesProgress with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1275,7 +1275,7 @@ describe('v3.EntityTypesClient', () => {
   describe('listEntityTypes', () => {
     it('invokes listEntityTypes without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes listEntityTypes without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1369,7 +1369,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes listEntityTypes with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1400,7 +1400,7 @@ describe('v3.EntityTypesClient', () => {
 
     it('invokes listEntityTypesStream without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1452,15 +1452,15 @@ describe('v3.EntityTypesClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEntityTypesStream with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,15 +1501,15 @@ describe('v3.EntityTypesClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntityTypes without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1550,15 +1550,15 @@ describe('v3.EntityTypesClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntityTypes with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1591,16 +1591,16 @@ describe('v3.EntityTypesClient', () => {
       assert(
         (client.descriptors.page.listEntityTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1630,7 +1630,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1674,7 +1674,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1709,7 +1709,7 @@ describe('v3.EntityTypesClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1757,7 +1757,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1798,7 +1798,7 @@ describe('v3.EntityTypesClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1819,7 +1819,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1847,7 +1847,7 @@ describe('v3.EntityTypesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1857,7 +1857,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1881,7 +1881,7 @@ describe('v3.EntityTypesClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1903,7 +1903,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1931,7 +1931,7 @@ describe('v3.EntityTypesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1941,7 +1941,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1965,7 +1965,7 @@ describe('v3.EntityTypesClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1987,7 +1987,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2015,7 +2015,7 @@ describe('v3.EntityTypesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2025,7 +2025,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2049,7 +2049,7 @@ describe('v3.EntityTypesClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2084,7 +2084,7 @@ describe('v3.EntityTypesClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2120,7 +2120,7 @@ describe('v3.EntityTypesClient', () => {
         agent: 'agentValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2184,7 +2184,7 @@ describe('v3.EntityTypesClient', () => {
         agent: 'agentValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2263,7 +2263,7 @@ describe('v3.EntityTypesClient', () => {
         agent: 'agentValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2342,7 +2342,7 @@ describe('v3.EntityTypesClient', () => {
         changelog: 'changelogValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2419,7 +2419,7 @@ describe('v3.EntityTypesClient', () => {
         continuous_test_result: 'continuousTestResultValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2531,7 +2531,7 @@ describe('v3.EntityTypesClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2618,7 +2618,7 @@ describe('v3.EntityTypesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2694,7 +2694,7 @@ describe('v3.EntityTypesClient', () => {
         environment: 'environmentValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2771,7 +2771,7 @@ describe('v3.EntityTypesClient', () => {
         example: 'exampleValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2859,7 +2859,7 @@ describe('v3.EntityTypesClient', () => {
         experiment: 'experimentValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2946,7 +2946,7 @@ describe('v3.EntityTypesClient', () => {
         flow: 'flowValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3022,7 +3022,7 @@ describe('v3.EntityTypesClient', () => {
         flow: 'flowValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3115,7 +3115,7 @@ describe('v3.EntityTypesClient', () => {
         generator: 'generatorValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3191,7 +3191,7 @@ describe('v3.EntityTypesClient', () => {
         intent: 'intentValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3265,7 +3265,7 @@ describe('v3.EntityTypesClient', () => {
         location: 'locationValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3317,7 +3317,7 @@ describe('v3.EntityTypesClient', () => {
         page: 'pageValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3404,7 +3404,7 @@ describe('v3.EntityTypesClient', () => {
         playbook: 'playbookValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3481,7 +3481,7 @@ describe('v3.EntityTypesClient', () => {
         version: 'versionValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3565,7 +3565,7 @@ describe('v3.EntityTypesClient', () => {
         project: 'projectValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3609,7 +3609,7 @@ describe('v3.EntityTypesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3754,7 +3754,7 @@ describe('v3.EntityTypesClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3879,7 +3879,7 @@ describe('v3.EntityTypesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4004,7 +4004,7 @@ describe('v3.EntityTypesClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4109,7 +4109,7 @@ describe('v3.EntityTypesClient', () => {
         security_settings: 'securitySettingsValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4178,7 +4178,7 @@ describe('v3.EntityTypesClient', () => {
         test_case: 'testCaseValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4255,7 +4255,7 @@ describe('v3.EntityTypesClient', () => {
         result: 'resultValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4342,7 +4342,7 @@ describe('v3.EntityTypesClient', () => {
         tool: 'toolValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4419,7 +4419,7 @@ describe('v3.EntityTypesClient', () => {
         version: 'versionValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4507,7 +4507,7 @@ describe('v3.EntityTypesClient', () => {
         version: 'versionValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4594,7 +4594,7 @@ describe('v3.EntityTypesClient', () => {
         webhook: 'webhookValue',
       };
       const client = new entitytypesModule.v3.EntityTypesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

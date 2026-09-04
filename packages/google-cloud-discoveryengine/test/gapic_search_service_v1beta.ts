@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as searchserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1beta.SearchServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.searchServiceStub, undefined);
@@ -250,12 +250,12 @@ describe('v1beta.SearchServiceClient', () => {
       assert(client.searchServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.searchServiceStub);
@@ -264,14 +264,14 @@ describe('v1beta.SearchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.searchServiceStub, undefined);
@@ -280,7 +280,7 @@ describe('v1beta.SearchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1beta.SearchServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1beta.SearchServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1beta.SearchServiceClient', () => {
   describe('search', () => {
     it('invokes search without error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -362,7 +362,7 @@ describe('v1beta.SearchServiceClient', () => {
 
     it('invokes search without error using callback', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -419,7 +419,7 @@ describe('v1beta.SearchServiceClient', () => {
 
     it('invokes search with error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v1beta.SearchServiceClient', () => {
 
     it('invokes searchStream without error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -502,15 +502,15 @@ describe('v1beta.SearchServiceClient', () => {
       assert(
         (client.descriptors.page.search.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchStream with error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -556,15 +556,15 @@ describe('v1beta.SearchServiceClient', () => {
       assert(
         (client.descriptors.page.search.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with search without error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,15 +605,15 @@ describe('v1beta.SearchServiceClient', () => {
       assert(
         (client.descriptors.page.search.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with search with error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -647,9 +647,9 @@ describe('v1beta.SearchServiceClient', () => {
       assert(
         (client.descriptors.page.search.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -657,7 +657,7 @@ describe('v1beta.SearchServiceClient', () => {
   describe('searchLite', () => {
     it('invokes searchLite without error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1beta.SearchServiceClient', () => {
 
     it('invokes searchLite without error using callback', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1beta.SearchServiceClient', () => {
 
     it('invokes searchLite with error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1beta.SearchServiceClient', () => {
 
     it('invokes searchLiteStream without error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -839,15 +839,15 @@ describe('v1beta.SearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchLite.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchLiteStream with error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -893,15 +893,15 @@ describe('v1beta.SearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchLite.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchLite without error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -943,15 +943,15 @@ describe('v1beta.SearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchLite.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchLite with error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,16 +986,16 @@ describe('v1beta.SearchServiceClient', () => {
       assert(
         (client.descriptors.page.searchLite.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1025,7 +1025,7 @@ describe('v1beta.SearchServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1069,7 +1069,7 @@ describe('v1beta.SearchServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v1beta.SearchServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1beta.SearchServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1199,7 +1199,7 @@ describe('v1beta.SearchServiceClient', () => {
         location: 'locationValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1252,7 +1252,7 @@ describe('v1beta.SearchServiceClient', () => {
         assist_answer: 'assistAnswerValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1351,7 +1351,7 @@ describe('v1beta.SearchServiceClient', () => {
         assistant: 'assistantValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1438,7 +1438,7 @@ describe('v1beta.SearchServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1513,7 +1513,7 @@ describe('v1beta.SearchServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1577,7 +1577,7 @@ describe('v1beta.SearchServiceClient', () => {
         grounding_config: 'groundingConfigValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v1beta.SearchServiceClient', () => {
         identity_mapping_store: 'identityMappingStoreValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1723,7 +1723,7 @@ describe('v1beta.SearchServiceClient', () => {
         license_config: 'licenseConfigValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1785,7 +1785,7 @@ describe('v1beta.SearchServiceClient', () => {
         project: 'projectValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1824,7 +1824,7 @@ describe('v1beta.SearchServiceClient', () => {
         location: 'locationValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1888,7 +1888,7 @@ describe('v1beta.SearchServiceClient', () => {
         cmek_config: 'cmekConfigValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1968,7 +1968,7 @@ describe('v1beta.SearchServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2071,7 +2071,7 @@ describe('v1beta.SearchServiceClient', () => {
         branch: 'branchValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2198,7 +2198,7 @@ describe('v1beta.SearchServiceClient', () => {
         document: 'documentValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2345,7 +2345,7 @@ describe('v1beta.SearchServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2508,7 +2508,7 @@ describe('v1beta.SearchServiceClient', () => {
         control: 'controlValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2634,7 +2634,7 @@ describe('v1beta.SearchServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2761,7 +2761,7 @@ describe('v1beta.SearchServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2887,7 +2887,7 @@ describe('v1beta.SearchServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2996,7 +2996,7 @@ describe('v1beta.SearchServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3122,7 +3122,7 @@ describe('v1beta.SearchServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3250,7 +3250,7 @@ describe('v1beta.SearchServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3395,7 +3395,7 @@ describe('v1beta.SearchServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3520,7 +3520,7 @@ describe('v1beta.SearchServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3629,7 +3629,7 @@ describe('v1beta.SearchServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3756,7 +3756,7 @@ describe('v1beta.SearchServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3884,7 +3884,7 @@ describe('v1beta.SearchServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4028,7 +4028,7 @@ describe('v1beta.SearchServiceClient', () => {
         control: 'controlValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4154,7 +4154,7 @@ describe('v1beta.SearchServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4280,7 +4280,7 @@ describe('v1beta.SearchServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4407,7 +4407,7 @@ describe('v1beta.SearchServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4550,7 +4550,7 @@ describe('v1beta.SearchServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4673,7 +4673,7 @@ describe('v1beta.SearchServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4753,7 +4753,7 @@ describe('v1beta.SearchServiceClient', () => {
         branch: 'branchValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4847,7 +4847,7 @@ describe('v1beta.SearchServiceClient', () => {
         document: 'documentValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4974,7 +4974,7 @@ describe('v1beta.SearchServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5116,7 +5116,7 @@ describe('v1beta.SearchServiceClient', () => {
         control: 'controlValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5211,7 +5211,7 @@ describe('v1beta.SearchServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5318,7 +5318,7 @@ describe('v1beta.SearchServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5424,7 +5424,7 @@ describe('v1beta.SearchServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5513,7 +5513,7 @@ describe('v1beta.SearchServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5606,7 +5606,7 @@ describe('v1beta.SearchServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5713,7 +5713,7 @@ describe('v1beta.SearchServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5837,7 +5837,7 @@ describe('v1beta.SearchServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5934,7 +5934,7 @@ describe('v1beta.SearchServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6023,7 +6023,7 @@ describe('v1beta.SearchServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6131,7 +6131,7 @@ describe('v1beta.SearchServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6238,7 +6238,7 @@ describe('v1beta.SearchServiceClient', () => {
         sample_query: 'sampleQueryValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6313,7 +6313,7 @@ describe('v1beta.SearchServiceClient', () => {
         sample_query_set: 'sampleQuerySetValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6378,7 +6378,7 @@ describe('v1beta.SearchServiceClient', () => {
         user_store: 'userStoreValue',
       };
       const client = new searchserviceModule.v1beta.SearchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

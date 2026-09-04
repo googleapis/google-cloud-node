@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as chatserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.chatServiceStub, undefined);
@@ -245,12 +245,12 @@ describe('v1.ChatServiceClient', () => {
       assert(client.chatServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.chatServiceStub);
@@ -259,14 +259,14 @@ describe('v1.ChatServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.chatServiceStub, undefined);
@@ -275,7 +275,7 @@ describe('v1.ChatServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v1.ChatServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v1.ChatServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v1.ChatServiceClient', () => {
   describe('createMessage', () => {
     it('invokes createMessage without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createMessage without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createMessage with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createMessage with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createMessage(request), expectedError);
@@ -450,7 +450,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getMembership', () => {
     it('invokes getMembership without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getMembership without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -528,7 +528,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getMembership with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -559,7 +559,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getMembership with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMembership(request), expectedError);
@@ -582,7 +582,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getMessage', () => {
     it('invokes getMessage without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getMessage without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getMessage with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -691,7 +691,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getMessage with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMessage(request), expectedError);
@@ -714,7 +714,7 @@ describe('v1.ChatServiceClient', () => {
   describe('updateMessage', () => {
     it('invokes updateMessage without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateMessage without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateMessage with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateMessage with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.message.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateMessage(request), expectedError);
@@ -850,7 +850,7 @@ describe('v1.ChatServiceClient', () => {
   describe('deleteMessage', () => {
     it('invokes deleteMessage without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteMessage without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteMessage with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteMessage with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -972,7 +972,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteMessage(request), expectedError);
@@ -982,7 +982,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getAttachment', () => {
     it('invokes getAttachment without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1013,7 +1013,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getAttachment without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1060,7 +1060,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getAttachment with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getAttachment with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAttachment(request), expectedError);
@@ -1114,7 +1114,7 @@ describe('v1.ChatServiceClient', () => {
   describe('uploadAttachment', () => {
     it('invokes uploadAttachment without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1145,7 +1145,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes uploadAttachment without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1192,7 +1192,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes uploadAttachment with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1223,7 +1223,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes uploadAttachment with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1236,7 +1236,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.uploadAttachment(request), expectedError);
@@ -1246,7 +1246,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getSpace', () => {
     it('invokes getSpace without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpace without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1324,7 +1324,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpace with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1352,7 +1352,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpace with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1365,7 +1365,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSpace(request), expectedError);
@@ -1375,7 +1375,7 @@ describe('v1.ChatServiceClient', () => {
   describe('createSpace', () => {
     it('invokes createSpace without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1392,7 +1392,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createSpace without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1425,7 +1425,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createSpace with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createSpace with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1450,7 +1450,7 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.CreateSpaceRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSpace(request), expectedError);
@@ -1460,7 +1460,7 @@ describe('v1.ChatServiceClient', () => {
   describe('setUpSpace', () => {
     it('invokes setUpSpace without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1477,7 +1477,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes setUpSpace without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1510,7 +1510,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes setUpSpace with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1527,7 +1527,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes setUpSpace with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1535,7 +1535,7 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.SetUpSpaceRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setUpSpace(request), expectedError);
@@ -1545,7 +1545,7 @@ describe('v1.ChatServiceClient', () => {
   describe('updateSpace', () => {
     it('invokes updateSpace without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1577,7 +1577,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSpace without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1625,7 +1625,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSpace with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1657,7 +1657,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSpace with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1671,7 +1671,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.space.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSpace(request), expectedError);
@@ -1681,7 +1681,7 @@ describe('v1.ChatServiceClient', () => {
   describe('deleteSpace', () => {
     it('invokes deleteSpace without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1712,7 +1712,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteSpace without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1759,7 +1759,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteSpace with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1790,7 +1790,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteSpace with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1803,7 +1803,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSpace(request), expectedError);
@@ -1813,7 +1813,7 @@ describe('v1.ChatServiceClient', () => {
   describe('completeImportSpace', () => {
     it('invokes completeImportSpace without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1845,7 +1845,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes completeImportSpace without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1892,7 +1892,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes completeImportSpace with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1923,7 +1923,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes completeImportSpace with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1936,7 +1936,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.completeImportSpace(request), expectedError);
@@ -1946,7 +1946,7 @@ describe('v1.ChatServiceClient', () => {
   describe('findDirectMessage', () => {
     it('invokes findDirectMessage without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1963,7 +1963,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes findDirectMessage without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1996,7 +1996,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes findDirectMessage with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2013,7 +2013,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes findDirectMessage with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.FindDirectMessageRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.findDirectMessage(request), expectedError);
@@ -2031,7 +2031,7 @@ describe('v1.ChatServiceClient', () => {
   describe('createMembership', () => {
     it('invokes createMembership without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2062,7 +2062,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createMembership without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2109,7 +2109,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createMembership with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2140,7 +2140,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createMembership with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2153,7 +2153,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createMembership(request), expectedError);
@@ -2163,7 +2163,7 @@ describe('v1.ChatServiceClient', () => {
   describe('updateMembership', () => {
     it('invokes updateMembership without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2195,7 +2195,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateMembership without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2243,7 +2243,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateMembership with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2275,7 +2275,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateMembership with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2289,7 +2289,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.membership.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateMembership(request), expectedError);
@@ -2299,7 +2299,7 @@ describe('v1.ChatServiceClient', () => {
   describe('deleteMembership', () => {
     it('invokes deleteMembership without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2330,7 +2330,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteMembership without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2377,7 +2377,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteMembership with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2408,7 +2408,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteMembership with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2421,7 +2421,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteMembership(request), expectedError);
@@ -2431,7 +2431,7 @@ describe('v1.ChatServiceClient', () => {
   describe('createReaction', () => {
     it('invokes createReaction without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2462,7 +2462,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createReaction without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2509,7 +2509,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createReaction with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2540,7 +2540,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createReaction with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2553,7 +2553,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createReaction(request), expectedError);
@@ -2563,7 +2563,7 @@ describe('v1.ChatServiceClient', () => {
   describe('deleteReaction', () => {
     it('invokes deleteReaction without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2594,7 +2594,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteReaction without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2641,7 +2641,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteReaction with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2672,7 +2672,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteReaction with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2685,7 +2685,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteReaction(request), expectedError);
@@ -2695,7 +2695,7 @@ describe('v1.ChatServiceClient', () => {
   describe('createCustomEmoji', () => {
     it('invokes createCustomEmoji without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2712,7 +2712,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createCustomEmoji without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2745,7 +2745,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createCustomEmoji with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2762,7 +2762,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createCustomEmoji with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2770,7 +2770,7 @@ describe('v1.ChatServiceClient', () => {
         new protos.google.chat.v1.CreateCustomEmojiRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCustomEmoji(request), expectedError);
@@ -2780,7 +2780,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getCustomEmoji', () => {
     it('invokes getCustomEmoji without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2811,7 +2811,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getCustomEmoji without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2858,7 +2858,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getCustomEmoji with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2889,7 +2889,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getCustomEmoji with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2902,7 +2902,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomEmoji(request), expectedError);
@@ -2912,7 +2912,7 @@ describe('v1.ChatServiceClient', () => {
   describe('deleteCustomEmoji', () => {
     it('invokes deleteCustomEmoji without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2943,7 +2943,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteCustomEmoji without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2990,7 +2990,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteCustomEmoji with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3021,7 +3021,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteCustomEmoji with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3034,7 +3034,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCustomEmoji(request), expectedError);
@@ -3044,7 +3044,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getSpaceReadState', () => {
     it('invokes getSpaceReadState without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3075,7 +3075,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpaceReadState without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3122,7 +3122,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpaceReadState with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3153,7 +3153,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpaceReadState with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3166,7 +3166,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSpaceReadState(request), expectedError);
@@ -3176,7 +3176,7 @@ describe('v1.ChatServiceClient', () => {
   describe('updateSpaceReadState', () => {
     it('invokes updateSpaceReadState without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3209,7 +3209,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSpaceReadState without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3257,7 +3257,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSpaceReadState with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3289,7 +3289,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSpaceReadState with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3303,7 +3303,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.spaceReadState.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSpaceReadState(request), expectedError);
@@ -3313,7 +3313,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getThreadReadState', () => {
     it('invokes getThreadReadState without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3345,7 +3345,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getThreadReadState without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3392,7 +3392,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getThreadReadState with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3423,7 +3423,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getThreadReadState with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3436,7 +3436,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getThreadReadState(request), expectedError);
@@ -3446,7 +3446,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getAvailability', () => {
     it('invokes getAvailability without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3477,7 +3477,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getAvailability without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3524,7 +3524,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getAvailability with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3555,7 +3555,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getAvailability with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3568,7 +3568,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAvailability(request), expectedError);
@@ -3578,7 +3578,7 @@ describe('v1.ChatServiceClient', () => {
   describe('markAsActive', () => {
     it('invokes markAsActive without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3609,7 +3609,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes markAsActive without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3656,7 +3656,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes markAsActive with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3687,7 +3687,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes markAsActive with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3700,7 +3700,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.markAsActive(request), expectedError);
@@ -3710,7 +3710,7 @@ describe('v1.ChatServiceClient', () => {
   describe('markAsAway', () => {
     it('invokes markAsAway without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3741,7 +3741,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes markAsAway without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3788,7 +3788,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes markAsAway with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3819,7 +3819,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes markAsAway with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3832,7 +3832,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.markAsAway(request), expectedError);
@@ -3842,7 +3842,7 @@ describe('v1.ChatServiceClient', () => {
   describe('markAsDoNotDisturb', () => {
     it('invokes markAsDoNotDisturb without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3874,7 +3874,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes markAsDoNotDisturb without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3921,7 +3921,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes markAsDoNotDisturb with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3952,7 +3952,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes markAsDoNotDisturb with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3965,7 +3965,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.markAsDoNotDisturb(request), expectedError);
@@ -3975,7 +3975,7 @@ describe('v1.ChatServiceClient', () => {
   describe('updateAvailability', () => {
     it('invokes updateAvailability without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4008,7 +4008,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateAvailability without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4056,7 +4056,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateAvailability with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4088,7 +4088,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateAvailability with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4102,7 +4102,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.availability.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAvailability(request), expectedError);
@@ -4112,7 +4112,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getSpaceEvent', () => {
     it('invokes getSpaceEvent without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4143,7 +4143,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpaceEvent without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4190,7 +4190,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpaceEvent with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4221,7 +4221,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpaceEvent with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4234,7 +4234,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSpaceEvent(request), expectedError);
@@ -4244,7 +4244,7 @@ describe('v1.ChatServiceClient', () => {
   describe('getSpaceNotificationSetting', () => {
     it('invokes getSpaceNotificationSetting without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4276,7 +4276,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpaceNotificationSetting without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4323,7 +4323,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpaceNotificationSetting with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4357,7 +4357,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes getSpaceNotificationSetting with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4370,7 +4370,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4383,7 +4383,7 @@ describe('v1.ChatServiceClient', () => {
   describe('updateSpaceNotificationSetting', () => {
     it('invokes updateSpaceNotificationSetting without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4416,7 +4416,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSpaceNotificationSetting without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4464,7 +4464,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSpaceNotificationSetting with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4499,7 +4499,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSpaceNotificationSetting with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4513,7 +4513,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.spaceNotificationSetting.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4526,7 +4526,7 @@ describe('v1.ChatServiceClient', () => {
   describe('createSection', () => {
     it('invokes createSection without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4557,7 +4557,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createSection without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4604,7 +4604,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createSection with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4635,7 +4635,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes createSection with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4648,7 +4648,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSection(request), expectedError);
@@ -4658,7 +4658,7 @@ describe('v1.ChatServiceClient', () => {
   describe('deleteSection', () => {
     it('invokes deleteSection without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4689,7 +4689,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteSection without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4736,7 +4736,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteSection with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4767,7 +4767,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes deleteSection with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4780,7 +4780,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSection(request), expectedError);
@@ -4790,7 +4790,7 @@ describe('v1.ChatServiceClient', () => {
   describe('updateSection', () => {
     it('invokes updateSection without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4822,7 +4822,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSection without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4870,7 +4870,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSection with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4902,7 +4902,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes updateSection with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4916,7 +4916,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.section.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSection(request), expectedError);
@@ -4926,7 +4926,7 @@ describe('v1.ChatServiceClient', () => {
   describe('positionSection', () => {
     it('invokes positionSection without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4957,7 +4957,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes positionSection without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5004,7 +5004,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes positionSection with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5035,7 +5035,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes positionSection with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5048,7 +5048,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.positionSection(request), expectedError);
@@ -5058,7 +5058,7 @@ describe('v1.ChatServiceClient', () => {
   describe('moveSectionItem', () => {
     it('invokes moveSectionItem without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5089,7 +5089,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes moveSectionItem without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5136,7 +5136,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes moveSectionItem with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5167,7 +5167,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes moveSectionItem with closed client', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5180,7 +5180,7 @@ describe('v1.ChatServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.moveSectionItem(request), expectedError);
@@ -5190,7 +5190,7 @@ describe('v1.ChatServiceClient', () => {
   describe('listMessages', () => {
     it('invokes listMessages without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5223,7 +5223,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listMessages without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5272,7 +5272,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listMessages with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5303,7 +5303,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listMessagesStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5346,15 +5346,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMessages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMessagesStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5394,15 +5394,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMessages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMessages without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5437,15 +5437,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMessages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMessages with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5477,9 +5477,9 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMessages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5487,7 +5487,7 @@ describe('v1.ChatServiceClient', () => {
   describe('listMemberships', () => {
     it('invokes listMemberships without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5520,7 +5520,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listMemberships without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5569,7 +5569,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listMemberships with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5600,7 +5600,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listMembershipsStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5643,15 +5643,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMemberships.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMembershipsStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5689,15 +5689,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMemberships.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMemberships without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5732,15 +5732,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMemberships.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMemberships with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5772,9 +5772,9 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listMemberships.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5782,7 +5782,7 @@ describe('v1.ChatServiceClient', () => {
   describe('searchMessages', () => {
     it('invokes searchMessages without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5815,7 +5815,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes searchMessages without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5864,7 +5864,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes searchMessages with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5895,7 +5895,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes searchMessagesStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5941,15 +5941,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.searchMessages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchMessagesStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5990,15 +5990,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.searchMessages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchMessages without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6033,15 +6033,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.searchMessages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchMessages with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6073,9 +6073,9 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.searchMessages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6083,7 +6083,7 @@ describe('v1.ChatServiceClient', () => {
   describe('listSpaces', () => {
     it('invokes listSpaces without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6102,7 +6102,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSpaces without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6137,7 +6137,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSpaces with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6154,7 +6154,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSpacesStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6192,7 +6192,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSpacesStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6227,7 +6227,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('uses async iteration with listSpaces without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6257,7 +6257,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('uses async iteration with listSpaces with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6288,7 +6288,7 @@ describe('v1.ChatServiceClient', () => {
   describe('searchSpaces', () => {
     it('invokes searchSpaces without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6307,7 +6307,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes searchSpaces without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6342,7 +6342,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes searchSpaces with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6359,7 +6359,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes searchSpacesStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6397,7 +6397,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes searchSpacesStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6432,7 +6432,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('uses async iteration with searchSpaces without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6462,7 +6462,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('uses async iteration with searchSpaces with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6491,7 +6491,7 @@ describe('v1.ChatServiceClient', () => {
   describe('findGroupChats', () => {
     it('invokes findGroupChats without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6510,7 +6510,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes findGroupChats without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6545,7 +6545,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes findGroupChats with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6562,7 +6562,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes findGroupChatsStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6600,7 +6600,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes findGroupChatsStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6633,7 +6633,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('uses async iteration with findGroupChats without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6663,7 +6663,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('uses async iteration with findGroupChats with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6692,7 +6692,7 @@ describe('v1.ChatServiceClient', () => {
   describe('listReactions', () => {
     it('invokes listReactions without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6725,7 +6725,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listReactions without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6774,7 +6774,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listReactions with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6805,7 +6805,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listReactionsStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6848,15 +6848,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listReactions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReactionsStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6894,15 +6894,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listReactions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReactions without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6937,15 +6937,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listReactions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReactions with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6977,9 +6977,9 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listReactions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6987,7 +6987,7 @@ describe('v1.ChatServiceClient', () => {
   describe('listCustomEmojis', () => {
     it('invokes listCustomEmojis without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7006,7 +7006,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listCustomEmojis without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7041,7 +7041,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listCustomEmojis with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7058,7 +7058,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listCustomEmojisStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7096,7 +7096,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listCustomEmojisStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7129,7 +7129,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('uses async iteration with listCustomEmojis without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7159,7 +7159,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('uses async iteration with listCustomEmojis with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7188,7 +7188,7 @@ describe('v1.ChatServiceClient', () => {
   describe('listSpaceEvents', () => {
     it('invokes listSpaceEvents without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7221,7 +7221,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSpaceEvents without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7270,7 +7270,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSpaceEvents with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7301,7 +7301,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSpaceEventsStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7344,15 +7344,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSpaceEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSpaceEventsStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7390,15 +7390,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSpaceEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSpaceEvents without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7433,15 +7433,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSpaceEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSpaceEvents with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7473,9 +7473,9 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSpaceEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7483,7 +7483,7 @@ describe('v1.ChatServiceClient', () => {
   describe('listSections', () => {
     it('invokes listSections without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7516,7 +7516,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSections without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7565,7 +7565,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSections with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7596,7 +7596,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSectionsStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7639,15 +7639,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSectionsStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7687,15 +7687,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSections without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7730,15 +7730,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSections with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7770,9 +7770,9 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7780,7 +7780,7 @@ describe('v1.ChatServiceClient', () => {
   describe('listSectionItems', () => {
     it('invokes listSectionItems without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7813,7 +7813,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSectionItems without error using callback', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7862,7 +7862,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSectionItems with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7893,7 +7893,7 @@ describe('v1.ChatServiceClient', () => {
 
     it('invokes listSectionItemsStream without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7936,15 +7936,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSectionItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSectionItemsStream with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7982,15 +7982,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSectionItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSectionItems without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8025,15 +8025,15 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSectionItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSectionItems with error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8065,9 +8065,9 @@ describe('v1.ChatServiceClient', () => {
       assert(
         (client.descriptors.page.listSectionItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8081,7 +8081,7 @@ describe('v1.ChatServiceClient', () => {
         attachment: 'attachmentValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8143,7 +8143,7 @@ describe('v1.ChatServiceClient', () => {
         user: 'userValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8181,7 +8181,7 @@ describe('v1.ChatServiceClient', () => {
         custom_emoji: 'customEmojiValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8220,7 +8220,7 @@ describe('v1.ChatServiceClient', () => {
         member: 'memberValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8269,7 +8269,7 @@ describe('v1.ChatServiceClient', () => {
         message: 'messageValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8319,7 +8319,7 @@ describe('v1.ChatServiceClient', () => {
         quoted_message_metadata: 'quotedMessageMetadataValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8399,7 +8399,7 @@ describe('v1.ChatServiceClient', () => {
         reaction: 'reactionValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8462,7 +8462,7 @@ describe('v1.ChatServiceClient', () => {
         section: 'sectionValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8512,7 +8512,7 @@ describe('v1.ChatServiceClient', () => {
         item: 'itemValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8574,7 +8574,7 @@ describe('v1.ChatServiceClient', () => {
         space: 'spaceValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8613,7 +8613,7 @@ describe('v1.ChatServiceClient', () => {
         space_event: 'spaceEventValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8662,7 +8662,7 @@ describe('v1.ChatServiceClient', () => {
         space: 'spaceValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8725,7 +8725,7 @@ describe('v1.ChatServiceClient', () => {
         space: 'spaceValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8774,7 +8774,7 @@ describe('v1.ChatServiceClient', () => {
         thread: 'threadValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8824,7 +8824,7 @@ describe('v1.ChatServiceClient', () => {
         thread: 'threadValue',
       };
       const client = new chatserviceModule.v1.ChatServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

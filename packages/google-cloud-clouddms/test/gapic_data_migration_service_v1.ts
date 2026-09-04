@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datamigrationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -290,7 +290,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataMigrationServiceStub, undefined);
@@ -298,13 +298,13 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(client.dataMigrationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataMigrationServiceStub);
@@ -313,15 +313,15 @@ describe('v1.DataMigrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataMigrationServiceStub, undefined);
@@ -330,7 +330,7 @@ describe('v1.DataMigrationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -339,7 +339,7 @@ describe('v1.DataMigrationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -352,7 +352,7 @@ describe('v1.DataMigrationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -376,7 +376,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -408,7 +408,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -456,7 +456,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getMigrationJob with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getMigrationJob with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -501,7 +501,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMigrationJob(request), expectedError);
@@ -512,7 +512,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes generateSshScript without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -544,7 +544,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes generateSshScript without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -592,7 +592,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes generateSshScript with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -624,7 +624,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes generateSshScript with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -637,7 +637,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.migrationJob = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateSshScript(request), expectedError);
@@ -648,7 +648,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes generateTcpProxyScript without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -681,7 +681,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes generateTcpProxyScript without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes generateTcpProxyScript with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -764,7 +764,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes generateTcpProxyScript with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -777,7 +777,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.migrationJob = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -791,7 +791,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getConnectionProfile without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -824,7 +824,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getConnectionProfile without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getConnectionProfile with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -904,7 +904,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getConnectionProfile with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -917,7 +917,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnectionProfile(request), expectedError);
@@ -928,7 +928,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getPrivateConnection without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getPrivateConnection without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1009,7 +1009,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getPrivateConnection with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1041,7 +1041,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getPrivateConnection with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPrivateConnection(request), expectedError);
@@ -1065,7 +1065,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getConversionWorkspace without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1098,7 +1098,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getConversionWorkspace without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getConversionWorkspace with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getConversionWorkspace with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1194,7 +1194,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1208,7 +1208,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createMappingRule without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createMappingRule without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1288,7 +1288,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createMappingRule with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1320,7 +1320,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createMappingRule with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1333,7 +1333,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createMappingRule(request), expectedError);
@@ -1344,7 +1344,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteMappingRule without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1376,7 +1376,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteMappingRule without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1424,7 +1424,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteMappingRule with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1456,7 +1456,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteMappingRule with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1469,7 +1469,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteMappingRule(request), expectedError);
@@ -1480,7 +1480,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getMappingRule without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1512,7 +1512,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getMappingRule without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1560,7 +1560,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getMappingRule with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1592,7 +1592,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getMappingRule with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1605,7 +1605,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMappingRule(request), expectedError);
@@ -1616,7 +1616,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes searchBackgroundJobs without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1649,7 +1649,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes searchBackgroundJobs without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1697,7 +1697,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes searchBackgroundJobs with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1729,7 +1729,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes searchBackgroundJobs with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1742,7 +1742,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.conversionWorkspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchBackgroundJobs(request), expectedError);
@@ -1753,7 +1753,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes describeConversionWorkspaceRevisions without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1787,7 +1787,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes describeConversionWorkspaceRevisions without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes describeConversionWorkspaceRevisions with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1868,7 +1868,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes describeConversionWorkspaceRevisions with closed client', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1881,7 +1881,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.conversionWorkspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1895,7 +1895,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1929,7 +1929,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1984,7 +1984,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createMigrationJob with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2016,7 +2016,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createMigrationJob with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2050,7 +2050,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCreateMigrationJobProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2058,8 +2058,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMigrationJobProgress(
@@ -2073,7 +2073,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCreateMigrationJobProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2095,7 +2095,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2130,7 +2130,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2186,7 +2186,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateMigrationJob with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2219,7 +2219,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateMigrationJob with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2254,7 +2254,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkUpdateMigrationJobProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2262,8 +2262,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateMigrationJobProgress(
@@ -2277,7 +2277,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkUpdateMigrationJobProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2299,7 +2299,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2333,7 +2333,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2388,7 +2388,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteMigrationJob with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2420,7 +2420,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteMigrationJob with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2454,7 +2454,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkDeleteMigrationJobProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2462,8 +2462,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteMigrationJobProgress(
@@ -2477,7 +2477,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkDeleteMigrationJobProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2499,7 +2499,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes startMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2533,7 +2533,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes startMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2588,7 +2588,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes startMigrationJob with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2620,7 +2620,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes startMigrationJob with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2654,7 +2654,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkStartMigrationJobProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2662,8 +2662,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartMigrationJobProgress(
@@ -2677,7 +2677,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkStartMigrationJobProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2699,7 +2699,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes stopMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2733,7 +2733,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes stopMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2788,7 +2788,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes stopMigrationJob with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2820,7 +2820,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes stopMigrationJob with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2854,7 +2854,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkStopMigrationJobProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2862,8 +2862,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStopMigrationJobProgress(
@@ -2877,7 +2877,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkStopMigrationJobProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2899,7 +2899,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes resumeMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2933,7 +2933,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes resumeMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2988,7 +2988,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes resumeMigrationJob with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3020,7 +3020,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes resumeMigrationJob with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3054,7 +3054,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkResumeMigrationJobProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3062,8 +3062,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkResumeMigrationJobProgress(
@@ -3077,7 +3077,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkResumeMigrationJobProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3099,7 +3099,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes promoteMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3133,7 +3133,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes promoteMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3188,7 +3188,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes promoteMigrationJob with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3220,7 +3220,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes promoteMigrationJob with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3254,7 +3254,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkPromoteMigrationJobProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3262,8 +3262,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPromoteMigrationJobProgress(
@@ -3277,7 +3277,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkPromoteMigrationJobProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3299,7 +3299,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes verifyMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3333,7 +3333,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes verifyMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3388,7 +3388,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes verifyMigrationJob with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3420,7 +3420,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes verifyMigrationJob with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3454,7 +3454,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkVerifyMigrationJobProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3462,8 +3462,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkVerifyMigrationJobProgress(
@@ -3477,7 +3477,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkVerifyMigrationJobProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3499,7 +3499,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes restartMigrationJob without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3533,7 +3533,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes restartMigrationJob without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3588,7 +3588,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes restartMigrationJob with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3620,7 +3620,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes restartMigrationJob with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3654,7 +3654,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkRestartMigrationJobProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3662,8 +3662,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestartMigrationJobProgress(
@@ -3677,7 +3677,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkRestartMigrationJobProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3699,7 +3699,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createConnectionProfile without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3733,7 +3733,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createConnectionProfile without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3788,7 +3788,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createConnectionProfile with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3823,7 +3823,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createConnectionProfile with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3857,7 +3857,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCreateConnectionProfileProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3865,8 +3865,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3881,7 +3881,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCreateConnectionProfileProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3903,7 +3903,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateConnectionProfile without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3938,7 +3938,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateConnectionProfile without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3994,7 +3994,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateConnectionProfile with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4030,7 +4030,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateConnectionProfile with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4065,7 +4065,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkUpdateConnectionProfileProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4073,8 +4073,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4089,7 +4089,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkUpdateConnectionProfileProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4111,7 +4111,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteConnectionProfile without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4145,7 +4145,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteConnectionProfile without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4200,7 +4200,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteConnectionProfile with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4235,7 +4235,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteConnectionProfile with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4269,7 +4269,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkDeleteConnectionProfileProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4277,8 +4277,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4293,7 +4293,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkDeleteConnectionProfileProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4315,7 +4315,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createPrivateConnection without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4349,7 +4349,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createPrivateConnection without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4404,7 +4404,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createPrivateConnection with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4439,7 +4439,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createPrivateConnection with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4473,7 +4473,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCreatePrivateConnectionProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4481,8 +4481,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4497,7 +4497,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCreatePrivateConnectionProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4519,7 +4519,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deletePrivateConnection without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4553,7 +4553,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deletePrivateConnection without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4608,7 +4608,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deletePrivateConnection with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4643,7 +4643,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deletePrivateConnection with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4677,7 +4677,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkDeletePrivateConnectionProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4685,8 +4685,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4701,7 +4701,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkDeletePrivateConnectionProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4723,7 +4723,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createConversionWorkspace without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4757,7 +4757,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createConversionWorkspace without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4812,7 +4812,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createConversionWorkspace with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4847,7 +4847,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes createConversionWorkspace with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4881,7 +4881,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCreateConversionWorkspaceProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4889,8 +4889,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4905,7 +4905,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCreateConversionWorkspaceProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4927,7 +4927,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateConversionWorkspace without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4962,7 +4962,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateConversionWorkspace without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5018,7 +5018,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateConversionWorkspace with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5054,7 +5054,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes updateConversionWorkspace with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5089,7 +5089,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkUpdateConversionWorkspaceProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5097,8 +5097,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5113,7 +5113,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkUpdateConversionWorkspaceProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5135,7 +5135,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteConversionWorkspace without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5169,7 +5169,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteConversionWorkspace without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5224,7 +5224,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteConversionWorkspace with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5259,7 +5259,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteConversionWorkspace with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5293,7 +5293,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkDeleteConversionWorkspaceProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5301,8 +5301,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5317,7 +5317,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkDeleteConversionWorkspaceProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5339,7 +5339,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes seedConversionWorkspace without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5373,7 +5373,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes seedConversionWorkspace without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5428,7 +5428,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes seedConversionWorkspace with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5463,7 +5463,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes seedConversionWorkspace with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5497,7 +5497,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkSeedConversionWorkspaceProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5505,8 +5505,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5521,7 +5521,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkSeedConversionWorkspaceProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5543,7 +5543,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes importMappingRules without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5577,7 +5577,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes importMappingRules without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5632,7 +5632,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes importMappingRules with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5664,7 +5664,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes importMappingRules with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5698,7 +5698,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkImportMappingRulesProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5706,8 +5706,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportMappingRulesProgress(
@@ -5721,7 +5721,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkImportMappingRulesProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5743,7 +5743,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes convertConversionWorkspace without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5777,7 +5777,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes convertConversionWorkspace without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5832,7 +5832,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes convertConversionWorkspace with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5867,7 +5867,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes convertConversionWorkspace with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5901,7 +5901,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkConvertConversionWorkspaceProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5909,8 +5909,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5925,7 +5925,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkConvertConversionWorkspaceProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5947,7 +5947,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes commitConversionWorkspace without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5981,7 +5981,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes commitConversionWorkspace without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6036,7 +6036,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes commitConversionWorkspace with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6071,7 +6071,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes commitConversionWorkspace with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6105,7 +6105,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCommitConversionWorkspaceProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6113,8 +6113,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6129,7 +6129,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkCommitConversionWorkspaceProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6151,7 +6151,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes rollbackConversionWorkspace without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6185,7 +6185,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes rollbackConversionWorkspace without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6240,7 +6240,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes rollbackConversionWorkspace with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6275,7 +6275,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes rollbackConversionWorkspace with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6309,7 +6309,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkRollbackConversionWorkspaceProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6317,8 +6317,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6333,7 +6333,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkRollbackConversionWorkspaceProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6355,7 +6355,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes applyConversionWorkspace without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6389,7 +6389,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes applyConversionWorkspace without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6444,7 +6444,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes applyConversionWorkspace with call error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6479,7 +6479,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes applyConversionWorkspace with LRO error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6513,7 +6513,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkApplyConversionWorkspaceProgress without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6521,8 +6521,8 @@ describe('v1.DataMigrationServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6537,7 +6537,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes checkApplyConversionWorkspaceProgress with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6559,7 +6559,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listMigrationJobs without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6599,7 +6599,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listMigrationJobs without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6655,7 +6655,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listMigrationJobs with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6687,7 +6687,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listMigrationJobsStream without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6739,16 +6739,16 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMigrationJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMigrationJobsStream with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6789,16 +6789,16 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMigrationJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMigrationJobs without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6839,16 +6839,16 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMigrationJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMigrationJobs with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6880,9 +6880,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMigrationJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6891,7 +6891,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConnectionProfiles without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6932,7 +6932,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConnectionProfiles without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6964,8 +6964,7 @@ describe('v1.DataMigrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.clouddms.v1.IConnectionProfile[]
-              | null,
+              protos.google.cloud.clouddms.v1.IConnectionProfile[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6990,7 +6989,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConnectionProfiles with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7025,7 +7024,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConnectionProfilesStream without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7093,7 +7092,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConnectionProfilesStream with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7150,7 +7149,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listConnectionProfiles without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7205,7 +7204,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listConnectionProfiles with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7253,7 +7252,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listPrivateConnections without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7294,7 +7293,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listPrivateConnections without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7326,8 +7325,7 @@ describe('v1.DataMigrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.clouddms.v1.IPrivateConnection[]
-              | null,
+              protos.google.cloud.clouddms.v1.IPrivateConnection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7352,7 +7350,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listPrivateConnections with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7387,7 +7385,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listPrivateConnectionsStream without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7455,7 +7453,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listPrivateConnectionsStream with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7512,7 +7510,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listPrivateConnections without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7567,7 +7565,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listPrivateConnections with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7615,7 +7613,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConversionWorkspaces without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7656,7 +7654,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConversionWorkspaces without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7688,8 +7686,7 @@ describe('v1.DataMigrationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.clouddms.v1.IConversionWorkspace[]
-              | null,
+              protos.google.cloud.clouddms.v1.IConversionWorkspace[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7714,7 +7711,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConversionWorkspaces with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7749,7 +7746,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConversionWorkspacesStream without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7817,7 +7814,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listConversionWorkspacesStream with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7874,7 +7871,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listConversionWorkspaces without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7929,7 +7926,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listConversionWorkspaces with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7977,7 +7974,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listMappingRules without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8017,7 +8014,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listMappingRules without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8073,7 +8070,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listMappingRules with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8105,7 +8102,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes listMappingRulesStream without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8157,16 +8154,16 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMappingRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMappingRulesStream with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8207,16 +8204,16 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMappingRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMappingRules without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8257,16 +8254,16 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMappingRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMappingRules with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8298,9 +8295,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.listMappingRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8309,7 +8306,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes describeDatabaseEntities without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8350,7 +8347,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes describeDatabaseEntities without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8406,7 +8403,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes describeDatabaseEntities with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8441,7 +8438,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes describeDatabaseEntitiesStream without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8508,7 +8505,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes describeDatabaseEntitiesStream with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8564,7 +8561,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with describeDatabaseEntities without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8618,7 +8615,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with describeDatabaseEntities with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8665,7 +8662,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes fetchStaticIps without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8695,7 +8692,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes fetchStaticIps without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8738,7 +8735,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes fetchStaticIps with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8770,7 +8767,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes fetchStaticIpsStream without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8809,16 +8806,16 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes fetchStaticIpsStream with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8856,16 +8853,16 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchStaticIps without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8896,16 +8893,16 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchStaticIps with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8937,9 +8934,9 @@ describe('v1.DataMigrationServiceClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8947,7 +8944,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8978,7 +8975,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9016,7 +9013,7 @@ describe('v1.DataMigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9027,7 +9024,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9060,7 +9057,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9091,7 +9088,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9129,7 +9126,7 @@ describe('v1.DataMigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9140,7 +9137,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9173,7 +9170,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9207,7 +9204,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9245,7 +9242,7 @@ describe('v1.DataMigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9256,7 +9253,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9292,7 +9289,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9323,7 +9320,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9368,7 +9365,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9404,7 +9401,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9453,7 +9450,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9495,7 +9492,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9517,7 +9514,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -9545,7 +9542,7 @@ describe('v1.DataMigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9556,7 +9553,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -9581,7 +9578,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9604,7 +9601,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -9632,7 +9629,7 @@ describe('v1.DataMigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9643,7 +9640,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -9668,7 +9665,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9691,7 +9688,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -9719,7 +9716,7 @@ describe('v1.DataMigrationServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9730,7 +9727,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -9755,7 +9752,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -9791,7 +9788,7 @@ describe('v1.DataMigrationServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9828,7 +9825,7 @@ describe('v1.DataMigrationServiceClient', () => {
       };
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9906,7 +9903,7 @@ describe('v1.DataMigrationServiceClient', () => {
       };
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9984,7 +9981,7 @@ describe('v1.DataMigrationServiceClient', () => {
       };
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10036,7 +10033,7 @@ describe('v1.DataMigrationServiceClient', () => {
       };
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10113,7 +10110,7 @@ describe('v1.DataMigrationServiceClient', () => {
       };
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10178,7 +10175,7 @@ describe('v1.DataMigrationServiceClient', () => {
       };
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -10254,7 +10251,7 @@ describe('v1.DataMigrationServiceClient', () => {
       };
       const client =
         new datamigrationserviceModule.v1.DataMigrationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

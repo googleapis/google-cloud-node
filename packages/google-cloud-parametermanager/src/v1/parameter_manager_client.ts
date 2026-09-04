@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class ParameterManagerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('parametermanager');
@@ -66,10 +66,10 @@ export class ParameterManagerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  parameterManagerStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  parameterManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ParameterManagerClient.
@@ -145,7 +145,7 @@ export class ParameterManagerClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -247,7 +247,7 @@ export class ParameterManagerClient {
       'google.cloud.parametermanager.v1.ParameterManager',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -288,7 +288,7 @@ export class ParameterManagerClient {
             .ParameterManager,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -307,7 +307,7 @@ export class ParameterManagerClient {
     ];
     for (const methodName of parameterManagerStubMethods) {
       const callPromise = this.parameterManagerStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -506,7 +506,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getParameter request %j', request);
@@ -668,7 +668,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createParameter request %j', request);
@@ -832,7 +832,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'parameter.name': request.parameter!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateParameter request %j', request);
@@ -990,7 +990,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteParameter request %j', request);
@@ -1138,7 +1138,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getParameterVersion request %j', request);
@@ -1281,7 +1281,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('renderParameterVersion request %j', request);
@@ -1443,7 +1443,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createParameterVersion request %j', request);
@@ -1607,7 +1607,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         'parameter_version.name': request.parameterVersion!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateParameterVersion request %j', request);
@@ -1765,7 +1765,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteParameterVersion request %j', request);
@@ -1916,7 +1916,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1989,7 +1989,7 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listParameters stream %j', request);
@@ -2044,7 +2044,7 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameters'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listParameters iterate %j', request);
@@ -2154,7 +2154,7 @@ export class ParameterManagerClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2227,7 +2227,7 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameterVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listParameterVersions stream %j', request);
@@ -2282,7 +2282,7 @@ export class ParameterManagerClient {
       });
     const defaultCallSettings = this._defaults['listParameterVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listParameterVersions iterate %j', request);
@@ -2639,11 +2639,11 @@ export class ParameterManagerClient {
    */
   close(): Promise<void> {
     if (this.parameterManagerStub && !this._terminated) {
-      return this.parameterManagerStub.then((stub) => {
+      return this.parameterManagerStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

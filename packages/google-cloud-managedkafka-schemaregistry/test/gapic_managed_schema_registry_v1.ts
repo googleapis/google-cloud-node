@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as managedschemaregistryModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -214,7 +214,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.managedSchemaRegistryStub, undefined);
@@ -222,13 +222,13 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       assert(client.managedSchemaRegistryStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.managedSchemaRegistryStub);
@@ -237,15 +237,15 @@ describe('v1.ManagedSchemaRegistryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.managedSchemaRegistryStub, undefined);
@@ -254,7 +254,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -263,7 +263,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -276,7 +276,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -300,7 +300,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaRegistry without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -332,7 +332,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaRegistry without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -380,7 +380,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaRegistry with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -412,7 +412,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaRegistry with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -425,7 +425,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSchemaRegistry(request), expectedError);
@@ -436,7 +436,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaRegistries without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaRegistries without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -517,7 +517,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaRegistries with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -549,7 +549,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaRegistries with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listSchemaRegistries(request), expectedError);
@@ -573,7 +573,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes createSchemaRegistry without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes createSchemaRegistry without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes createSchemaRegistry with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -686,7 +686,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes createSchemaRegistry with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSchemaRegistry(request), expectedError);
@@ -710,7 +710,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaRegistry without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaRegistry without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -791,7 +791,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaRegistry with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -823,7 +823,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaRegistry with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -836,7 +836,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSchemaRegistry(request), expectedError);
@@ -847,7 +847,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getContext without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -879,7 +879,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getContext without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -927,7 +927,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getContext with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getContext with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -972,7 +972,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getContext(request), expectedError);
@@ -983,7 +983,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listContexts without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1015,7 +1015,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listContexts without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1060,7 +1060,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listContexts with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1092,7 +1092,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listContexts with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listContexts(request), expectedError);
@@ -1116,7 +1116,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchema without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchema without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchema with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchema with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1238,7 +1238,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSchema(request), expectedError);
@@ -1249,7 +1249,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getRawSchema without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1281,7 +1281,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getRawSchema without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1326,7 +1326,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getRawSchema with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getRawSchema with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1371,7 +1371,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRawSchema(request), expectedError);
@@ -1382,7 +1382,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaVersions without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaVersions without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1460,7 +1460,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaVersions with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1492,7 +1492,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaVersions with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1505,7 +1505,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listSchemaVersions(request), expectedError);
@@ -1516,7 +1516,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaTypes without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1548,7 +1548,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaTypes without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1593,7 +1593,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaTypes with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1625,7 +1625,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSchemaTypes with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1638,7 +1638,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listSchemaTypes(request), expectedError);
@@ -1649,7 +1649,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSubjects without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1681,7 +1681,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSubjects without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1726,7 +1726,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSubjects with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1758,7 +1758,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSubjects with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1771,7 +1771,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listSubjects(request), expectedError);
@@ -1782,7 +1782,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSubjectsBySchemaId without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1815,7 +1815,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSubjectsBySchemaId without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1860,7 +1860,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSubjectsBySchemaId with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listSubjectsBySchemaId with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1908,7 +1908,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1922,7 +1922,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSubject without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1954,7 +1954,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSubject without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1999,7 +1999,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSubject with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2031,7 +2031,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSubject with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2044,7 +2044,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSubject(request), expectedError);
@@ -2055,7 +2055,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes lookupVersion without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2087,7 +2087,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes lookupVersion without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2135,7 +2135,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes lookupVersion with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2167,7 +2167,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes lookupVersion with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2180,7 +2180,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.lookupVersion(request), expectedError);
@@ -2191,7 +2191,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getVersion without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2223,7 +2223,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getVersion without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2271,7 +2271,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getVersion with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2303,7 +2303,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getVersion with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2316,7 +2316,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVersion(request), expectedError);
@@ -2327,7 +2327,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getRawSchemaVersion without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2360,7 +2360,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getRawSchemaVersion without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2405,7 +2405,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getRawSchemaVersion with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2437,7 +2437,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getRawSchemaVersion with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2450,7 +2450,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRawSchemaVersion(request), expectedError);
@@ -2461,7 +2461,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listVersions without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2493,7 +2493,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listVersions without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2538,7 +2538,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listVersions with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2570,7 +2570,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listVersions with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2583,7 +2583,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listVersions(request), expectedError);
@@ -2594,7 +2594,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes createVersion without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2626,7 +2626,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes createVersion without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2674,7 +2674,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes createVersion with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2706,7 +2706,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes createVersion with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2719,7 +2719,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createVersion(request), expectedError);
@@ -2730,7 +2730,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteVersion without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2762,7 +2762,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteVersion without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2807,7 +2807,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteVersion with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2839,7 +2839,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteVersion with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2852,7 +2852,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteVersion(request), expectedError);
@@ -2863,7 +2863,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listReferencedSchemas without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2896,7 +2896,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listReferencedSchemas without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2941,7 +2941,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listReferencedSchemas with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2976,7 +2976,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes listReferencedSchemas with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2989,7 +2989,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3003,7 +3003,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes checkCompatibility without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3036,7 +3036,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes checkCompatibility without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3084,7 +3084,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes checkCompatibility with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3116,7 +3116,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes checkCompatibility with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3129,7 +3129,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.checkCompatibility(request), expectedError);
@@ -3140,7 +3140,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaConfig without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3172,7 +3172,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaConfig without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3220,7 +3220,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaConfig with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3252,7 +3252,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaConfig with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3265,7 +3265,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSchemaConfig(request), expectedError);
@@ -3276,7 +3276,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes updateSchemaConfig without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3309,7 +3309,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes updateSchemaConfig without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3357,7 +3357,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes updateSchemaConfig with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3389,7 +3389,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes updateSchemaConfig with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3402,7 +3402,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSchemaConfig(request), expectedError);
@@ -3413,7 +3413,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaConfig without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3446,7 +3446,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaConfig without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3494,7 +3494,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaConfig with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3526,7 +3526,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaConfig with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3539,7 +3539,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSchemaConfig(request), expectedError);
@@ -3550,7 +3550,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaMode without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3582,7 +3582,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaMode without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3630,7 +3630,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaMode with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3662,7 +3662,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getSchemaMode with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3675,7 +3675,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSchemaMode(request), expectedError);
@@ -3686,7 +3686,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes updateSchemaMode without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3718,7 +3718,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes updateSchemaMode without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3766,7 +3766,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes updateSchemaMode with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3798,7 +3798,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes updateSchemaMode with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3811,7 +3811,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSchemaMode(request), expectedError);
@@ -3822,7 +3822,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaMode without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3854,7 +3854,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaMode without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3902,7 +3902,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaMode with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3934,7 +3934,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes deleteSchemaMode with closed client', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3947,7 +3947,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSchemaMode(request), expectedError);
@@ -3957,7 +3957,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3988,7 +3988,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4033,7 +4033,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4069,7 +4069,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4118,7 +4118,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4170,7 +4170,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4295,7 +4295,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4383,7 +4383,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4528,7 +4528,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4636,7 +4636,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4745,7 +4745,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4872,7 +4872,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5000,7 +5000,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5146,7 +5146,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5270,7 +5270,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5355,7 +5355,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5462,7 +5462,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5571,7 +5571,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5696,7 +5696,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5803,7 +5803,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5880,7 +5880,7 @@ describe('v1.ManagedSchemaRegistryClient', () => {
       };
       const client =
         new managedschemaregistryModule.v1.ManagedSchemaRegistryClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as catalogserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.catalogServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v2beta.CatalogServiceClient', () => {
       assert(client.catalogServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.catalogServiceStub);
@@ -261,14 +261,14 @@ describe('v2beta.CatalogServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.catalogServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v2beta.CatalogServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2beta.CatalogServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2beta.CatalogServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('updateCatalog', () => {
     it('invokes updateCatalog without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes updateCatalog without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes updateCatalog with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes updateCatalog with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -446,7 +446,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.catalog.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCatalog(request), expectedError);
@@ -456,7 +456,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('setDefaultBranch', () => {
     it('invokes setDefaultBranch without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes setDefaultBranch without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -534,7 +534,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes setDefaultBranch with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -565,7 +565,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes setDefaultBranch with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -578,7 +578,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.catalog = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setDefaultBranch(request), expectedError);
@@ -588,7 +588,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('getDefaultBranch', () => {
     it('invokes getDefaultBranch without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes getDefaultBranch without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes getDefaultBranch with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes getDefaultBranch with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.catalog = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDefaultBranch(request), expectedError);
@@ -720,7 +720,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('getCompletionConfig', () => {
     it('invokes getCompletionConfig without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes getCompletionConfig without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes getCompletionConfig with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes getCompletionConfig with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCompletionConfig(request), expectedError);
@@ -853,7 +853,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('updateCompletionConfig', () => {
     it('invokes updateCompletionConfig without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes updateCompletionConfig without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes updateCompletionConfig with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -969,7 +969,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes updateCompletionConfig with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -983,7 +983,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.completionConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -996,7 +996,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('getAttributesConfig', () => {
     it('invokes getAttributesConfig without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1028,7 +1028,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes getAttributesConfig without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1075,7 +1075,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes getAttributesConfig with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes getAttributesConfig with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1119,7 +1119,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAttributesConfig(request), expectedError);
@@ -1129,7 +1129,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('updateAttributesConfig', () => {
     it('invokes updateAttributesConfig without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1162,7 +1162,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes updateAttributesConfig without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1210,7 +1210,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes updateAttributesConfig with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes updateAttributesConfig with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1259,7 +1259,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.attributesConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1272,7 +1272,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('addCatalogAttribute', () => {
     it('invokes addCatalogAttribute without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1304,7 +1304,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes addCatalogAttribute without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1351,7 +1351,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes addCatalogAttribute with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1382,7 +1382,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes addCatalogAttribute with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1395,7 +1395,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.attributesConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addCatalogAttribute(request), expectedError);
@@ -1405,7 +1405,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('removeCatalogAttribute', () => {
     it('invokes removeCatalogAttribute without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1437,7 +1437,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes removeCatalogAttribute without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1484,7 +1484,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes removeCatalogAttribute with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1518,7 +1518,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes removeCatalogAttribute with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1531,7 +1531,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.attributesConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1544,7 +1544,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('batchRemoveCatalogAttributes', () => {
     it('invokes batchRemoveCatalogAttributes without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1576,7 +1576,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes batchRemoveCatalogAttributes without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1623,7 +1623,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes batchRemoveCatalogAttributes with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1657,7 +1657,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes batchRemoveCatalogAttributes with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1670,7 +1670,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.attributesConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1683,7 +1683,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('replaceCatalogAttribute', () => {
     it('invokes replaceCatalogAttribute without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1715,7 +1715,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes replaceCatalogAttribute without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1762,7 +1762,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes replaceCatalogAttribute with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1796,7 +1796,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes replaceCatalogAttribute with closed client', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1809,7 +1809,7 @@ describe('v2beta.CatalogServiceClient', () => {
       );
       request.attributesConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1822,7 +1822,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('listCatalogs', () => {
     it('invokes listCatalogs without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1855,7 +1855,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes listCatalogs without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1904,7 +1904,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes listCatalogs with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1935,7 +1935,7 @@ describe('v2beta.CatalogServiceClient', () => {
 
     it('invokes listCatalogsStream without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1981,15 +1981,15 @@ describe('v2beta.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listCatalogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCatalogsStream with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2032,15 +2032,15 @@ describe('v2beta.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listCatalogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCatalogs without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,15 +2075,15 @@ describe('v2beta.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listCatalogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCatalogs with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2115,16 +2115,16 @@ describe('v2beta.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listCatalogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2154,7 +2154,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2198,7 +2198,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2233,7 +2233,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2281,7 +2281,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2322,7 +2322,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2343,7 +2343,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2371,7 +2371,7 @@ describe('v2beta.CatalogServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2381,7 +2381,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2405,7 +2405,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2427,7 +2427,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2455,7 +2455,7 @@ describe('v2beta.CatalogServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2465,7 +2465,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2489,7 +2489,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2511,7 +2511,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2539,7 +2539,7 @@ describe('v2beta.CatalogServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2549,7 +2549,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2573,7 +2573,7 @@ describe('v2beta.CatalogServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2608,7 +2608,7 @@ describe('v2beta.CatalogServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2642,7 +2642,7 @@ describe('v2beta.CatalogServiceClient', () => {
         project: 'projectValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2682,7 +2682,7 @@ describe('v2beta.CatalogServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2750,7 +2750,7 @@ describe('v2beta.CatalogServiceClient', () => {
         branch: 'branchValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2825,7 +2825,7 @@ describe('v2beta.CatalogServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2889,7 +2889,7 @@ describe('v2beta.CatalogServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2957,7 +2957,7 @@ describe('v2beta.CatalogServiceClient', () => {
         control: 'controlValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3031,7 +3031,7 @@ describe('v2beta.CatalogServiceClient', () => {
         location: 'locationValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3082,7 +3082,7 @@ describe('v2beta.CatalogServiceClient', () => {
         model: 'modelValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3159,7 +3159,7 @@ describe('v2beta.CatalogServiceClient', () => {
         product: 'productValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3246,7 +3246,7 @@ describe('v2beta.CatalogServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new catalogserviceModule.v2beta.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

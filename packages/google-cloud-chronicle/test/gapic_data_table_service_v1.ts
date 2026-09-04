@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datatableserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataTableServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.DataTableServiceClient', () => {
       assert(client.dataTableServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataTableServiceStub);
@@ -261,14 +261,14 @@ describe('v1.DataTableServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataTableServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.DataTableServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.DataTableServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.DataTableServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('createDataTable', () => {
     it('invokes createDataTable without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes createDataTable without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes createDataTable with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes createDataTable with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataTable(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('getDataTable', () => {
     it('invokes getDataTable without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes getDataTable without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes getDataTable with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes getDataTable with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataTable(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('updateDataTable', () => {
     it('invokes updateDataTable without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes updateDataTable without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes updateDataTable with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes updateDataTable with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.dataTable.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataTable(request), expectedError);
@@ -720,7 +720,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('deleteDataTable', () => {
     it('invokes deleteDataTable without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes deleteDataTable without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes deleteDataTable with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes deleteDataTable with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataTable(request), expectedError);
@@ -852,7 +852,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('createDataTableRow', () => {
     it('invokes createDataTableRow without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -884,7 +884,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes createDataTableRow without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -931,7 +931,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes createDataTableRow with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes createDataTableRow with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataTableRow(request), expectedError);
@@ -985,7 +985,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('updateDataTableRow', () => {
     it('invokes updateDataTableRow without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes updateDataTableRow without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1066,7 +1066,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes updateDataTableRow with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1098,7 +1098,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes updateDataTableRow with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1112,7 +1112,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.dataTableRow.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataTableRow(request), expectedError);
@@ -1122,7 +1122,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('getDataTableRow', () => {
     it('invokes getDataTableRow without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1153,7 +1153,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes getDataTableRow without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1200,7 +1200,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes getDataTableRow with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes getDataTableRow with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1244,7 +1244,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataTableRow(request), expectedError);
@@ -1254,7 +1254,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('deleteDataTableRow', () => {
     it('invokes deleteDataTableRow without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1286,7 +1286,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes deleteDataTableRow without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1333,7 +1333,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes deleteDataTableRow with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1364,7 +1364,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes deleteDataTableRow with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataTableRow(request), expectedError);
@@ -1387,7 +1387,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('bulkCreateDataTableRows', () => {
     it('invokes bulkCreateDataTableRows without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1419,7 +1419,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkCreateDataTableRows without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1466,7 +1466,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkCreateDataTableRows with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1500,7 +1500,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkCreateDataTableRows with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1513,7 +1513,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1526,7 +1526,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('bulkGetDataTableRows', () => {
     it('invokes bulkGetDataTableRows without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1558,7 +1558,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkGetDataTableRows without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1605,7 +1605,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkGetDataTableRows with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1636,7 +1636,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkGetDataTableRows with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1649,7 +1649,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.bulkGetDataTableRows(request), expectedError);
@@ -1659,7 +1659,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('bulkReplaceDataTableRows', () => {
     it('invokes bulkReplaceDataTableRows without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1691,7 +1691,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkReplaceDataTableRows without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1738,7 +1738,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkReplaceDataTableRows with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1772,7 +1772,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkReplaceDataTableRows with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1785,7 +1785,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1798,7 +1798,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('bulkUpdateDataTableRows', () => {
     it('invokes bulkUpdateDataTableRows without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1830,7 +1830,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkUpdateDataTableRows without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1877,7 +1877,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkUpdateDataTableRows with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1911,7 +1911,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes bulkUpdateDataTableRows with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1924,7 +1924,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1937,7 +1937,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('getDataTableOperationErrors', () => {
     it('invokes getDataTableOperationErrors without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1969,7 +1969,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes getDataTableOperationErrors without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2016,7 +2016,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes getDataTableOperationErrors with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2050,7 +2050,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes getDataTableOperationErrors with closed client', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2063,7 +2063,7 @@ describe('v1.DataTableServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2076,7 +2076,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('listDataTables', () => {
     it('invokes listDataTables without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2109,7 +2109,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes listDataTables without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2158,7 +2158,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes listDataTables with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2189,7 +2189,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes listDataTablesStream without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2235,15 +2235,15 @@ describe('v1.DataTableServiceClient', () => {
       assert(
         (client.descriptors.page.listDataTables.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataTablesStream with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2284,15 +2284,15 @@ describe('v1.DataTableServiceClient', () => {
       assert(
         (client.descriptors.page.listDataTables.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataTables without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2327,15 +2327,15 @@ describe('v1.DataTableServiceClient', () => {
       assert(
         (client.descriptors.page.listDataTables.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataTables with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2367,9 +2367,9 @@ describe('v1.DataTableServiceClient', () => {
       assert(
         (client.descriptors.page.listDataTables.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2377,7 +2377,7 @@ describe('v1.DataTableServiceClient', () => {
   describe('listDataTableRows', () => {
     it('invokes listDataTableRows without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2416,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes listDataTableRows without error using callback', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2471,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes listDataTableRows with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2502,7 +2502,7 @@ describe('v1.DataTableServiceClient', () => {
 
     it('invokes listDataTableRowsStream without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2554,15 +2554,15 @@ describe('v1.DataTableServiceClient', () => {
       assert(
         (client.descriptors.page.listDataTableRows.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataTableRowsStream with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2603,15 +2603,15 @@ describe('v1.DataTableServiceClient', () => {
       assert(
         (client.descriptors.page.listDataTableRows.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataTableRows without error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2652,15 +2652,15 @@ describe('v1.DataTableServiceClient', () => {
       assert(
         (client.descriptors.page.listDataTableRows.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataTableRows with error', async () => {
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2692,9 +2692,9 @@ describe('v1.DataTableServiceClient', () => {
       assert(
         (client.descriptors.page.listDataTableRows.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2708,7 +2708,7 @@ describe('v1.DataTableServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2773,7 +2773,7 @@ describe('v1.DataTableServiceClient', () => {
         chart: 'chartValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2849,7 +2849,7 @@ describe('v1.DataTableServiceClient', () => {
         query: 'queryValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2925,7 +2925,7 @@ describe('v1.DataTableServiceClient', () => {
         data_access_label: 'dataAccessLabelValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3002,7 +3002,7 @@ describe('v1.DataTableServiceClient', () => {
         data_access_scope: 'dataAccessScopeValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3079,7 +3079,7 @@ describe('v1.DataTableServiceClient', () => {
         data_table: 'dataTableValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3155,7 +3155,7 @@ describe('v1.DataTableServiceClient', () => {
         data_table_operation_errors: 'dataTableOperationErrorsValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3253,7 +3253,7 @@ describe('v1.DataTableServiceClient', () => {
         data_table_row: 'dataTableRowValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3341,7 +3341,7 @@ describe('v1.DataTableServiceClient', () => {
           'featuredContentNativeDashboardValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3436,7 +3436,7 @@ describe('v1.DataTableServiceClient', () => {
         findings_refinement: 'findingsRefinementValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3528,7 +3528,7 @@ describe('v1.DataTableServiceClient', () => {
         findings_refinement: 'findingsRefinementValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3622,7 +3622,7 @@ describe('v1.DataTableServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3685,7 +3685,7 @@ describe('v1.DataTableServiceClient', () => {
         location: 'locationValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3736,7 +3736,7 @@ describe('v1.DataTableServiceClient', () => {
         dashboard: 'dashboardValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3809,7 +3809,7 @@ describe('v1.DataTableServiceClient', () => {
         project: 'projectValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3850,7 +3850,7 @@ describe('v1.DataTableServiceClient', () => {
         reference_list: 'referenceListValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3927,7 +3927,7 @@ describe('v1.DataTableServiceClient', () => {
         retrohunt: 'retrohuntValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4014,7 +4014,7 @@ describe('v1.DataTableServiceClient', () => {
         rule: 'ruleValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4090,7 +4090,7 @@ describe('v1.DataTableServiceClient', () => {
         rule: 'ruleValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4166,7 +4166,7 @@ describe('v1.DataTableServiceClient', () => {
         rule_execution_error: 'ruleExecutionErrorValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4258,7 +4258,7 @@ describe('v1.DataTableServiceClient', () => {
         watchlist: 'watchlistValue',
       };
       const client = new datatableserviceModule.v1.DataTableServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class ApiHubClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('apihub');
@@ -66,10 +66,10 @@ export class ApiHubClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  apiHubStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  apiHubStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ApiHubClient.
@@ -144,14 +144,14 @@ export class ApiHubClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -328,7 +328,7 @@ export class ApiHubClient {
       'google.cloud.apihub.v1.ApiHub',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -368,7 +368,7 @@ export class ApiHubClient {
           (this._protos as any).google.cloud.apihub.v1.ApiHub,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -414,7 +414,7 @@ export class ApiHubClient {
     ];
     for (const methodName of apiHubStubMethods) {
       const callPromise = this.apiHubStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -618,7 +618,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createApi request %j', request);
@@ -743,7 +743,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getApi request %j', request);
@@ -892,7 +892,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'api.name': request.api!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateApi request %j', request);
@@ -1021,7 +1021,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteApi request %j', request);
@@ -1163,7 +1163,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createVersion request %j', request);
@@ -1293,7 +1293,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getVersion request %j', request);
@@ -1439,7 +1439,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'version.name': request.version!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateVersion request %j', request);
@@ -1573,7 +1573,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteVersion request %j', request);
@@ -1737,7 +1737,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSpec request %j', request);
@@ -1866,7 +1866,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSpec request %j', request);
@@ -1994,7 +1994,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSpecContents request %j', request);
@@ -2147,7 +2147,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'spec.name': request.spec!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSpec request %j', request);
@@ -2275,7 +2275,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSpec request %j', request);
@@ -2427,7 +2427,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createApiOperation request %j', request);
@@ -2557,7 +2557,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getApiOperation request %j', request);
@@ -2716,7 +2716,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'api_operation.name': request.apiOperation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateApiOperation request %j', request);
@@ -2854,7 +2854,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteApiOperation request %j', request);
@@ -2984,7 +2984,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDefinition request %j', request);
@@ -3128,7 +3128,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDeployment request %j', request);
@@ -3257,7 +3257,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDeployment request %j', request);
@@ -3411,7 +3411,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'deployment.name': request.deployment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDeployment request %j', request);
@@ -3540,7 +3540,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteDeployment request %j', request);
@@ -3688,7 +3688,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAttribute request %j', request);
@@ -3816,7 +3816,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAttribute request %j', request);
@@ -3970,7 +3970,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'attribute.name': request.attribute!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAttribute request %j', request);
@@ -4104,7 +4104,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAttribute request %j', request);
@@ -4253,7 +4253,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createExternalApi request %j', request);
@@ -4383,7 +4383,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getExternalApi request %j', request);
@@ -4534,7 +4534,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         'external_api.name': request.externalApi!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateExternalApi request %j', request);
@@ -4670,7 +4670,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteExternalApi request %j', request);
@@ -4925,7 +4925,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5111,7 +5111,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listApis stream %j', request);
@@ -5281,7 +5281,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listApis iterate %j', request);
@@ -5477,7 +5477,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5642,7 +5642,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVersions stream %j', request);
@@ -5789,7 +5789,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVersions iterate %j', request);
@@ -5977,7 +5977,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6134,7 +6134,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listSpecs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSpecs stream %j', request);
@@ -6275,7 +6275,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listSpecs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSpecs iterate %j', request);
@@ -6458,7 +6458,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6604,7 +6604,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listApiOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listApiOperations stream %j', request);
@@ -6732,7 +6732,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listApiOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listApiOperations iterate %j', request);
@@ -6939,7 +6939,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7115,7 +7115,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeployments stream %j', request);
@@ -7273,7 +7273,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeployments iterate %j', request);
@@ -7423,7 +7423,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7542,7 +7542,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listAttributes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAttributes stream %j', request);
@@ -7643,7 +7643,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listAttributes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAttributes iterate %j', request);
@@ -7778,7 +7778,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7882,7 +7882,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['searchResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchResources stream %j', request);
@@ -7968,7 +7968,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['searchResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchResources iterate %j', request);
@@ -8080,7 +8080,7 @@ export class ApiHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8155,7 +8155,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listExternalApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExternalApis stream %j', request);
@@ -8212,7 +8212,7 @@ export class ApiHubClient {
       });
     const defaultCallSettings = this._defaults['listExternalApis'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listExternalApis iterate %j', request);
@@ -9504,11 +9504,11 @@ export class ApiHubClient {
    */
   close(): Promise<void> {
     if (this.apiHubStub && !this._terminated) {
-      return this.apiHubStub.then((stub) => {
+      return this.apiHubStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

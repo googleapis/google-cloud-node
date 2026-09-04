@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as changelogsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v3.ChangelogsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.changelogsStub, undefined);
@@ -245,12 +245,12 @@ describe('v3.ChangelogsClient', () => {
       assert(client.changelogsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.changelogsStub);
@@ -259,14 +259,14 @@ describe('v3.ChangelogsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.changelogsStub, undefined);
@@ -275,7 +275,7 @@ describe('v3.ChangelogsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v3.ChangelogsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v3.ChangelogsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v3.ChangelogsClient', () => {
   describe('getChangelog', () => {
     it('invokes getChangelog without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v3.ChangelogsClient', () => {
 
     it('invokes getChangelog without error using callback', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v3.ChangelogsClient', () => {
 
     it('invokes getChangelog with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v3.ChangelogsClient', () => {
 
     it('invokes getChangelog with closed client', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v3.ChangelogsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getChangelog(request), expectedError);
@@ -450,7 +450,7 @@ describe('v3.ChangelogsClient', () => {
   describe('listChangelogs', () => {
     it('invokes listChangelogs without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v3.ChangelogsClient', () => {
 
     it('invokes listChangelogs without error using callback', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -544,7 +544,7 @@ describe('v3.ChangelogsClient', () => {
 
     it('invokes listChangelogs with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v3.ChangelogsClient', () => {
 
     it('invokes listChangelogsStream without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -627,15 +627,15 @@ describe('v3.ChangelogsClient', () => {
       assert(
         (client.descriptors.page.listChangelogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listChangelogsStream with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -676,15 +676,15 @@ describe('v3.ChangelogsClient', () => {
       assert(
         (client.descriptors.page.listChangelogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChangelogs without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,15 +725,15 @@ describe('v3.ChangelogsClient', () => {
       assert(
         (client.descriptors.page.listChangelogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChangelogs with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -765,16 +765,16 @@ describe('v3.ChangelogsClient', () => {
       assert(
         (client.descriptors.page.listChangelogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -804,7 +804,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -848,7 +848,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -883,7 +883,7 @@ describe('v3.ChangelogsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -931,7 +931,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -972,7 +972,7 @@ describe('v3.ChangelogsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1021,7 +1021,7 @@ describe('v3.ChangelogsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1031,7 +1031,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1055,7 +1055,7 @@ describe('v3.ChangelogsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1105,7 +1105,7 @@ describe('v3.ChangelogsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1115,7 +1115,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1139,7 +1139,7 @@ describe('v3.ChangelogsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1161,7 +1161,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1189,7 +1189,7 @@ describe('v3.ChangelogsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1199,7 +1199,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1223,7 +1223,7 @@ describe('v3.ChangelogsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1258,7 +1258,7 @@ describe('v3.ChangelogsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1294,7 +1294,7 @@ describe('v3.ChangelogsClient', () => {
         agent: 'agentValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v3.ChangelogsClient', () => {
         agent: 'agentValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1437,7 +1437,7 @@ describe('v3.ChangelogsClient', () => {
         agent: 'agentValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,7 +1516,7 @@ describe('v3.ChangelogsClient', () => {
         changelog: 'changelogValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1593,7 +1593,7 @@ describe('v3.ChangelogsClient', () => {
         continuous_test_result: 'continuousTestResultValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1705,7 +1705,7 @@ describe('v3.ChangelogsClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1792,7 +1792,7 @@ describe('v3.ChangelogsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1868,7 +1868,7 @@ describe('v3.ChangelogsClient', () => {
         environment: 'environmentValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1945,7 +1945,7 @@ describe('v3.ChangelogsClient', () => {
         example: 'exampleValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2033,7 +2033,7 @@ describe('v3.ChangelogsClient', () => {
         experiment: 'experimentValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2120,7 +2120,7 @@ describe('v3.ChangelogsClient', () => {
         flow: 'flowValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2196,7 +2196,7 @@ describe('v3.ChangelogsClient', () => {
         flow: 'flowValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2289,7 +2289,7 @@ describe('v3.ChangelogsClient', () => {
         generator: 'generatorValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2365,7 +2365,7 @@ describe('v3.ChangelogsClient', () => {
         intent: 'intentValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2439,7 +2439,7 @@ describe('v3.ChangelogsClient', () => {
         location: 'locationValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2491,7 +2491,7 @@ describe('v3.ChangelogsClient', () => {
         page: 'pageValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2578,7 +2578,7 @@ describe('v3.ChangelogsClient', () => {
         playbook: 'playbookValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2655,7 +2655,7 @@ describe('v3.ChangelogsClient', () => {
         version: 'versionValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2739,7 +2739,7 @@ describe('v3.ChangelogsClient', () => {
         project: 'projectValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2783,7 +2783,7 @@ describe('v3.ChangelogsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2928,7 +2928,7 @@ describe('v3.ChangelogsClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3053,7 +3053,7 @@ describe('v3.ChangelogsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3178,7 +3178,7 @@ describe('v3.ChangelogsClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3283,7 +3283,7 @@ describe('v3.ChangelogsClient', () => {
         security_settings: 'securitySettingsValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3352,7 +3352,7 @@ describe('v3.ChangelogsClient', () => {
         test_case: 'testCaseValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3429,7 +3429,7 @@ describe('v3.ChangelogsClient', () => {
         result: 'resultValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3516,7 +3516,7 @@ describe('v3.ChangelogsClient', () => {
         tool: 'toolValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3593,7 +3593,7 @@ describe('v3.ChangelogsClient', () => {
         version: 'versionValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3681,7 +3681,7 @@ describe('v3.ChangelogsClient', () => {
         version: 'versionValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3768,7 +3768,7 @@ describe('v3.ChangelogsClient', () => {
         webhook: 'webhookValue',
       };
       const client = new changelogsModule.v3.ChangelogsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

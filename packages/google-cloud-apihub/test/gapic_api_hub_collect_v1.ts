@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as apihubcollectModule from '../src';
 
 import {
@@ -49,7 +49,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -106,9 +106,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -123,7 +123,7 @@ describe('v1.ApiHubCollectClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -249,12 +249,12 @@ describe('v1.ApiHubCollectClient', () => {
       assert(client.apiHubCollectStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.apiHubCollectStub);
@@ -263,12 +263,12 @@ describe('v1.ApiHubCollectClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -279,7 +279,7 @@ describe('v1.ApiHubCollectClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -481,8 +481,8 @@ describe('v1.ApiHubCollectClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCollectApiDataProgress(
@@ -672,7 +672,7 @@ describe('v1.ApiHubCollectClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -762,7 +762,7 @@ describe('v1.ApiHubCollectClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -846,7 +846,7 @@ describe('v1.ApiHubCollectClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -930,7 +930,7 @@ describe('v1.ApiHubCollectClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -999,7 +999,7 @@ describe('v1.ApiHubCollectClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1035,7 +1035,7 @@ describe('v1.ApiHubCollectClient', () => {
         api: 'apiValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v1.ApiHubCollectClient', () => {
         api_hub_instance: 'apiHubInstanceValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1166,7 +1166,7 @@ describe('v1.ApiHubCollectClient', () => {
         operation: 'operationValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1252,7 +1252,7 @@ describe('v1.ApiHubCollectClient', () => {
         attribute: 'attributeValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1316,7 +1316,7 @@ describe('v1.ApiHubCollectClient', () => {
         curation: 'curationValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1382,7 +1382,7 @@ describe('v1.ApiHubCollectClient', () => {
         definition: 'definitionValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1468,7 +1468,7 @@ describe('v1.ApiHubCollectClient', () => {
         dependency: 'dependencyValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1532,7 +1532,7 @@ describe('v1.ApiHubCollectClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1596,7 +1596,7 @@ describe('v1.ApiHubCollectClient', () => {
         discovered_api_observation: 'discoveredApiObservationValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1678,7 +1678,7 @@ describe('v1.ApiHubCollectClient', () => {
         discovered_api_operation: 'discoveredApiOperationValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1776,7 +1776,7 @@ describe('v1.ApiHubCollectClient', () => {
         external_api: 'externalApiValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1840,7 +1840,7 @@ describe('v1.ApiHubCollectClient', () => {
         host_project_registration: 'hostProjectRegistrationValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1920,7 +1920,7 @@ describe('v1.ApiHubCollectClient', () => {
         location: 'locationValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1970,7 +1970,7 @@ describe('v1.ApiHubCollectClient', () => {
         plugin: 'pluginValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2035,7 +2035,7 @@ describe('v1.ApiHubCollectClient', () => {
         instance: 'instanceValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2110,7 +2110,7 @@ describe('v1.ApiHubCollectClient', () => {
         runtime_project_attachment: 'runtimeProjectAttachmentValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2193,7 +2193,7 @@ describe('v1.ApiHubCollectClient', () => {
         spec: 'specValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2279,7 +2279,7 @@ describe('v1.ApiHubCollectClient', () => {
         plugin: 'pluginValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2344,7 +2344,7 @@ describe('v1.ApiHubCollectClient', () => {
         version: 'versionValue',
       };
       const client = new apihubcollectModule.v1.ApiHubCollectClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

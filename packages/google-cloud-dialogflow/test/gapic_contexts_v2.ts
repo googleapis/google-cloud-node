@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as contextsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v2.ContextsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.contextsStub, undefined);
@@ -245,12 +245,12 @@ describe('v2.ContextsClient', () => {
       assert(client.contextsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.contextsStub);
@@ -259,14 +259,14 @@ describe('v2.ContextsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.contextsStub, undefined);
@@ -275,7 +275,7 @@ describe('v2.ContextsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v2.ContextsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v2.ContextsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v2.ContextsClient', () => {
   describe('getContext', () => {
     it('invokes getContext without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes getContext without error using callback', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes getContext with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes getContext with closed client', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v2.ContextsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getContext(request), expectedError);
@@ -450,7 +450,7 @@ describe('v2.ContextsClient', () => {
   describe('createContext', () => {
     it('invokes createContext without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes createContext without error using callback', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -528,7 +528,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes createContext with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -559,7 +559,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes createContext with closed client', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v2.ContextsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createContext(request), expectedError);
@@ -582,7 +582,7 @@ describe('v2.ContextsClient', () => {
   describe('updateContext', () => {
     it('invokes updateContext without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes updateContext without error using callback', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes updateContext with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes updateContext with closed client', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v2.ContextsClient', () => {
       );
       request.context.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateContext(request), expectedError);
@@ -718,7 +718,7 @@ describe('v2.ContextsClient', () => {
   describe('deleteContext', () => {
     it('invokes deleteContext without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes deleteContext without error using callback', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes deleteContext with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -827,7 +827,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes deleteContext with closed client', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v2.ContextsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteContext(request), expectedError);
@@ -850,7 +850,7 @@ describe('v2.ContextsClient', () => {
   describe('deleteAllContexts', () => {
     it('invokes deleteAllContexts without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes deleteAllContexts without error using callback', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes deleteAllContexts with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes deleteAllContexts with closed client', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -972,7 +972,7 @@ describe('v2.ContextsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAllContexts(request), expectedError);
@@ -982,7 +982,7 @@ describe('v2.ContextsClient', () => {
   describe('listContexts', () => {
     it('invokes listContexts without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1015,7 +1015,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes listContexts without error using callback', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1064,7 +1064,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes listContexts with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1095,7 +1095,7 @@ describe('v2.ContextsClient', () => {
 
     it('invokes listContextsStream without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1141,15 +1141,15 @@ describe('v2.ContextsClient', () => {
       assert(
         (client.descriptors.page.listContexts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listContextsStream with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1192,15 +1192,15 @@ describe('v2.ContextsClient', () => {
       assert(
         (client.descriptors.page.listContexts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listContexts without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,15 +1235,15 @@ describe('v2.ContextsClient', () => {
       assert(
         (client.descriptors.page.listContexts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listContexts with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1275,16 +1275,16 @@ describe('v2.ContextsClient', () => {
       assert(
         (client.descriptors.page.listContexts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v2.ContextsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v2.ContextsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1393,7 +1393,7 @@ describe('v2.ContextsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1441,7 +1441,7 @@ describe('v2.ContextsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1489,7 +1489,7 @@ describe('v2.ContextsClient', () => {
         conversation_dataset: 'conversationDatasetValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1566,7 +1566,7 @@ describe('v2.ContextsClient', () => {
         location: 'locationValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1619,7 +1619,7 @@ describe('v2.ContextsClient', () => {
         generator: 'generatorValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1684,7 +1684,7 @@ describe('v2.ContextsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1775,7 +1775,7 @@ describe('v2.ContextsClient', () => {
         project: 'projectValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1813,7 +1813,7 @@ describe('v2.ContextsClient', () => {
         project: 'projectValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1852,7 +1852,7 @@ describe('v2.ContextsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v2.ContextsClient', () => {
         environment: 'environmentValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1982,7 +1982,7 @@ describe('v2.ContextsClient', () => {
         context: 'contextValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2108,7 +2108,7 @@ describe('v2.ContextsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2229,7 +2229,7 @@ describe('v2.ContextsClient', () => {
         project: 'projectValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2275,7 +2275,7 @@ describe('v2.ContextsClient', () => {
         intent: 'intentValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2336,7 +2336,7 @@ describe('v2.ContextsClient', () => {
         session: 'sessionValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2398,7 +2398,7 @@ describe('v2.ContextsClient', () => {
         context: 'contextValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2477,7 +2477,7 @@ describe('v2.ContextsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2553,7 +2553,7 @@ describe('v2.ContextsClient', () => {
         version: 'versionValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2614,7 +2614,7 @@ describe('v2.ContextsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2677,7 +2677,7 @@ describe('v2.ContextsClient', () => {
         message: 'messageValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2755,7 +2755,7 @@ describe('v2.ContextsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2821,7 +2821,7 @@ describe('v2.ContextsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2904,7 +2904,7 @@ describe('v2.ContextsClient', () => {
         participant: 'participantValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2984,7 +2984,7 @@ describe('v2.ContextsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3049,7 +3049,7 @@ describe('v2.ContextsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3112,7 +3112,7 @@ describe('v2.ContextsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3176,7 +3176,7 @@ describe('v2.ContextsClient', () => {
         document: 'documentValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3254,7 +3254,7 @@ describe('v2.ContextsClient', () => {
         location: 'locationValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3318,7 +3318,7 @@ describe('v2.ContextsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3397,7 +3397,7 @@ describe('v2.ContextsClient', () => {
         environment: 'environmentValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3480,7 +3480,7 @@ describe('v2.ContextsClient', () => {
         context: 'contextValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3626,7 +3626,7 @@ describe('v2.ContextsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3767,7 +3767,7 @@ describe('v2.ContextsClient', () => {
         location: 'locationValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3829,7 +3829,7 @@ describe('v2.ContextsClient', () => {
         intent: 'intentValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3909,7 +3909,7 @@ describe('v2.ContextsClient', () => {
         context: 'contextValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4010,7 +4010,7 @@ describe('v2.ContextsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4115,7 +4115,7 @@ describe('v2.ContextsClient', () => {
         version: 'versionValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4193,7 +4193,7 @@ describe('v2.ContextsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4272,7 +4272,7 @@ describe('v2.ContextsClient', () => {
         message: 'messageValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4372,7 +4372,7 @@ describe('v2.ContextsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4455,7 +4455,7 @@ describe('v2.ContextsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4561,7 +4561,7 @@ describe('v2.ContextsClient', () => {
         participant: 'participantValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4666,7 +4666,7 @@ describe('v2.ContextsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4749,7 +4749,7 @@ describe('v2.ContextsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4828,7 +4828,7 @@ describe('v2.ContextsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4908,7 +4908,7 @@ describe('v2.ContextsClient', () => {
         document: 'documentValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5013,7 +5013,7 @@ describe('v2.ContextsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5077,7 +5077,7 @@ describe('v2.ContextsClient', () => {
         tool: 'toolValue',
       };
       const client = new contextsModule.v2.ContextsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

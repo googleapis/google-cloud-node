@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { DatabaseCenterClient } from '@google-cloud/databasecenter';
+import {DatabaseCenterClient} from '@google-cloud/databasecenter';
 
 // check that the client class type name can be used
 function doStuffWithDatabaseCenterClient(client: DatabaseCenterClient) {

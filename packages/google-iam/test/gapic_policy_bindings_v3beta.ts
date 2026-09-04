@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as policybindingsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.policyBindingsStub, undefined);
@@ -284,12 +284,12 @@ describe('v3beta.PolicyBindingsClient', () => {
       assert(client.policyBindingsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.policyBindingsStub);
@@ -298,14 +298,14 @@ describe('v3beta.PolicyBindingsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.policyBindingsStub, undefined);
@@ -314,7 +314,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('getPolicyBinding', () => {
     it('invokes getPolicyBinding without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes getPolicyBinding without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes getPolicyBinding with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes getPolicyBinding with closed client', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v3beta.PolicyBindingsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPolicyBinding(request), expectedError);
@@ -489,7 +489,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('createPolicyBinding', () => {
     it('invokes createPolicyBinding without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes createPolicyBinding without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -576,7 +576,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes createPolicyBinding with call error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes createPolicyBinding with LRO error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -640,7 +640,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes checkCreatePolicyBindingProgress without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,8 +648,8 @@ describe('v3beta.PolicyBindingsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePolicyBindingProgress(
@@ -662,7 +662,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes checkCreatePolicyBindingProgress with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -683,7 +683,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('updatePolicyBinding', () => {
     it('invokes updatePolicyBinding without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -717,7 +717,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes updatePolicyBinding without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -772,7 +772,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes updatePolicyBinding with call error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -804,7 +804,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes updatePolicyBinding with LRO error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -838,7 +838,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes checkUpdatePolicyBindingProgress without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -846,8 +846,8 @@ describe('v3beta.PolicyBindingsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdatePolicyBindingProgress(
@@ -860,7 +860,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes checkUpdatePolicyBindingProgress with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('deletePolicyBinding', () => {
     it('invokes deletePolicyBinding without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes deletePolicyBinding without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes deletePolicyBinding with call error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes deletePolicyBinding with LRO error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1032,7 +1032,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes checkDeletePolicyBindingProgress without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1040,8 +1040,8 @@ describe('v3beta.PolicyBindingsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePolicyBindingProgress(
@@ -1054,7 +1054,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes checkDeletePolicyBindingProgress with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1075,7 +1075,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('listPolicyBindings', () => {
     it('invokes listPolicyBindings without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes listPolicyBindings without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1158,7 +1158,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes listPolicyBindings with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1189,7 +1189,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes listPolicyBindingsStream without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,15 +1235,15 @@ describe('v3beta.PolicyBindingsClient', () => {
       assert(
         (client.descriptors.page.listPolicyBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPolicyBindingsStream with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1284,15 +1284,15 @@ describe('v3beta.PolicyBindingsClient', () => {
       assert(
         (client.descriptors.page.listPolicyBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPolicyBindings without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1327,15 +1327,15 @@ describe('v3beta.PolicyBindingsClient', () => {
       assert(
         (client.descriptors.page.listPolicyBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPolicyBindings with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1367,9 +1367,9 @@ describe('v3beta.PolicyBindingsClient', () => {
       assert(
         (client.descriptors.page.listPolicyBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1377,7 +1377,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('searchTargetPolicyBindings', () => {
     it('invokes searchTargetPolicyBindings without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1411,7 +1411,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes searchTargetPolicyBindings without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1460,7 +1460,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes searchTargetPolicyBindings with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1494,7 +1494,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes searchTargetPolicyBindingsStream without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1554,7 +1554,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('invokes searchTargetPolicyBindingsStream with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1609,7 +1609,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('uses async iteration with searchTargetPolicyBindings without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1656,7 +1656,7 @@ describe('v3beta.PolicyBindingsClient', () => {
 
     it('uses async iteration with searchTargetPolicyBindings with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1701,7 +1701,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1731,7 +1731,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1775,7 +1775,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1810,7 +1810,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1858,7 +1858,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1899,7 +1899,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1920,7 +1920,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1948,7 +1948,7 @@ describe('v3beta.PolicyBindingsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1958,7 +1958,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1982,7 +1982,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2004,7 +2004,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2032,7 +2032,7 @@ describe('v3beta.PolicyBindingsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2042,7 +2042,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2066,7 +2066,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2088,7 +2088,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2116,7 +2116,7 @@ describe('v3beta.PolicyBindingsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2126,7 +2126,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2150,7 +2150,7 @@ describe('v3beta.PolicyBindingsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2185,7 +2185,7 @@ describe('v3beta.PolicyBindingsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2221,7 +2221,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         access_policy: 'accessPolicyValue',
       };
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2300,7 +2300,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         policy_binding: 'policyBindingValue',
       };
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2377,7 +2377,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         organization: 'organizationValue',
       };
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2416,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         location: 'locationValue',
       };
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2480,7 +2480,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         access_policy: 'accessPolicyValue',
       };
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2563,7 +2563,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         policy_binding: 'policyBindingValue',
       };
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2646,7 +2646,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         principal_access_boundary_policy: 'principalAccessBoundaryPolicyValue',
       };
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2727,7 +2727,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         access_policy: 'accessPolicyValue',
       };
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2806,7 +2806,7 @@ describe('v3beta.PolicyBindingsClient', () => {
         policy_binding: 'policyBindingValue',
       };
       const client = new policybindingsModule.v3beta.PolicyBindingsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

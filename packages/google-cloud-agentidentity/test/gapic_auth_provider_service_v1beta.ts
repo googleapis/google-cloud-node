@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as authproviderserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos, LocationProtos } from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -254,7 +254,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.authProviderServiceStub, undefined);
@@ -262,13 +262,13 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(client.authProviderServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.authProviderServiceStub);
@@ -277,15 +277,15 @@ describe('v1beta.AuthProviderServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.authProviderServiceStub, undefined);
@@ -294,7 +294,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAuthProvider without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAuthProvider without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAuthProvider with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAuthProvider with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAuthProvider(request), expectedError);
@@ -476,7 +476,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes createAuthProvider without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -509,7 +509,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes createAuthProvider without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes createAuthProvider with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -589,7 +589,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes createAuthProvider with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAuthProvider(request), expectedError);
@@ -613,7 +613,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes updateAuthProvider without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -647,7 +647,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes updateAuthProvider without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes updateAuthProvider with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes updateAuthProvider with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.authProvider.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAuthProvider(request), expectedError);
@@ -754,7 +754,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes deleteAuthProvider without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes deleteAuthProvider without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes deleteAuthProvider with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes deleteAuthProvider with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAuthProvider(request), expectedError);
@@ -891,7 +891,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes undeleteAuthProvider without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -924,7 +924,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes undeleteAuthProvider without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -972,7 +972,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes undeleteAuthProvider with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes undeleteAuthProvider with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.undeleteAuthProvider(request), expectedError);
@@ -1028,7 +1028,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAuthorization without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1060,7 +1060,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAuthorization without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAuthorization with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1140,7 +1140,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAuthorization with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1153,7 +1153,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAuthorization(request), expectedError);
@@ -1164,7 +1164,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes deleteAuthorization without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1197,7 +1197,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes deleteAuthorization without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes deleteAuthorization with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes deleteAuthorization with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1290,7 +1290,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAuthorization(request), expectedError);
@@ -1301,7 +1301,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAccessSummary without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1333,7 +1333,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAccessSummary without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1381,7 +1381,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAccessSummary with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1413,7 +1413,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getAccessSummary with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1426,7 +1426,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAccessSummary(request), expectedError);
@@ -1437,7 +1437,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes revokeAuthorization without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1470,7 +1470,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes revokeAuthorization without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1518,7 +1518,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes revokeAuthorization with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1550,7 +1550,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes revokeAuthorization with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.revokeAuthorization(request), expectedError);
@@ -1574,7 +1574,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes enableAuthProvider without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1607,7 +1607,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes enableAuthProvider without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes enableAuthProvider with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1687,7 +1687,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes enableAuthProvider with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1700,7 +1700,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.enableAuthProvider(request), expectedError);
@@ -1711,7 +1711,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes disableAuthProvider without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1744,7 +1744,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes disableAuthProvider without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1792,7 +1792,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes disableAuthProvider with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1824,7 +1824,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes disableAuthProvider with closed client', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1837,7 +1837,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.disableAuthProvider(request), expectedError);
@@ -1848,7 +1848,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAuthProviders without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1888,7 +1888,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAuthProviders without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1920,8 +1920,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.agentidentity.v1beta.IAuthProvider[]
-              | null,
+              protos.google.cloud.agentidentity.v1beta.IAuthProvider[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1946,7 +1945,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAuthProviders with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1978,7 +1977,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAuthProvidersStream without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2031,16 +2030,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAuthProvidersStream with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2082,16 +2081,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuthProviders without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2133,16 +2132,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuthProviders with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2175,9 +2174,9 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2186,7 +2185,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes queryAuthProviders without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2217,7 +2216,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes queryAuthProviders without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2260,7 +2259,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes queryAuthProviders with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2292,7 +2291,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes queryAuthProvidersStream without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2331,16 +2330,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.queryAuthProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes queryAuthProvidersStream with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2378,16 +2377,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.queryAuthProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryAuthProviders without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2418,16 +2417,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.queryAuthProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryAuthProviders with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2459,9 +2458,9 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.queryAuthProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2470,7 +2469,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes queryWorkloads without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2500,7 +2499,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes queryWorkloads without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2543,7 +2542,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes queryWorkloads with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2575,7 +2574,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes queryWorkloadsStream without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2614,16 +2613,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.queryWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes queryWorkloadsStream with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2661,16 +2660,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.queryWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryWorkloads without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2701,16 +2700,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.queryWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with queryWorkloads with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2742,9 +2741,9 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.queryWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2753,7 +2752,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAuthorizations without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2794,7 +2793,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAuthorizations without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2826,8 +2825,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.agentidentity.v1beta.IAuthorization[]
-              | null,
+              protos.google.cloud.agentidentity.v1beta.IAuthorization[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2852,7 +2850,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAuthorizations with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2884,7 +2882,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAuthorizationsStream without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2939,16 +2937,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthorizations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAuthorizationsStream with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2992,16 +2990,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthorizations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuthorizations without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3043,16 +3041,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthorizations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuthorizations with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3085,9 +3083,9 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAuthorizations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3096,7 +3094,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAccessSummaries without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3137,7 +3135,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAccessSummaries without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3169,8 +3167,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.agentidentity.v1beta.IAccessSummary[]
-              | null,
+              protos.google.cloud.agentidentity.v1beta.IAccessSummary[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3195,7 +3192,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAccessSummaries with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3227,7 +3224,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes listAccessSummariesStream without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3282,16 +3279,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAccessSummaries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAccessSummariesStream with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3335,16 +3332,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAccessSummaries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAccessSummaries without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3386,16 +3383,16 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAccessSummaries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAccessSummaries with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3428,9 +3425,9 @@ describe('v1beta.AuthProviderServiceClient', () => {
       assert(
         (client.descriptors.page.listAccessSummaries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3438,7 +3435,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3469,7 +3466,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3507,7 +3504,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3518,7 +3515,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3551,7 +3548,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3582,7 +3579,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3620,7 +3617,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3631,7 +3628,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3664,7 +3661,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3698,7 +3695,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3736,7 +3733,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3747,7 +3744,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3783,7 +3780,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3814,7 +3811,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3859,7 +3856,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3895,7 +3892,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3944,7 +3941,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3993,7 +3990,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       };
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4058,7 +4055,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       };
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4124,7 +4121,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       };
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4199,7 +4196,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       };
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4248,7 +4245,7 @@ describe('v1beta.AuthProviderServiceClient', () => {
       };
       const client =
         new authproviderserviceModule.v1beta.AuthProviderServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as networksecurityModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -282,7 +282,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.networkSecurityStub, undefined);
@@ -290,12 +290,12 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(client.networkSecurityStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.networkSecurityStub);
@@ -304,14 +304,14 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.networkSecurityStub, undefined);
@@ -320,7 +320,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -328,7 +328,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -340,7 +340,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -363,7 +363,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getAuthorizationPolicy', () => {
     it('invokes getAuthorizationPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -395,7 +395,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getAuthorizationPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getAuthorizationPolicy with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -476,7 +476,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getAuthorizationPolicy with closed client', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -502,7 +502,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getBackendAuthenticationConfig', () => {
     it('invokes getBackendAuthenticationConfig without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -534,7 +534,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getBackendAuthenticationConfig without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -581,7 +581,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getBackendAuthenticationConfig with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getBackendAuthenticationConfig with closed client', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -628,7 +628,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -641,7 +641,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getServerTlsPolicy', () => {
     it('invokes getServerTlsPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -673,7 +673,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getServerTlsPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -720,7 +720,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getServerTlsPolicy with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getServerTlsPolicy with closed client', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -764,7 +764,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getServerTlsPolicy(request), expectedError);
@@ -774,7 +774,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getClientTlsPolicy', () => {
     it('invokes getClientTlsPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -806,7 +806,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getClientTlsPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -853,7 +853,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getClientTlsPolicy with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -884,7 +884,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getClientTlsPolicy with closed client', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -897,7 +897,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getClientTlsPolicy(request), expectedError);
@@ -907,7 +907,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getGatewaySecurityPolicy', () => {
     it('invokes getGatewaySecurityPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -939,7 +939,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getGatewaySecurityPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getGatewaySecurityPolicy with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1020,7 +1020,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getGatewaySecurityPolicy with closed client', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1033,7 +1033,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1046,7 +1046,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getGatewaySecurityPolicyRule', () => {
     it('invokes getGatewaySecurityPolicyRule without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1078,7 +1078,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getGatewaySecurityPolicyRule without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1125,7 +1125,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getGatewaySecurityPolicyRule with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getGatewaySecurityPolicyRule with closed client', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1172,7 +1172,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1185,7 +1185,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getUrlList', () => {
     it('invokes getUrlList without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1216,7 +1216,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getUrlList without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1263,7 +1263,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getUrlList with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1294,7 +1294,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getUrlList with closed client', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1307,7 +1307,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUrlList(request), expectedError);
@@ -1317,7 +1317,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getTlsInspectionPolicy', () => {
     it('invokes getTlsInspectionPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1349,7 +1349,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getTlsInspectionPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1396,7 +1396,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getTlsInspectionPolicy with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1430,7 +1430,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getTlsInspectionPolicy with closed client', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,7 +1443,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1456,7 +1456,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getAuthzPolicy', () => {
     it('invokes getAuthzPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1487,7 +1487,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getAuthzPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1534,7 +1534,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getAuthzPolicy with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes getAuthzPolicy with closed client', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1578,7 +1578,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAuthzPolicy(request), expectedError);
@@ -1588,7 +1588,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('createAuthorizationPolicy', () => {
     it('invokes createAuthorizationPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1621,7 +1621,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createAuthorizationPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1675,7 +1675,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createAuthorizationPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1709,7 +1709,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createAuthorizationPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1742,7 +1742,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateAuthorizationPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1750,8 +1750,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1765,7 +1765,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateAuthorizationPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1786,7 +1786,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('updateAuthorizationPolicy', () => {
     it('invokes updateAuthorizationPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1820,7 +1820,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateAuthorizationPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1875,7 +1875,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateAuthorizationPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateAuthorizationPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1944,7 +1944,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateAuthorizationPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1952,8 +1952,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1967,7 +1967,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateAuthorizationPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1988,7 +1988,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteAuthorizationPolicy', () => {
     it('invokes deleteAuthorizationPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteAuthorizationPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteAuthorizationPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2109,7 +2109,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteAuthorizationPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2142,7 +2142,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteAuthorizationPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2150,8 +2150,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2165,7 +2165,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteAuthorizationPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2186,7 +2186,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('createBackendAuthenticationConfig', () => {
     it('invokes createBackendAuthenticationConfig without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2220,7 +2220,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createBackendAuthenticationConfig without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2274,7 +2274,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createBackendAuthenticationConfig with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2306,7 +2306,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createBackendAuthenticationConfig with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2337,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateBackendAuthenticationConfigProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2345,8 +2345,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2360,7 +2360,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateBackendAuthenticationConfigProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2381,7 +2381,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('updateBackendAuthenticationConfig', () => {
     it('invokes updateBackendAuthenticationConfig without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2416,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateBackendAuthenticationConfig without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2471,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateBackendAuthenticationConfig with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2504,7 +2504,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateBackendAuthenticationConfig with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2536,7 +2536,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateBackendAuthenticationConfigProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2544,8 +2544,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2559,7 +2559,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateBackendAuthenticationConfigProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2580,7 +2580,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteBackendAuthenticationConfig', () => {
     it('invokes deleteBackendAuthenticationConfig without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2614,7 +2614,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteBackendAuthenticationConfig without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2668,7 +2668,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteBackendAuthenticationConfig with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2700,7 +2700,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteBackendAuthenticationConfig with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2731,7 +2731,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteBackendAuthenticationConfigProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2739,8 +2739,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2754,7 +2754,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteBackendAuthenticationConfigProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2775,7 +2775,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('createServerTlsPolicy', () => {
     it('invokes createServerTlsPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2808,7 +2808,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createServerTlsPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2862,7 +2862,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createServerTlsPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2896,7 +2896,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createServerTlsPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2929,7 +2929,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateServerTlsPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2937,8 +2937,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateServerTlsPolicyProgress(
@@ -2951,7 +2951,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateServerTlsPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2972,7 +2972,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('updateServerTlsPolicy', () => {
     it('invokes updateServerTlsPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3006,7 +3006,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateServerTlsPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3061,7 +3061,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateServerTlsPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3096,7 +3096,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateServerTlsPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3130,7 +3130,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateServerTlsPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3138,8 +3138,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateServerTlsPolicyProgress(
@@ -3152,7 +3152,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateServerTlsPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3173,7 +3173,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteServerTlsPolicy', () => {
     it('invokes deleteServerTlsPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3206,7 +3206,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteServerTlsPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3260,7 +3260,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteServerTlsPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3294,7 +3294,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteServerTlsPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3327,7 +3327,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteServerTlsPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3335,8 +3335,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteServerTlsPolicyProgress(
@@ -3349,7 +3349,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteServerTlsPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3370,7 +3370,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('createClientTlsPolicy', () => {
     it('invokes createClientTlsPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3403,7 +3403,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createClientTlsPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3457,7 +3457,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createClientTlsPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3491,7 +3491,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createClientTlsPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3524,7 +3524,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateClientTlsPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3532,8 +3532,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClientTlsPolicyProgress(
@@ -3546,7 +3546,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateClientTlsPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3567,7 +3567,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('updateClientTlsPolicy', () => {
     it('invokes updateClientTlsPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3601,7 +3601,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateClientTlsPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3656,7 +3656,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateClientTlsPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3691,7 +3691,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateClientTlsPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3725,7 +3725,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateClientTlsPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3733,8 +3733,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateClientTlsPolicyProgress(
@@ -3747,7 +3747,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateClientTlsPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3768,7 +3768,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteClientTlsPolicy', () => {
     it('invokes deleteClientTlsPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3801,7 +3801,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteClientTlsPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3855,7 +3855,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteClientTlsPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3889,7 +3889,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteClientTlsPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3922,7 +3922,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteClientTlsPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3930,8 +3930,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteClientTlsPolicyProgress(
@@ -3944,7 +3944,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteClientTlsPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3965,7 +3965,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('createGatewaySecurityPolicy', () => {
     it('invokes createGatewaySecurityPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3998,7 +3998,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createGatewaySecurityPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4052,7 +4052,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createGatewaySecurityPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4086,7 +4086,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createGatewaySecurityPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4119,7 +4119,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateGatewaySecurityPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4127,8 +4127,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4142,7 +4142,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateGatewaySecurityPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4163,7 +4163,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('updateGatewaySecurityPolicy', () => {
     it('invokes updateGatewaySecurityPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4197,7 +4197,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateGatewaySecurityPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4252,7 +4252,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateGatewaySecurityPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4287,7 +4287,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateGatewaySecurityPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4321,7 +4321,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateGatewaySecurityPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4329,8 +4329,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4344,7 +4344,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateGatewaySecurityPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4365,7 +4365,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteGatewaySecurityPolicy', () => {
     it('invokes deleteGatewaySecurityPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4398,7 +4398,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteGatewaySecurityPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4452,7 +4452,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteGatewaySecurityPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4486,7 +4486,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteGatewaySecurityPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4519,7 +4519,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteGatewaySecurityPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4527,8 +4527,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4542,7 +4542,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteGatewaySecurityPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4563,7 +4563,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('createGatewaySecurityPolicyRule', () => {
     it('invokes createGatewaySecurityPolicyRule without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4596,7 +4596,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createGatewaySecurityPolicyRule without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4650,7 +4650,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createGatewaySecurityPolicyRule with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4682,7 +4682,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createGatewaySecurityPolicyRule with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4712,7 +4712,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateGatewaySecurityPolicyRuleProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4720,8 +4720,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4735,7 +4735,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateGatewaySecurityPolicyRuleProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4756,7 +4756,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('updateGatewaySecurityPolicyRule', () => {
     it('invokes updateGatewaySecurityPolicyRule without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4790,7 +4790,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateGatewaySecurityPolicyRule without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4845,7 +4845,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateGatewaySecurityPolicyRule with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4878,7 +4878,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateGatewaySecurityPolicyRule with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4909,7 +4909,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateGatewaySecurityPolicyRuleProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4917,8 +4917,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4932,7 +4932,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateGatewaySecurityPolicyRuleProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4953,7 +4953,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteGatewaySecurityPolicyRule', () => {
     it('invokes deleteGatewaySecurityPolicyRule without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4986,7 +4986,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteGatewaySecurityPolicyRule without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5040,7 +5040,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteGatewaySecurityPolicyRule with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5072,7 +5072,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteGatewaySecurityPolicyRule with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5102,7 +5102,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteGatewaySecurityPolicyRuleProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5110,8 +5110,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5125,7 +5125,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteGatewaySecurityPolicyRuleProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5146,7 +5146,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('createUrlList', () => {
     it('invokes createUrlList without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5179,7 +5179,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createUrlList without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5233,7 +5233,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createUrlList with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5264,7 +5264,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createUrlList with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5297,7 +5297,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateUrlListProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5305,8 +5305,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateUrlListProgress(
@@ -5319,7 +5319,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateUrlListProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5340,7 +5340,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('updateUrlList', () => {
     it('invokes updateUrlList without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5374,7 +5374,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateUrlList without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5429,7 +5429,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateUrlList with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5461,7 +5461,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateUrlList with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5495,7 +5495,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateUrlListProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5503,8 +5503,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateUrlListProgress(
@@ -5517,7 +5517,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateUrlListProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5538,7 +5538,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteUrlList', () => {
     it('invokes deleteUrlList without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5571,7 +5571,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteUrlList without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5625,7 +5625,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteUrlList with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5656,7 +5656,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteUrlList with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5689,7 +5689,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteUrlListProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5697,8 +5697,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteUrlListProgress(
@@ -5711,7 +5711,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteUrlListProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5732,7 +5732,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('createTlsInspectionPolicy', () => {
     it('invokes createTlsInspectionPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5765,7 +5765,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createTlsInspectionPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5819,7 +5819,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createTlsInspectionPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5853,7 +5853,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createTlsInspectionPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5886,7 +5886,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateTlsInspectionPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5894,8 +5894,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5909,7 +5909,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateTlsInspectionPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5930,7 +5930,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('updateTlsInspectionPolicy', () => {
     it('invokes updateTlsInspectionPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5964,7 +5964,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateTlsInspectionPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6019,7 +6019,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateTlsInspectionPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6054,7 +6054,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateTlsInspectionPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6088,7 +6088,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateTlsInspectionPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6096,8 +6096,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6111,7 +6111,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateTlsInspectionPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6132,7 +6132,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteTlsInspectionPolicy', () => {
     it('invokes deleteTlsInspectionPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6165,7 +6165,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteTlsInspectionPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6219,7 +6219,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteTlsInspectionPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6253,7 +6253,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteTlsInspectionPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6286,7 +6286,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteTlsInspectionPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6294,8 +6294,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6309,7 +6309,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteTlsInspectionPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6330,7 +6330,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('createAuthzPolicy', () => {
     it('invokes createAuthzPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6363,7 +6363,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createAuthzPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6417,7 +6417,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createAuthzPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6448,7 +6448,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes createAuthzPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6481,7 +6481,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateAuthzPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6489,8 +6489,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAuthzPolicyProgress(
@@ -6503,7 +6503,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkCreateAuthzPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6524,7 +6524,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('updateAuthzPolicy', () => {
     it('invokes updateAuthzPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6558,7 +6558,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateAuthzPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6613,7 +6613,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateAuthzPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6645,7 +6645,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes updateAuthzPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6679,7 +6679,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateAuthzPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6687,8 +6687,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAuthzPolicyProgress(
@@ -6701,7 +6701,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkUpdateAuthzPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6722,7 +6722,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteAuthzPolicy', () => {
     it('invokes deleteAuthzPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6755,7 +6755,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteAuthzPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6809,7 +6809,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteAuthzPolicy with call error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6840,7 +6840,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes deleteAuthzPolicy with LRO error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6873,7 +6873,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteAuthzPolicyProgress without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6881,8 +6881,8 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAuthzPolicyProgress(
@@ -6895,7 +6895,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes checkDeleteAuthzPolicyProgress with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6916,7 +6916,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listAuthorizationPolicies', () => {
     it('invokes listAuthorizationPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6956,7 +6956,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listAuthorizationPolicies without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7013,7 +7013,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listAuthorizationPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7047,7 +7047,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listAuthorizationPoliciesStream without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7116,7 +7116,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listAuthorizationPoliciesStream with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7174,7 +7174,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listAuthorizationPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7228,7 +7228,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listAuthorizationPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7275,7 +7275,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listBackendAuthenticationConfigs', () => {
     it('invokes listBackendAuthenticationConfigs without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7315,7 +7315,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listBackendAuthenticationConfigs without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7372,7 +7372,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listBackendAuthenticationConfigs with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7406,7 +7406,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listBackendAuthenticationConfigsStream without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7478,7 +7478,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listBackendAuthenticationConfigsStream with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7539,7 +7539,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listBackendAuthenticationConfigs without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7593,7 +7593,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listBackendAuthenticationConfigs with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7640,7 +7640,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listServerTlsPolicies', () => {
     it('invokes listServerTlsPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7680,7 +7680,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listServerTlsPolicies without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7737,7 +7737,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listServerTlsPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7771,7 +7771,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listServerTlsPoliciesStream without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7840,7 +7840,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listServerTlsPoliciesStream with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7898,7 +7898,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listServerTlsPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7952,7 +7952,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listServerTlsPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7999,7 +7999,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listClientTlsPolicies', () => {
     it('invokes listClientTlsPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8039,7 +8039,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listClientTlsPolicies without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8096,7 +8096,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listClientTlsPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8130,7 +8130,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listClientTlsPoliciesStream without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8199,7 +8199,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listClientTlsPoliciesStream with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8257,7 +8257,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listClientTlsPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8311,7 +8311,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listClientTlsPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8358,7 +8358,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listGatewaySecurityPolicies', () => {
     it('invokes listGatewaySecurityPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8398,7 +8398,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listGatewaySecurityPolicies without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8455,7 +8455,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listGatewaySecurityPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8489,7 +8489,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listGatewaySecurityPoliciesStream without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8561,7 +8561,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listGatewaySecurityPoliciesStream with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8622,7 +8622,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listGatewaySecurityPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8676,7 +8676,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listGatewaySecurityPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8723,7 +8723,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listGatewaySecurityPolicyRules', () => {
     it('invokes listGatewaySecurityPolicyRules without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8763,7 +8763,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listGatewaySecurityPolicyRules without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8820,7 +8820,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listGatewaySecurityPolicyRules with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8854,7 +8854,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listGatewaySecurityPolicyRulesStream without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8926,7 +8926,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listGatewaySecurityPolicyRulesStream with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8987,7 +8987,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listGatewaySecurityPolicyRules without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9041,7 +9041,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listGatewaySecurityPolicyRules with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9088,7 +9088,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listUrlLists', () => {
     it('invokes listUrlLists without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9127,7 +9127,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listUrlLists without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9159,8 +9159,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.networksecurity.v1alpha1.IUrlList[]
-              | null,
+              protos.google.cloud.networksecurity.v1alpha1.IUrlList[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9184,7 +9183,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listUrlLists with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9215,7 +9214,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listUrlListsStream without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9268,15 +9267,15 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listUrlListsStream with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9320,15 +9319,15 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUrlLists without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9370,15 +9369,15 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUrlLists with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9411,9 +9410,9 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listUrlLists.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9421,7 +9420,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listTlsInspectionPolicies', () => {
     it('invokes listTlsInspectionPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9461,7 +9460,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listTlsInspectionPolicies without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9518,7 +9517,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listTlsInspectionPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9552,7 +9551,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listTlsInspectionPoliciesStream without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9621,7 +9620,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listTlsInspectionPoliciesStream with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9679,7 +9678,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listTlsInspectionPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9733,7 +9732,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('uses async iteration with listTlsInspectionPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9780,7 +9779,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listAuthzPolicies', () => {
     it('invokes listAuthzPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9819,7 +9818,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listAuthzPolicies without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9876,7 +9875,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listAuthzPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9907,7 +9906,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
 
     it('invokes listAuthzPoliciesStream without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9962,15 +9961,15 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAuthzPoliciesStream with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10014,15 +10013,15 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuthzPolicies without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10064,15 +10063,15 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuthzPolicies with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10105,16 +10104,16 @@ describe('v1alpha1.NetworkSecurityClient', () => {
       assert(
         (client.descriptors.page.listAuthzPolicies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10144,7 +10143,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10182,7 +10181,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -10192,7 +10191,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10224,7 +10223,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10254,7 +10253,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10292,7 +10291,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -10302,7 +10301,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10334,7 +10333,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10367,7 +10366,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10405,7 +10404,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -10415,7 +10414,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10450,7 +10449,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10480,7 +10479,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10524,7 +10523,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10559,7 +10558,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10607,7 +10606,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10648,7 +10647,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10669,7 +10668,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10697,7 +10696,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -10707,7 +10706,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10731,7 +10730,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10753,7 +10752,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10781,7 +10780,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -10791,7 +10790,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10815,7 +10814,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10837,7 +10836,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10865,7 +10864,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -10875,7 +10874,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10899,7 +10898,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10934,7 +10933,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10970,7 +10969,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         authorization_policy: 'authorizationPolicyValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11048,7 +11047,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         authz_policy: 'authzPolicyValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11112,7 +11111,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         backend_authentication_config: 'backendAuthenticationConfigValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11192,7 +11191,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         client_tls_policy: 'clientTlsPolicyValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11257,7 +11256,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         dns_threat_detector: 'dnsThreatDetectorValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11334,7 +11333,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         firewall_endpoint_association: 'firewallEndpointAssociationValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11414,7 +11413,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         gateway_security_policy: 'gatewaySecurityPolicyValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11496,7 +11495,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         rule: 'ruleValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11592,7 +11591,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         intercept_deployment: 'interceptDeploymentValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11670,7 +11669,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         intercept_deployment_group: 'interceptDeploymentGroupValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11751,7 +11750,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         intercept_endpoint_group: 'interceptEndpointGroupValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11833,7 +11832,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
           'interceptEndpointGroupAssociationValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11916,7 +11915,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         mirroring_deployment: 'mirroringDeploymentValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11994,7 +11993,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         mirroring_deployment_group: 'mirroringDeploymentGroupValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12075,7 +12074,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         mirroring_endpoint_group: 'mirroringEndpointGroupValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12157,7 +12156,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
           'mirroringEndpointGroupAssociationValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12240,7 +12239,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         firewall_endpoint: 'firewallEndpointValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12327,7 +12326,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         security_profile: 'securityProfileValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12411,7 +12410,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         security_profile_group: 'securityProfileGroupValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12498,7 +12497,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         partner_sse_gateway: 'partnerSseGatewayValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12575,7 +12574,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         partner_sse_realm: 'partnerSseRealmValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12640,7 +12639,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         firewall_endpoint: 'firewallEndpointValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12721,7 +12720,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         security_profile: 'securityProfileValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12800,7 +12799,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         security_profile_group: 'securityProfileGroupValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12883,7 +12882,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         sac_attachment: 'sacAttachmentValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12947,7 +12946,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         sac_realm: 'sacRealmValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13011,7 +13010,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         sse_gateway_reference: 'sseGatewayReferenceValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13089,7 +13088,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         server_tls_policy: 'serverTlsPolicyValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13154,7 +13153,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         tls_inspection_policy: 'tlsInspectionPolicyValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13232,7 +13231,7 @@ describe('v1alpha1.NetworkSecurityClient', () => {
         url_list: 'urlListValue',
       };
       const client = new networksecurityModule.v1alpha1.NetworkSecurityClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as featureregistryserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -289,7 +289,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.featureRegistryServiceStub, undefined);
@@ -297,13 +297,13 @@ describe('v1.FeatureRegistryServiceClient', () => {
       assert(client.featureRegistryServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.featureRegistryServiceStub);
@@ -312,15 +312,15 @@ describe('v1.FeatureRegistryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.featureRegistryServiceStub, undefined);
@@ -329,7 +329,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -338,7 +338,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -351,7 +351,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -375,7 +375,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getFeatureGroup without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getFeatureGroup without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getFeatureGroup with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getFeatureGroup with closed client', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -500,7 +500,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFeatureGroup(request), expectedError);
@@ -511,7 +511,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getFeature without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -543,7 +543,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getFeature without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getFeature with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getFeature with closed client', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -636,7 +636,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFeature(request), expectedError);
@@ -647,7 +647,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes createFeatureGroup without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -681,7 +681,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes createFeatureGroup without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes createFeatureGroup with call error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -768,7 +768,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes createFeatureGroup with LRO error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -802,7 +802,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkCreateFeatureGroupProgress without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -810,8 +810,8 @@ describe('v1.FeatureRegistryServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFeatureGroupProgress(
@@ -825,7 +825,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkCreateFeatureGroupProgress with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -847,7 +847,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes updateFeatureGroup without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes updateFeatureGroup without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -938,7 +938,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes updateFeatureGroup with call error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes updateFeatureGroup with LRO error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkUpdateFeatureGroupProgress without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1014,8 +1014,8 @@ describe('v1.FeatureRegistryServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFeatureGroupProgress(
@@ -1029,7 +1029,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkUpdateFeatureGroupProgress with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteFeatureGroup without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1085,7 +1085,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteFeatureGroup without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1140,7 +1140,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteFeatureGroup with call error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1172,7 +1172,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteFeatureGroup with LRO error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1206,7 +1206,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkDeleteFeatureGroupProgress without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1214,8 +1214,8 @@ describe('v1.FeatureRegistryServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFeatureGroupProgress(
@@ -1229,7 +1229,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkDeleteFeatureGroupProgress with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1251,7 +1251,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes createFeature without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1285,7 +1285,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes createFeature without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1340,7 +1340,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes createFeature with call error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes createFeature with LRO error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkCreateFeatureProgress without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1414,8 +1414,8 @@ describe('v1.FeatureRegistryServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFeatureProgress(
@@ -1429,7 +1429,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkCreateFeatureProgress with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1451,7 +1451,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes batchCreateFeatures without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1485,7 +1485,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes batchCreateFeatures without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1540,7 +1540,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes batchCreateFeatures with call error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1572,7 +1572,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes batchCreateFeatures with LRO error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1606,7 +1606,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkBatchCreateFeaturesProgress without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1614,8 +1614,8 @@ describe('v1.FeatureRegistryServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchCreateFeaturesProgress(
@@ -1629,7 +1629,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkBatchCreateFeaturesProgress with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1651,7 +1651,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes updateFeature without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1686,7 +1686,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes updateFeature without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1742,7 +1742,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes updateFeature with call error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1775,7 +1775,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes updateFeature with LRO error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1810,7 +1810,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkUpdateFeatureProgress without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1818,8 +1818,8 @@ describe('v1.FeatureRegistryServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFeatureProgress(
@@ -1833,7 +1833,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkUpdateFeatureProgress with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1855,7 +1855,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteFeature without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteFeature without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1944,7 +1944,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteFeature with call error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1976,7 +1976,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteFeature with LRO error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2010,7 +2010,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkDeleteFeatureProgress without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2018,8 +2018,8 @@ describe('v1.FeatureRegistryServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFeatureProgress(
@@ -2033,7 +2033,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes checkDeleteFeatureProgress with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2055,7 +2055,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes listFeatureGroups without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2095,7 +2095,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes listFeatureGroups without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2151,7 +2151,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes listFeatureGroups with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2183,7 +2183,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes listFeatureGroupsStream without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2235,16 +2235,16 @@ describe('v1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFeatureGroupsStream with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2285,16 +2285,16 @@ describe('v1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeatureGroups without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2335,16 +2335,16 @@ describe('v1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeatureGroups with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2376,9 +2376,9 @@ describe('v1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatureGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2387,7 +2387,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes listFeatures without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2421,7 +2421,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes listFeatures without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2471,7 +2471,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes listFeatures with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2503,7 +2503,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes listFeaturesStream without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2549,16 +2549,16 @@ describe('v1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFeaturesStream with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2601,16 +2601,16 @@ describe('v1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeatures without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2645,16 +2645,16 @@ describe('v1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeatures with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2686,9 +2686,9 @@ describe('v1.FeatureRegistryServiceClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2696,7 +2696,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2727,7 +2727,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2765,7 +2765,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2776,7 +2776,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2809,7 +2809,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2840,7 +2840,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2878,7 +2878,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2889,7 +2889,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2922,7 +2922,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2956,7 +2956,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2994,7 +2994,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3005,7 +3005,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3041,7 +3041,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3072,7 +3072,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3117,7 +3117,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3153,7 +3153,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3202,7 +3202,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3244,7 +3244,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3266,7 +3266,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3294,7 +3294,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3305,7 +3305,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3330,7 +3330,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3353,7 +3353,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3381,7 +3381,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3392,7 +3392,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3417,7 +3417,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3440,7 +3440,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3468,7 +3468,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3479,7 +3479,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3504,7 +3504,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -3540,7 +3540,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3579,7 +3579,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3667,7 +3667,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3745,7 +3745,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3821,7 +3821,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3899,7 +3899,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3965,7 +3965,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4041,7 +4041,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4107,7 +4107,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4183,7 +4183,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4249,7 +4249,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4315,7 +4315,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4392,7 +4392,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4475,7 +4475,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4552,7 +4552,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4628,7 +4628,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4693,7 +4693,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4772,7 +4772,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4850,7 +4850,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4927,7 +4927,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4992,7 +4992,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5074,7 +5074,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5139,7 +5139,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5203,7 +5203,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5255,7 +5255,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5333,7 +5333,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5398,7 +5398,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5463,7 +5463,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5544,7 +5544,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5622,7 +5622,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5730,7 +5730,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5796,7 +5796,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5873,7 +5873,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5955,7 +5955,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6021,7 +6021,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6103,7 +6103,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6181,7 +6181,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6244,7 +6244,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6285,7 +6285,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6366,7 +6366,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6470,7 +6470,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6595,7 +6595,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6687,7 +6687,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6741,7 +6741,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6805,7 +6805,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6860,7 +6860,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6936,7 +6936,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7003,7 +7003,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7079,7 +7079,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7145,7 +7145,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7223,7 +7223,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7311,7 +7311,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7377,7 +7377,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7442,7 +7442,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7508,7 +7508,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7605,7 +7605,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7695,7 +7695,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7819,7 +7819,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7889,7 +7889,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7965,7 +7965,7 @@ describe('v1.FeatureRegistryServiceClient', () => {
       };
       const client =
         new featureregistryserviceModule.v1.FeatureRegistryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as vmmigrationModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vmMigrationStub, undefined);
@@ -282,12 +282,12 @@ describe('v1.VmMigrationClient', () => {
       assert(client.vmMigrationStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.vmMigrationStub);
@@ -296,14 +296,14 @@ describe('v1.VmMigrationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vmMigrationStub, undefined);
@@ -312,7 +312,7 @@ describe('v1.VmMigrationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1.VmMigrationClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1.VmMigrationClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getSource', () => {
     it('invokes getSource without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getSource without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getSource with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getSource with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSource(request), expectedError);
@@ -484,7 +484,7 @@ describe('v1.VmMigrationClient', () => {
   describe('fetchInventory', () => {
     it('invokes fetchInventory without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes fetchInventory without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes fetchInventory with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes fetchInventory with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.source = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchInventory(request), expectedError);
@@ -616,7 +616,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getUtilizationReport', () => {
     it('invokes getUtilizationReport without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,7 +648,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getUtilizationReport without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -695,7 +695,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getUtilizationReport with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getUtilizationReport with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUtilizationReport(request), expectedError);
@@ -749,7 +749,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getDatacenterConnector', () => {
     it('invokes getDatacenterConnector without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getDatacenterConnector without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getDatacenterConnector with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getDatacenterConnector with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -888,7 +888,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getMigratingVm', () => {
     it('invokes getMigratingVm without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getMigratingVm without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getMigratingVm with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getMigratingVm with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMigratingVm(request), expectedError);
@@ -1020,7 +1020,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getCloneJob', () => {
     it('invokes getCloneJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getCloneJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1098,7 +1098,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getCloneJob with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1129,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getCloneJob with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCloneJob(request), expectedError);
@@ -1152,7 +1152,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getCutoverJob', () => {
     it('invokes getCutoverJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1183,7 +1183,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getCutoverJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1230,7 +1230,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getCutoverJob with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1261,7 +1261,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getCutoverJob with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1274,7 +1274,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCutoverJob(request), expectedError);
@@ -1284,7 +1284,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getGroup', () => {
     it('invokes getGroup without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1315,7 +1315,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getGroup without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1362,7 +1362,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getGroup with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1390,7 +1390,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getGroup with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1403,7 +1403,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGroup(request), expectedError);
@@ -1413,7 +1413,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getTargetProject', () => {
     it('invokes getTargetProject without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1444,7 +1444,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getTargetProject without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1491,7 +1491,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getTargetProject with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1522,7 +1522,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getTargetProject with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1535,7 +1535,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTargetProject(request), expectedError);
@@ -1545,7 +1545,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getReplicationCycle', () => {
     it('invokes getReplicationCycle without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1577,7 +1577,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getReplicationCycle without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1624,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getReplicationCycle with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getReplicationCycle with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1668,7 +1668,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReplicationCycle(request), expectedError);
@@ -1678,7 +1678,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getImageImport', () => {
     it('invokes getImageImport without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1709,7 +1709,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getImageImport without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1756,7 +1756,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getImageImport with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1787,7 +1787,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getImageImport with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getImageImport(request), expectedError);
@@ -1810,7 +1810,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getImageImportJob', () => {
     it('invokes getImageImportJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1841,7 +1841,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getImageImportJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1888,7 +1888,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getImageImportJob with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +1919,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getImageImportJob with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1932,7 +1932,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getImageImportJob(request), expectedError);
@@ -1942,7 +1942,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getDiskMigrationJob', () => {
     it('invokes getDiskMigrationJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,7 +1974,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getDiskMigrationJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getDiskMigrationJob with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2052,7 +2052,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes getDiskMigrationJob with closed client', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2065,7 +2065,7 @@ describe('v1.VmMigrationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDiskMigrationJob(request), expectedError);
@@ -2075,7 +2075,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createSource', () => {
     it('invokes createSource without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2107,7 +2107,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createSource without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2161,7 +2161,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createSource with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2192,7 +2192,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createSource with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2225,7 +2225,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateSourceProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2233,8 +2233,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSourceProgress(
@@ -2247,7 +2247,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateSourceProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2265,7 +2265,7 @@ describe('v1.VmMigrationClient', () => {
   describe('updateSource', () => {
     it('invokes updateSource without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2298,7 +2298,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateSource without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2353,7 +2353,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateSource with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2385,7 +2385,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateSource with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2419,7 +2419,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateSourceProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2427,8 +2427,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSourceProgress(
@@ -2441,7 +2441,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateSourceProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2459,7 +2459,7 @@ describe('v1.VmMigrationClient', () => {
   describe('deleteSource', () => {
     it('invokes deleteSource without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2491,7 +2491,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteSource without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2545,7 +2545,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteSource with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2576,7 +2576,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteSource with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2609,7 +2609,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteSourceProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2617,8 +2617,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSourceProgress(
@@ -2631,7 +2631,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteSourceProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2649,7 +2649,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createUtilizationReport', () => {
     it('invokes createUtilizationReport without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2682,7 +2682,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createUtilizationReport without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2736,7 +2736,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createUtilizationReport with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2770,7 +2770,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createUtilizationReport with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2803,7 +2803,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateUtilizationReportProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2811,8 +2811,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2826,7 +2826,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateUtilizationReportProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2847,7 +2847,7 @@ describe('v1.VmMigrationClient', () => {
   describe('deleteUtilizationReport', () => {
     it('invokes deleteUtilizationReport without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2880,7 +2880,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteUtilizationReport without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2934,7 +2934,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteUtilizationReport with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2968,7 +2968,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteUtilizationReport with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3001,7 +3001,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteUtilizationReportProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3009,8 +3009,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3024,7 +3024,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteUtilizationReportProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3045,7 +3045,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createDatacenterConnector', () => {
     it('invokes createDatacenterConnector without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3078,7 +3078,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createDatacenterConnector without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3132,7 +3132,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createDatacenterConnector with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3166,7 +3166,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createDatacenterConnector with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3199,7 +3199,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateDatacenterConnectorProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3207,8 +3207,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3222,7 +3222,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateDatacenterConnectorProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3243,7 +3243,7 @@ describe('v1.VmMigrationClient', () => {
   describe('deleteDatacenterConnector', () => {
     it('invokes deleteDatacenterConnector without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3276,7 +3276,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteDatacenterConnector without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3330,7 +3330,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteDatacenterConnector with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3364,7 +3364,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteDatacenterConnector with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3397,7 +3397,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteDatacenterConnectorProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3405,8 +3405,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3420,7 +3420,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteDatacenterConnectorProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3441,7 +3441,7 @@ describe('v1.VmMigrationClient', () => {
   describe('upgradeAppliance', () => {
     it('invokes upgradeAppliance without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3474,7 +3474,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes upgradeAppliance without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3528,7 +3528,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes upgradeAppliance with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3559,7 +3559,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes upgradeAppliance with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3592,7 +3592,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpgradeApplianceProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3600,8 +3600,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpgradeApplianceProgress(
@@ -3614,7 +3614,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpgradeApplianceProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3635,7 +3635,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createMigratingVm', () => {
     it('invokes createMigratingVm without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3668,7 +3668,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createMigratingVm without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3722,7 +3722,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createMigratingVm with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3753,7 +3753,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createMigratingVm with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3786,7 +3786,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateMigratingVmProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3794,8 +3794,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMigratingVmProgress(
@@ -3808,7 +3808,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateMigratingVmProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3829,7 +3829,7 @@ describe('v1.VmMigrationClient', () => {
   describe('updateMigratingVm', () => {
     it('invokes updateMigratingVm without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3863,7 +3863,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateMigratingVm without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3918,7 +3918,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateMigratingVm with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3950,7 +3950,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateMigratingVm with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3984,7 +3984,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateMigratingVmProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3992,8 +3992,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateMigratingVmProgress(
@@ -4006,7 +4006,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateMigratingVmProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4027,7 +4027,7 @@ describe('v1.VmMigrationClient', () => {
   describe('deleteMigratingVm', () => {
     it('invokes deleteMigratingVm without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4060,7 +4060,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteMigratingVm without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4114,7 +4114,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteMigratingVm with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4145,7 +4145,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteMigratingVm with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4178,7 +4178,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteMigratingVmProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4186,8 +4186,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteMigratingVmProgress(
@@ -4200,7 +4200,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteMigratingVmProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4221,7 +4221,7 @@ describe('v1.VmMigrationClient', () => {
   describe('startMigration', () => {
     it('invokes startMigration without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4254,7 +4254,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes startMigration without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4308,7 +4308,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes startMigration with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4339,7 +4339,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes startMigration with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4372,7 +4372,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkStartMigrationProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4380,8 +4380,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartMigrationProgress(
@@ -4394,7 +4394,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkStartMigrationProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4415,7 +4415,7 @@ describe('v1.VmMigrationClient', () => {
   describe('resumeMigration', () => {
     it('invokes resumeMigration without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4448,7 +4448,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes resumeMigration without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4502,7 +4502,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes resumeMigration with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4533,7 +4533,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes resumeMigration with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4566,7 +4566,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkResumeMigrationProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4574,8 +4574,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkResumeMigrationProgress(
@@ -4588,7 +4588,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkResumeMigrationProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4609,7 +4609,7 @@ describe('v1.VmMigrationClient', () => {
   describe('pauseMigration', () => {
     it('invokes pauseMigration without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4642,7 +4642,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes pauseMigration without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4696,7 +4696,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes pauseMigration with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4727,7 +4727,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes pauseMigration with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4760,7 +4760,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkPauseMigrationProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4768,8 +4768,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPauseMigrationProgress(
@@ -4782,7 +4782,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkPauseMigrationProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4803,7 +4803,7 @@ describe('v1.VmMigrationClient', () => {
   describe('finalizeMigration', () => {
     it('invokes finalizeMigration without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4836,7 +4836,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes finalizeMigration without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4890,7 +4890,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes finalizeMigration with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4921,7 +4921,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes finalizeMigration with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4954,7 +4954,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkFinalizeMigrationProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4962,8 +4962,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkFinalizeMigrationProgress(
@@ -4976,7 +4976,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkFinalizeMigrationProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4997,7 +4997,7 @@ describe('v1.VmMigrationClient', () => {
   describe('extendMigration', () => {
     it('invokes extendMigration without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5030,7 +5030,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes extendMigration without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5084,7 +5084,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes extendMigration with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5115,7 +5115,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes extendMigration with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5148,7 +5148,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkExtendMigrationProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5156,8 +5156,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExtendMigrationProgress(
@@ -5170,7 +5170,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkExtendMigrationProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5191,7 +5191,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createCloneJob', () => {
     it('invokes createCloneJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5224,7 +5224,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createCloneJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5278,7 +5278,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createCloneJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5309,7 +5309,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createCloneJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5342,7 +5342,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateCloneJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5350,8 +5350,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCloneJobProgress(
@@ -5364,7 +5364,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateCloneJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5385,7 +5385,7 @@ describe('v1.VmMigrationClient', () => {
   describe('cancelCloneJob', () => {
     it('invokes cancelCloneJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5418,7 +5418,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelCloneJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5472,7 +5472,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelCloneJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5503,7 +5503,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelCloneJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5536,7 +5536,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCancelCloneJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5544,8 +5544,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCancelCloneJobProgress(
@@ -5558,7 +5558,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCancelCloneJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5579,7 +5579,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createCutoverJob', () => {
     it('invokes createCutoverJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5612,7 +5612,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createCutoverJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5666,7 +5666,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createCutoverJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5697,7 +5697,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createCutoverJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5730,7 +5730,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateCutoverJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5738,8 +5738,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCutoverJobProgress(
@@ -5752,7 +5752,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateCutoverJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5773,7 +5773,7 @@ describe('v1.VmMigrationClient', () => {
   describe('cancelCutoverJob', () => {
     it('invokes cancelCutoverJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5806,7 +5806,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelCutoverJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5860,7 +5860,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelCutoverJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5891,7 +5891,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelCutoverJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5924,7 +5924,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCancelCutoverJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5932,8 +5932,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCancelCutoverJobProgress(
@@ -5946,7 +5946,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCancelCutoverJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5967,7 +5967,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createGroup', () => {
     it('invokes createGroup without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5999,7 +5999,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createGroup without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6053,7 +6053,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createGroup with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6084,7 +6084,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createGroup with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6117,7 +6117,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateGroupProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6125,8 +6125,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateGroupProgress(
@@ -6139,7 +6139,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateGroupProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6157,7 +6157,7 @@ describe('v1.VmMigrationClient', () => {
   describe('updateGroup', () => {
     it('invokes updateGroup without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6190,7 +6190,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateGroup without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6245,7 +6245,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateGroup with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6277,7 +6277,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateGroup with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6311,7 +6311,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateGroupProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6319,8 +6319,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateGroupProgress(
@@ -6333,7 +6333,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateGroupProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6351,7 +6351,7 @@ describe('v1.VmMigrationClient', () => {
   describe('deleteGroup', () => {
     it('invokes deleteGroup without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6383,7 +6383,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteGroup without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6437,7 +6437,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteGroup with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6468,7 +6468,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteGroup with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6501,7 +6501,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteGroupProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6509,8 +6509,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteGroupProgress(
@@ -6523,7 +6523,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteGroupProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6541,7 +6541,7 @@ describe('v1.VmMigrationClient', () => {
   describe('addGroupMigration', () => {
     it('invokes addGroupMigration without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6574,7 +6574,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes addGroupMigration without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6628,7 +6628,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes addGroupMigration with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6659,7 +6659,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes addGroupMigration with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6692,7 +6692,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkAddGroupMigrationProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6700,8 +6700,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAddGroupMigrationProgress(
@@ -6714,7 +6714,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkAddGroupMigrationProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6735,7 +6735,7 @@ describe('v1.VmMigrationClient', () => {
   describe('removeGroupMigration', () => {
     it('invokes removeGroupMigration without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6768,7 +6768,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes removeGroupMigration without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6822,7 +6822,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes removeGroupMigration with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6853,7 +6853,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes removeGroupMigration with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6886,7 +6886,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkRemoveGroupMigrationProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6894,8 +6894,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRemoveGroupMigrationProgress(
@@ -6908,7 +6908,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkRemoveGroupMigrationProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6929,7 +6929,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createTargetProject', () => {
     it('invokes createTargetProject without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6962,7 +6962,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createTargetProject without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7016,7 +7016,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createTargetProject with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7047,7 +7047,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createTargetProject with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7080,7 +7080,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateTargetProjectProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7088,8 +7088,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateTargetProjectProgress(
@@ -7102,7 +7102,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateTargetProjectProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7123,7 +7123,7 @@ describe('v1.VmMigrationClient', () => {
   describe('updateTargetProject', () => {
     it('invokes updateTargetProject without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7157,7 +7157,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateTargetProject without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7212,7 +7212,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateTargetProject with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7244,7 +7244,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateTargetProject with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7278,7 +7278,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateTargetProjectProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7286,8 +7286,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateTargetProjectProgress(
@@ -7300,7 +7300,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateTargetProjectProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7321,7 +7321,7 @@ describe('v1.VmMigrationClient', () => {
   describe('deleteTargetProject', () => {
     it('invokes deleteTargetProject without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7354,7 +7354,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteTargetProject without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7408,7 +7408,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteTargetProject with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7439,7 +7439,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteTargetProject with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7472,7 +7472,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteTargetProjectProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7480,8 +7480,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTargetProjectProgress(
@@ -7494,7 +7494,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteTargetProjectProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7515,7 +7515,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createImageImport', () => {
     it('invokes createImageImport without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7548,7 +7548,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createImageImport without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7602,7 +7602,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createImageImport with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7633,7 +7633,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createImageImport with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7666,7 +7666,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateImageImportProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7674,8 +7674,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateImageImportProgress(
@@ -7688,7 +7688,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateImageImportProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7709,7 +7709,7 @@ describe('v1.VmMigrationClient', () => {
   describe('deleteImageImport', () => {
     it('invokes deleteImageImport without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7742,7 +7742,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteImageImport without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7796,7 +7796,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteImageImport with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7827,7 +7827,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteImageImport with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7860,7 +7860,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteImageImportProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7868,8 +7868,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteImageImportProgress(
@@ -7882,7 +7882,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteImageImportProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7903,7 +7903,7 @@ describe('v1.VmMigrationClient', () => {
   describe('cancelImageImportJob', () => {
     it('invokes cancelImageImportJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7936,7 +7936,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelImageImportJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7990,7 +7990,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelImageImportJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8021,7 +8021,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelImageImportJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8054,7 +8054,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCancelImageImportJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8062,8 +8062,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCancelImageImportJobProgress(
@@ -8076,7 +8076,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCancelImageImportJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8097,7 +8097,7 @@ describe('v1.VmMigrationClient', () => {
   describe('createDiskMigrationJob', () => {
     it('invokes createDiskMigrationJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8130,7 +8130,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createDiskMigrationJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8184,7 +8184,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createDiskMigrationJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8218,7 +8218,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes createDiskMigrationJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8251,7 +8251,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateDiskMigrationJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8259,8 +8259,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDiskMigrationJobProgress(
@@ -8273,7 +8273,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCreateDiskMigrationJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8294,7 +8294,7 @@ describe('v1.VmMigrationClient', () => {
   describe('updateDiskMigrationJob', () => {
     it('invokes updateDiskMigrationJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8328,7 +8328,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateDiskMigrationJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8383,7 +8383,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateDiskMigrationJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8418,7 +8418,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes updateDiskMigrationJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8452,7 +8452,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateDiskMigrationJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8460,8 +8460,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDiskMigrationJobProgress(
@@ -8474,7 +8474,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkUpdateDiskMigrationJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8495,7 +8495,7 @@ describe('v1.VmMigrationClient', () => {
   describe('deleteDiskMigrationJob', () => {
     it('invokes deleteDiskMigrationJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8528,7 +8528,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteDiskMigrationJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8582,7 +8582,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteDiskMigrationJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8616,7 +8616,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes deleteDiskMigrationJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8649,7 +8649,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteDiskMigrationJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8657,8 +8657,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDiskMigrationJobProgress(
@@ -8671,7 +8671,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkDeleteDiskMigrationJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8692,7 +8692,7 @@ describe('v1.VmMigrationClient', () => {
   describe('runDiskMigrationJob', () => {
     it('invokes runDiskMigrationJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8725,7 +8725,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes runDiskMigrationJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8779,7 +8779,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes runDiskMigrationJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8810,7 +8810,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes runDiskMigrationJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8843,7 +8843,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkRunDiskMigrationJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8851,8 +8851,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunDiskMigrationJobProgress(
@@ -8865,7 +8865,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkRunDiskMigrationJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8886,7 +8886,7 @@ describe('v1.VmMigrationClient', () => {
   describe('cancelDiskMigrationJob', () => {
     it('invokes cancelDiskMigrationJob without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8919,7 +8919,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelDiskMigrationJob without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8973,7 +8973,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelDiskMigrationJob with call error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9007,7 +9007,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes cancelDiskMigrationJob with LRO error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9040,7 +9040,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCancelDiskMigrationJobProgress without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9048,8 +9048,8 @@ describe('v1.VmMigrationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCancelDiskMigrationJobProgress(
@@ -9062,7 +9062,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes checkCancelDiskMigrationJobProgress with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9083,7 +9083,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listSources', () => {
     it('invokes listSources without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9116,7 +9116,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listSources without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9165,7 +9165,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listSources with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9196,7 +9196,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listSourcesStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9242,15 +9242,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSourcesStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9293,15 +9293,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSources without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9336,15 +9336,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSources with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9378,9 +9378,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9388,7 +9388,7 @@ describe('v1.VmMigrationClient', () => {
   describe('fetchStorageInventory', () => {
     it('invokes fetchStorageInventory without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9428,7 +9428,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes fetchStorageInventory without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9485,7 +9485,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes fetchStorageInventory with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9519,7 +9519,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes fetchStorageInventoryStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9588,7 +9588,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes fetchStorageInventoryStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9646,7 +9646,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with fetchStorageInventory without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9700,7 +9700,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with fetchStorageInventory with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9747,7 +9747,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listUtilizationReports', () => {
     it('invokes listUtilizationReports without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9787,7 +9787,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listUtilizationReports without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9819,8 +9819,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IUtilizationReport[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IUtilizationReport[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9844,7 +9843,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listUtilizationReports with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9878,7 +9877,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listUtilizationReportsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9945,7 +9944,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listUtilizationReportsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10001,7 +10000,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with listUtilizationReports without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10055,7 +10054,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with listUtilizationReports with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10102,7 +10101,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listDatacenterConnectors', () => {
     it('invokes listDatacenterConnectors without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10142,7 +10141,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listDatacenterConnectors without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10174,8 +10173,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IDatacenterConnector[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IDatacenterConnector[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -10199,7 +10197,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listDatacenterConnectors with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10233,7 +10231,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listDatacenterConnectorsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10302,7 +10300,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listDatacenterConnectorsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10360,7 +10358,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with listDatacenterConnectors without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10414,7 +10412,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with listDatacenterConnectors with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10461,7 +10459,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listMigratingVms', () => {
     it('invokes listMigratingVms without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10500,7 +10498,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listMigratingVms without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10555,7 +10553,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listMigratingVms with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10586,7 +10584,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listMigratingVmsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10638,15 +10636,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listMigratingVms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMigratingVmsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10687,15 +10685,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listMigratingVms.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMigratingVms without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10736,15 +10734,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listMigratingVms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMigratingVms with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10776,9 +10774,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listMigratingVms.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -10786,7 +10784,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listCloneJobs', () => {
     it('invokes listCloneJobs without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10825,7 +10823,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listCloneJobs without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10880,7 +10878,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listCloneJobs with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10911,7 +10909,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listCloneJobsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10963,15 +10961,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCloneJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCloneJobsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11012,15 +11010,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCloneJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCloneJobs without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11061,15 +11059,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCloneJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCloneJobs with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11101,9 +11099,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCloneJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11111,7 +11109,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listCutoverJobs', () => {
     it('invokes listCutoverJobs without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11150,7 +11148,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listCutoverJobs without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11205,7 +11203,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listCutoverJobs with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11236,7 +11234,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listCutoverJobsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11288,15 +11286,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCutoverJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCutoverJobsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11337,15 +11335,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCutoverJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCutoverJobs without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11386,15 +11384,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCutoverJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCutoverJobs with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11426,9 +11424,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listCutoverJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11436,7 +11434,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listGroups', () => {
     it('invokes listGroups without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11469,7 +11467,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listGroups without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11518,7 +11516,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listGroups with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11549,7 +11547,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listGroupsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11595,15 +11593,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGroupsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11646,15 +11644,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroups without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11689,15 +11687,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroups with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11731,9 +11729,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -11741,7 +11739,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listTargetProjects', () => {
     it('invokes listTargetProjects without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11781,7 +11779,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listTargetProjects without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11836,7 +11834,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listTargetProjects with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11867,7 +11865,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listTargetProjectsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11920,15 +11918,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listTargetProjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTargetProjectsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11970,15 +11968,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listTargetProjects.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTargetProjects without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12019,15 +12017,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listTargetProjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTargetProjects with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12060,9 +12058,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listTargetProjects.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12070,7 +12068,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listReplicationCycles', () => {
     it('invokes listReplicationCycles without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12110,7 +12108,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listReplicationCycles without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12142,8 +12140,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IReplicationCycle[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IReplicationCycle[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12167,7 +12164,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listReplicationCycles with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12201,7 +12198,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listReplicationCyclesStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12268,7 +12265,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listReplicationCyclesStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12324,7 +12321,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with listReplicationCycles without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12378,7 +12375,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with listReplicationCycles with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12425,7 +12422,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listImageImports', () => {
     it('invokes listImageImports without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12464,7 +12461,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listImageImports without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12519,7 +12516,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listImageImports with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12550,7 +12547,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listImageImportsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12602,15 +12599,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listImageImportsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12651,15 +12648,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listImageImports without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12700,15 +12697,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listImageImports with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12740,9 +12737,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -12750,7 +12747,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listImageImportJobs', () => {
     it('invokes listImageImportJobs without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12790,7 +12787,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listImageImportJobs without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12822,8 +12819,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IImageImportJob[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IImageImportJob[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -12847,7 +12843,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listImageImportJobs with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12878,7 +12874,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listImageImportJobsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12931,15 +12927,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImportJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listImageImportJobsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -12981,15 +12977,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImportJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listImageImportJobs without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13031,15 +13027,15 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImportJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listImageImportJobs with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13072,9 +13068,9 @@ describe('v1.VmMigrationClient', () => {
       assert(
         (client.descriptors.page.listImageImportJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -13082,7 +13078,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listDiskMigrationJobs', () => {
     it('invokes listDiskMigrationJobs without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13122,7 +13118,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listDiskMigrationJobs without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13154,8 +13150,7 @@ describe('v1.VmMigrationClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.vmmigration.v1.IDiskMigrationJob[]
-              | null,
+              protos.google.cloud.vmmigration.v1.IDiskMigrationJob[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -13179,7 +13174,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listDiskMigrationJobs with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13213,7 +13208,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listDiskMigrationJobsStream without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13280,7 +13275,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('invokes listDiskMigrationJobsStream with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13336,7 +13331,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with listDiskMigrationJobs without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13390,7 +13385,7 @@ describe('v1.VmMigrationClient', () => {
 
     it('uses async iteration with listDiskMigrationJobs with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13436,7 +13431,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13466,7 +13461,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13510,7 +13505,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13545,7 +13540,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13593,7 +13588,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13634,7 +13629,7 @@ describe('v1.VmMigrationClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13655,7 +13650,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -13683,7 +13678,7 @@ describe('v1.VmMigrationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -13693,7 +13688,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -13717,7 +13712,7 @@ describe('v1.VmMigrationClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13739,7 +13734,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -13767,7 +13762,7 @@ describe('v1.VmMigrationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -13777,7 +13772,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -13801,7 +13796,7 @@ describe('v1.VmMigrationClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13823,7 +13818,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -13851,7 +13846,7 @@ describe('v1.VmMigrationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -13861,7 +13856,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -13885,7 +13880,7 @@ describe('v1.VmMigrationClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -13920,7 +13915,7 @@ describe('v1.VmMigrationClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -13958,7 +13953,7 @@ describe('v1.VmMigrationClient', () => {
         clone_job: 'cloneJobValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14045,7 +14040,7 @@ describe('v1.VmMigrationClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14122,7 +14117,7 @@ describe('v1.VmMigrationClient', () => {
         cutover_job: 'cutoverJobValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14209,7 +14204,7 @@ describe('v1.VmMigrationClient', () => {
         datacenter_connector: 'datacenterConnectorValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14302,7 +14297,7 @@ describe('v1.VmMigrationClient', () => {
         disk_migration_job: 'diskMigrationJobValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14381,7 +14376,7 @@ describe('v1.VmMigrationClient', () => {
         group: 'groupValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14445,7 +14440,7 @@ describe('v1.VmMigrationClient', () => {
         job: 'jobValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14510,7 +14505,7 @@ describe('v1.VmMigrationClient', () => {
         result: 'resultValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14584,7 +14579,7 @@ describe('v1.VmMigrationClient', () => {
         location: 'locationValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14635,7 +14630,7 @@ describe('v1.VmMigrationClient', () => {
         migrating_vm: 'migratingVmValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14708,7 +14703,7 @@ describe('v1.VmMigrationClient', () => {
         project: 'projectValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14750,7 +14745,7 @@ describe('v1.VmMigrationClient', () => {
         replication_cycle: 'replicationCycleValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14840,7 +14835,7 @@ describe('v1.VmMigrationClient', () => {
         service_account: 'serviceAccountValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14894,7 +14889,7 @@ describe('v1.VmMigrationClient', () => {
         source: 'sourceValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -14958,7 +14953,7 @@ describe('v1.VmMigrationClient', () => {
         target_project: 'targetProjectValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -15023,7 +15018,7 @@ describe('v1.VmMigrationClient', () => {
         utilization_report: 'utilizationReportValue',
       };
       const client = new vmmigrationModule.v1.VmMigrationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

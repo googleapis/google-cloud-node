@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as llmutilityserviceModule from '../src';
 
-import { protobuf, IamProtos, LocationProtos } from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -159,7 +159,7 @@ describe('v1.LlmUtilityServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
@@ -200,7 +200,7 @@ describe('v1.LlmUtilityServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.llmUtilityServiceStub, undefined);
@@ -208,12 +208,12 @@ describe('v1.LlmUtilityServiceClient', () => {
       assert(client.llmUtilityServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.llmUtilityServiceStub);
@@ -222,14 +222,14 @@ describe('v1.LlmUtilityServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.llmUtilityServiceStub, undefined);
@@ -238,7 +238,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -246,7 +246,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -258,7 +258,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -281,7 +281,7 @@ describe('v1.LlmUtilityServiceClient', () => {
   describe('countTokens', () => {
     it('invokes countTokens without error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -312,7 +312,7 @@ describe('v1.LlmUtilityServiceClient', () => {
 
     it('invokes countTokens without error using callback', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -359,7 +359,7 @@ describe('v1.LlmUtilityServiceClient', () => {
 
     it('invokes countTokens with error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v1.LlmUtilityServiceClient', () => {
 
     it('invokes countTokens with closed client', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -403,7 +403,7 @@ describe('v1.LlmUtilityServiceClient', () => {
       );
       request.endpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.countTokens(request), expectedError);
@@ -413,7 +413,7 @@ describe('v1.LlmUtilityServiceClient', () => {
   describe('computeTokens', () => {
     it('invokes computeTokens without error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1.LlmUtilityServiceClient', () => {
 
     it('invokes computeTokens without error using callback', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v1.LlmUtilityServiceClient', () => {
 
     it('invokes computeTokens with error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.LlmUtilityServiceClient', () => {
 
     it('invokes computeTokens with closed client', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1.LlmUtilityServiceClient', () => {
       );
       request.endpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.computeTokens(request), expectedError);
@@ -544,7 +544,7 @@ describe('v1.LlmUtilityServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -612,7 +612,7 @@ describe('v1.LlmUtilityServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -622,7 +622,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1.LlmUtilityServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -684,7 +684,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -722,7 +722,7 @@ describe('v1.LlmUtilityServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -732,7 +732,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -764,7 +764,7 @@ describe('v1.LlmUtilityServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1.LlmUtilityServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -845,7 +845,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.LlmUtilityServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -910,7 +910,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -954,7 +954,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -989,7 +989,7 @@ describe('v1.LlmUtilityServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1037,7 +1037,7 @@ describe('v1.LlmUtilityServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1087,7 +1087,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1174,7 +1174,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1251,7 +1251,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1326,7 +1326,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1403,7 +1403,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1468,7 +1468,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         context: 'contextValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1543,7 +1543,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1608,7 +1608,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1683,7 +1683,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1748,7 +1748,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1813,7 +1813,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1971,7 +1971,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2047,7 +2047,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2122,7 +2122,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2186,7 +2186,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2264,7 +2264,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2341,7 +2341,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2417,7 +2417,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2481,7 +2481,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2562,7 +2562,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         index: 'indexValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2626,7 +2626,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2691,7 +2691,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2768,7 +2768,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2832,7 +2832,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         model: 'modelValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2896,7 +2896,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2976,7 +2976,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3053,7 +3053,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3160,7 +3160,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3225,7 +3225,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3301,7 +3301,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3382,7 +3382,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3447,7 +3447,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3528,7 +3528,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3605,7 +3605,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3669,7 +3669,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3749,7 +3749,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3852,7 +3852,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3976,7 +3976,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         model: 'modelValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4067,7 +4067,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         model: 'modelValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4120,7 +4120,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4183,7 +4183,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         location: 'locationValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4237,7 +4237,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4312,7 +4312,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4378,7 +4378,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4453,7 +4453,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4518,7 +4518,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4595,7 +4595,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         event: 'eventValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4682,7 +4682,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4747,7 +4747,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         study: 'studyValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4811,7 +4811,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4876,7 +4876,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4972,7 +4972,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         run: 'runValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5061,7 +5061,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5184,7 +5184,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5253,7 +5253,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5328,7 +5328,7 @@ describe('v1.LlmUtilityServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new llmutilityserviceModule.v1.LlmUtilityServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

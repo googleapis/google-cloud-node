@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as interceptModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -278,7 +278,7 @@ describe('v1.InterceptClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.interceptStub, undefined);
@@ -286,12 +286,12 @@ describe('v1.InterceptClient', () => {
       assert(client.interceptStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.interceptStub);
@@ -300,14 +300,14 @@ describe('v1.InterceptClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.interceptStub, undefined);
@@ -316,7 +316,7 @@ describe('v1.InterceptClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -324,7 +324,7 @@ describe('v1.InterceptClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -336,7 +336,7 @@ describe('v1.InterceptClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -359,7 +359,7 @@ describe('v1.InterceptClient', () => {
   describe('getInterceptEndpointGroup', () => {
     it('invokes getInterceptEndpointGroup without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptEndpointGroup without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptEndpointGroup with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,7 +472,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptEndpointGroup with closed client', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -485,7 +485,7 @@ describe('v1.InterceptClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -498,7 +498,7 @@ describe('v1.InterceptClient', () => {
   describe('getInterceptEndpointGroupAssociation', () => {
     it('invokes getInterceptEndpointGroupAssociation without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptEndpointGroupAssociation without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -578,7 +578,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptEndpointGroupAssociation with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,7 +610,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptEndpointGroupAssociation with closed client', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1.InterceptClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -636,7 +636,7 @@ describe('v1.InterceptClient', () => {
   describe('getInterceptDeploymentGroup', () => {
     it('invokes getInterceptDeploymentGroup without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -668,7 +668,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptDeploymentGroup without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -715,7 +715,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptDeploymentGroup with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptDeploymentGroup with closed client', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -762,7 +762,7 @@ describe('v1.InterceptClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -775,7 +775,7 @@ describe('v1.InterceptClient', () => {
   describe('getInterceptDeployment', () => {
     it('invokes getInterceptDeployment without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -807,7 +807,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptDeployment without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -854,7 +854,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptDeployment with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes getInterceptDeployment with closed client', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -901,7 +901,7 @@ describe('v1.InterceptClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -914,7 +914,7 @@ describe('v1.InterceptClient', () => {
   describe('createInterceptEndpointGroup', () => {
     it('invokes createInterceptEndpointGroup without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,7 +947,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptEndpointGroup without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1001,7 +1001,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptEndpointGroup with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1035,7 +1035,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptEndpointGroup with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1068,7 +1068,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkCreateInterceptEndpointGroupProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1076,8 +1076,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1091,7 +1091,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkCreateInterceptEndpointGroupProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1112,7 +1112,7 @@ describe('v1.InterceptClient', () => {
   describe('updateInterceptEndpointGroup', () => {
     it('invokes updateInterceptEndpointGroup without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptEndpointGroup without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1201,7 +1201,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptEndpointGroup with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1236,7 +1236,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptEndpointGroup with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkUpdateInterceptEndpointGroupProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1278,8 +1278,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1293,7 +1293,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkUpdateInterceptEndpointGroupProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v1.InterceptClient', () => {
   describe('deleteInterceptEndpointGroup', () => {
     it('invokes deleteInterceptEndpointGroup without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1347,7 +1347,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptEndpointGroup without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptEndpointGroup with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1435,7 +1435,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptEndpointGroup with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1468,7 +1468,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkDeleteInterceptEndpointGroupProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1476,8 +1476,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1491,7 +1491,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkDeleteInterceptEndpointGroupProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1512,7 +1512,7 @@ describe('v1.InterceptClient', () => {
   describe('createInterceptEndpointGroupAssociation', () => {
     it('invokes createInterceptEndpointGroupAssociation without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1548,7 +1548,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptEndpointGroupAssociation without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1604,7 +1604,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptEndpointGroupAssociation with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1638,7 +1638,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptEndpointGroupAssociation with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1671,7 +1671,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkCreateInterceptEndpointGroupAssociationProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1679,8 +1679,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1694,7 +1694,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkCreateInterceptEndpointGroupAssociationProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1715,7 +1715,7 @@ describe('v1.InterceptClient', () => {
   describe('updateInterceptEndpointGroupAssociation', () => {
     it('invokes updateInterceptEndpointGroupAssociation without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1752,7 +1752,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptEndpointGroupAssociation without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1809,7 +1809,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptEndpointGroupAssociation with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1844,7 +1844,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptEndpointGroupAssociation with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,7 +1878,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkUpdateInterceptEndpointGroupAssociationProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1886,8 +1886,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1901,7 +1901,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkUpdateInterceptEndpointGroupAssociationProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1922,7 +1922,7 @@ describe('v1.InterceptClient', () => {
   describe('deleteInterceptEndpointGroupAssociation', () => {
     it('invokes deleteInterceptEndpointGroupAssociation without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1958,7 +1958,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptEndpointGroupAssociation without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2014,7 +2014,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptEndpointGroupAssociation with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2048,7 +2048,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptEndpointGroupAssociation with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2081,7 +2081,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkDeleteInterceptEndpointGroupAssociationProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2089,8 +2089,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2104,7 +2104,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkDeleteInterceptEndpointGroupAssociationProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2125,7 +2125,7 @@ describe('v1.InterceptClient', () => {
   describe('createInterceptDeploymentGroup', () => {
     it('invokes createInterceptDeploymentGroup without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2158,7 +2158,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptDeploymentGroup without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2212,7 +2212,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptDeploymentGroup with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2246,7 +2246,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptDeploymentGroup with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2279,7 +2279,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkCreateInterceptDeploymentGroupProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2287,8 +2287,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2302,7 +2302,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkCreateInterceptDeploymentGroupProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2323,7 +2323,7 @@ describe('v1.InterceptClient', () => {
   describe('updateInterceptDeploymentGroup', () => {
     it('invokes updateInterceptDeploymentGroup without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2357,7 +2357,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptDeploymentGroup without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2412,7 +2412,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptDeploymentGroup with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2447,7 +2447,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptDeploymentGroup with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2481,7 +2481,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkUpdateInterceptDeploymentGroupProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2489,8 +2489,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2504,7 +2504,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkUpdateInterceptDeploymentGroupProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v1.InterceptClient', () => {
   describe('deleteInterceptDeploymentGroup', () => {
     it('invokes deleteInterceptDeploymentGroup without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2558,7 +2558,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptDeploymentGroup without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2612,7 +2612,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptDeploymentGroup with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2646,7 +2646,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptDeploymentGroup with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2679,7 +2679,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkDeleteInterceptDeploymentGroupProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2687,8 +2687,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2702,7 +2702,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkDeleteInterceptDeploymentGroupProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2723,7 +2723,7 @@ describe('v1.InterceptClient', () => {
   describe('createInterceptDeployment', () => {
     it('invokes createInterceptDeployment without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2756,7 +2756,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptDeployment without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2810,7 +2810,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptDeployment with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2844,7 +2844,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes createInterceptDeployment with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2877,7 +2877,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkCreateInterceptDeploymentProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2885,8 +2885,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2900,7 +2900,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkCreateInterceptDeploymentProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2921,7 +2921,7 @@ describe('v1.InterceptClient', () => {
   describe('updateInterceptDeployment', () => {
     it('invokes updateInterceptDeployment without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2955,7 +2955,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptDeployment without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3010,7 +3010,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptDeployment with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3045,7 +3045,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes updateInterceptDeployment with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3079,7 +3079,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkUpdateInterceptDeploymentProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3087,8 +3087,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3102,7 +3102,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkUpdateInterceptDeploymentProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3123,7 +3123,7 @@ describe('v1.InterceptClient', () => {
   describe('deleteInterceptDeployment', () => {
     it('invokes deleteInterceptDeployment without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3156,7 +3156,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptDeployment without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3210,7 +3210,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptDeployment with call error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3244,7 +3244,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes deleteInterceptDeployment with LRO error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3277,7 +3277,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkDeleteInterceptDeploymentProgress without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3285,8 +3285,8 @@ describe('v1.InterceptClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3300,7 +3300,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes checkDeleteInterceptDeploymentProgress with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3321,7 +3321,7 @@ describe('v1.InterceptClient', () => {
   describe('listInterceptEndpointGroups', () => {
     it('invokes listInterceptEndpointGroups without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3361,7 +3361,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptEndpointGroups without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3418,7 +3418,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptEndpointGroups with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3452,7 +3452,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptEndpointGroupsStream without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3524,7 +3524,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptEndpointGroupsStream with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3585,7 +3585,7 @@ describe('v1.InterceptClient', () => {
 
     it('uses async iteration with listInterceptEndpointGroups without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3639,7 +3639,7 @@ describe('v1.InterceptClient', () => {
 
     it('uses async iteration with listInterceptEndpointGroups with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3686,7 +3686,7 @@ describe('v1.InterceptClient', () => {
   describe('listInterceptEndpointGroupAssociations', () => {
     it('invokes listInterceptEndpointGroupAssociations without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3727,7 +3727,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptEndpointGroupAssociations without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3784,7 +3784,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptEndpointGroupAssociations with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3816,7 +3816,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptEndpointGroupAssociationsStream without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3889,7 +3889,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptEndpointGroupAssociationsStream with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3951,7 +3951,7 @@ describe('v1.InterceptClient', () => {
 
     it('uses async iteration with listInterceptEndpointGroupAssociations without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4006,7 +4006,7 @@ describe('v1.InterceptClient', () => {
 
     it('uses async iteration with listInterceptEndpointGroupAssociations with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4054,7 +4054,7 @@ describe('v1.InterceptClient', () => {
   describe('listInterceptDeploymentGroups', () => {
     it('invokes listInterceptDeploymentGroups without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4094,7 +4094,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptDeploymentGroups without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4151,7 +4151,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptDeploymentGroups with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4185,7 +4185,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptDeploymentGroupsStream without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4257,7 +4257,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptDeploymentGroupsStream with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4318,7 +4318,7 @@ describe('v1.InterceptClient', () => {
 
     it('uses async iteration with listInterceptDeploymentGroups without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4372,7 +4372,7 @@ describe('v1.InterceptClient', () => {
 
     it('uses async iteration with listInterceptDeploymentGroups with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4419,7 +4419,7 @@ describe('v1.InterceptClient', () => {
   describe('listInterceptDeployments', () => {
     it('invokes listInterceptDeployments without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4459,7 +4459,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptDeployments without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4516,7 +4516,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptDeployments with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4550,7 +4550,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptDeploymentsStream without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4619,7 +4619,7 @@ describe('v1.InterceptClient', () => {
 
     it('invokes listInterceptDeploymentsStream with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4677,7 +4677,7 @@ describe('v1.InterceptClient', () => {
 
     it('uses async iteration with listInterceptDeployments without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4731,7 +4731,7 @@ describe('v1.InterceptClient', () => {
 
     it('uses async iteration with listInterceptDeployments with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4777,7 +4777,7 @@ describe('v1.InterceptClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4807,7 +4807,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4845,7 +4845,7 @@ describe('v1.InterceptClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4855,7 +4855,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4887,7 +4887,7 @@ describe('v1.InterceptClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4917,7 +4917,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4955,7 +4955,7 @@ describe('v1.InterceptClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4965,7 +4965,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4997,7 +4997,7 @@ describe('v1.InterceptClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5030,7 +5030,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5068,7 +5068,7 @@ describe('v1.InterceptClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5078,7 +5078,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5113,7 +5113,7 @@ describe('v1.InterceptClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5143,7 +5143,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5187,7 +5187,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5222,7 +5222,7 @@ describe('v1.InterceptClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5270,7 +5270,7 @@ describe('v1.InterceptClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5311,7 +5311,7 @@ describe('v1.InterceptClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5332,7 +5332,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5360,7 +5360,7 @@ describe('v1.InterceptClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5370,7 +5370,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5394,7 +5394,7 @@ describe('v1.InterceptClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5416,7 +5416,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5444,7 +5444,7 @@ describe('v1.InterceptClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5454,7 +5454,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5478,7 +5478,7 @@ describe('v1.InterceptClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5500,7 +5500,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5528,7 +5528,7 @@ describe('v1.InterceptClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5538,7 +5538,7 @@ describe('v1.InterceptClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5562,7 +5562,7 @@ describe('v1.InterceptClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5597,7 +5597,7 @@ describe('v1.InterceptClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5633,7 +5633,7 @@ describe('v1.InterceptClient', () => {
         authorization_policy: 'authorizationPolicyValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5711,7 +5711,7 @@ describe('v1.InterceptClient', () => {
         authz_policy: 'authzPolicyValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5775,7 +5775,7 @@ describe('v1.InterceptClient', () => {
         backend_authentication_config: 'backendAuthenticationConfigValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5855,7 +5855,7 @@ describe('v1.InterceptClient', () => {
         client_tls_policy: 'clientTlsPolicyValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5920,7 +5920,7 @@ describe('v1.InterceptClient', () => {
         dns_threat_detector: 'dnsThreatDetectorValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5997,7 +5997,7 @@ describe('v1.InterceptClient', () => {
         firewall_endpoint_association: 'firewallEndpointAssociationValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6076,7 +6076,7 @@ describe('v1.InterceptClient', () => {
         forwarding_rule: 'forwardingRuleValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6130,7 +6130,7 @@ describe('v1.InterceptClient', () => {
         gateway_security_policy: 'gatewaySecurityPolicyValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6212,7 +6212,7 @@ describe('v1.InterceptClient', () => {
         rule: 'ruleValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6308,7 +6308,7 @@ describe('v1.InterceptClient', () => {
         intercept_deployment: 'interceptDeploymentValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6386,7 +6386,7 @@ describe('v1.InterceptClient', () => {
         intercept_deployment_group: 'interceptDeploymentGroupValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6467,7 +6467,7 @@ describe('v1.InterceptClient', () => {
         intercept_endpoint_group: 'interceptEndpointGroupValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6549,7 +6549,7 @@ describe('v1.InterceptClient', () => {
           'interceptEndpointGroupAssociationValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6631,7 +6631,7 @@ describe('v1.InterceptClient', () => {
         location: 'locationValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6681,7 +6681,7 @@ describe('v1.InterceptClient', () => {
         mirroring_deployment: 'mirroringDeploymentValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6759,7 +6759,7 @@ describe('v1.InterceptClient', () => {
         mirroring_deployment_group: 'mirroringDeploymentGroupValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6840,7 +6840,7 @@ describe('v1.InterceptClient', () => {
         mirroring_endpoint_group: 'mirroringEndpointGroupValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6922,7 +6922,7 @@ describe('v1.InterceptClient', () => {
           'mirroringEndpointGroupAssociationValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7004,7 +7004,7 @@ describe('v1.InterceptClient', () => {
         network: 'networkValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7054,7 +7054,7 @@ describe('v1.InterceptClient', () => {
         address_group: 'addressGroupValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7137,7 +7137,7 @@ describe('v1.InterceptClient', () => {
         firewall_endpoint: 'firewallEndpointValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7224,7 +7224,7 @@ describe('v1.InterceptClient', () => {
         security_profile: 'securityProfileValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7308,7 +7308,7 @@ describe('v1.InterceptClient', () => {
         security_profile_group: 'securityProfileGroupValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7393,7 +7393,7 @@ describe('v1.InterceptClient', () => {
         project: 'projectValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7433,7 +7433,7 @@ describe('v1.InterceptClient', () => {
         address_group: 'addressGroupValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7511,7 +7511,7 @@ describe('v1.InterceptClient', () => {
         firewall_endpoint: 'firewallEndpointValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7592,7 +7592,7 @@ describe('v1.InterceptClient', () => {
         security_profile: 'securityProfileValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7671,7 +7671,7 @@ describe('v1.InterceptClient', () => {
         security_profile_group: 'securityProfileGroupValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7754,7 +7754,7 @@ describe('v1.InterceptClient', () => {
         sac_attachment: 'sacAttachmentValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7818,7 +7818,7 @@ describe('v1.InterceptClient', () => {
         sac_realm: 'sacRealmValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7882,7 +7882,7 @@ describe('v1.InterceptClient', () => {
         server_tls_policy: 'serverTlsPolicyValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7947,7 +7947,7 @@ describe('v1.InterceptClient', () => {
         tls_inspection_policy: 'tlsInspectionPolicyValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8025,7 +8025,7 @@ describe('v1.InterceptClient', () => {
         url_list: 'urlListValue',
       };
       const client = new interceptModule.v1.InterceptClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

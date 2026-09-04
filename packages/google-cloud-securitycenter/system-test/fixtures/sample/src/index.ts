@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { SecurityCenterClient } from '@google-cloud/security-center';
+import {SecurityCenterClient} from '@google-cloud/security-center';
 
 // check that the client class type name can be used
 function doStuffWithSecurityCenterClient(client: SecurityCenterClient) {

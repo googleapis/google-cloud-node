@@ -29,7 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class SqlDatabasesServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('sql');
@@ -64,10 +64,10 @@ export class SqlDatabasesServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  sqlDatabasesServiceStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  sqlDatabasesServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SqlDatabasesServiceClient.
@@ -143,7 +143,7 @@ export class SqlDatabasesServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -217,7 +217,7 @@ export class SqlDatabasesServiceClient {
       'google.cloud.sql.v1.SqlDatabasesService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -257,7 +257,7 @@ export class SqlDatabasesServiceClient {
           (this._protos as any).google.cloud.sql.v1.SqlDatabasesService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -271,7 +271,7 @@ export class SqlDatabasesServiceClient {
     ];
     for (const methodName of sqlDatabasesServiceStubMethods) {
       const callPromise = this.sqlDatabasesServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -472,7 +472,7 @@ export class SqlDatabasesServiceClient {
         instance: request.instance ?? '',
         database: request.database ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('delete request %j', request);
@@ -605,7 +605,7 @@ export class SqlDatabasesServiceClient {
         instance: request.instance ?? '',
         database: request.database ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('get request %j', request);
@@ -738,7 +738,7 @@ export class SqlDatabasesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('insert request %j', request);
@@ -869,7 +869,7 @@ export class SqlDatabasesServiceClient {
         project: request.project ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list request %j', request);
@@ -1005,7 +1005,7 @@ export class SqlDatabasesServiceClient {
         instance: request.instance ?? '',
         database: request.database ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patch request %j', request);
@@ -1141,7 +1141,7 @@ export class SqlDatabasesServiceClient {
         instance: request.instance ?? '',
         database: request.database ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('update request %j', request);
@@ -1314,11 +1314,11 @@ export class SqlDatabasesServiceClient {
    */
   close(): Promise<void> {
     if (this.sqlDatabasesServiceStub && !this._terminated) {
-      return this.sqlDatabasesServiceStub.then((stub) => {
+      return this.sqlDatabasesServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

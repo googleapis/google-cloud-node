@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { ConnectorsClient } from '@google-cloud/connectors';
+import {ConnectorsClient} from '@google-cloud/connectors';
 
 // check that the client class type name can be used
 function doStuffWithConnectorsClient(client: ConnectorsClient) {

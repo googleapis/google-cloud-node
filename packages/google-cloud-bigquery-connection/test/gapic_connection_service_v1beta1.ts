@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as connectionserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -188,7 +188,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.connectionServiceStub, undefined);
@@ -196,13 +196,13 @@ describe('v1beta1.ConnectionServiceClient', () => {
       assert(client.connectionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.connectionServiceStub);
@@ -211,15 +211,15 @@ describe('v1beta1.ConnectionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.connectionServiceStub, undefined);
@@ -228,7 +228,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -237,7 +237,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -250,7 +250,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -274,7 +274,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes createConnection without error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -306,7 +306,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes createConnection without error using callback', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes createConnection with error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes createConnection with closed client', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createConnection(request), expectedError);
@@ -410,7 +410,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes getConnection without error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes getConnection without error using callback', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -490,7 +490,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes getConnection with error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes getConnection with closed client', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnection(request), expectedError);
@@ -546,7 +546,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes listConnections without error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -578,7 +578,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes listConnections without error using callback', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -626,7 +626,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes listConnections with error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -658,7 +658,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes listConnections with closed client', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -671,7 +671,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listConnections(request), expectedError);
@@ -682,7 +682,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes updateConnection without error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -714,7 +714,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes updateConnection without error using callback', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -762,7 +762,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes updateConnection with error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes updateConnection with closed client', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -807,7 +807,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateConnection(request), expectedError);
@@ -818,7 +818,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes updateConnectionCredential without error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -851,7 +851,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes updateConnectionCredential without error using callback', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -899,7 +899,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes updateConnectionCredential with error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes updateConnectionCredential with closed client', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -947,7 +947,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -961,7 +961,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes deleteConnection without error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes deleteConnection without error using callback', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1041,7 +1041,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes deleteConnection with error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1073,7 +1073,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes deleteConnection with closed client', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1086,7 +1086,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteConnection(request), expectedError);
@@ -1097,7 +1097,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1129,7 +1129,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1177,7 +1177,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes getIamPolicy with closed client', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1222,7 +1222,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1233,7 +1233,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1265,7 +1265,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1313,7 +1313,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes setIamPolicy with closed client', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1369,7 +1369,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1402,7 +1402,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1450,7 +1450,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1482,7 +1482,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
     it('invokes testIamPermissions with closed client', async () => {
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1512,7 +1512,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       };
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1576,7 +1576,7 @@ describe('v1beta1.ConnectionServiceClient', () => {
       };
       const client =
         new connectionserviceModule.v1beta1.ConnectionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

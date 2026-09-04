@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as systempolicyv1beta1Module from '../src';
 
-import { protobuf, IamProtos } from 'google-gax';
+import {protobuf, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -191,7 +191,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.systemPolicyV1Beta1Stub, undefined);
@@ -199,13 +199,13 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
       assert(client.systemPolicyV1Beta1Stub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.systemPolicyV1Beta1Stub);
@@ -214,15 +214,15 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.systemPolicyV1Beta1Stub, undefined);
@@ -231,7 +231,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -240,7 +240,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -253,7 +253,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -277,7 +277,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes getSystemPolicy without error', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -309,7 +309,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes getSystemPolicy without error using callback', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -357,7 +357,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes getSystemPolicy with error', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes getSystemPolicy with closed client', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSystemPolicy(request), expectedError);
@@ -412,7 +412,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -492,7 +492,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -525,7 +525,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -605,7 +605,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -638,7 +638,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -672,7 +672,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -721,7 +721,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -763,7 +763,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
       };
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -812,7 +812,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
       };
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -851,7 +851,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
       };
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -890,7 +890,7 @@ describe('v1beta1.SystemPolicyV1Beta1Client', () => {
       };
       const client =
         new systempolicyv1beta1Module.v1beta1.SystemPolicyV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

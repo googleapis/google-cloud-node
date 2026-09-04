@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as companyserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -240,7 +240,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.companyServiceStub, undefined);
@@ -248,12 +248,12 @@ describe('v4beta1.CompanyServiceClient', () => {
       assert(client.companyServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.companyServiceStub);
@@ -262,14 +262,14 @@ describe('v4beta1.CompanyServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.companyServiceStub, undefined);
@@ -278,7 +278,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v4beta1.CompanyServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v4beta1.CompanyServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v4beta1.CompanyServiceClient', () => {
   describe('createCompany', () => {
     it('invokes createCompany without error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes createCompany without error using callback', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes createCompany with error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes createCompany with closed client', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v4beta1.CompanyServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCompany(request), expectedError);
@@ -453,7 +453,7 @@ describe('v4beta1.CompanyServiceClient', () => {
   describe('getCompany', () => {
     it('invokes getCompany without error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes getCompany without error using callback', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes getCompany with error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes getCompany with closed client', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v4beta1.CompanyServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCompany(request), expectedError);
@@ -585,7 +585,7 @@ describe('v4beta1.CompanyServiceClient', () => {
   describe('updateCompany', () => {
     it('invokes updateCompany without error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -617,7 +617,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes updateCompany without error using callback', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -665,7 +665,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes updateCompany with error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes updateCompany with closed client', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v4beta1.CompanyServiceClient', () => {
       );
       request.company.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCompany(request), expectedError);
@@ -721,7 +721,7 @@ describe('v4beta1.CompanyServiceClient', () => {
   describe('deleteCompany', () => {
     it('invokes deleteCompany without error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes deleteCompany without error using callback', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes deleteCompany with error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes deleteCompany with closed client', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v4beta1.CompanyServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCompany(request), expectedError);
@@ -853,7 +853,7 @@ describe('v4beta1.CompanyServiceClient', () => {
   describe('listCompanies', () => {
     it('invokes listCompanies without error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes listCompanies without error using callback', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -935,7 +935,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes listCompanies with error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v4beta1.CompanyServiceClient', () => {
 
     it('invokes listCompaniesStream without error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1012,15 +1012,15 @@ describe('v4beta1.CompanyServiceClient', () => {
       assert(
         (client.descriptors.page.listCompanies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCompaniesStream with error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1061,15 +1061,15 @@ describe('v4beta1.CompanyServiceClient', () => {
       assert(
         (client.descriptors.page.listCompanies.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCompanies without error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,15 +1104,15 @@ describe('v4beta1.CompanyServiceClient', () => {
       assert(
         (client.descriptors.page.listCompanies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCompanies with error', async () => {
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1144,9 +1144,9 @@ describe('v4beta1.CompanyServiceClient', () => {
       assert(
         (client.descriptors.page.listCompanies.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1158,7 +1158,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         project: 'projectValue',
       };
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1197,7 +1197,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         company: 'companyValue',
       };
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1249,7 +1249,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         job: 'jobValue',
       };
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1299,7 +1299,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         company: 'companyValue',
       };
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         job: 'jobValue',
       };
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,7 +1443,7 @@ describe('v4beta1.CompanyServiceClient', () => {
         tenant: 'tenantValue',
       };
       const client = new companyserviceModule.v4beta1.CompanyServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

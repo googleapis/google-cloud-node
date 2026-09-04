@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as estimatebillingserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -105,9 +105,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -194,7 +194,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -242,7 +242,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.estimateBillingServiceStub, undefined);
@@ -250,13 +250,13 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       assert(client.estimateBillingServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.estimateBillingServiceStub);
@@ -265,15 +265,15 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.estimateBillingServiceStub, undefined);
@@ -282,7 +282,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -291,7 +291,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -304,7 +304,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -328,7 +328,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes estimateDataSize without error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -362,7 +362,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes estimateDataSize without error using callback', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -417,7 +417,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes estimateDataSize with call error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -449,7 +449,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes estimateDataSize with LRO error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes checkEstimateDataSizeProgress without error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -491,8 +491,8 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkEstimateDataSizeProgress(
@@ -506,7 +506,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes checkEstimateDataSizeProgress with error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -527,7 +527,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -603,7 +603,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -639,7 +639,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -688,7 +688,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -780,7 +780,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -791,7 +791,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -816,7 +816,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -867,7 +867,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -878,7 +878,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -903,7 +903,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -954,7 +954,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -965,7 +965,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -990,7 +990,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1026,7 +1026,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1062,7 +1062,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1190,7 +1190,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1450,7 +1450,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1598,7 +1598,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1762,7 +1762,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2017,7 +2017,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2144,7 +2144,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2254,7 +2254,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2381,7 +2381,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2510,7 +2510,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2656,7 +2656,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2782,7 +2782,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2892,7 +2892,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3019,7 +3019,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3146,7 +3146,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3273,7 +3273,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3401,7 +3401,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3545,7 +3545,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3669,7 +3669,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3751,7 +3751,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3879,7 +3879,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4022,7 +4022,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4118,7 +4118,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4226,7 +4226,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4333,7 +4333,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4423,7 +4423,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4517,7 +4517,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4625,7 +4625,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4750,7 +4750,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4848,7 +4848,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4938,7 +4938,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5046,7 +5046,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5122,7 +5122,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

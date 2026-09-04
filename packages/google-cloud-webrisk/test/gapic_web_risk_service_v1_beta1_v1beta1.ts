@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as webriskservicev1beta1Module from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -143,7 +143,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'webrisk.configured.example.com');
@@ -188,7 +188,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
@@ -196,13 +196,13 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       assert(client.webRiskServiceV1Beta1Stub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.webRiskServiceV1Beta1Stub);
@@ -211,15 +211,15 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.webRiskServiceV1Beta1Stub, undefined);
@@ -228,7 +228,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -237,7 +237,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -250,7 +250,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -274,7 +274,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes computeThreatListDiff without error', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -293,7 +293,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes computeThreatListDiff without error using callback', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -327,7 +327,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes computeThreatListDiff with error', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -348,7 +348,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes computeThreatListDiff with closed client', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -356,7 +356,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -370,7 +370,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes searchUris without error', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes searchUris without error using callback', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -422,7 +422,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes searchUris with error', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes searchUris with closed client', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchUris(request), expectedError);
@@ -459,7 +459,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes searchHashes without error', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes searchHashes without error using callback', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -511,7 +511,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes searchHashes with error', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
     it('invokes searchHashes with closed client', async () => {
       const client =
         new webriskservicev1beta1Module.v1beta1.WebRiskServiceV1Beta1Client({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -537,7 +537,7 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.searchHashes(request), expectedError);

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as workflowsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.workflowsStub, undefined);
@@ -282,12 +282,12 @@ describe('v1beta.WorkflowsClient', () => {
       assert(client.workflowsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.workflowsStub);
@@ -296,14 +296,14 @@ describe('v1beta.WorkflowsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.workflowsStub, undefined);
@@ -312,7 +312,7 @@ describe('v1beta.WorkflowsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1beta.WorkflowsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1beta.WorkflowsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('getWorkflow', () => {
     it('invokes getWorkflow without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes getWorkflow without error using callback', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes getWorkflow with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes getWorkflow with closed client', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v1beta.WorkflowsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWorkflow(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('createWorkflow', () => {
     it('invokes createWorkflow without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes createWorkflow without error using callback', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes createWorkflow with call error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes createWorkflow with LRO error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -638,7 +638,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes checkCreateWorkflowProgress without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,8 +646,8 @@ describe('v1beta.WorkflowsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateWorkflowProgress(
@@ -660,7 +660,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes checkCreateWorkflowProgress with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -681,7 +681,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('deleteWorkflow', () => {
     it('invokes deleteWorkflow without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -714,7 +714,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes deleteWorkflow without error using callback', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -768,7 +768,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes deleteWorkflow with call error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes deleteWorkflow with LRO error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes checkDeleteWorkflowProgress without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,8 +840,8 @@ describe('v1beta.WorkflowsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteWorkflowProgress(
@@ -854,7 +854,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes checkDeleteWorkflowProgress with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('updateWorkflow', () => {
     it('invokes updateWorkflow without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -909,7 +909,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes updateWorkflow without error using callback', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes updateWorkflow with call error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -996,7 +996,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes updateWorkflow with LRO error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1030,7 +1030,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes checkUpdateWorkflowProgress without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1038,8 +1038,8 @@ describe('v1beta.WorkflowsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateWorkflowProgress(
@@ -1052,7 +1052,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes checkUpdateWorkflowProgress with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1073,7 +1073,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('listWorkflows', () => {
     it('invokes listWorkflows without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1112,7 +1112,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes listWorkflows without error using callback', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1167,7 +1167,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes listWorkflows with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1198,7 +1198,7 @@ describe('v1beta.WorkflowsClient', () => {
 
     it('invokes listWorkflowsStream without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,15 +1250,15 @@ describe('v1beta.WorkflowsClient', () => {
       assert(
         (client.descriptors.page.listWorkflows.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listWorkflowsStream with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1299,15 +1299,15 @@ describe('v1beta.WorkflowsClient', () => {
       assert(
         (client.descriptors.page.listWorkflows.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkflows without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1348,15 +1348,15 @@ describe('v1beta.WorkflowsClient', () => {
       assert(
         (client.descriptors.page.listWorkflows.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkflows with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1388,16 +1388,16 @@ describe('v1beta.WorkflowsClient', () => {
       assert(
         (client.descriptors.page.listWorkflows.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1427,7 +1427,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1471,7 +1471,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1506,7 +1506,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1554,7 +1554,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1595,7 +1595,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1616,7 +1616,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1644,7 +1644,7 @@ describe('v1beta.WorkflowsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1654,7 +1654,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1678,7 +1678,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1700,7 +1700,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1728,7 +1728,7 @@ describe('v1beta.WorkflowsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1738,7 +1738,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1762,7 +1762,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1784,7 +1784,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1812,7 +1812,7 @@ describe('v1beta.WorkflowsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1822,7 +1822,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1846,7 +1846,7 @@ describe('v1beta.WorkflowsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1881,7 +1881,7 @@ describe('v1beta.WorkflowsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1916,7 +1916,7 @@ describe('v1beta.WorkflowsClient', () => {
         location: 'locationValue',
       };
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1966,7 +1966,7 @@ describe('v1beta.WorkflowsClient', () => {
         workflow: 'workflowValue',
       };
       const client = new workflowsModule.v1beta.WorkflowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

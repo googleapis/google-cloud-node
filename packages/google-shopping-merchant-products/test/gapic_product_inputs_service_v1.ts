@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as productinputsserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -186,7 +186,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.productInputsServiceStub, undefined);
@@ -194,13 +194,13 @@ describe('v1.ProductInputsServiceClient', () => {
       assert(client.productInputsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.productInputsServiceStub);
@@ -209,15 +209,15 @@ describe('v1.ProductInputsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.productInputsServiceStub, undefined);
@@ -226,7 +226,7 @@ describe('v1.ProductInputsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -235,7 +235,7 @@ describe('v1.ProductInputsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -248,7 +248,7 @@ describe('v1.ProductInputsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -272,7 +272,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes insertProductInput without error', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -305,7 +305,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes insertProductInput without error using callback', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -353,7 +353,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes insertProductInput with error', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -385,7 +385,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes insertProductInput with closed client', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1.ProductInputsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insertProductInput(request), expectedError);
@@ -409,7 +409,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes updateProductInput without error', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes updateProductInput without error using callback', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -492,7 +492,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes updateProductInput with error', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -525,7 +525,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes updateProductInput with closed client', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -539,7 +539,7 @@ describe('v1.ProductInputsServiceClient', () => {
       );
       request.productInput.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateProductInput(request), expectedError);
@@ -550,7 +550,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes deleteProductInput without error', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -583,7 +583,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes deleteProductInput without error using callback', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -631,7 +631,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes deleteProductInput with error', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -663,7 +663,7 @@ describe('v1.ProductInputsServiceClient', () => {
     it('invokes deleteProductInput with closed client', async () => {
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -676,7 +676,7 @@ describe('v1.ProductInputsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteProductInput(request), expectedError);
@@ -691,7 +691,7 @@ describe('v1.ProductInputsServiceClient', () => {
       };
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -731,7 +731,7 @@ describe('v1.ProductInputsServiceClient', () => {
       };
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v1.ProductInputsServiceClient', () => {
       };
       const client =
         new productinputsserviceModule.v1.ProductInputsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

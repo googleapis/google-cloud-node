@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cmekconfigserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -196,7 +196,7 @@ describe('v1.CmekConfigServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -240,7 +240,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cmekConfigServiceStub, undefined);
@@ -248,12 +248,12 @@ describe('v1.CmekConfigServiceClient', () => {
       assert(client.cmekConfigServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cmekConfigServiceStub);
@@ -262,14 +262,14 @@ describe('v1.CmekConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.cmekConfigServiceStub, undefined);
@@ -278,7 +278,7 @@ describe('v1.CmekConfigServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v1.CmekConfigServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v1.CmekConfigServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('getCmekConfig', () => {
     it('invokes getCmekConfig without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes getCmekConfig without error using callback', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes getCmekConfig with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes getCmekConfig with closed client', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1.CmekConfigServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCmekConfig(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('listCmekConfigs', () => {
     it('invokes listCmekConfigs without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes listCmekConfigs without error using callback', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes listCmekConfigs with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes listCmekConfigs with closed client', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v1.CmekConfigServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listCmekConfigs(request), expectedError);
@@ -585,7 +585,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('updateCmekConfig', () => {
     it('invokes updateCmekConfig without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes updateCmekConfig without error using callback', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -674,7 +674,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes updateCmekConfig with call error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes updateCmekConfig with LRO error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes checkUpdateCmekConfigProgress without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,8 +748,8 @@ describe('v1.CmekConfigServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateCmekConfigProgress(
@@ -762,7 +762,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes checkUpdateCmekConfigProgress with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('deleteCmekConfig', () => {
     it('invokes deleteCmekConfig without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -816,7 +816,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes deleteCmekConfig without error using callback', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -870,7 +870,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes deleteCmekConfig with call error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -901,7 +901,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes deleteCmekConfig with LRO error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes checkDeleteCmekConfigProgress without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -942,8 +942,8 @@ describe('v1.CmekConfigServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCmekConfigProgress(
@@ -956,7 +956,7 @@ describe('v1.CmekConfigServiceClient', () => {
 
     it('invokes checkDeleteCmekConfigProgress with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -976,7 +976,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1085,7 +1085,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1133,7 +1133,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1174,7 +1174,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1195,7 +1195,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1223,7 +1223,7 @@ describe('v1.CmekConfigServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1233,7 +1233,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1257,7 +1257,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1279,7 +1279,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1307,7 +1307,7 @@ describe('v1.CmekConfigServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1317,7 +1317,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1341,7 +1341,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1363,7 +1363,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1391,7 +1391,7 @@ describe('v1.CmekConfigServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1401,7 +1401,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1425,7 +1425,7 @@ describe('v1.CmekConfigServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1460,7 +1460,7 @@ describe('v1.CmekConfigServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v1.CmekConfigServiceClient', () => {
         assist_answer: 'assistAnswerValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1598,7 +1598,7 @@ describe('v1.CmekConfigServiceClient', () => {
         assistant: 'assistantValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1686,7 +1686,7 @@ describe('v1.CmekConfigServiceClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1792,7 +1792,7 @@ describe('v1.CmekConfigServiceClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1868,7 +1868,7 @@ describe('v1.CmekConfigServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1943,7 +1943,7 @@ describe('v1.CmekConfigServiceClient', () => {
         identity_mapping_store: 'identityMappingStoreValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2023,7 +2023,7 @@ describe('v1.CmekConfigServiceClient', () => {
         location: 'locationValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2071,7 +2071,7 @@ describe('v1.CmekConfigServiceClient', () => {
         project: 'projectValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2110,7 +2110,7 @@ describe('v1.CmekConfigServiceClient', () => {
         location: 'locationValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2174,7 +2174,7 @@ describe('v1.CmekConfigServiceClient', () => {
         cmek_config: 'cmekConfigValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2254,7 +2254,7 @@ describe('v1.CmekConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2358,7 +2358,7 @@ describe('v1.CmekConfigServiceClient', () => {
         document: 'documentValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2505,7 +2505,7 @@ describe('v1.CmekConfigServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2668,7 +2668,7 @@ describe('v1.CmekConfigServiceClient', () => {
         control: 'controlValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2794,7 +2794,7 @@ describe('v1.CmekConfigServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2921,7 +2921,7 @@ describe('v1.CmekConfigServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3047,7 +3047,7 @@ describe('v1.CmekConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3156,7 +3156,7 @@ describe('v1.CmekConfigServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3282,7 +3282,7 @@ describe('v1.CmekConfigServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3410,7 +3410,7 @@ describe('v1.CmekConfigServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3555,7 +3555,7 @@ describe('v1.CmekConfigServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3680,7 +3680,7 @@ describe('v1.CmekConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3789,7 +3789,7 @@ describe('v1.CmekConfigServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3916,7 +3916,7 @@ describe('v1.CmekConfigServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4042,7 +4042,7 @@ describe('v1.CmekConfigServiceClient', () => {
         control: 'controlValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4168,7 +4168,7 @@ describe('v1.CmekConfigServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4294,7 +4294,7 @@ describe('v1.CmekConfigServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4421,7 +4421,7 @@ describe('v1.CmekConfigServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4564,7 +4564,7 @@ describe('v1.CmekConfigServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4687,7 +4687,7 @@ describe('v1.CmekConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4768,7 +4768,7 @@ describe('v1.CmekConfigServiceClient', () => {
         document: 'documentValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4895,7 +4895,7 @@ describe('v1.CmekConfigServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5037,7 +5037,7 @@ describe('v1.CmekConfigServiceClient', () => {
         control: 'controlValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5132,7 +5132,7 @@ describe('v1.CmekConfigServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5239,7 +5239,7 @@ describe('v1.CmekConfigServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5345,7 +5345,7 @@ describe('v1.CmekConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5434,7 +5434,7 @@ describe('v1.CmekConfigServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5527,7 +5527,7 @@ describe('v1.CmekConfigServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5634,7 +5634,7 @@ describe('v1.CmekConfigServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5758,7 +5758,7 @@ describe('v1.CmekConfigServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5855,7 +5855,7 @@ describe('v1.CmekConfigServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5944,7 +5944,7 @@ describe('v1.CmekConfigServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6052,7 +6052,7 @@ describe('v1.CmekConfigServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new cmekconfigserviceModule.v1.CmekConfigServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

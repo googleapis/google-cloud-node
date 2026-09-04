@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as lintingserviceModule from '../src';
 
-import { GoogleAuth, protobuf, LocationProtos } from 'google-gax';
+import {GoogleAuth, protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -94,7 +94,7 @@ describe('v1.LintingServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -220,12 +220,12 @@ describe('v1.LintingServiceClient', () => {
       assert(client.lintingServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.lintingServiceStub);
@@ -234,12 +234,12 @@ describe('v1.LintingServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -250,7 +250,7 @@ describe('v1.LintingServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -415,7 +415,7 @@ describe('v1.LintingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getStyleGuide(request), expectedError);
@@ -551,7 +551,7 @@ describe('v1.LintingServiceClient', () => {
       );
       request.styleGuide.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateStyleGuide(request), expectedError);
@@ -687,7 +687,7 @@ describe('v1.LintingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -819,7 +819,7 @@ describe('v1.LintingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.lintSpec(request), expectedError);
@@ -985,7 +985,7 @@ describe('v1.LintingServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1033,7 +1033,7 @@ describe('v1.LintingServiceClient', () => {
         api: 'apiValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1097,7 +1097,7 @@ describe('v1.LintingServiceClient', () => {
         api_hub_instance: 'apiHubInstanceValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1164,7 +1164,7 @@ describe('v1.LintingServiceClient', () => {
         operation: 'operationValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1.LintingServiceClient', () => {
         attribute: 'attributeValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v1.LintingServiceClient', () => {
         curation: 'curationValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1380,7 +1380,7 @@ describe('v1.LintingServiceClient', () => {
         definition: 'definitionValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1466,7 +1466,7 @@ describe('v1.LintingServiceClient', () => {
         dependency: 'dependencyValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1530,7 +1530,7 @@ describe('v1.LintingServiceClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1594,7 +1594,7 @@ describe('v1.LintingServiceClient', () => {
         discovered_api_observation: 'discoveredApiObservationValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1676,7 +1676,7 @@ describe('v1.LintingServiceClient', () => {
         discovered_api_operation: 'discoveredApiOperationValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1774,7 +1774,7 @@ describe('v1.LintingServiceClient', () => {
         external_api: 'externalApiValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1838,7 +1838,7 @@ describe('v1.LintingServiceClient', () => {
         host_project_registration: 'hostProjectRegistrationValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +1919,7 @@ describe('v1.LintingServiceClient', () => {
         plugin: 'pluginValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1984,7 +1984,7 @@ describe('v1.LintingServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2059,7 +2059,7 @@ describe('v1.LintingServiceClient', () => {
         runtime_project_attachment: 'runtimeProjectAttachmentValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2142,7 +2142,7 @@ describe('v1.LintingServiceClient', () => {
         spec: 'specValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2228,7 +2228,7 @@ describe('v1.LintingServiceClient', () => {
         plugin: 'pluginValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2293,7 +2293,7 @@ describe('v1.LintingServiceClient', () => {
         version: 'versionValue',
       };
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as homepageserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -136,7 +136,7 @@ describe('v1beta.HomepageServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new homepageserviceModule.v1beta.HomepageServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
@@ -177,7 +177,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.homepageServiceStub, undefined);
@@ -185,12 +185,12 @@ describe('v1beta.HomepageServiceClient', () => {
       assert(client.homepageServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.homepageServiceStub);
@@ -199,14 +199,14 @@ describe('v1beta.HomepageServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.homepageServiceStub, undefined);
@@ -215,7 +215,7 @@ describe('v1beta.HomepageServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -223,7 +223,7 @@ describe('v1beta.HomepageServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -235,7 +235,7 @@ describe('v1beta.HomepageServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -258,7 +258,7 @@ describe('v1beta.HomepageServiceClient', () => {
   describe('getHomepage', () => {
     it('invokes getHomepage without error', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -289,7 +289,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes getHomepage without error using callback', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -336,7 +336,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes getHomepage with error', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -367,7 +367,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes getHomepage with closed client', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -380,7 +380,7 @@ describe('v1beta.HomepageServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getHomepage(request), expectedError);
@@ -390,7 +390,7 @@ describe('v1beta.HomepageServiceClient', () => {
   describe('updateHomepage', () => {
     it('invokes updateHomepage without error', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -422,7 +422,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes updateHomepage without error using callback', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -470,7 +470,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes updateHomepage with error', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes updateHomepage with closed client', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v1beta.HomepageServiceClient', () => {
       );
       request.homepage.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateHomepage(request), expectedError);
@@ -526,7 +526,7 @@ describe('v1beta.HomepageServiceClient', () => {
   describe('claimHomepage', () => {
     it('invokes claimHomepage without error', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes claimHomepage without error using callback', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -604,7 +604,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes claimHomepage with error', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -635,7 +635,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes claimHomepage with closed client', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,7 +648,7 @@ describe('v1beta.HomepageServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.claimHomepage(request), expectedError);
@@ -658,7 +658,7 @@ describe('v1beta.HomepageServiceClient', () => {
   describe('unclaimHomepage', () => {
     it('invokes unclaimHomepage without error', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -689,7 +689,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes unclaimHomepage without error using callback', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes unclaimHomepage with error', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -767,7 +767,7 @@ describe('v1beta.HomepageServiceClient', () => {
 
     it('invokes unclaimHomepage with closed client', async () => {
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v1beta.HomepageServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.unclaimHomepage(request), expectedError);
@@ -794,7 +794,7 @@ describe('v1beta.HomepageServiceClient', () => {
         account: 'accountValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1beta.HomepageServiceClient', () => {
         issue: 'issueValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1beta.HomepageServiceClient', () => {
         tax: 'taxValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v1beta.HomepageServiceClient', () => {
         account: 'accountValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v1beta.HomepageServiceClient', () => {
         account: 'accountValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1beta.HomepageServiceClient', () => {
         account: 'accountValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1057,7 +1057,7 @@ describe('v1beta.HomepageServiceClient', () => {
         account: 'accountValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,7 +1096,7 @@ describe('v1beta.HomepageServiceClient', () => {
         program: 'programValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1151,7 +1151,7 @@ describe('v1beta.HomepageServiceClient', () => {
         email: 'emailValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1206,7 +1206,7 @@ describe('v1beta.HomepageServiceClient', () => {
         gbp_account: 'gbpAccountValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v1beta.HomepageServiceClient', () => {
         account: 'accountValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1294,7 +1294,7 @@ describe('v1beta.HomepageServiceClient', () => {
         lfp_provider: 'lfpProviderValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v1beta.HomepageServiceClient', () => {
         omnichannel_setting: 'omnichannelSettingValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v1beta.HomepageServiceClient', () => {
         return_policy: 'returnPolicyValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1482,7 +1482,7 @@ describe('v1beta.HomepageServiceClient', () => {
         program: 'programValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1531,7 +1531,7 @@ describe('v1beta.HomepageServiceClient', () => {
         region: 'regionValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1579,7 +1579,7 @@ describe('v1beta.HomepageServiceClient', () => {
         account: 'accountValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1620,7 +1620,7 @@ describe('v1beta.HomepageServiceClient', () => {
         version: 'versionValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1659,7 +1659,7 @@ describe('v1beta.HomepageServiceClient', () => {
         identifier: 'identifierValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1720,7 +1720,7 @@ describe('v1beta.HomepageServiceClient', () => {
         email: 'emailValue',
       };
       const client = new homepageserviceModule.v1beta.HomepageServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

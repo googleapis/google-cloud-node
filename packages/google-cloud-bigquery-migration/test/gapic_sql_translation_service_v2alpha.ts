@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sqltranslationserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -143,7 +143,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -191,7 +191,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sqlTranslationServiceStub, undefined);
@@ -199,13 +199,13 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
       assert(client.sqlTranslationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sqlTranslationServiceStub);
@@ -214,15 +214,15 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sqlTranslationServiceStub, undefined);
@@ -231,7 +231,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -240,7 +240,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -253,7 +253,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -277,7 +277,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
     it('invokes translateQuery without error', async () => {
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -309,7 +309,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
     it('invokes translateQuery without error using callback', async () => {
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -357,7 +357,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
     it('invokes translateQuery with error', async () => {
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
     it('invokes translateQuery with closed client', async () => {
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.translateQuery(request), expectedError);
@@ -418,7 +418,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
       };
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -470,7 +470,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
       };
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -549,7 +549,7 @@ describe('v2alpha.SqlTranslationServiceClient', () => {
       };
       const client =
         new sqltranslationserviceModule.v2alpha.SqlTranslationServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

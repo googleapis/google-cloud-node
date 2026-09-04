@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as memorystoreModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.memorystoreStub, undefined);
@@ -282,12 +282,12 @@ describe('v1.MemorystoreClient', () => {
       assert(client.memorystoreStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.memorystoreStub);
@@ -296,14 +296,14 @@ describe('v1.MemorystoreClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.memorystoreStub, undefined);
@@ -312,7 +312,7 @@ describe('v1.MemorystoreClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1.MemorystoreClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1.MemorystoreClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1.MemorystoreClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v1.MemorystoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1.MemorystoreClient', () => {
   describe('getCertificateAuthority', () => {
     it('invokes getCertificateAuthority without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getCertificateAuthority without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getCertificateAuthority with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getCertificateAuthority with closed client', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.MemorystoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -626,7 +626,7 @@ describe('v1.MemorystoreClient', () => {
   describe('getSharedRegionalCertificateAuthority', () => {
     it('invokes getSharedRegionalCertificateAuthority without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -659,7 +659,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getSharedRegionalCertificateAuthority without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getSharedRegionalCertificateAuthority with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getSharedRegionalCertificateAuthority with closed client', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.MemorystoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -764,7 +764,7 @@ describe('v1.MemorystoreClient', () => {
   describe('getBackupCollection', () => {
     it('invokes getBackupCollection without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getBackupCollection without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getBackupCollection with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getBackupCollection with closed client', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v1.MemorystoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackupCollection(request), expectedError);
@@ -897,7 +897,7 @@ describe('v1.MemorystoreClient', () => {
   describe('getBackup', () => {
     it('invokes getBackup without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getBackup without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getBackup with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getBackup with closed client', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1.MemorystoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBackup(request), expectedError);
@@ -1026,7 +1026,7 @@ describe('v1.MemorystoreClient', () => {
   describe('getTokenAuthUser', () => {
     it('invokes getTokenAuthUser without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1057,7 +1057,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getTokenAuthUser without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getTokenAuthUser with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getTokenAuthUser with closed client', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v1.MemorystoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTokenAuthUser(request), expectedError);
@@ -1158,7 +1158,7 @@ describe('v1.MemorystoreClient', () => {
   describe('getAuthToken', () => {
     it('invokes getAuthToken without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1189,7 +1189,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getAuthToken without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1236,7 +1236,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getAuthToken with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1267,7 +1267,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes getAuthToken with closed client', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1280,7 +1280,7 @@ describe('v1.MemorystoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAuthToken(request), expectedError);
@@ -1290,7 +1290,7 @@ describe('v1.MemorystoreClient', () => {
   describe('createInstance', () => {
     it('invokes createInstance without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1323,7 +1323,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes createInstance without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes createInstance with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1408,7 +1408,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes createInstance with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1441,7 +1441,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkCreateInstanceProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1449,8 +1449,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceProgress(
@@ -1463,7 +1463,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkCreateInstanceProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1484,7 +1484,7 @@ describe('v1.MemorystoreClient', () => {
   describe('updateInstance', () => {
     it('invokes updateInstance without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1518,7 +1518,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes updateInstance without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1573,7 +1573,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes updateInstance with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1605,7 +1605,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes updateInstance with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1639,7 +1639,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkUpdateInstanceProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1647,8 +1647,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInstanceProgress(
@@ -1661,7 +1661,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkUpdateInstanceProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1682,7 +1682,7 @@ describe('v1.MemorystoreClient', () => {
   describe('deleteInstance', () => {
     it('invokes deleteInstance without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1715,7 +1715,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteInstance without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1769,7 +1769,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteInstance with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteInstance with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkDeleteInstanceProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1841,8 +1841,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteInstanceProgress(
@@ -1855,7 +1855,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkDeleteInstanceProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1876,7 +1876,7 @@ describe('v1.MemorystoreClient', () => {
   describe('rescheduleMaintenance', () => {
     it('invokes rescheduleMaintenance without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1909,7 +1909,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes rescheduleMaintenance without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1963,7 +1963,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes rescheduleMaintenance with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1997,7 +1997,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes rescheduleMaintenance with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2030,7 +2030,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkRescheduleMaintenanceProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2038,8 +2038,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRescheduleMaintenanceProgress(
@@ -2052,7 +2052,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkRescheduleMaintenanceProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2073,7 +2073,7 @@ describe('v1.MemorystoreClient', () => {
   describe('deleteBackup', () => {
     it('invokes deleteBackup without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2105,7 +2105,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteBackup without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2159,7 +2159,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteBackup with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2190,7 +2190,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteBackup with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2223,7 +2223,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkDeleteBackupProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2231,8 +2231,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBackupProgress(
@@ -2245,7 +2245,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkDeleteBackupProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2263,7 +2263,7 @@ describe('v1.MemorystoreClient', () => {
   describe('exportBackup', () => {
     it('invokes exportBackup without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2295,7 +2295,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes exportBackup without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2349,7 +2349,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes exportBackup with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2380,7 +2380,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes exportBackup with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2413,7 +2413,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkExportBackupProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2421,8 +2421,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportBackupProgress(
@@ -2435,7 +2435,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkExportBackupProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2453,7 +2453,7 @@ describe('v1.MemorystoreClient', () => {
   describe('backupInstance', () => {
     it('invokes backupInstance without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2486,7 +2486,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes backupInstance without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2540,7 +2540,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes backupInstance with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2571,7 +2571,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes backupInstance with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2604,7 +2604,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkBackupInstanceProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2612,8 +2612,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBackupInstanceProgress(
@@ -2626,7 +2626,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkBackupInstanceProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2647,7 +2647,7 @@ describe('v1.MemorystoreClient', () => {
   describe('startMigration', () => {
     it('invokes startMigration without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2680,7 +2680,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes startMigration without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2734,7 +2734,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes startMigration with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2765,7 +2765,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes startMigration with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2798,7 +2798,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkStartMigrationProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2806,8 +2806,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartMigrationProgress(
@@ -2820,7 +2820,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkStartMigrationProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2841,7 +2841,7 @@ describe('v1.MemorystoreClient', () => {
   describe('finishMigration', () => {
     it('invokes finishMigration without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2874,7 +2874,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes finishMigration without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2928,7 +2928,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes finishMigration with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2959,7 +2959,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes finishMigration with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2992,7 +2992,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkFinishMigrationProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3000,8 +3000,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkFinishMigrationProgress(
@@ -3014,7 +3014,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkFinishMigrationProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3035,7 +3035,7 @@ describe('v1.MemorystoreClient', () => {
   describe('addTokenAuthUser', () => {
     it('invokes addTokenAuthUser without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3068,7 +3068,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes addTokenAuthUser without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3122,7 +3122,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes addTokenAuthUser with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3153,7 +3153,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes addTokenAuthUser with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3186,7 +3186,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkAddTokenAuthUserProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3194,8 +3194,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAddTokenAuthUserProgress(
@@ -3208,7 +3208,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkAddTokenAuthUserProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3229,7 +3229,7 @@ describe('v1.MemorystoreClient', () => {
   describe('deleteTokenAuthUser', () => {
     it('invokes deleteTokenAuthUser without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3262,7 +3262,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteTokenAuthUser without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3316,7 +3316,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteTokenAuthUser with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3347,7 +3347,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteTokenAuthUser with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3380,7 +3380,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkDeleteTokenAuthUserProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3388,8 +3388,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTokenAuthUserProgress(
@@ -3402,7 +3402,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkDeleteTokenAuthUserProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3423,7 +3423,7 @@ describe('v1.MemorystoreClient', () => {
   describe('addAuthToken', () => {
     it('invokes addAuthToken without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3455,7 +3455,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes addAuthToken without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3509,7 +3509,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes addAuthToken with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3540,7 +3540,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes addAuthToken with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3573,7 +3573,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkAddAuthTokenProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3581,8 +3581,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAddAuthTokenProgress(
@@ -3595,7 +3595,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkAddAuthTokenProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3613,7 +3613,7 @@ describe('v1.MemorystoreClient', () => {
   describe('deleteAuthToken', () => {
     it('invokes deleteAuthToken without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3646,7 +3646,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteAuthToken without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3700,7 +3700,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteAuthToken with call error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3731,7 +3731,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes deleteAuthToken with LRO error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3764,7 +3764,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkDeleteAuthTokenProgress without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3772,8 +3772,8 @@ describe('v1.MemorystoreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAuthTokenProgress(
@@ -3786,7 +3786,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes checkDeleteAuthTokenProgress with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3807,7 +3807,7 @@ describe('v1.MemorystoreClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3846,7 +3846,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3901,7 +3901,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3932,7 +3932,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3984,15 +3984,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4033,15 +4033,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4082,15 +4082,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4122,9 +4122,9 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4132,7 +4132,7 @@ describe('v1.MemorystoreClient', () => {
   describe('listBackupCollections', () => {
     it('invokes listBackupCollections without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4172,7 +4172,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listBackupCollections without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4204,8 +4204,7 @@ describe('v1.MemorystoreClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.memorystore.v1.IBackupCollection[]
-              | null,
+              protos.google.cloud.memorystore.v1.IBackupCollection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4229,7 +4228,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listBackupCollections with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4263,7 +4262,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listBackupCollectionsStream without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4330,7 +4329,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listBackupCollectionsStream with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4386,7 +4385,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('uses async iteration with listBackupCollections without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4440,7 +4439,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('uses async iteration with listBackupCollections with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4487,7 +4486,7 @@ describe('v1.MemorystoreClient', () => {
   describe('listBackups', () => {
     it('invokes listBackups without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4520,7 +4519,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listBackups without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4569,7 +4568,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listBackups with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4600,7 +4599,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listBackupsStream without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4646,15 +4645,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBackupsStream with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4697,15 +4696,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4740,15 +4739,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBackups with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4782,9 +4781,9 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listBackups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4792,7 +4791,7 @@ describe('v1.MemorystoreClient', () => {
   describe('listTokenAuthUsers', () => {
     it('invokes listTokenAuthUsers without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4832,7 +4831,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listTokenAuthUsers without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4887,7 +4886,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listTokenAuthUsers with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4918,7 +4917,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listTokenAuthUsersStream without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4971,15 +4970,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTokenAuthUsersStream with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5021,15 +5020,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listTokenAuthUsers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTokenAuthUsers without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5070,15 +5069,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTokenAuthUsers with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5111,9 +5110,9 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listTokenAuthUsers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5121,7 +5120,7 @@ describe('v1.MemorystoreClient', () => {
   describe('listAuthTokens', () => {
     it('invokes listAuthTokens without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5160,7 +5159,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listAuthTokens without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5215,7 +5214,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listAuthTokens with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5246,7 +5245,7 @@ describe('v1.MemorystoreClient', () => {
 
     it('invokes listAuthTokensStream without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5298,15 +5297,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listAuthTokens.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAuthTokensStream with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5347,15 +5346,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listAuthTokens.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuthTokens without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5396,15 +5395,15 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listAuthTokens.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAuthTokens with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5436,16 +5435,16 @@ describe('v1.MemorystoreClient', () => {
       assert(
         (client.descriptors.page.listAuthTokens.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5475,7 +5474,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5519,7 +5518,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5554,7 +5553,7 @@ describe('v1.MemorystoreClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5602,7 +5601,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5643,7 +5642,7 @@ describe('v1.MemorystoreClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5664,7 +5663,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5692,7 +5691,7 @@ describe('v1.MemorystoreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5702,7 +5701,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5726,7 +5725,7 @@ describe('v1.MemorystoreClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5748,7 +5747,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5776,7 +5775,7 @@ describe('v1.MemorystoreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5786,7 +5785,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5810,7 +5809,7 @@ describe('v1.MemorystoreClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5832,7 +5831,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5860,7 +5859,7 @@ describe('v1.MemorystoreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5870,7 +5869,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5894,7 +5893,7 @@ describe('v1.MemorystoreClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5929,7 +5928,7 @@ describe('v1.MemorystoreClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5967,7 +5966,7 @@ describe('v1.MemorystoreClient', () => {
         auth_token: 'authTokenValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6054,7 +6053,7 @@ describe('v1.MemorystoreClient', () => {
         backup: 'backupValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6129,7 +6128,7 @@ describe('v1.MemorystoreClient', () => {
         backup_collection: 'backupCollectionValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6197,7 +6196,7 @@ describe('v1.MemorystoreClient', () => {
         ca_pool: 'caPoolValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6261,7 +6260,7 @@ describe('v1.MemorystoreClient', () => {
         instance: 'instanceValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6341,7 +6340,7 @@ describe('v1.MemorystoreClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6418,7 +6417,7 @@ describe('v1.MemorystoreClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6508,7 +6507,7 @@ describe('v1.MemorystoreClient', () => {
         forwarding_rule: 'forwardingRuleValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6573,7 +6572,7 @@ describe('v1.MemorystoreClient', () => {
         instance: 'instanceValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6636,7 +6635,7 @@ describe('v1.MemorystoreClient', () => {
         location: 'locationValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6685,7 +6684,7 @@ describe('v1.MemorystoreClient', () => {
         network: 'networkValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6735,7 +6734,7 @@ describe('v1.MemorystoreClient', () => {
         network_attachment: 'networkAttachmentValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6810,7 +6809,7 @@ describe('v1.MemorystoreClient', () => {
         project: 'projectValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6850,7 +6849,7 @@ describe('v1.MemorystoreClient', () => {
         service_attachment: 'serviceAttachmentValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6926,7 +6925,7 @@ describe('v1.MemorystoreClient', () => {
         location: 'locationValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6993,7 +6992,7 @@ describe('v1.MemorystoreClient', () => {
         token_auth_user: 'tokenAuthUserValue',
       };
       const client = new memorystoreModule.v1.MemorystoreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

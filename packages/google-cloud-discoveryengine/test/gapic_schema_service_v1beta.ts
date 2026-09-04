@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as schemaserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.schemaServiceStub, undefined);
@@ -287,12 +287,12 @@ describe('v1beta.SchemaServiceClient', () => {
       assert(client.schemaServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.schemaServiceStub);
@@ -301,14 +301,14 @@ describe('v1beta.SchemaServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.schemaServiceStub, undefined);
@@ -317,7 +317,7 @@ describe('v1beta.SchemaServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1beta.SchemaServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1beta.SchemaServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('getSchema', () => {
     it('invokes getSchema without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes getSchema without error using callback', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes getSchema with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes getSchema with closed client', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1beta.SchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSchema(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('createSchema', () => {
     it('invokes createSchema without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes createSchema without error using callback', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes createSchema with call error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes createSchema with LRO error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -639,7 +639,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes checkCreateSchemaProgress without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -647,8 +647,8 @@ describe('v1beta.SchemaServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSchemaProgress(
@@ -661,7 +661,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes checkCreateSchemaProgress with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -679,7 +679,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('updateSchema', () => {
     it('invokes updateSchema without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +712,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes updateSchema without error using callback', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -767,7 +767,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes updateSchema with call error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes updateSchema with LRO error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes checkUpdateSchemaProgress without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -841,8 +841,8 @@ describe('v1beta.SchemaServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSchemaProgress(
@@ -855,7 +855,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes checkUpdateSchemaProgress with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('deleteSchema', () => {
     it('invokes deleteSchema without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -905,7 +905,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes deleteSchema without error using callback', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes deleteSchema with call error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -990,7 +990,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes deleteSchema with LRO error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1023,7 +1023,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes checkDeleteSchemaProgress without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1031,8 +1031,8 @@ describe('v1beta.SchemaServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSchemaProgress(
@@ -1045,7 +1045,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes checkDeleteSchemaProgress with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('listSchemas', () => {
     it('invokes listSchemas without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes listSchemas without error using callback', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1134,8 +1134,7 @@ describe('v1beta.SchemaServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1beta.ISchema[]
-              | null,
+              protos.google.cloud.discoveryengine.v1beta.ISchema[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1159,7 +1158,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes listSchemas with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1190,7 +1189,7 @@ describe('v1beta.SchemaServiceClient', () => {
 
     it('invokes listSchemasStream without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1243,15 +1242,15 @@ describe('v1beta.SchemaServiceClient', () => {
       assert(
         (client.descriptors.page.listSchemas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSchemasStream with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1295,15 +1294,15 @@ describe('v1beta.SchemaServiceClient', () => {
       assert(
         (client.descriptors.page.listSchemas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSchemas without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1345,15 +1344,15 @@ describe('v1beta.SchemaServiceClient', () => {
       assert(
         (client.descriptors.page.listSchemas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSchemas with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1388,16 +1387,16 @@ describe('v1beta.SchemaServiceClient', () => {
       assert(
         (client.descriptors.page.listSchemas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1427,7 +1426,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1471,7 +1470,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1506,7 +1505,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1554,7 +1553,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1595,7 +1594,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1616,7 +1615,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1644,7 +1643,7 @@ describe('v1beta.SchemaServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1654,7 +1653,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1678,7 +1677,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1700,7 +1699,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1728,7 +1727,7 @@ describe('v1beta.SchemaServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1738,7 +1737,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1762,7 +1761,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1784,7 +1783,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1812,7 +1811,7 @@ describe('v1beta.SchemaServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1822,7 +1821,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1846,7 +1845,7 @@ describe('v1beta.SchemaServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1881,7 +1880,7 @@ describe('v1beta.SchemaServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1916,7 +1915,7 @@ describe('v1beta.SchemaServiceClient', () => {
         location: 'locationValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1969,7 +1968,7 @@ describe('v1beta.SchemaServiceClient', () => {
         assist_answer: 'assistAnswerValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2068,7 +2067,7 @@ describe('v1beta.SchemaServiceClient', () => {
         assistant: 'assistantValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2155,7 +2154,7 @@ describe('v1beta.SchemaServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2230,7 +2229,7 @@ describe('v1beta.SchemaServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2294,7 +2293,7 @@ describe('v1beta.SchemaServiceClient', () => {
         grounding_config: 'groundingConfigValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2359,7 +2358,7 @@ describe('v1beta.SchemaServiceClient', () => {
         identity_mapping_store: 'identityMappingStoreValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2440,7 +2439,7 @@ describe('v1beta.SchemaServiceClient', () => {
         license_config: 'licenseConfigValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2502,7 +2501,7 @@ describe('v1beta.SchemaServiceClient', () => {
         project: 'projectValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2541,7 +2540,7 @@ describe('v1beta.SchemaServiceClient', () => {
         location: 'locationValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2605,7 +2604,7 @@ describe('v1beta.SchemaServiceClient', () => {
         cmek_config: 'cmekConfigValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2685,7 +2684,7 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2789,7 +2788,7 @@ describe('v1beta.SchemaServiceClient', () => {
         document: 'documentValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2936,7 +2935,7 @@ describe('v1beta.SchemaServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3099,7 +3098,7 @@ describe('v1beta.SchemaServiceClient', () => {
         control: 'controlValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3225,7 +3224,7 @@ describe('v1beta.SchemaServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3352,7 +3351,7 @@ describe('v1beta.SchemaServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3478,7 +3477,7 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3587,7 +3586,7 @@ describe('v1beta.SchemaServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3713,7 +3712,7 @@ describe('v1beta.SchemaServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3841,7 +3840,7 @@ describe('v1beta.SchemaServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3986,7 +3985,7 @@ describe('v1beta.SchemaServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4111,7 +4110,7 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4220,7 +4219,7 @@ describe('v1beta.SchemaServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4347,7 +4346,7 @@ describe('v1beta.SchemaServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4475,7 +4474,7 @@ describe('v1beta.SchemaServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4619,7 +4618,7 @@ describe('v1beta.SchemaServiceClient', () => {
         control: 'controlValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4745,7 +4744,7 @@ describe('v1beta.SchemaServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4871,7 +4870,7 @@ describe('v1beta.SchemaServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4998,7 +4997,7 @@ describe('v1beta.SchemaServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5141,7 +5140,7 @@ describe('v1beta.SchemaServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5264,7 +5263,7 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5345,7 +5344,7 @@ describe('v1beta.SchemaServiceClient', () => {
         document: 'documentValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5472,7 +5471,7 @@ describe('v1beta.SchemaServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5614,7 +5613,7 @@ describe('v1beta.SchemaServiceClient', () => {
         control: 'controlValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5709,7 +5708,7 @@ describe('v1beta.SchemaServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5816,7 +5815,7 @@ describe('v1beta.SchemaServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5922,7 +5921,7 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6011,7 +6010,7 @@ describe('v1beta.SchemaServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6104,7 +6103,7 @@ describe('v1beta.SchemaServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6211,7 +6210,7 @@ describe('v1beta.SchemaServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6335,7 +6334,7 @@ describe('v1beta.SchemaServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6432,7 +6431,7 @@ describe('v1beta.SchemaServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6521,7 +6520,7 @@ describe('v1beta.SchemaServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6629,7 +6628,7 @@ describe('v1beta.SchemaServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6736,7 +6735,7 @@ describe('v1beta.SchemaServiceClient', () => {
         sample_query: 'sampleQueryValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6811,7 +6810,7 @@ describe('v1beta.SchemaServiceClient', () => {
         sample_query_set: 'sampleQuerySetValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6876,7 +6875,7 @@ describe('v1beta.SchemaServiceClient', () => {
         user_store: 'userStoreValue',
       };
       const client = new schemaserviceModule.v1beta.SchemaServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as apihubdiscoveryModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf, LocationProtos } from 'google-gax';
+import {GoogleAuth, protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.ApiHubDiscoveryClient', () => {
       assert(client.apiHubDiscoveryStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.apiHubDiscoveryStub);
@@ -274,12 +274,12 @@ describe('v1.ApiHubDiscoveryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -459,7 +459,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -598,7 +598,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -611,7 +611,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
   describe('listDiscoveredApiObservations', () => {
     it('invokes listDiscoveredApiObservations without error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('invokes listDiscoveredApiObservations without error using callback', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -683,8 +683,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apihub.v1.IDiscoveredApiObservation[]
-              | null,
+              protos.google.cloud.apihub.v1.IDiscoveredApiObservation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -708,7 +707,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('invokes listDiscoveredApiObservations with error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +741,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('invokes listDiscoveredApiObservationsStream without error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -814,7 +813,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('invokes listDiscoveredApiObservationsStream with error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -929,7 +928,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('uses async iteration with listDiscoveredApiObservations with error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -976,7 +975,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
   describe('listDiscoveredApiOperations', () => {
     it('invokes listDiscoveredApiOperations without error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1016,7 +1015,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('invokes listDiscoveredApiOperations without error using callback', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1048,8 +1047,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apihub.v1.IDiscoveredApiOperation[]
-              | null,
+              protos.google.cloud.apihub.v1.IDiscoveredApiOperation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1073,7 +1071,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('invokes listDiscoveredApiOperations with error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,7 +1105,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('invokes listDiscoveredApiOperationsStream without error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1177,7 +1175,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('invokes listDiscoveredApiOperationsStream with error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1290,7 +1288,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
 
     it('uses async iteration with listDiscoveredApiOperations with error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1493,7 +1491,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1541,7 +1539,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         api: 'apiValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1605,7 +1603,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         api_hub_instance: 'apiHubInstanceValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1672,7 +1670,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         operation: 'operationValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1758,7 +1756,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         attribute: 'attributeValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1822,7 +1820,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         curation: 'curationValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1888,7 +1886,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         definition: 'definitionValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,7 +1972,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         dependency: 'dependencyValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2038,7 +2036,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2102,7 +2100,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         discovered_api_observation: 'discoveredApiObservationValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2184,7 +2182,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         discovered_api_operation: 'discoveredApiOperationValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2282,7 +2280,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         external_api: 'externalApiValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2346,7 +2344,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         host_project_registration: 'hostProjectRegistrationValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2426,7 +2424,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         location: 'locationValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2476,7 +2474,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         plugin: 'pluginValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2541,7 +2539,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         instance: 'instanceValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2614,7 +2612,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         project: 'projectValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2654,7 +2652,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         runtime_project_attachment: 'runtimeProjectAttachmentValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2737,7 +2735,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         spec: 'specValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2823,7 +2821,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         plugin: 'pluginValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2888,7 +2886,7 @@ describe('v1.ApiHubDiscoveryClient', () => {
         version: 'versionValue',
       };
       const client = new apihubdiscoveryModule.v1.ApiHubDiscoveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

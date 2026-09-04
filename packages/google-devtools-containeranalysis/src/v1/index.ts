@@ -16,6 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { ContainerAnalysisClient } from './container_analysis_client';
+export {ContainerAnalysisClient} from './container_analysis_client';
 
 

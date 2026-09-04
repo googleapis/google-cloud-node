@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as apphubModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -275,7 +275,7 @@ describe('v1.AppHubClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.appHubStub, undefined);
@@ -283,12 +283,12 @@ describe('v1.AppHubClient', () => {
       assert(client.appHubStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.appHubStub);
@@ -297,14 +297,14 @@ describe('v1.AppHubClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.appHubStub, undefined);
@@ -313,7 +313,7 @@ describe('v1.AppHubClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -321,7 +321,7 @@ describe('v1.AppHubClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -333,7 +333,7 @@ describe('v1.AppHubClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -356,7 +356,7 @@ describe('v1.AppHubClient', () => {
   describe('lookupServiceProjectAttachment', () => {
     it('invokes lookupServiceProjectAttachment without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes lookupServiceProjectAttachment without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes lookupServiceProjectAttachment with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes lookupServiceProjectAttachment with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.AppHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -495,7 +495,7 @@ describe('v1.AppHubClient', () => {
   describe('getServiceProjectAttachment', () => {
     it('invokes getServiceProjectAttachment without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -527,7 +527,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getServiceProjectAttachment without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getServiceProjectAttachment with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -608,7 +608,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getServiceProjectAttachment with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -621,7 +621,7 @@ describe('v1.AppHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -634,7 +634,7 @@ describe('v1.AppHubClient', () => {
   describe('detachServiceProjectAttachment', () => {
     it('invokes detachServiceProjectAttachment without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes detachServiceProjectAttachment without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -713,7 +713,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes detachServiceProjectAttachment with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes detachServiceProjectAttachment with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -760,7 +760,7 @@ describe('v1.AppHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -773,7 +773,7 @@ describe('v1.AppHubClient', () => {
   describe('getDiscoveredService', () => {
     it('invokes getDiscoveredService without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -805,7 +805,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getDiscoveredService without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -852,7 +852,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getDiscoveredService with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -883,7 +883,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getDiscoveredService with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -896,7 +896,7 @@ describe('v1.AppHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDiscoveredService(request), expectedError);
@@ -906,7 +906,7 @@ describe('v1.AppHubClient', () => {
   describe('lookupDiscoveredService', () => {
     it('invokes lookupDiscoveredService without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -938,7 +938,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes lookupDiscoveredService without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -985,7 +985,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes lookupDiscoveredService with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1019,7 +1019,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes lookupDiscoveredService with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1032,7 +1032,7 @@ describe('v1.AppHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1045,7 +1045,7 @@ describe('v1.AppHubClient', () => {
   describe('getService', () => {
     it('invokes getService without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1076,7 +1076,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getService without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1123,7 +1123,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getService with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1154,7 +1154,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getService with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1167,7 +1167,7 @@ describe('v1.AppHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getService(request), expectedError);
@@ -1177,7 +1177,7 @@ describe('v1.AppHubClient', () => {
   describe('getDiscoveredWorkload', () => {
     it('invokes getDiscoveredWorkload without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getDiscoveredWorkload without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1256,7 +1256,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getDiscoveredWorkload with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1290,7 +1290,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getDiscoveredWorkload with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v1.AppHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1316,7 +1316,7 @@ describe('v1.AppHubClient', () => {
   describe('lookupDiscoveredWorkload', () => {
     it('invokes lookupDiscoveredWorkload without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1348,7 +1348,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes lookupDiscoveredWorkload without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1395,7 +1395,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes lookupDiscoveredWorkload with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1429,7 +1429,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes lookupDiscoveredWorkload with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1.AppHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1455,7 +1455,7 @@ describe('v1.AppHubClient', () => {
   describe('getWorkload', () => {
     it('invokes getWorkload without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1486,7 +1486,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getWorkload without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getWorkload with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1564,7 +1564,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getWorkload with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1577,7 +1577,7 @@ describe('v1.AppHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWorkload(request), expectedError);
@@ -1587,7 +1587,7 @@ describe('v1.AppHubClient', () => {
   describe('getApplication', () => {
     it('invokes getApplication without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1618,7 +1618,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getApplication without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1665,7 +1665,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getApplication with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1696,7 +1696,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes getApplication with closed client', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1709,7 +1709,7 @@ describe('v1.AppHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApplication(request), expectedError);
@@ -1719,7 +1719,7 @@ describe('v1.AppHubClient', () => {
   describe('createServiceProjectAttachment', () => {
     it('invokes createServiceProjectAttachment without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1752,7 +1752,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createServiceProjectAttachment without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1806,7 +1806,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createServiceProjectAttachment with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1840,7 +1840,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createServiceProjectAttachment with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1873,7 +1873,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkCreateServiceProjectAttachmentProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,8 +1881,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1896,7 +1896,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkCreateServiceProjectAttachmentProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1917,7 +1917,7 @@ describe('v1.AppHubClient', () => {
   describe('deleteServiceProjectAttachment', () => {
     it('invokes deleteServiceProjectAttachment without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1950,7 +1950,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteServiceProjectAttachment without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2004,7 +2004,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteServiceProjectAttachment with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2038,7 +2038,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteServiceProjectAttachment with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2071,7 +2071,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkDeleteServiceProjectAttachmentProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2079,8 +2079,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2094,7 +2094,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkDeleteServiceProjectAttachmentProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2115,7 +2115,7 @@ describe('v1.AppHubClient', () => {
   describe('createService', () => {
     it('invokes createService without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2148,7 +2148,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createService without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2202,7 +2202,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createService with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2233,7 +2233,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createService with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2266,7 +2266,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkCreateServiceProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2274,8 +2274,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateServiceProgress(
@@ -2288,7 +2288,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkCreateServiceProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2309,7 +2309,7 @@ describe('v1.AppHubClient', () => {
   describe('updateService', () => {
     it('invokes updateService without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2343,7 +2343,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes updateService without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2398,7 +2398,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes updateService with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2430,7 +2430,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes updateService with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2464,7 +2464,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkUpdateServiceProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2472,8 +2472,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateServiceProgress(
@@ -2486,7 +2486,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkUpdateServiceProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2507,7 +2507,7 @@ describe('v1.AppHubClient', () => {
   describe('deleteService', () => {
     it('invokes deleteService without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2540,7 +2540,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteService without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2594,7 +2594,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteService with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2625,7 +2625,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteService with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2658,7 +2658,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkDeleteServiceProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2666,8 +2666,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteServiceProgress(
@@ -2680,7 +2680,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkDeleteServiceProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2701,7 +2701,7 @@ describe('v1.AppHubClient', () => {
   describe('createWorkload', () => {
     it('invokes createWorkload without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2734,7 +2734,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createWorkload without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2788,7 +2788,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createWorkload with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2819,7 +2819,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createWorkload with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2852,7 +2852,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkCreateWorkloadProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2860,8 +2860,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateWorkloadProgress(
@@ -2874,7 +2874,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkCreateWorkloadProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2895,7 +2895,7 @@ describe('v1.AppHubClient', () => {
   describe('updateWorkload', () => {
     it('invokes updateWorkload without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2929,7 +2929,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes updateWorkload without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2984,7 +2984,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes updateWorkload with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3016,7 +3016,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes updateWorkload with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3050,7 +3050,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkUpdateWorkloadProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3058,8 +3058,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateWorkloadProgress(
@@ -3072,7 +3072,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkUpdateWorkloadProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3093,7 +3093,7 @@ describe('v1.AppHubClient', () => {
   describe('deleteWorkload', () => {
     it('invokes deleteWorkload without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3126,7 +3126,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteWorkload without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3180,7 +3180,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteWorkload with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3211,7 +3211,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteWorkload with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3244,7 +3244,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkDeleteWorkloadProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3252,8 +3252,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteWorkloadProgress(
@@ -3266,7 +3266,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkDeleteWorkloadProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3287,7 +3287,7 @@ describe('v1.AppHubClient', () => {
   describe('createApplication', () => {
     it('invokes createApplication without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3320,7 +3320,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createApplication without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3374,7 +3374,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createApplication with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3405,7 +3405,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes createApplication with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3438,7 +3438,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkCreateApplicationProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3446,8 +3446,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateApplicationProgress(
@@ -3460,7 +3460,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkCreateApplicationProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3481,7 +3481,7 @@ describe('v1.AppHubClient', () => {
   describe('updateApplication', () => {
     it('invokes updateApplication without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3515,7 +3515,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes updateApplication without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3570,7 +3570,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes updateApplication with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3602,7 +3602,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes updateApplication with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3636,7 +3636,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkUpdateApplicationProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3644,8 +3644,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateApplicationProgress(
@@ -3658,7 +3658,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkUpdateApplicationProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3679,7 +3679,7 @@ describe('v1.AppHubClient', () => {
   describe('deleteApplication', () => {
     it('invokes deleteApplication without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3712,7 +3712,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteApplication without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3766,7 +3766,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteApplication with call error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3797,7 +3797,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes deleteApplication with LRO error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3830,7 +3830,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkDeleteApplicationProgress without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3838,8 +3838,8 @@ describe('v1.AppHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteApplicationProgress(
@@ -3852,7 +3852,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes checkDeleteApplicationProgress with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3873,7 +3873,7 @@ describe('v1.AppHubClient', () => {
   describe('listServiceProjectAttachments', () => {
     it('invokes listServiceProjectAttachments without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3913,7 +3913,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listServiceProjectAttachments without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3945,8 +3945,7 @@ describe('v1.AppHubClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.apphub.v1.IServiceProjectAttachment[]
-              | null,
+              protos.google.cloud.apphub.v1.IServiceProjectAttachment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3970,7 +3969,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listServiceProjectAttachments with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4004,7 +4003,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listServiceProjectAttachmentsStream without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4076,7 +4075,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listServiceProjectAttachmentsStream with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4137,7 +4136,7 @@ describe('v1.AppHubClient', () => {
 
     it('uses async iteration with listServiceProjectAttachments without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4191,7 +4190,7 @@ describe('v1.AppHubClient', () => {
 
     it('uses async iteration with listServiceProjectAttachments with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4238,7 +4237,7 @@ describe('v1.AppHubClient', () => {
   describe('listDiscoveredServices', () => {
     it('invokes listDiscoveredServices without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4278,7 +4277,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listDiscoveredServices without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4333,7 +4332,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listDiscoveredServices with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4367,7 +4366,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listDiscoveredServicesStream without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4433,7 +4432,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listDiscoveredServicesStream with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4488,7 +4487,7 @@ describe('v1.AppHubClient', () => {
 
     it('uses async iteration with listDiscoveredServices without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4541,7 +4540,7 @@ describe('v1.AppHubClient', () => {
 
     it('uses async iteration with listDiscoveredServices with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4588,7 +4587,7 @@ describe('v1.AppHubClient', () => {
   describe('listServices', () => {
     it('invokes listServices without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4621,7 +4620,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listServices without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4670,7 +4669,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listServices with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4701,7 +4700,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listServicesStream without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4744,15 +4743,15 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listServicesStream with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4792,15 +4791,15 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4835,15 +4834,15 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4875,9 +4874,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4885,7 +4884,7 @@ describe('v1.AppHubClient', () => {
   describe('listDiscoveredWorkloads', () => {
     it('invokes listDiscoveredWorkloads without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4925,7 +4924,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listDiscoveredWorkloads without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4980,7 +4979,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listDiscoveredWorkloads with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5014,7 +5013,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listDiscoveredWorkloadsStream without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5081,7 +5080,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listDiscoveredWorkloadsStream with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5137,7 +5136,7 @@ describe('v1.AppHubClient', () => {
 
     it('uses async iteration with listDiscoveredWorkloads without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5190,7 +5189,7 @@ describe('v1.AppHubClient', () => {
 
     it('uses async iteration with listDiscoveredWorkloads with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5237,7 +5236,7 @@ describe('v1.AppHubClient', () => {
   describe('listWorkloads', () => {
     it('invokes listWorkloads without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5270,7 +5269,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listWorkloads without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5319,7 +5318,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listWorkloads with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5350,7 +5349,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listWorkloadsStream without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5396,15 +5395,15 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listWorkloadsStream with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5445,15 +5444,15 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkloads without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5488,15 +5487,15 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkloads with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5528,9 +5527,9 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5538,7 +5537,7 @@ describe('v1.AppHubClient', () => {
   describe('listApplications', () => {
     it('invokes listApplications without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5571,7 +5570,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listApplications without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5620,7 +5619,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listApplications with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5651,7 +5650,7 @@ describe('v1.AppHubClient', () => {
 
     it('invokes listApplicationsStream without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5697,15 +5696,15 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listApplications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listApplicationsStream with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5746,15 +5745,15 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listApplications.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApplications without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5789,15 +5788,15 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listApplications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApplications with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5829,16 +5828,16 @@ describe('v1.AppHubClient', () => {
       assert(
         (client.descriptors.page.listApplications.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5868,7 +5867,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5906,7 +5905,7 @@ describe('v1.AppHubClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5916,7 +5915,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5948,7 +5947,7 @@ describe('v1.AppHubClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5978,7 +5977,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6016,7 +6015,7 @@ describe('v1.AppHubClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6026,7 +6025,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6058,7 +6057,7 @@ describe('v1.AppHubClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6091,7 +6090,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6129,7 +6128,7 @@ describe('v1.AppHubClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6139,7 +6138,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6174,7 +6173,7 @@ describe('v1.AppHubClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6204,7 +6203,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6248,7 +6247,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6283,7 +6282,7 @@ describe('v1.AppHubClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6331,7 +6330,7 @@ describe('v1.AppHubClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6372,7 +6371,7 @@ describe('v1.AppHubClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6393,7 +6392,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6421,7 +6420,7 @@ describe('v1.AppHubClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6431,7 +6430,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6455,7 +6454,7 @@ describe('v1.AppHubClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6477,7 +6476,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6505,7 +6504,7 @@ describe('v1.AppHubClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6515,7 +6514,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6539,7 +6538,7 @@ describe('v1.AppHubClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6561,7 +6560,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6589,7 +6588,7 @@ describe('v1.AppHubClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6599,7 +6598,7 @@ describe('v1.AppHubClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6623,7 +6622,7 @@ describe('v1.AppHubClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6658,7 +6657,7 @@ describe('v1.AppHubClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6694,7 +6693,7 @@ describe('v1.AppHubClient', () => {
         application: 'applicationValue',
       };
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6758,7 +6757,7 @@ describe('v1.AppHubClient', () => {
         discovered_service: 'discoveredServiceValue',
       };
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6835,7 +6834,7 @@ describe('v1.AppHubClient', () => {
         discovered_workload: 'discoveredWorkloadValue',
       };
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6911,7 +6910,7 @@ describe('v1.AppHubClient', () => {
         location: 'locationValue',
       };
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6959,7 +6958,7 @@ describe('v1.AppHubClient', () => {
         project: 'projectValue',
       };
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7000,7 +6999,7 @@ describe('v1.AppHubClient', () => {
         service: 'serviceValue',
       };
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7075,7 +7074,7 @@ describe('v1.AppHubClient', () => {
         service_project_attachment: 'serviceProjectAttachmentValue',
       };
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7157,7 +7156,7 @@ describe('v1.AppHubClient', () => {
         workload: 'workloadValue',
       };
       const client = new apphubModule.v1.AppHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as connectorsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -275,7 +275,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.connectorsStub, undefined);
@@ -283,12 +283,12 @@ describe('v1.ConnectorsClient', () => {
       assert(client.connectorsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.connectorsStub);
@@ -297,14 +297,14 @@ describe('v1.ConnectorsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.connectorsStub, undefined);
@@ -313,7 +313,7 @@ describe('v1.ConnectorsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -321,7 +321,7 @@ describe('v1.ConnectorsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -333,7 +333,7 @@ describe('v1.ConnectorsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -356,7 +356,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getConnection', () => {
     it('invokes getConnection without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnection without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnection with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnection with closed client', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v1.ConnectorsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnection(request), expectedError);
@@ -488,7 +488,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getProvider', () => {
     it('invokes getProvider without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getProvider without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getProvider with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -597,7 +597,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getProvider with closed client', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,7 +610,7 @@ describe('v1.ConnectorsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProvider(request), expectedError);
@@ -620,7 +620,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getConnector', () => {
     it('invokes getConnector without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnector without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnector with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnector with closed client', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.ConnectorsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnector(request), expectedError);
@@ -752,7 +752,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getConnectorVersion', () => {
     it('invokes getConnectorVersion without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnectorVersion without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnectorVersion with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnectorVersion with closed client', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.ConnectorsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnectorVersion(request), expectedError);
@@ -885,7 +885,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getConnectionSchemaMetadata', () => {
     it('invokes getConnectionSchemaMetadata without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -917,7 +917,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnectionSchemaMetadata without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnectionSchemaMetadata with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getConnectionSchemaMetadata with closed client', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1.ConnectorsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1024,7 +1024,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getRuntimeConfig', () => {
     it('invokes getRuntimeConfig without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1055,7 +1055,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getRuntimeConfig without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getRuntimeConfig with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1133,7 +1133,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getRuntimeConfig with closed client', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1.ConnectorsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRuntimeConfig(request), expectedError);
@@ -1156,7 +1156,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getGlobalSettings', () => {
     it('invokes getGlobalSettings without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1187,7 +1187,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getGlobalSettings without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,7 +1234,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getGlobalSettings with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1265,7 +1265,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes getGlobalSettings with closed client', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1278,7 +1278,7 @@ describe('v1.ConnectorsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGlobalSettings(request), expectedError);
@@ -1288,7 +1288,7 @@ describe('v1.ConnectorsClient', () => {
   describe('createConnection', () => {
     it('invokes createConnection without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1321,7 +1321,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes createConnection without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes createConnection with call error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes createConnection with LRO error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1439,7 +1439,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes checkCreateConnectionProgress without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1447,8 +1447,8 @@ describe('v1.ConnectorsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateConnectionProgress(
@@ -1461,7 +1461,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes checkCreateConnectionProgress with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1482,7 +1482,7 @@ describe('v1.ConnectorsClient', () => {
   describe('updateConnection', () => {
     it('invokes updateConnection without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,7 +1516,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes updateConnection without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1571,7 +1571,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes updateConnection with call error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1603,7 +1603,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes updateConnection with LRO error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1637,7 +1637,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes checkUpdateConnectionProgress without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1645,8 +1645,8 @@ describe('v1.ConnectorsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateConnectionProgress(
@@ -1659,7 +1659,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes checkUpdateConnectionProgress with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1680,7 +1680,7 @@ describe('v1.ConnectorsClient', () => {
   describe('deleteConnection', () => {
     it('invokes deleteConnection without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1713,7 +1713,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes deleteConnection without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1767,7 +1767,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes deleteConnection with call error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1798,7 +1798,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes deleteConnection with LRO error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1831,7 +1831,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes checkDeleteConnectionProgress without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1839,8 +1839,8 @@ describe('v1.ConnectorsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteConnectionProgress(
@@ -1853,7 +1853,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes checkDeleteConnectionProgress with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1874,7 +1874,7 @@ describe('v1.ConnectorsClient', () => {
   describe('refreshConnectionSchemaMetadata', () => {
     it('invokes refreshConnectionSchemaMetadata without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1907,7 +1907,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes refreshConnectionSchemaMetadata without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1961,7 +1961,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes refreshConnectionSchemaMetadata with call error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1993,7 +1993,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes refreshConnectionSchemaMetadata with LRO error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2023,7 +2023,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes checkRefreshConnectionSchemaMetadataProgress without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2031,8 +2031,8 @@ describe('v1.ConnectorsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2046,7 +2046,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes checkRefreshConnectionSchemaMetadataProgress with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2067,7 +2067,7 @@ describe('v1.ConnectorsClient', () => {
   describe('listConnections', () => {
     it('invokes listConnections without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2106,7 +2106,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnections without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2161,7 +2161,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnections with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2192,7 +2192,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnectionsStream without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2244,15 +2244,15 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConnectionsStream with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2293,15 +2293,15 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnections without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2342,15 +2342,15 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnections with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2382,9 +2382,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2392,7 +2392,7 @@ describe('v1.ConnectorsClient', () => {
   describe('listProviders', () => {
     it('invokes listProviders without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2425,7 +2425,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listProviders without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2474,7 +2474,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listProviders with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2505,7 +2505,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listProvidersStream without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2551,15 +2551,15 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProvidersStream with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2600,15 +2600,15 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listProviders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProviders without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2643,15 +2643,15 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProviders with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2683,9 +2683,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listProviders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2693,7 +2693,7 @@ describe('v1.ConnectorsClient', () => {
   describe('listConnectors', () => {
     it('invokes listConnectors without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2732,7 +2732,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnectors without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2787,7 +2787,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnectors with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2818,7 +2818,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnectorsStream without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2870,15 +2870,15 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConnectorsStream with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2919,15 +2919,15 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnectors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnectors without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2968,15 +2968,15 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnectors with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3008,9 +3008,9 @@ describe('v1.ConnectorsClient', () => {
       assert(
         (client.descriptors.page.listConnectors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3018,7 +3018,7 @@ describe('v1.ConnectorsClient', () => {
   describe('listConnectorVersions', () => {
     it('invokes listConnectorVersions without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3058,7 +3058,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnectorVersions without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3090,8 +3090,7 @@ describe('v1.ConnectorsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.connectors.v1.IConnectorVersion[]
-              | null,
+              protos.google.cloud.connectors.v1.IConnectorVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3115,7 +3114,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnectorVersions with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3149,7 +3148,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnectorVersionsStream without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3216,7 +3215,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listConnectorVersionsStream with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3272,7 +3271,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('uses async iteration with listConnectorVersions without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3326,7 +3325,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('uses async iteration with listConnectorVersions with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3373,7 +3372,7 @@ describe('v1.ConnectorsClient', () => {
   describe('listRuntimeEntitySchemas', () => {
     it('invokes listRuntimeEntitySchemas without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3413,7 +3412,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listRuntimeEntitySchemas without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3445,8 +3444,7 @@ describe('v1.ConnectorsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.connectors.v1.IRuntimeEntitySchema[]
-              | null,
+              protos.google.cloud.connectors.v1.IRuntimeEntitySchema[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3470,7 +3468,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listRuntimeEntitySchemas with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3504,7 +3502,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listRuntimeEntitySchemasStream without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3571,7 +3569,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listRuntimeEntitySchemasStream with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3627,7 +3625,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('uses async iteration with listRuntimeEntitySchemas without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3681,7 +3679,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('uses async iteration with listRuntimeEntitySchemas with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3728,7 +3726,7 @@ describe('v1.ConnectorsClient', () => {
   describe('listRuntimeActionSchemas', () => {
     it('invokes listRuntimeActionSchemas without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3768,7 +3766,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listRuntimeActionSchemas without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3800,8 +3798,7 @@ describe('v1.ConnectorsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.connectors.v1.IRuntimeActionSchema[]
-              | null,
+              protos.google.cloud.connectors.v1.IRuntimeActionSchema[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3825,7 +3822,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listRuntimeActionSchemas with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3859,7 +3856,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listRuntimeActionSchemasStream without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3926,7 +3923,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('invokes listRuntimeActionSchemasStream with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3982,7 +3979,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('uses async iteration with listRuntimeActionSchemas without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4036,7 +4033,7 @@ describe('v1.ConnectorsClient', () => {
 
     it('uses async iteration with listRuntimeActionSchemas with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4082,7 +4079,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4112,7 +4109,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4150,7 +4147,7 @@ describe('v1.ConnectorsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4160,7 +4157,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4192,7 +4189,7 @@ describe('v1.ConnectorsClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4222,7 +4219,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4260,7 +4257,7 @@ describe('v1.ConnectorsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4270,7 +4267,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4302,7 +4299,7 @@ describe('v1.ConnectorsClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4335,7 +4332,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4373,7 +4370,7 @@ describe('v1.ConnectorsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4383,7 +4380,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4418,7 +4415,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4448,7 +4445,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4492,7 +4489,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4527,7 +4524,7 @@ describe('v1.ConnectorsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4575,7 +4572,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4616,7 +4613,7 @@ describe('v1.ConnectorsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4637,7 +4634,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4665,7 +4662,7 @@ describe('v1.ConnectorsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4675,7 +4672,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4699,7 +4696,7 @@ describe('v1.ConnectorsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4721,7 +4718,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4749,7 +4746,7 @@ describe('v1.ConnectorsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4759,7 +4756,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4783,7 +4780,7 @@ describe('v1.ConnectorsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4805,7 +4802,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4833,7 +4830,7 @@ describe('v1.ConnectorsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4843,7 +4840,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4867,7 +4864,7 @@ describe('v1.ConnectorsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4902,7 +4899,7 @@ describe('v1.ConnectorsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4938,7 +4935,7 @@ describe('v1.ConnectorsClient', () => {
         connection: 'connectionValue',
       };
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5002,7 +4999,7 @@ describe('v1.ConnectorsClient', () => {
         connection: 'connectionValue',
       };
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5082,7 +5079,7 @@ describe('v1.ConnectorsClient', () => {
         connector: 'connectorValue',
       };
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5159,7 +5156,7 @@ describe('v1.ConnectorsClient', () => {
         version: 'versionValue',
       };
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5248,7 +5245,7 @@ describe('v1.ConnectorsClient', () => {
         provider: 'providerValue',
       };
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5311,7 +5308,7 @@ describe('v1.ConnectorsClient', () => {
         location: 'locationValue',
       };
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5362,7 +5359,7 @@ describe('v1.ConnectorsClient', () => {
         project: 'projectValue',
       };
       const client = new connectorsModule.v1.ConnectorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

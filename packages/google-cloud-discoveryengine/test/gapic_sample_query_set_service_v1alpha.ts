@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as samplequerysetserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -254,7 +254,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sampleQuerySetServiceStub, undefined);
@@ -262,13 +262,13 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       assert(client.sampleQuerySetServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sampleQuerySetServiceStub);
@@ -277,15 +277,15 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sampleQuerySetServiceStub, undefined);
@@ -294,7 +294,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes getSampleQuerySet without error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes getSampleQuerySet without error using callback', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes getSampleQuerySet with error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes getSampleQuerySet with closed client', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSampleQuerySet(request), expectedError);
@@ -476,7 +476,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes createSampleQuerySet without error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -509,7 +509,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes createSampleQuerySet without error using callback', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes createSampleQuerySet with error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -589,7 +589,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes createSampleQuerySet with closed client', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSampleQuerySet(request), expectedError);
@@ -613,7 +613,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes updateSampleQuerySet without error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -647,7 +647,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes updateSampleQuerySet without error using callback', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes updateSampleQuerySet with error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes updateSampleQuerySet with closed client', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       );
       request.sampleQuerySet.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSampleQuerySet(request), expectedError);
@@ -754,7 +754,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes deleteSampleQuerySet without error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes deleteSampleQuerySet without error using callback', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes deleteSampleQuerySet with error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes deleteSampleQuerySet with closed client', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSampleQuerySet(request), expectedError);
@@ -891,7 +891,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes listSampleQuerySets without error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -932,7 +932,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes listSampleQuerySets without error using callback', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -990,7 +990,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes listSampleQuerySets with error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1022,7 +1022,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes listSampleQuerySetsStream without error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1077,16 +1077,16 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       assert(
         (client.descriptors.page.listSampleQuerySets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSampleQuerySetsStream with error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1130,16 +1130,16 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       assert(
         (client.descriptors.page.listSampleQuerySets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSampleQuerySets without error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1181,16 +1181,16 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       assert(
         (client.descriptors.page.listSampleQuerySets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSampleQuerySets with error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1223,9 +1223,9 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       assert(
         (client.descriptors.page.listSampleQuerySets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1233,7 +1233,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1264,7 +1264,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1309,7 +1309,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1394,7 +1394,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1494,7 +1494,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1570,7 +1570,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1683,7 +1683,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1725,7 +1725,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1830,7 +1830,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1978,7 +1978,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2142,7 +2142,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2269,7 +2269,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2397,7 +2397,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2524,7 +2524,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2634,7 +2634,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2761,7 +2761,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2890,7 +2890,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3036,7 +3036,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3162,7 +3162,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3272,7 +3272,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3399,7 +3399,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3526,7 +3526,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3653,7 +3653,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3781,7 +3781,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3925,7 +3925,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4049,7 +4049,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4131,7 +4131,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4259,7 +4259,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4402,7 +4402,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4498,7 +4498,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4606,7 +4606,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4713,7 +4713,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4803,7 +4803,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4897,7 +4897,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5005,7 +5005,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5130,7 +5130,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5228,7 +5228,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5318,7 +5318,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5426,7 +5426,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5502,7 +5502,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

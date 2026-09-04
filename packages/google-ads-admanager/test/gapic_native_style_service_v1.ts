@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as nativestyleserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.NativeStyleServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -262,12 +262,12 @@ describe('v1.NativeStyleServiceClient', () => {
       assert(client.nativeStyleServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.nativeStyleServiceStub);
@@ -276,12 +276,12 @@ describe('v1.NativeStyleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -292,7 +292,7 @@ describe('v1.NativeStyleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -457,7 +457,7 @@ describe('v1.NativeStyleServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNativeStyle(request), expectedError);
@@ -593,7 +593,7 @@ describe('v1.NativeStyleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -732,7 +732,7 @@ describe('v1.NativeStyleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -871,7 +871,7 @@ describe('v1.NativeStyleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1010,7 +1010,7 @@ describe('v1.NativeStyleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1149,7 +1149,7 @@ describe('v1.NativeStyleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1162,7 +1162,7 @@ describe('v1.NativeStyleServiceClient', () => {
   describe('listNativeStyles', () => {
     it('invokes listNativeStyles without error', async () => {
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1195,7 +1195,7 @@ describe('v1.NativeStyleServiceClient', () => {
 
     it('invokes listNativeStyles without error using callback', async () => {
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1244,7 +1244,7 @@ describe('v1.NativeStyleServiceClient', () => {
 
     it('invokes listNativeStyles with error', async () => {
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1275,7 +1275,7 @@ describe('v1.NativeStyleServiceClient', () => {
 
     it('invokes listNativeStylesStream without error', async () => {
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1321,15 +1321,15 @@ describe('v1.NativeStyleServiceClient', () => {
       assert(
         (client.descriptors.page.listNativeStyles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNativeStylesStream with error', async () => {
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1370,9 +1370,9 @@ describe('v1.NativeStyleServiceClient', () => {
       assert(
         (client.descriptors.page.listNativeStyles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1413,15 +1413,15 @@ describe('v1.NativeStyleServiceClient', () => {
       assert(
         (client.descriptors.page.listNativeStyles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNativeStyles with error', async () => {
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1453,9 +1453,9 @@ describe('v1.NativeStyleServiceClient', () => {
       assert(
         (client.descriptors.page.listNativeStyles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1469,7 +1469,7 @@ describe('v1.NativeStyleServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1.NativeStyleServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v1.NativeStyleServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1651,7 +1651,7 @@ describe('v1.NativeStyleServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1700,7 +1700,7 @@ describe('v1.NativeStyleServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1749,7 @@ describe('v1.NativeStyleServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1801,7 +1801,7 @@ describe('v1.NativeStyleServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1854,7 +1854,7 @@ describe('v1.NativeStyleServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1907,7 +1907,7 @@ describe('v1.NativeStyleServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1956,7 +1956,7 @@ describe('v1.NativeStyleServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2009,7 +2009,7 @@ describe('v1.NativeStyleServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2061,7 +2061,7 @@ describe('v1.NativeStyleServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2114,7 +2114,7 @@ describe('v1.NativeStyleServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2167,7 +2167,7 @@ describe('v1.NativeStyleServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2224,7 +2224,7 @@ describe('v1.NativeStyleServiceClient', () => {
         company: 'companyValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2273,7 +2273,7 @@ describe('v1.NativeStyleServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2322,7 +2322,7 @@ describe('v1.NativeStyleServiceClient', () => {
         content: 'contentValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2371,7 +2371,7 @@ describe('v1.NativeStyleServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2423,7 +2423,7 @@ describe('v1.NativeStyleServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2475,7 +2475,7 @@ describe('v1.NativeStyleServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2524,7 +2524,7 @@ describe('v1.NativeStyleServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2576,7 +2576,7 @@ describe('v1.NativeStyleServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2633,7 +2633,7 @@ describe('v1.NativeStyleServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2686,7 +2686,7 @@ describe('v1.NativeStyleServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2738,7 +2738,7 @@ describe('v1.NativeStyleServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2801,7 +2801,7 @@ describe('v1.NativeStyleServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2866,7 +2866,7 @@ describe('v1.NativeStyleServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2931,7 +2931,7 @@ describe('v1.NativeStyleServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2993,7 +2993,7 @@ describe('v1.NativeStyleServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3040,7 +3040,7 @@ describe('v1.NativeStyleServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3097,7 +3097,7 @@ describe('v1.NativeStyleServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3150,7 +3150,7 @@ describe('v1.NativeStyleServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3213,7 +3213,7 @@ describe('v1.NativeStyleServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3278,7 +3278,7 @@ describe('v1.NativeStyleServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3330,7 +3330,7 @@ describe('v1.NativeStyleServiceClient', () => {
         label: 'labelValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3379,7 +3379,7 @@ describe('v1.NativeStyleServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3428,7 +3428,7 @@ describe('v1.NativeStyleServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3480,7 +3480,7 @@ describe('v1.NativeStyleServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3532,7 +3532,7 @@ describe('v1.NativeStyleServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3585,7 +3585,7 @@ describe('v1.NativeStyleServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3637,7 +3637,7 @@ describe('v1.NativeStyleServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3689,7 +3689,7 @@ describe('v1.NativeStyleServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3754,7 +3754,7 @@ describe('v1.NativeStyleServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3805,7 +3805,7 @@ describe('v1.NativeStyleServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3844,7 +3844,7 @@ describe('v1.NativeStyleServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3897,7 +3897,7 @@ describe('v1.NativeStyleServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3962,7 +3962,7 @@ describe('v1.NativeStyleServiceClient', () => {
         order: 'orderValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4011,7 +4011,7 @@ describe('v1.NativeStyleServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4060,7 +4060,7 @@ describe('v1.NativeStyleServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4112,7 +4112,7 @@ describe('v1.NativeStyleServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4165,7 +4165,7 @@ describe('v1.NativeStyleServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4228,7 +4228,7 @@ describe('v1.NativeStyleServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4291,7 +4291,7 @@ describe('v1.NativeStyleServiceClient', () => {
         report: 'reportValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4340,7 +4340,7 @@ describe('v1.NativeStyleServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4403,7 +4403,7 @@ describe('v1.NativeStyleServiceClient', () => {
         role: 'roleValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4452,7 +4452,7 @@ describe('v1.NativeStyleServiceClient', () => {
         site: 'siteValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4501,7 +4501,7 @@ describe('v1.NativeStyleServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4550,7 +4550,7 @@ describe('v1.NativeStyleServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4603,7 +4603,7 @@ describe('v1.NativeStyleServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4656,7 +4656,7 @@ describe('v1.NativeStyleServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4713,7 +4713,7 @@ describe('v1.NativeStyleServiceClient', () => {
         team: 'teamValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4762,7 +4762,7 @@ describe('v1.NativeStyleServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4825,7 +4825,7 @@ describe('v1.NativeStyleServiceClient', () => {
         user: 'userValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4874,7 +4874,7 @@ describe('v1.NativeStyleServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4937,7 +4937,7 @@ describe('v1.NativeStyleServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new nativestyleserviceModule.v1.NativeStyleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

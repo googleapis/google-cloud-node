@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as findingsrefinementserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'chronicle.configured.example.com');
@@ -251,7 +251,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.findingsRefinementServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.FindingsRefinementServiceClient', () => {
       assert(client.findingsRefinementServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.findingsRefinementServiceStub);
@@ -274,15 +274,15 @@ describe('v1.FindingsRefinementServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.findingsRefinementServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes getFindingsRefinement without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes getFindingsRefinement without error using callback', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes getFindingsRefinement with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes getFindingsRefinement with closed client', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes createFindingsRefinement without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes createFindingsRefinement without error using callback', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes createFindingsRefinement with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes createFindingsRefinement with closed client', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -623,7 +623,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes updateFindingsRefinement without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes updateFindingsRefinement without error using callback', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes updateFindingsRefinement with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes updateFindingsRefinement with closed client', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       );
       request.findingsRefinement.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -770,7 +770,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes getFindingsRefinementDeployment without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -803,7 +803,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes getFindingsRefinementDeployment without error using callback', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -851,7 +851,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes getFindingsRefinementDeployment with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes getFindingsRefinementDeployment with closed client', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -899,7 +899,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -913,7 +913,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes updateFindingsRefinementDeployment without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -948,7 +948,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes updateFindingsRefinementDeployment without error using callback', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes updateFindingsRefinementDeployment with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1033,7 +1033,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes updateFindingsRefinementDeployment with closed client', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       );
       request.findingsRefinementDeployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1061,7 +1061,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes computeFindingsRefinementActivity without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1095,7 +1095,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes computeFindingsRefinementActivity without error using callback', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes computeFindingsRefinementActivity with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1178,7 +1178,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes computeFindingsRefinementActivity with closed client', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1205,7 +1205,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes computeAllFindingsRefinementActivities without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes computeAllFindingsRefinementActivities without error using callback', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1287,7 +1287,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes computeAllFindingsRefinementActivities with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1320,7 +1320,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes computeAllFindingsRefinementActivities with closed client', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1333,7 +1333,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       );
       request.instance = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1347,7 +1347,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listFindingsRefinements without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1388,7 +1388,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listFindingsRefinements without error using callback', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1420,8 +1420,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.chronicle.v1.IFindingsRefinement[]
-              | null,
+              protos.google.cloud.chronicle.v1.IFindingsRefinement[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1446,7 +1445,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listFindingsRefinements with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1481,7 +1480,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listFindingsRefinementsStream without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1549,7 +1548,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listFindingsRefinementsStream with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1606,7 +1605,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('uses async iteration with listFindingsRefinements without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1661,7 +1660,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('uses async iteration with listFindingsRefinements with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1709,7 +1708,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listAllFindingsRefinementDeployments without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1751,7 +1750,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listAllFindingsRefinementDeployments without error using callback', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1809,7 +1808,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listAllFindingsRefinementDeployments with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1842,7 +1841,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listAllFindingsRefinementDeploymentsStream without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1915,7 +1914,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('invokes listAllFindingsRefinementDeploymentsStream with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1977,7 +1976,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('uses async iteration with listAllFindingsRefinementDeployments without error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2033,7 +2032,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
     it('uses async iteration with listAllFindingsRefinementDeployments with error', async () => {
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2088,7 +2087,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2154,7 +2153,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2232,7 +2231,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2320,7 +2319,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2397,7 +2396,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2474,7 +2473,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2552,7 +2551,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2630,7 +2629,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2707,7 +2706,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2806,7 +2805,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2895,7 +2894,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2991,7 +2990,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3084,7 +3083,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3179,7 +3178,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3243,7 +3242,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3295,7 +3294,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3369,7 +3368,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3411,7 +3410,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3489,7 +3488,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3577,7 +3576,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3654,7 +3653,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3731,7 +3730,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3824,7 +3823,7 @@ describe('v1.FindingsRefinementServiceClient', () => {
       };
       const client =
         new findingsrefinementserviceModule.v1.FindingsRefinementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class OsConfigServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('os-config');
@@ -67,9 +67,9 @@ export class OsConfigServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  osConfigServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  osConfigServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of OsConfigServiceClient.
@@ -145,7 +145,7 @@ export class OsConfigServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -247,7 +247,7 @@ export class OsConfigServiceClient {
       'google.cloud.osconfig.v1beta.OsConfigService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -287,7 +287,7 @@ export class OsConfigServiceClient {
           (this._protos as any).google.cloud.osconfig.v1beta.OsConfigService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -313,7 +313,7 @@ export class OsConfigServiceClient {
     ];
     for (const methodName of osConfigServiceStubMethods) {
       const callPromise = this.osConfigServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -530,7 +530,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('executePatchJob request %j', request);
@@ -668,7 +668,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPatchJob request %j', request);
@@ -803,7 +803,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelPatchJob request %j', request);
@@ -956,7 +956,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createPatchDeployment request %j', request);
@@ -1100,7 +1100,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPatchDeployment request %j', request);
@@ -1244,7 +1244,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deletePatchDeployment request %j', request);
@@ -1390,7 +1390,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'patch_deployment.name': request.patchDeployment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updatePatchDeployment request %j', request);
@@ -1535,7 +1535,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pausePatchDeployment request %j', request);
@@ -1680,7 +1680,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resumePatchDeployment request %j', request);
@@ -1829,7 +1829,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createGuestPolicy request %j', request);
@@ -1967,7 +1967,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGuestPolicy request %j', request);
@@ -2107,7 +2107,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'guest_policy.name': request.guestPolicy!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateGuestPolicy request %j', request);
@@ -2245,7 +2245,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteGuestPolicy request %j', request);
@@ -2401,7 +2401,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('lookupEffectiveGuestPolicy request %j', request);
@@ -2551,7 +2551,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2623,7 +2623,7 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPatchJobs stream %j', request);
@@ -2677,7 +2677,7 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPatchJobs iterate %j', request);
@@ -2786,7 +2786,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2858,7 +2858,7 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchJobInstanceDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPatchJobInstanceDetails stream %j', request);
@@ -2912,7 +2912,7 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchJobInstanceDetails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPatchJobInstanceDetails iterate %j', request);
@@ -3017,7 +3017,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3085,7 +3085,7 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPatchDeployments stream %j', request);
@@ -3135,7 +3135,7 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listPatchDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPatchDeployments iterate %j', request);
@@ -3241,7 +3241,7 @@ export class OsConfigServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3310,7 +3310,7 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listGuestPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGuestPolicies stream %j', request);
@@ -3361,7 +3361,7 @@ export class OsConfigServiceClient {
       });
     const defaultCallSettings = this._defaults['listGuestPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGuestPolicies iterate %j', request);
@@ -3498,7 +3498,7 @@ export class OsConfigServiceClient {
    */
   close(): Promise<void> {
     if (this.osConfigServiceStub && !this._terminated) {
-      return this.osConfigServiceStub.then((stub) => {
+      return this.osConfigServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

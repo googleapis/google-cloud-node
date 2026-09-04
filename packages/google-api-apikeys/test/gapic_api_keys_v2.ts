@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as apikeysModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -269,7 +269,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.apiKeysStub, undefined);
@@ -277,12 +277,12 @@ describe('v2.ApiKeysClient', () => {
       assert(client.apiKeysStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.apiKeysStub);
@@ -291,14 +291,14 @@ describe('v2.ApiKeysClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.apiKeysStub, undefined);
@@ -307,7 +307,7 @@ describe('v2.ApiKeysClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -315,7 +315,7 @@ describe('v2.ApiKeysClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -327,7 +327,7 @@ describe('v2.ApiKeysClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -350,7 +350,7 @@ describe('v2.ApiKeysClient', () => {
   describe('getKey', () => {
     it('invokes getKey without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -381,7 +381,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes getKey without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes getKey with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -456,7 +456,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes getKey with closed client', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v2.ApiKeysClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getKey(request), expectedError);
@@ -479,7 +479,7 @@ describe('v2.ApiKeysClient', () => {
   describe('getKeyString', () => {
     it('invokes getKeyString without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -510,7 +510,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes getKeyString without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes getKeyString with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes getKeyString with closed client', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v2.ApiKeysClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getKeyString(request), expectedError);
@@ -611,7 +611,7 @@ describe('v2.ApiKeysClient', () => {
   describe('lookupKey', () => {
     it('invokes lookupKey without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -628,7 +628,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes lookupKey without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes lookupKey with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -675,7 +675,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes lookupKey with closed client', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -683,7 +683,7 @@ describe('v2.ApiKeysClient', () => {
         new protos.google.api.apikeys.v2.LookupKeyRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.lookupKey(request), expectedError);
@@ -693,7 +693,7 @@ describe('v2.ApiKeysClient', () => {
   describe('createKey', () => {
     it('invokes createKey without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes createKey without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -779,7 +779,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes createKey with call error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -810,7 +810,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes createKey with LRO error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes checkCreateKeyProgress without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -851,8 +851,8 @@ describe('v2.ApiKeysClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateKeyProgress(
@@ -865,7 +865,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes checkCreateKeyProgress with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -883,7 +883,7 @@ describe('v2.ApiKeysClient', () => {
   describe('updateKey', () => {
     it('invokes updateKey without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -916,7 +916,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes updateKey without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes updateKey with call error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes updateKey with LRO error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1037,7 +1037,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes checkUpdateKeyProgress without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1045,8 +1045,8 @@ describe('v2.ApiKeysClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateKeyProgress(
@@ -1059,7 +1059,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes checkUpdateKeyProgress with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v2.ApiKeysClient', () => {
   describe('deleteKey', () => {
     it('invokes deleteKey without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes deleteKey without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1163,7 +1163,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes deleteKey with call error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1194,7 +1194,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes deleteKey with LRO error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes checkDeleteKeyProgress without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,8 +1235,8 @@ describe('v2.ApiKeysClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteKeyProgress(
@@ -1249,7 +1249,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes checkDeleteKeyProgress with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1267,7 +1267,7 @@ describe('v2.ApiKeysClient', () => {
   describe('undeleteKey', () => {
     it('invokes undeleteKey without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1299,7 +1299,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes undeleteKey without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1353,7 +1353,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes undeleteKey with call error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1384,7 +1384,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes undeleteKey with LRO error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,7 +1417,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes checkUndeleteKeyProgress without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1425,8 +1425,8 @@ describe('v2.ApiKeysClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUndeleteKeyProgress(
@@ -1439,7 +1439,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes checkUndeleteKeyProgress with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1457,7 +1457,7 @@ describe('v2.ApiKeysClient', () => {
   describe('listKeys', () => {
     it('invokes listKeys without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes listKeys without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1539,7 +1539,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes listKeys with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,7 +1567,7 @@ describe('v2.ApiKeysClient', () => {
 
     it('invokes listKeysStream without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1610,15 +1610,15 @@ describe('v2.ApiKeysClient', () => {
       assert(
         (client.descriptors.page.listKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listKeysStream with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,15 +1658,15 @@ describe('v2.ApiKeysClient', () => {
       assert(
         (client.descriptors.page.listKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKeys without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1700,15 +1700,15 @@ describe('v2.ApiKeysClient', () => {
       assert(
         (client.descriptors.page.listKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKeys with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1741,16 +1741,16 @@ describe('v2.ApiKeysClient', () => {
       assert(
         (client.descriptors.page.listKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1771,7 +1771,7 @@ describe('v2.ApiKeysClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1799,7 +1799,7 @@ describe('v2.ApiKeysClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1809,7 +1809,7 @@ describe('v2.ApiKeysClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1833,7 +1833,7 @@ describe('v2.ApiKeysClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1855,7 +1855,7 @@ describe('v2.ApiKeysClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1883,7 +1883,7 @@ describe('v2.ApiKeysClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1893,7 +1893,7 @@ describe('v2.ApiKeysClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1917,7 +1917,7 @@ describe('v2.ApiKeysClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1939,7 +1939,7 @@ describe('v2.ApiKeysClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1967,7 +1967,7 @@ describe('v2.ApiKeysClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1977,7 +1977,7 @@ describe('v2.ApiKeysClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2001,7 +2001,7 @@ describe('v2.ApiKeysClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2036,7 +2036,7 @@ describe('v2.ApiKeysClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2072,7 +2072,7 @@ describe('v2.ApiKeysClient', () => {
         key: 'keyValue',
       };
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2135,7 +2135,7 @@ describe('v2.ApiKeysClient', () => {
         location: 'locationValue',
       };
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2183,7 +2183,7 @@ describe('v2.ApiKeysClient', () => {
         project: 'projectValue',
       };
       const client = new apikeysModule.v2.ApiKeysClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as instancegroupmanagerresizerequestsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -183,7 +183,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
@@ -192,7 +192,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'compute.example.com');
@@ -219,7 +219,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'compute.configured.example.com');
@@ -234,7 +234,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -279,7 +279,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       assert(client.instanceGroupManagerResizeRequestsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
           {
@@ -287,7 +287,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.instanceGroupManagerResizeRequestsStub);
@@ -296,12 +296,12 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
           {
@@ -318,7 +318,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -558,7 +558,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       );
       request.resizeRequest = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancel(request), expectedError);
@@ -759,7 +759,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       );
       request.resizeRequest = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.delete(request), expectedError);
@@ -956,7 +956,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       );
       request.resizeRequest = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.get(request), expectedError);
@@ -1137,7 +1137,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       );
       request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insert(request), expectedError);
@@ -1149,7 +1149,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1200,7 +1200,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1268,7 +1268,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1308,7 +1308,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1374,9 +1374,9 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       assert(
         (client.descriptors.page.list.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1384,7 +1384,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1441,9 +1441,9 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       assert(
         (client.descriptors.page.list.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1503,9 +1503,9 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       assert(
         (client.descriptors.page.list.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1513,7 +1513,7 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       const client =
         new instancegroupmanagerresizerequestsModule.v1beta.InstanceGroupManagerResizeRequestsClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1558,9 +1558,9 @@ describe('v1beta.InstanceGroupManagerResizeRequestsClient', () => {
       assert(
         (client.descriptors.page.list.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });

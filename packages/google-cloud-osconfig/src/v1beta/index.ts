@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { OsConfigServiceClient } from './os_config_service_client';
+export {OsConfigServiceClient} from './os_config_service_client';

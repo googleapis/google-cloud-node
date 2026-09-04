@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { TranscoderServiceClient } from '@google-cloud/video-transcoder';
+import {TranscoderServiceClient} from '@google-cloud/video-transcoder';
 
 // check that the client class type name can be used
 function doStuffWithTranscoderServiceClient(client: TranscoderServiceClient) {

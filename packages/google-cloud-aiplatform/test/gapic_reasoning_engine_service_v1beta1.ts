@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as reasoningengineserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -244,7 +244,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
@@ -289,7 +289,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.reasoningEngineServiceStub, undefined);
@@ -297,13 +297,13 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       assert(client.reasoningEngineServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.reasoningEngineServiceStub);
@@ -312,15 +312,15 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.reasoningEngineServiceStub, undefined);
@@ -329,7 +329,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -338,7 +338,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -351,7 +351,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -375,7 +375,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getReasoningEngine without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -408,7 +408,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getReasoningEngine without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -456,7 +456,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getReasoningEngine with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getReasoningEngine with closed client', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -501,7 +501,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReasoningEngine(request), expectedError);
@@ -512,7 +512,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes createReasoningEngine without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -546,7 +546,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes createReasoningEngine without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes createReasoningEngine with call error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -636,7 +636,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes createReasoningEngine with LRO error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -670,7 +670,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes checkCreateReasoningEngineProgress without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -678,8 +678,8 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateReasoningEngineProgress(
@@ -693,7 +693,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes checkCreateReasoningEngineProgress with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -715,7 +715,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes updateReasoningEngine without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes updateReasoningEngine without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -806,7 +806,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes updateReasoningEngine with call error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes updateReasoningEngine with LRO error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes checkUpdateReasoningEngineProgress without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -885,8 +885,8 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateReasoningEngineProgress(
@@ -900,7 +900,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes checkUpdateReasoningEngineProgress with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -922,7 +922,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes deleteReasoningEngine without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -956,7 +956,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes deleteReasoningEngine without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes deleteReasoningEngine with call error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes deleteReasoningEngine with LRO error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1080,7 +1080,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes checkDeleteReasoningEngineProgress without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1088,8 +1088,8 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteReasoningEngineProgress(
@@ -1103,7 +1103,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes checkDeleteReasoningEngineProgress with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1125,7 +1125,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes listReasoningEngines without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1166,7 +1166,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes listReasoningEngines without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1198,8 +1198,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.aiplatform.v1beta1.IReasoningEngine[]
-              | null,
+              protos.google.cloud.aiplatform.v1beta1.IReasoningEngine[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1224,7 +1223,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes listReasoningEngines with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1256,7 +1255,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes listReasoningEnginesStream without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1311,16 +1310,16 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listReasoningEngines.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReasoningEnginesStream with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1364,16 +1363,16 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listReasoningEngines.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReasoningEngines without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1415,16 +1414,16 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listReasoningEngines.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReasoningEngines with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1457,9 +1456,9 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       assert(
         (client.descriptors.page.listReasoningEngines.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1467,7 +1466,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1498,7 +1497,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1536,7 +1535,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1547,7 +1546,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1580,7 +1579,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1611,7 +1610,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1649,7 +1648,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1660,7 +1659,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1693,7 +1692,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1727,7 +1726,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1765,7 +1764,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1776,7 +1775,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1812,7 +1811,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1843,7 +1842,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1888,7 +1887,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1924,7 +1923,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1973,7 +1972,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2015,7 +2014,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2037,7 +2036,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2065,7 +2064,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2076,7 +2075,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2101,7 +2100,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2124,7 +2123,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2152,7 +2151,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2163,7 +2162,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2188,7 +2187,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2211,7 +2210,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2239,7 +2238,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2250,7 +2249,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2275,7 +2274,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2311,7 +2310,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2350,7 +2349,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2438,7 +2437,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2516,7 +2515,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2592,7 +2591,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2670,7 +2669,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2736,7 +2735,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2812,7 +2811,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2878,7 +2877,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2954,7 +2953,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3020,7 +3019,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3086,7 +3085,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3163,7 +3162,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3246,7 +3245,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3322,7 +3321,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3388,7 +3387,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3464,7 +3463,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3529,7 +3528,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3595,7 +3594,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3674,7 +3673,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3782,7 +3781,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3861,7 +3860,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3939,7 +3938,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4016,7 +4015,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4081,7 +4080,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4163,7 +4162,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4228,7 +4227,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4292,7 +4291,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4344,7 +4343,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4421,7 +4420,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4499,7 +4498,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4564,7 +4563,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4629,7 +4628,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4710,7 +4709,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4788,7 +4787,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4896,7 +4895,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4962,7 +4961,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5055,7 +5054,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5121,7 +5120,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5198,7 +5197,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5280,7 +5279,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5346,7 +5345,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5428,7 +5427,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5494,7 +5493,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5572,7 +5571,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5637,7 +5636,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5718,7 +5717,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5822,7 +5821,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5947,7 +5946,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6039,7 +6038,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6093,7 +6092,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6159,7 +6158,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6234,7 +6233,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6289,7 +6288,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6367,7 +6366,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6454,7 +6453,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6521,7 +6520,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6619,7 +6618,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6695,7 +6694,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6761,7 +6760,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6839,7 +6838,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6927,7 +6926,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6993,7 +6992,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7058,7 +7057,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7124,7 +7123,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7221,7 +7220,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7311,7 +7310,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7435,7 +7434,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7505,7 +7504,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7581,7 +7580,7 @@ describe('v1beta1.ReasoningEngineServiceClient', () => {
       };
       const client =
         new reasoningengineserviceModule.v1beta1.ReasoningEngineServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as accountlabelsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -249,7 +249,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.accountLabelsServiceStub, undefined);
@@ -257,13 +257,13 @@ describe('v1.AccountLabelsServiceClient', () => {
       assert(client.accountLabelsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.accountLabelsServiceStub);
@@ -272,15 +272,15 @@ describe('v1.AccountLabelsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.accountLabelsServiceStub, undefined);
@@ -289,7 +289,7 @@ describe('v1.AccountLabelsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -298,7 +298,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -311,7 +311,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -335,7 +335,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes createAccountLabel without error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -368,7 +368,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes createAccountLabel without error using callback', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -416,7 +416,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes createAccountLabel with error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes createAccountLabel with closed client', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAccountLabel(request), expectedError);
@@ -472,7 +472,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes updateAccountLabel without error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -506,7 +506,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes updateAccountLabel without error using callback', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -555,7 +555,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes updateAccountLabel with error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes updateAccountLabel with closed client', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       );
       request.accountLabel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAccountLabel(request), expectedError);
@@ -613,7 +613,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes deleteAccountLabel without error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes deleteAccountLabel without error using callback', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes deleteAccountLabel with error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes deleteAccountLabel with closed client', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAccountLabel(request), expectedError);
@@ -750,7 +750,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes listAccountLabels without error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes listAccountLabels without error using callback', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -834,7 +834,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes listAccountLabels with error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -866,7 +866,7 @@ describe('v1.AccountLabelsServiceClient', () => {
     it('invokes listAccountLabelsStream without error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -912,16 +912,16 @@ describe('v1.AccountLabelsServiceClient', () => {
       assert(
         (client.descriptors.page.listAccountLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAccountLabelsStream with error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -962,16 +962,16 @@ describe('v1.AccountLabelsServiceClient', () => {
       assert(
         (client.descriptors.page.listAccountLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAccountLabels without error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1006,16 +1006,16 @@ describe('v1.AccountLabelsServiceClient', () => {
       assert(
         (client.descriptors.page.listAccountLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAccountLabels with error', async () => {
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1047,9 +1047,9 @@ describe('v1.AccountLabelsServiceClient', () => {
       assert(
         (client.descriptors.page.listAccountLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1062,7 +1062,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       };
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       };
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       };
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1202,7 +1202,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       };
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1256,7 +1256,7 @@ describe('v1.AccountLabelsServiceClient', () => {
       };
       const client =
         new accountlabelsserviceModule.v1.AccountLabelsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

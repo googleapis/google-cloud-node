@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as navconnectserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -136,7 +136,7 @@ describe('v1.NavConnectServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new navconnectserviceModule.v1.NavConnectServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -180,7 +180,7 @@ describe('v1.NavConnectServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.navConnectServiceStub, undefined);
@@ -188,12 +188,12 @@ describe('v1.NavConnectServiceClient', () => {
       assert(client.navConnectServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.navConnectServiceStub);
@@ -202,14 +202,14 @@ describe('v1.NavConnectServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.navConnectServiceStub, undefined);
@@ -218,7 +218,7 @@ describe('v1.NavConnectServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -226,7 +226,7 @@ describe('v1.NavConnectServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -238,7 +238,7 @@ describe('v1.NavConnectServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -261,7 +261,7 @@ describe('v1.NavConnectServiceClient', () => {
   describe('createTrip', () => {
     it('invokes createTrip without error', async () => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -292,7 +292,7 @@ describe('v1.NavConnectServiceClient', () => {
 
     it('invokes createTrip without error using callback', async () => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -339,7 +339,7 @@ describe('v1.NavConnectServiceClient', () => {
 
     it('invokes createTrip with error', async () => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.NavConnectServiceClient', () => {
 
     it('invokes createTrip with closed client', async () => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1.NavConnectServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTrip(request), expectedError);
@@ -393,7 +393,7 @@ describe('v1.NavConnectServiceClient', () => {
   describe('getTrip', () => {
     it('invokes getTrip without error', async () => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v1.NavConnectServiceClient', () => {
 
     it('invokes getTrip without error using callback', async () => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1.NavConnectServiceClient', () => {
 
     it('invokes getTrip with error', async () => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -499,7 +499,7 @@ describe('v1.NavConnectServiceClient', () => {
 
     it('invokes getTrip with closed client', async () => {
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -512,7 +512,7 @@ describe('v1.NavConnectServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTrip(request), expectedError);
@@ -527,7 +527,7 @@ describe('v1.NavConnectServiceClient', () => {
         trip: 'tripValue',
       };
       const client = new navconnectserviceModule.v1.NavConnectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

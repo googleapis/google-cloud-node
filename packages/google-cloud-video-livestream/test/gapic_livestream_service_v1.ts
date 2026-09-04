@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as livestreamserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -236,7 +236,7 @@ describe('v1.LivestreamServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new livestreamserviceModule.v1.LivestreamServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'livestream.configured.example.com');
@@ -277,7 +277,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.livestreamServiceStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.LivestreamServiceClient', () => {
       assert(client.livestreamServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.livestreamServiceStub);
@@ -299,14 +299,14 @@ describe('v1.LivestreamServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.livestreamServiceStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.LivestreamServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.LivestreamServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.LivestreamServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('getChannel', () => {
     it('invokes getChannel without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getChannel without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getChannel with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getChannel with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getChannel(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('getInput', () => {
     it('invokes getInput without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getInput without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getInput with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getInput with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInput(request), expectedError);
@@ -619,7 +619,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('previewInput', () => {
     it('invokes previewInput without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes previewInput without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes previewInput with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes previewInput with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.previewInput(request), expectedError);
@@ -751,7 +751,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('createEvent', () => {
     it('invokes createEvent without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createEvent without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createEvent with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createEvent with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEvent(request), expectedError);
@@ -883,7 +883,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('getEvent', () => {
     it('invokes getEvent without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getEvent without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getEvent with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -989,7 +989,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getEvent with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvent(request), expectedError);
@@ -1012,7 +1012,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('deleteEvent', () => {
     it('invokes deleteEvent without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1043,7 +1043,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteEvent without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1090,7 +1090,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteEvent with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1121,7 +1121,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteEvent with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteEvent(request), expectedError);
@@ -1144,7 +1144,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('getClip', () => {
     it('invokes getClip without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getClip without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1222,7 +1222,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getClip with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getClip with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1263,7 +1263,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getClip(request), expectedError);
@@ -1273,7 +1273,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('getDvrSession', () => {
     it('invokes getDvrSession without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1304,7 +1304,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getDvrSession without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1351,7 +1351,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getDvrSession with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1382,7 +1382,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getDvrSession with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1395,7 +1395,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDvrSession(request), expectedError);
@@ -1405,7 +1405,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('getAsset', () => {
     it('invokes getAsset without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1436,7 +1436,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getAsset without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1483,7 +1483,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getAsset with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getAsset with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1524,7 +1524,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAsset(request), expectedError);
@@ -1534,7 +1534,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('getPool', () => {
     it('invokes getPool without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getPool without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1612,7 +1612,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getPool with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1640,7 +1640,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes getPool with closed client', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1653,7 +1653,7 @@ describe('v1.LivestreamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPool(request), expectedError);
@@ -1663,7 +1663,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('createChannel', () => {
     it('invokes createChannel without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1696,7 +1696,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createChannel without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1750,7 +1750,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createChannel with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1781,7 +1781,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createChannel with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1814,7 +1814,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateChannelProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1822,8 +1822,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateChannelProgress(
@@ -1836,7 +1836,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateChannelProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1857,7 +1857,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('deleteChannel', () => {
     it('invokes deleteChannel without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1890,7 +1890,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteChannel without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1944,7 +1944,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteChannel with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1975,7 +1975,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteChannel with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2008,7 +2008,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteChannelProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2016,8 +2016,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteChannelProgress(
@@ -2030,7 +2030,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteChannelProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2051,7 +2051,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('updateChannel', () => {
     it('invokes updateChannel without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2085,7 +2085,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updateChannel without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2140,7 +2140,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updateChannel with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2172,7 +2172,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updateChannel with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,7 +2206,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkUpdateChannelProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2214,8 +2214,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateChannelProgress(
@@ -2228,7 +2228,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkUpdateChannelProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2249,7 +2249,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('startChannel', () => {
     it('invokes startChannel without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2281,7 +2281,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes startChannel without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2335,7 +2335,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes startChannel with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2366,7 +2366,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes startChannel with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2399,7 +2399,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkStartChannelProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2407,8 +2407,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartChannelProgress(
@@ -2421,7 +2421,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkStartChannelProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2439,7 +2439,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('stopChannel', () => {
     it('invokes stopChannel without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2471,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes stopChannel without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes stopChannel with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2556,7 +2556,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes stopChannel with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2589,7 +2589,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkStopChannelProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2597,8 +2597,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStopChannelProgress(
@@ -2611,7 +2611,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkStopChannelProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2629,7 +2629,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('startDistribution', () => {
     it('invokes startDistribution without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2662,7 +2662,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes startDistribution without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2716,7 +2716,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes startDistribution with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2747,7 +2747,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes startDistribution with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2780,7 +2780,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkStartDistributionProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2788,8 +2788,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartDistributionProgress(
@@ -2802,7 +2802,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkStartDistributionProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2823,7 +2823,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('stopDistribution', () => {
     it('invokes stopDistribution without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2856,7 +2856,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes stopDistribution without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2910,7 +2910,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes stopDistribution with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2941,7 +2941,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes stopDistribution with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2974,7 +2974,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkStopDistributionProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2982,8 +2982,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStopDistributionProgress(
@@ -2996,7 +2996,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkStopDistributionProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3017,7 +3017,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('createInput', () => {
     it('invokes createInput without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3049,7 +3049,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createInput without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3103,7 +3103,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createInput with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3134,7 +3134,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createInput with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3167,7 +3167,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateInputProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3175,8 +3175,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInputProgress(
@@ -3189,7 +3189,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateInputProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3207,7 +3207,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('deleteInput', () => {
     it('invokes deleteInput without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3239,7 +3239,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteInput without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3293,7 +3293,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteInput with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3324,7 +3324,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteInput with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3357,7 +3357,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteInputProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3365,8 +3365,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteInputProgress(
@@ -3379,7 +3379,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteInputProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3397,7 +3397,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('updateInput', () => {
     it('invokes updateInput without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3430,7 +3430,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updateInput without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3485,7 +3485,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updateInput with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3517,7 +3517,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updateInput with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3551,7 +3551,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkUpdateInputProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3559,8 +3559,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInputProgress(
@@ -3573,7 +3573,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkUpdateInputProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3591,7 +3591,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('createClip', () => {
     it('invokes createClip without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3623,7 +3623,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createClip without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3677,7 +3677,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createClip with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3708,7 +3708,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createClip with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3741,7 +3741,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateClipProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3749,8 +3749,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClipProgress(
@@ -3763,7 +3763,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateClipProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3781,7 +3781,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('deleteClip', () => {
     it('invokes deleteClip without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3813,7 +3813,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteClip without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3867,7 +3867,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteClip with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3898,7 +3898,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteClip with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3931,7 +3931,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteClipProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3939,8 +3939,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteClipProgress(
@@ -3953,7 +3953,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteClipProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3971,7 +3971,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('createDvrSession', () => {
     it('invokes createDvrSession without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4004,7 +4004,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createDvrSession without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4058,7 +4058,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createDvrSession with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4089,7 +4089,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createDvrSession with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4122,7 +4122,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateDvrSessionProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4130,8 +4130,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDvrSessionProgress(
@@ -4144,7 +4144,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateDvrSessionProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4165,7 +4165,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('deleteDvrSession', () => {
     it('invokes deleteDvrSession without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4198,7 +4198,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteDvrSession without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4252,7 +4252,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteDvrSession with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4283,7 +4283,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteDvrSession with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4316,7 +4316,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteDvrSessionProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4324,8 +4324,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDvrSessionProgress(
@@ -4338,7 +4338,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteDvrSessionProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4359,7 +4359,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('updateDvrSession', () => {
     it('invokes updateDvrSession without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4393,7 +4393,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updateDvrSession without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4448,7 +4448,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updateDvrSession with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4480,7 +4480,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updateDvrSession with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4514,7 +4514,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkUpdateDvrSessionProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4522,8 +4522,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDvrSessionProgress(
@@ -4536,7 +4536,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkUpdateDvrSessionProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4557,7 +4557,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('createAsset', () => {
     it('invokes createAsset without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4589,7 +4589,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createAsset without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4643,7 +4643,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createAsset with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4674,7 +4674,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes createAsset with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4707,7 +4707,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateAssetProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4715,8 +4715,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAssetProgress(
@@ -4729,7 +4729,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkCreateAssetProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4747,7 +4747,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('deleteAsset', () => {
     it('invokes deleteAsset without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4779,7 +4779,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteAsset without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4833,7 +4833,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteAsset with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4864,7 +4864,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes deleteAsset with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4897,7 +4897,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteAssetProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4905,8 +4905,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAssetProgress(
@@ -4919,7 +4919,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkDeleteAssetProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4937,7 +4937,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('updatePool', () => {
     it('invokes updatePool without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4970,7 +4970,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updatePool without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5025,7 +5025,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updatePool with call error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5057,7 +5057,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes updatePool with LRO error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5091,7 +5091,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkUpdatePoolProgress without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5099,8 +5099,8 @@ describe('v1.LivestreamServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdatePoolProgress(
@@ -5113,7 +5113,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes checkUpdatePoolProgress with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5131,7 +5131,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('listChannels', () => {
     it('invokes listChannels without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5170,7 +5170,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listChannels without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5225,7 +5225,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listChannels with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5256,7 +5256,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listChannelsStream without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5308,15 +5308,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listChannels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listChannelsStream with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5359,15 +5359,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listChannels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChannels without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5408,15 +5408,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listChannels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChannels with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5449,9 +5449,9 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listChannels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5459,7 +5459,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('listInputs', () => {
     it('invokes listInputs without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5498,7 +5498,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listInputs without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5553,7 +5553,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listInputs with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5584,7 +5584,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listInputsStream without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5636,15 +5636,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listInputs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInputsStream with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5687,15 +5687,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listInputs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInputs without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5736,15 +5736,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listInputs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInputs with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5778,9 +5778,9 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listInputs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5788,7 +5788,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('listEvents', () => {
     it('invokes listEvents without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5827,7 +5827,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listEvents without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5882,7 +5882,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listEvents with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5913,7 +5913,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listEventsStream without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5965,15 +5965,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEventsStream with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6016,15 +6016,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvents without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6065,15 +6065,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvents with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6107,9 +6107,9 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listEvents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6117,7 +6117,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('listClips', () => {
     it('invokes listClips without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6156,7 +6156,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listClips without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6211,7 +6211,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listClips with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6239,7 +6239,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listClipsStream without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6291,15 +6291,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listClips.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listClipsStream with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6342,15 +6342,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listClips.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClips without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6390,15 +6390,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listClips.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClips with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6431,9 +6431,9 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listClips.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6441,7 +6441,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('listDvrSessions', () => {
     it('invokes listDvrSessions without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6480,7 +6480,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listDvrSessions without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6512,8 +6512,7 @@ describe('v1.LivestreamServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.video.livestream.v1.IDvrSession[]
-              | null,
+              protos.google.cloud.video.livestream.v1.IDvrSession[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6537,7 +6536,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listDvrSessions with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6568,7 +6567,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listDvrSessionsStream without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6621,15 +6620,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listDvrSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDvrSessionsStream with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6671,15 +6670,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listDvrSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDvrSessions without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6721,15 +6720,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listDvrSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDvrSessions with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6762,9 +6761,9 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listDvrSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6772,7 +6771,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('listAssets', () => {
     it('invokes listAssets without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6811,7 +6810,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listAssets without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6866,7 +6865,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listAssets with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6897,7 +6896,7 @@ describe('v1.LivestreamServiceClient', () => {
 
     it('invokes listAssetsStream without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6949,15 +6948,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAssetsStream with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7000,15 +6999,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7049,15 +7048,15 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7091,16 +7090,16 @@ describe('v1.LivestreamServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7130,7 +7129,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7174,7 +7173,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7209,7 +7208,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7257,7 +7256,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7298,7 +7297,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7319,7 +7318,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7347,7 +7346,7 @@ describe('v1.LivestreamServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7357,7 +7356,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7381,7 +7380,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7403,7 +7402,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7431,7 +7430,7 @@ describe('v1.LivestreamServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7441,7 +7440,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7465,7 +7464,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7487,7 +7486,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7515,7 +7514,7 @@ describe('v1.LivestreamServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7525,7 +7524,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7549,7 +7548,7 @@ describe('v1.LivestreamServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7584,7 +7583,7 @@ describe('v1.LivestreamServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7620,7 +7619,7 @@ describe('v1.LivestreamServiceClient', () => {
         asset: 'assetValue',
       };
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7684,7 +7683,7 @@ describe('v1.LivestreamServiceClient', () => {
         channel: 'channelValue',
       };
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7749,7 +7748,7 @@ describe('v1.LivestreamServiceClient', () => {
         clip: 'clipValue',
       };
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7825,7 +7824,7 @@ describe('v1.LivestreamServiceClient', () => {
         dvr_session: 'dvrSessionValue',
       };
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7901,7 +7900,7 @@ describe('v1.LivestreamServiceClient', () => {
         event: 'eventValue',
       };
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7976,7 +7975,7 @@ describe('v1.LivestreamServiceClient', () => {
         input: 'inputValue',
       };
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8039,7 +8038,7 @@ describe('v1.LivestreamServiceClient', () => {
         location: 'locationValue',
       };
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8089,7 +8088,7 @@ describe('v1.LivestreamServiceClient', () => {
         pool: 'poolValue',
       };
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8151,7 +8150,7 @@ describe('v1.LivestreamServiceClient', () => {
         project: 'projectValue',
       };
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

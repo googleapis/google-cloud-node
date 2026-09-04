@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { MapManagementClient } from './map_management_client';
+export {MapManagementClient} from './map_management_client';

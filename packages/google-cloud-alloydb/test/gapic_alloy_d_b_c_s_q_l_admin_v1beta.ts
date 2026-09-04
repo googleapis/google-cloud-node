@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as alloydbcsqladminModule from '../src';
 
 import {
@@ -49,7 +49,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -106,9 +106,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -230,7 +230,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.alloyDBCSQLAdminStub, undefined);
@@ -238,12 +238,12 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
       assert(client.alloyDBCSQLAdminStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.alloyDBCSQLAdminStub);
@@ -252,14 +252,14 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.alloyDBCSQLAdminStub, undefined);
@@ -268,7 +268,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -276,7 +276,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -288,7 +288,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -311,7 +311,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('restoreFromCloudSQL', () => {
     it('invokes restoreFromCloudSQL without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -344,7 +344,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
 
     it('invokes restoreFromCloudSQL without error using callback', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
 
     it('invokes restoreFromCloudSQL with call error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
 
     it('invokes restoreFromCloudSQL with LRO error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -462,7 +462,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
 
     it('invokes checkRestoreFromCloudSQLProgress without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -470,8 +470,8 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreFromCloudSQLProgress(
@@ -484,7 +484,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
 
     it('invokes checkRestoreFromCloudSQLProgress with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -504,7 +504,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -534,7 +534,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -582,7 +582,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -644,7 +644,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -682,7 +682,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -692,7 +692,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -724,7 +724,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -757,7 +757,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -805,7 +805,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -870,7 +870,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1038,7 +1038,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1087,7 +1087,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1097,7 +1097,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1121,7 +1121,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1171,7 +1171,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1181,7 +1181,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1205,7 +1205,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1255,7 +1255,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1265,7 +1265,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1289,7 +1289,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1324,7 +1324,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1360,7 +1360,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         backup: 'backupValue',
       };
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1424,7 +1424,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         cluster: 'clusterValue',
       };
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1489,7 +1489,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         instance: 'instanceValue',
       };
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         database: 'databaseValue',
       };
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1641,7 +1641,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         instance: 'instanceValue',
       };
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1715,7 +1715,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         location: 'locationValue',
       };
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1763,7 +1763,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         project: 'projectValue',
       };
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1803,7 +1803,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         flag: 'flagValue',
       };
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1882,7 +1882,7 @@ describe('v1beta.AlloyDBCSQLAdminClient', () => {
         user: 'userValue',
       };
       const client = new alloydbcsqladminModule.v1beta.AlloyDBCSQLAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

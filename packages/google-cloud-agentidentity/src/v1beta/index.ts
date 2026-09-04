@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { AuthProviderServiceClient } from './auth_provider_service_client';
+export {AuthProviderServiceClient} from './auth_provider_service_client';

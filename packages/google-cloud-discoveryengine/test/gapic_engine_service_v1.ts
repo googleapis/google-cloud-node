@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as engineserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.engineServiceStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.EngineServiceClient', () => {
       assert(client.engineServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.engineServiceStub);
@@ -301,14 +301,14 @@ describe('v1.EngineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.engineServiceStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.EngineServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.EngineServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.EngineServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.EngineServiceClient', () => {
   describe('updateEngine', () => {
     it('invokes updateEngine without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes updateEngine without error using callback', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes updateEngine with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,7 +472,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes updateEngine with closed client', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.EngineServiceClient', () => {
       );
       request.engine.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEngine(request), expectedError);
@@ -496,7 +496,7 @@ describe('v1.EngineServiceClient', () => {
   describe('getEngine', () => {
     it('invokes getEngine without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -527,7 +527,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes getEngine without error using callback', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes getEngine with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes getEngine with closed client', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.EngineServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEngine(request), expectedError);
@@ -625,7 +625,7 @@ describe('v1.EngineServiceClient', () => {
   describe('createEngine', () => {
     it('invokes createEngine without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes createEngine without error using callback', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes createEngine with call error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes createEngine with LRO error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -775,7 +775,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes checkCreateEngineProgress without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,8 +783,8 @@ describe('v1.EngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEngineProgress(
@@ -797,7 +797,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes checkCreateEngineProgress with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -815,7 +815,7 @@ describe('v1.EngineServiceClient', () => {
   describe('deleteEngine', () => {
     it('invokes deleteEngine without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -847,7 +847,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes deleteEngine without error using callback', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -901,7 +901,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes deleteEngine with call error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -932,7 +932,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes deleteEngine with LRO error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes checkDeleteEngineProgress without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,8 +973,8 @@ describe('v1.EngineServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEngineProgress(
@@ -987,7 +987,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes checkDeleteEngineProgress with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1.EngineServiceClient', () => {
   describe('listEngines', () => {
     it('invokes listEngines without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1044,7 +1044,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes listEngines without error using callback', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes listEngines with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1130,7 +1130,7 @@ describe('v1.EngineServiceClient', () => {
 
     it('invokes listEnginesStream without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1182,15 +1182,15 @@ describe('v1.EngineServiceClient', () => {
       assert(
         (client.descriptors.page.listEngines.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEnginesStream with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1233,15 +1233,15 @@ describe('v1.EngineServiceClient', () => {
       assert(
         (client.descriptors.page.listEngines.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEngines without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1282,15 +1282,15 @@ describe('v1.EngineServiceClient', () => {
       assert(
         (client.descriptors.page.listEngines.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEngines with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1324,16 +1324,16 @@ describe('v1.EngineServiceClient', () => {
       assert(
         (client.descriptors.page.listEngines.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1363,7 +1363,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1407,7 +1407,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1.EngineServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1531,7 +1531,7 @@ describe('v1.EngineServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1552,7 +1552,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1580,7 +1580,7 @@ describe('v1.EngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1590,7 +1590,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1614,7 +1614,7 @@ describe('v1.EngineServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1636,7 +1636,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1664,7 +1664,7 @@ describe('v1.EngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1674,7 +1674,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1698,7 +1698,7 @@ describe('v1.EngineServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1720,7 +1720,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1748,7 +1748,7 @@ describe('v1.EngineServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1758,7 +1758,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1782,7 +1782,7 @@ describe('v1.EngineServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1817,7 +1817,7 @@ describe('v1.EngineServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1856,7 +1856,7 @@ describe('v1.EngineServiceClient', () => {
         assist_answer: 'assistAnswerValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1955,7 +1955,7 @@ describe('v1.EngineServiceClient', () => {
         assistant: 'assistantValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2041,7 +2041,7 @@ describe('v1.EngineServiceClient', () => {
         collection: 'collectionValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2106,7 +2106,7 @@ describe('v1.EngineServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2181,7 @@ describe('v1.EngineServiceClient', () => {
         identity_mapping_store: 'identityMappingStoreValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2260,7 +2260,7 @@ describe('v1.EngineServiceClient', () => {
         project: 'projectValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2299,7 +2299,7 @@ describe('v1.EngineServiceClient', () => {
         location: 'locationValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2363,7 +2363,7 @@ describe('v1.EngineServiceClient', () => {
         cmek_config: 'cmekConfigValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2443,7 +2443,7 @@ describe('v1.EngineServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2547,7 +2547,7 @@ describe('v1.EngineServiceClient', () => {
         document: 'documentValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2694,7 +2694,7 @@ describe('v1.EngineServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2857,7 +2857,7 @@ describe('v1.EngineServiceClient', () => {
         control: 'controlValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2983,7 +2983,7 @@ describe('v1.EngineServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3110,7 +3110,7 @@ describe('v1.EngineServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3236,7 +3236,7 @@ describe('v1.EngineServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3345,7 +3345,7 @@ describe('v1.EngineServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3471,7 +3471,7 @@ describe('v1.EngineServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3599,7 +3599,7 @@ describe('v1.EngineServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3744,7 +3744,7 @@ describe('v1.EngineServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3869,7 +3869,7 @@ describe('v1.EngineServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3978,7 +3978,7 @@ describe('v1.EngineServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4105,7 +4105,7 @@ describe('v1.EngineServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4231,7 +4231,7 @@ describe('v1.EngineServiceClient', () => {
         control: 'controlValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4357,7 +4357,7 @@ describe('v1.EngineServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4483,7 +4483,7 @@ describe('v1.EngineServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4610,7 +4610,7 @@ describe('v1.EngineServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4753,7 +4753,7 @@ describe('v1.EngineServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4876,7 +4876,7 @@ describe('v1.EngineServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4957,7 +4957,7 @@ describe('v1.EngineServiceClient', () => {
         document: 'documentValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5084,7 +5084,7 @@ describe('v1.EngineServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5226,7 +5226,7 @@ describe('v1.EngineServiceClient', () => {
         control: 'controlValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5321,7 +5321,7 @@ describe('v1.EngineServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5428,7 +5428,7 @@ describe('v1.EngineServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5534,7 +5534,7 @@ describe('v1.EngineServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5623,7 +5623,7 @@ describe('v1.EngineServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5716,7 +5716,7 @@ describe('v1.EngineServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5823,7 +5823,7 @@ describe('v1.EngineServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5947,7 +5947,7 @@ describe('v1.EngineServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6044,7 +6044,7 @@ describe('v1.EngineServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6133,7 +6133,7 @@ describe('v1.EngineServiceClient', () => {
         sitemap: 'sitemapValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6241,7 +6241,7 @@ describe('v1.EngineServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new engineserviceModule.v1.EngineServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

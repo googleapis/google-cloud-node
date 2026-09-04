@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as matchserviceModule from '../src';
 
-import { protobuf, IamProtos, LocationProtos } from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v1.MatchServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.matchServiceStub, undefined);
@@ -207,12 +207,12 @@ describe('v1.MatchServiceClient', () => {
       assert(client.matchServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.matchServiceStub);
@@ -221,14 +221,14 @@ describe('v1.MatchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.matchServiceStub, undefined);
@@ -237,7 +237,7 @@ describe('v1.MatchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -245,7 +245,7 @@ describe('v1.MatchServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -257,7 +257,7 @@ describe('v1.MatchServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -280,7 +280,7 @@ describe('v1.MatchServiceClient', () => {
   describe('findNeighbors', () => {
     it('invokes findNeighbors without error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -311,7 +311,7 @@ describe('v1.MatchServiceClient', () => {
 
     it('invokes findNeighbors without error using callback', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -358,7 +358,7 @@ describe('v1.MatchServiceClient', () => {
 
     it('invokes findNeighbors with error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1.MatchServiceClient', () => {
 
     it('invokes findNeighbors with closed client', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v1.MatchServiceClient', () => {
       );
       request.indexEndpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.findNeighbors(request), expectedError);
@@ -412,7 +412,7 @@ describe('v1.MatchServiceClient', () => {
   describe('readIndexDatapoints', () => {
     it('invokes readIndexDatapoints without error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1.MatchServiceClient', () => {
 
     it('invokes readIndexDatapoints without error using callback', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v1.MatchServiceClient', () => {
 
     it('invokes readIndexDatapoints with error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.MatchServiceClient', () => {
 
     it('invokes readIndexDatapoints with closed client', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1.MatchServiceClient', () => {
       );
       request.indexEndpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.readIndexDatapoints(request), expectedError);
@@ -544,7 +544,7 @@ describe('v1.MatchServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.MatchServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -612,7 +612,7 @@ describe('v1.MatchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -622,7 +622,7 @@ describe('v1.MatchServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1.MatchServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -684,7 +684,7 @@ describe('v1.MatchServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -722,7 +722,7 @@ describe('v1.MatchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -732,7 +732,7 @@ describe('v1.MatchServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -764,7 +764,7 @@ describe('v1.MatchServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.MatchServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1.MatchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -845,7 +845,7 @@ describe('v1.MatchServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.MatchServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -910,7 +910,7 @@ describe('v1.MatchServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -954,7 +954,7 @@ describe('v1.MatchServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -989,7 +989,7 @@ describe('v1.MatchServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1037,7 +1037,7 @@ describe('v1.MatchServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1087,7 +1087,7 @@ describe('v1.MatchServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1174,7 +1174,7 @@ describe('v1.MatchServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1251,7 +1251,7 @@ describe('v1.MatchServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1326,7 +1326,7 @@ describe('v1.MatchServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1403,7 +1403,7 @@ describe('v1.MatchServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1468,7 +1468,7 @@ describe('v1.MatchServiceClient', () => {
         context: 'contextValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1543,7 +1543,7 @@ describe('v1.MatchServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1608,7 +1608,7 @@ describe('v1.MatchServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1683,7 +1683,7 @@ describe('v1.MatchServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1748,7 +1748,7 @@ describe('v1.MatchServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1813,7 +1813,7 @@ describe('v1.MatchServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1889,7 +1889,7 @@ describe('v1.MatchServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1971,7 +1971,7 @@ describe('v1.MatchServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2047,7 +2047,7 @@ describe('v1.MatchServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2122,7 +2122,7 @@ describe('v1.MatchServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2186,7 +2186,7 @@ describe('v1.MatchServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2264,7 +2264,7 @@ describe('v1.MatchServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2341,7 +2341,7 @@ describe('v1.MatchServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2417,7 +2417,7 @@ describe('v1.MatchServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2481,7 +2481,7 @@ describe('v1.MatchServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2562,7 +2562,7 @@ describe('v1.MatchServiceClient', () => {
         index: 'indexValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2626,7 +2626,7 @@ describe('v1.MatchServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2691,7 +2691,7 @@ describe('v1.MatchServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2768,7 +2768,7 @@ describe('v1.MatchServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2832,7 +2832,7 @@ describe('v1.MatchServiceClient', () => {
         model: 'modelValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2896,7 +2896,7 @@ describe('v1.MatchServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2976,7 +2976,7 @@ describe('v1.MatchServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3053,7 +3053,7 @@ describe('v1.MatchServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3160,7 +3160,7 @@ describe('v1.MatchServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3225,7 +3225,7 @@ describe('v1.MatchServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3301,7 +3301,7 @@ describe('v1.MatchServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3382,7 +3382,7 @@ describe('v1.MatchServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3447,7 +3447,7 @@ describe('v1.MatchServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3528,7 +3528,7 @@ describe('v1.MatchServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3605,7 +3605,7 @@ describe('v1.MatchServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3669,7 +3669,7 @@ describe('v1.MatchServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3749,7 +3749,7 @@ describe('v1.MatchServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3852,7 +3852,7 @@ describe('v1.MatchServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3976,7 +3976,7 @@ describe('v1.MatchServiceClient', () => {
         model: 'modelValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4067,7 +4067,7 @@ describe('v1.MatchServiceClient', () => {
         model: 'modelValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4120,7 +4120,7 @@ describe('v1.MatchServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4183,7 +4183,7 @@ describe('v1.MatchServiceClient', () => {
         location: 'locationValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4237,7 +4237,7 @@ describe('v1.MatchServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4312,7 +4312,7 @@ describe('v1.MatchServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4378,7 +4378,7 @@ describe('v1.MatchServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4453,7 +4453,7 @@ describe('v1.MatchServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4518,7 +4518,7 @@ describe('v1.MatchServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4595,7 +4595,7 @@ describe('v1.MatchServiceClient', () => {
         event: 'eventValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4682,7 +4682,7 @@ describe('v1.MatchServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4747,7 +4747,7 @@ describe('v1.MatchServiceClient', () => {
         study: 'studyValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4811,7 +4811,7 @@ describe('v1.MatchServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4876,7 +4876,7 @@ describe('v1.MatchServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4972,7 +4972,7 @@ describe('v1.MatchServiceClient', () => {
         run: 'runValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5061,7 +5061,7 @@ describe('v1.MatchServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5184,7 +5184,7 @@ describe('v1.MatchServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5253,7 +5253,7 @@ describe('v1.MatchServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5328,7 +5328,7 @@ describe('v1.MatchServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new matchserviceModule.v1.MatchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

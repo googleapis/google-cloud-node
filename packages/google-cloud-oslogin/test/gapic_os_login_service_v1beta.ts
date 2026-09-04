@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as osloginserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -176,7 +176,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.osLoginServiceStub, undefined);
@@ -184,12 +184,12 @@ describe('v1beta.OsLoginServiceClient', () => {
       assert(client.osLoginServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.osLoginServiceStub);
@@ -198,14 +198,14 @@ describe('v1beta.OsLoginServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.osLoginServiceStub, undefined);
@@ -214,7 +214,7 @@ describe('v1beta.OsLoginServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -222,7 +222,7 @@ describe('v1beta.OsLoginServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -234,7 +234,7 @@ describe('v1beta.OsLoginServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -257,7 +257,7 @@ describe('v1beta.OsLoginServiceClient', () => {
   describe('createSshPublicKey', () => {
     it('invokes createSshPublicKey without error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -289,7 +289,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes createSshPublicKey without error using callback', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -336,7 +336,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes createSshPublicKey with error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -367,7 +367,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes createSshPublicKey with closed client', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -380,7 +380,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSshPublicKey(request), expectedError);
@@ -390,7 +390,7 @@ describe('v1beta.OsLoginServiceClient', () => {
   describe('deletePosixAccount', () => {
     it('invokes deletePosixAccount without error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -422,7 +422,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes deletePosixAccount without error using callback', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes deletePosixAccount with error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -500,7 +500,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes deletePosixAccount with closed client', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deletePosixAccount(request), expectedError);
@@ -523,7 +523,7 @@ describe('v1beta.OsLoginServiceClient', () => {
   describe('deleteSshPublicKey', () => {
     it('invokes deleteSshPublicKey without error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -555,7 +555,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes deleteSshPublicKey without error using callback', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes deleteSshPublicKey with error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -633,7 +633,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes deleteSshPublicKey with closed client', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSshPublicKey(request), expectedError);
@@ -656,7 +656,7 @@ describe('v1beta.OsLoginServiceClient', () => {
   describe('getLoginProfile', () => {
     it('invokes getLoginProfile without error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -687,7 +687,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes getLoginProfile without error using callback', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes getLoginProfile with error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -765,7 +765,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes getLoginProfile with closed client', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -778,7 +778,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLoginProfile(request), expectedError);
@@ -788,7 +788,7 @@ describe('v1beta.OsLoginServiceClient', () => {
   describe('getSshPublicKey', () => {
     it('invokes getSshPublicKey without error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -819,7 +819,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes getSshPublicKey without error using callback', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -866,7 +866,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes getSshPublicKey with error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -897,7 +897,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes getSshPublicKey with closed client', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -910,7 +910,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSshPublicKey(request), expectedError);
@@ -920,7 +920,7 @@ describe('v1beta.OsLoginServiceClient', () => {
   describe('importSshPublicKey', () => {
     it('invokes importSshPublicKey without error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -952,7 +952,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes importSshPublicKey without error using callback', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes importSshPublicKey with error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1030,7 +1030,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes importSshPublicKey with closed client', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1043,7 +1043,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.importSshPublicKey(request), expectedError);
@@ -1053,7 +1053,7 @@ describe('v1beta.OsLoginServiceClient', () => {
   describe('updateSshPublicKey', () => {
     it('invokes updateSshPublicKey without error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1085,7 +1085,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes updateSshPublicKey without error using callback', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes updateSshPublicKey with error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1163,7 +1163,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes updateSshPublicKey with closed client', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSshPublicKey(request), expectedError);
@@ -1186,7 +1186,7 @@ describe('v1beta.OsLoginServiceClient', () => {
   describe('signSshPublicKey', () => {
     it('invokes signSshPublicKey without error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1217,7 +1217,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes signSshPublicKey without error using callback', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1264,7 +1264,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes signSshPublicKey with error', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1295,7 +1295,7 @@ describe('v1beta.OsLoginServiceClient', () => {
 
     it('invokes signSshPublicKey with closed client', async () => {
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1308,7 +1308,7 @@ describe('v1beta.OsLoginServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.signSshPublicKey(request), expectedError);
@@ -1323,7 +1323,7 @@ describe('v1beta.OsLoginServiceClient', () => {
         project: 'projectValue',
       };
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v1beta.OsLoginServiceClient', () => {
         fingerprint: 'fingerprintValue',
       };
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v1beta.OsLoginServiceClient', () => {
         user: 'userValue',
       };
       const client = new osloginserviceModule.v1beta.OsLoginServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

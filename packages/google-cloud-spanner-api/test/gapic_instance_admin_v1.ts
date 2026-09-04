@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as instanceadminModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.instanceAdminStub, undefined);
@@ -279,12 +279,12 @@ describe('v1.InstanceAdminClient', () => {
       assert(client.instanceAdminStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.instanceAdminStub);
@@ -293,14 +293,14 @@ describe('v1.InstanceAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.instanceAdminStub, undefined);
@@ -309,7 +309,7 @@ describe('v1.InstanceAdminClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v1.InstanceAdminClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v1.InstanceAdminClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('getInstanceConfig', () => {
     it('invokes getInstanceConfig without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getInstanceConfig without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getInstanceConfig with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getInstanceConfig with closed client', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstanceConfig(request), expectedError);
@@ -484,7 +484,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('deleteInstanceConfig', () => {
     it('invokes deleteInstanceConfig without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes deleteInstanceConfig without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes deleteInstanceConfig with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes deleteInstanceConfig with closed client', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteInstanceConfig(request), expectedError);
@@ -617,7 +617,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,7 +648,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -695,7 +695,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -749,7 +749,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('deleteInstance', () => {
     it('invokes deleteInstance without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes deleteInstance without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -827,7 +827,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes deleteInstance with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -858,7 +858,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes deleteInstance with closed client', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteInstance(request), expectedError);
@@ -881,7 +881,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -912,7 +912,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -990,7 +990,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1013,7 +1013,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1044,7 +1044,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1122,7 +1122,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1145,7 +1145,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1177,7 +1177,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1224,7 +1224,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1255,7 +1255,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1268,7 +1268,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1278,7 +1278,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('getInstancePartition', () => {
     it('invokes getInstancePartition without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,7 +1310,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getInstancePartition without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getInstancePartition with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1388,7 +1388,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes getInstancePartition with closed client', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstancePartition(request), expectedError);
@@ -1411,7 +1411,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('deleteInstancePartition', () => {
     it('invokes deleteInstancePartition without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,7 +1443,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes deleteInstancePartition without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes deleteInstancePartition with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1524,7 +1524,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes deleteInstancePartition with closed client', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1537,7 +1537,7 @@ describe('v1.InstanceAdminClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1550,7 +1550,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('createInstanceConfig', () => {
     it('invokes createInstanceConfig without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1583,7 +1583,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes createInstanceConfig without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1637,7 +1637,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes createInstanceConfig with call error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1668,7 +1668,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes createInstanceConfig with LRO error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1701,7 +1701,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkCreateInstanceConfigProgress without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1709,8 +1709,8 @@ describe('v1.InstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceConfigProgress(
@@ -1723,7 +1723,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkCreateInstanceConfigProgress with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1744,7 +1744,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('updateInstanceConfig', () => {
     it('invokes updateInstanceConfig without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1778,7 +1778,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes updateInstanceConfig without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes updateInstanceConfig with call error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1865,7 +1865,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes updateInstanceConfig with LRO error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1899,7 +1899,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkUpdateInstanceConfigProgress without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1907,8 +1907,8 @@ describe('v1.InstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInstanceConfigProgress(
@@ -1921,7 +1921,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkUpdateInstanceConfigProgress with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1942,7 +1942,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('createInstance', () => {
     it('invokes createInstance without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1975,7 +1975,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes createInstance without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,7 +2029,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes createInstance with call error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2060,7 +2060,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes createInstance with LRO error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2093,7 +2093,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkCreateInstanceProgress without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2101,8 +2101,8 @@ describe('v1.InstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceProgress(
@@ -2115,7 +2115,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkCreateInstanceProgress with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2136,7 +2136,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('updateInstance', () => {
     it('invokes updateInstance without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2170,7 +2170,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes updateInstance without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2225,7 +2225,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes updateInstance with call error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2257,7 +2257,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes updateInstance with LRO error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2291,7 +2291,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkUpdateInstanceProgress without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2299,8 +2299,8 @@ describe('v1.InstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInstanceProgress(
@@ -2313,7 +2313,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkUpdateInstanceProgress with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2334,7 +2334,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('createInstancePartition', () => {
     it('invokes createInstancePartition without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2367,7 +2367,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes createInstancePartition without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2421,7 +2421,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes createInstancePartition with call error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2455,7 +2455,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes createInstancePartition with LRO error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2488,7 +2488,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkCreateInstancePartitionProgress without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2496,8 +2496,8 @@ describe('v1.InstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2511,7 +2511,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkCreateInstancePartitionProgress with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2532,7 +2532,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('updateInstancePartition', () => {
     it('invokes updateInstancePartition without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2566,7 +2566,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes updateInstancePartition without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2621,7 +2621,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes updateInstancePartition with call error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2656,7 +2656,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes updateInstancePartition with LRO error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2690,7 +2690,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkUpdateInstancePartitionProgress without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2698,8 +2698,8 @@ describe('v1.InstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2713,7 +2713,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkUpdateInstancePartitionProgress with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2734,7 +2734,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('moveInstance', () => {
     it('invokes moveInstance without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2766,7 +2766,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes moveInstance without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2820,7 +2820,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes moveInstance with call error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2851,7 +2851,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes moveInstance with LRO error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2884,7 +2884,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkMoveInstanceProgress without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2892,8 +2892,8 @@ describe('v1.InstanceAdminClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkMoveInstanceProgress(
@@ -2906,7 +2906,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes checkMoveInstanceProgress with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2924,7 +2924,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('listInstanceConfigs', () => {
     it('invokes listInstanceConfigs without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2964,7 +2964,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstanceConfigs without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2996,8 +2996,7 @@ describe('v1.InstanceAdminClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.spanner.admin.instance.v1.IInstanceConfig[]
-              | null,
+              protos.google.spanner.admin.instance.v1.IInstanceConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3021,7 +3020,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstanceConfigs with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3052,7 +3051,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstanceConfigsStream without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3107,15 +3106,15 @@ describe('v1.InstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listInstanceConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstanceConfigsStream with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3159,15 +3158,15 @@ describe('v1.InstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listInstanceConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstanceConfigs without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3209,15 +3208,15 @@ describe('v1.InstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listInstanceConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstanceConfigs with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3250,9 +3249,9 @@ describe('v1.InstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listInstanceConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3260,7 +3259,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('listInstanceConfigOperations', () => {
     it('invokes listInstanceConfigOperations without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3294,7 +3293,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstanceConfigOperations without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3343,7 +3342,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstanceConfigOperations with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3377,7 +3376,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstanceConfigOperationsStream without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3437,7 +3436,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstanceConfigOperationsStream with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3492,7 +3491,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('uses async iteration with listInstanceConfigOperations without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3539,7 +3538,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('uses async iteration with listInstanceConfigOperations with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3585,7 +3584,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3624,7 +3623,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3679,7 +3678,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3710,7 +3709,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3763,15 +3762,15 @@ describe('v1.InstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3813,15 +3812,15 @@ describe('v1.InstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3862,15 +3861,15 @@ describe('v1.InstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3903,9 +3902,9 @@ describe('v1.InstanceAdminClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3913,7 +3912,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('listInstancePartitions', () => {
     it('invokes listInstancePartitions without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3953,7 +3952,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstancePartitions without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4010,7 +4009,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstancePartitions with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4044,7 +4043,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstancePartitionsStream without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4113,7 +4112,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstancePartitionsStream with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4171,7 +4170,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('uses async iteration with listInstancePartitions without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4225,7 +4224,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('uses async iteration with listInstancePartitions with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4272,7 +4271,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('listInstancePartitionOperations', () => {
     it('invokes listInstancePartitionOperations without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4306,7 +4305,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstancePartitionOperations without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4355,7 +4354,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstancePartitionOperations with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4389,7 +4388,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstancePartitionOperationsStream without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4449,7 +4448,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('invokes listInstancePartitionOperationsStream with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4504,7 +4503,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('uses async iteration with listInstancePartitionOperations without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4551,7 +4550,7 @@ describe('v1.InstanceAdminClient', () => {
 
     it('uses async iteration with listInstancePartitionOperations with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4596,7 +4595,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4617,7 +4616,7 @@ describe('v1.InstanceAdminClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4645,7 +4644,7 @@ describe('v1.InstanceAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4655,7 +4654,7 @@ describe('v1.InstanceAdminClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4679,7 +4678,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4701,7 +4700,7 @@ describe('v1.InstanceAdminClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4729,7 +4728,7 @@ describe('v1.InstanceAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4739,7 +4738,7 @@ describe('v1.InstanceAdminClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4763,7 +4762,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4785,7 +4784,7 @@ describe('v1.InstanceAdminClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4813,7 +4812,7 @@ describe('v1.InstanceAdminClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4823,7 +4822,7 @@ describe('v1.InstanceAdminClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4847,7 +4846,7 @@ describe('v1.InstanceAdminClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4882,7 +4881,7 @@ describe('v1.InstanceAdminClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4917,7 +4916,7 @@ describe('v1.InstanceAdminClient', () => {
         instance: 'instanceValue',
       };
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4966,7 +4965,7 @@ describe('v1.InstanceAdminClient', () => {
         instance_config: 'instanceConfigValue',
       };
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5020,7 +5019,7 @@ describe('v1.InstanceAdminClient', () => {
         instance_partition: 'instancePartitionValue',
       };
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5095,7 +5094,7 @@ describe('v1.InstanceAdminClient', () => {
         project: 'projectValue',
       };
       const client = new instanceadminModule.v1.InstanceAdminClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { MapManagementClient } from '@google-cloud/mapmanagement';
+import {MapManagementClient} from '@google-cloud/mapmanagement';
 
 // check that the client class type name can be used
 function doStuffWithMapManagementClient(client: MapManagementClient) {

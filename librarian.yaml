@@ -21,9 +21,9 @@ sources:
 tools:
   pnpm:
     - name: gapic-generator-typescript
-      version: gapic-generator-v4.12.2
-      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v4.12.2.tar.gz
-      checksum: 7fbdc5b9d08e58a2aa7b72c1ee407cac69e56d179fe623d27ac806419b8a3359
+      version: gapic-generator-v5.2.0
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.2.0.tar.gz
+      checksum: a2afaa498c7938837e65a1eecb2041bda5b0bda232e6bdbd5117e012cdc7e75b
       build:
         - pnpm install --frozen-lockfile --config.auto-install-peers=true
         - pnpm run compile

@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -70,7 +70,7 @@ export class AppConnectionsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('appconnections');
@@ -83,12 +83,12 @@ export class AppConnectionsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  appConnectionsServiceStub?: Promise<{ [name: string]: Function }>;
+  appConnectionsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AppConnectionsServiceClient.
@@ -165,7 +165,7 @@ export class AppConnectionsServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -408,7 +408,7 @@ export class AppConnectionsServiceClient {
       'google.cloud.beyondcorp.appconnections.v1.AppConnectionsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -449,7 +449,7 @@ export class AppConnectionsServiceClient {
             .AppConnectionsService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -463,7 +463,7 @@ export class AppConnectionsServiceClient {
     ];
     for (const methodName of appConnectionsServiceStubMethods) {
       const callPromise = this.appConnectionsServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -671,7 +671,7 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAppConnection request %j', request);
@@ -846,7 +846,7 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -903,7 +903,7 @@ export class AppConnectionsServiceClient {
     this._log.info('createAppConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1043,7 +1043,7 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'app_connection.name': request.appConnection!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1100,7 +1100,7 @@ export class AppConnectionsServiceClient {
     this._log.info('updateAppConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1230,7 +1230,7 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1287,7 +1287,7 @@ export class AppConnectionsServiceClient {
     this._log.info('deleteAppConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1408,7 +1408,7 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1489,7 +1489,7 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAppConnections stream %j', request);
@@ -1552,7 +1552,7 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAppConnections iterate %j', request);
@@ -1669,7 +1669,7 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1747,7 +1747,7 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['resolveAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resolveAppConnections stream %j', request);
@@ -1807,7 +1807,7 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['resolveAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resolveAppConnections iterate %j', request);
@@ -2430,14 +2430,14 @@ export class AppConnectionsServiceClient {
    */
   close(): Promise<void> {
     if (this.appConnectionsServiceStub && !this._terminated) {
-      return this.appConnectionsServiceStub.then((stub) => {
+      return this.appConnectionsServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

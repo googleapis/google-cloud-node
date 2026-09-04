@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -62,7 +62,7 @@ export class SpecialistPoolServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('aiplatform');
@@ -75,12 +75,12 @@ export class SpecialistPoolServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  specialistPoolServiceStub?: Promise<{ [name: string]: Function }>;
+  specialistPoolServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SpecialistPoolServiceClient.
@@ -157,7 +157,7 @@ export class SpecialistPoolServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -428,12 +428,12 @@ export class SpecialistPoolServiceClient {
         {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/ui/{name=projects/*/locations/*}',
-          additional_bindings: [{ get: '/v1/{name=projects/*/locations/*}' }],
+          additional_bindings: [{get: '/v1/{name=projects/*/locations/*}'}],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/ui/{name=projects/*}/locations',
-          additional_bindings: [{ get: '/v1/{name=projects/*}/locations' }],
+          additional_bindings: [{get: '/v1/{name=projects/*}/locations'}],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
@@ -726,7 +726,7 @@ export class SpecialistPoolServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',
             },
-            { post: '/v1/{name=projects/*/locations/*/operations/*}:cancel' },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
@@ -865,10 +865,8 @@ export class SpecialistPoolServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            {
-              delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}',
-            },
-            { delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -969,9 +967,7 @@ export class SpecialistPoolServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1056,7 +1052,7 @@ export class SpecialistPoolServiceClient {
               delete:
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1/{name=projects/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1141,9 +1137,7 @@ export class SpecialistPoolServiceClient {
               delete:
                 '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            {
-              delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}',
-            },
+            {delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               delete:
                 '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
@@ -1240,18 +1234,16 @@ export class SpecialistPoolServiceClient {
               delete:
                 '/v1/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
-            { delete: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}' },
+            {delete: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}' },
-            {
-              get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1273,9 +1265,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*/operations/*}',
             },
@@ -1303,7 +1293,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1328,7 +1318,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1344,7 +1334,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1357,9 +1347,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig/operations/*}',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1390,10 +1378,8 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
-            {
-              get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
             },
@@ -1409,9 +1395,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',
             },
@@ -1433,7 +1417,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/tuningJobs/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -1455,7 +1439,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/models/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
@@ -1483,7 +1467,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
             },
@@ -1496,9 +1480,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}',
-            },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
@@ -1526,16 +1508,16 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
-            { get: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}' },
+            {get: '/v1/{name=reasoningEngines/*/sessions/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/ui/{name=projects/*/locations/*/agents/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/apps/*}/operations' },
-            { get: '/ui/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1551,16 +1533,12 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/edgeDevices/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/extensionControllers/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/extensions/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/extensions/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1570,19 +1548,15 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/ui/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/ui/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1607,7 +1581,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1620,7 +1594,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1636,7 +1610,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            { get: '/ui/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/ui/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1667,8 +1641,8 @@ export class SpecialistPoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { get: '/v1/{name=projects/*/locations/*}/operations' },
-            { get: '/v1/{name=projects/*/locations/*/datasets/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
             },
@@ -1684,7 +1658,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/endpoints/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*}/operations',
             },
@@ -1694,19 +1668,15 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/customJobs/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*}/operations',
             },
             {
               get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations',
-            },
-            { get: '/v1/{name=projects/*/locations/*/indexes/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/tuningJobs/*}/operations'},
+            {get: '/v1/{name=projects/*/locations/*/indexes/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*}/operations',
             },
@@ -1728,7 +1698,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/migratableResources/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/models/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
@@ -1747,7 +1717,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/reasoningEngines/*/sessions/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/studies/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
             },
@@ -1763,13 +1733,11 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/ragEngineConfig}/operations',
             },
-            {
-              get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations',
-            },
+            {get: '/v1/{name=projects/*/locations/*/ragCorpora/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/ragCorpora/*/ragFiles/*}/operations',
             },
-            { get: '/v1/{name=projects/*/locations/*/schedules/*}/operations' },
+            {get: '/v1/{name=projects/*/locations/*/schedules/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/specialistPools/*}/operations',
             },
@@ -1797,7 +1765,7 @@ export class SpecialistPoolServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
-            { get: '/v1/{name=reasoningEngines/*/sessions/*}/operations' },
+            {get: '/v1/{name=reasoningEngines/*/sessions/*}/operations'},
           ],
         },
         {
@@ -1954,7 +1922,7 @@ export class SpecialistPoolServiceClient {
             {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/featureMonitors/*/operations/*}:wait',
             },
-            { post: '/v1/{name=projects/*/locations/*/operations/*}:wait' },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:wait'},
             {
               post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -2145,7 +2113,7 @@ export class SpecialistPoolServiceClient {
       'google.cloud.aiplatform.v1.SpecialistPoolService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -2186,7 +2154,7 @@ export class SpecialistPoolServiceClient {
             .SpecialistPoolService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -2199,7 +2167,7 @@ export class SpecialistPoolServiceClient {
     ];
     for (const methodName of specialistPoolServiceStubMethods) {
       const callPromise = this.specialistPoolServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -2402,7 +2370,7 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSpecialistPool request %j', request);
@@ -2555,7 +2523,7 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2612,7 +2580,7 @@ export class SpecialistPoolServiceClient {
     this._log.info('createSpecialistPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2729,7 +2697,7 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2786,7 +2754,7 @@ export class SpecialistPoolServiceClient {
     this._log.info('deleteSpecialistPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2900,7 +2868,7 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'specialist_pool.name': request.specialistPool!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2957,7 +2925,7 @@ export class SpecialistPoolServiceClient {
     this._log.info('updateSpecialistPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3072,7 +3040,7 @@ export class SpecialistPoolServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3147,7 +3115,7 @@ export class SpecialistPoolServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpecialistPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSpecialistPools stream %j', request);
@@ -3204,7 +3172,7 @@ export class SpecialistPoolServiceClient {
       });
     const defaultCallSettings = this._defaults['listSpecialistPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSpecialistPools iterate %j', request);
@@ -7416,14 +7384,14 @@ export class SpecialistPoolServiceClient {
    */
   close(): Promise<void> {
     if (this.specialistPoolServiceStub && !this._terminated) {
-      return this.specialistPoolServiceStub.then((stub) => {
+      return this.specialistPoolServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

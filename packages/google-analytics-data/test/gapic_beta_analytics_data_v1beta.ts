@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as betaanalyticsdataModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'analyticsdata.example.com');
@@ -207,7 +207,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'analyticsdata.example.com');
@@ -282,7 +282,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -291,14 +291,14 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       assert(client.betaAnalyticsDataStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.betaAnalyticsDataStub);
@@ -307,15 +307,15 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -325,7 +325,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -334,7 +334,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -348,7 +348,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -373,7 +373,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runReport without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -406,7 +406,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runReport without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -455,7 +455,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runReport with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -485,7 +485,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runReport with closed client', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -499,7 +499,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runReport(request), expectedError);
@@ -510,7 +510,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runPivotReport without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -543,7 +543,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runPivotReport without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -592,7 +592,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runPivotReport with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -625,7 +625,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runPivotReport with closed client', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -639,7 +639,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runPivotReport(request), expectedError);
@@ -650,7 +650,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes batchRunReports without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -683,7 +683,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes batchRunReports without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -732,7 +732,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes batchRunReports with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -765,7 +765,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes batchRunReports with closed client', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -779,7 +779,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchRunReports(request), expectedError);
@@ -790,7 +790,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes batchRunPivotReports without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -824,7 +824,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes batchRunPivotReports without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -873,7 +873,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes batchRunPivotReports with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -906,7 +906,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes batchRunPivotReports with closed client', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -920,7 +920,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchRunPivotReports(request), expectedError);
@@ -931,7 +931,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getMetadata without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -964,7 +964,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getMetadata without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1013,7 +1013,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getMetadata with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1046,7 +1046,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getMetadata with closed client', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1060,7 +1060,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMetadata(request), expectedError);
@@ -1071,7 +1071,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runRealtimeReport without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1104,7 +1104,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runRealtimeReport without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1153,7 +1153,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runRealtimeReport with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1186,7 +1186,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes runRealtimeReport with closed client', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1200,7 +1200,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runRealtimeReport(request), expectedError);
@@ -1211,7 +1211,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes checkCompatibility without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1245,7 +1245,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes checkCompatibility without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1294,7 +1294,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes checkCompatibility with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1327,7 +1327,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes checkCompatibility with closed client', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1341,7 +1341,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.checkCompatibility(request), expectedError);
@@ -1352,7 +1352,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes queryAudienceExport without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1386,7 +1386,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes queryAudienceExport without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1435,7 +1435,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes queryAudienceExport with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1468,7 +1468,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes queryAudienceExport with closed client', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1482,7 +1482,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.queryAudienceExport(request), expectedError);
@@ -1493,7 +1493,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getAudienceExport without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1526,7 +1526,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getAudienceExport without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1575,7 +1575,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getAudienceExport with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1608,7 +1608,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getAudienceExport with closed client', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1622,7 +1622,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAudienceExport(request), expectedError);
@@ -1633,7 +1633,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes createAudienceExport without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1668,7 +1668,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes createAudienceExport without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1724,7 +1724,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes createAudienceExport with call error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1757,7 +1757,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes createAudienceExport with LRO error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1792,7 +1792,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes checkCreateAudienceExportProgress without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1801,8 +1801,8 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAudienceExportProgress(
@@ -1816,7 +1816,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes checkCreateAudienceExportProgress with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1839,7 +1839,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes listAudienceExports without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1881,7 +1881,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes listAudienceExports without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1914,8 +1914,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.analytics.data.v1beta.IAudienceExport[]
-              | null,
+              protos.google.analytics.data.v1beta.IAudienceExport[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1940,7 +1939,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes listAudienceExports with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1973,7 +1972,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes listAudienceExportsStream without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2027,16 +2026,16 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceExports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAudienceExportsStream with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2079,16 +2078,16 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceExports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAudienceExports without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2131,16 +2130,16 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceExports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAudienceExports with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2174,9 +2173,9 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       assert(
         (client.descriptors.page.listAudienceExports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2184,7 +2183,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2207,7 +2206,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2236,7 +2235,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2247,7 +2246,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2273,7 +2272,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2297,7 +2296,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2326,7 +2325,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2337,7 +2336,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2363,7 +2362,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2387,7 +2386,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2416,7 +2415,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2427,7 +2426,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2453,7 +2452,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2490,7 +2489,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2527,7 +2526,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       };
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2581,7 +2580,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       };
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2621,7 +2620,7 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       };
       const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

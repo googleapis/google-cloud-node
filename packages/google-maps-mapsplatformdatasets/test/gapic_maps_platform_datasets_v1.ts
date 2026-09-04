@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as mapsplatformdatasetsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -252,7 +252,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.mapsPlatformDatasetsStub, undefined);
@@ -260,13 +260,13 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(client.mapsPlatformDatasetsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.mapsPlatformDatasetsStub);
@@ -275,15 +275,15 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.mapsPlatformDatasetsStub, undefined);
@@ -292,7 +292,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -301,7 +301,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -314,7 +314,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -338,7 +338,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes createDataset without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes createDataset without error using callback', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes createDataset with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes createDataset with closed client', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataset(request), expectedError);
@@ -474,7 +474,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes updateDatasetMetadata without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -508,7 +508,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes updateDatasetMetadata without error using callback', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes updateDatasetMetadata with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes updateDatasetMetadata with closed client', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       );
       request.dataset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -621,7 +621,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes getDataset without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -653,7 +653,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes getDataset without error using callback', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes getDataset with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes getDataset with closed client', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataset(request), expectedError);
@@ -757,7 +757,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes deleteDataset without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -789,7 +789,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes deleteDataset without error using callback', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -837,7 +837,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes deleteDataset with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -869,7 +869,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes deleteDataset with closed client', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataset(request), expectedError);
@@ -893,7 +893,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes fetchDatasetErrors without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes fetchDatasetErrors without error using callback', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes fetchDatasetErrors with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes fetchDatasetErrorsStream without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1050,16 +1050,16 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes fetchDatasetErrorsStream with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1097,16 +1097,16 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchDatasetErrors without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1141,16 +1141,16 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchDatasetErrors with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1182,9 +1182,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1193,7 +1193,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes listDatasets without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1233,7 +1233,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes listDatasets without error using callback', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1265,8 +1265,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.maps.mapsplatformdatasets.v1.IDataset[]
-              | null,
+              protos.google.maps.mapsplatformdatasets.v1.IDataset[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1291,7 +1290,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes listDatasets with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1323,7 +1322,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     it('invokes listDatasetsStream without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1376,16 +1375,16 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatasetsStream with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1429,16 +1428,16 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets without error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1480,16 +1479,16 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets with error', async () => {
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1522,9 +1521,9 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1538,7 +1537,7 @@ describe('v1.MapsPlatformDatasetsClient', () => {
       };
       const client =
         new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

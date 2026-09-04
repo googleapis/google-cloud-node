@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as branchserviceModule from '../src';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v2alpha.BranchServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.branchServiceStub, undefined);
@@ -207,12 +207,12 @@ describe('v2alpha.BranchServiceClient', () => {
       assert(client.branchServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.branchServiceStub);
@@ -221,14 +221,14 @@ describe('v2alpha.BranchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.branchServiceStub, undefined);
@@ -237,7 +237,7 @@ describe('v2alpha.BranchServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -245,7 +245,7 @@ describe('v2alpha.BranchServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -257,7 +257,7 @@ describe('v2alpha.BranchServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -280,7 +280,7 @@ describe('v2alpha.BranchServiceClient', () => {
   describe('listBranches', () => {
     it('invokes listBranches without error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -311,7 +311,7 @@ describe('v2alpha.BranchServiceClient', () => {
 
     it('invokes listBranches without error using callback', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -358,7 +358,7 @@ describe('v2alpha.BranchServiceClient', () => {
 
     it('invokes listBranches with error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v2alpha.BranchServiceClient', () => {
 
     it('invokes listBranches with closed client', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v2alpha.BranchServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listBranches(request), expectedError);
@@ -412,7 +412,7 @@ describe('v2alpha.BranchServiceClient', () => {
   describe('getBranch', () => {
     it('invokes getBranch without error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v2alpha.BranchServiceClient', () => {
 
     it('invokes getBranch without error using callback', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -490,7 +490,7 @@ describe('v2alpha.BranchServiceClient', () => {
 
     it('invokes getBranch with error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v2alpha.BranchServiceClient', () => {
 
     it('invokes getBranch with closed client', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v2alpha.BranchServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBranch(request), expectedError);
@@ -540,7 +540,7 @@ describe('v2alpha.BranchServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -570,7 +570,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -649,7 +649,7 @@ describe('v2alpha.BranchServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v2alpha.BranchServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -759,7 +759,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -787,7 +787,7 @@ describe('v2alpha.BranchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -797,7 +797,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -821,7 +821,7 @@ describe('v2alpha.BranchServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -871,7 +871,7 @@ describe('v2alpha.BranchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -881,7 +881,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -905,7 +905,7 @@ describe('v2alpha.BranchServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -927,7 +927,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -955,7 +955,7 @@ describe('v2alpha.BranchServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -965,7 +965,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -989,7 +989,7 @@ describe('v2alpha.BranchServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1024,7 +1024,7 @@ describe('v2alpha.BranchServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1058,7 +1058,7 @@ describe('v2alpha.BranchServiceClient', () => {
         project: 'projectValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1098,7 +1098,7 @@ describe('v2alpha.BranchServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1166,7 +1166,7 @@ describe('v2alpha.BranchServiceClient', () => {
         branch: 'branchValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1241,7 +1241,7 @@ describe('v2alpha.BranchServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1305,7 +1305,7 @@ describe('v2alpha.BranchServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,7 +1373,7 @@ describe('v2alpha.BranchServiceClient', () => {
         control: 'controlValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1446,7 +1446,7 @@ describe('v2alpha.BranchServiceClient', () => {
         project: 'projectValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1487,7 +1487,7 @@ describe('v2alpha.BranchServiceClient', () => {
         merchant_center_account_link: 'merchantCenterAccountLinkValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v2alpha.BranchServiceClient', () => {
         model: 'modelValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,7 +1661,7 @@ describe('v2alpha.BranchServiceClient', () => {
         product: 'productValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1745,7 +1745,7 @@ describe('v2alpha.BranchServiceClient', () => {
         project: 'projectValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1786,7 +1786,7 @@ describe('v2alpha.BranchServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new branchserviceModule.v2alpha.BranchServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

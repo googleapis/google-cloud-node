@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as profilerserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -179,7 +179,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.profilerServiceStub, undefined);
@@ -187,12 +187,12 @@ describe('v2.ProfilerServiceClient', () => {
       assert(client.profilerServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.profilerServiceStub);
@@ -201,14 +201,14 @@ describe('v2.ProfilerServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.profilerServiceStub, undefined);
@@ -217,7 +217,7 @@ describe('v2.ProfilerServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -225,7 +225,7 @@ describe('v2.ProfilerServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -237,7 +237,7 @@ describe('v2.ProfilerServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -260,7 +260,7 @@ describe('v2.ProfilerServiceClient', () => {
   describe('createProfile', () => {
     it('invokes createProfile without error', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -291,7 +291,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('invokes createProfile without error using callback', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -338,7 +338,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('invokes createProfile with error', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -369,7 +369,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('invokes createProfile with closed client', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -382,7 +382,7 @@ describe('v2.ProfilerServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createProfile(request), expectedError);
@@ -392,7 +392,7 @@ describe('v2.ProfilerServiceClient', () => {
   describe('createOfflineProfile', () => {
     it('invokes createOfflineProfile without error', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('invokes createOfflineProfile without error using callback', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('invokes createOfflineProfile with error', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('invokes createOfflineProfile with closed client', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v2.ProfilerServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createOfflineProfile(request), expectedError);
@@ -525,7 +525,7 @@ describe('v2.ProfilerServiceClient', () => {
   describe('updateProfile', () => {
     it('invokes updateProfile without error', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -557,7 +557,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('invokes updateProfile without error using callback', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('invokes updateProfile with error', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -637,7 +637,7 @@ describe('v2.ProfilerServiceClient', () => {
 
     it('invokes updateProfile with closed client', async () => {
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v2.ProfilerServiceClient', () => {
       );
       request.profile.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateProfile(request), expectedError);
@@ -666,7 +666,7 @@ describe('v2.ProfilerServiceClient', () => {
         profile: 'profileValue',
       };
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -714,7 +714,7 @@ describe('v2.ProfilerServiceClient', () => {
         project: 'projectValue',
       };
       const client = new profilerserviceModule.v2.ProfilerServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

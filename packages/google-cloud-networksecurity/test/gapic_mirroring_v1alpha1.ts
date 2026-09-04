@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as mirroringModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -280,7 +280,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.mirroringStub, undefined);
@@ -288,12 +288,12 @@ describe('v1alpha1.MirroringClient', () => {
       assert(client.mirroringStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.mirroringStub);
@@ -302,14 +302,14 @@ describe('v1alpha1.MirroringClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.mirroringStub, undefined);
@@ -318,7 +318,7 @@ describe('v1alpha1.MirroringClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -326,7 +326,7 @@ describe('v1alpha1.MirroringClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -338,7 +338,7 @@ describe('v1alpha1.MirroringClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -361,7 +361,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('getMirroringEndpointGroup', () => {
     it('invokes getMirroringEndpointGroup without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -393,7 +393,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringEndpointGroup without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringEndpointGroup with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringEndpointGroup with closed client', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1alpha1.MirroringClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -500,7 +500,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('getMirroringEndpointGroupAssociation', () => {
     it('invokes getMirroringEndpointGroupAssociation without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -533,7 +533,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringEndpointGroupAssociation without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -580,7 +580,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringEndpointGroupAssociation with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -612,7 +612,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringEndpointGroupAssociation with closed client', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -625,7 +625,7 @@ describe('v1alpha1.MirroringClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -638,7 +638,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('getMirroringDeploymentGroup', () => {
     it('invokes getMirroringDeploymentGroup without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -670,7 +670,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringDeploymentGroup without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -717,7 +717,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringDeploymentGroup with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringDeploymentGroup with closed client', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -764,7 +764,7 @@ describe('v1alpha1.MirroringClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -777,7 +777,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('getMirroringDeployment', () => {
     it('invokes getMirroringDeployment without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -809,7 +809,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringDeployment without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringDeployment with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -890,7 +890,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes getMirroringDeployment with closed client', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -903,7 +903,7 @@ describe('v1alpha1.MirroringClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -916,7 +916,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('createMirroringEndpointGroup', () => {
     it('invokes createMirroringEndpointGroup without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringEndpointGroup without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringEndpointGroup with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1037,7 +1037,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringEndpointGroup with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1070,7 +1070,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkCreateMirroringEndpointGroupProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1078,8 +1078,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1093,7 +1093,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkCreateMirroringEndpointGroupProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1114,7 +1114,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('updateMirroringEndpointGroup', () => {
     it('invokes updateMirroringEndpointGroup without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringEndpointGroup without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1203,7 +1203,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringEndpointGroup with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1238,7 +1238,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringEndpointGroup with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkUpdateMirroringEndpointGroupProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1280,8 +1280,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1295,7 +1295,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkUpdateMirroringEndpointGroupProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1316,7 +1316,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('deleteMirroringEndpointGroup', () => {
     it('invokes deleteMirroringEndpointGroup without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1349,7 +1349,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringEndpointGroup without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1403,7 +1403,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringEndpointGroup with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1437,7 +1437,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringEndpointGroup with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1470,7 +1470,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkDeleteMirroringEndpointGroupProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1478,8 +1478,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1493,7 +1493,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkDeleteMirroringEndpointGroupProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1514,7 +1514,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('createMirroringEndpointGroupAssociation', () => {
     it('invokes createMirroringEndpointGroupAssociation without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1550,7 +1550,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringEndpointGroupAssociation without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1606,7 +1606,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringEndpointGroupAssociation with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1640,7 +1640,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringEndpointGroupAssociation with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1673,7 +1673,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkCreateMirroringEndpointGroupAssociationProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1681,8 +1681,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1696,7 +1696,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkCreateMirroringEndpointGroupAssociationProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1717,7 +1717,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('updateMirroringEndpointGroupAssociation', () => {
     it('invokes updateMirroringEndpointGroupAssociation without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringEndpointGroupAssociation without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1811,7 +1811,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringEndpointGroupAssociation with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1846,7 +1846,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringEndpointGroupAssociation with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1880,7 +1880,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkUpdateMirroringEndpointGroupAssociationProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1888,8 +1888,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1903,7 +1903,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkUpdateMirroringEndpointGroupAssociationProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1924,7 +1924,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('deleteMirroringEndpointGroupAssociation', () => {
     it('invokes deleteMirroringEndpointGroupAssociation without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1960,7 +1960,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringEndpointGroupAssociation without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2016,7 +2016,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringEndpointGroupAssociation with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2050,7 +2050,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringEndpointGroupAssociation with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2083,7 +2083,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkDeleteMirroringEndpointGroupAssociationProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2091,8 +2091,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2106,7 +2106,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkDeleteMirroringEndpointGroupAssociationProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2127,7 +2127,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('createMirroringDeploymentGroup', () => {
     it('invokes createMirroringDeploymentGroup without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2160,7 +2160,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringDeploymentGroup without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2214,7 +2214,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringDeploymentGroup with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2248,7 +2248,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringDeploymentGroup with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2281,7 +2281,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkCreateMirroringDeploymentGroupProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2289,8 +2289,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2304,7 +2304,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkCreateMirroringDeploymentGroupProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2325,7 +2325,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('updateMirroringDeploymentGroup', () => {
     it('invokes updateMirroringDeploymentGroup without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2359,7 +2359,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringDeploymentGroup without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2414,7 +2414,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringDeploymentGroup with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2449,7 +2449,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringDeploymentGroup with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2483,7 +2483,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkUpdateMirroringDeploymentGroupProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2491,8 +2491,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2506,7 +2506,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkUpdateMirroringDeploymentGroupProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2527,7 +2527,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('deleteMirroringDeploymentGroup', () => {
     it('invokes deleteMirroringDeploymentGroup without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2560,7 +2560,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringDeploymentGroup without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2614,7 +2614,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringDeploymentGroup with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2648,7 +2648,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringDeploymentGroup with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2681,7 +2681,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkDeleteMirroringDeploymentGroupProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2689,8 +2689,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2704,7 +2704,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkDeleteMirroringDeploymentGroupProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2725,7 +2725,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('createMirroringDeployment', () => {
     it('invokes createMirroringDeployment without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2758,7 +2758,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringDeployment without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2812,7 +2812,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringDeployment with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2846,7 +2846,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes createMirroringDeployment with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2879,7 +2879,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkCreateMirroringDeploymentProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2887,8 +2887,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2902,7 +2902,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkCreateMirroringDeploymentProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2923,7 +2923,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('updateMirroringDeployment', () => {
     it('invokes updateMirroringDeployment without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2957,7 +2957,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringDeployment without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3012,7 +3012,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringDeployment with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3047,7 +3047,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes updateMirroringDeployment with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3081,7 +3081,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkUpdateMirroringDeploymentProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3089,8 +3089,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3104,7 +3104,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkUpdateMirroringDeploymentProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3125,7 +3125,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('deleteMirroringDeployment', () => {
     it('invokes deleteMirroringDeployment without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3158,7 +3158,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringDeployment without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3212,7 +3212,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringDeployment with call error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3246,7 +3246,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes deleteMirroringDeployment with LRO error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3279,7 +3279,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkDeleteMirroringDeploymentProgress without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3287,8 +3287,8 @@ describe('v1alpha1.MirroringClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3302,7 +3302,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes checkDeleteMirroringDeploymentProgress with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3323,7 +3323,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('listMirroringEndpointGroups', () => {
     it('invokes listMirroringEndpointGroups without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3363,7 +3363,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringEndpointGroups without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3420,7 +3420,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringEndpointGroups with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3454,7 +3454,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringEndpointGroupsStream without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3526,7 +3526,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringEndpointGroupsStream with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3587,7 +3587,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('uses async iteration with listMirroringEndpointGroups without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3641,7 +3641,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('uses async iteration with listMirroringEndpointGroups with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3688,7 +3688,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('listMirroringEndpointGroupAssociations', () => {
     it('invokes listMirroringEndpointGroupAssociations without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3729,7 +3729,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringEndpointGroupAssociations without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3786,7 +3786,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringEndpointGroupAssociations with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3818,7 +3818,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringEndpointGroupAssociationsStream without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3891,7 +3891,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringEndpointGroupAssociationsStream with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3953,7 +3953,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('uses async iteration with listMirroringEndpointGroupAssociations without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4008,7 +4008,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('uses async iteration with listMirroringEndpointGroupAssociations with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4056,7 +4056,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('listMirroringDeploymentGroups', () => {
     it('invokes listMirroringDeploymentGroups without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4096,7 +4096,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringDeploymentGroups without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4153,7 +4153,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringDeploymentGroups with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4187,7 +4187,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringDeploymentGroupsStream without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4259,7 +4259,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringDeploymentGroupsStream with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4320,7 +4320,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('uses async iteration with listMirroringDeploymentGroups without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4374,7 +4374,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('uses async iteration with listMirroringDeploymentGroups with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4421,7 +4421,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('listMirroringDeployments', () => {
     it('invokes listMirroringDeployments without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4461,7 +4461,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringDeployments without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4518,7 +4518,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringDeployments with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4552,7 +4552,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringDeploymentsStream without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4621,7 +4621,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('invokes listMirroringDeploymentsStream with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4679,7 +4679,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('uses async iteration with listMirroringDeployments without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4733,7 +4733,7 @@ describe('v1alpha1.MirroringClient', () => {
 
     it('uses async iteration with listMirroringDeployments with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4779,7 +4779,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4809,7 +4809,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4847,7 +4847,7 @@ describe('v1alpha1.MirroringClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4857,7 +4857,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4889,7 +4889,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4919,7 +4919,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4957,7 +4957,7 @@ describe('v1alpha1.MirroringClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4967,7 +4967,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4999,7 +4999,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5032,7 +5032,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5070,7 +5070,7 @@ describe('v1alpha1.MirroringClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5080,7 +5080,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5115,7 +5115,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5145,7 +5145,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5189,7 +5189,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5224,7 +5224,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5272,7 +5272,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5313,7 +5313,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5334,7 +5334,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5362,7 +5362,7 @@ describe('v1alpha1.MirroringClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5372,7 +5372,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5396,7 +5396,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5418,7 +5418,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5446,7 +5446,7 @@ describe('v1alpha1.MirroringClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5456,7 +5456,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5480,7 +5480,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5502,7 +5502,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5530,7 +5530,7 @@ describe('v1alpha1.MirroringClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5540,7 +5540,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5564,7 +5564,7 @@ describe('v1alpha1.MirroringClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5599,7 +5599,7 @@ describe('v1alpha1.MirroringClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5635,7 +5635,7 @@ describe('v1alpha1.MirroringClient', () => {
         authorization_policy: 'authorizationPolicyValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5713,7 +5713,7 @@ describe('v1alpha1.MirroringClient', () => {
         authz_policy: 'authzPolicyValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5777,7 +5777,7 @@ describe('v1alpha1.MirroringClient', () => {
         backend_authentication_config: 'backendAuthenticationConfigValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5857,7 +5857,7 @@ describe('v1alpha1.MirroringClient', () => {
         client_tls_policy: 'clientTlsPolicyValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5922,7 +5922,7 @@ describe('v1alpha1.MirroringClient', () => {
         dns_threat_detector: 'dnsThreatDetectorValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5999,7 +5999,7 @@ describe('v1alpha1.MirroringClient', () => {
         firewall_endpoint_association: 'firewallEndpointAssociationValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6078,7 +6078,7 @@ describe('v1alpha1.MirroringClient', () => {
         forwarding_rule: 'forwardingRuleValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6132,7 +6132,7 @@ describe('v1alpha1.MirroringClient', () => {
         gateway_security_policy: 'gatewaySecurityPolicyValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6214,7 +6214,7 @@ describe('v1alpha1.MirroringClient', () => {
         rule: 'ruleValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6310,7 +6310,7 @@ describe('v1alpha1.MirroringClient', () => {
         intercept_deployment: 'interceptDeploymentValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6388,7 +6388,7 @@ describe('v1alpha1.MirroringClient', () => {
         intercept_deployment_group: 'interceptDeploymentGroupValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6469,7 +6469,7 @@ describe('v1alpha1.MirroringClient', () => {
         intercept_endpoint_group: 'interceptEndpointGroupValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6551,7 +6551,7 @@ describe('v1alpha1.MirroringClient', () => {
           'interceptEndpointGroupAssociationValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6633,7 +6633,7 @@ describe('v1alpha1.MirroringClient', () => {
         location: 'locationValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6683,7 +6683,7 @@ describe('v1alpha1.MirroringClient', () => {
         mirroring_deployment: 'mirroringDeploymentValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6761,7 +6761,7 @@ describe('v1alpha1.MirroringClient', () => {
         mirroring_deployment_group: 'mirroringDeploymentGroupValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6842,7 +6842,7 @@ describe('v1alpha1.MirroringClient', () => {
         mirroring_endpoint_group: 'mirroringEndpointGroupValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6924,7 +6924,7 @@ describe('v1alpha1.MirroringClient', () => {
           'mirroringEndpointGroupAssociationValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7006,7 +7006,7 @@ describe('v1alpha1.MirroringClient', () => {
         network: 'networkValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7056,7 +7056,7 @@ describe('v1alpha1.MirroringClient', () => {
         firewall_endpoint: 'firewallEndpointValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7143,7 +7143,7 @@ describe('v1alpha1.MirroringClient', () => {
         security_profile: 'securityProfileValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7227,7 +7227,7 @@ describe('v1alpha1.MirroringClient', () => {
         security_profile_group: 'securityProfileGroupValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7314,7 +7314,7 @@ describe('v1alpha1.MirroringClient', () => {
         partner_sse_gateway: 'partnerSseGatewayValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7391,7 +7391,7 @@ describe('v1alpha1.MirroringClient', () => {
         partner_sse_realm: 'partnerSseRealmValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7454,7 +7454,7 @@ describe('v1alpha1.MirroringClient', () => {
         project: 'projectValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7494,7 +7494,7 @@ describe('v1alpha1.MirroringClient', () => {
         firewall_endpoint: 'firewallEndpointValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7575,7 +7575,7 @@ describe('v1alpha1.MirroringClient', () => {
         security_profile: 'securityProfileValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7654,7 +7654,7 @@ describe('v1alpha1.MirroringClient', () => {
         security_profile_group: 'securityProfileGroupValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7737,7 +7737,7 @@ describe('v1alpha1.MirroringClient', () => {
         sac_attachment: 'sacAttachmentValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7801,7 +7801,7 @@ describe('v1alpha1.MirroringClient', () => {
         sac_realm: 'sacRealmValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7865,7 +7865,7 @@ describe('v1alpha1.MirroringClient', () => {
         sse_gateway_reference: 'sseGatewayReferenceValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7943,7 +7943,7 @@ describe('v1alpha1.MirroringClient', () => {
         server_tls_policy: 'serverTlsPolicyValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8008,7 +8008,7 @@ describe('v1alpha1.MirroringClient', () => {
         tls_inspection_policy: 'tlsInspectionPolicyValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8086,7 +8086,7 @@ describe('v1alpha1.MirroringClient', () => {
         url_list: 'urlListValue',
       };
       const client = new mirroringModule.v1alpha1.MirroringClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as repositorymanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v2.RepositoryManagerClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new repositorymanagerModule.v2.RepositoryManagerClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'cloudbuild.configured.example.com');
@@ -278,7 +278,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.repositoryManagerStub, undefined);
@@ -286,12 +286,12 @@ describe('v2.RepositoryManagerClient', () => {
       assert(client.repositoryManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.repositoryManagerStub);
@@ -300,14 +300,14 @@ describe('v2.RepositoryManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.repositoryManagerStub, undefined);
@@ -316,7 +316,7 @@ describe('v2.RepositoryManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -324,7 +324,7 @@ describe('v2.RepositoryManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -336,7 +336,7 @@ describe('v2.RepositoryManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -359,7 +359,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('getConnection', () => {
     it('invokes getConnection without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes getConnection without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -437,7 +437,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes getConnection with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes getConnection with closed client', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v2.RepositoryManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnection(request), expectedError);
@@ -491,7 +491,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('getRepository', () => {
     it('invokes getRepository without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes getRepository without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes getRepository with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes getRepository with closed client', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v2.RepositoryManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRepository(request), expectedError);
@@ -623,7 +623,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('fetchReadWriteToken', () => {
     it('invokes fetchReadWriteToken without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -655,7 +655,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchReadWriteToken without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchReadWriteToken with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchReadWriteToken with closed client', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v2.RepositoryManagerClient', () => {
       );
       request.repository = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchReadWriteToken(request), expectedError);
@@ -756,7 +756,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('fetchReadToken', () => {
     it('invokes fetchReadToken without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchReadToken without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -834,7 +834,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchReadToken with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchReadToken with closed client', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v2.RepositoryManagerClient', () => {
       );
       request.repository = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchReadToken(request), expectedError);
@@ -888,7 +888,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('fetchGitRefs', () => {
     it('invokes fetchGitRefs without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchGitRefs without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchGitRefs with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchGitRefs with closed client', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v2.RepositoryManagerClient', () => {
       );
       request.repository = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchGitRefs(request), expectedError);
@@ -1020,7 +1020,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('createConnection', () => {
     it('invokes createConnection without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1053,7 +1053,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes createConnection without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes createConnection with call error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes createConnection with LRO error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1171,7 +1171,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkCreateConnectionProgress without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1179,8 +1179,8 @@ describe('v2.RepositoryManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateConnectionProgress(
@@ -1193,7 +1193,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkCreateConnectionProgress with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1214,7 +1214,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('updateConnection', () => {
     it('invokes updateConnection without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1248,7 +1248,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes updateConnection without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes updateConnection with call error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1335,7 +1335,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes updateConnection with LRO error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1369,7 +1369,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkUpdateConnectionProgress without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,8 +1377,8 @@ describe('v2.RepositoryManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateConnectionProgress(
@@ -1391,7 +1391,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkUpdateConnectionProgress with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1412,7 +1412,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('deleteConnection', () => {
     it('invokes deleteConnection without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1445,7 +1445,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes deleteConnection without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes deleteConnection with call error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1530,7 +1530,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes deleteConnection with LRO error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkDeleteConnectionProgress without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1571,8 +1571,8 @@ describe('v2.RepositoryManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteConnectionProgress(
@@ -1585,7 +1585,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkDeleteConnectionProgress with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1606,7 +1606,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('createRepository', () => {
     it('invokes createRepository without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1639,7 +1639,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes createRepository without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1693,7 +1693,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes createRepository with call error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1724,7 +1724,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes createRepository with LRO error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1757,7 +1757,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkCreateRepositoryProgress without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1765,8 +1765,8 @@ describe('v2.RepositoryManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRepositoryProgress(
@@ -1779,7 +1779,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkCreateRepositoryProgress with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('batchCreateRepositories', () => {
     it('invokes batchCreateRepositories without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes batchCreateRepositories without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1887,7 +1887,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes batchCreateRepositories with call error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1921,7 +1921,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes batchCreateRepositories with LRO error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1954,7 +1954,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkBatchCreateRepositoriesProgress without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1962,8 +1962,8 @@ describe('v2.RepositoryManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1977,7 +1977,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkBatchCreateRepositoriesProgress with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1998,7 +1998,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('deleteRepository', () => {
     it('invokes deleteRepository without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2031,7 +2031,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes deleteRepository without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2085,7 +2085,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes deleteRepository with call error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2116,7 +2116,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes deleteRepository with LRO error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2149,7 +2149,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkDeleteRepositoryProgress without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2157,8 +2157,8 @@ describe('v2.RepositoryManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRepositoryProgress(
@@ -2171,7 +2171,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes checkDeleteRepositoryProgress with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2192,7 +2192,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('listConnections', () => {
     it('invokes listConnections without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2231,7 +2231,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes listConnections without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2286,7 +2286,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes listConnections with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2317,7 +2317,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes listConnectionsStream without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2369,15 +2369,15 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConnectionsStream with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2418,15 +2418,15 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnections without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2467,15 +2467,15 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConnections with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2508,9 +2508,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2518,7 +2518,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('listRepositories', () => {
     it('invokes listRepositories without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2557,7 +2557,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes listRepositories without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2612,7 +2612,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes listRepositories with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2643,7 +2643,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes listRepositoriesStream without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2695,15 +2695,15 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRepositoriesStream with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2744,15 +2744,15 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRepositories without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2793,15 +2793,15 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRepositories with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2834,9 +2834,9 @@ describe('v2.RepositoryManagerClient', () => {
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2844,7 +2844,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('fetchLinkableRepositories', () => {
     it('invokes fetchLinkableRepositories without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2884,7 +2884,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchLinkableRepositories without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2939,7 +2939,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchLinkableRepositories with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2973,7 +2973,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchLinkableRepositoriesStream without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3039,7 +3039,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('invokes fetchLinkableRepositoriesStream with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3094,7 +3094,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('uses async iteration with fetchLinkableRepositories without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3147,7 +3147,7 @@ describe('v2.RepositoryManagerClient', () => {
 
     it('uses async iteration with fetchLinkableRepositories with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3193,7 +3193,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3223,7 +3223,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3261,7 +3261,7 @@ describe('v2.RepositoryManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3271,7 +3271,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3303,7 +3303,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3333,7 +3333,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3371,7 +3371,7 @@ describe('v2.RepositoryManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3381,7 +3381,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3413,7 +3413,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3446,7 +3446,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3484,7 +3484,7 @@ describe('v2.RepositoryManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3494,7 +3494,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3529,7 +3529,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3559,7 +3559,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3603,7 +3603,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3638,7 +3638,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3686,7 +3686,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3727,7 +3727,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3748,7 +3748,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3776,7 +3776,7 @@ describe('v2.RepositoryManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3786,7 +3786,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3810,7 +3810,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3832,7 +3832,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3860,7 +3860,7 @@ describe('v2.RepositoryManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3870,7 +3870,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3894,7 +3894,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3916,7 +3916,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3944,7 +3944,7 @@ describe('v2.RepositoryManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3954,7 +3954,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3978,7 +3978,7 @@ describe('v2.RepositoryManagerClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4013,7 +4013,7 @@ describe('v2.RepositoryManagerClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4049,7 +4049,7 @@ describe('v2.RepositoryManagerClient', () => {
         connection: 'connectionValue',
       };
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4112,7 +4112,7 @@ describe('v2.RepositoryManagerClient', () => {
         location: 'locationValue',
       };
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4160,7 +4160,7 @@ describe('v2.RepositoryManagerClient', () => {
         project: 'projectValue',
       };
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4201,7 +4201,7 @@ describe('v2.RepositoryManagerClient', () => {
         repository: 'repositoryValue',
       };
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4276,7 +4276,7 @@ describe('v2.RepositoryManagerClient', () => {
         version: 'versionValue',
       };
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4341,7 +4341,7 @@ describe('v2.RepositoryManagerClient', () => {
         service: 'serviceValue',
       };
       const client = new repositorymanagerModule.v2.RepositoryManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

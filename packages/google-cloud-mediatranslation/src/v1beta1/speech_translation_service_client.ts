@@ -24,10 +24,10 @@ import type {
   Descriptors,
   ClientOptions,
 } from 'google-gax';
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -49,7 +49,7 @@ export class SpeechTranslationServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('media-translation');
@@ -62,8 +62,8 @@ export class SpeechTranslationServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  speechTranslationServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  speechTranslationServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SpeechTranslationServiceClient.
@@ -140,7 +140,7 @@ export class SpeechTranslationServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -211,7 +211,7 @@ export class SpeechTranslationServiceClient {
       'google.cloud.mediatranslation.v1beta1.SpeechTranslationService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -252,18 +252,18 @@ export class SpeechTranslationServiceClient {
             .SpeechTranslationService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const speechTranslationServiceStubMethods = ['streamingTranslateSpeech'];
     for (const methodName of speechTranslationServiceStubMethods) {
       const callPromise = this.speechTranslationServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -399,7 +399,7 @@ export class SpeechTranslationServiceClient {
    * region_tag:mediatranslation_v1beta1_generated_SpeechTranslationService_StreamingTranslateSpeech_async
    */
   streamingTranslateSpeech(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamingTranslateSpeech stream %j', options);
@@ -414,7 +414,7 @@ export class SpeechTranslationServiceClient {
    */
   close(): Promise<void> {
     if (this.speechTranslationServiceStub && !this._terminated) {
-      return this.speechTranslationServiceStub.then((stub) => {
+      return this.speechTranslationServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

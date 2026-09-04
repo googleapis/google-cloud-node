@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dashboardchartserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -188,7 +188,7 @@ describe('v1.DashboardChartServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dashboardChartServiceStub, undefined);
@@ -196,13 +196,13 @@ describe('v1.DashboardChartServiceClient', () => {
       assert(client.dashboardChartServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dashboardChartServiceStub);
@@ -211,15 +211,15 @@ describe('v1.DashboardChartServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dashboardChartServiceStub, undefined);
@@ -228,7 +228,7 @@ describe('v1.DashboardChartServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -237,7 +237,7 @@ describe('v1.DashboardChartServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -250,7 +250,7 @@ describe('v1.DashboardChartServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -274,7 +274,7 @@ describe('v1.DashboardChartServiceClient', () => {
     it('invokes getDashboardChart without error', async () => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -306,7 +306,7 @@ describe('v1.DashboardChartServiceClient', () => {
     it('invokes getDashboardChart without error using callback', async () => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.DashboardChartServiceClient', () => {
     it('invokes getDashboardChart with error', async () => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.DashboardChartServiceClient', () => {
     it('invokes getDashboardChart with closed client', async () => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1.DashboardChartServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDashboardChart(request), expectedError);
@@ -410,7 +410,7 @@ describe('v1.DashboardChartServiceClient', () => {
     it('invokes batchGetDashboardCharts without error', async () => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1.DashboardChartServiceClient', () => {
     it('invokes batchGetDashboardCharts without error using callback', async () => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v1.DashboardChartServiceClient', () => {
     it('invokes batchGetDashboardCharts with error', async () => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -526,7 +526,7 @@ describe('v1.DashboardChartServiceClient', () => {
     it('invokes batchGetDashboardCharts with closed client', async () => {
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -539,7 +539,7 @@ describe('v1.DashboardChartServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -559,7 +559,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -625,7 +625,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -779,7 +779,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -857,7 +857,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -935,7 +935,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1012,7 +1012,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1111,7 +1111,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1200,7 +1200,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1296,7 +1296,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1389,7 +1389,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1484,7 +1484,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1548,7 +1548,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1600,7 +1600,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1674,7 +1674,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1716,7 +1716,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1794,7 +1794,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1882,7 +1882,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1959,7 +1959,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2036,7 +2036,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2129,7 +2129,7 @@ describe('v1.DashboardChartServiceClient', () => {
       };
       const client =
         new dashboardchartserviceModule.v1.DashboardChartServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { MaintenanceClient } from '@google-cloud/maintenance-api';
+import {MaintenanceClient} from '@google-cloud/maintenance-api';
 
 // check that the client class type name can be used
 function doStuffWithMaintenanceClient(client: MaintenanceClient) {

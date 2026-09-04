@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as osconfigzonalserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -281,7 +281,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.osConfigZonalServiceStub, undefined);
@@ -289,13 +289,13 @@ describe('v1.OsConfigZonalServiceClient', () => {
       assert(client.osConfigZonalServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.osConfigZonalServiceStub);
@@ -304,15 +304,15 @@ describe('v1.OsConfigZonalServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.osConfigZonalServiceStub, undefined);
@@ -321,7 +321,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -330,7 +330,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -343,7 +343,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -367,7 +367,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getOSPolicyAssignment without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getOSPolicyAssignment without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getOSPolicyAssignment with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getOSPolicyAssignment with closed client', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -496,7 +496,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -510,7 +510,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getOSPolicyAssignmentReport without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -543,7 +543,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getOSPolicyAssignmentReport without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getOSPolicyAssignmentReport with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -626,7 +626,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getOSPolicyAssignmentReport with closed client', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -639,7 +639,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -653,7 +653,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getInventory without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -685,7 +685,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getInventory without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getInventory with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -765,7 +765,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getInventory with closed client', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -778,7 +778,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInventory(request), expectedError);
@@ -789,7 +789,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getVulnerabilityReport without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -822,7 +822,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getVulnerabilityReport without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -870,7 +870,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getVulnerabilityReport with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -905,7 +905,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes getVulnerabilityReport with closed client', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -918,7 +918,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -932,7 +932,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes createOSPolicyAssignment without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes createOSPolicyAssignment without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1021,7 +1021,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes createOSPolicyAssignment with call error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1056,7 +1056,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes createOSPolicyAssignment with LRO error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1090,7 +1090,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes checkCreateOSPolicyAssignmentProgress without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1098,8 +1098,8 @@ describe('v1.OsConfigZonalServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1114,7 +1114,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes checkCreateOSPolicyAssignmentProgress with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1136,7 +1136,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes updateOSPolicyAssignment without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1171,7 +1171,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes updateOSPolicyAssignment without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes updateOSPolicyAssignment with call error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1263,7 +1263,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes updateOSPolicyAssignment with LRO error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1298,7 +1298,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes checkUpdateOSPolicyAssignmentProgress without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1306,8 +1306,8 @@ describe('v1.OsConfigZonalServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1322,7 +1322,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes checkUpdateOSPolicyAssignmentProgress with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1344,7 +1344,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes deleteOSPolicyAssignment without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1378,7 +1378,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes deleteOSPolicyAssignment without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1433,7 +1433,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes deleteOSPolicyAssignment with call error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1468,7 +1468,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes deleteOSPolicyAssignment with LRO error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1502,7 +1502,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes checkDeleteOSPolicyAssignmentProgress without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1510,8 +1510,8 @@ describe('v1.OsConfigZonalServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1526,7 +1526,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes checkDeleteOSPolicyAssignmentProgress with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1548,7 +1548,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignments without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1589,7 +1589,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignments without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1621,8 +1621,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.osconfig.v1.IOSPolicyAssignment[]
-              | null,
+              protos.google.cloud.osconfig.v1.IOSPolicyAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1647,7 +1646,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignments with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1682,7 +1681,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentsStream without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1750,7 +1749,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentsStream with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1807,7 +1806,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('uses async iteration with listOSPolicyAssignments without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1862,7 +1861,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('uses async iteration with listOSPolicyAssignments with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1910,7 +1909,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentRevisions without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1951,7 +1950,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentRevisions without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1983,8 +1982,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.osconfig.v1.IOSPolicyAssignment[]
-              | null,
+              protos.google.cloud.osconfig.v1.IOSPolicyAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2009,7 +2007,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentRevisions with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2044,7 +2042,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentRevisionsStream without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2115,7 +2113,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentRevisionsStream with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2175,7 +2173,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('uses async iteration with listOSPolicyAssignmentRevisions without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2230,7 +2228,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('uses async iteration with listOSPolicyAssignmentRevisions with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2278,7 +2276,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentReports without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2319,7 +2317,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentReports without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2377,7 +2375,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentReports with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2412,7 +2410,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentReportsStream without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2485,7 +2483,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listOSPolicyAssignmentReportsStream with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2547,7 +2545,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('uses async iteration with listOSPolicyAssignmentReports without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2602,7 +2600,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('uses async iteration with listOSPolicyAssignmentReports with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2650,7 +2648,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listInventories without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2684,7 +2682,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listInventories without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2734,7 +2732,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listInventories with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2766,7 +2764,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listInventoriesStream without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2812,16 +2810,16 @@ describe('v1.OsConfigZonalServiceClient', () => {
       assert(
         (client.descriptors.page.listInventories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInventoriesStream with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2862,16 +2860,16 @@ describe('v1.OsConfigZonalServiceClient', () => {
       assert(
         (client.descriptors.page.listInventories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInventories without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2906,16 +2904,16 @@ describe('v1.OsConfigZonalServiceClient', () => {
       assert(
         (client.descriptors.page.listInventories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInventories with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2947,9 +2945,9 @@ describe('v1.OsConfigZonalServiceClient', () => {
       assert(
         (client.descriptors.page.listInventories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2958,7 +2956,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listVulnerabilityReports without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2999,7 +2997,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listVulnerabilityReports without error using callback', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3031,8 +3029,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.osconfig.v1.IVulnerabilityReport[]
-              | null,
+              protos.google.cloud.osconfig.v1.IVulnerabilityReport[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3057,7 +3054,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listVulnerabilityReports with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3092,7 +3089,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listVulnerabilityReportsStream without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3160,7 +3157,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('invokes listVulnerabilityReportsStream with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3217,7 +3214,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('uses async iteration with listVulnerabilityReports without error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3272,7 +3269,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
     it('uses async iteration with listVulnerabilityReports with error', async () => {
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3326,7 +3323,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       };
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3391,7 +3388,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       };
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3470,7 +3467,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       };
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3564,7 +3561,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       };
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3618,7 +3615,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       };
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3669,7 +3666,7 @@ describe('v1.OsConfigZonalServiceClient', () => {
       };
       const client =
         new osconfigzonalserviceModule.v1.OsConfigZonalServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

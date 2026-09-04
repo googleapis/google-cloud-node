@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as groundedgenerationserviceModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -130,7 +130,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
@@ -139,7 +139,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
@@ -166,7 +166,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -184,7 +184,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -217,7 +217,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -226,15 +226,15 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       assert(client.groundedGenerationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.groundedGenerationServiceStub);
@@ -243,16 +243,16 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -262,7 +262,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -272,7 +272,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -287,7 +287,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -313,7 +313,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -347,7 +347,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -397,7 +397,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -431,7 +431,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -445,7 +445,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       );
       request.groundingConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.checkGrounding(request), expectedError);
@@ -456,7 +456,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -489,7 +489,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -536,7 +536,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -574,7 +574,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -625,7 +625,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -675,7 +675,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -729,7 +729,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -807,7 +807,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -874,7 +874,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -940,7 +940,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -984,7 +984,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1091,7 +1091,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1241,7 +1241,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1407,7 +1407,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1536,7 +1536,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1666,7 +1666,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1795,7 +1795,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1907,7 +1907,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2036,7 +2036,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2167,7 +2167,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2315,7 +2315,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2443,7 +2443,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2555,7 +2555,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2684,7 +2684,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2813,7 +2813,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2942,7 +2942,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3072,7 +3072,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3218,7 +3218,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3344,7 +3344,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3428,7 +3428,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3558,7 +3558,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3703,7 +3703,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3801,7 +3801,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3911,7 +3911,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4020,7 +4020,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4112,7 +4112,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4208,7 +4208,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4318,7 +4318,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4445,7 +4445,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4545,7 +4545,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4637,7 +4637,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4747,7 +4747,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4825,7 +4825,7 @@ describe('v1alpha.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1alpha.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

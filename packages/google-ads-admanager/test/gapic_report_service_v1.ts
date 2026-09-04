@@ -19,18 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as reportserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import {
-  GoogleAuth,
-  protobuf,
-  LROperation,
-  operationsProtos,
-} from 'google-gax';
+import {GoogleAuth, protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -50,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -171,7 +166,7 @@ describe('v1.ReportServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -297,12 +292,12 @@ describe('v1.ReportServiceClient', () => {
       assert(client.reportServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new reportserviceModule.v1.ReportServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.reportServiceStub);
@@ -311,12 +306,12 @@ describe('v1.ReportServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new reportserviceModule.v1.ReportServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -327,7 +322,7 @@ describe('v1.ReportServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -489,7 +484,7 @@ describe('v1.ReportServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReport(request), expectedError);
@@ -621,7 +616,7 @@ describe('v1.ReportServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createReport(request), expectedError);
@@ -757,7 +752,7 @@ describe('v1.ReportServiceClient', () => {
       );
       request.report.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateReport(request), expectedError);
@@ -925,8 +920,8 @@ describe('v1.ReportServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunReportProgress(
@@ -957,7 +952,7 @@ describe('v1.ReportServiceClient', () => {
   describe('listReports', () => {
     it('invokes listReports without error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -990,7 +985,7 @@ describe('v1.ReportServiceClient', () => {
 
     it('invokes listReports without error using callback', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1039,7 +1034,7 @@ describe('v1.ReportServiceClient', () => {
 
     it('invokes listReports with error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1070,7 +1065,7 @@ describe('v1.ReportServiceClient', () => {
 
     it('invokes listReportsStream without error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1113,15 +1108,15 @@ describe('v1.ReportServiceClient', () => {
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReportsStream with error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1161,9 +1156,9 @@ describe('v1.ReportServiceClient', () => {
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1204,15 +1199,15 @@ describe('v1.ReportServiceClient', () => {
       assert(
         (client.descriptors.page.listReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReports with error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1246,9 +1241,9 @@ describe('v1.ReportServiceClient', () => {
       assert(
         (client.descriptors.page.listReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1256,7 +1251,7 @@ describe('v1.ReportServiceClient', () => {
   describe('fetchReportResultRows', () => {
     it('invokes fetchReportResultRows without error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1296,7 +1291,7 @@ describe('v1.ReportServiceClient', () => {
 
     it('invokes fetchReportResultRows without error using callback', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1328,8 +1323,7 @@ describe('v1.ReportServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.ads.admanager.v1.ReportDataTable.IRow[]
-              | null,
+              protos.google.ads.admanager.v1.ReportDataTable.IRow[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1353,7 +1347,7 @@ describe('v1.ReportServiceClient', () => {
 
     it('invokes fetchReportResultRows with error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,7 +1381,7 @@ describe('v1.ReportServiceClient', () => {
 
     it('invokes fetchReportResultRowsStream without error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1454,7 +1448,7 @@ describe('v1.ReportServiceClient', () => {
 
     it('invokes fetchReportResultRowsStream with error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1564,7 +1558,7 @@ describe('v1.ReportServiceClient', () => {
 
     it('uses async iteration with fetchReportResultRows with error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1659,7 +1653,7 @@ describe('v1.ReportServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1743,7 +1737,7 @@ describe('v1.ReportServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1827,7 +1821,7 @@ describe('v1.ReportServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1896,7 +1890,7 @@ describe('v1.ReportServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1932,7 +1926,7 @@ describe('v1.ReportServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1996,7 +1990,7 @@ describe('v1.ReportServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2065,7 +2059,7 @@ describe('v1.ReportServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2114,7 +2108,7 @@ describe('v1.ReportServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2163,7 +2157,7 @@ describe('v1.ReportServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2212,7 +2206,7 @@ describe('v1.ReportServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2264,7 +2258,7 @@ describe('v1.ReportServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2317,7 +2311,7 @@ describe('v1.ReportServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2370,7 +2364,7 @@ describe('v1.ReportServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2419,7 +2413,7 @@ describe('v1.ReportServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2472,7 +2466,7 @@ describe('v1.ReportServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2524,7 +2518,7 @@ describe('v1.ReportServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2577,7 +2571,7 @@ describe('v1.ReportServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2630,7 +2624,7 @@ describe('v1.ReportServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2687,7 +2681,7 @@ describe('v1.ReportServiceClient', () => {
         company: 'companyValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2736,7 +2730,7 @@ describe('v1.ReportServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2785,7 +2779,7 @@ describe('v1.ReportServiceClient', () => {
         content: 'contentValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2834,7 +2828,7 @@ describe('v1.ReportServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2886,7 +2880,7 @@ describe('v1.ReportServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2938,7 +2932,7 @@ describe('v1.ReportServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2987,7 +2981,7 @@ describe('v1.ReportServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3039,7 +3033,7 @@ describe('v1.ReportServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3096,7 +3090,7 @@ describe('v1.ReportServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3149,7 +3143,7 @@ describe('v1.ReportServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3201,7 +3195,7 @@ describe('v1.ReportServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3264,7 +3258,7 @@ describe('v1.ReportServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3329,7 +3323,7 @@ describe('v1.ReportServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3394,7 +3388,7 @@ describe('v1.ReportServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3456,7 +3450,7 @@ describe('v1.ReportServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3503,7 +3497,7 @@ describe('v1.ReportServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3560,7 +3554,7 @@ describe('v1.ReportServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3613,7 +3607,7 @@ describe('v1.ReportServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3676,7 +3670,7 @@ describe('v1.ReportServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3741,7 +3735,7 @@ describe('v1.ReportServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3793,7 +3787,7 @@ describe('v1.ReportServiceClient', () => {
         label: 'labelValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3842,7 +3836,7 @@ describe('v1.ReportServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3891,7 +3885,7 @@ describe('v1.ReportServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3943,7 +3937,7 @@ describe('v1.ReportServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3995,7 +3989,7 @@ describe('v1.ReportServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4048,7 +4042,7 @@ describe('v1.ReportServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4100,7 +4094,7 @@ describe('v1.ReportServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4152,7 +4146,7 @@ describe('v1.ReportServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4217,7 +4211,7 @@ describe('v1.ReportServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4268,7 +4262,7 @@ describe('v1.ReportServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4307,7 +4301,7 @@ describe('v1.ReportServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4360,7 +4354,7 @@ describe('v1.ReportServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4425,7 +4419,7 @@ describe('v1.ReportServiceClient', () => {
         order: 'orderValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4474,7 +4468,7 @@ describe('v1.ReportServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4523,7 +4517,7 @@ describe('v1.ReportServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4575,7 +4569,7 @@ describe('v1.ReportServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4628,7 +4622,7 @@ describe('v1.ReportServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4691,7 +4685,7 @@ describe('v1.ReportServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4754,7 +4748,7 @@ describe('v1.ReportServiceClient', () => {
         report: 'reportValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4803,7 +4797,7 @@ describe('v1.ReportServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4866,7 +4860,7 @@ describe('v1.ReportServiceClient', () => {
         role: 'roleValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4915,7 +4909,7 @@ describe('v1.ReportServiceClient', () => {
         site: 'siteValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4964,7 +4958,7 @@ describe('v1.ReportServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5013,7 +5007,7 @@ describe('v1.ReportServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5066,7 +5060,7 @@ describe('v1.ReportServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5119,7 +5113,7 @@ describe('v1.ReportServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5176,7 +5170,7 @@ describe('v1.ReportServiceClient', () => {
         team: 'teamValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5225,7 +5219,7 @@ describe('v1.ReportServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5288,7 +5282,7 @@ describe('v1.ReportServiceClient', () => {
         user: 'userValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5337,7 +5331,7 @@ describe('v1.ReportServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5400,7 +5394,7 @@ describe('v1.ReportServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new reportserviceModule.v1.ReportServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

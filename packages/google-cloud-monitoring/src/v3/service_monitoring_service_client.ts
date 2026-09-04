@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class ServiceMonitoringServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('monitoring');
@@ -67,9 +67,9 @@ export class ServiceMonitoringServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  serviceMonitoringServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  serviceMonitoringServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ServiceMonitoringServiceClient.
@@ -146,7 +146,7 @@ export class ServiceMonitoringServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -314,7 +314,7 @@ export class ServiceMonitoringServiceClient {
       'google.monitoring.v3.ServiceMonitoringService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -354,7 +354,7 @@ export class ServiceMonitoringServiceClient {
           (this._protos as any).google.monitoring.v3.ServiceMonitoringService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -372,7 +372,7 @@ export class ServiceMonitoringServiceClient {
     ];
     for (const methodName of serviceMonitoringServiceStubMethods) {
       const callPromise = this.serviceMonitoringServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -575,7 +575,7 @@ export class ServiceMonitoringServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createService request %j', request);
@@ -701,7 +701,7 @@ export class ServiceMonitoringServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getService request %j', request);
@@ -828,7 +828,7 @@ export class ServiceMonitoringServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'service.name': request.service!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateService request %j', request);
@@ -954,7 +954,7 @@ export class ServiceMonitoringServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteService request %j', request);
@@ -1102,7 +1102,7 @@ export class ServiceMonitoringServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createServiceLevelObjective request %j', request);
@@ -1247,7 +1247,7 @@ export class ServiceMonitoringServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServiceLevelObjective request %j', request);
@@ -1394,7 +1394,7 @@ export class ServiceMonitoringServiceClient {
         'service_level_objective.name':
           request.serviceLevelObjective!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateServiceLevelObjective request %j', request);
@@ -1540,7 +1540,7 @@ export class ServiceMonitoringServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteServiceLevelObjective request %j', request);
@@ -1704,7 +1704,7 @@ export class ServiceMonitoringServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1796,7 +1796,7 @@ export class ServiceMonitoringServiceClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServices stream %j', request);
@@ -1872,7 +1872,7 @@ export class ServiceMonitoringServiceClient {
       });
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServices iterate %j', request);
@@ -1990,7 +1990,7 @@ export class ServiceMonitoringServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2071,7 +2071,7 @@ export class ServiceMonitoringServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceLevelObjectives'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceLevelObjectives stream %j', request);
@@ -2134,7 +2134,7 @@ export class ServiceMonitoringServiceClient {
       });
     const defaultCallSettings = this._defaults['listServiceLevelObjectives'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceLevelObjectives iterate %j', request);
@@ -3380,7 +3380,7 @@ export class ServiceMonitoringServiceClient {
    */
   close(): Promise<void> {
     if (this.serviceMonitoringServiceStub && !this._terminated) {
-      return this.serviceMonitoringServiceStub.then((stub) => {
+      return this.serviceMonitoringServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

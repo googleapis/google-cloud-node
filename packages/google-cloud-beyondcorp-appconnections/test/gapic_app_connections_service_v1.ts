@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as appconnectionsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -289,7 +289,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.appConnectionsServiceStub, undefined);
@@ -297,13 +297,13 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert(client.appConnectionsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.appConnectionsServiceStub);
@@ -312,15 +312,15 @@ describe('v1.AppConnectionsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.appConnectionsServiceStub, undefined);
@@ -329,7 +329,7 @@ describe('v1.AppConnectionsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -338,7 +338,7 @@ describe('v1.AppConnectionsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -351,7 +351,7 @@ describe('v1.AppConnectionsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -375,7 +375,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getAppConnection without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getAppConnection without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getAppConnection with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getAppConnection with closed client', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -500,7 +500,7 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAppConnection(request), expectedError);
@@ -511,7 +511,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes createAppConnection without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes createAppConnection without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes createAppConnection with call error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes createAppConnection with LRO error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes checkCreateAppConnectionProgress without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -674,8 +674,8 @@ describe('v1.AppConnectionsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAppConnectionProgress(
@@ -689,7 +689,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes checkCreateAppConnectionProgress with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes updateAppConnection without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes updateAppConnection without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -802,7 +802,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes updateAppConnection with call error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes updateAppConnection with LRO error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -870,7 +870,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes checkUpdateAppConnectionProgress without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -878,8 +878,8 @@ describe('v1.AppConnectionsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAppConnectionProgress(
@@ -893,7 +893,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes checkUpdateAppConnectionProgress with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -915,7 +915,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes deleteAppConnection without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes deleteAppConnection without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes deleteAppConnection with call error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1036,7 +1036,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes deleteAppConnection with LRO error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1070,7 +1070,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes checkDeleteAppConnectionProgress without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1078,8 +1078,8 @@ describe('v1.AppConnectionsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAppConnectionProgress(
@@ -1093,7 +1093,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes checkDeleteAppConnectionProgress with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1115,7 +1115,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes listAppConnections without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1156,7 +1156,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes listAppConnections without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1214,7 +1214,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes listAppConnections with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1246,7 +1246,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes listAppConnectionsStream without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1301,16 +1301,16 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert(
         (client.descriptors.page.listAppConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAppConnectionsStream with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1354,16 +1354,16 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert(
         (client.descriptors.page.listAppConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAppConnections without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1405,16 +1405,16 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert(
         (client.descriptors.page.listAppConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAppConnections with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1447,9 +1447,9 @@ describe('v1.AppConnectionsServiceClient', () => {
       assert(
         (client.descriptors.page.listAppConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1458,7 +1458,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes resolveAppConnections without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes resolveAppConnections without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1557,7 +1557,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes resolveAppConnections with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1592,7 +1592,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes resolveAppConnectionsStream without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1662,7 +1662,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes resolveAppConnectionsStream with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1721,7 +1721,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('uses async iteration with resolveAppConnections without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1776,7 +1776,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('uses async iteration with resolveAppConnections with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1823,7 +1823,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1854,7 +1854,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1892,7 +1892,7 @@ describe('v1.AppConnectionsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1903,7 +1903,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1936,7 +1936,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1967,7 +1967,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2005,7 +2005,7 @@ describe('v1.AppConnectionsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2016,7 +2016,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2049,7 +2049,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2083,7 +2083,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2121,7 +2121,7 @@ describe('v1.AppConnectionsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2132,7 +2132,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2168,7 +2168,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2199,7 +2199,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2244,7 +2244,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2280,7 +2280,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2329,7 +2329,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2371,7 +2371,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2393,7 +2393,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2421,7 +2421,7 @@ describe('v1.AppConnectionsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2432,7 +2432,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2457,7 +2457,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2480,7 +2480,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2508,7 +2508,7 @@ describe('v1.AppConnectionsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2519,7 +2519,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2544,7 +2544,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2567,7 +2567,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2595,7 +2595,7 @@ describe('v1.AppConnectionsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2606,7 +2606,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2631,7 +2631,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2667,7 +2667,7 @@ describe('v1.AppConnectionsServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2704,7 +2704,7 @@ describe('v1.AppConnectionsServiceClient', () => {
       };
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2769,7 +2769,7 @@ describe('v1.AppConnectionsServiceClient', () => {
       };
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2833,7 +2833,7 @@ describe('v1.AppConnectionsServiceClient', () => {
       };
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2882,7 +2882,7 @@ describe('v1.AppConnectionsServiceClient', () => {
       };
       const client =
         new appconnectionsserviceModule.v1.AppConnectionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

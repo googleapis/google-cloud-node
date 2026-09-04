@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as recommenderModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v1.RecommenderClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.recommenderStub, undefined);
@@ -245,12 +245,12 @@ describe('v1.RecommenderClient', () => {
       assert(client.recommenderStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.recommenderStub);
@@ -259,14 +259,14 @@ describe('v1.RecommenderClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.recommenderStub, undefined);
@@ -275,7 +275,7 @@ describe('v1.RecommenderClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v1.RecommenderClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v1.RecommenderClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v1.RecommenderClient', () => {
   describe('getInsight', () => {
     it('invokes getInsight without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getInsight without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getInsight with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getInsight with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInsight(request), expectedError);
@@ -450,7 +450,7 @@ describe('v1.RecommenderClient', () => {
   describe('markInsightAccepted', () => {
     it('invokes markInsightAccepted without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markInsightAccepted without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markInsightAccepted with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -560,7 +560,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markInsightAccepted with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -573,7 +573,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.markInsightAccepted(request), expectedError);
@@ -583,7 +583,7 @@ describe('v1.RecommenderClient', () => {
   describe('getRecommendation', () => {
     it('invokes getRecommendation without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getRecommendation without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getRecommendation with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -692,7 +692,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getRecommendation with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -705,7 +705,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRecommendation(request), expectedError);
@@ -715,7 +715,7 @@ describe('v1.RecommenderClient', () => {
   describe('markRecommendationDismissed', () => {
     it('invokes markRecommendationDismissed without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationDismissed without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationDismissed with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationDismissed with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -841,7 +841,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -854,7 +854,7 @@ describe('v1.RecommenderClient', () => {
   describe('markRecommendationClaimed', () => {
     it('invokes markRecommendationClaimed without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationClaimed without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -933,7 +933,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationClaimed with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -967,7 +967,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationClaimed with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -980,7 +980,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -993,7 +993,7 @@ describe('v1.RecommenderClient', () => {
   describe('markRecommendationSucceeded', () => {
     it('invokes markRecommendationSucceeded without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1025,7 +1025,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationSucceeded without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1072,7 +1072,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationSucceeded with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationSucceeded with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1119,7 +1119,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1132,7 +1132,7 @@ describe('v1.RecommenderClient', () => {
   describe('markRecommendationFailed', () => {
     it('invokes markRecommendationFailed without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1164,7 +1164,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationFailed without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1211,7 +1211,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationFailed with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes markRecommendationFailed with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1258,7 +1258,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1271,7 +1271,7 @@ describe('v1.RecommenderClient', () => {
   describe('getRecommenderConfig', () => {
     it('invokes getRecommenderConfig without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getRecommenderConfig without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1350,7 +1350,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getRecommenderConfig with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1381,7 +1381,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getRecommenderConfig with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1394,7 +1394,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRecommenderConfig(request), expectedError);
@@ -1404,7 +1404,7 @@ describe('v1.RecommenderClient', () => {
   describe('updateRecommenderConfig', () => {
     it('invokes updateRecommenderConfig without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1437,7 +1437,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes updateRecommenderConfig without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1485,7 +1485,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes updateRecommenderConfig with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1520,7 +1520,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes updateRecommenderConfig with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1534,7 +1534,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.recommenderConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1547,7 +1547,7 @@ describe('v1.RecommenderClient', () => {
   describe('getInsightTypeConfig', () => {
     it('invokes getInsightTypeConfig without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1579,7 +1579,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getInsightTypeConfig without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1626,7 +1626,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getInsightTypeConfig with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1657,7 +1657,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes getInsightTypeConfig with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1670,7 +1670,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInsightTypeConfig(request), expectedError);
@@ -1680,7 +1680,7 @@ describe('v1.RecommenderClient', () => {
   describe('updateInsightTypeConfig', () => {
     it('invokes updateInsightTypeConfig without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1713,7 +1713,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes updateInsightTypeConfig without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1761,7 +1761,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes updateInsightTypeConfig with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1796,7 +1796,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes updateInsightTypeConfig with closed client', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1810,7 +1810,7 @@ describe('v1.RecommenderClient', () => {
       );
       request.insightTypeConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1823,7 +1823,7 @@ describe('v1.RecommenderClient', () => {
   describe('listInsights', () => {
     it('invokes listInsights without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1856,7 +1856,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes listInsights without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1905,7 +1905,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes listInsights with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1936,7 +1936,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes listInsightsStream without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1982,15 +1982,15 @@ describe('v1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listInsights.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInsightsStream with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2033,15 +2033,15 @@ describe('v1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listInsights.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInsights without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2076,15 +2076,15 @@ describe('v1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listInsights.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInsights with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2116,9 +2116,9 @@ describe('v1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listInsights.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2126,7 +2126,7 @@ describe('v1.RecommenderClient', () => {
   describe('listRecommendations', () => {
     it('invokes listRecommendations without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2166,7 +2166,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes listRecommendations without error using callback', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2198,8 +2198,7 @@ describe('v1.RecommenderClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.recommender.v1.IRecommendation[]
-              | null,
+              protos.google.cloud.recommender.v1.IRecommendation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2223,7 +2222,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes listRecommendations with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2254,7 +2253,7 @@ describe('v1.RecommenderClient', () => {
 
     it('invokes listRecommendationsStream without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2307,15 +2306,15 @@ describe('v1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listRecommendations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRecommendationsStream with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2357,15 +2356,15 @@ describe('v1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listRecommendations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRecommendations without error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2407,15 +2406,15 @@ describe('v1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRecommendations with error', async () => {
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2448,9 +2447,9 @@ describe('v1.RecommenderClient', () => {
       assert(
         (client.descriptors.page.listRecommendations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2464,7 +2463,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2547,7 +2546,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2636,7 +2635,7 @@ describe('v1.RecommenderClient', () => {
         insight: 'insightValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2741,7 +2740,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2824,7 +2823,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2913,7 +2912,7 @@ describe('v1.RecommenderClient', () => {
         recommendation: 'recommendationValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3019,7 +3018,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3099,7 +3098,7 @@ describe('v1.RecommenderClient', () => {
         insight: 'insightValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3195,7 +3194,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3275,7 +3274,7 @@ describe('v1.RecommenderClient', () => {
         recommendation: 'recommendationValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3380,7 +3379,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3461,7 +3460,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3549,7 +3548,7 @@ describe('v1.RecommenderClient', () => {
         insight: 'insightValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3654,7 +3653,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3735,7 +3734,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3824,7 +3823,7 @@ describe('v1.RecommenderClient', () => {
         recommendation: 'recommendationValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3929,7 +3928,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4008,7 +4007,7 @@ describe('v1.RecommenderClient', () => {
         insight_type: 'insightTypeValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4090,7 +4089,7 @@ describe('v1.RecommenderClient', () => {
         insight: 'insightValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4190,7 +4189,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4269,7 +4268,7 @@ describe('v1.RecommenderClient', () => {
         recommender: 'recommenderValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4352,7 +4351,7 @@ describe('v1.RecommenderClient', () => {
         recommendation: 'recommendationValue',
       };
       const client = new recommenderModule.v1.RecommenderClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

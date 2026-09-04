@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -69,7 +69,7 @@ export class GkeHubClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('gke-hub');
@@ -82,10 +82,10 @@ export class GkeHubClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  gkeHubStub?: Promise<{ [name: string]: Function }>;
+  gkeHubStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of GkeHubClient.
@@ -161,7 +161,7 @@ export class GkeHubClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -698,7 +698,7 @@ export class GkeHubClient {
       'google.cloud.gkehub.v1.GkeHub',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -738,7 +738,7 @@ export class GkeHubClient {
           (this._protos as any).google.cloud.gkehub.v1.GkeHub,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -790,7 +790,7 @@ export class GkeHubClient {
     ];
     for (const methodName of gkeHubStubMethods) {
       const callPromise = this.gkeHubStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -986,7 +986,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMembership request %j', request);
@@ -1118,7 +1118,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getFeature request %j', request);
@@ -1278,7 +1278,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateConnectManifest request %j', request);
@@ -1408,7 +1408,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getFleet request %j', request);
@@ -1541,7 +1541,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getScopeNamespace request %j', request);
@@ -1676,7 +1676,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getScopeRBACRoleBinding request %j', request);
@@ -1806,7 +1806,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getScope request %j', request);
@@ -1939,7 +1939,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMembershipBinding request %j', request);
@@ -2083,7 +2083,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMembershipRBACRoleBinding request %j', request);
@@ -2240,7 +2240,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateMembershipRBACRoleBindingYAML request %j', request);
@@ -2427,7 +2427,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2484,7 +2484,7 @@ export class GkeHubClient {
     this._log.info('createMembership long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2615,7 +2615,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2672,7 +2672,7 @@ export class GkeHubClient {
     this._log.info('createFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2807,7 +2807,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2864,7 +2864,7 @@ export class GkeHubClient {
     this._log.info('deleteMembership long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2995,7 +2995,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3052,7 +3052,7 @@ export class GkeHubClient {
     this._log.info('deleteFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3190,7 +3190,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3247,7 +3247,7 @@ export class GkeHubClient {
     this._log.info('updateMembership long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3385,7 +3385,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3442,7 +3442,7 @@ export class GkeHubClient {
     this._log.info('updateFeature long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3557,7 +3557,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3614,7 +3614,7 @@ export class GkeHubClient {
     this._log.info('createFleet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3731,7 +3731,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         'fleet.name': request.fleet!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3788,7 +3788,7 @@ export class GkeHubClient {
     this._log.info('updateFleet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3901,7 +3901,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3958,7 +3958,7 @@ export class GkeHubClient {
     this._log.info('deleteFleet long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4083,7 +4083,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4140,7 +4140,7 @@ export class GkeHubClient {
     this._log.info('createScopeNamespace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4256,7 +4256,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         'scope_namespace.name': request.scopeNamespace!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4313,7 +4313,7 @@ export class GkeHubClient {
     this._log.info('updateScopeNamespace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4426,7 +4426,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4483,7 +4483,7 @@ export class GkeHubClient {
     this._log.info('deleteScopeNamespace long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4608,7 +4608,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4665,7 +4665,7 @@ export class GkeHubClient {
     this._log.info('createScopeRBACRoleBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4780,7 +4780,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         'rbacrolebinding.name': request.rbacrolebinding!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4837,7 +4837,7 @@ export class GkeHubClient {
     this._log.info('updateScopeRBACRoleBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4950,7 +4950,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5007,7 +5007,7 @@ export class GkeHubClient {
     this._log.info('deleteScopeRBACRoleBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5125,7 +5125,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5182,7 +5182,7 @@ export class GkeHubClient {
     this._log.info('createScope long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5297,7 +5297,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         'scope.name': request.scope!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5354,7 +5354,7 @@ export class GkeHubClient {
     this._log.info('updateScope long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5467,7 +5467,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5524,7 +5524,7 @@ export class GkeHubClient {
     this._log.info('deleteScope long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5642,7 +5642,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5699,7 +5699,7 @@ export class GkeHubClient {
     this._log.info('createMembershipBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5813,7 +5813,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         'membership_binding.name': request.membershipBinding!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5870,7 +5870,7 @@ export class GkeHubClient {
     this._log.info('updateMembershipBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5983,7 +5983,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6040,7 +6040,7 @@ export class GkeHubClient {
     this._log.info('deleteMembershipBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6165,7 +6165,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6228,7 +6228,7 @@ export class GkeHubClient {
     this._log.info('createMembershipRBACRoleBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6343,7 +6343,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         'rbacrolebinding.name': request.rbacrolebinding!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6406,7 +6406,7 @@ export class GkeHubClient {
     this._log.info('updateMembershipRBACRoleBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6519,7 +6519,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6582,7 +6582,7 @@ export class GkeHubClient {
     this._log.info('deleteMembershipRBACRoleBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6713,7 +6713,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6810,7 +6810,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMemberships stream %j', request);
@@ -6889,7 +6889,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMemberships iterate %j', request);
@@ -7005,7 +7005,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         scope_name: request.scopeName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7083,7 +7083,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listBoundMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBoundMemberships stream %j', request);
@@ -7143,7 +7143,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listBoundMemberships'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBoundMemberships iterate %j', request);
@@ -7271,7 +7271,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7368,7 +7368,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFeatures stream %j', request);
@@ -7447,7 +7447,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFeatures iterate %j', request);
@@ -7551,7 +7551,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7623,7 +7623,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listFleets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFleets stream %j', request);
@@ -7679,7 +7679,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listFleets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFleets iterate %j', request);
@@ -7788,7 +7788,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7860,7 +7860,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listScopeNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScopeNamespaces stream %j', request);
@@ -7914,7 +7914,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listScopeNamespaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScopeNamespaces iterate %j', request);
@@ -8023,7 +8023,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8095,7 +8095,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listScopeRbacRoleBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScopeRBACRoleBindings stream %j', request);
@@ -8149,7 +8149,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listScopeRbacRoleBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScopeRBACRoleBindings iterate %j', request);
@@ -8250,7 +8250,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8320,7 +8320,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScopes stream %j', request);
@@ -8374,7 +8374,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScopes iterate %j', request);
@@ -8483,7 +8483,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8555,7 +8555,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listPermittedScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPermittedScopes stream %j', request);
@@ -8609,7 +8609,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listPermittedScopes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPermittedScopes iterate %j', request);
@@ -8721,7 +8721,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8796,7 +8796,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listMembershipBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMembershipBindings stream %j', request);
@@ -8853,7 +8853,7 @@ export class GkeHubClient {
       });
     const defaultCallSettings = this._defaults['listMembershipBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMembershipBindings iterate %j', request);
@@ -8962,7 +8962,7 @@ export class GkeHubClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9035,7 +9035,7 @@ export class GkeHubClient {
     const defaultCallSettings =
       this._defaults['listMembershipRbacRoleBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMembershipRBACRoleBindings stream %j', request);
@@ -9090,7 +9090,7 @@ export class GkeHubClient {
     const defaultCallSettings =
       this._defaults['listMembershipRbacRoleBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMembershipRBACRoleBindings iterate %j', request);
@@ -9758,7 +9758,7 @@ export class GkeHubClient {
    */
   close(): Promise<void> {
     if (this.gkeHubStub && !this._terminated) {
-      return this.gkeHubStub.then((stub) => {
+      return this.gkeHubStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
