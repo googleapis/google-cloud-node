@@ -551,20 +551,17 @@ export class PartialResultStream extends Transform implements ResultEvents {
 }
 
 /**
- * Rows returned from queries may be chunked, requiring them to be stitched
- * together. This function returns a stream that will properly assemble these
- * rows, as well as retry after an error. Rows are only emitted if they hit a
- * "checkpoint", which is when a `resumeToken` is returned from the API. Without
- * that token, it's unsafe for the query to be retried, as we wouldn't want to
- * emit the same data multiple times.
+ * A custom Transform stream that buffers PartialResultSet chunks and flushes them
+ * asynchronously to prevent blocking the event loop.
+ *
+ * It holds chunks in a queue until a "checkpoint" is reached (as determined by
+ * `isCheckpointFn`) or until the queue exceeds `maxQueued` items.
+ *
+ * This matches the legacy behavior of buffering chunks and flushing them
+ * asynchronously using `setImmediate` to yield control back to the event loop,
+ * preventing long-running synchronous loops from blocking other processing.
  *
  * @private
- *
- * @param {RequestFunction} requestFn The function that makes an API request. It
- *     will receive one argument, `resumeToken`, which should be used however is
- *     necessary to send to the API for additional requests.
- * @param {RowOptions} [options] Options for formatting rows.
- * @returns {PartialResultStream}
  */
 class CheckpointStream extends Transform {
   private queue: google.spanner.v1.PartialResultSet[] = [];
@@ -582,6 +579,13 @@ class CheckpointStream extends Transform {
     this.isCheckpointFn = options.isCheckpointFn;
   }
 
+  /**
+   * Buffers chunks and flushes queue asynchronously on checkpoints or when max limit is reached.
+   *
+   * @param {google.spanner.v1.PartialResultSet} chunk The chunk to transform.
+   * @param {string} enc Encoding (unused).
+   * @param {Function} callback Callback to signal completion of transformation.
+   */
   _transform(
     chunk: google.spanner.v1.PartialResultSet,
     enc: string,
@@ -604,6 +608,12 @@ class CheckpointStream extends Transform {
     this._flushQueue(callback);
   }
 
+  /**
+   * Flushes queued chunks asynchronously using `setImmediate` to avoid blocking the event loop.
+   *
+   * @private
+   * @param {Function} callback Callback to call when all chunks are flushed.
+   */
   private _flushQueue(callback: () => void): void {
     const loop = () => {
       if (this.destroyed) {
@@ -621,21 +631,50 @@ class CheckpointStream extends Transform {
     loop();
   }
 
+  /**
+   * Flushes remaining queued chunks before destroying the stream with the provided error.
+   *
+   * @param {Error} err The error to destroy the stream with.
+   */
   flushAndDestroy(err: Error): void {
     this._flushQueue(() => {
       this.destroy(err);
     });
   }
 
+  /**
+   * Clears the queue without flushing, useful when retrying and discarding partial data.
+   */
   reset(): void {
     this.queue = [];
   }
 
+  /**
+   * Flushes all remaining queued chunks when the stream ends.
+   *
+   * @param {Function} callback Callback to call when flushing is complete.
+   */
   _flush(callback: () => void): void {
     this._flushQueue(callback);
   }
 }
 
+/**
+ * Rows returned from queries may be chunked, requiring them to be stitched
+ * together. This function returns a stream that will properly assemble these
+ * rows, as well as retry after an error. Rows are only emitted if they hit a
+ * "checkpoint", which is when a `resumeToken` is returned from the API. Without
+ * that token, it's unsafe for the query to be retried, as we wouldn't want to
+ * emit the same data multiple times.
+ *
+ * @private
+ *
+ * @param {RequestFunction} requestFn The function that makes an API request. It
+ *     will receive one argument, `resumeToken`, which should be used however is
+ *     necessary to send to the API for additional requests.
+ * @param {RowOptions} [options] Options for formatting rows.
+ * @returns {PartialResultStream}
+ */
 export function partialResultStream(
   requestFn: RequestFunction,
   options?: RowOptions,
@@ -691,7 +730,7 @@ export function partialResultStream(
     if (lastRequestStream) {
       lastRequestStream.removeListener('end', endListener);
       lastRequestStream.removeAllListeners('error');
-      lastRequestStream.on('error', () => { });
+      lastRequestStream.on('error', () => {});
       lastRequestStream.unpipe(requestsStream);
       lastRequestStream.destroy();
     }
