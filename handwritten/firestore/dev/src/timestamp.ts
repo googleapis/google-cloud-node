@@ -118,6 +118,47 @@ export class Timestamp implements firestore.Timestamp {
   }
 
   /**
+   * Creates a new timestamp from the given `Temporal.Instant`.
+   *
+   * @example
+   * ```
+   * let documentRef = firestore.doc('col/doc');
+   *
+   * let instant = Temporal.Now.instant();
+   * documentRef.set({ startTime:Firestore.Timestamp.fromInstant(instant) });
+   *
+   * ```
+   * @param {Temporal.Instant} instant The `Temporal.Instant` to initialize the `Timestamp` from.
+   * @returns {Timestamp} A new `Timestamp` representing the same point in time
+   * as the given instant.
+   */
+  static fromInstant(instant: Temporal.Instant): Timestamp {
+    if (!instant || typeof instant.epochNanoseconds !== 'bigint') {
+      throw new Error('Invalid Temporal.Instant object provided.');
+    }
+    return Timestamp._fromEpochNanoseconds(instant.epochNanoseconds);
+  }
+
+  private static _fromEpochNanoseconds(nanos: bigint): Timestamp {
+    let seconds: number;
+    let nanoseconds: number;
+    if (nanos >= 0n) {
+      seconds = Number(nanos / 1000000000n);
+      nanoseconds = Number(nanos % 1000000000n);
+    } else {
+      const rem = nanos % 1000000000n;
+      if (rem === 0n) {
+        seconds = Number(nanos / 1000000000n);
+        nanoseconds = 0;
+      } else {
+        seconds = Number(nanos / 1000000000n - 1n);
+        nanoseconds = Number(rem + 1000000000n);
+      }
+    }
+    return new Timestamp(seconds, nanoseconds);
+  }
+
+  /**
    * Generates a `Timestamp` object from a Timestamp proto.
    *
    * @private
@@ -196,6 +237,32 @@ export class Timestamp implements firestore.Timestamp {
    */
   get nanoseconds(): number {
     return this._nanoseconds;
+  }
+
+  /**
+   * Converts a `Timestamp` to a `Temporal.Instant` object.
+   *
+   * @example
+   * ```
+   * let documentRef = firestore.doc('col/doc');
+   *
+   * documentRef.get().then(snap => {
+   *   console.log(`Document updated at: ${snap.updateTime.toInstant()}`);
+   * });
+   *
+   * ```
+   * @returns {Temporal.Instant} `Temporal.Instant` object representing the same point in time
+   * as this `Timestamp`, with nanosecond precision.
+   */
+  toInstant(): Temporal.Instant {
+    if (typeof Temporal === 'undefined' || !Temporal.Instant) {
+      throw new Error(
+        'The Temporal object is not available in the current environment.',
+      );
+    }
+    const nanos =
+      BigInt(this._seconds) * 1000000000n + BigInt(this._nanoseconds);
+    return Temporal.Instant.fromEpochNanoseconds(nanos);
   }
 
   /**

@@ -300,6 +300,36 @@ describe('serialize document', () => {
     });
   });
 
+  it('supports Temporal.Instant', async () => {
+    const Temporal =
+      (globalThis as Record<string, unknown>).Temporal ||
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      require('@js-temporal/polyfill').Temporal;
+    const instant = Temporal.Instant.fromEpochNanoseconds(1488872578916123456n);
+
+    const overrides: ApiOverride = {
+      commit: request => {
+        requestEquals(
+          request,
+          set({
+            document: document('documentId', 'temporalInstant', {
+              timestampValue: {
+                nanos: 916123456,
+                seconds: '1488872578',
+              },
+            }),
+          }),
+        );
+        return response(writeResult(1));
+      },
+    };
+
+    const firestore = await createInstance(overrides);
+    await firestore.doc('collectionId/documentId').set({
+      temporalInstant: instant,
+    });
+  });
+
   it('supports BigInt', async () => {
     const overrides: ApiOverride = {
       commit: request => {
