@@ -49,8 +49,8 @@
     },
     {
       "files": [
-        "handwritten/firestore/dev/test/*.ts",
-        "handwritten/firestore/dev/system-test/*.ts"
+        "handwritten/firestore/dev/test/**/*.ts",
+        "handwritten/firestore/dev/system-test/**/*.ts"
       ],
       "parser": "@typescript-eslint/parser",
       "rules": {
@@ -71,7 +71,9 @@
             "argsIgnorePattern": "^_"
           }
         ],
-        "@typescript-eslint/no-floating-promises": "warn"
+        "@typescript-eslint/no-floating-promises": "warn",
+        "promise/always-return": "off",
+        "promise/catch-or-return": "off"
       }
     },
     {
