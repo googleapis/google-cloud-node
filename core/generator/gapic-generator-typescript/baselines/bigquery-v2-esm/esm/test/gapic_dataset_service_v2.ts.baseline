@@ -20,16 +20,16 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datasetserviceModule from '../src/index.js';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -56,7 +56,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -128,9 +128,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -250,7 +250,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.datasetServiceStub, undefined);
@@ -258,12 +258,12 @@ describe('v2.DatasetServiceClient', () => {
       assert(client.datasetServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.datasetServiceStub);
@@ -272,14 +272,14 @@ describe('v2.DatasetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.datasetServiceStub, undefined);
@@ -288,7 +288,7 @@ describe('v2.DatasetServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -296,7 +296,7 @@ describe('v2.DatasetServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -308,7 +308,7 @@ describe('v2.DatasetServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -331,7 +331,7 @@ describe('v2.DatasetServiceClient', () => {
   describe('getDataset', () => {
     it('invokes getDataset without error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -367,7 +367,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes getDataset without error using callback', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -419,7 +419,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes getDataset with error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes getDataset with closed client', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -473,7 +473,7 @@ describe('v2.DatasetServiceClient', () => {
       );
       request.datasetId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataset(request), expectedError);
@@ -483,7 +483,7 @@ describe('v2.DatasetServiceClient', () => {
   describe('insertDataset', () => {
     it('invokes insertDataset without error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes insertDataset without error using callback', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes insertDataset with error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -592,7 +592,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes insertDataset with closed client', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v2.DatasetServiceClient', () => {
       );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insertDataset(request), expectedError);
@@ -615,7 +615,7 @@ describe('v2.DatasetServiceClient', () => {
   describe('patchDataset', () => {
     it('invokes patchDataset without error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes patchDataset without error using callback', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -703,7 +703,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes patchDataset with error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes patchDataset with closed client', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -757,7 +757,7 @@ describe('v2.DatasetServiceClient', () => {
       );
       request.datasetId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.patchDataset(request), expectedError);
@@ -767,7 +767,7 @@ describe('v2.DatasetServiceClient', () => {
   describe('updateDataset', () => {
     it('invokes updateDataset without error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -803,7 +803,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes updateDataset without error using callback', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -855,7 +855,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes updateDataset with error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -891,7 +891,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes updateDataset with closed client', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -909,7 +909,7 @@ describe('v2.DatasetServiceClient', () => {
       );
       request.datasetId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataset(request), expectedError);
@@ -919,7 +919,7 @@ describe('v2.DatasetServiceClient', () => {
   describe('deleteDataset', () => {
     it('invokes deleteDataset without error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -955,7 +955,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes deleteDataset without error using callback', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes deleteDataset with error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1043,7 +1043,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes deleteDataset with closed client', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1061,7 +1061,7 @@ describe('v2.DatasetServiceClient', () => {
       );
       request.datasetId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataset(request), expectedError);
@@ -1071,7 +1071,7 @@ describe('v2.DatasetServiceClient', () => {
   describe('undeleteDataset', () => {
     it('invokes undeleteDataset without error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes undeleteDataset without error using callback', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes undeleteDataset with error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1195,7 +1195,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes undeleteDataset with closed client', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1213,7 +1213,7 @@ describe('v2.DatasetServiceClient', () => {
       );
       request.datasetId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.undeleteDataset(request), expectedError);
@@ -1223,7 +1223,7 @@ describe('v2.DatasetServiceClient', () => {
   describe('listDatasets', () => {
     it('invokes listDatasets without error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1262,7 +1262,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes listDatasets without error using callback', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1318,7 +1318,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes listDatasets with error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1349,7 +1349,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes listDatasetsStream without error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1410,7 +1410,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('invokes listDatasetsStream with error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1462,7 +1462,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('uses async iteration with listDatasets without error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1512,7 +1512,7 @@ describe('v2.DatasetServiceClient', () => {
 
     it('uses async iteration with listDatasets with error', async () => {
       const client = new datasetserviceModule.v2.DatasetServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
