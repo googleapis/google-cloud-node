@@ -19,7 +19,7 @@
 import * as v1beta1 from './v1beta1';
 const BigQueryStorageClient = v1beta1.BigQueryStorageClient;
 type BigQueryStorageClient = v1beta1.BigQueryStorageClient;
-export { v1beta1, BigQueryStorageClient };
-export default { v1beta1, BigQueryStorageClient };
+export {v1beta1, BigQueryStorageClient};
+export default {v1beta1, BigQueryStorageClient};
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

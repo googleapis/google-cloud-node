@@ -443,7 +443,7 @@ libraries:
       default_version: v2
       package_name: '@google-cloud/bare-metal-solution'
   - name: google-cloud-batch
-    version: 3.0.0
+    version: 3.1.0
     apis:
       - path: google/cloud/batch/v1
       - path: google/cloud/batch/v1alpha
@@ -540,7 +540,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/bigquery-data-transfer'
   - name: google-cloud-bigquery-migration
-    version: 3.0.0
+    version: 3.1.0
     apis:
       - path: google/cloud/bigquery/migration/v2
       - path: google/cloud/bigquery/migration/v2alpha
@@ -564,7 +564,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.4.0
+    version: 0.5.0
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -714,7 +714,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-confidentialcomputing
-    version: 3.0.0
+    version: 3.1.0
     apis:
       - path: google/cloud/confidentialcomputing/v1
       - path: google/cloud/confidentialcomputing/v1alpha1
@@ -1027,7 +1027,7 @@ libraries:
     nodejs:
       default_version: v1alpha
   - name: google-cloud-geminidataanalytics
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/cloud/geminidataanalytics/v1
       - path: google/cloud/geminidataanalytics/v1beta
@@ -1917,7 +1917,7 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
-    version: 0.6.0
+    version: 0.7.0
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
@@ -2138,7 +2138,7 @@ libraries:
       package_name: '@google-cloud/monitoring-dashboards'
       metadata_name_override: monitoring-dashboards
   - name: google-privacy-dlp
-    version: 7.0.1
+    version: 7.1.0
     apis:
       - path: google/privacy/dlp/v2
     copyright_year: "2026"
@@ -2212,6 +2212,15 @@ libraries:
     nodejs:
       default_version: v1
       package_name: '@google-shopping/lfp'
+      client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+  - name: google-shopping-merchant-loyaltycustomers
+    version: 0.1.0
+    apis:
+      - path: google/shopping/merchant/loyaltycustomers/v1
+    copyright_year: "2026"
+    nodejs:
+      default_version: v1
+      package_name: '@google-shopping/loyaltycustomers'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
   - name: google-shopping-merchant-notifications
     version: 0.10.0
