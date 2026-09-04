@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-spanner?activeTab=versions
 
+## [8.12.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.11.0...spanner-v8.12.0) (2026-09-04)
+
+
+### Features
+
+* **spanner:** Add send and ack mutations Cloud Spanner Queues ([#9200](https://github.com/googleapis/google-cloud-node/issues/9200)) ([ee88e46](https://github.com/googleapis/google-cloud-node/commit/ee88e46133ec2eab9a658e849dfa3fa415a83ee6))
+
 ## [8.11.0](https://github.com/googleapis/google-cloud-node/compare/spanner-v8.10.0...spanner-v8.11.0) (2026-08-19)
 
 
