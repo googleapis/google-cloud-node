@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ManagedIdentitiesServiceClient} from '@google-cloud/managed-identities';
+import { ManagedIdentitiesServiceClient } from '@google-cloud/managed-identities';
 
 // check that the client class type name can be used
-function doStuffWithManagedIdentitiesServiceClient(client: ManagedIdentitiesServiceClient) {
+function doStuffWithManagedIdentitiesServiceClient(
+  client: ManagedIdentitiesServiceClient,
+) {
   client.close();
 }
 

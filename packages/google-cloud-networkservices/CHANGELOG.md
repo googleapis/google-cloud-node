@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.14.0...networkservices-v0.15.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.13.0...networkservices-v0.14.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.12.1...networkservices-v0.13.0) (2026-06-25)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
 ## [0.12.1](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.12.0...networkservices-v0.12.1) (2026-05-01)
 
 

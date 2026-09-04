@@ -24,6 +24,7 @@ import {SchemaParameters} from './schema';
 import * as h2 from './http2';
 import {GaxiosResponseWithHTTP2} from './http2';
 import {headersToClassicHeaders, marshallGaxiosResponse} from './util';
+import {validateAndEncodeParams} from './transcoding';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../package.json');
@@ -163,6 +164,13 @@ async function createAPIRequestAsync<T>(
     // developer which required params are not included in the request
     throw new Error('Missing required parameters: ' + missingParams.join(', '));
   }
+
+  // Validate and encode path params to prevent traversal and injection attacks.
+  // Uses options.url (converting URL objects to string if possible) or falls back to mediaUrl.
+  validateAndEncodeParams(
+    options.url?.toString() ?? parameters.mediaUrl ?? undefined,
+    params,
+  );
 
   // Parse urls
   if (options.url) {

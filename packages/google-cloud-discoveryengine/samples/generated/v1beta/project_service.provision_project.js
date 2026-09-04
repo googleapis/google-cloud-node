@@ -47,6 +47,10 @@ function main(name, acceptDataUseTerms, dataUseTermsVersion) {
    *  Acceptable version is `2022-11-23`, and this may change over time.
    */
   // const dataUseTermsVersion = 'abc123'
+  /**
+   *  Optional. Parameters for Agentspace.
+   */
+  // const saasParams = {}
 
   // Imports the Discoveryengine library
   const {ProjectServiceClient} = require('@google-cloud/discoveryengine').v1beta;

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as gax from 'google-gax';
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 
 type StorageError = protos.google.cloud.bigquery.storage.v1.IStorageError;
 

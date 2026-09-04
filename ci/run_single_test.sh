@@ -18,7 +18,7 @@ set -e
 
 export REGION_ID='uc'
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
-export NODE_OPTIONS=--max_old_space_size=4096
+export NODE_OPTIONS="${NODE_OPTIONS} --max_old_space_size=6144 --no-deprecation"
 
 if [ -z "${BUILD_TYPE}" ]; then
     echo "missing BUILD_TYPE env var"
@@ -29,6 +29,8 @@ if [ -z "${TEST_TYPE}" ]; then
     TEST_TYPE="units"
 fi
 
+TEST_CMD=${TEST_CMD:-pnpm}
+
 d=$(pwd)
 PROJECT=$(basename ${d})
 
@@ -37,11 +39,20 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER_OUTPUT=${PROJECT}_sponge_log.xml
     export MOCHA_REPORTER_SUITENAME=${PROJECT}
     export MOCHA_REPORTER=xunit
+else
+    export MOCHA_REPORTER=dot
 fi
 
 # Install dependencies
-echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
-pnpm install --ignore-scripts --engine-strict --prod; pnpm install
+# Normalize POSIX paths to Windows-compatible mixed paths (forward slashes) on Windows Git Bash
+# so native Node.js and pnpm processes can resolve .pnpmfile.cjs without segmentation faults.
+PNPMFILE_PATH="${PROJECT_ROOT}/.pnpmfile.cjs"
+if command -v cygpath >/dev/null 2>&1; then
+    PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
+fi
+
+echo "pnpm install --engine-strict --pnpmfile \"${PNPMFILE_PATH}\""
+pnpm install --engine-strict --pnpmfile "${PNPMFILE_PATH}"
 
 
 retval=0
@@ -69,20 +80,20 @@ fi
 set +e
 case ${TEST_TYPE} in
 lint)
-    pnpm prelint
-    pnpm lint
+    ${TEST_CMD} prelint
+    ${TEST_CMD} lint
     retval=$?
     ;;
 samples)
-    pnpm samples-test
+    ${TEST_CMD} samples-test
     retval=$?
     ;;
 system)
-    pnpm system-test
+    ${TEST_CMD} system-test
     retval=$?
     ;;
 units)
-    pnpm test
+    ${TEST_CMD} test
     retval=$?
     ;;
 *)

@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {BackupDRClient} from './backup_d_r_client';
-export {BackupDrProtectionSummaryClient} from './backup_dr_protection_summary_client';
+export { BackupDRClient } from './backup_d_r_client';
+export { BackupDrProtectionSummaryClient } from './backup_dr_protection_summary_client';

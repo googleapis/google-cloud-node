@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ServiceUsageClient} from './service_usage_client';
+export { ServiceUsageClient } from './service_usage_client';

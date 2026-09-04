@@ -79,7 +79,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update security center service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.update_security_center_service.js) |
 | update security health analytics custom module | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.update_security_health_analytics_custom_module.js) |
 | validate event threat detection custom module | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/security_center_management.validate_event_threat_detection_custom_module.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securitycentermanagement/samples/generated/v1/snippet_metadata_google.cloud.securitycentermanagement.v1.json) |
 
 
 ## Supported Node.js Versions

@@ -30,7 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The resource name of the project associated with the
-   *  attestors google.cloud.binaryauthorization.v1.Attestor, in the format `projects/*`.
+   *  attestors google.cloud.binaryauthorization.v1.Attestor, in the format
+   *  `projects/*`.
    */
   // const parent = 'abc123'
   /**
@@ -40,8 +41,9 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  A token identifying a page of results the server should return. Typically,
-   *  this is the value of ListAttestorsResponse.next_page_token google.cloud.binaryauthorization.v1.ListAttestorsResponse.next_page_token  returned
-   *  from the previous call to the `ListAttestors` method.
+   *  this is the value of
+   *  ListAttestorsResponse.next_page_token google.cloud.binaryauthorization.v1.ListAttestorsResponse.next_page_token 
+   *  returned from the previous call to the `ListAttestors` method.
    */
   // const pageToken = 'abc123'
 

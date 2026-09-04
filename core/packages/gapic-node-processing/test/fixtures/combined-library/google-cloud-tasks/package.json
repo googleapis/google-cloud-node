@@ -55,8 +55,6 @@
     "compile-protos": "compileProtos esm/src --esm ",
     "docs": "jsdoc -c .jsdoc.cjs",
     "postpack": "minifyProtoJson build/cjs && minifyProtoJson build/esm",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile-protos && npm run compile",
@@ -100,6 +98,6 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=v18"
+    "node": ">=18"
   }
 }

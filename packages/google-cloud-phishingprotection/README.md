@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | report phishing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-phishingprotection/samples/generated/v1beta1/phishing_protection_service_v1_beta1.report_phishing.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-phishingprotection/samples/generated/v1beta1/snippet_metadata_google.cloud.phishingprotection.v1beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -92,7 +91,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-phishingprotection/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -102,7 +101,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-phishingprotection/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

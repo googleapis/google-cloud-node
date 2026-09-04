@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ConferenceRecordsServiceClient} from './conference_records_service_client';
-export {SpacesServiceClient} from './spaces_service_client';
+export { ConferenceRecordsServiceClient } from './conference_records_service_client';
+export { SpacesServiceClient } from './spaces_service_client';

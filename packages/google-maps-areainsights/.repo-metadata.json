@@ -1,17 +1,16 @@
 {
-  "name": "area-insights",
-  "name_pretty": "Places Insights API",
-  "product_documentation": "https://developers.google.com/maps/documentation/places-insights",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/area-insights/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@googlemaps/areainsights",
-  "api_id": "areainsights.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "area-insights"
+    "api_description": "Places Aggregate API.",
+    "api_id": "areainsights.googleapis.com",
+    "api_shortname": "area-insights",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/area-insights/latest",
+    "default_version": "v1",
+    "distribution_name": "@googlemaps/areainsights",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1624013&template=2026178",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "area-insights",
+    "name_pretty": "Places Aggregate",
+    "product_documentation": "https://developers.google.com/maps/documentation/places-insights",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

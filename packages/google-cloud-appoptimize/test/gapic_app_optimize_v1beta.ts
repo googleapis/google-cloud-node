@@ -19,1703 +19,2147 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as appoptimizeModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({ done: true, value: undefined });
+          }
+          return Promise.resolve({ done: false, value: responses![counter++] });
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta.AppOptimizeClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'appoptimize.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'appoptimize.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          appoptimizeModule.v1beta.AppOptimizeClient.servicePath;
+        assert.strictEqual(servicePath, 'appoptimize.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          appoptimizeModule.v1beta.AppOptimizeClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'appoptimize.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'appoptimize.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'appoptimize.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new appoptimizeModule.v1beta.AppOptimizeClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'appoptimize.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'appoptimize.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new appoptimizeModule.v1beta.AppOptimizeClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
+    });
 
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = appoptimizeModule.v1beta.AppOptimizeClient.servicePath;
-                assert.strictEqual(servicePath, 'appoptimize.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('has port', () => {
+      const port = appoptimizeModule.v1beta.AppOptimizeClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = appoptimizeModule.v1beta.AppOptimizeClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'appoptimize.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('should create a client with no option', () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        fallback: true,
+      });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.appOptimizeStub, undefined);
+      await client.initialize();
+      assert(client.appOptimizeStub);
+    });
+
+    it('has close method for the initialized client', (done) => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.appOptimizeStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has close method for the non-initialized client', (done) => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.appOptimizeStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
+
+  describe('getReport', () => {
+    it('invokes getReport without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.GetReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.GetReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.Report(),
+      );
+      client.innerApiCalls.getReport = stubSimpleCall(expectedResponse);
+      const [response] = await client.getReport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getReport without error using callback', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.GetReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.GetReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.Report(),
+      );
+      client.innerApiCalls.getReport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getReport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.appoptimize.v1beta.IReport | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getReport with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.GetReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.GetReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getReport = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getReport(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getReport with closed client', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.GetReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.GetReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getReport(request), expectedError);
+    });
+  });
+
+  describe('deleteReport', () => {
+    it('invokes deleteReport without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.DeleteReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.DeleteReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteReport = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteReport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteReport without error using callback', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.DeleteReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.DeleteReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteReport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteReport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteReport with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.DeleteReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.DeleteReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteReport = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteReport(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteReport with closed client', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.DeleteReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.DeleteReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.deleteReport(request), expectedError);
+    });
+  });
+
+  describe('createReport', () => {
+    it('invokes createReport without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.CreateReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.CreateReportRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createReport = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createReport(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createReport without error using callback', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.CreateReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.CreateReportRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createReport =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createReport(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.appoptimize.v1beta.IReport,
+              protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.appoptimize.v1beta.IReport,
+        protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createReport with call error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.CreateReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.CreateReportRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createReport = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createReport(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createReport with LRO error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.CreateReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.CreateReportRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createReport = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createReport(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateReportProgress without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateReportProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateReportProgress with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.checkCreateReportProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listReports', () => {
+    it('invokes listReports without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ListReportsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ListReportsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+      ];
+      client.innerApiCalls.listReports = stubSimpleCall(expectedResponse);
+      const [response] = await client.listReports(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReports as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReports as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReports without error using callback', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ListReportsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ListReportsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+      ];
+      client.innerApiCalls.listReports =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listReports(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.appoptimize.v1beta.IReport[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReports as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReports as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReports with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ListReportsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ListReportsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listReports = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listReports(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listReports as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReports as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReportsStream without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ListReportsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ListReportsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+      ];
+      client.descriptors.page.listReports.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listReportsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.appoptimize.v1beta.Report[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.appoptimize.v1beta.Report) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listReports.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listReports, request),
+      );
+      assert(
+        (client.descriptors.page.listReports.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listReportsStream with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ListReportsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ListReportsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReports.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError,
+      );
+      const stream = client.listReportsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.appoptimize.v1beta.Report[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.appoptimize.v1beta.Report) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listReports.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listReports, request),
+      );
+      assert(
+        (client.descriptors.page.listReports.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listReports without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ListReportsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ListReportsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.appoptimize.v1beta.Report(),
+        ),
+      ];
+      client.descriptors.page.listReports.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.appoptimize.v1beta.IReport[] = [];
+      const iterable = client.listReportsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listReports.asyncIterate as SinonStub).getCall(
+          0,
+        ).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listReports.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listReports with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ListReportsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ListReportsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReports.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError,
+      );
+      const iterable = client.listReportsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.appoptimize.v1beta.IReport[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'appoptimize.example.com');
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listReports.asyncIterate as SinonStub).getCall(
+          0,
+        ).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listReports.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('readReport', () => {
+    it('invokes readReport without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ReadReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ReadReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+      ];
+      client.innerApiCalls.readReport = stubSimpleCall(expectedResponse);
+      const [response] = await client.readReport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readReport without error using callback', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ReadReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ReadReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+      ];
+      client.innerApiCalls.readReport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.readReport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IListValue[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.readReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readReport with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ReadReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ReadReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.readReport = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.readReport(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.readReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes readReportStream without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ReadReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ReadReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+      ];
+      client.descriptors.page.readReport.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.readReportStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.protobuf.ListValue[] = [];
+        stream.on('data', (response: protos.google.protobuf.ListValue) => {
+          responses.push(response);
         });
-
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'appoptimize.example.com');
+        stream.on('end', () => {
+          resolve(responses);
         });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.readReport.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.readReport, request),
+      );
+      assert(
+        (client.descriptors.page.readReport.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new appoptimizeModule.v1beta.AppOptimizeClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'appoptimize.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('invokes readReportStream with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ReadReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ReadReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.readReport.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError,
+      );
+      const stream = client.readReportStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.protobuf.ListValue[] = [];
+        stream.on('data', (response: protos.google.protobuf.ListValue) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.readReport.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.readReport, request),
+      );
+      assert(
+        (client.descriptors.page.readReport.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new appoptimizeModule.v1beta.AppOptimizeClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'appoptimize.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
+    it('uses async iteration with readReport without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ReadReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ReadReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+        generateSampleMessage(new protos.google.protobuf.ListValue()),
+      ];
+      client.descriptors.page.readReport.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.protobuf.IListValue[] = [];
+      const iterable = client.readReportAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.readReport.asyncIterate as SinonStub).getCall(
+          0,
+        ).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.readReport.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with readReport with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.appoptimize.v1beta.ReadReportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.appoptimize.v1beta.ReadReportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.readReport.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError,
+      );
+      const iterable = client.readReportAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.protobuf.IListValue[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new appoptimizeModule.v1beta.AppOptimizeClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
-
-        it('has port', () => {
-            const port = appoptimizeModule.v1beta.AppOptimizeClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
-
-        it('should create a client with no option', () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.appOptimizeStub, undefined);
-            await client.initialize();
-            assert(client.appOptimizeStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.appOptimizeStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.appOptimizeStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
-        });
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.readReport.asyncIterate as SinonStub).getCall(
+          0,
+        ).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.readReport.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
     });
-
-    describe('getReport', () => {
-        it('invokes getReport without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.GetReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.GetReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.Report()
-            );
-            client.innerApiCalls.getReport = stubSimpleCall(expectedResponse);
-            const [response] = await client.getReport(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getReport without error using callback', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.GetReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.GetReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.Report()
-            );
-            client.innerApiCalls.getReport = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getReport(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.appoptimize.v1beta.IReport|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getReport with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.GetReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.GetReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getReport = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getReport(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getReport with closed client', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.GetReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.GetReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getReport(request), expectedError);
-        });
+  });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location(),
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
     });
-
-    describe('deleteReport', () => {
-        it('invokes deleteReport without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.DeleteReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.DeleteReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteReport = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteReport(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteReport without error using callback', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.DeleteReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.DeleteReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteReport = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteReport(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteReport with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.DeleteReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.DeleteReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteReport = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.deleteReport(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteReport with closed client', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.DeleteReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.DeleteReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.deleteReport(request), expectedError);
-        });
-    });
-
-    describe('createReport', () => {
-        it('invokes createReport without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.CreateReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.CreateReportRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createReport = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createReport(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createReport without error using callback', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.CreateReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.CreateReportRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createReport = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createReport(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createReport with call error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.CreateReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.CreateReportRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createReport = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createReport(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createReport with LRO error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.CreateReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.CreateReportRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createReport = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createReport(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCreateReportProgress without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateReportProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCreateReportProgress with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateReportProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('listReports', () => {
-        it('invokes listReports without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ListReportsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ListReportsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-            ];
-            client.innerApiCalls.listReports = stubSimpleCall(expectedResponse);
-            const [response] = await client.listReports(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listReports as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listReports as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listReports without error using callback', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ListReportsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ListReportsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-            ];
-            client.innerApiCalls.listReports = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listReports(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.appoptimize.v1beta.IReport[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listReports as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listReports as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listReports with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ListReportsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ListReportsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listReports = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listReports(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listReports as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listReports as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listReportsStream without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ListReportsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ListReportsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-            ];
-            client.descriptors.page.listReports.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listReportsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.appoptimize.v1beta.Report[] = [];
-                stream.on('data', (response: protos.google.cloud.appoptimize.v1beta.Report) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listReports.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listReports, request));
-            assert(
-                (client.descriptors.page.listReports.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listReportsStream with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ListReportsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ListReportsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listReports.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listReportsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.appoptimize.v1beta.Report[] = [];
-                stream.on('data', (response: protos.google.cloud.appoptimize.v1beta.Report) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listReports.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listReports, request));
-            assert(
-                (client.descriptors.page.listReports.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listReports without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ListReportsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ListReportsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-              generateSampleMessage(new protos.google.cloud.appoptimize.v1beta.Report()),
-            ];
-            client.descriptors.page.listReports.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.appoptimize.v1beta.IReport[] = [];
-            const iterable = client.listReportsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes getLocation without error using callback', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location(),
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listReports.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listReports.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError,
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+  });
 
-        it('uses async iteration with listReports with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ListReportsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ListReportsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listReports.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listReportsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.appoptimize.v1beta.IReport[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listReports.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listReports.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+  describe('Path templates', () => {
+    describe('application', async () => {
+      const fakePath = '/rendered/path/application';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        application: 'applicationValue',
+      };
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.applicationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.applicationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('applicationPath', () => {
+        const result = client.applicationPath(
+          'projectValue',
+          'locationValue',
+          'applicationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.applicationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromApplicationName', () => {
+        const result = client.matchProjectFromApplicationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.applicationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromApplicationName', () => {
+        const result = client.matchLocationFromApplicationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.applicationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchApplicationFromApplicationName', () => {
+        const result = client.matchApplicationFromApplicationName(fakePath);
+        assert.strictEqual(result, 'applicationValue');
+        assert(
+          (client.pathTemplates.applicationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('readReport', () => {
-        it('invokes readReport without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ReadReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ReadReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-            ];
-            client.innerApiCalls.readReport = stubSimpleCall(expectedResponse);
-            const [response] = await client.readReport(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        it('invokes readReport without error using callback', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ReadReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ReadReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-            ];
-            client.innerApiCalls.readReport = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.readReport(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IListValue[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.readReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-        it('invokes readReport with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ReadReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ReadReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.readReport = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.readReport(request), expectedError);
-            const actualRequest = (client.innerApiCalls.readReport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.readReport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-        it('invokes readReportStream without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ReadReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ReadReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-            ];
-            client.descriptors.page.readReport.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.readReportStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.protobuf.ListValue[] = [];
-                stream.on('data', (response: protos.google.protobuf.ListValue) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.readReport.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.readReport, request));
-            assert(
-                (client.descriptors.page.readReport.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes readReportStream with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ReadReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ReadReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.readReport.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.readReportStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.protobuf.ListValue[] = [];
-                stream.on('data', (response: protos.google.protobuf.ListValue) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.readReport.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.readReport, request));
-            assert(
-                (client.descriptors.page.readReport.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with readReport without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ReadReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ReadReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-              generateSampleMessage(new protos.google.protobuf.ListValue()),
-            ];
-            client.descriptors.page.readReport.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.protobuf.IListValue[] = [];
-            const iterable = client.readReportAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.readReport.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.readReport.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with readReport with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.appoptimize.v1beta.ReadReportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.appoptimize.v1beta.ReadReportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.readReport.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.readReportAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.protobuf.IListValue[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.readReport.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.readReport.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-    });
-    describe('getLocation', () => {
-        it('invokes getLocation without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-            const response = await client.getLocation(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes getLocation without error using callback', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getLocation(
-                    request,
-                    expectedOptions,
-                    (
-                        err?: Error | null,
-                        result?: LocationProtos.google.cloud.location.ILocation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getLocation with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-    describe('listLocationsAsync', () => {
-        it('uses async iteration with listLocations without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-                new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedResponse = [
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-            ];
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-            const iterable = client.listLocationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-        it('uses async iteration with listLocations with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedError = new Error('expected');
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listLocationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-    });
-    describe('getOperation', () => {
-        it('invokes getOperation without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const response = await client.getOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes getOperation without error using callback', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.getOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: operationsProtos.google.longrunning.Operation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getOperation with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('cancelOperation', () => {
-        it('invokes cancelOperation without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
-            const response = await client.cancelOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes cancelOperation without error using callback', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.cancelOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes cancelOperation with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('deleteOperation', () => {
-        it('invokes deleteOperation without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
-            const response = await client.deleteOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes deleteOperation without error using callback', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.deleteOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes deleteOperation with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('listOperationsAsync', () => {
-        it('uses async iteration with listOperations without error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedResponse = [
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-            ];
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: operationsProtos.google.longrunning.IOperation[] = [];
-            const iterable = client.operationsClient.listOperationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-        it('uses async iteration with listOperations with error', async () => {
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.operationsClient.listOperationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: operationsProtos.google.longrunning.IOperation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('Path templates', () => {
+    describe('project', async () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        describe('application', async () => {
-            const fakePath = "/rendered/path/application";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                application: "applicationValue",
-            };
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.applicationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.applicationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-            it('applicationPath', () => {
-                const result = client.applicationPath("projectValue", "locationValue", "applicationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.applicationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromApplicationName', () => {
-                const result = client.matchProjectFromApplicationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.applicationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromApplicationName', () => {
-                const result = client.matchLocationFromApplicationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.applicationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchApplicationFromApplicationName', () => {
-                const result = client.matchApplicationFromApplicationName(fakePath);
-                assert.strictEqual(result, "applicationValue");
-                assert((client.pathTemplates.applicationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('location', async () => {
-            const fakePath = "/rendered/path/location";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-            };
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.locationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.locationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('locationPath', () => {
-                const result = client.locationPath("projectValue", "locationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromLocationName', () => {
-                const result = client.matchProjectFromLocationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromLocationName', () => {
-                const result = client.matchLocationFromLocationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('project', async () => {
-            const fakePath = "/rendered/path/project";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPath', () => {
-                const result = client.projectPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectName', () => {
-                const result = client.matchProjectFromProjectName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('report', async () => {
-            const fakePath = "/rendered/path/report";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                report: "reportValue",
-            };
-            const client = new appoptimizeModule.v1beta.AppOptimizeClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.reportPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.reportPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('reportPath', () => {
-                const result = client.reportPath("projectValue", "locationValue", "reportValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.reportPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromReportName', () => {
-                const result = client.matchProjectFromReportName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromReportName', () => {
-                const result = client.matchLocationFromReportName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReportFromReportName', () => {
-                const result = client.matchReportFromReportName(fakePath);
-                assert.strictEqual(result, "reportValue");
-                assert((client.pathTemplates.reportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
+
+    describe('report', async () => {
+      const fakePath = '/rendered/path/report';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        report: 'reportValue',
+      };
+      const client = new appoptimizeModule.v1beta.AppOptimizeClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.reportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.reportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('reportPath', () => {
+        const result = client.reportPath(
+          'projectValue',
+          'locationValue',
+          'reportValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.reportPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromReportName', () => {
+        const result = client.matchProjectFromReportName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.reportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromReportName', () => {
+        const result = client.matchLocationFromReportName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.reportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReportFromReportName', () => {
+        const result = client.matchReportFromReportName(fakePath);
+        assert.strictEqual(result, 'reportValue');
+        assert(
+          (client.pathTemplates.reportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+  });
 });

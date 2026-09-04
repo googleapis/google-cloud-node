@@ -37,11 +37,11 @@ function main(parent, workstationConfigId, workstationConfig) {
    */
   // const workstationConfigId = 'abc123'
   /**
-   *  Required. Config to create.
+   *  Required. Workstation configuration to create.
    */
   // const workstationConfig = {}
   /**
-   *  Optional. If set, validate the request and preview the review, but do not
+   *  Optional. If set, validate the request and preview the result, but do not
    *  actually apply it.
    */
   // const validateOnly = true

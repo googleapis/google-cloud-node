@@ -72,7 +72,7 @@ export interface GetNotificationCallback {
   (
     err: Error | null,
     notification?: Notification | null,
-    apiResponse?: unknown,
+    apiResponse?: unknown
   ): void;
 }
 

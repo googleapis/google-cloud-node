@@ -1,5 +1,30 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v3.0.0...bigquery-migration-v3.1.0) (2026-09-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9238](https://github.com/googleapis/google-cloud-node/issues/9238)) ([4c2bc95](https://github.com/googleapis/google-cloud-node/commit/4c2bc9510562e753340276ff5b21e1f18c71e7b2))
+
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v2.2.0...bigquery-migration-v3.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v2.1.2...bigquery-migration-v2.2.0) (2026-06-01)
+
+
+### Features
+
+* Add support for assessment tasks in BigQuery Migration API ([#8334](https://github.com/googleapis/google-cloud-node/issues/8334)) ([cb9a19e](https://github.com/googleapis/google-cloud-node/commit/cb9a19eb93bccdbc7c579df021b9e898d32675a2))
+
 ## [2.1.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v2.1.1...bigquery-migration-v2.1.2) (2026-05-01)
 
 

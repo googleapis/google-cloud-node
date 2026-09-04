@@ -32,33 +32,46 @@ import {
 } from './partial-result-stream';
 import {Session} from './session';
 import {Key} from './table';
-import {Span} from './instrument';
-import {google as spannerClient} from '../protos/protos';
 import {
-  NormalCallback,
-  addLeaderAwareRoutingHeader,
-  getCommonHeaders,
-} from './common';
-import {google} from '../protos/protos';
-import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
-import IAny = google.protobuf.IAny;
-import IQueryOptions = google.spanner.v1.ExecuteSqlRequest.IQueryOptions;
-import IRequestOptions = google.spanner.v1.IRequestOptions;
-import {Database, Spanner} from '.';
-import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
-import {
+  Span,
   ObservabilityOptions,
   startTrace,
   setSpanError,
   setSpanErrorAndException,
   traceConfig,
 } from './instrument';
+import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
+import {protos} from '@google-cloud/spanner-api';
+import spannerClient = protos.google;
+import google = protos.google;
+import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
+import IAny = google.protobuf.IAny;
+import IQueryOptions = google.spanner.v1.ExecuteSqlRequest.IQueryOptions;
+import IRequestOptions = google.spanner.v1.IRequestOptions;
+import {Database, Spanner} from '.';
+import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 import {RunTransactionOptions} from './transaction-runner';
 import {injectRequestIDIntoHeaders, nextNthRequest} from './request_id_header';
 
 export type Rows = Array<Row | Json>;
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
 const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
+
+let nextAffinityId = 0;
+
+/**
+ * Injects a key-value pair into the gaxOpts.otherArgs.options object
+ * without mutating the original.
+ */
+function injectGaxOpt(existingOpts: any, key: string, value: any): any {
+  return Object.assign({}, existingOpts, {
+    otherArgs: Object.assign({}, existingOpts?.otherArgs, {
+      options: Object.assign({}, existingOpts?.otherArgs?.options, {
+        [key]: value,
+      }),
+    }),
+  });
+}
 
 export interface TimestampBounds {
   strong?: boolean;
@@ -73,6 +86,15 @@ export interface BatchWriteOptions {
   requestOptions?: Pick<IRequestOptions, 'priority' | 'transactionTag'>;
   gaxOptions?: CallOptions;
   excludeTxnFromChangeStreams?: boolean;
+}
+
+export interface QueueSendOptions {
+  payload?: Value;
+  deliverTime?: Date | spannerClient.protobuf.ITimestamp;
+}
+
+export interface QueueAckOptions {
+  ignoreNotFound?: boolean;
 }
 
 export interface RequestOptions {
@@ -296,6 +318,9 @@ export class Snapshot extends EventEmitter {
     | undefined
     | null;
   id?: Uint8Array | string;
+  protected _affinityKey?: string;
+  protected _bindGaxOpts?: CallOptions;
+  protected _unbindGaxOpts?: CallOptions;
   multiplexedSessionPreviousTransactionId?: Uint8Array | string;
   ended: boolean;
   metadata?: spannerClient.spanner.v1.ITransaction;
@@ -365,8 +390,63 @@ export class Snapshot extends EventEmitter {
     this.ended = false;
     this.session = session;
     this.queryOptions = Object.assign({}, queryOptions);
-    this.request = session.request.bind(session);
-    this.requestStream = session.requestStream.bind(session);
+    // If the session is multiplexed, generate a unique affinity key for this
+    // specific transaction/snapshot. This allows requests using the same shared
+    // multiplexed session to be distributed across different gRPC channels.
+    if (session.metadata && session.metadata.multiplexed) {
+      this._affinityKey = `mux-affinity-${process.pid}-${nextAffinityId++}`;
+      // Pre-construct and cache the bind gax options to avoid creating
+      // a new object on every request, which improves performance.
+      this._bindGaxOpts = {
+        otherArgs: {
+          options: {
+            affinityKey: this._affinityKey,
+          },
+        },
+      };
+      // Pre-construct and cache the unbind gax options. This explicitly signals
+      // the channel factory to release the affinity mapping when the transaction ends.
+      this._unbindGaxOpts = {
+        otherArgs: {
+          options: {
+            affinityKey: this._affinityKey,
+            unbind: true,
+          },
+        },
+      };
+      this.request = (config: any, callback?: Function) => {
+        let gaxOpts;
+        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
+          gaxOpts = this._bindGaxOpts as any;
+        } else {
+          gaxOpts = injectGaxOpt(
+            config.gaxOpts,
+            'affinityKey',
+            this._affinityKey,
+          );
+        }
+        config = Object.assign({}, config, {gaxOpts});
+        return session.request(config, callback);
+      };
+
+      this.requestStream = (config: any) => {
+        let gaxOpts;
+        if (!config.gaxOpts || Object.keys(config.gaxOpts).length === 0) {
+          gaxOpts = this._bindGaxOpts as any;
+        } else {
+          gaxOpts = injectGaxOpt(
+            config.gaxOpts,
+            'affinityKey',
+            this._affinityKey,
+          );
+        }
+        config = Object.assign({}, config, {gaxOpts});
+        return session.requestStream(config);
+      };
+    } else {
+      this.request = session.request.bind(session);
+      this.requestStream = session.requestStream.bind(session);
+    }
 
     const readOnly = Snapshot.encodeTimestampBounds(options || {});
     this._options = {readOnly};
@@ -374,10 +454,7 @@ export class Snapshot extends EventEmitter {
     this._waitingRequests = [];
     this._inlineBeginStarted = false;
     this._observabilityOptions = session._observabilityOptions;
-    this.commonHeaders_ = getCommonHeaders(
-      this._dbName,
-      this._observabilityOptions?.enableEndToEndTracing,
-    );
+    this.commonHeaders_ = {...session.commonHeaders_};
     this._traceConfig = {
       opts: this._observabilityOptions,
       dbName: this._dbName,
@@ -1031,6 +1108,20 @@ export class Snapshot extends EventEmitter {
 
     this.ended = true;
     process.nextTick(() => this.emit('end'));
+
+    if (this._affinityKey) {
+      const database = this.session?.parent as Database;
+      const spanner = database?.parent?.parent as Spanner;
+      const client = spanner?.clients_?.get('SpannerClient') as any;
+
+      if (client?.spannerStub) {
+        Promise.resolve(client.spannerStub)
+          .then((stub: any) => {
+            stub?.getChannel?.()?.unbind?.(this._affinityKey);
+          })
+          .catch(() => {});
+      }
+    }
   }
 
   /**
@@ -1761,9 +1852,7 @@ export class Snapshot extends EventEmitter {
    */
   protected _getDirectedReadOptions(
     directedReadOptions:
-      | google.spanner.v1.IDirectedReadOptions
-      | null
-      | undefined,
+      google.spanner.v1.IDirectedReadOptions | null | undefined,
   ) {
     if (
       !directedReadOptions &&
@@ -2381,7 +2470,7 @@ export class Transaction extends Dml {
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
-    const gaxOpts =
+    let gaxOpts =
       'gaxOptions' in options ? (options as CommitOptions).gaxOptions : options;
 
     const mutations = this._queuedMutations;
@@ -2456,12 +2545,20 @@ export class Transaction extends Dml {
         span.addEvent('Starting Commit');
 
         const database = this.session.parent as Database;
+        if (this._affinityKey) {
+          if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
+            gaxOpts = this._unbindGaxOpts as any;
+          } else {
+            gaxOpts = injectGaxOpt(gaxOpts, 'unbind', true);
+          }
+        }
+
         this.request(
           {
             client: 'SpannerClient',
             method: 'commit',
             reqOpts,
-            gaxOpts: gaxOpts,
+            gaxOpts,
             headers: injectRequestIDIntoHeaders(
               headers,
               this.session,
@@ -2714,6 +2811,28 @@ export class Transaction extends Dml {
   }
 
   /**
+   * Queue a send mutation.
+   *
+   * @param {string} queue The name of the queue.
+   * @param {Key} key The key of the message to send.
+   * @param {QueueSendOptions} [options] Options for the send mutation.
+   */
+  queueSend(queue: string, key: Key, options?: QueueSendOptions): void {
+    this._queuedMutations.push(buildSendMutation(queue, key, options));
+  }
+
+  /**
+   * Queue an ack mutation.
+   *
+   * @param {string} queue The name of the queue.
+   * @param {Key} key The key of the message to ack.
+   * @param {QueueAckOptions} [options] Options for the ack mutation.
+   */
+  queueAck(queue: string, key: Key, options?: QueueAckOptions): void {
+    this._queuedMutations.push(buildAckMutation(queue, key, options));
+  }
+
+  /**
    * Replace rows of data within a table.
    *
    * @see [Commit API Documentation](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#google.spanner.v1.Spanner.Commit)
@@ -2790,11 +2909,10 @@ export class Transaction extends Dml {
   ): void;
   rollback(
     gaxOptionsOrCallback?:
-      | CallOptions
-      | spannerClient.spanner.v1.Spanner.RollbackCallback,
+      CallOptions | spannerClient.spanner.v1.Spanner.RollbackCallback,
     cb?: spannerClient.spanner.v1.Spanner.RollbackCallback,
   ): void | Promise<void> {
-    const gaxOpts =
+    let gaxOpts =
       typeof gaxOptionsOrCallback === 'object' ? gaxOptionsOrCallback : {};
     const callback =
       typeof gaxOptionsOrCallback === 'function' ? gaxOptionsOrCallback : cb!;
@@ -2817,6 +2935,14 @@ export class Transaction extends Dml {
       const headers = this.commonHeaders_;
       if (this._getSpanner().routeToLeaderEnabled) {
         addLeaderAwareRoutingHeader(headers);
+      }
+
+      if (this._affinityKey) {
+        if (!gaxOpts || Object.keys(gaxOpts).length === 0) {
+          gaxOpts = this._unbindGaxOpts as any;
+        } else {
+          gaxOpts = injectGaxOpt(gaxOpts, 'unbind', true);
+        }
       }
 
       this.request(
@@ -3078,6 +3204,69 @@ function buildDeleteMutation(
 }
 
 /**
+ * Builds a send mutation.
+ *
+ * @param {string} queue - The name of the queue.
+ * @param {Key} key - The key for the message.
+ * @param {QueueSendOptions} [options] - Options for sending the message.
+ * @returns {spannerClient.spanner.v1.Mutation} - The formatted send mutation.
+ */
+function buildSendMutation(
+  queue: string,
+  key: Key,
+  options?: QueueSendOptions,
+): spannerClient.spanner.v1.Mutation {
+  const send: spannerClient.spanner.v1.Mutation.ISend = {
+    queue,
+    key: codec.convertToListValue(toArray(key)),
+  };
+  if (options) {
+    if (options.payload !== undefined) {
+      send.payload = codec.encode(options.payload);
+    }
+    if (options.deliverTime) {
+      if (options.deliverTime instanceof Date) {
+        send.deliverTime = codec.convertMsToProtoTimestamp(
+          options.deliverTime.getTime(),
+        );
+      } else {
+        send.deliverTime = options.deliverTime;
+      }
+    }
+  }
+  const mutation: spannerClient.spanner.v1.IMutation = {
+    send,
+  };
+  return mutation as spannerClient.spanner.v1.Mutation;
+}
+
+/**
+ * Builds an ack mutation.
+ *
+ * @param {string} queue - The name of the queue.
+ * @param {Key} key - The key for the message.
+ * @param {QueueAckOptions} [options] - Options for acking the message.
+ * @returns {spannerClient.spanner.v1.Mutation} - The formatted ack mutation.
+ */
+function buildAckMutation(
+  queue: string,
+  key: Key,
+  options?: QueueAckOptions,
+): spannerClient.spanner.v1.Mutation {
+  const ack: spannerClient.spanner.v1.Mutation.IAck = {
+    queue,
+    key: codec.convertToListValue(toArray(key)),
+  };
+  if (options && options.ignoreNotFound !== undefined) {
+    ack.ignoreNotFound = options.ignoreNotFound;
+  }
+  const mutation: spannerClient.spanner.v1.IMutation = {
+    ack,
+  };
+  return mutation as spannerClient.spanner.v1.Mutation;
+}
+
+/**
  * MutationSet represent a set of changes to be applied atomically to a Cloud Spanner
  * database with a {@link Transaction}.
  * Mutations are used to insert, update, upsert(insert or update), replace, or
@@ -3130,6 +3319,28 @@ export class MutationSet {
    */
   insert(table: string, rows: object | object[]): void {
     this._queuedMutations.push(buildMutation('insert', table, rows));
+  }
+
+  /**
+   * Queue a send mutation.
+   *
+   * @param {string} queue The name of the queue.
+   * @param {Key} key The key of the message to send.
+   * @param {QueueSendOptions} [options] Options for the send mutation.
+   */
+  queueSend(queue: string, key: Key, options?: QueueSendOptions): void {
+    this._queuedMutations.push(buildSendMutation(queue, key, options));
+  }
+
+  /**
+   * Queue an ack mutation.
+   *
+   * @param {string} queue The name of the queue.
+   * @param {Key} key The key of the message to ack.
+   * @param {QueueAckOptions} [options] Options for the ack mutation.
+   */
+  queueAck(queue: string, key: Key, options?: QueueAckOptions): void {
+    this._queuedMutations.push(buildAckMutation(queue, key, options));
   }
 
   /**
@@ -3222,6 +3433,14 @@ export class MutationGroup {
 
   insert(table: string, rows: object | object[]): void {
     this._proto.mutations.push(buildMutation('insert', table, rows));
+  }
+
+  queueSend(queue: string, key: Key, options?: QueueSendOptions): void {
+    this._proto.mutations.push(buildSendMutation(queue, key, options));
+  }
+
+  queueAck(queue: string, key: Key, options?: QueueAckOptions): void {
+    this._proto.mutations.push(buildAckMutation(queue, key, options));
   }
 
   update(table: string, rows: object | object[]): void {

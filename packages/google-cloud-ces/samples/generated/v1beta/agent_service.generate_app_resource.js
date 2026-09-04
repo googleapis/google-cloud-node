@@ -44,6 +44,10 @@ function main(parent) {
    */
   // const toolset = {}
   /**
+   *  The app version context specifying the base snapshot and target agent.
+   */
+  // const appVersionContext = {}
+  /**
    *  Required. The resource name of the app to generate the resource for.
    */
   // const parent = 'abc123'

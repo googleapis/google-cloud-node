@@ -1040,7 +1040,7 @@ export class DataChatServiceClient {
 
   /**
    * Answers a data question by generating a stream of
-   * {@link protos.google.cloud.geminidataanalytics.v1alpha.Message|Message} objects.
+   * {@link protos.google.cloud.geminidataanalytics.v1.Message|Message} objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1059,16 +1059,31 @@ export class DataChatServiceClient {
    *   Some clients may not use GDA managed resources including
    *   conversations and agents, instead they create and manage their own
    *   conversations and agents resources.
+   * @param {google.cloud.geminidataanalytics.v1beta.LookerSettings} [request.lookerSettings]
+   *   Optional. Looker specific settings.
    * @param {string} [request.project]
-   *   Optional. The Google Cloud project to be used for quota and billing.
+   *   Optional. Deprecated: Use `parent` field instead.
+   *   The Google Cloud project to be used for quota and billing.
    * @param {string} request.parent
    *   Required. The parent value for chat request.
    *   Pattern: `projects/{project}/locations/{location}`
    * @param {number[]} request.messages
    *   Required. Content of current conversation.
+   * @param {google.cloud.geminidataanalytics.v1beta.Credentials} [request.credentials]
+   *   Optional. The credentials to use when calling the data source(s) specified
+   *   in the context.
+   *
+   *   This field can be used to provide credentials for various data sources.
+   *   For example, when connecting to Looker, it currently supports both OAuth
+   *   token and API key-based credentials, as described in
+   *   [Authentication with an
+   *   SDK](https://cloud.google.com/looker/docs/api-auth#authentication_with_an_sdk).
    * @param {google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode} [request.thinkingMode]
    *   Optional. The thinking mode to use for the agent loop.
    *   Defaults to THINKING_MODE_UNSPECIFIED if not specified.
+   * @param {google.cloud.geminidataanalytics.v1beta.ChatRequest.Model} [request.model]
+   *   Optional. The model to use for the agent loop when processing the request.
+   *   This setting only has an effect when context.options.model is not set.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1107,8 +1122,9 @@ export class DataChatServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1240,8 +1256,9 @@ export class DataChatServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1296,8 +1313,9 @@ export class DataChatServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1352,8 +1370,9 @@ export class DataChatServiceClient {
    *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1488,8 +1507,9 @@ export class DataChatServiceClient {
    *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1547,8 +1567,9 @@ export class DataChatServiceClient {
    *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]

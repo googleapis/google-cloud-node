@@ -19,4356 +19,5864 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as machinelearningrunsModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({ done: true, value: undefined });
+          }
+          return Promise.resolve({ done: false, value: responses![counter++] });
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1alpha.MachineLearningRunsClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'hypercomputecluster.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'hypercomputecluster.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          machinelearningrunsModule.v1alpha.MachineLearningRunsClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'hypercomputecluster.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          machinelearningrunsModule.v1alpha.MachineLearningRunsClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'hypercomputecluster.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'hypercomputecluster.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'hypercomputecluster.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new machinelearningrunsModule.v1alpha.MachineLearningRunsClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'hypercomputecluster.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+              universeDomain: 'configured.example.com',
+            });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'hypercomputecluster.configured.example.com',
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
+    });
 
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = machinelearningrunsModule.v1alpha.MachineLearningRunsClient.servicePath;
-                assert.strictEqual(servicePath, 'hypercomputecluster.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('has port', () => {
+      const port =
+        machinelearningrunsModule.v1alpha.MachineLearningRunsClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = machinelearningrunsModule.v1alpha.MachineLearningRunsClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'hypercomputecluster.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('should create a client with no option', () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          fallback: true,
+        });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.machineLearningRunsStub, undefined);
+      await client.initialize();
+      assert(client.machineLearningRunsStub);
+    });
+
+    it('has close method for the initialized client', (done) => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.machineLearningRunsStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has close method for the non-initialized client', (done) => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.machineLearningRunsStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
+
+  describe('getMachineLearningRun', () => {
+    it('invokes getMachineLearningRun without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+      );
+      client.innerApiCalls.getMachineLearningRun =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getMachineLearningRun(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMachineLearningRun without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+      );
+      client.innerApiCalls.getMachineLearningRun =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getMachineLearningRun(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMachineLearningRun with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getMachineLearningRun = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getMachineLearningRun(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMachineLearningRun with closed client', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getMachineLearningRun(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getProfilerTarget', () => {
+    it('invokes getProfilerTarget without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+      );
+      client.innerApiCalls.getProfilerTarget = stubSimpleCall(expectedResponse);
+      const [response] = await client.getProfilerTarget(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfilerTarget without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+      );
+      client.innerApiCalls.getProfilerTarget =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getProfilerTarget(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfilerTarget with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getProfilerTarget = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getProfilerTarget(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfilerTarget with closed client', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getProfilerTarget(request), expectedError);
+    });
+  });
+
+  describe('deleteProfilerTarget', () => {
+    it('invokes deleteProfilerTarget without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteProfilerTarget =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteProfilerTarget(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteProfilerTarget without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteProfilerTarget =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteProfilerTarget(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteProfilerTarget with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteProfilerTarget = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteProfilerTarget(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteProfilerTarget with closed client', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.deleteProfilerTarget(request), expectedError);
+    });
+  });
+
+  describe('getProfilerSession', () => {
+    it('invokes getProfilerSession without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+      );
+      client.innerApiCalls.getProfilerSession =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getProfilerSession(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfilerSession without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+      );
+      client.innerApiCalls.getProfilerSession =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getProfilerSession(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfilerSession with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getProfilerSession = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getProfilerSession(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfilerSession with closed client', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getProfilerSession(request), expectedError);
+    });
+  });
+
+  describe('deleteProfilerSession', () => {
+    it('invokes deleteProfilerSession without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteProfilerSession =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteProfilerSession(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteProfilerSession without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteProfilerSession =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteProfilerSession(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteProfilerSession with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteProfilerSession = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteProfilerSession(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteProfilerSession with closed client', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.deleteProfilerSession(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getProfileSession', () => {
+    it('invokes getProfileSession without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+      );
+      client.innerApiCalls.getProfileSession = stubSimpleCall(expectedResponse);
+      const [response] = await client.getProfileSession(request);
+      assert(stub.calledOnce);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProfileSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfileSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfileSession without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+      );
+      client.innerApiCalls.getProfileSession =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getProfileSession(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert(stub.calledOnce);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getProfileSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfileSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfileSession with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getProfileSession = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getProfileSession(request), expectedError);
+      assert(stub.calledOnce);
+      const actualRequest = (
+        client.innerApiCalls.getProfileSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProfileSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getProfileSession with closed client', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getProfileSession(request), expectedError);
+      assert(stub.calledOnce);
+    });
+  });
+
+  describe('getMonitoredEvent', () => {
+    it('invokes getMonitoredEvent without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+      );
+      client.innerApiCalls.getMonitoredEvent = stubSimpleCall(expectedResponse);
+      const [response] = await client.getMonitoredEvent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMonitoredEvent without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+      );
+      client.innerApiCalls.getMonitoredEvent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getMonitoredEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMonitoredEvent with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getMonitoredEvent = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getMonitoredEvent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getMonitoredEvent with closed client', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getMonitoredEvent(request), expectedError);
+    });
+  });
+
+  describe('createMachineLearningRun', () => {
+    it('invokes createMachineLearningRun without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createMachineLearningRun =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createMachineLearningRun(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMachineLearningRun without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createMachineLearningRun =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createMachineLearningRun(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+              protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMachineLearningRun with call error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createMachineLearningRun = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createMachineLearningRun(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMachineLearningRun with LRO error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createMachineLearningRun = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createMachineLearningRun(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateMachineLearningRunProgress without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkCreateMachineLearningRunProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateMachineLearningRunProgress with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateMachineLearningRunProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateMachineLearningRun', () => {
+    it('invokes updateMachineLearningRun without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest(),
+      );
+      request.machineLearningRun ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest',
+        ['machineLearningRun', 'name'],
+      );
+      request.machineLearningRun.name = defaultValue1;
+      const expectedHeaderRequestParams = `machine_learning_run.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateMachineLearningRun =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateMachineLearningRun(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMachineLearningRun without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest(),
+      );
+      request.machineLearningRun ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest',
+        ['machineLearningRun', 'name'],
+      );
+      request.machineLearningRun.name = defaultValue1;
+      const expectedHeaderRequestParams = `machine_learning_run.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateMachineLearningRun =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateMachineLearningRun(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+              protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMachineLearningRun with call error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest(),
+      );
+      request.machineLearningRun ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest',
+        ['machineLearningRun', 'name'],
+      );
+      request.machineLearningRun.name = defaultValue1;
+      const expectedHeaderRequestParams = `machine_learning_run.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMachineLearningRun = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateMachineLearningRun(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMachineLearningRun with LRO error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest(),
+      );
+      request.machineLearningRun ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest',
+        ['machineLearningRun', 'name'],
+      );
+      request.machineLearningRun.name = defaultValue1;
+      const expectedHeaderRequestParams = `machine_learning_run.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMachineLearningRun = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateMachineLearningRun(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateMachineLearningRunProgress without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdateMachineLearningRunProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateMachineLearningRunProgress with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateMachineLearningRunProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteMachineLearningRun', () => {
+    it('invokes deleteMachineLearningRun without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteMachineLearningRun =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteMachineLearningRun(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMachineLearningRun without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteMachineLearningRun =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteMachineLearningRun(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMachineLearningRun with call error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteMachineLearningRun = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.deleteMachineLearningRun(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMachineLearningRun with LRO error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteMachineLearningRun = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteMachineLearningRun(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteMachineLearningRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMachineLearningRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteMachineLearningRunProgress without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteMachineLearningRunProgress(
+          expectedResponse.name,
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteMachineLearningRunProgress with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteMachineLearningRunProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createProfilerTarget', () => {
+    it('invokes createProfilerTarget without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createProfilerTarget =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createProfilerTarget(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createProfilerTarget without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createProfilerTarget =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createProfilerTarget(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+              protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createProfilerTarget with call error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createProfilerTarget = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createProfilerTarget(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createProfilerTarget with LRO error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createProfilerTarget = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createProfilerTarget(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createProfilerTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProfilerTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateProfilerTargetProgress without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateProfilerTargetProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateProfilerTargetProgress with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateProfilerTargetProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createProfilerSession', () => {
+    it('invokes createProfilerSession without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createProfilerSession =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createProfilerSession(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createProfilerSession without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createProfilerSession =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createProfilerSession(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+              protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createProfilerSession with call error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createProfilerSession = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.createProfilerSession(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.createProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createProfilerSession with LRO error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createProfilerSession = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createProfilerSession(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createProfilerSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProfilerSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateProfilerSessionProgress without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateProfilerSessionProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateProfilerSessionProgress with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateProfilerSessionProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createMonitoredEvent', () => {
+    it('invokes createMonitoredEvent without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createMonitoredEvent =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createMonitoredEvent(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMonitoredEvent without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createMonitoredEvent =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createMonitoredEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+              protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMonitoredEvent with call error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createMonitoredEvent = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createMonitoredEvent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createMonitoredEvent with LRO error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createMonitoredEvent = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createMonitoredEvent(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateMonitoredEventProgress without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateMonitoredEventProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateMonitoredEventProgress with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateMonitoredEventProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateMonitoredEvent', () => {
+    it('invokes updateMonitoredEvent without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest(),
+      );
+      request.monitoredEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest',
+        ['monitoredEvent', 'name'],
+      );
+      request.monitoredEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `monitored_event.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateMonitoredEvent =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateMonitoredEvent(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMonitoredEvent without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest(),
+      );
+      request.monitoredEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest',
+        ['monitoredEvent', 'name'],
+      );
+      request.monitoredEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `monitored_event.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.updateMonitoredEvent =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateMonitoredEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+              protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMonitoredEvent with call error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest(),
+      );
+      request.monitoredEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest',
+        ['monitoredEvent', 'name'],
+      );
+      request.monitoredEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `monitored_event.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMonitoredEvent = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateMonitoredEvent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateMonitoredEvent with LRO error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest(),
+      );
+      request.monitoredEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest',
+        ['monitoredEvent', 'name'],
+      );
+      request.monitoredEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `monitored_event.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateMonitoredEvent = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.updateMonitoredEvent(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateMonitoredEventProgress without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateMonitoredEventProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateMonitoredEventProgress with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkUpdateMonitoredEventProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteMonitoredEvent', () => {
+    it('invokes deleteMonitoredEvent without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteMonitoredEvent =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteMonitoredEvent(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMonitoredEvent without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteMonitoredEvent =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteMonitoredEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMonitoredEvent with call error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteMonitoredEvent = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteMonitoredEvent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteMonitoredEvent with LRO error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteMonitoredEvent = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteMonitoredEvent(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteMonitoredEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMonitoredEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteMonitoredEventProgress without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteMonitoredEventProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteMonitoredEventProgress with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteMonitoredEventProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listMachineLearningRuns', () => {
+    it('invokes listMachineLearningRuns without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+      ];
+      client.innerApiCalls.listMachineLearningRuns =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listMachineLearningRuns(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMachineLearningRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMachineLearningRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMachineLearningRuns without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+      ];
+      client.innerApiCalls.listMachineLearningRuns =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listMachineLearningRuns(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMachineLearningRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMachineLearningRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMachineLearningRuns with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listMachineLearningRuns = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.listMachineLearningRuns(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.listMachineLearningRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMachineLearningRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMachineLearningRunsStream without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+      ];
+      client.descriptors.page.listMachineLearningRuns.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listMachineLearningRunsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listMachineLearningRuns
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMachineLearningRuns, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listMachineLearningRuns
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listMachineLearningRunsStream with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMachineLearningRuns.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listMachineLearningRunsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listMachineLearningRuns
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMachineLearningRuns, request),
+      );
+      assert(
+        (
+          client.descriptors.page.listMachineLearningRuns
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listMachineLearningRuns without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun(),
+        ),
+      ];
+      client.descriptors.page.listMachineLearningRuns.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[] =
+        [];
+      const iterable = client.listMachineLearningRunsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMachineLearningRuns
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listMachineLearningRuns
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listMachineLearningRuns with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMachineLearningRuns.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listMachineLearningRunsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'hypercomputecluster.example.com');
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMachineLearningRuns
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.descriptors.page.listMachineLearningRuns
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
+  describe('listProfilerTargets', () => {
+    it('invokes listProfilerTargets without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+      ];
+      client.innerApiCalls.listProfilerTargets =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listProfilerTargets(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listProfilerTargets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProfilerTargets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'hypercomputecluster.example.com');
+    it('invokes listProfilerTargets without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+      ];
+      client.innerApiCalls.listProfilerTargets =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listProfilerTargets(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listProfilerTargets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProfilerTargets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'hypercomputecluster.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('invokes listProfilerTargets with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listProfilerTargets = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listProfilerTargets(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listProfilerTargets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProfilerTargets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'hypercomputecluster.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
+    it('invokes listProfilerTargetsStream without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+      ];
+      client.descriptors.page.listProfilerTargets.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listProfilerTargetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listProfilerTargets.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProfilerTargets, request),
+      );
+      assert(
+        (client.descriptors.page.listProfilerTargets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listProfilerTargetsStream with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProfilerTargets.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listProfilerTargetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listProfilerTargets.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProfilerTargets, request),
+      );
+      assert(
+        (client.descriptors.page.listProfilerTargets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listProfilerTargets without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget(),
+        ),
+      ];
+      client.descriptors.page.listProfilerTargets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[] =
+        [];
+      const iterable = client.listProfilerTargetsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listProfilerTargets with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProfilerTargets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listProfilerTargetsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
 
-        it('has port', () => {
-            const port = machinelearningrunsModule.v1alpha.MachineLearningRunsClient.port;
-            assert(port);
-            assert(typeof port === 'number');
+  describe('listProfilerSessions', () => {
+    it('invokes listProfilerSessions without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
-
-        it('should create a client with no option', () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.machineLearningRunsStub, undefined);
-            await client.initialize();
-            assert(client.machineLearningRunsStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.machineLearningRunsStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.machineLearningRunsStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
-        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+      ];
+      client.innerApiCalls.listProfilerSessions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listProfilerSessions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listProfilerSessions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProfilerSessions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('getMachineLearningRun', () => {
-        it('invokes getMachineLearningRun without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()
-            );
-            client.innerApiCalls.getMachineLearningRun = stubSimpleCall(expectedResponse);
-            const [response] = await client.getMachineLearningRun(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getMachineLearningRun without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()
-            );
-            client.innerApiCalls.getMachineLearningRun = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getMachineLearningRun(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getMachineLearningRun with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getMachineLearningRun = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getMachineLearningRun(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getMachineLearningRun with closed client', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetMachineLearningRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getMachineLearningRun(request), expectedError);
-        });
-    });
-
-    describe('getProfilerTarget', () => {
-        it('invokes getProfilerTarget without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()
-            );
-            client.innerApiCalls.getProfilerTarget = stubSimpleCall(expectedResponse);
-            const [response] = await client.getProfilerTarget(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getProfilerTarget without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()
-            );
-            client.innerApiCalls.getProfilerTarget = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getProfilerTarget(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getProfilerTarget with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getProfilerTarget = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getProfilerTarget(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getProfilerTarget with closed client', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfilerTargetRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getProfilerTarget(request), expectedError);
-        });
-    });
-
-    describe('deleteProfilerTarget', () => {
-        it('invokes deleteProfilerTarget without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteProfilerTarget = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteProfilerTarget(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteProfilerTarget without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteProfilerTarget = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteProfilerTarget(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteProfilerTarget with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteProfilerTarget = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.deleteProfilerTarget(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteProfilerTarget with closed client', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerTargetRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.deleteProfilerTarget(request), expectedError);
-        });
-    });
-
-    describe('getProfilerSession', () => {
-        it('invokes getProfilerSession without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()
-            );
-            client.innerApiCalls.getProfilerSession = stubSimpleCall(expectedResponse);
-            const [response] = await client.getProfilerSession(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getProfilerSession without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()
-            );
-            client.innerApiCalls.getProfilerSession = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getProfilerSession(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getProfilerSession with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getProfilerSession = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getProfilerSession(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getProfilerSession with closed client', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfilerSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getProfilerSession(request), expectedError);
-        });
-    });
-
-    describe('deleteProfilerSession', () => {
-        it('invokes deleteProfilerSession without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteProfilerSession = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteProfilerSession(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteProfilerSession without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteProfilerSession = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteProfilerSession(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteProfilerSession with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteProfilerSession = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.deleteProfilerSession(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteProfilerSession with closed client', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteProfilerSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.deleteProfilerSession(request), expectedError);
-        });
-    });
-
-    describe('getProfileSession', () => {
-        it('invokes getProfileSession without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()
-            );
-            client.innerApiCalls.getProfileSession = stubSimpleCall(expectedResponse);
-            const [response] = await client.getProfileSession(request);
-            assert(stub.calledOnce);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getProfileSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfileSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getProfileSession without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()
-            );
-            client.innerApiCalls.getProfileSession = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getProfileSession(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert(stub.calledOnce);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getProfileSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfileSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getProfileSession with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getProfileSession = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getProfileSession(request), expectedError);
-            assert(stub.calledOnce);
-            const actualRequest = (client.innerApiCalls.getProfileSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getProfileSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getProfileSession with closed client', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetProfileSessionRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getProfileSession(request), expectedError);
-            assert(stub.calledOnce);
-        });
-    });
-
-    describe('getMonitoredEvent', () => {
-        it('invokes getMonitoredEvent without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()
-            );
-            client.innerApiCalls.getMonitoredEvent = stubSimpleCall(expectedResponse);
-            const [response] = await client.getMonitoredEvent(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getMonitoredEvent without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()
-            );
-            client.innerApiCalls.getMonitoredEvent = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getMonitoredEvent(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getMonitoredEvent with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getMonitoredEvent = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getMonitoredEvent(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getMonitoredEvent with closed client', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.GetMonitoredEventRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getMonitoredEvent(request), expectedError);
-        });
-    });
-
-    describe('createMachineLearningRun', () => {
-        it('invokes createMachineLearningRun without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createMachineLearningRun = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createMachineLearningRun(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createMachineLearningRun without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createMachineLearningRun = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createMachineLearningRun(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createMachineLearningRun with call error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createMachineLearningRun = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createMachineLearningRun(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createMachineLearningRun with LRO error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateMachineLearningRunRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createMachineLearningRun = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createMachineLearningRun(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCreateMachineLearningRunProgress without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateMachineLearningRunProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCreateMachineLearningRunProgress with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateMachineLearningRunProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('updateMachineLearningRun', () => {
-        it('invokes updateMachineLearningRun without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest()
-            );
-            request.machineLearningRun ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest', ['machineLearningRun', 'name']);
-            request.machineLearningRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `machine_learning_run.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateMachineLearningRun = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.updateMachineLearningRun(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateMachineLearningRun without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest()
-            );
-            request.machineLearningRun ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest', ['machineLearningRun', 'name']);
-            request.machineLearningRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `machine_learning_run.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateMachineLearningRun = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateMachineLearningRun(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateMachineLearningRun with call error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest()
-            );
-            request.machineLearningRun ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest', ['machineLearningRun', 'name']);
-            request.machineLearningRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `machine_learning_run.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateMachineLearningRun = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.updateMachineLearningRun(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateMachineLearningRun with LRO error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest()
-            );
-            request.machineLearningRun ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.UpdateMachineLearningRunRequest', ['machineLearningRun', 'name']);
-            request.machineLearningRun.name = defaultValue1;
-            const expectedHeaderRequestParams = `machine_learning_run.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateMachineLearningRun = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.updateMachineLearningRun(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.updateMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkUpdateMachineLearningRunProgress without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkUpdateMachineLearningRunProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkUpdateMachineLearningRunProgress with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkUpdateMachineLearningRunProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('deleteMachineLearningRun', () => {
-        it('invokes deleteMachineLearningRun without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteMachineLearningRun = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.deleteMachineLearningRun(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteMachineLearningRun without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteMachineLearningRun = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteMachineLearningRun(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteMachineLearningRun with call error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteMachineLearningRun = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.deleteMachineLearningRun(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteMachineLearningRun with LRO error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteMachineLearningRunRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteMachineLearningRun = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.deleteMachineLearningRun(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteMachineLearningRun as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteMachineLearningRun as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkDeleteMachineLearningRunProgress without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkDeleteMachineLearningRunProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkDeleteMachineLearningRunProgress with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkDeleteMachineLearningRunProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('createProfilerTarget', () => {
-        it('invokes createProfilerTarget without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createProfilerTarget = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createProfilerTarget(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createProfilerTarget without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createProfilerTarget = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createProfilerTarget(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createProfilerTarget with call error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createProfilerTarget = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createProfilerTarget(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createProfilerTarget with LRO error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateProfilerTargetRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createProfilerTarget = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createProfilerTarget(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createProfilerTarget as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createProfilerTarget as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCreateProfilerTargetProgress without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateProfilerTargetProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCreateProfilerTargetProgress with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateProfilerTargetProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('createProfilerSession', () => {
-        it('invokes createProfilerSession without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createProfilerSession = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createProfilerSession(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createProfilerSession without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createProfilerSession = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createProfilerSession(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createProfilerSession with call error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createProfilerSession = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createProfilerSession(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createProfilerSession with LRO error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateProfilerSessionRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createProfilerSession = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createProfilerSession(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createProfilerSession as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createProfilerSession as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCreateProfilerSessionProgress without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateProfilerSessionProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCreateProfilerSessionProgress with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateProfilerSessionProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('createMonitoredEvent', () => {
-        it('invokes createMonitoredEvent without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createMonitoredEvent = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createMonitoredEvent(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createMonitoredEvent without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createMonitoredEvent = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createMonitoredEvent(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createMonitoredEvent with call error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createMonitoredEvent = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createMonitoredEvent(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createMonitoredEvent with LRO error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.CreateMonitoredEventRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createMonitoredEvent = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createMonitoredEvent(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCreateMonitoredEventProgress without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateMonitoredEventProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCreateMonitoredEventProgress with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateMonitoredEventProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('updateMonitoredEvent', () => {
-        it('invokes updateMonitoredEvent without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest()
-            );
-            request.monitoredEvent ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest', ['monitoredEvent', 'name']);
-            request.monitoredEvent.name = defaultValue1;
-            const expectedHeaderRequestParams = `monitored_event.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateMonitoredEvent = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.updateMonitoredEvent(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateMonitoredEvent without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest()
-            );
-            request.monitoredEvent ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest', ['monitoredEvent', 'name']);
-            request.monitoredEvent.name = defaultValue1;
-            const expectedHeaderRequestParams = `monitored_event.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.updateMonitoredEvent = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateMonitoredEvent(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateMonitoredEvent with call error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest()
-            );
-            request.monitoredEvent ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest', ['monitoredEvent', 'name']);
-            request.monitoredEvent.name = defaultValue1;
-            const expectedHeaderRequestParams = `monitored_event.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateMonitoredEvent = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.updateMonitoredEvent(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateMonitoredEvent with LRO error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest()
-            );
-            request.monitoredEvent ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.UpdateMonitoredEventRequest', ['monitoredEvent', 'name']);
-            request.monitoredEvent.name = defaultValue1;
-            const expectedHeaderRequestParams = `monitored_event.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateMonitoredEvent = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.updateMonitoredEvent(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.updateMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkUpdateMonitoredEventProgress without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkUpdateMonitoredEventProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkUpdateMonitoredEventProgress with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkUpdateMonitoredEventProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('deleteMonitoredEvent', () => {
-        it('invokes deleteMonitoredEvent without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteMonitoredEvent = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.deleteMonitoredEvent(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteMonitoredEvent without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.deleteMonitoredEvent = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteMonitoredEvent(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.hypercomputecluster.v1alpha.IOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteMonitoredEvent with call error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteMonitoredEvent = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.deleteMonitoredEvent(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteMonitoredEvent with LRO error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.DeleteMonitoredEventRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteMonitoredEvent = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.deleteMonitoredEvent(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteMonitoredEvent as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteMonitoredEvent as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkDeleteMonitoredEventProgress without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkDeleteMonitoredEventProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkDeleteMonitoredEventProgress with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkDeleteMonitoredEventProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-    });
-
-    describe('listMachineLearningRuns', () => {
-        it('invokes listMachineLearningRuns without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-            ];
-            client.innerApiCalls.listMachineLearningRuns = stubSimpleCall(expectedResponse);
-            const [response] = await client.listMachineLearningRuns(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listMachineLearningRuns as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listMachineLearningRuns as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listMachineLearningRuns without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-            ];
-            client.innerApiCalls.listMachineLearningRuns = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listMachineLearningRuns(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listMachineLearningRuns as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listMachineLearningRuns as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listMachineLearningRuns with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listMachineLearningRuns = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listMachineLearningRuns(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listMachineLearningRuns as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listMachineLearningRuns as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listMachineLearningRunsStream without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-            ];
-            client.descriptors.page.listMachineLearningRuns.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listMachineLearningRunsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listMachineLearningRuns.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listMachineLearningRuns, request));
-            assert(
-                (client.descriptors.page.listMachineLearningRuns.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listMachineLearningRunsStream with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listMachineLearningRuns.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listMachineLearningRunsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listMachineLearningRuns.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listMachineLearningRuns, request));
-            assert(
-                (client.descriptors.page.listMachineLearningRuns.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listMachineLearningRuns without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MachineLearningRun()),
-            ];
-            client.descriptors.page.listMachineLearningRuns.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[] = [];
-            const iterable = client.listMachineLearningRunsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes listProfilerSessions without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+      ];
+      client.innerApiCalls.listProfilerSessions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listProfilerSessions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listMachineLearningRuns.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listMachineLearningRuns.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listMachineLearningRuns with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMachineLearningRunsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listMachineLearningRuns.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listMachineLearningRunsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.IMachineLearningRun[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listMachineLearningRuns.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listMachineLearningRuns.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listProfilerSessions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProfilerSessions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('listProfilerTargets', () => {
-        it('invokes listProfilerTargets without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-            ];
-            client.innerApiCalls.listProfilerTargets = stubSimpleCall(expectedResponse);
-            const [response] = await client.listProfilerTargets(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listProfilerTargets as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listProfilerTargets as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes listProfilerSessions with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listProfilerSessions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listProfilerSessions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listProfilerSessions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProfilerSessions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('invokes listProfilerTargets without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-            ];
-            client.innerApiCalls.listProfilerTargets = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listProfilerTargets(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listProfilerTargets as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listProfilerTargets as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes listProfilerSessionsStream without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
-
-        it('invokes listProfilerTargets with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listProfilerTargets = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listProfilerTargets(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listProfilerTargets as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listProfilerTargets as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+      ];
+      client.descriptors.page.listProfilerSessions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listProfilerSessionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes listProfilerTargetsStream without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-            ];
-            client.descriptors.page.listProfilerTargets.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listProfilerTargetsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listProfilerTargets.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listProfilerTargets, request));
-            assert(
-                (client.descriptors.page.listProfilerTargets.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listProfilerSessions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProfilerSessions, request),
+      );
+      assert(
+        (client.descriptors.page.listProfilerSessions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-        it('invokes listProfilerTargetsStream with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listProfilerTargets.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listProfilerTargetsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listProfilerTargets.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listProfilerTargets, request));
-            assert(
-                (client.descriptors.page.listProfilerTargets.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
+    it('invokes listProfilerSessionsStream with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProfilerSessions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listProfilerSessionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listProfilerSessions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProfilerSessions, request),
+      );
+      assert(
+        (client.descriptors.page.listProfilerSessions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-        it('uses async iteration with listProfilerTargets without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerTarget()),
-            ];
-            client.descriptors.page.listProfilerTargets.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[] = [];
-            const iterable = client.listProfilerTargetsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('uses async iteration with listProfilerSessions without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession(),
+        ),
+      ];
+      client.descriptors.page.listProfilerSessions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[] =
+        [];
+      const iterable = client.listProfilerSessionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listProfilerSessions with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProfilerSessions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listProfilerSessionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('listProfileSessions', () => {
+    it('invokes listProfileSessions without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+      ];
+      client.innerApiCalls.listProfileSessions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listProfileSessions(request);
+      assert(stub.calledOnce);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listProfileSessions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProfileSessions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listProfileSessions without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+      ];
+      client.innerApiCalls.listProfileSessions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listProfileSessions(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listProfilerTargets with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerTargetsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listProfilerTargets.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listProfilerTargetsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerTarget[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listProfilerTargets.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert(stub.calledOnce);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listProfileSessions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProfileSessions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('listProfilerSessions', () => {
-        it('invokes listProfilerSessions without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-            ];
-            client.innerApiCalls.listProfilerSessions = stubSimpleCall(expectedResponse);
-            const [response] = await client.listProfilerSessions(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listProfilerSessions as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listProfilerSessions as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes listProfileSessions with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listProfileSessions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listProfileSessions(request), expectedError);
+      assert(stub.calledOnce);
+      const actualRequest = (
+        client.innerApiCalls.listProfileSessions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProfileSessions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('invokes listProfilerSessions without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-            ];
-            client.innerApiCalls.listProfilerSessions = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listProfilerSessions(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listProfilerSessions as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listProfilerSessions as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes listProfileSessionsStream without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
-
-        it('invokes listProfilerSessions with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listProfilerSessions = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listProfilerSessions(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listProfilerSessions as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listProfilerSessions as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+      ];
+      client.descriptors.page.listProfileSessions.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listProfileSessionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes listProfilerSessionsStream without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-            ];
-            client.descriptors.page.listProfilerSessions.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listProfilerSessionsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listProfilerSessions.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listProfilerSessions, request));
-            assert(
-                (client.descriptors.page.listProfilerSessions.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert(stub.calledOnce);
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listProfileSessions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProfileSessions, request),
+      );
+      assert(
+        (client.descriptors.page.listProfileSessions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-        it('invokes listProfilerSessionsStream with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listProfilerSessions.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listProfilerSessionsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listProfilerSessions.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listProfilerSessions, request));
-            assert(
-                (client.descriptors.page.listProfilerSessions.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
+    it('invokes listProfileSessionsStream with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProfileSessions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listProfileSessionsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
+      assert(
+        (client.descriptors.page.listProfileSessions.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProfileSessions, request),
+      );
+      assert(
+        (client.descriptors.page.listProfileSessions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-        it('uses async iteration with listProfilerSessions without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfilerSession()),
-            ];
-            client.descriptors.page.listProfilerSessions.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[] = [];
-            const iterable = client.listProfilerSessionsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('uses async iteration with listProfileSessions without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession(),
+        ),
+      ];
+      client.descriptors.page.listProfileSessions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[] =
+        [];
+      const iterable = client.listProfileSessionsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert(stub.calledOnce);
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProfileSessions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listProfileSessions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listProfileSessions with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const stub = sinon.stub(client, 'warn');
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProfileSessions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listProfileSessionsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert(stub.calledOnce);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProfileSessions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listProfileSessions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('listMonitoredEvents', () => {
+    it('invokes listMonitoredEvents without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+      ];
+      client.innerApiCalls.listMonitoredEvents =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listMonitoredEvents(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMonitoredEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMonitoredEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listMonitoredEvents without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+      ];
+      client.innerApiCalls.listMonitoredEvents =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listMonitoredEvents(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listProfilerSessions with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfilerSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listProfilerSessions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listProfilerSessionsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfilerSession[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listProfilerSessions.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listMonitoredEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMonitoredEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('listProfileSessions', () => {
-        it('invokes listProfileSessions without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-            ];
-            client.innerApiCalls.listProfileSessions = stubSimpleCall(expectedResponse);
-            const [response] = await client.listProfileSessions(request);
-            assert(stub.calledOnce);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listProfileSessions as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listProfileSessions as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes listMonitoredEvents with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listMonitoredEvents = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listMonitoredEvents(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listMonitoredEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMonitoredEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('invokes listProfileSessions without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-            ];
-            client.innerApiCalls.listProfileSessions = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listProfileSessions(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert(stub.calledOnce);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listProfileSessions as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listProfileSessions as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('invokes listMonitoredEventsStream without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
-
-        it('invokes listProfileSessions with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listProfileSessions = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listProfileSessions(request), expectedError);
-            assert(stub.calledOnce);
-            const actualRequest = (client.innerApiCalls.listProfileSessions as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listProfileSessions as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+      ];
+      client.descriptors.page.listMonitoredEvents.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listMonitoredEventsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes listProfileSessionsStream without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-            ];
-            client.descriptors.page.listProfileSessions.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listProfileSessionsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert(stub.calledOnce);
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listProfileSessions.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listProfileSessions, request));
-            assert(
-                (client.descriptors.page.listProfileSessions.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMonitoredEvents, request),
+      );
+      assert(
+        (client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-        it('invokes listProfileSessionsStream with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listProfileSessions.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listProfileSessionsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert(stub.calledOnce);
-            assert((client.descriptors.page.listProfileSessions.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listProfileSessions, request));
-            assert(
-                (client.descriptors.page.listProfileSessions.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
+    it('invokes listMonitoredEventsStream with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMonitoredEvents.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listMonitoredEventsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listMonitoredEvents, request),
+      );
+      assert(
+        (client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
 
-        it('uses async iteration with listProfileSessions without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.ProfileSession()),
-            ];
-            client.descriptors.page.listProfileSessions.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[] = [];
-            const iterable = client.listProfileSessionsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('uses async iteration with listMonitoredEvents without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent(),
+        ),
+      ];
+      client.descriptors.page.listMonitoredEvents.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[] =
+        [];
+      const iterable = client.listMonitoredEventsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listMonitoredEvents with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listMonitoredEvents.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listMonitoredEventsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location(),
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
+    });
+    it('invokes getLocation without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location(),
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert(stub.calledOnce);
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listProfileSessions.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listProfileSessions.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError,
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined),
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location(),
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest(),
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+  });
 
-        it('uses async iteration with listProfileSessions with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            const stub = sinon.stub(client, 'warn');
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListProfileSessionsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listProfileSessions.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listProfileSessionsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.IProfileSession[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert(stub.calledOnce);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listProfileSessions.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listProfileSessions.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
+  describe('Path templates', () => {
+    describe('cluster', async () => {
+      const fakePath = '/rendered/path/cluster';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+      };
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.clusterPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.clusterPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('clusterPath', () => {
+        const result = client.clusterPath(
+          'projectValue',
+          'locationValue',
+          'clusterValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.clusterPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromClusterName', () => {
+        const result = client.matchProjectFromClusterName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromClusterName', () => {
+        const result = client.matchLocationFromClusterName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchClusterFromClusterName', () => {
+        const result = client.matchClusterFromClusterName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.clusterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('listMonitoredEvents', () => {
-        it('invokes listMonitoredEvents without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-            ];
-            client.innerApiCalls.listMonitoredEvents = stubSimpleCall(expectedResponse);
-            const [response] = await client.listMonitoredEvents(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listMonitoredEvents as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listMonitoredEvents as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        it('invokes listMonitoredEvents without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-            ];
-            client.innerApiCalls.listMonitoredEvents = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listMonitoredEvents(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listMonitoredEvents as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listMonitoredEvents as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-        it('invokes listMonitoredEvents with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listMonitoredEvents = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listMonitoredEvents(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listMonitoredEvents as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listMonitoredEvents as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-        it('invokes listMonitoredEventsStream without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-            ];
-            client.descriptors.page.listMonitoredEvents.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listMonitoredEventsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listMonitoredEvents, request));
-            assert(
-                (client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listMonitoredEventsStream with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listMonitoredEvents.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listMonitoredEventsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent[] = [];
-                stream.on('data', (response: protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listMonitoredEvents, request));
-            assert(
-                (client.descriptors.page.listMonitoredEvents.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listMonitoredEvents without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-              generateSampleMessage(new protos.google.cloud.hypercomputecluster.v1alpha.MonitoredEvent()),
-            ];
-            client.descriptors.page.listMonitoredEvents.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[] = [];
-            const iterable = client.listMonitoredEventsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listMonitoredEvents with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.hypercomputecluster.v1alpha.ListMonitoredEventsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listMonitoredEvents.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listMonitoredEventsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.hypercomputecluster.v1alpha.IMonitoredEvent[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listMonitoredEvents.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-    });
-    describe('getLocation', () => {
-        it('invokes getLocation without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
-            const response = await client.getLocation(request, expectedOptions);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-        it('invokes getLocation without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(
-              new LocationProtos.google.cloud.location.Location()
-            );
-            client.locationsClient.getLocation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getLocation(
-                    request,
-                    expectedOptions,
-                    (
-                        err?: Error | null,
-                        result?: LocationProtos.google.cloud.location.ILocation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getLocation with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.GetLocationRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.locationsClient.getLocation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getLocation(request, expectedOptions), expectedError);
-            assert((client.locationsClient.getLocation as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-    describe('listLocationsAsync', () => {
-        it('uses async iteration with listLocations without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-                new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedResponse = [
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-                generateSampleMessage(
-                    new LocationProtos.google.cloud.location.Location()
-                ),
-            ];
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-            const iterable = client.listLocationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-        it('uses async iteration with listLocations with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new LocationProtos.google.cloud.location.ListLocationsRequest()
-            );
-            request.name = '';
-            const expectedHeaderRequestParams = 'name=';
-            const expectedError = new Error('expected');
-            client.locationsClient.descriptors.page.listLocations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listLocationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: LocationProtos.google.cloud.location.ILocation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.locationsClient.descriptors.page.listLocations.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-    });
-    describe('getOperation', () => {
-        it('invokes getOperation without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const response = await client.getOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes getOperation without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.getOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: operationsProtos.google.longrunning.Operation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getOperation with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('cancelOperation', () => {
-        it('invokes cancelOperation without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
-            const response = await client.cancelOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes cancelOperation without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.cancelOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes cancelOperation with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('deleteOperation', () => {
-        it('invokes deleteOperation without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
-            const response = await client.deleteOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes deleteOperation without error using callback', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.deleteOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes deleteOperation with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('listOperationsAsync', () => {
-        it('uses async iteration with listOperations without error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedResponse = [
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-            ];
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: operationsProtos.google.longrunning.IOperation[] = [];
-            const iterable = client.operationsClient.listOperationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-        it('uses async iteration with listOperations with error', async () => {
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.operationsClient.listOperationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: operationsProtos.google.longrunning.IOperation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
 
-    describe('Path templates', () => {
-
-        describe('cluster', async () => {
-            const fakePath = "/rendered/path/cluster";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                cluster: "clusterValue",
-            };
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.clusterPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.clusterPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('clusterPath', () => {
-                const result = client.clusterPath("projectValue", "locationValue", "clusterValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.clusterPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromClusterName', () => {
-                const result = client.matchProjectFromClusterName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromClusterName', () => {
-                const result = client.matchLocationFromClusterName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchClusterFromClusterName', () => {
-                const result = client.matchClusterFromClusterName(fakePath);
-                assert.strictEqual(result, "clusterValue");
-                assert((client.pathTemplates.clusterPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
+    describe('machineLearningRun', async () => {
+      const fakePath = '/rendered/path/machineLearningRun';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        machine_learning_run: 'machineLearningRunValue',
+      };
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      await client.initialize();
+      client.pathTemplates.machineLearningRunPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.machineLearningRunPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
-        describe('location', async () => {
-            const fakePath = "/rendered/path/location";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-            };
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.locationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.locationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
+      it('machineLearningRunPath', () => {
+        const result = client.machineLearningRunPath(
+          'projectValue',
+          'locationValue',
+          'machineLearningRunValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.machineLearningRunPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
 
-            it('locationPath', () => {
-                const result = client.locationPath("projectValue", "locationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
+      it('matchProjectFromMachineLearningRunName', () => {
+        const result = client.matchProjectFromMachineLearningRunName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.machineLearningRunPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-            it('matchProjectFromLocationName', () => {
-                const result = client.matchProjectFromLocationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
+      it('matchLocationFromMachineLearningRunName', () => {
+        const result = client.matchLocationFromMachineLearningRunName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.machineLearningRunPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
 
-            it('matchLocationFromLocationName', () => {
-                const result = client.matchLocationFromLocationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('machineLearningRun', async () => {
-            const fakePath = "/rendered/path/machineLearningRun";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                machine_learning_run: "machineLearningRunValue",
-            };
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.machineLearningRunPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.machineLearningRunPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('machineLearningRunPath', () => {
-                const result = client.machineLearningRunPath("projectValue", "locationValue", "machineLearningRunValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.machineLearningRunPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMachineLearningRunName', () => {
-                const result = client.matchProjectFromMachineLearningRunName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.machineLearningRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMachineLearningRunName', () => {
-                const result = client.matchLocationFromMachineLearningRunName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.machineLearningRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMachineLearningRunFromMachineLearningRunName', () => {
-                const result = client.matchMachineLearningRunFromMachineLearningRunName(fakePath);
-                assert.strictEqual(result, "machineLearningRunValue");
-                assert((client.pathTemplates.machineLearningRunPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('monitoredEvent', async () => {
-            const fakePath = "/rendered/path/monitoredEvent";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                machine_learning_run: "machineLearningRunValue",
-                monitored_event: "monitoredEventValue",
-            };
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.monitoredEventPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.monitoredEventPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('monitoredEventPath', () => {
-                const result = client.monitoredEventPath("projectValue", "locationValue", "machineLearningRunValue", "monitoredEventValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.monitoredEventPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromMonitoredEventName', () => {
-                const result = client.matchProjectFromMonitoredEventName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.monitoredEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromMonitoredEventName', () => {
-                const result = client.matchLocationFromMonitoredEventName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.monitoredEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMachineLearningRunFromMonitoredEventName', () => {
-                const result = client.matchMachineLearningRunFromMonitoredEventName(fakePath);
-                assert.strictEqual(result, "machineLearningRunValue");
-                assert((client.pathTemplates.monitoredEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMonitoredEventFromMonitoredEventName', () => {
-                const result = client.matchMonitoredEventFromMonitoredEventName(fakePath);
-                assert.strictEqual(result, "monitoredEventValue");
-                assert((client.pathTemplates.monitoredEventPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('node', async () => {
-            const fakePath = "/rendered/path/node";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                cluster: "clusterValue",
-                node: "nodeValue",
-            };
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.nodePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.nodePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('nodePath', () => {
-                const result = client.nodePath("projectValue", "locationValue", "clusterValue", "nodeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.nodePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNodeName', () => {
-                const result = client.matchProjectFromNodeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.nodePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNodeName', () => {
-                const result = client.matchLocationFromNodeName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.nodePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchClusterFromNodeName', () => {
-                const result = client.matchClusterFromNodeName(fakePath);
-                assert.strictEqual(result, "clusterValue");
-                assert((client.pathTemplates.nodePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchNodeFromNodeName', () => {
-                const result = client.matchNodeFromNodeName(fakePath);
-                assert.strictEqual(result, "nodeValue");
-                assert((client.pathTemplates.nodePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('profileSession', async () => {
-            const fakePath = "/rendered/path/profileSession";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                machine_learning_run: "machineLearningRunValue",
-                profile_session: "profileSessionValue",
-            };
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.profileSessionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.profileSessionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('profileSessionPath', () => {
-                const result = client.profileSessionPath("projectValue", "locationValue", "machineLearningRunValue", "profileSessionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.profileSessionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProfileSessionName', () => {
-                const result = client.matchProjectFromProfileSessionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.profileSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProfileSessionName', () => {
-                const result = client.matchLocationFromProfileSessionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.profileSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMachineLearningRunFromProfileSessionName', () => {
-                const result = client.matchMachineLearningRunFromProfileSessionName(fakePath);
-                assert.strictEqual(result, "machineLearningRunValue");
-                assert((client.pathTemplates.profileSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchProfileSessionFromProfileSessionName', () => {
-                const result = client.matchProfileSessionFromProfileSessionName(fakePath);
-                assert.strictEqual(result, "profileSessionValue");
-                assert((client.pathTemplates.profileSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('profilerSession', async () => {
-            const fakePath = "/rendered/path/profilerSession";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                machine_learning_run: "machineLearningRunValue",
-                profiler_session: "profilerSessionValue",
-            };
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.profilerSessionPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.profilerSessionPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('profilerSessionPath', () => {
-                const result = client.profilerSessionPath("projectValue", "locationValue", "machineLearningRunValue", "profilerSessionValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.profilerSessionPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProfilerSessionName', () => {
-                const result = client.matchProjectFromProfilerSessionName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.profilerSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProfilerSessionName', () => {
-                const result = client.matchLocationFromProfilerSessionName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.profilerSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMachineLearningRunFromProfilerSessionName', () => {
-                const result = client.matchMachineLearningRunFromProfilerSessionName(fakePath);
-                assert.strictEqual(result, "machineLearningRunValue");
-                assert((client.pathTemplates.profilerSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchProfilerSessionFromProfilerSessionName', () => {
-                const result = client.matchProfilerSessionFromProfilerSessionName(fakePath);
-                assert.strictEqual(result, "profilerSessionValue");
-                assert((client.pathTemplates.profilerSessionPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('profilerTarget', async () => {
-            const fakePath = "/rendered/path/profilerTarget";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                machine_learning_run: "machineLearningRunValue",
-                profiler_target: "profilerTargetValue",
-            };
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.profilerTargetPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.profilerTargetPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('profilerTargetPath', () => {
-                const result = client.profilerTargetPath("projectValue", "locationValue", "machineLearningRunValue", "profilerTargetValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.profilerTargetPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProfilerTargetName', () => {
-                const result = client.matchProjectFromProfilerTargetName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.profilerTargetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProfilerTargetName', () => {
-                const result = client.matchLocationFromProfilerTargetName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.profilerTargetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchMachineLearningRunFromProfilerTargetName', () => {
-                const result = client.matchMachineLearningRunFromProfilerTargetName(fakePath);
-                assert.strictEqual(result, "machineLearningRunValue");
-                assert((client.pathTemplates.profilerTargetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchProfilerTargetFromProfilerTargetName', () => {
-                const result = client.matchProfilerTargetFromProfilerTargetName(fakePath);
-                assert.strictEqual(result, "profilerTargetValue");
-                assert((client.pathTemplates.profilerTargetPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('project', async () => {
-            const fakePath = "/rendered/path/project";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPath', () => {
-                const result = client.projectPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectName', () => {
-                const result = client.matchProjectFromProjectName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+      it('matchMachineLearningRunFromMachineLearningRunName', () => {
+        const result =
+          client.matchMachineLearningRunFromMachineLearningRunName(fakePath);
+        assert.strictEqual(result, 'machineLearningRunValue');
+        assert(
+          (
+            client.pathTemplates.machineLearningRunPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
     });
+
+    describe('monitoredEvent', async () => {
+      const fakePath = '/rendered/path/monitoredEvent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        machine_learning_run: 'machineLearningRunValue',
+        monitored_event: 'monitoredEventValue',
+      };
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.monitoredEventPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.monitoredEventPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('monitoredEventPath', () => {
+        const result = client.monitoredEventPath(
+          'projectValue',
+          'locationValue',
+          'machineLearningRunValue',
+          'monitoredEventValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.monitoredEventPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromMonitoredEventName', () => {
+        const result = client.matchProjectFromMonitoredEventName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.monitoredEventPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromMonitoredEventName', () => {
+        const result = client.matchLocationFromMonitoredEventName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.monitoredEventPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMachineLearningRunFromMonitoredEventName', () => {
+        const result =
+          client.matchMachineLearningRunFromMonitoredEventName(fakePath);
+        assert.strictEqual(result, 'machineLearningRunValue');
+        assert(
+          (client.pathTemplates.monitoredEventPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMonitoredEventFromMonitoredEventName', () => {
+        const result =
+          client.matchMonitoredEventFromMonitoredEventName(fakePath);
+        assert.strictEqual(result, 'monitoredEventValue');
+        assert(
+          (client.pathTemplates.monitoredEventPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('node', async () => {
+      const fakePath = '/rendered/path/node';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cluster: 'clusterValue',
+        node: 'nodeValue',
+      };
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.nodePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nodePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nodePath', () => {
+        const result = client.nodePath(
+          'projectValue',
+          'locationValue',
+          'clusterValue',
+          'nodeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nodePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromNodeName', () => {
+        const result = client.matchProjectFromNodeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromNodeName', () => {
+        const result = client.matchLocationFromNodeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchClusterFromNodeName', () => {
+        const result = client.matchClusterFromNodeName(fakePath);
+        assert.strictEqual(result, 'clusterValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchNodeFromNodeName', () => {
+        const result = client.matchNodeFromNodeName(fakePath);
+        assert.strictEqual(result, 'nodeValue');
+        assert(
+          (client.pathTemplates.nodePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('profileSession', async () => {
+      const fakePath = '/rendered/path/profileSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        machine_learning_run: 'machineLearningRunValue',
+        profile_session: 'profileSessionValue',
+      };
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.profileSessionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.profileSessionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('profileSessionPath', () => {
+        const result = client.profileSessionPath(
+          'projectValue',
+          'locationValue',
+          'machineLearningRunValue',
+          'profileSessionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.profileSessionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProfileSessionName', () => {
+        const result = client.matchProjectFromProfileSessionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.profileSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProfileSessionName', () => {
+        const result = client.matchLocationFromProfileSessionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.profileSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMachineLearningRunFromProfileSessionName', () => {
+        const result =
+          client.matchMachineLearningRunFromProfileSessionName(fakePath);
+        assert.strictEqual(result, 'machineLearningRunValue');
+        assert(
+          (client.pathTemplates.profileSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchProfileSessionFromProfileSessionName', () => {
+        const result =
+          client.matchProfileSessionFromProfileSessionName(fakePath);
+        assert.strictEqual(result, 'profileSessionValue');
+        assert(
+          (client.pathTemplates.profileSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('profilerSession', async () => {
+      const fakePath = '/rendered/path/profilerSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        machine_learning_run: 'machineLearningRunValue',
+        profiler_session: 'profilerSessionValue',
+      };
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.profilerSessionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.profilerSessionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('profilerSessionPath', () => {
+        const result = client.profilerSessionPath(
+          'projectValue',
+          'locationValue',
+          'machineLearningRunValue',
+          'profilerSessionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.profilerSessionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProfilerSessionName', () => {
+        const result = client.matchProjectFromProfilerSessionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.profilerSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProfilerSessionName', () => {
+        const result = client.matchLocationFromProfilerSessionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.profilerSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMachineLearningRunFromProfilerSessionName', () => {
+        const result =
+          client.matchMachineLearningRunFromProfilerSessionName(fakePath);
+        assert.strictEqual(result, 'machineLearningRunValue');
+        assert(
+          (client.pathTemplates.profilerSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchProfilerSessionFromProfilerSessionName', () => {
+        const result =
+          client.matchProfilerSessionFromProfilerSessionName(fakePath);
+        assert.strictEqual(result, 'profilerSessionValue');
+        assert(
+          (client.pathTemplates.profilerSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('profilerTarget', async () => {
+      const fakePath = '/rendered/path/profilerTarget';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        machine_learning_run: 'machineLearningRunValue',
+        profiler_target: 'profilerTargetValue',
+      };
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.profilerTargetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.profilerTargetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('profilerTargetPath', () => {
+        const result = client.profilerTargetPath(
+          'projectValue',
+          'locationValue',
+          'machineLearningRunValue',
+          'profilerTargetValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.profilerTargetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProfilerTargetName', () => {
+        const result = client.matchProjectFromProfilerTargetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.profilerTargetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProfilerTargetName', () => {
+        const result = client.matchLocationFromProfilerTargetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.profilerTargetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchMachineLearningRunFromProfilerTargetName', () => {
+        const result =
+          client.matchMachineLearningRunFromProfilerTargetName(fakePath);
+        assert.strictEqual(result, 'machineLearningRunValue');
+        assert(
+          (client.pathTemplates.profilerTargetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchProfilerTargetFromProfilerTargetName', () => {
+        const result =
+          client.matchProfilerTargetFromProfilerTargetName(fakePath);
+        assert.strictEqual(result, 'profilerTargetValue');
+        assert(
+          (client.pathTemplates.profilerTargetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('project', async () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client =
+        new machinelearningrunsModule.v1alpha.MachineLearningRunsClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+  });
 });

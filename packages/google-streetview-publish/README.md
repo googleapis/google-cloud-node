@@ -57,7 +57,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| streetview | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/snippet_metadata_google.streetview.publish.v1.json) |
 | batch delete photos | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_delete_photos.js) |
 | batch get photos | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_get_photos.js) |
 | batch update photos | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-streetview-publish/samples/generated/v1/street_view_publish_service.batch_update_photos.js) |

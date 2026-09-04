@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 
 export type WriteStream = protos.google.cloud.bigquery.storage.v1.IWriteStream;
 export type WriteStreamType = WriteStream['type'] | 'DEFAULT';

@@ -1,0 +1,65 @@
+steps:
+# 1. Set up Node.js environment
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    npm install
+  dir: 'handwritten/google-cloud-dns'
+  id: 'install-dependencies'
+
+# 2. Fetch service account key for system tests
+- name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gcloud secrets versions access latest --project=cloud-devrel-kokoro-resources --secret=long-door-651-kokoro-system-test-service-account --format='get(payload.data)' | tr '_-' '/+' | base64 -d > /workspace/google_application_credentials.json
+  id: 'get-service-account-key'
+
+# 3. Configure environment variables for the tests and run system tests
+#    - GOOGLE_APPLICATION_CREDENTIALS: Service account key from Secret Manager
+#    - GCLOUD_PROJECT: Can be passed as a build variable.
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    npm run system-test
+  dir: 'handwritten/google-cloud-dns'
+  env:
+  - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
+  - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/google_application_credentials.json'
+  id: 'run-system-tests'
+  waitFor: ['install-dependencies', 'get-service-account-key']
+
+# 4. (Optional) Code Coverage Reporting
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    # Check if nyc is installed and run report
+    if [ -f ./node_modules/nyc/bin/nyc.js ]; then
+      ./node_modules/nyc/bin/nyc.js report || true # `|| true` prevents build failure if nyc report itself exits non-zero
+    else
+      echo "nyc not found, skipping coverage report."
+    fi
+    # The original codecov.sh script from Kokoro needs to be made available to GCB.
+    # Options:
+    #   a) Commit codecov.sh into your repo (e.g., .kokoro/codecov.sh) and call it:
+    #      if [ -f .kokoro/codecov.sh ]; then . ./.kokoro/codecov.sh; fi
+    #   b) Replicate its functionality directly in this step.
+    #   c) Store it in a GCS bucket and fetch it.
+    echo "Codecov reporting (if desired) would be integrated here."
+  dir: 'handwritten/google-cloud-dns'
+  id: 'coverage-report'
+  waitFor: ['run-system-tests']
+
+# Define a substitution variable for your project ID
+# Replace 'long-door-651' with the actual GCP Project ID your system tests should run against.
+substitutions:
+  _GCP_PROJECT_ID: 'long-door-651'
+
+timeout: '3600s'

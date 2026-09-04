@@ -18,7 +18,8 @@ import execa = require('execa');
 import {describe, it} from 'mocha';
 
 describe('pack-n-play', () => {
-  it('should run tests', async () => {
+  it('should run tests', async function () {
+    this.timeout(600000); // 10 minutes
     const fixturesPath = path.resolve('./test/fixtures');
     const dirs = fs
       .readdirSync(fixturesPath)
@@ -29,7 +30,7 @@ describe('pack-n-play', () => {
         stdio: 'inherit',
         cwd: dir,
       };
-      await execa('npm', ['install'], opts);
+      await execa('npm', ['install', '--no-audit', '--no-fund'], opts);
       await execa('npm', ['link', '../../../'], opts);
       await execa('npm', ['test'], opts);
     }

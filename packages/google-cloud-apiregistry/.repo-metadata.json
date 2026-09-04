@@ -1,17 +1,15 @@
 {
-  "name": "cloudapiregistry",
-  "name_pretty": "Cloud API Registry API",
-  "product_documentation": "https://docs.cloud.google.com/api-registry/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudapiregistry/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/apiregistry",
-  "api_id": "cloudapiregistry.googleapis.com",
-  "default_version": "v1beta",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "cloudapiregistry"
+    "api_id": "cloudapiregistry.googleapis.com",
+    "api_shortname": "cloudapiregistry",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apiregistry/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/apiregistry",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1979613&template=2231768",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "cloudapiregistry",
+    "name_pretty": "Cloud API Registry",
+    "product_documentation": "https://docs.cloud.google.com/api-registry/",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

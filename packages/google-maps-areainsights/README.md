@@ -78,7 +78,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | compute insights | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-areainsights/samples/generated/v1/area_insights.compute_insights.js) |
-| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-areainsights/samples/generated/v1/snippet_metadata_google.maps.areainsights.v1.json) |
 
 
 ## Supported Node.js Versions

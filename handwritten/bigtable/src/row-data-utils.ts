@@ -27,7 +27,8 @@ import {
 } from './row';
 import {Family} from './chunktransformer';
 import {Bytes, Mutation} from './mutation';
-import {google} from '../protos/protos';
+import {protos} from '.';
+import google = protos.google;
 import {TabularApiSurface} from './tabular-api-surface';
 import arrify = require('arrify');
 import {Bigtable} from './index';

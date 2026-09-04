@@ -17,14 +17,14 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1alpha from './v1alpha';
-import * as v1beta from './v1beta';
 import * as v1beta1 from './v1beta1';
+import * as v1beta from './v1beta';
+import * as v1alpha from './v1alpha';
 
 const GkeHubClient = v1.GkeHubClient;
 type GkeHubClient = v1.GkeHubClient;
 
-export {v1, v1alpha, v1beta, v1beta1, GkeHubClient};
-export default {v1, v1alpha, v1beta, v1beta1, GkeHubClient};
+export {v1, v1beta1, v1beta, v1alpha, GkeHubClient};
+export default {v1, v1beta1, v1beta, v1alpha, GkeHubClient};
 import * as protos from '../protos/protos';
 export {protos};

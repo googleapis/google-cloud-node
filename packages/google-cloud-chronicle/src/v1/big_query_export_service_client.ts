@@ -229,6 +229,13 @@ export class BigQueryExportServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}',
         ),
+      findingsRefinementPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/findingsRefinements/{findings_refinement}',
+      ),
+      findingsRefinementDeploymentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/findingsRefinements/{findings_refinement}/deployment',
+        ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}',
       ),
@@ -252,6 +259,9 @@ export class BigQueryExportServiceClient {
       ),
       ruleDeploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment',
+      ),
+      ruleExecutionErrorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/ruleExecutionErrors/{rule_execution_error}',
       ),
       watchlistPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}',
@@ -1541,6 +1551,166 @@ export class BigQueryExportServiceClient {
   }
 
   /**
+   * Return a fully-qualified findingsRefinement resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} findings_refinement
+   * @returns {string} Resource name string.
+   */
+  findingsRefinementPath(
+    project: string,
+    location: string,
+    instance: string,
+    findingsRefinement: string,
+  ) {
+    return this.pathTemplates.findingsRefinementPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      findings_refinement: findingsRefinement,
+    });
+  }
+
+  /**
+   * Parse the project from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFindingsRefinementName(findingsRefinementName: string) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFindingsRefinementName(findingsRefinementName: string) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromFindingsRefinementName(findingsRefinementName: string) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).instance;
+  }
+
+  /**
+   * Parse the findings_refinement from FindingsRefinement resource.
+   *
+   * @param {string} findingsRefinementName
+   *   A fully-qualified path representing FindingsRefinement resource.
+   * @returns {string} A string representing the findings_refinement.
+   */
+  matchFindingsRefinementFromFindingsRefinementName(
+    findingsRefinementName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementPathTemplate.match(
+      findingsRefinementName,
+    ).findings_refinement;
+  }
+
+  /**
+   * Return a fully-qualified findingsRefinementDeployment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} findings_refinement
+   * @returns {string} Resource name string.
+   */
+  findingsRefinementDeploymentPath(
+    project: string,
+    location: string,
+    instance: string,
+    findingsRefinement: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      findings_refinement: findingsRefinement,
+    });
+  }
+
+  /**
+   * Parse the project from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).instance;
+  }
+
+  /**
+   * Parse the findings_refinement from FindingsRefinementDeployment resource.
+   *
+   * @param {string} findingsRefinementDeploymentName
+   *   A fully-qualified path representing FindingsRefinementDeployment resource.
+   * @returns {string} A string representing the findings_refinement.
+   */
+  matchFindingsRefinementFromFindingsRefinementDeploymentName(
+    findingsRefinementDeploymentName: string,
+  ) {
+    return this.pathTemplates.findingsRefinementDeploymentPathTemplate.match(
+      findingsRefinementDeploymentName,
+    ).findings_refinement;
+  }
+
+  /**
    * Return a fully-qualified instance resource name string.
    *
    * @param {string} project
@@ -2014,6 +2184,83 @@ export class BigQueryExportServiceClient {
     return this.pathTemplates.ruleDeploymentPathTemplate.match(
       ruleDeploymentName,
     ).rule;
+  }
+
+  /**
+   * Return a fully-qualified ruleExecutionError resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} rule_execution_error
+   * @returns {string} Resource name string.
+   */
+  ruleExecutionErrorPath(
+    project: string,
+    location: string,
+    instance: string,
+    ruleExecutionError: string,
+  ) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      rule_execution_error: ruleExecutionError,
+    });
+  }
+
+  /**
+   * Parse the project from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRuleExecutionErrorName(ruleExecutionErrorName: string) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromRuleExecutionErrorName(ruleExecutionErrorName: string) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromRuleExecutionErrorName(ruleExecutionErrorName: string) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).instance;
+  }
+
+  /**
+   * Parse the rule_execution_error from RuleExecutionError resource.
+   *
+   * @param {string} ruleExecutionErrorName
+   *   A fully-qualified path representing RuleExecutionError resource.
+   * @returns {string} A string representing the rule_execution_error.
+   */
+  matchRuleExecutionErrorFromRuleExecutionErrorName(
+    ruleExecutionErrorName: string,
+  ) {
+    return this.pathTemplates.ruleExecutionErrorPathTemplate.match(
+      ruleExecutionErrorName,
+    ).rule_execution_error;
   }
 
   /**

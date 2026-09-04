@@ -1021,6 +1021,9 @@ export namespace google {
                         /** ProductAttributes pickupSla */
                         pickupSla?: (google.shopping.merchant.products.v1.PickupSla|keyof typeof google.shopping.merchant.products.v1.PickupSla|null);
 
+                        /** ProductAttributes pickupCost */
+                        pickupCost?: (google.shopping.merchant.products.v1.IPickupCost|null);
+
                         /** ProductAttributes linkTemplate */
                         linkTemplate?: (string|null);
 
@@ -1083,6 +1086,138 @@ export namespace google {
 
                         /** ProductAttributes videoLinks */
                         videoLinks?: (string[]|null);
+
+                        /** ProductAttributes minimumOrderValues */
+                        minimumOrderValues?: (google.shopping.merchant.products.v1.IProductMinimumOrderValue[]|null);
+
+                        /** ProductAttributes vin */
+                        vin?: (string|null);
+
+                        /** ProductAttributes model */
+                        model?: (string|null);
+
+                        /** ProductAttributes trim */
+                        trim?: (string|null);
+
+                        /** ProductAttributes bodyStyle */
+                        bodyStyle?: (google.shopping.merchant.products.v1.ProductAttributes.VehicleBodyStyle|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.VehicleBodyStyle|null);
+
+                        /** ProductAttributes year */
+                        year?: (number|Long|string|null);
+
+                        /** ProductAttributes mileage */
+                        mileage?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
+
+                        /** ProductAttributes electricRange */
+                        electricRange?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
+
+                        /** ProductAttributes fuelConsumption */
+                        fuelConsumption?: (google.shopping.merchant.products.v1.ProductAttributes.IFuelConsumption|null);
+
+                        /** ProductAttributes fuelConsumptionDischargedBattery */
+                        fuelConsumptionDischargedBattery?: (google.shopping.merchant.products.v1.ProductAttributes.IFuelConsumption|null);
+
+                        /** ProductAttributes energyConsumption */
+                        energyConsumption?: (google.shopping.merchant.products.v1.ProductAttributes.IEnergyConsumption|null);
+
+                        /** ProductAttributes co2Emissions */
+                        co2Emissions?: (google.shopping.merchant.products.v1.ProductAttributes.ICo2Emissions|null);
+
+                        /** ProductAttributes dateFirstRegistered */
+                        dateFirstRegistered?: (string|null);
+
+                        /** ProductAttributes engine */
+                        engine?: (google.shopping.merchant.products.v1.ProductAttributes.EngineType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.EngineType|null);
+
+                        /** ProductAttributes emissionsStandard */
+                        emissionsStandard?: (google.shopping.merchant.products.v1.ProductAttributes.EmissionsStandard|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.EmissionsStandard|null);
+
+                        /** ProductAttributes certifiedPreOwned */
+                        certifiedPreOwned?: (boolean|null);
+
+                        /** ProductAttributes vehicleMsrp */
+                        vehicleMsrp?: (google.shopping.type.IPrice|null);
+
+                        /** ProductAttributes vehicleAllInPrice */
+                        vehicleAllInPrice?: (google.shopping.type.IPrice|null);
+
+                        /** ProductAttributes vehiclePriceType */
+                        vehiclePriceType?: (google.shopping.merchant.products.v1.ProductAttributes.VehiclePriceType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.VehiclePriceType|null);
+
+                        /** ProductAttributes vehicleMandatoryInspectionIncluded */
+                        vehicleMandatoryInspectionIncluded?: (boolean|null);
+
+                        /** ProductAttributes vehicleExpenses */
+                        vehicleExpenses?: (google.shopping.type.IPrice|null);
+
+                        /** ProductAttributes warranty */
+                        warranty?: (google.shopping.merchant.products.v1.ProductAttributes.IWarranty|null);
+
+                        /** ProductAttributes displayAddress */
+                        displayAddress?: (google.shopping.merchant.products.v1.ProductAttributes.IDisplayAddress|null);
+
+                        /** ProductAttributes latitude */
+                        latitude?: (number|null);
+
+                        /** ProductAttributes longitude */
+                        longitude?: (number|null);
+
+                        /** ProductAttributes neighborhood */
+                        neighborhood?: (string|null);
+
+                        /** ProductAttributes unitArea */
+                        unitArea?: (google.shopping.merchant.products.v1.ProductAttributes.IUnitArea|null);
+
+                        /** ProductAttributes numberOfUnits */
+                        numberOfUnits?: (number|Long|string|null);
+
+                        /** ProductAttributes propertyName */
+                        propertyName?: (string|null);
+
+                        /** ProductAttributes numberOfBedrooms */
+                        numberOfBedrooms?: (number|null);
+
+                        /** ProductAttributes numberOfBathrooms */
+                        numberOfBathrooms?: (number|null);
+
+                        /** ProductAttributes propertyType */
+                        propertyType?: (google.shopping.merchant.products.v1.ProductAttributes.PropertyType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.PropertyType|null);
+
+                        /** ProductAttributes amenityFeature */
+                        amenityFeature?: (google.shopping.merchant.products.v1.ProductAttributes.AmenityFeature[]|null);
+
+                        /** ProductAttributes utilitiesIncluded */
+                        utilitiesIncluded?: (google.shopping.merchant.products.v1.ProductAttributes.UtilitiesIncluded[]|null);
+
+                        /** ProductAttributes petPolicy */
+                        petPolicy?: (google.shopping.merchant.products.v1.ProductAttributes.IPetPolicy|null);
+
+                        /** ProductAttributes specialtyHousingType */
+                        specialtyHousingType?: (google.shopping.merchant.products.v1.ProductAttributes.SpecialtyHousingType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.SpecialtyHousingType|null);
+
+                        /** ProductAttributes productFee */
+                        productFee?: (google.shopping.merchant.products.v1.ProductAttributes.IProductFee[]|null);
+
+                        /** ProductAttributes shortTitle */
+                        shortTitle?: (string|null);
+
+                        /** ProductAttributes questionsAndAnswers */
+                        questionsAndAnswers?: (google.shopping.merchant.products.v1.ProductAttributes.IQuestionAndAnswer[]|null);
+
+                        /** ProductAttributes popularityRank */
+                        popularityRank?: (number|null);
+
+                        /** ProductAttributes itemGroupTitle */
+                        itemGroupTitle?: (string|null);
+
+                        /** ProductAttributes documentLinks */
+                        documentLinks?: (string[]|null);
+
+                        /** ProductAttributes variantOptions */
+                        variantOptions?: (google.shopping.merchant.products.v1.ProductAttributes.IVariantOption[]|null);
+
+                        /** ProductAttributes relatedProducts */
+                        relatedProducts?: (google.shopping.merchant.products.v1.ProductAttributes.IRelatedProduct[]|null);
                     }
 
                     /** Represents a ProductAttributes. */
@@ -1325,6 +1460,9 @@ export namespace google {
                         /** ProductAttributes pickupSla. */
                         public pickupSla?: (google.shopping.merchant.products.v1.PickupSla|keyof typeof google.shopping.merchant.products.v1.PickupSla|null);
 
+                        /** ProductAttributes pickupCost. */
+                        public pickupCost?: (google.shopping.merchant.products.v1.IPickupCost|null);
+
                         /** ProductAttributes linkTemplate. */
                         public linkTemplate?: (string|null);
 
@@ -1387,6 +1525,138 @@ export namespace google {
 
                         /** ProductAttributes videoLinks. */
                         public videoLinks: string[];
+
+                        /** ProductAttributes minimumOrderValues. */
+                        public minimumOrderValues: google.shopping.merchant.products.v1.IProductMinimumOrderValue[];
+
+                        /** ProductAttributes vin. */
+                        public vin: string;
+
+                        /** ProductAttributes model. */
+                        public model: string;
+
+                        /** ProductAttributes trim. */
+                        public trim: string;
+
+                        /** ProductAttributes bodyStyle. */
+                        public bodyStyle: (google.shopping.merchant.products.v1.ProductAttributes.VehicleBodyStyle|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.VehicleBodyStyle);
+
+                        /** ProductAttributes year. */
+                        public year: (number|Long|string);
+
+                        /** ProductAttributes mileage. */
+                        public mileage?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
+
+                        /** ProductAttributes electricRange. */
+                        public electricRange?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
+
+                        /** ProductAttributes fuelConsumption. */
+                        public fuelConsumption?: (google.shopping.merchant.products.v1.ProductAttributes.IFuelConsumption|null);
+
+                        /** ProductAttributes fuelConsumptionDischargedBattery. */
+                        public fuelConsumptionDischargedBattery?: (google.shopping.merchant.products.v1.ProductAttributes.IFuelConsumption|null);
+
+                        /** ProductAttributes energyConsumption. */
+                        public energyConsumption?: (google.shopping.merchant.products.v1.ProductAttributes.IEnergyConsumption|null);
+
+                        /** ProductAttributes co2Emissions. */
+                        public co2Emissions?: (google.shopping.merchant.products.v1.ProductAttributes.ICo2Emissions|null);
+
+                        /** ProductAttributes dateFirstRegistered. */
+                        public dateFirstRegistered: string;
+
+                        /** ProductAttributes engine. */
+                        public engine: (google.shopping.merchant.products.v1.ProductAttributes.EngineType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.EngineType);
+
+                        /** ProductAttributes emissionsStandard. */
+                        public emissionsStandard: (google.shopping.merchant.products.v1.ProductAttributes.EmissionsStandard|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.EmissionsStandard);
+
+                        /** ProductAttributes certifiedPreOwned. */
+                        public certifiedPreOwned: boolean;
+
+                        /** ProductAttributes vehicleMsrp. */
+                        public vehicleMsrp?: (google.shopping.type.IPrice|null);
+
+                        /** ProductAttributes vehicleAllInPrice. */
+                        public vehicleAllInPrice?: (google.shopping.type.IPrice|null);
+
+                        /** ProductAttributes vehiclePriceType. */
+                        public vehiclePriceType: (google.shopping.merchant.products.v1.ProductAttributes.VehiclePriceType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.VehiclePriceType);
+
+                        /** ProductAttributes vehicleMandatoryInspectionIncluded. */
+                        public vehicleMandatoryInspectionIncluded: boolean;
+
+                        /** ProductAttributes vehicleExpenses. */
+                        public vehicleExpenses?: (google.shopping.type.IPrice|null);
+
+                        /** ProductAttributes warranty. */
+                        public warranty?: (google.shopping.merchant.products.v1.ProductAttributes.IWarranty|null);
+
+                        /** ProductAttributes displayAddress. */
+                        public displayAddress?: (google.shopping.merchant.products.v1.ProductAttributes.IDisplayAddress|null);
+
+                        /** ProductAttributes latitude. */
+                        public latitude?: (number|null);
+
+                        /** ProductAttributes longitude. */
+                        public longitude?: (number|null);
+
+                        /** ProductAttributes neighborhood. */
+                        public neighborhood: string;
+
+                        /** ProductAttributes unitArea. */
+                        public unitArea?: (google.shopping.merchant.products.v1.ProductAttributes.IUnitArea|null);
+
+                        /** ProductAttributes numberOfUnits. */
+                        public numberOfUnits?: (number|Long|string|null);
+
+                        /** ProductAttributes propertyName. */
+                        public propertyName: string;
+
+                        /** ProductAttributes numberOfBedrooms. */
+                        public numberOfBedrooms?: (number|null);
+
+                        /** ProductAttributes numberOfBathrooms. */
+                        public numberOfBathrooms?: (number|null);
+
+                        /** ProductAttributes propertyType. */
+                        public propertyType: (google.shopping.merchant.products.v1.ProductAttributes.PropertyType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.PropertyType);
+
+                        /** ProductAttributes amenityFeature. */
+                        public amenityFeature: google.shopping.merchant.products.v1.ProductAttributes.AmenityFeature[];
+
+                        /** ProductAttributes utilitiesIncluded. */
+                        public utilitiesIncluded: google.shopping.merchant.products.v1.ProductAttributes.UtilitiesIncluded[];
+
+                        /** ProductAttributes petPolicy. */
+                        public petPolicy?: (google.shopping.merchant.products.v1.ProductAttributes.IPetPolicy|null);
+
+                        /** ProductAttributes specialtyHousingType. */
+                        public specialtyHousingType: (google.shopping.merchant.products.v1.ProductAttributes.SpecialtyHousingType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.SpecialtyHousingType);
+
+                        /** ProductAttributes productFee. */
+                        public productFee: google.shopping.merchant.products.v1.ProductAttributes.IProductFee[];
+
+                        /** ProductAttributes shortTitle. */
+                        public shortTitle?: (string|null);
+
+                        /** ProductAttributes questionsAndAnswers. */
+                        public questionsAndAnswers: google.shopping.merchant.products.v1.ProductAttributes.IQuestionAndAnswer[];
+
+                        /** ProductAttributes popularityRank. */
+                        public popularityRank: number;
+
+                        /** ProductAttributes itemGroupTitle. */
+                        public itemGroupTitle: string;
+
+                        /** ProductAttributes documentLinks. */
+                        public documentLinks: string[];
+
+                        /** ProductAttributes variantOptions. */
+                        public variantOptions: google.shopping.merchant.products.v1.ProductAttributes.IVariantOption[];
+
+                        /** ProductAttributes relatedProducts. */
+                        public relatedProducts: google.shopping.merchant.products.v1.ProductAttributes.IRelatedProduct[];
 
                         /**
                          * Creates a new ProductAttributes instance using the specified properties.
@@ -1740,6 +2010,1357 @@ export namespace google {
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
+                        /** Properties of a Mileage. */
+                        interface IMileage {
+
+                            /** Mileage value */
+                            value?: (number|Long|string|null);
+
+                            /** Mileage unit */
+                            unit?: (google.shopping.merchant.products.v1.ProductAttributes.Mileage.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Mileage.Unit|null);
+                        }
+
+                        /** Represents a Mileage. */
+                        class Mileage implements IMileage {
+
+                            /**
+                             * Constructs a new Mileage.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IMileage);
+
+                            /** Mileage value. */
+                            public value?: (number|Long|string|null);
+
+                            /** Mileage unit. */
+                            public unit: (google.shopping.merchant.products.v1.ProductAttributes.Mileage.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Mileage.Unit);
+
+                            /**
+                             * Creates a new Mileage instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Mileage instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IMileage): google.shopping.merchant.products.v1.ProductAttributes.Mileage;
+
+                            /**
+                             * Encodes the specified Mileage message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.Mileage.verify|verify} messages.
+                             * @param message Mileage message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IMileage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Mileage message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.Mileage.verify|verify} messages.
+                             * @param message Mileage message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IMileage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Mileage message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Mileage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.Mileage;
+
+                            /**
+                             * Decodes a Mileage message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Mileage
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.Mileage;
+
+                            /**
+                             * Verifies a Mileage message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Mileage message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Mileage
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.Mileage;
+
+                            /**
+                             * Creates a plain object from a Mileage message. Also converts values to other types if specified.
+                             * @param message Mileage
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.Mileage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Mileage to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Mileage
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Mileage {
+
+                            /** Unit enum. */
+                            enum Unit {
+                                UNIT_UNSPECIFIED = 0,
+                                MILES = 1,
+                                KM = 2
+                            }
+                        }
+
+                        /** Properties of a FuelConsumption. */
+                        interface IFuelConsumption {
+
+                            /** FuelConsumption value */
+                            value?: (number|null);
+
+                            /** FuelConsumption unit */
+                            unit?: (google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption.Unit|null);
+                        }
+
+                        /** Represents a FuelConsumption. */
+                        class FuelConsumption implements IFuelConsumption {
+
+                            /**
+                             * Constructs a new FuelConsumption.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IFuelConsumption);
+
+                            /** FuelConsumption value. */
+                            public value?: (number|null);
+
+                            /** FuelConsumption unit. */
+                            public unit: (google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption.Unit);
+
+                            /**
+                             * Creates a new FuelConsumption instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FuelConsumption instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IFuelConsumption): google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption;
+
+                            /**
+                             * Encodes the specified FuelConsumption message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption.verify|verify} messages.
+                             * @param message FuelConsumption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IFuelConsumption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FuelConsumption message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption.verify|verify} messages.
+                             * @param message FuelConsumption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IFuelConsumption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FuelConsumption message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FuelConsumption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption;
+
+                            /**
+                             * Decodes a FuelConsumption message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FuelConsumption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption;
+
+                            /**
+                             * Verifies a FuelConsumption message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FuelConsumption message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FuelConsumption
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption;
+
+                            /**
+                             * Creates a plain object from a FuelConsumption message. Also converts values to other types if specified.
+                             * @param message FuelConsumption
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.FuelConsumption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FuelConsumption to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FuelConsumption
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace FuelConsumption {
+
+                            /** Unit enum. */
+                            enum Unit {
+                                UNIT_UNSPECIFIED = 0,
+                                LPER100KM = 1,
+                                KGPER100KM = 2
+                            }
+                        }
+
+                        /** Properties of an EnergyConsumption. */
+                        interface IEnergyConsumption {
+
+                            /** EnergyConsumption value */
+                            value?: (number|null);
+
+                            /** EnergyConsumption unit */
+                            unit?: (google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption.Unit|null);
+                        }
+
+                        /** Represents an EnergyConsumption. */
+                        class EnergyConsumption implements IEnergyConsumption {
+
+                            /**
+                             * Constructs a new EnergyConsumption.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IEnergyConsumption);
+
+                            /** EnergyConsumption value. */
+                            public value?: (number|null);
+
+                            /** EnergyConsumption unit. */
+                            public unit: (google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption.Unit);
+
+                            /**
+                             * Creates a new EnergyConsumption instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns EnergyConsumption instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IEnergyConsumption): google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption;
+
+                            /**
+                             * Encodes the specified EnergyConsumption message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption.verify|verify} messages.
+                             * @param message EnergyConsumption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IEnergyConsumption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified EnergyConsumption message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption.verify|verify} messages.
+                             * @param message EnergyConsumption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IEnergyConsumption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an EnergyConsumption message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns EnergyConsumption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption;
+
+                            /**
+                             * Decodes an EnergyConsumption message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns EnergyConsumption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption;
+
+                            /**
+                             * Verifies an EnergyConsumption message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an EnergyConsumption message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns EnergyConsumption
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption;
+
+                            /**
+                             * Creates a plain object from an EnergyConsumption message. Also converts values to other types if specified.
+                             * @param message EnergyConsumption
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.EnergyConsumption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this EnergyConsumption to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for EnergyConsumption
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace EnergyConsumption {
+
+                            /** Unit enum. */
+                            enum Unit {
+                                UNIT_UNSPECIFIED = 0,
+                                KWHPER100KM = 1
+                            }
+                        }
+
+                        /** Properties of a Co2Emissions. */
+                        interface ICo2Emissions {
+
+                            /** Co2Emissions value */
+                            value?: (number|Long|string|null);
+
+                            /** Co2Emissions unit */
+                            unit?: (google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions.Unit|null);
+                        }
+
+                        /** Represents a Co2Emissions. */
+                        class Co2Emissions implements ICo2Emissions {
+
+                            /**
+                             * Constructs a new Co2Emissions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.ICo2Emissions);
+
+                            /** Co2Emissions value. */
+                            public value?: (number|Long|string|null);
+
+                            /** Co2Emissions unit. */
+                            public unit: (google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions.Unit);
+
+                            /**
+                             * Creates a new Co2Emissions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Co2Emissions instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.ICo2Emissions): google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions;
+
+                            /**
+                             * Encodes the specified Co2Emissions message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions.verify|verify} messages.
+                             * @param message Co2Emissions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.ICo2Emissions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Co2Emissions message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions.verify|verify} messages.
+                             * @param message Co2Emissions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.ICo2Emissions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Co2Emissions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Co2Emissions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions;
+
+                            /**
+                             * Decodes a Co2Emissions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Co2Emissions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions;
+
+                            /**
+                             * Verifies a Co2Emissions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Co2Emissions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Co2Emissions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions;
+
+                            /**
+                             * Creates a plain object from a Co2Emissions message. Also converts values to other types if specified.
+                             * @param message Co2Emissions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.Co2Emissions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Co2Emissions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Co2Emissions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Co2Emissions {
+
+                            /** Unit enum. */
+                            enum Unit {
+                                UNIT_UNSPECIFIED = 0,
+                                GPERKM = 1
+                            }
+                        }
+
+                        /** Properties of a Warranty. */
+                        interface IWarranty {
+
+                            /** Warranty duration */
+                            duration?: (number|Long|string|null);
+
+                            /** Warranty mileage */
+                            mileage?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
+                        }
+
+                        /** Represents a Warranty. */
+                        class Warranty implements IWarranty {
+
+                            /**
+                             * Constructs a new Warranty.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IWarranty);
+
+                            /** Warranty duration. */
+                            public duration: (number|Long|string);
+
+                            /** Warranty mileage. */
+                            public mileage?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
+
+                            /**
+                             * Creates a new Warranty instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Warranty instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IWarranty): google.shopping.merchant.products.v1.ProductAttributes.Warranty;
+
+                            /**
+                             * Encodes the specified Warranty message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.Warranty.verify|verify} messages.
+                             * @param message Warranty message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IWarranty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Warranty message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.Warranty.verify|verify} messages.
+                             * @param message Warranty message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IWarranty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Warranty message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Warranty
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.Warranty;
+
+                            /**
+                             * Decodes a Warranty message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Warranty
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.Warranty;
+
+                            /**
+                             * Verifies a Warranty message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Warranty message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Warranty
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.Warranty;
+
+                            /**
+                             * Creates a plain object from a Warranty message. Also converts values to other types if specified.
+                             * @param message Warranty
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.Warranty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Warranty to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Warranty
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ProductFee. */
+                        interface IProductFee {
+
+                            /** ProductFee type */
+                            type?: (google.shopping.merchant.products.v1.ProductAttributes.ProductFee.FeeType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.ProductFee.FeeType|null);
+
+                            /** ProductFee amount */
+                            amount?: (google.shopping.type.IPrice|null);
+                        }
+
+                        /** Represents a ProductFee. */
+                        class ProductFee implements IProductFee {
+
+                            /**
+                             * Constructs a new ProductFee.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IProductFee);
+
+                            /** ProductFee type. */
+                            public type: (google.shopping.merchant.products.v1.ProductAttributes.ProductFee.FeeType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.ProductFee.FeeType);
+
+                            /** ProductFee amount. */
+                            public amount?: (google.shopping.type.IPrice|null);
+
+                            /**
+                             * Creates a new ProductFee instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ProductFee instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IProductFee): google.shopping.merchant.products.v1.ProductAttributes.ProductFee;
+
+                            /**
+                             * Encodes the specified ProductFee message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.ProductFee.verify|verify} messages.
+                             * @param message ProductFee message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IProductFee, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ProductFee message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.ProductFee.verify|verify} messages.
+                             * @param message ProductFee message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IProductFee, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ProductFee message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ProductFee
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.ProductFee;
+
+                            /**
+                             * Decodes a ProductFee message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ProductFee
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.ProductFee;
+
+                            /**
+                             * Verifies a ProductFee message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ProductFee message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ProductFee
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.ProductFee;
+
+                            /**
+                             * Creates a plain object from a ProductFee message. Also converts values to other types if specified.
+                             * @param message ProductFee
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.ProductFee, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ProductFee to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ProductFee
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ProductFee {
+
+                            /** FeeType enum. */
+                            enum FeeType {
+                                FEE_TYPE_UNSPECIFIED = 0,
+                                ADMIN_FEE = 1,
+                                APPLICATION_FEE = 2,
+                                SECURITY_DEPOSIT = 3
+                            }
+                        }
+
+                        /** Properties of a DisplayAddress. */
+                        interface IDisplayAddress {
+
+                            /** DisplayAddress streetNumber */
+                            streetNumber?: (string|null);
+
+                            /** DisplayAddress streetName */
+                            streetName?: (string|null);
+
+                            /** DisplayAddress city */
+                            city?: (string|null);
+
+                            /** DisplayAddress region */
+                            region?: (string|null);
+
+                            /** DisplayAddress postalCode */
+                            postalCode?: (string|null);
+                        }
+
+                        /** Represents a DisplayAddress. */
+                        class DisplayAddress implements IDisplayAddress {
+
+                            /**
+                             * Constructs a new DisplayAddress.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IDisplayAddress);
+
+                            /** DisplayAddress streetNumber. */
+                            public streetNumber: string;
+
+                            /** DisplayAddress streetName. */
+                            public streetName: string;
+
+                            /** DisplayAddress city. */
+                            public city: string;
+
+                            /** DisplayAddress region. */
+                            public region: string;
+
+                            /** DisplayAddress postalCode. */
+                            public postalCode: string;
+
+                            /**
+                             * Creates a new DisplayAddress instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DisplayAddress instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IDisplayAddress): google.shopping.merchant.products.v1.ProductAttributes.DisplayAddress;
+
+                            /**
+                             * Encodes the specified DisplayAddress message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.DisplayAddress.verify|verify} messages.
+                             * @param message DisplayAddress message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IDisplayAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DisplayAddress message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.DisplayAddress.verify|verify} messages.
+                             * @param message DisplayAddress message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IDisplayAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DisplayAddress message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DisplayAddress
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.DisplayAddress;
+
+                            /**
+                             * Decodes a DisplayAddress message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DisplayAddress
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.DisplayAddress;
+
+                            /**
+                             * Verifies a DisplayAddress message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DisplayAddress message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DisplayAddress
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.DisplayAddress;
+
+                            /**
+                             * Creates a plain object from a DisplayAddress message. Also converts values to other types if specified.
+                             * @param message DisplayAddress
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.DisplayAddress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DisplayAddress to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DisplayAddress
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of an UnitArea. */
+                        interface IUnitArea {
+
+                            /** UnitArea value */
+                            value?: (number|null);
+
+                            /** UnitArea unit */
+                            unit?: (google.shopping.merchant.products.v1.ProductAttributes.UnitArea.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.UnitArea.Unit|null);
+                        }
+
+                        /** Represents an UnitArea. */
+                        class UnitArea implements IUnitArea {
+
+                            /**
+                             * Constructs a new UnitArea.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IUnitArea);
+
+                            /** UnitArea value. */
+                            public value?: (number|null);
+
+                            /** UnitArea unit. */
+                            public unit: (google.shopping.merchant.products.v1.ProductAttributes.UnitArea.Unit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.UnitArea.Unit);
+
+                            /**
+                             * Creates a new UnitArea instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns UnitArea instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IUnitArea): google.shopping.merchant.products.v1.ProductAttributes.UnitArea;
+
+                            /**
+                             * Encodes the specified UnitArea message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.UnitArea.verify|verify} messages.
+                             * @param message UnitArea message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IUnitArea, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified UnitArea message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.UnitArea.verify|verify} messages.
+                             * @param message UnitArea message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IUnitArea, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an UnitArea message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns UnitArea
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.UnitArea;
+
+                            /**
+                             * Decodes an UnitArea message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns UnitArea
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.UnitArea;
+
+                            /**
+                             * Verifies an UnitArea message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an UnitArea message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns UnitArea
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.UnitArea;
+
+                            /**
+                             * Creates a plain object from an UnitArea message. Also converts values to other types if specified.
+                             * @param message UnitArea
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.UnitArea, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this UnitArea to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for UnitArea
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace UnitArea {
+
+                            /** Unit enum. */
+                            enum Unit {
+                                UNIT_UNSPECIFIED = 0,
+                                SQM = 1,
+                                SQFT = 2
+                            }
+                        }
+
+                        /** Properties of a PetPolicy. */
+                        interface IPetPolicy {
+
+                            /** PetPolicy petsAllowed */
+                            petsAllowed?: (boolean|null);
+
+                            /** PetPolicy petTypes */
+                            petTypes?: (google.shopping.merchant.products.v1.ProductAttributes.PetPolicy.PetType[]|null);
+                        }
+
+                        /** Represents a PetPolicy. */
+                        class PetPolicy implements IPetPolicy {
+
+                            /**
+                             * Constructs a new PetPolicy.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IPetPolicy);
+
+                            /** PetPolicy petsAllowed. */
+                            public petsAllowed: boolean;
+
+                            /** PetPolicy petTypes. */
+                            public petTypes: google.shopping.merchant.products.v1.ProductAttributes.PetPolicy.PetType[];
+
+                            /**
+                             * Creates a new PetPolicy instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PetPolicy instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IPetPolicy): google.shopping.merchant.products.v1.ProductAttributes.PetPolicy;
+
+                            /**
+                             * Encodes the specified PetPolicy message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.PetPolicy.verify|verify} messages.
+                             * @param message PetPolicy message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IPetPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PetPolicy message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.PetPolicy.verify|verify} messages.
+                             * @param message PetPolicy message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IPetPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PetPolicy message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PetPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.PetPolicy;
+
+                            /**
+                             * Decodes a PetPolicy message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PetPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.PetPolicy;
+
+                            /**
+                             * Verifies a PetPolicy message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PetPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PetPolicy
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.PetPolicy;
+
+                            /**
+                             * Creates a plain object from a PetPolicy message. Also converts values to other types if specified.
+                             * @param message PetPolicy
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.PetPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PetPolicy to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PetPolicy
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace PetPolicy {
+
+                            /** PetType enum. */
+                            enum PetType {
+                                PET_TYPE_UNSPECIFIED = 0,
+                                CATS = 1,
+                                LARGE_DOGS = 2,
+                                SMALL_DOGS = 3
+                            }
+                        }
+
+                        /** Properties of a QuestionAndAnswer. */
+                        interface IQuestionAndAnswer {
+
+                            /** QuestionAndAnswer question */
+                            question?: (string|null);
+
+                            /** QuestionAndAnswer answer */
+                            answer?: (string|null);
+                        }
+
+                        /** Represents a QuestionAndAnswer. */
+                        class QuestionAndAnswer implements IQuestionAndAnswer {
+
+                            /**
+                             * Constructs a new QuestionAndAnswer.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IQuestionAndAnswer);
+
+                            /** QuestionAndAnswer question. */
+                            public question: string;
+
+                            /** QuestionAndAnswer answer. */
+                            public answer: string;
+
+                            /**
+                             * Creates a new QuestionAndAnswer instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns QuestionAndAnswer instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IQuestionAndAnswer): google.shopping.merchant.products.v1.ProductAttributes.QuestionAndAnswer;
+
+                            /**
+                             * Encodes the specified QuestionAndAnswer message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.QuestionAndAnswer.verify|verify} messages.
+                             * @param message QuestionAndAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IQuestionAndAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified QuestionAndAnswer message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.QuestionAndAnswer.verify|verify} messages.
+                             * @param message QuestionAndAnswer message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IQuestionAndAnswer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a QuestionAndAnswer message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns QuestionAndAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.QuestionAndAnswer;
+
+                            /**
+                             * Decodes a QuestionAndAnswer message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns QuestionAndAnswer
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.QuestionAndAnswer;
+
+                            /**
+                             * Verifies a QuestionAndAnswer message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a QuestionAndAnswer message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns QuestionAndAnswer
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.QuestionAndAnswer;
+
+                            /**
+                             * Creates a plain object from a QuestionAndAnswer message. Also converts values to other types if specified.
+                             * @param message QuestionAndAnswer
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.QuestionAndAnswer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this QuestionAndAnswer to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for QuestionAndAnswer
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a VariantOption. */
+                        interface IVariantOption {
+
+                            /** VariantOption name */
+                            name?: (string|null);
+
+                            /** VariantOption value */
+                            value?: (string|null);
+                        }
+
+                        /** Represents a VariantOption. */
+                        class VariantOption implements IVariantOption {
+
+                            /**
+                             * Constructs a new VariantOption.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IVariantOption);
+
+                            /** VariantOption name. */
+                            public name: string;
+
+                            /** VariantOption value. */
+                            public value: string;
+
+                            /**
+                             * Creates a new VariantOption instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns VariantOption instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IVariantOption): google.shopping.merchant.products.v1.ProductAttributes.VariantOption;
+
+                            /**
+                             * Encodes the specified VariantOption message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.VariantOption.verify|verify} messages.
+                             * @param message VariantOption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IVariantOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified VariantOption message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.VariantOption.verify|verify} messages.
+                             * @param message VariantOption message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IVariantOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a VariantOption message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns VariantOption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.VariantOption;
+
+                            /**
+                             * Decodes a VariantOption message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns VariantOption
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.VariantOption;
+
+                            /**
+                             * Verifies a VariantOption message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a VariantOption message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns VariantOption
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.VariantOption;
+
+                            /**
+                             * Creates a plain object from a VariantOption message. Also converts values to other types if specified.
+                             * @param message VariantOption
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.VariantOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this VariantOption to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for VariantOption
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a RelatedProduct. */
+                        interface IRelatedProduct {
+
+                            /** RelatedProduct relationshipType */
+                            relationshipType?: (google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.RelationshipType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.RelationshipType|null);
+
+                            /** RelatedProduct idType */
+                            idType?: (google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.IdType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.IdType|null);
+
+                            /** RelatedProduct id */
+                            id?: (string|null);
+                        }
+
+                        /** Represents a RelatedProduct. */
+                        class RelatedProduct implements IRelatedProduct {
+
+                            /**
+                             * Constructs a new RelatedProduct.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IRelatedProduct);
+
+                            /** RelatedProduct relationshipType. */
+                            public relationshipType: (google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.RelationshipType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.RelationshipType);
+
+                            /** RelatedProduct idType. */
+                            public idType: (google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.IdType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.IdType);
+
+                            /** RelatedProduct id. */
+                            public id: string;
+
+                            /**
+                             * Creates a new RelatedProduct instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RelatedProduct instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IRelatedProduct): google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct;
+
+                            /**
+                             * Encodes the specified RelatedProduct message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.verify|verify} messages.
+                             * @param message RelatedProduct message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IRelatedProduct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RelatedProduct message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct.verify|verify} messages.
+                             * @param message RelatedProduct message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IRelatedProduct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RelatedProduct message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RelatedProduct
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct;
+
+                            /**
+                             * Decodes a RelatedProduct message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RelatedProduct
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct;
+
+                            /**
+                             * Verifies a RelatedProduct message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RelatedProduct message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RelatedProduct
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct;
+
+                            /**
+                             * Creates a plain object from a RelatedProduct message. Also converts values to other types if specified.
+                             * @param message RelatedProduct
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.RelatedProduct, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RelatedProduct to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RelatedProduct
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace RelatedProduct {
+
+                            /** RelationshipType enum. */
+                            enum RelationshipType {
+                                RELATIONSHIP_TYPE_UNSPECIFIED = 0,
+                                PART_OF_SET = 1,
+                                REQUIRED_PART = 2,
+                                OFTEN_BOUGHT_WITH = 3,
+                                SUBSTITUTE = 4,
+                                DIFFERENT_BRAND = 5,
+                                ACCESSORY = 6
+                            }
+
+                            /** IdType enum. */
+                            enum IdType {
+                                ID_TYPE_UNSPECIFIED = 0,
+                                GTIN = 1,
+                                ID = 2
+                            }
+                        }
+
                         /** CarrierPriceOption enum. */
                         enum CarrierPriceOption {
                             CARRIER_PRICE_OPTION_UNSPECIFIED = 0,
@@ -1804,6 +3425,157 @@ export namespace google {
                             USPS_GROUND_ADVANTAGE_RETAIL = 59,
                             USPS_PRIORITY_MAIL = 60,
                             USPS_GROUND_ADVANTAGE_COMMERCIAL = 61
+                        }
+
+                        /** VehicleBodyStyle enum. */
+                        enum VehicleBodyStyle {
+                            VEHICLE_BODY_STYLE_UNSPECIFIED = 0,
+                            ATV_SPORT = 1,
+                            ATV_TOURING = 2,
+                            ATV_UTILITY = 3,
+                            ATV_YOUTH = 4,
+                            CITY_CAR = 5,
+                            CLASS_A_MOTORHOME = 6,
+                            CLASS_B_MOTORHOME = 7,
+                            CLASS_C_MOTORHOME = 8,
+                            COMPACT_SUV = 9,
+                            CONVERTIBLE = 10,
+                            COUPE = 11,
+                            CROSSOVER = 12,
+                            FIFTH_WHEEL = 13,
+                            FULL_SIZE_VAN = 14,
+                            HATCHBACK = 15,
+                            LIMOUSINE = 16,
+                            MINIVAN = 17,
+                            NOTCHBACK = 18,
+                            POP_UP_CAMPER = 19,
+                            SEDAN = 20,
+                            SIDE_BY_SIDE = 21,
+                            STATION_WAGON = 22,
+                            SUV = 23,
+                            TRAVEL_TRAILER = 24,
+                            TRUCK = 25,
+                            TRUCK_CAMPER = 26,
+                            UTE = 27,
+                            UTV_RECREATIONAL_UTILITY = 28,
+                            UTV_SPORT = 29,
+                            UTV_UTILITY = 30,
+                            UTV_YOUTH = 31
+                        }
+
+                        /** EngineType enum. */
+                        enum EngineType {
+                            ENGINE_TYPE_UNSPECIFIED = 0,
+                            GASOLINE = 1,
+                            DIESEL = 2,
+                            ELECTRIC = 3,
+                            HYBRID = 4,
+                            PLUG_IN_HYBRID = 5,
+                            NATURAL_GAS = 6,
+                            LPG = 7,
+                            METHANE = 8,
+                            OTHER = 9
+                        }
+
+                        /** EmissionsStandard enum. */
+                        enum EmissionsStandard {
+                            EMISSIONS_STANDARD_UNSPECIFIED = 0,
+                            ZERO_EMISSIONS = 1,
+                            EURO1 = 2,
+                            EURO2 = 3,
+                            EURO3 = 4,
+                            EURO4 = 5,
+                            EURO5 = 6,
+                            EURO5B = 7,
+                            EURO6 = 8,
+                            EURO6C = 9,
+                            EURO6D = 10,
+                            EURO6D_TEMP = 11,
+                            EURO6E = 12
+                        }
+
+                        /** VehiclePriceType enum. */
+                        enum VehiclePriceType {
+                            VEHICLE_PRICE_TYPE_UNSPECIFIED = 0,
+                            ALL_IN_PRICE = 1,
+                            DRIVE_AWAY_PRICE = 2,
+                            ESTIMATED_DRIVE_AWAY_PRICE = 3,
+                            EXCLUDING_GOVERNMENT_CHARGES_PRICE = 4,
+                            VEHICLE_BASE_PRICE = 5
+                        }
+
+                        /** PropertyType enum. */
+                        enum PropertyType {
+                            PROPERTY_TYPE_UNSPECIFIED = 0,
+                            APARTMENT = 1,
+                            CONDO = 2,
+                            LOFT = 3,
+                            MULTI_FAMILY_HOME = 4,
+                            PENTHOUSE = 5,
+                            ROOM = 6,
+                            SINGLE_FAMILY_HOME = 7,
+                            STUDIO = 8,
+                            TOWNHOUSE = 9
+                        }
+
+                        /** AmenityFeature enum. */
+                        enum AmenityFeature {
+                            AMENITY_FEATURE_UNSPECIFIED = 0,
+                            BALCONY = 1,
+                            BASEMENT = 2,
+                            BASKETBALL_COURT = 3,
+                            BIKE_STORAGE = 4,
+                            CENTRAL_AC = 5,
+                            DISHWASHER = 6,
+                            DOG_PARK = 7,
+                            ELEVATOR = 8,
+                            EV_CHARGING = 9,
+                            FENCED_LOT = 10,
+                            FIREPLACE = 11,
+                            FITNESS_CENTER = 12,
+                            FORCED_AIR_HEATING = 13,
+                            FULLY_FURNISHED = 14,
+                            GARAGE = 15,
+                            GATED_COMMUNITY = 16,
+                            HARDWOOD_FLOORS = 17,
+                            HIGH_SPEED_INTERNET = 18,
+                            INTERCOM = 19,
+                            IN_UNIT_WASHER_DRYER = 20,
+                            KITCHEN = 21,
+                            LARGE_CLOSETS = 22,
+                            MULTISPORT_COURT = 23,
+                            ONSITE_LAUNDRY = 24,
+                            OUTDOOR_LOUNGE = 25,
+                            PARKING = 26,
+                            PATIO = 27,
+                            PICKLEBALL_COURT = 28,
+                            POOL = 29,
+                            REFRIGERATOR = 30,
+                            SOCCER_FIELD = 31,
+                            TENNIS_COURT = 32,
+                            WALK_IN_CLOSETS = 33,
+                            WHEELCHAIR_ACCESS = 34
+                        }
+
+                        /** UtilitiesIncluded enum. */
+                        enum UtilitiesIncluded {
+                            UTILITIES_INCLUDED_UNSPECIFIED = 0,
+                            ELECTRICITY = 1,
+                            GAS = 2,
+                            INTERNET = 3,
+                            TRASH = 4,
+                            WATER = 5
+                        }
+
+                        /** SpecialtyHousingType enum. */
+                        enum SpecialtyHousingType {
+                            SPECIALTY_HOUSING_TYPE_UNSPECIFIED = 0,
+                            CORPORATE = 1,
+                            LOW_INCOME = 2,
+                            MILITARY = 3,
+                            SENIOR = 4,
+                            SHORT_TERM = 5,
+                            STUDENT = 6
                         }
                     }
 
@@ -2345,6 +4117,9 @@ export namespace google {
 
                         /** ProductInstallment annualPercentageRate */
                         annualPercentageRate?: (number|null);
+
+                        /** ProductInstallment totalAmount */
+                        totalAmount?: (google.shopping.type.IPrice|null);
                     }
 
                     /** Represents a ProductInstallment. */
@@ -2370,6 +4145,9 @@ export namespace google {
 
                         /** ProductInstallment annualPercentageRate. */
                         public annualPercentageRate?: (number|null);
+
+                        /** ProductInstallment totalAmount. */
+                        public totalAmount?: (google.shopping.type.IPrice|null);
 
                         /**
                          * Creates a new ProductInstallment instance using the specified properties.
@@ -2732,6 +4510,12 @@ export namespace google {
 
                         /** Shipping handlingCutoffTimezone */
                         handlingCutoffTimezone?: (string|null);
+
+                        /** Shipping loyaltyProgramLabel */
+                        loyaltyProgramLabel?: (string|null);
+
+                        /** Shipping loyaltyTierLabel */
+                        loyaltyTierLabel?: (string|null);
                     }
 
                     /** Represents a Shipping. */
@@ -2781,6 +4565,12 @@ export namespace google {
 
                         /** Shipping handlingCutoffTimezone. */
                         public handlingCutoffTimezone?: (string|null);
+
+                        /** Shipping loyaltyProgramLabel. */
+                        public loyaltyProgramLabel: string;
+
+                        /** Shipping loyaltyTierLabel. */
+                        public loyaltyTierLabel: string;
 
                         /**
                          * Creates a new Shipping instance using the specified properties.
@@ -4364,6 +6154,109 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a PickupCost. */
+                    interface IPickupCost {
+
+                        /** PickupCost flatRate */
+                        flatRate?: (google.shopping.type.IPrice|null);
+
+                        /** PickupCost freeThreshold */
+                        freeThreshold?: (google.shopping.type.IPrice|null);
+                    }
+
+                    /** Represents a PickupCost. */
+                    class PickupCost implements IPickupCost {
+
+                        /**
+                         * Constructs a new PickupCost.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.products.v1.IPickupCost);
+
+                        /** PickupCost flatRate. */
+                        public flatRate?: (google.shopping.type.IPrice|null);
+
+                        /** PickupCost freeThreshold. */
+                        public freeThreshold?: (google.shopping.type.IPrice|null);
+
+                        /**
+                         * Creates a new PickupCost instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PickupCost instance
+                         */
+                        public static create(properties?: google.shopping.merchant.products.v1.IPickupCost): google.shopping.merchant.products.v1.PickupCost;
+
+                        /**
+                         * Encodes the specified PickupCost message. Does not implicitly {@link google.shopping.merchant.products.v1.PickupCost.verify|verify} messages.
+                         * @param message PickupCost message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.products.v1.IPickupCost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PickupCost message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.PickupCost.verify|verify} messages.
+                         * @param message PickupCost message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.products.v1.IPickupCost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PickupCost message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PickupCost
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.PickupCost;
+
+                        /**
+                         * Decodes a PickupCost message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PickupCost
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.PickupCost;
+
+                        /**
+                         * Verifies a PickupCost message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PickupCost message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PickupCost
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.PickupCost;
+
+                        /**
+                         * Creates a plain object from a PickupCost message. Also converts values to other types if specified.
+                         * @param message PickupCost
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.products.v1.PickupCost, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PickupCost to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PickupCost
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a HandlingCutoffTime. */
                     interface IHandlingCutoffTime {
 
@@ -4479,6 +6372,132 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a ProductMinimumOrderValue. */
+                    interface IProductMinimumOrderValue {
+
+                        /** ProductMinimumOrderValue country */
+                        country?: (string|null);
+
+                        /** ProductMinimumOrderValue service */
+                        service?: (string|null);
+
+                        /** ProductMinimumOrderValue surface */
+                        surface?: (google.shopping.merchant.products.v1.ProductMinimumOrderValue.Surface|keyof typeof google.shopping.merchant.products.v1.ProductMinimumOrderValue.Surface|null);
+
+                        /** ProductMinimumOrderValue price */
+                        price?: (google.shopping.type.IPrice|null);
+                    }
+
+                    /** Represents a ProductMinimumOrderValue. */
+                    class ProductMinimumOrderValue implements IProductMinimumOrderValue {
+
+                        /**
+                         * Constructs a new ProductMinimumOrderValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.products.v1.IProductMinimumOrderValue);
+
+                        /** ProductMinimumOrderValue country. */
+                        public country?: (string|null);
+
+                        /** ProductMinimumOrderValue service. */
+                        public service?: (string|null);
+
+                        /** ProductMinimumOrderValue surface. */
+                        public surface?: (google.shopping.merchant.products.v1.ProductMinimumOrderValue.Surface|keyof typeof google.shopping.merchant.products.v1.ProductMinimumOrderValue.Surface|null);
+
+                        /** ProductMinimumOrderValue price. */
+                        public price?: (google.shopping.type.IPrice|null);
+
+                        /**
+                         * Creates a new ProductMinimumOrderValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductMinimumOrderValue instance
+                         */
+                        public static create(properties?: google.shopping.merchant.products.v1.IProductMinimumOrderValue): google.shopping.merchant.products.v1.ProductMinimumOrderValue;
+
+                        /**
+                         * Encodes the specified ProductMinimumOrderValue message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductMinimumOrderValue.verify|verify} messages.
+                         * @param message ProductMinimumOrderValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.products.v1.IProductMinimumOrderValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductMinimumOrderValue message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductMinimumOrderValue.verify|verify} messages.
+                         * @param message ProductMinimumOrderValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.products.v1.IProductMinimumOrderValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductMinimumOrderValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductMinimumOrderValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductMinimumOrderValue;
+
+                        /**
+                         * Decodes a ProductMinimumOrderValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductMinimumOrderValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductMinimumOrderValue;
+
+                        /**
+                         * Verifies a ProductMinimumOrderValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductMinimumOrderValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductMinimumOrderValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductMinimumOrderValue;
+
+                        /**
+                         * Creates a plain object from a ProductMinimumOrderValue message. Also converts values to other types if specified.
+                         * @param message ProductMinimumOrderValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.products.v1.ProductMinimumOrderValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductMinimumOrderValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductMinimumOrderValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ProductMinimumOrderValue {
+
+                        /** Surface enum. */
+                        enum Surface {
+                            SURFACE_UNSPECIFIED = 0,
+                            ONLINE = 1,
+                            LOCAL = 2,
+                            ONLINE_LOCAL = 3
+                        }
+                    }
+
                     /** Represents a ProductsService */
                     class ProductsService extends $protobuf.rpc.Service {
 
@@ -4583,6 +6602,9 @@ export namespace google {
 
                         /** Product automatedDiscounts */
                         automatedDiscounts?: (google.shopping.merchant.products.v1.IAutomatedDiscounts|null);
+
+                        /** Product archived */
+                        archived?: (boolean|null);
                     }
 
                     /** Represents a Product. */
@@ -4629,6 +6651,9 @@ export namespace google {
 
                         /** Product automatedDiscounts. */
                         public automatedDiscounts?: (google.shopping.merchant.products.v1.IAutomatedDiscounts|null);
+
+                        /** Product archived. */
+                        public archived: boolean;
 
                         /**
                          * Creates a new Product instance using the specified properties.
@@ -11100,6 +13125,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -11113,6 +13141,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -11842,6 +13873,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -11861,6 +13895,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -12174,6 +14211,365 @@ export namespace google {
 
             /**
              * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -12566,6 +14962,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -14937,6 +17335,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -14959,6 +17360,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -15898,6 +18302,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -15932,6 +18339,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -16060,7 +18470,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -16163,6 +18574,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }

@@ -253,7 +253,7 @@ class BulkCommitBatch extends WriteBatch {
         const tag = options?.requestTag ?? requestTag();
 
         // Capture the error stack to preserve stack tracing across async calls.
-        const stack = Error().stack!;
+        const callsiteError = Error();
 
         let response: api.IBatchWriteResponse;
         try {
@@ -295,7 +295,7 @@ class BulkCommitBatch extends WriteBatch {
               status.message || undefined,
             );
             error.code = status.code as number;
-            this.pendingOps[i].onError(wrapError(error, stack));
+            this.pendingOps[i].onError(wrapError(error, callsiteError.stack!));
           }
         }
       },

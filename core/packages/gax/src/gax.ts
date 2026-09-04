@@ -22,7 +22,7 @@ import type {Message} from 'protobufjs';
 import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
-import {toLowerCamelCase} from './util';
+import {toLowerCamelCase, StaticTraceContext} from './util';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 
@@ -170,6 +170,7 @@ export interface CallOptions {
   longrunning?: BackoffSettings;
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
+  enableTelemetryTracing?: boolean;
 }
 
 export class CallSettings {
@@ -186,6 +187,7 @@ export class CallSettings {
   longrunning?: BackoffSettings;
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
+  enableTelemetryTracing?: boolean;
 
   /**
    * @param {Object} settings - An object containing parameters of this settings.
@@ -219,6 +221,7 @@ export class CallSettings {
       'longrunning' in settings ? settings.longrunning : undefined;
     this.apiName = settings.apiName ?? undefined;
     this.retryRequestOptions = settings.retryRequestOptions;
+    this.enableTelemetryTracing = settings.enableTelemetryTracing;
   }
 
   /**
@@ -242,6 +245,7 @@ export class CallSettings {
     let longrunning = this.longrunning;
     let apiName = this.apiName;
     let retryRequestOptions = this.retryRequestOptions;
+    let enableTelemetryTracing = this.enableTelemetryTracing;
 
     // If the user provides a timeout to the method, that timeout value will be used
     // to override the backoff settings.
@@ -297,6 +301,9 @@ export class CallSettings {
     if ('retryRequestOptions' in options) {
       retryRequestOptions = options.retryRequestOptions;
     }
+    if ('enableTelemetryTracing' in options) {
+      enableTelemetryTracing = options.enableTelemetryTracing;
+    }
 
     return new CallSettings({
       timeout,
@@ -309,6 +316,7 @@ export class CallSettings {
       isBundling,
       apiName,
       retryRequestOptions,
+      enableTelemetryTracing,
     });
   }
 }
@@ -780,8 +788,10 @@ export interface ClientConfig {
  * @param {Object.<string, string[]>} retryNames - A dictionary mapping the strings
  *   referring to response status codes to objects representing
  *   those codes.
- * @param {Object} otherArgs - the non-request arguments to be passed to the API
+ * @param {Object} [otherArgs] - the non-request arguments to be passed to the API
  *   calls.
+ * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
+ * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
  * @return {Object} A mapping from method name to CallSettings, or null if the
  *   service is not found in the config.
  */
@@ -791,8 +801,12 @@ export function constructSettings(
   configOverrides: ClientConfig,
   retryNames: {},
   otherArgs?: {},
+  enableTelemetryTracing?: boolean,
+  internalTelemetryInfo?: StaticTraceContext,
 ) {
-  otherArgs = otherArgs || {};
+  otherArgs = internalTelemetryInfo
+    ? {...otherArgs, internalTelemetryInfo}
+    : otherArgs || {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
@@ -851,6 +865,7 @@ export function constructSettings(
         : null,
       otherArgs,
       apiName,
+      enableTelemetryTracing,
     });
   }
 

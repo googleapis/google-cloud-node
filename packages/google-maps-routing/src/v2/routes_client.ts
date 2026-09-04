@@ -483,9 +483,9 @@ export class RoutesClient {
    *   Optional. If set to true, the service attempts to minimize the overall cost
    *   of the route by re-ordering the specified intermediate waypoints. The
    *   request fails if any of the intermediate waypoints is a `via` waypoint. Use
-   *   `ComputeRoutesResponse.Routes.optimized_intermediate_waypoint_index` to
+   *   `ComputeRoutesResponse.routes.optimized_intermediate_waypoint_index` to
    *   find the new ordering.
-   *   If `ComputeRoutesResponseroutes.optimized_intermediate_waypoint_index` is
+   *   If `ComputeRoutesResponse.routes.optimized_intermediate_waypoint_index` is
    *   not requested in the `X-Goog-FieldMask` header, the request fails.
    *   If `optimize_waypoint_order` is set to false,
    *   `ComputeRoutesResponse.optimized_intermediate_waypoint_index` will be

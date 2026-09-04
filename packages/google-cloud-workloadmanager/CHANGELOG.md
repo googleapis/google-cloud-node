@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.2.1...workloadmanager-v0.3.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.2.0...workloadmanager-v0.2.1) (2026-07-15)
+
+
+### Bug Fixes
+
+* Documentation url ([#8881](https://github.com/googleapis/google-cloud-node/issues/8881)) ([a3d1773](https://github.com/googleapis/google-cloud-node/commit/a3d17735e97c3757f278e240b144835e0cc8aa26))
+* Update documentation URL ([#8884](https://github.com/googleapis/google-cloud-node/issues/8884)) ([c6a2b2e](https://github.com/googleapis/google-cloud-node/commit/c6a2b2e2d19febd9ed52562c28bb8b14c0c9b33a))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.1.1...workloadmanager-v0.2.0) (2026-07-13)
+
+
+### Features
+
+* **google/cloud/workloadmanager/v1:** Onboard a new library ([#8836](https://github.com/googleapis/google-cloud-node/issues/8836)) ([7c89205](https://github.com/googleapis/google-cloud-node/commit/7c89205e12fcb3e77fa1d395e5ee69d70820fa10))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.1.0...workloadmanager-v0.1.1) (2026-05-01)
 
 

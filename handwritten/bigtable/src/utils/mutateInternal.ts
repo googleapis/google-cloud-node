@@ -27,7 +27,8 @@ import {
   TabularApiSurface,
 } from '../tabular-api-surface';
 import {ServiceError} from 'google-gax';
-import {google} from '../../protos/protos';
+import {protos} from '..';
+import google = protos.google;
 import * as is from 'is';
 import {Mutation} from '../mutation';
 import arrify = require('arrify');

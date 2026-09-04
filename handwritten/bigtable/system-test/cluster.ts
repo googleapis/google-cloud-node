@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {afterEach, beforeEach, describe, it} from 'mocha';
-import {generateId} from './common';
+import {afterEach, before, beforeEach, describe, it} from 'mocha';
+import {generateId, reapInstances} from './common';
 import {Bigtable, ClusterInfo, Instance, Cluster} from '../src';
 import assert = require('assert');
 import {ClusterUtils} from '../src/utils/cluster';
@@ -30,6 +30,10 @@ function isValidationError(err: any): err is ValidationError {
 describe('Cluster', () => {
   const bigtable = new Bigtable();
   let instance: Instance;
+
+  before(async () => {
+    await reapInstances(bigtable);
+  });
 
   async function checkMetadata(
     cluster: Cluster,
@@ -67,7 +71,7 @@ describe('Cluster', () => {
     const [, operation] = await instance.create({
       clusters,
       labels: {
-        time_created: Date.now(),
+        time_created: String(Date.now()),
       },
     });
     await operation.promise();

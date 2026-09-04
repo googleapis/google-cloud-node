@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import {PendingWrite} from './pending_write';
 import {RemoveListener} from './stream_connection';
 import * as adapt from '../adapt';

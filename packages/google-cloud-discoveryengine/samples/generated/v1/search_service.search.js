@@ -401,6 +401,14 @@ function main(servingConfig) {
    */
   // const relevanceThreshold = {}
   /**
+   *  Optional. The granular relevance filtering specification.
+   *  If not specified, the global `relevance_threshold` will be used for all
+   *  sub-searches. If specified, this overrides the global
+   *  `relevance_threshold` to use thresholds on a per sub-search basis.
+   *  This feature is currently supported only for custom and site search.
+   */
+  // const relevanceFilterSpec = {}
+  /**
    *  Optional. The specification for returning the relevance score.
    */
   // const relevanceScoreSpec = {}

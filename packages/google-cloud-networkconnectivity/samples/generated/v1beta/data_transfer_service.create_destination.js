@@ -58,7 +58,7 @@ function main(parent, destinationId, destination) {
   // const requestId = 'abc123'
 
   // Imports the Networkconnectivity library
-  const {DataTransferServiceClient} = require('@google-cloud/networkconnectivity').v1beta;
+  const {DataTransferServiceClient} = require('@google-cloud/network-connectivity').v1beta;
 
   // Instantiates a client
   const networkconnectivityClient = new DataTransferServiceClient();

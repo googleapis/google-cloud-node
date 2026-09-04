@@ -1,17 +1,15 @@
 {
-  "name": "datalineage",
-  "name_pretty": "Data Lineage API",
-  "product_documentation": "https://cloud.google.com/dataplex/docs/about-data-lineage",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datalineage/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/configmanagement",
-  "api_id": "datalineage.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "datalineage"
+    "api_id": "datalineage.googleapis.com",
+    "api_shortname": "datalineage",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/configmanagement/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/configmanagement",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1530027",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "datalineage",
+    "name_pretty": "Data Lineage",
+    "product_documentation": "https://cloud.google.com/dataplex/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

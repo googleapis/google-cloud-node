@@ -4,6 +4,31 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-v5.4.0...monitoring-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/monitoring-v5.3.3...monitoring-v5.4.0) (2026-06-25)
+
+
+### Features
+
+* Regenerate google-cloud-monitoring ([#8640](https://github.com/googleapis/google-cloud-node/issues/8640)) ([5a5a0c1](https://github.com/googleapis/google-cloud-node/commit/5a5a0c1ac9500f885a2f4e94175f1776d501fe25))
+
+## [5.3.3](https://github.com/googleapis/google-cloud-node/compare/monitoring-v5.3.2...monitoring-v5.3.3) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [5.3.2](https://github.com/googleapis/google-cloud-node/compare/monitoring-v5.3.1...monitoring-v5.3.2) (2026-05-01)
 
 

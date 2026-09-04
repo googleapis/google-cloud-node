@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {TranslationServiceClient} from '@google-cloud/translate';
+import { TranslationServiceClient } from '@google-cloud/translate';
 
 // check that the client class type name can be used
 function doStuffWithTranslationServiceClient(client: TranslationServiceClient) {

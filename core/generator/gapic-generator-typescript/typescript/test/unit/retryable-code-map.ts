@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import {RetryableCodeMap, Code} from '../../src/schema/retryable-code-map.js';
+import '../../src/util.js';
 import assert from 'assert';
 import {describe, it} from 'mocha';
 

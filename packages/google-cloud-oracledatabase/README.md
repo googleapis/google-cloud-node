@@ -115,7 +115,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | switchover autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.switchover_autonomous_database.js) |
 | update autonomous database | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.update_autonomous_database.js) |
 | update exadb vm cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/oracle_database.update_exadb_vm_cluster.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/samples/generated/v1/snippet_metadata_google.cloud.oracledatabase.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -149,7 +148,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -159,7 +158,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oracledatabase/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

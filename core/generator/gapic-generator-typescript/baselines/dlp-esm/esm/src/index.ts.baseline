@@ -19,8 +19,8 @@
 import * as v2 from './v2/index.js';
 const DlpServiceClient = v2.DlpServiceClient;
 type DlpServiceClient = v2.DlpServiceClient;
-export { v2, DlpServiceClient };
-export default { v2, DlpServiceClient };
+export {v2, DlpServiceClient};
+export default {v2, DlpServiceClient};
 // @ts-ignore
 import * as protos from '../../protos/protos.js';
-export { protos };
+export {protos};

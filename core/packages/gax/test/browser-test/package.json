@@ -8,7 +8,7 @@
     "build/test"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "license": "Apache-2.0",
   "keywords": [],
@@ -39,7 +39,7 @@
     "karma-chrome-launcher": "^3.2.0",
     "karma-mocha": "^2.0.1",
     "karma-sourcemap-loader": "^0.4.0",
-    "karma-webpack": "^5.0.1",
+    "karma-webpack": "^5.0.0",
     "mocha": "^10.0.0",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",

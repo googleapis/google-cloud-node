@@ -383,12 +383,22 @@ export async function isAvailable() {
           if (err.response && err.response.status === 404) {
             return false;
           } else {
-            const codes =
-              e instanceof Error && e.name === 'AggregateError'
-                ? (e as any).errors.map((error: any) =>
-                    error.code ? error.code.toString() : 'UNKNOWN',
-                  )
-                : [err.code ? err.code.toString() : 'UNKNOWN'];
+            const errObj = e as any;
+            const getErrorCodes = (err: any): string[] => {
+              if (!err) return ['UNKNOWN'];
+              if (err.name === 'AggregateError' && Array.isArray(err.errors)) {
+                return err.errors.flatMap(getErrorCodes);
+              }
+              if (err.code) {
+                return [err.code.toString()];
+              }
+              if (err.cause) {
+                return getErrorCodes(err.cause);
+              }
+              return ['UNKNOWN'];
+            };
+
+            const codes = getErrorCodes(errObj);
 
             const isExpected = codes.every((code: string) =>
               [

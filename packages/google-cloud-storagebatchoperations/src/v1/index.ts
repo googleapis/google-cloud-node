@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {StorageBatchOperationsClient} from './storage_batch_operations_client';
+export { StorageBatchOperationsClient } from './storage_batch_operations_client';

@@ -16,7 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {SpannerClient} from './spanner_client';
-export {DatabaseAdminClient} from './database_admin_client';
-export {InstanceAdminClient} from './instance_admin_client';
-export {SpannerExecutorProxyClient} from './spanner_executor_proxy_client';
+export {
+  SpannerClient,
+  DatabaseAdminClient,
+  InstanceAdminClient,
+  SpannerExecutorProxyClient,
+} from '@google-cloud/spanner-api';

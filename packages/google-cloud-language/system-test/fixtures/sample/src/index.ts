@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {LanguageServiceClient} from '@google-cloud/language';
+import { LanguageServiceClient } from '@google-cloud/language';
 
 // check that the client class type name can be used
 function doStuffWithLanguageServiceClient(client: LanguageServiceClient) {

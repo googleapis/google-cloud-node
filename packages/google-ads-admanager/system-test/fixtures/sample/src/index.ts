@@ -19,12 +19,16 @@
 import {
   AdBreakServiceClient,
   AdReviewCenterAdServiceClient,
+  AdRuleServiceClient,
+  AdSpotServiceClient,
   AdUnitServiceClient,
   ApplicationServiceClient,
   AudienceSegmentServiceClient,
   BandwidthGroupServiceClient,
   BrowserLanguageServiceClient,
   BrowserServiceClient,
+  CdnConfigServiceClient,
+  ChildPublisherServiceClient,
   CmsMetadataKeyServiceClient,
   CmsMetadataValueServiceClient,
   CompanyServiceClient,
@@ -32,10 +36,14 @@ import {
   ContentBundleServiceClient,
   ContentLabelServiceClient,
   ContentServiceClient,
+  CreativeSetServiceClient,
   CreativeTemplateServiceClient,
+  CreativeWrapperServiceClient,
   CustomFieldServiceClient,
   CustomTargetingKeyServiceClient,
   CustomTargetingValueServiceClient,
+  DaiAuthenticationKeyServiceClient,
+  DaiEncodingProfileServiceClient,
   DeviceCapabilityServiceClient,
   DeviceCategoryServiceClient,
   DeviceManufacturerServiceClient,
@@ -44,14 +52,17 @@ import {
   LabelServiceClient,
   LineItemServiceClient,
   LinkedDeviceServiceClient,
+  LiveStreamServiceClient,
   McmEarningsServiceClient,
   MobileCarrierServiceClient,
   MobileDeviceServiceClient,
   MobileDeviceSubmodelServiceClient,
+  NativeStyleServiceClient,
   NetworkServiceClient,
   OperatingSystemServiceClient,
   OperatingSystemVersionServiceClient,
   OrderServiceClient,
+  PartnerServiceClient,
   PlacementServiceClient,
   PrivateAuctionDealServiceClient,
   PrivateAuctionServiceClient,
@@ -60,9 +71,14 @@ import {
   RichMediaAdsCompanyServiceClient,
   RoleServiceClient,
   SiteServiceClient,
+  SlateServiceClient,
+  SuggestedAdUnitServiceClient,
+  TargetingPresetServiceClient,
   TaxonomyCategoryServiceClient,
   TeamServiceClient,
+  ThirdPartyCompanyServiceClient,
   UserServiceClient,
+  ViewabilityProviderServiceClient,
 } from '@google-ads/admanager';
 
 // check that the client class type name can be used
@@ -72,6 +88,12 @@ function doStuffWithAdBreakServiceClient(client: AdBreakServiceClient) {
 function doStuffWithAdReviewCenterAdServiceClient(
   client: AdReviewCenterAdServiceClient,
 ) {
+  client.close();
+}
+function doStuffWithAdRuleServiceClient(client: AdRuleServiceClient) {
+  client.close();
+}
+function doStuffWithAdSpotServiceClient(client: AdSpotServiceClient) {
   client.close();
 }
 function doStuffWithAdUnitServiceClient(client: AdUnitServiceClient) {
@@ -96,6 +118,14 @@ function doStuffWithBrowserLanguageServiceClient(
   client.close();
 }
 function doStuffWithBrowserServiceClient(client: BrowserServiceClient) {
+  client.close();
+}
+function doStuffWithCdnConfigServiceClient(client: CdnConfigServiceClient) {
+  client.close();
+}
+function doStuffWithChildPublisherServiceClient(
+  client: ChildPublisherServiceClient,
+) {
   client.close();
 }
 function doStuffWithCmsMetadataKeyServiceClient(
@@ -127,8 +157,16 @@ function doStuffWithContentLabelServiceClient(
 function doStuffWithContentServiceClient(client: ContentServiceClient) {
   client.close();
 }
+function doStuffWithCreativeSetServiceClient(client: CreativeSetServiceClient) {
+  client.close();
+}
 function doStuffWithCreativeTemplateServiceClient(
   client: CreativeTemplateServiceClient,
+) {
+  client.close();
+}
+function doStuffWithCreativeWrapperServiceClient(
+  client: CreativeWrapperServiceClient,
 ) {
   client.close();
 }
@@ -142,6 +180,16 @@ function doStuffWithCustomTargetingKeyServiceClient(
 }
 function doStuffWithCustomTargetingValueServiceClient(
   client: CustomTargetingValueServiceClient,
+) {
+  client.close();
+}
+function doStuffWithDaiAuthenticationKeyServiceClient(
+  client: DaiAuthenticationKeyServiceClient,
+) {
+  client.close();
+}
+function doStuffWithDaiEncodingProfileServiceClient(
+  client: DaiEncodingProfileServiceClient,
 ) {
   client.close();
 }
@@ -179,6 +227,9 @@ function doStuffWithLinkedDeviceServiceClient(
 ) {
   client.close();
 }
+function doStuffWithLiveStreamServiceClient(client: LiveStreamServiceClient) {
+  client.close();
+}
 function doStuffWithMcmEarningsServiceClient(client: McmEarningsServiceClient) {
   client.close();
 }
@@ -197,6 +248,9 @@ function doStuffWithMobileDeviceSubmodelServiceClient(
 ) {
   client.close();
 }
+function doStuffWithNativeStyleServiceClient(client: NativeStyleServiceClient) {
+  client.close();
+}
 function doStuffWithNetworkServiceClient(client: NetworkServiceClient) {
   client.close();
 }
@@ -211,6 +265,9 @@ function doStuffWithOperatingSystemVersionServiceClient(
   client.close();
 }
 function doStuffWithOrderServiceClient(client: OrderServiceClient) {
+  client.close();
+}
+function doStuffWithPartnerServiceClient(client: PartnerServiceClient) {
   client.close();
 }
 function doStuffWithPlacementServiceClient(client: PlacementServiceClient) {
@@ -245,6 +302,19 @@ function doStuffWithRoleServiceClient(client: RoleServiceClient) {
 function doStuffWithSiteServiceClient(client: SiteServiceClient) {
   client.close();
 }
+function doStuffWithSlateServiceClient(client: SlateServiceClient) {
+  client.close();
+}
+function doStuffWithSuggestedAdUnitServiceClient(
+  client: SuggestedAdUnitServiceClient,
+) {
+  client.close();
+}
+function doStuffWithTargetingPresetServiceClient(
+  client: TargetingPresetServiceClient,
+) {
+  client.close();
+}
 function doStuffWithTaxonomyCategoryServiceClient(
   client: TaxonomyCategoryServiceClient,
 ) {
@@ -253,7 +323,17 @@ function doStuffWithTaxonomyCategoryServiceClient(
 function doStuffWithTeamServiceClient(client: TeamServiceClient) {
   client.close();
 }
+function doStuffWithThirdPartyCompanyServiceClient(
+  client: ThirdPartyCompanyServiceClient,
+) {
+  client.close();
+}
 function doStuffWithUserServiceClient(client: UserServiceClient) {
+  client.close();
+}
+function doStuffWithViewabilityProviderServiceClient(
+  client: ViewabilityProviderServiceClient,
+) {
   client.close();
 }
 
@@ -264,6 +344,12 @@ function main() {
   // check that the client instance can be created
   const adReviewCenterAdServiceClient = new AdReviewCenterAdServiceClient();
   doStuffWithAdReviewCenterAdServiceClient(adReviewCenterAdServiceClient);
+  // check that the client instance can be created
+  const adRuleServiceClient = new AdRuleServiceClient();
+  doStuffWithAdRuleServiceClient(adRuleServiceClient);
+  // check that the client instance can be created
+  const adSpotServiceClient = new AdSpotServiceClient();
+  doStuffWithAdSpotServiceClient(adSpotServiceClient);
   // check that the client instance can be created
   const adUnitServiceClient = new AdUnitServiceClient();
   doStuffWithAdUnitServiceClient(adUnitServiceClient);
@@ -282,6 +368,12 @@ function main() {
   // check that the client instance can be created
   const browserServiceClient = new BrowserServiceClient();
   doStuffWithBrowserServiceClient(browserServiceClient);
+  // check that the client instance can be created
+  const cdnConfigServiceClient = new CdnConfigServiceClient();
+  doStuffWithCdnConfigServiceClient(cdnConfigServiceClient);
+  // check that the client instance can be created
+  const childPublisherServiceClient = new ChildPublisherServiceClient();
+  doStuffWithChildPublisherServiceClient(childPublisherServiceClient);
   // check that the client instance can be created
   const cmsMetadataKeyServiceClient = new CmsMetadataKeyServiceClient();
   doStuffWithCmsMetadataKeyServiceClient(cmsMetadataKeyServiceClient);
@@ -304,8 +396,14 @@ function main() {
   const contentServiceClient = new ContentServiceClient();
   doStuffWithContentServiceClient(contentServiceClient);
   // check that the client instance can be created
+  const creativeSetServiceClient = new CreativeSetServiceClient();
+  doStuffWithCreativeSetServiceClient(creativeSetServiceClient);
+  // check that the client instance can be created
   const creativeTemplateServiceClient = new CreativeTemplateServiceClient();
   doStuffWithCreativeTemplateServiceClient(creativeTemplateServiceClient);
+  // check that the client instance can be created
+  const creativeWrapperServiceClient = new CreativeWrapperServiceClient();
+  doStuffWithCreativeWrapperServiceClient(creativeWrapperServiceClient);
   // check that the client instance can be created
   const customFieldServiceClient = new CustomFieldServiceClient();
   doStuffWithCustomFieldServiceClient(customFieldServiceClient);
@@ -318,6 +416,15 @@ function main() {
   doStuffWithCustomTargetingValueServiceClient(
     customTargetingValueServiceClient,
   );
+  // check that the client instance can be created
+  const daiAuthenticationKeyServiceClient =
+    new DaiAuthenticationKeyServiceClient();
+  doStuffWithDaiAuthenticationKeyServiceClient(
+    daiAuthenticationKeyServiceClient,
+  );
+  // check that the client instance can be created
+  const daiEncodingProfileServiceClient = new DaiEncodingProfileServiceClient();
+  doStuffWithDaiEncodingProfileServiceClient(daiEncodingProfileServiceClient);
   // check that the client instance can be created
   const deviceCapabilityServiceClient = new DeviceCapabilityServiceClient();
   doStuffWithDeviceCapabilityServiceClient(deviceCapabilityServiceClient);
@@ -346,6 +453,9 @@ function main() {
   const linkedDeviceServiceClient = new LinkedDeviceServiceClient();
   doStuffWithLinkedDeviceServiceClient(linkedDeviceServiceClient);
   // check that the client instance can be created
+  const liveStreamServiceClient = new LiveStreamServiceClient();
+  doStuffWithLiveStreamServiceClient(liveStreamServiceClient);
+  // check that the client instance can be created
   const mcmEarningsServiceClient = new McmEarningsServiceClient();
   doStuffWithMcmEarningsServiceClient(mcmEarningsServiceClient);
   // check that the client instance can be created
@@ -361,6 +471,9 @@ function main() {
     mobileDeviceSubmodelServiceClient,
   );
   // check that the client instance can be created
+  const nativeStyleServiceClient = new NativeStyleServiceClient();
+  doStuffWithNativeStyleServiceClient(nativeStyleServiceClient);
+  // check that the client instance can be created
   const networkServiceClient = new NetworkServiceClient();
   doStuffWithNetworkServiceClient(networkServiceClient);
   // check that the client instance can be created
@@ -375,6 +488,9 @@ function main() {
   // check that the client instance can be created
   const orderServiceClient = new OrderServiceClient();
   doStuffWithOrderServiceClient(orderServiceClient);
+  // check that the client instance can be created
+  const partnerServiceClient = new PartnerServiceClient();
+  doStuffWithPartnerServiceClient(partnerServiceClient);
   // check that the client instance can be created
   const placementServiceClient = new PlacementServiceClient();
   doStuffWithPlacementServiceClient(placementServiceClient);
@@ -401,14 +517,30 @@ function main() {
   const siteServiceClient = new SiteServiceClient();
   doStuffWithSiteServiceClient(siteServiceClient);
   // check that the client instance can be created
+  const slateServiceClient = new SlateServiceClient();
+  doStuffWithSlateServiceClient(slateServiceClient);
+  // check that the client instance can be created
+  const suggestedAdUnitServiceClient = new SuggestedAdUnitServiceClient();
+  doStuffWithSuggestedAdUnitServiceClient(suggestedAdUnitServiceClient);
+  // check that the client instance can be created
+  const targetingPresetServiceClient = new TargetingPresetServiceClient();
+  doStuffWithTargetingPresetServiceClient(targetingPresetServiceClient);
+  // check that the client instance can be created
   const taxonomyCategoryServiceClient = new TaxonomyCategoryServiceClient();
   doStuffWithTaxonomyCategoryServiceClient(taxonomyCategoryServiceClient);
   // check that the client instance can be created
   const teamServiceClient = new TeamServiceClient();
   doStuffWithTeamServiceClient(teamServiceClient);
   // check that the client instance can be created
+  const thirdPartyCompanyServiceClient = new ThirdPartyCompanyServiceClient();
+  doStuffWithThirdPartyCompanyServiceClient(thirdPartyCompanyServiceClient);
+  // check that the client instance can be created
   const userServiceClient = new UserServiceClient();
   doStuffWithUserServiceClient(userServiceClient);
+  // check that the client instance can be created
+  const viewabilityProviderServiceClient =
+    new ViewabilityProviderServiceClient();
+  doStuffWithViewabilityProviderServiceClient(viewabilityProviderServiceClient);
 }
 
 main();

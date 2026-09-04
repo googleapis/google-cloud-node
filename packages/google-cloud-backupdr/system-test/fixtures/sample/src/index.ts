@@ -16,13 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {BackupDRClient, BackupDrProtectionSummaryClient} from '@google-cloud/backupdr';
+import {
+  BackupDRClient,
+  BackupDrProtectionSummaryClient,
+} from '@google-cloud/backupdr';
 
 // check that the client class type name can be used
 function doStuffWithBackupDRClient(client: BackupDRClient) {
   client.close();
 }
-function doStuffWithBackupDrProtectionSummaryClient(client: BackupDrProtectionSummaryClient) {
+function doStuffWithBackupDrProtectionSummaryClient(
+  client: BackupDrProtectionSummaryClient,
+) {
   client.close();
 }
 

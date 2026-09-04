@@ -27,6 +27,30 @@
         "ListCustomTargetingValues": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "CreateCustomTargetingValue": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchCreateCustomTargetingValues": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateCustomTargetingValue": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchUpdateCustomTargetingValues": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchActivateCustomTargetingValues": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchDeactivateCustomTargetingValues": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

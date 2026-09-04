@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| iam | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v1beta/snippet_metadata_google.iam.v1beta.json) |
 | create workload identity pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool.js) |
 | create workload identity pool provider | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v1beta/workload_identity_pools.create_workload_identity_pool_provider.js) |
 | delete workload identity pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v1beta/workload_identity_pools.delete_workload_identity_pool.js) |
@@ -76,13 +75,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.get_policy.js) |
 | list policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.list_policies.js) |
 | update policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.update_policy.js) |
-| iam | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/snippet_metadata_google.iam.v2.json) |
 | create policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2beta/policies.create_policy.js) |
 | delete policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2beta/policies.delete_policy.js) |
 | get policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2beta/policies.get_policy.js) |
 | list policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2beta/policies.list_policies.js) |
 | update policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2beta/policies.update_policy.js) |
-| iam | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2beta/snippet_metadata_google.iam.v2beta.json) |
 | create policy binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/policy_bindings.create_policy_binding.js) |
 | delete policy binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/policy_bindings.delete_policy_binding.js) |
 | get policy binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/policy_bindings.get_policy_binding.js) |
@@ -95,7 +92,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list principal access boundary policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.list_principal_access_boundary_policies.js) |
 | search principal access boundary policy bindings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.search_principal_access_boundary_policy_bindings.js) |
 | update principal access boundary policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.update_principal_access_boundary_policy.js) |
-| iam | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/snippet_metadata_google.iam.v3.json) |
 | create access policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/access_policies.create_access_policy.js) |
 | delete access policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/access_policies.delete_access_policy.js) |
 | get access policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/access_policies.get_access_policy.js) |
@@ -114,7 +110,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list principal access boundary policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/principal_access_boundary_policies.list_principal_access_boundary_policies.js) |
 | search principal access boundary policy bindings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/principal_access_boundary_policies.search_principal_access_boundary_policy_bindings.js) |
 | update principal access boundary policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/principal_access_boundary_policies.update_principal_access_boundary_policy.js) |
-| iam | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/snippet_metadata_google.iam.v3beta.json) |
 
 
 ## Supported Node.js Versions
@@ -148,7 +143,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -158,7 +153,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

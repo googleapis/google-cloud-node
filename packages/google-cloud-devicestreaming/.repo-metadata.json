@@ -1,17 +1,16 @@
 {
-  "name": "devicestreaming",
-  "name_pretty": "Device Streaming API",
-  "product_documentation": "https://cloud.google.com/device-streaming/docs",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/devicestreaming/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/devicestreaming",
-  "api_id": "devicestreaming.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "devicestreaming"
+    "api_description": "The Cloud API for device streaming usage.",
+    "api_id": "devicestreaming.googleapis.com",
+    "api_shortname": "devicestreaming",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/devicestreaming/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/devicestreaming",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1767292&template=2112325",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "devicestreaming",
+    "name_pretty": "Device Streaming",
+    "product_documentation": "https://cloud.google.com/device-streaming/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

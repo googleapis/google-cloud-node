@@ -17,7 +17,7 @@ import {describe, it} from 'mocha';
 import * as protobuf from 'protobufjs';
 import * as adapt from '../../src/adapt';
 import * as messagesJSON from '../testdata/message.json';
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 
 type TableFieldSchema =
   protos.google.cloud.bigquery.storage.v1.ITableFieldSchema;

@@ -66,7 +66,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | resume job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.resume_job.js) |
 | run job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.run_job.js) |
 | update job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/cloud_scheduler.update_job.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1/snippet_metadata_google.cloud.scheduler.v1.json) |
 | create job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.create_job.js) |
 | delete job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.delete_job.js) |
 | get job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.get_job.js) |
@@ -75,7 +74,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | resume job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.resume_job.js) |
 | run job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.run_job.js) |
 | update job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/cloud_scheduler.update_job.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-scheduler/samples/generated/v1beta1/snippet_metadata_google.cloud.scheduler.v1beta1.json) |
 
 
 ## Supported Node.js Versions

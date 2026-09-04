@@ -1,17 +1,16 @@
 {
-  "name": "marketingplatformadminapi",
-  "name_pretty": "Google Marketing Platform Admin API",
-  "product_documentation": "https://developers.google.com/analytics/devguides/config/gmp/v1",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-ads/marketing-platform-admin",
-  "api_id": "marketingplatformadmin.googleapis.com",
-  "default_version": "v1alpha",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "marketingplatformadminapi"
+    "api_description": "The Google Marketing Platform Admin API allows for programmatic access to\nthe Google Marketing Platform configuration data. You can use the Google\nMarketing Platform Admin API to manage links between your Google Marketing\nPlatform organization and Google Analytics accounts, and to set the\nservice level of your GA4 properties.",
+    "api_id": "marketingplatformadmin.googleapis.com",
+    "api_shortname": "marketingplatformadminapi",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest",
+    "default_version": "v1alpha",
+    "distribution_name": "@google-ads/marketing-platform-admin",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1603054",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "marketingplatformadminapi",
+    "name_pretty": "Google Marketing Platform Admin",
+    "product_documentation": "https://developers.google.com/analytics/devguides/config/gmp/v1",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -1,17 +1,16 @@
 {
-  "name": "oracledatabase",
-  "name_pretty": "Oracle Database@Google Cloud API",
-  "product_documentation": "https://cloud.google.com/oracle/database/docs",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/oracledatabase/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/oracledatabase",
-  "api_id": "oracledatabase.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "oracledatabase"
+    "api_description": "The Oracle Database@Google Cloud API provides a set of APIs to manage\nOracle database services, such as Exadata and Autonomous Databases.",
+    "api_id": "oracledatabase.googleapis.com",
+    "api_shortname": "oracledatabase",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/oracledatabase/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/oracledatabase",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1492565",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "oracledatabase",
+    "name_pretty": "Oracle Database@Google Cloud",
+    "product_documentation": "https://cloud.google.com/oracle/database/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -1,17 +1,16 @@
 {
-  "name": "meet",
-  "name_pretty": "Google Meet API",
-  "product_documentation": "https://developers.google.com/meet/api/guides/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/meet/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-apps/meet",
-  "api_id": "meet.googleapis.com",
-  "default_version": "v2",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "meet"
+    "api_description": "Create and manage meetings in Google Meet.",
+    "api_id": "meet.googleapis.com",
+    "api_shortname": "meet",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/meet/latest",
+    "default_version": "v2",
+    "distribution_name": "@google-apps/meet",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1216362&template=1766418",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "meet",
+    "name_pretty": "Google Meet",
+    "product_documentation": "https://developers.google.com/meet/api/guides/overview",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

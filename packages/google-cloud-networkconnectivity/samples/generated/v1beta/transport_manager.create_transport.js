@@ -56,7 +56,7 @@ function main(parent, transportId, transport) {
   // const requestId = 'abc123'
 
   // Imports the Networkconnectivity library
-  const {TransportManagerClient} = require('@google-cloud/networkconnectivity').v1beta;
+  const {TransportManagerClient} = require('@google-cloud/network-connectivity').v1beta;
 
   // Instantiates a client
   const networkconnectivityClient = new TransportManagerClient();

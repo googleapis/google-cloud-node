@@ -1,17 +1,16 @@
 {
-  "name": "cloudcommerceconsumerprocurement",
-  "name_pretty": "Cloud Commerce Consumer Procurement API",
-  "product_documentation": "https://cloud.google.com/marketplace/docs/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudcommerceconsumerprocurement/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/procurement",
-  "api_id": "cloudcommerceconsumerprocurement.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "cloudcommerceconsumerprocurement"
+    "api_description": "Enables consumers to procure products served by Cloud Marketplace platform",
+    "api_id": "cloudcommerceconsumerprocurement.googleapis.com",
+    "api_shortname": "cloudcommerceconsumerprocurement",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/procurement/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/procurement",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1396141",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "cloudcommerceconsumerprocurement",
+    "name_pretty": "Cloud Commerce Consumer Procurement",
+    "product_documentation": "https://cloud.google.com/marketplace/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

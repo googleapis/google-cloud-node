@@ -1,17 +1,16 @@
 {
-  "name": "cloudquotas",
-  "name_pretty": "Cloud Quotas API",
-  "product_documentation": "https://cloud.google.com/docs/quota/api-overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudquotas/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/cloudquotas",
-  "api_id": "cloudquotas.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "cloudquotas"
+    "api_description": "Cloud Quotas API provides Google Cloud service consumers with management\nand observability for resource usage, quotas, and restrictions of the\nservices they consume.",
+    "api_id": "cloudquotas.googleapis.com",
+    "api_shortname": "cloudquotas",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudquotas/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/cloudquotas",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=445904",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "cloudquotas",
+    "name_pretty": "Cloud Quotas",
+    "product_documentation": "https://cloud.google.com/docs",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

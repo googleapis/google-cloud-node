@@ -13,7 +13,8 @@
 // limitations under the License.
 import * as Types from './types';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import {google} from '../../protos/protos';
+import {protos} from '..';
+import google = protos.google;
 
 /**
  * This class keeps and parses the metadata.

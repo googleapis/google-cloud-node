@@ -876,6 +876,138 @@ describe('v1.RuleServiceClient', () => {
     });
   });
 
+  describe('verifyRuleText', () => {
+    it('invokes verifyRuleText without error', async () => {
+      const client = new ruleserviceModule.v1.RuleServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyRuleTextRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.VerifyRuleTextRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyRuleTextResponse(),
+      );
+      client.innerApiCalls.verifyRuleText = stubSimpleCall(expectedResponse);
+      const [response] = await client.verifyRuleText(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.verifyRuleText as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyRuleText as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyRuleText without error using callback', async () => {
+      const client = new ruleserviceModule.v1.RuleServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyRuleTextRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.VerifyRuleTextRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyRuleTextResponse(),
+      );
+      client.innerApiCalls.verifyRuleText =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.verifyRuleText(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IVerifyRuleTextResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.verifyRuleText as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyRuleText as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyRuleText with error', async () => {
+      const client = new ruleserviceModule.v1.RuleServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyRuleTextRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.VerifyRuleTextRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedHeaderRequestParams = `instance=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.verifyRuleText = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.verifyRuleText(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.verifyRuleText as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.verifyRuleText as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes verifyRuleText with closed client', async () => {
+      const client = new ruleserviceModule.v1.RuleServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.VerifyRuleTextRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.VerifyRuleTextRequest',
+        ['instance'],
+      );
+      request.instance = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.verifyRuleText(request), expectedError);
+    });
+  });
+
   describe('getRetrohunt', () => {
     it('invokes getRetrohunt without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
@@ -3731,6 +3863,193 @@ describe('v1.RuleServiceClient', () => {
       });
     });
 
+    describe('findingsRefinement', async () => {
+      const fakePath = '/rendered/path/findingsRefinement';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        findings_refinement: 'findingsRefinementValue',
+      };
+      const client = new ruleserviceModule.v1.RuleServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.findingsRefinementPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.findingsRefinementPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('findingsRefinementPath', () => {
+        const result = client.findingsRefinementPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'findingsRefinementValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFindingsRefinementName', () => {
+        const result = client.matchProjectFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFindingsRefinementName', () => {
+        const result = client.matchLocationFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFindingsRefinementName', () => {
+        const result = client.matchInstanceFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFindingsRefinementFromFindingsRefinementName', () => {
+        const result =
+          client.matchFindingsRefinementFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'findingsRefinementValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('findingsRefinementDeployment', async () => {
+      const fakePath = '/rendered/path/findingsRefinementDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        findings_refinement: 'findingsRefinementValue',
+      };
+      const client = new ruleserviceModule.v1.RuleServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.findingsRefinementDeploymentPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.findingsRefinementDeploymentPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('findingsRefinementDeploymentPath', () => {
+        const result = client.findingsRefinementDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'findingsRefinementValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchProjectFromFindingsRefinementDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchLocationFromFindingsRefinementDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchInstanceFromFindingsRefinementDeploymentName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFindingsRefinementFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchFindingsRefinementFromFindingsRefinementDeploymentName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'findingsRefinementValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
@@ -4268,6 +4587,98 @@ describe('v1.RuleServiceClient', () => {
         assert.strictEqual(result, 'ruleValue');
         assert(
           (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('ruleExecutionError', async () => {
+      const fakePath = '/rendered/path/ruleExecutionError';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule_execution_error: 'ruleExecutionErrorValue',
+      };
+      const client = new ruleserviceModule.v1.RuleServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.ruleExecutionErrorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ruleExecutionErrorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ruleExecutionErrorPath', () => {
+        const result = client.ruleExecutionErrorPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleExecutionErrorValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleExecutionErrorName', () => {
+        const result = client.matchProjectFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleExecutionErrorName', () => {
+        const result = client.matchLocationFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleExecutionErrorName', () => {
+        const result = client.matchInstanceFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleExecutionErrorFromRuleExecutionErrorName', () => {
+        const result =
+          client.matchRuleExecutionErrorFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'ruleExecutionErrorValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

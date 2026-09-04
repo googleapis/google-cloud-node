@@ -211,7 +211,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/site_service.get_site.js) |
 | list sites | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/site_service.list_sites.js) |
 | update site | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/site_service.update_site.js) |
-| ads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/snippet_metadata_google.ads.admanager.v1.json) |
 | get taxonomy category | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.get_taxonomy_category.js) |
 | list taxonomy categories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/taxonomy_category_service.list_taxonomy_categories.js) |
 | batch activate teams | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ads-admanager/samples/generated/v1/team_service.batch_activate_teams.js) |

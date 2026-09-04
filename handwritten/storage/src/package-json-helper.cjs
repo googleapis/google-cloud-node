@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/* eslint-disable node/no-missing-require */
-
 function getPackageJSON() {
   return require('../../../package.json');
 }

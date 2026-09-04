@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {LicenseManagerClient} from '@google-cloud/licensemanager';
+import { LicenseManagerClient } from '@google-cloud/licensemanager';
 
 // check that the client class type name can be used
 function doStuffWithLicenseManagerClient(client: LicenseManagerClient) {

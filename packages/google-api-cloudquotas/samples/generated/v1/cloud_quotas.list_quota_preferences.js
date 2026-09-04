@@ -29,7 +29,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent value of QuotaPreference resources.
+   *  Required. Identifier. Parent value of QuotaPreference resources.
    *  Listing across different resource containers (such as 'projects/-') is not
    *  allowed.
    *  When the value starts with 'folders' or 'organizations', it lists the

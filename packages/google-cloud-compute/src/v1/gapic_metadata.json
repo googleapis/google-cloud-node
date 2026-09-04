@@ -2187,6 +2187,54 @@
         }
       }
     },
+    "Hosts": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "HostsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "HostsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ImageFamilyViews": {
       "clients": {
         "grpc": {
@@ -9169,6 +9217,44 @@
         }
       }
     },
+    "ReliabilityRisks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReliabilityRisksClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReliabilityRisksClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ReservationBlocks": {
       "clients": {
         "grpc": {
@@ -9710,6 +9796,11 @@
         "grpc": {
           "libraryClient": "RolloutsClient",
           "rpcs": {
+            "Advance": {
+              "methods": [
+                "advance"
+              ]
+            },
             "Cancel": {
               "methods": [
                 "cancel"
@@ -9723,6 +9814,16 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "Pause": {
+              "methods": [
+                "pause"
+              ]
+            },
+            "Resume": {
+              "methods": [
+                "resume"
               ]
             },
             "List": {
@@ -9737,6 +9838,11 @@
         "grpc-fallback": {
           "libraryClient": "RolloutsClient",
           "rpcs": {
+            "Advance": {
+              "methods": [
+                "advance"
+              ]
+            },
             "Cancel": {
               "methods": [
                 "cancel"
@@ -9750,6 +9856,16 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "Pause": {
+              "methods": [
+                "pause"
+              ]
+            },
+            "Resume": {
+              "methods": [
+                "resume"
               ]
             },
             "List": {
@@ -9773,6 +9889,11 @@
                 "delete"
               ]
             },
+            "DeleteNamedSet": {
+              "methods": [
+                "deleteNamedSet"
+              ]
+            },
             "DeleteRoutePolicy": {
               "methods": [
                 "deleteRoutePolicy"
@@ -9781,6 +9902,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetNamedSet": {
+              "methods": [
+                "getNamedSet"
               ]
             },
             "GetNatIpInfo": {
@@ -9808,6 +9934,11 @@
                 "patch"
               ]
             },
+            "PatchNamedSet": {
+              "methods": [
+                "patchNamedSet"
+              ]
+            },
             "PatchRoutePolicy": {
               "methods": [
                 "patchRoutePolicy"
@@ -9821,6 +9952,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateNamedSet": {
+              "methods": [
+                "updateNamedSet"
               ]
             },
             "UpdateRoutePolicy": {
@@ -9854,6 +9990,13 @@
                 "listBgpRoutes",
                 "listBgpRoutesStream",
                 "listBgpRoutesAsync"
+              ]
+            },
+            "ListNamedSets": {
+              "methods": [
+                "listNamedSets",
+                "listNamedSetsStream",
+                "listNamedSetsAsync"
               ]
             },
             "ListRoutePolicies": {
@@ -9873,6 +10016,11 @@
                 "delete"
               ]
             },
+            "DeleteNamedSet": {
+              "methods": [
+                "deleteNamedSet"
+              ]
+            },
             "DeleteRoutePolicy": {
               "methods": [
                 "deleteRoutePolicy"
@@ -9881,6 +10029,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetNamedSet": {
+              "methods": [
+                "getNamedSet"
               ]
             },
             "GetNatIpInfo": {
@@ -9908,6 +10061,11 @@
                 "patch"
               ]
             },
+            "PatchNamedSet": {
+              "methods": [
+                "patchNamedSet"
+              ]
+            },
             "PatchRoutePolicy": {
               "methods": [
                 "patchRoutePolicy"
@@ -9921,6 +10079,11 @@
             "Update": {
               "methods": [
                 "update"
+              ]
+            },
+            "UpdateNamedSet": {
+              "methods": [
+                "updateNamedSet"
               ]
             },
             "UpdateRoutePolicy": {
@@ -9954,6 +10117,13 @@
                 "listBgpRoutes",
                 "listBgpRoutesStream",
                 "listBgpRoutesAsync"
+              ]
+            },
+            "ListNamedSets": {
+              "methods": [
+                "listNamedSets",
+                "listNamedSetsStream",
+                "listNamedSetsAsync"
               ]
             },
             "ListRoutePolicies": {

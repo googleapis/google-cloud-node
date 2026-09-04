@@ -1,5 +1,30 @@
 # Changelog
 
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v3.0.0...confidentialcomputing-v3.1.0) (2026-09-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9238](https://github.com/googleapis/google-cloud-node/issues/9238)) ([4c2bc95](https://github.com/googleapis/google-cloud-node/commit/4c2bc9510562e753340276ff5b21e1f18c71e7b2))
+
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.3.0...confidentialcomputing-v3.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.2.3...confidentialcomputing-v2.3.0) (2026-06-25)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+
 ## [2.2.3](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v2.2.2...confidentialcomputing-v2.2.3) (2026-05-01)
 
 

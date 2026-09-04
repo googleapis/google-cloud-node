@@ -27,7 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -50,7 +50,7 @@ export class TestServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('routingtest');
@@ -63,8 +63,8 @@ export class TestServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  testServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  testServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of TestServiceClient.
@@ -140,7 +140,7 @@ export class TestServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -198,7 +198,7 @@ export class TestServiceClient {
       'google.routingtest.v1.TestService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -238,7 +238,7 @@ export class TestServiceClient {
           (this._protos as any).google.routingtest.v1.TestService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -249,7 +249,7 @@ export class TestServiceClient {
     ];
     for (const methodName of testServiceStubMethods) {
       const callPromise = this.testServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -452,13 +452,13 @@ export class TestServiceClient {
           );
         if (match) {
           const parameterValue = match.groups?.['database'] ?? fieldValue;
-          Object.assign(routingParameter, { database: parameterValue });
+          Object.assign(routingParameter, {database: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fastFibonacci request %j', request);
@@ -591,7 +591,7 @@ export class TestServiceClient {
         const match = fieldValue.toString().match(RegExp('(?<name>.*)'));
         if (match) {
           const parameterValue = match.groups?.['name'] ?? fieldValue;
-          Object.assign(routingParameter, { name: parameterValue });
+          Object.assign(routingParameter, {name: parameterValue});
         }
       }
     }
@@ -603,13 +603,13 @@ export class TestServiceClient {
           .match(RegExp('(?<routing_id>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['routing_id'] ?? fieldValue;
-          Object.assign(routingParameter, { routing_id: parameterValue });
+          Object.assign(routingParameter, {routing_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('randomFibonacci request %j', request);
@@ -744,7 +744,7 @@ export class TestServiceClient {
           .match(RegExp('(?<database>projects/[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['database'] ?? fieldValue;
-          Object.assign(routingParameter, { database: parameterValue });
+          Object.assign(routingParameter, {database: parameterValue});
         }
       }
     }
@@ -758,7 +758,7 @@ export class TestServiceClient {
           );
         if (match) {
           const parameterValue = match.groups?.['database'] ?? fieldValue;
-          Object.assign(routingParameter, { database: parameterValue });
+          Object.assign(routingParameter, {database: parameterValue});
         }
       }
     }
@@ -772,13 +772,13 @@ export class TestServiceClient {
           );
         if (match) {
           const parameterValue = match.groups?.['routing_id'] ?? fieldValue;
-          Object.assign(routingParameter, { routing_id: parameterValue });
+          Object.assign(routingParameter, {routing_id: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('slowFibonacci request %j', request);
@@ -832,7 +832,7 @@ export class TestServiceClient {
    */
   close(): Promise<void> {
     if (this.testServiceStub && !this._terminated) {
-      return this.testServiceStub.then((stub) => {
+      return this.testServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

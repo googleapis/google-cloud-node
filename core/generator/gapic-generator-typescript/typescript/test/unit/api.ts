@@ -325,4 +325,25 @@ describe('src/schema/api.ts', () => {
       assert('.google.cloud.example.v1.MessageB' in secondCallMessages);
     });
   });
+
+  it('should set enableTelemetryTracing option', () => {
+    const fd = {} as protos.google.protobuf.FileDescriptorProto;
+    fd.name = 'google/cloud/test/v1/test.proto';
+    fd.package = 'google.cloud.test.v1';
+    fd.service = [{} as protos.google.protobuf.ServiceDescriptorProto];
+    fd.service[0].name = 'ZService';
+    fd.service[0].options = {
+      '.google.api.defaultHost': 'hostname.example.com:443',
+    };
+    const apiWithTracing = new API([fd], 'google.cloud.test.v1', {
+      grpcServiceConfig: {} as protos.grpc.service_config.ServiceConfig,
+      enableTelemetryTracing: true,
+    });
+    assert.strictEqual(apiWithTracing.enableTelemetryTracing, true);
+
+    const apiWithoutTracing = new API([fd], 'google.cloud.test.v1', {
+      grpcServiceConfig: {} as protos.grpc.service_config.ServiceConfig,
+    });
+    assert.strictEqual(apiWithoutTracing.enableTelemetryTracing, false);
+  });
 });

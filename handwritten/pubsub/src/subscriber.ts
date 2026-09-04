@@ -17,7 +17,7 @@
 import {DateStruct, PreciseDate} from '@google-cloud/precise-date';
 import {replaceProjectIdToken} from '@google-cloud/projectify';
 import {promisify} from '@google-cloud/promisify';
-import defer = require('p-defer');
+import * as defer from 'p-defer';
 
 import {google} from '../protos/protos';
 import {Histogram} from './histogram';
@@ -26,15 +26,17 @@ import {AckQueue, BatchOptions, ModAckQueue} from './message-queues';
 import {MessageStream, MessageStreamOptions} from './message-stream';
 import {Subscription} from './subscription';
 import {defaultOptions} from './default-options';
-import {SubscriberClient} from './v1';
 import * as tracing from './telemetry-tracing';
 import {Duration, atMost as durationAtMost} from './temporal';
 import {EventEmitter} from 'events';
 
 import {awaitWithTimeout} from './util';
-import {logs as baseLogs} from './logs';
+import {logs as baseLogs, LoggingFunction} from './logs';
 
 export {StatusError} from './message-stream';
+
+import {v1} from '.';
+type SubscriberClient = v1.SubscriberClient;
 
 /**
  * Loggers. Exported for unit tests.
@@ -42,9 +44,9 @@ export {StatusError} from './message-stream';
  * @private
  */
 export const logs = {
-  slowAck: baseLogs.pubsub.sublog('slow-ack'),
-  ackNack: baseLogs.pubsub.sublog('ack-nack'),
-  debug: baseLogs.pubsub.sublog('debug'),
+  slowAck: baseLogs.pubsub.sublog('slow-ack') as LoggingFunction,
+  ackNack: baseLogs.pubsub.sublog('ack-nack') as LoggingFunction,
+  debug: baseLogs.pubsub.sublog('debug') as LoggingFunction,
 };
 
 export type PullResponse = google.pubsub.v1.IStreamingPullResponse;

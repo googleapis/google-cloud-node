@@ -16,9 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {FlexTemplatesServiceClient} from './flex_templates_service_client';
-export {JobsV1Beta3Client} from './jobs_v1_beta3_client';
-export {MessagesV1Beta3Client} from './messages_v1_beta3_client';
-export {MetricsV1Beta3Client} from './metrics_v1_beta3_client';
-export {SnapshotsV1Beta3Client} from './snapshots_v1_beta3_client';
-export {TemplatesServiceClient} from './templates_service_client';
+export { FlexTemplatesServiceClient } from './flex_templates_service_client';
+export { JobsV1Beta3Client } from './jobs_v1_beta3_client';
+export { MessagesV1Beta3Client } from './messages_v1_beta3_client';
+export { MetricsV1Beta3Client } from './metrics_v1_beta3_client';
+export { SnapshotsV1Beta3Client } from './snapshots_v1_beta3_client';
+export { TemplatesServiceClient } from './templates_service_client';

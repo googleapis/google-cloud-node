@@ -1,17 +1,15 @@
 {
-  "name": "analyticshub",
-  "name_pretty": "Analytics Hub API",
-  "product_documentation": "",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/analyticshub/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/analyticshub",
-  "api_id": "google.cloud.bigquery.analyticshub.v1",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "analyticshub"
+    "api_description": "Exchange data and analytics assets securely and efficiently.",
+    "api_id": "analyticshub.googleapis.com",
+    "api_shortname": "analyticshub",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-analyticshub/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/bigquery-analyticshub",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "analyticshub",
+    "name_pretty": "Analytics Hub",
+    "product_documentation": "https://cloud.google.com/analytics-hub/docs",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

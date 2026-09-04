@@ -1,0 +1,79 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import * as assert from 'assert';
+import {describe, it} from 'mocha';
+import {enrichError, enrichPgError} from '../../src/lib/errors.js';
+
+describe('enrichPgError SQLSTATE Mapping', () => {
+  it('should extract SQLSTATE codes from error messages enriched by Go driver', () => {
+    const err = enrichPgError(
+      new Error(
+        '[SQLSTATE 42P01] rpc error: code = NotFound desc = relation "foo" does not exist',
+      ),
+    );
+    assert.strictEqual(err.code, '42P01');
+    assert.strictEqual(err.severity, 'ERROR');
+  });
+
+  it('should preserve valid 5-character PostgreSQL SQLSTATE string codes', () => {
+    const orig = new Error('custom error') as Error & {code?: string};
+    orig.code = '42P01';
+    const err = enrichPgError(orig);
+    assert.strictEqual(err.code, '42P01');
+  });
+
+  it('should fallback to XX000 for unknown errors without SQLSTATE prefix', () => {
+    const err = enrichPgError(new Error('random unknown error message'));
+    assert.strictEqual(err.code, 'XX000');
+    assert.strictEqual(err.severity, 'ERROR');
+  });
+
+  it('should preserve stack traces when wrapping Error objects', () => {
+    const orig = new Error('test stack preservation');
+    orig.stack = 'CustomError: test\n    at testFunction (file.js:1:1)';
+    const err = enrichPgError(orig);
+    assert.strictEqual(
+      err.stack,
+      'CustomError: test\n    at testFunction (file.js:1:1)',
+    );
+  });
+
+  it('should reject Node system error codes like EPERM and fallback to XX000', () => {
+    const orig = new Error('permission denied error') as Error & {
+      code?: string;
+    };
+    orig.code = 'EPERM';
+    const err = enrichPgError(orig);
+    assert.strictEqual(err.code, 'XX000');
+  });
+
+  it('should handle gRPC numeric error codes and fallback to XX000', () => {
+    const orig = {message: 'not found', code: 5};
+    const err = enrichPgError(orig);
+    assert.strictEqual(err.code, 'XX000');
+    assert.strictEqual(err.message, 'not found');
+  });
+
+  describe('enrichError dispatcher', () => {
+    it('should default to pg dialect enrichment', () => {
+      const err = enrichError(
+        new Error(
+          '[SQLSTATE 42P01] rpc error: code = NotFound desc = relation "foo" does not exist',
+        ),
+      );
+      assert.strictEqual(err.code, '42P01');
+    });
+  });
+});

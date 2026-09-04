@@ -46,6 +46,14 @@ function main(workstation) {
    *  generated.
    */
   // const workstation = 'abc123'
+  /**
+   *  Optional. Port for which the access token should be generated. If
+   *  specified, the generated access token grants access only to the
+   *  specified port of the workstation. If specified, values must be within the
+   *  range 1 - 65535. If not specified, the generated access token grants
+   *  access to all ports of the workstation.
+   */
+  // const port = 1234
 
   // Imports the Workstations library
   const {WorkstationsClient} = require('@google-cloud/workstations').v1;

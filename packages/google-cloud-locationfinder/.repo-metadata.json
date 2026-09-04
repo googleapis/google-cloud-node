@@ -1,17 +1,16 @@
 {
-  "name": "locationfinder",
-  "name_pretty": "Cloud Location Finder API",
-  "product_documentation": "https://cloud.google.com/location-finder/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/locationfinder/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/locationfinder",
-  "api_id": "cloudlocationfinder.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "locationfinder"
+    "api_description": "Cloud Location Finder is a public API that offers a repository of all Google Cloud and Google Distributed Cloud locations, as well as cloud locations for other cloud providers.",
+    "api_id": "cloudlocationfinder.googleapis.com",
+    "api_shortname": "locationfinder",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/locationfinder/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/locationfinder",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1569265&template=1988535",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "locationfinder",
+    "name_pretty": "Cloud Location Finder",
+    "product_documentation": "https://cloud.google.com/location-finder/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

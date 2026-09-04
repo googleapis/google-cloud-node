@@ -70,7 +70,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get css product | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/css_products_service.get_css_product.js) |
 | list css products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/css_products_service.list_css_products.js) |
 | list quota groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/quota_service.list_quota_groups.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-css/samples/generated/v1/snippet_metadata_google.shopping.css.v1.json) |
 
 
 ## Supported Node.js Versions

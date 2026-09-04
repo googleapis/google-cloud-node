@@ -1,0 +1,75 @@
+---
+name: generation-check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  # Allows manual triggering for debugging purpose.
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read # Read repository contents
+
+jobs:
+  regeneration:
+    name: Regenerate and verify clean git tree
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # Read repository contents
+      issues: write # Required for creating issue on main branch failure
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
+        id: changes
+        with:
+          filters: |
+            librarian:
+              - 'librarian.yaml'
+      # Version of librarian is pulled from librarian.yaml,
+      # action is pinned to commit SHA to satisfy blanket security policy.
+      - uses: googleapis/librarian@35997441eafc2b02716804f9baba1e3f04f8a44f # v0.31.1
+        if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+      - name: Use Node.js 22
+        if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: 22
+      - name: Setup pnpm
+        if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: ^7.0.0
+      - name: Install tools
+        if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        run: librarian install
+      - name: Regenerate
+        if: steps.changes.outputs.librarian == 'true' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        run: |
+          librarian generate --all
+          if [ -n "$(git status --porcelain)" ]; then
+            git status
+            echo "==================== GIT DIFF ===================="
+            git diff
+            echo "=================================================="
+            echo "Regeneration failed. Please run 'librarian generate --all' to update the generated files."
+            exit 1
+          fi
+      - name: Create issue if previous step fails
+        if: ${{ failure() && github.ref == 'refs/heads/main' }}
+        uses: googleapis/librarian/.github/actions/create-issue-on-failure@35997441eafc2b02716804f9baba1e3f04f8a44f # v0.31.1
+        with:
+          title: "Librarian generate diff check failed on main branch"
+          body: |
+            The librarian generate diff check failed on main branch.
+
+            To keep the `main` branch healthy, please consider **reverting the triggering change** first. Once the revert is merged, you can investigate the failure and submit a new PR with the fix.
+
+            Please check the logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

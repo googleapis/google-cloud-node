@@ -252,6 +252,9 @@ export class SecureSourceManagerClient {
       repositoryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/repositories/{repository}',
       ),
+      serviceAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/serviceAccounts/{service_account}',
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -11339,6 +11342,46 @@ export class SecureSourceManagerClient {
   matchRepositoryFromRepositoryName(repositoryName: string) {
     return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
       .repository;
+  }
+
+  /**
+   * Return a fully-qualified serviceAccount resource name string.
+   *
+   * @param {string} project
+   * @param {string} service_account
+   * @returns {string} Resource name string.
+   */
+  serviceAccountPath(project: string, serviceAccount: string) {
+    return this.pathTemplates.serviceAccountPathTemplate.render({
+      project: project,
+      service_account: serviceAccount,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceAccount resource.
+   *
+   * @param {string} serviceAccountName
+   *   A fully-qualified path representing ServiceAccount resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceAccountName(serviceAccountName: string) {
+    return this.pathTemplates.serviceAccountPathTemplate.match(
+      serviceAccountName,
+    ).project;
+  }
+
+  /**
+   * Parse the service_account from ServiceAccount resource.
+   *
+   * @param {string} serviceAccountName
+   *   A fully-qualified path representing ServiceAccount resource.
+   * @returns {string} A string representing the service_account.
+   */
+  matchServiceAccountFromServiceAccountName(serviceAccountName: string) {
+    return this.pathTemplates.serviceAccountPathTemplate.match(
+      serviceAccountName,
+    ).service_account;
   }
 
   /**

@@ -22,6 +22,7 @@ import * as util from 'util';
 import * as pbjs from 'protobufjs-cli/pbjs';
 import * as pbts from 'protobufjs-cli/pbts';
 import * as crypto from 'crypto';
+import * as uglify from 'uglify-js';
 import {walkUp} from 'walk-up-path';
 
 export const gaxProtos = path.join(
@@ -246,6 +247,7 @@ interface CompileProtosOptions {
   esm?: boolean;
   keepCase?: boolean;
   forceNumber?: boolean;
+  noComments?: boolean;
 }
 
 /**
@@ -349,6 +351,34 @@ async function compileProtos(
   let tsResult = (await readFile(tsOutput)).toString();
   tsResult = fixDtsFile(tsResult);
   await writeFile(tsOutput, tsResult);
+
+  if (options.noComments) {
+    const uglifyOptions: uglify.MinifyOptions = {
+      output: {comments: false, beautify: false},
+      compress: false,
+      mangle: false,
+    };
+
+    const minified = uglify.minify(
+      (await readFile(jsOutput)).toString(),
+      uglifyOptions,
+    );
+    if (minified.error) {
+      throw new Error(`UglifyJS failed on ${jsOutput}: ${minified.error}`);
+    }
+    await writeFile(jsOutput, minified.code);
+
+    if (options.esm && jsOutputEsm) {
+      const esmContent = (await readFile(jsOutputEsm)).toString();
+      const minifiedEsm = uglify.minify(esmContent, uglifyOptions);
+      if (minifiedEsm.error) {
+        throw new Error(
+          `UglifyJS failed on ${jsOutputEsm}: ${minifiedEsm.error}`,
+        );
+      }
+      await writeFile(jsOutputEsm, minifiedEsm.code);
+    }
+  }
 }
 
 /**
@@ -397,6 +427,7 @@ export async function main(parameters: string[]): Promise<void> {
   let esm = false;
   let keepCase = false;
   let forceNumber = false;
+  let noComments = false;
   const directories: string[] = [];
   for (const parameter of parameters) {
     if (parameter === '--skip-json') {
@@ -415,6 +446,10 @@ export async function main(parameters: string[]): Promise<void> {
       forceNumber = true;
       continue;
     }
+    if (parameter === '--no-comments') {
+      noComments = true;
+      continue;
+    }
     // it's not an option so it's a directory
     const directory = parameter;
     directories.push(directory);
@@ -428,10 +463,17 @@ export async function main(parameters: string[]): Promise<void> {
       esm,
       keepCase,
       forceNumber,
+      noComments,
     });
   }
   const protos = await buildListOfProtos(protoJsonFiles, esm);
-  await compileProtos(rootName, protos, {skipJson, esm, keepCase, forceNumber});
+  await compileProtos(rootName, protos, {
+    skipJson,
+    esm,
+    keepCase,
+    forceNumber,
+    noComments,
+  });
 }
 
 /**

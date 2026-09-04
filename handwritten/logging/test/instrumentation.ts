@@ -17,7 +17,8 @@
 import * as assert from 'assert';
 import {Entry} from '../src';
 import * as instrumentation from '../src/utils/instrumentation';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/logging-api';
+import google = protos.google;
 
 const NAME = 'name';
 const VERSION = 'version';

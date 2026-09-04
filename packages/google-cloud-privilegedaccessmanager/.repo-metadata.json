@@ -1,17 +1,16 @@
 {
-  "name": "privilegedaccessmanager",
-  "name_pretty": "Privileged Access Manager API",
-  "product_documentation": "https://cloud.google.com/iam/docs/pam-overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/privilegedaccessmanager/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/privilegedaccessmanager",
-  "api_id": "privilegedaccessmanager.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "privilegedaccessmanager"
+    "api_description": "Privileged Access Manager (PAM) helps you on your journey towards least\nprivilege and helps mitigate risks tied to privileged access misuse or\nabuse. PAM allows you to shift from always-on standing privileges towards\non-demand access with just-in-time, time-bound, and approval-based access\nelevations. PAM allows IAM administrators to create entitlements that can\ngrant just-in-time, temporary access to any resource scope. Requesters can\nexplore eligible entitlements and request the access needed for their\ntask. Approvers are notified when approvals await their\ndecision. Streamlined workflows facilitated by using PAM can support\nvarious use cases, including emergency access for incident responders,\ntime-boxed access for developers for critical deployment or maintenance,\ntemporary access for operators for data ingestion and audits, JIT access\nto service accounts for automated tasks, and more.",
+    "api_id": "privilegedaccessmanager.googleapis.com",
+    "api_shortname": "privilegedaccessmanager",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/privilegedaccessmanager/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/privilegedaccessmanager",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1587284&template=2001118",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "privilegedaccessmanager",
+    "name_pretty": "Privileged Access Manager",
+    "product_documentation": "https://cloud.google.com/iam/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

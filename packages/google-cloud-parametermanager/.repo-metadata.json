@@ -1,17 +1,16 @@
 {
-  "name": "parametermanager",
-  "name_pretty": "Parameter Manager API",
-  "product_documentation": "https://cloud.google.com/secret-manager/parameter-manager/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/parametermanager/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/parametermanager",
-  "api_id": "parametermanager.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "parametermanager"
+    "api_description": "Parameter Manager is a single source of truth to store, access and manage\nthe lifecycle of your workload parameters. Parameter Manager aims to make\nmanagement of sensitive application parameters effortless for customers\nwithout diminishing focus on security.",
+    "api_id": "parametermanager.googleapis.com",
+    "api_shortname": "parametermanager",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/parametermanager/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/parametermanager",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1706749&template=0",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "parametermanager",
+    "name_pretty": "Parameter Manager",
+    "product_documentation": "https://cloud.google.com/secret-manager/parameter-manager/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -1,0 +1,151 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.ftp.v1",
+  "libraryPackage": "@google-cloud/ftp",
+  "services": {
+    "CloudFtp": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CloudFtpClient",
+          "rpcs": {
+            "GetServer": {
+              "methods": [
+                "getServer"
+              ]
+            },
+            "GetUser": {
+              "methods": [
+                "getUser"
+              ]
+            },
+            "CreateServer": {
+              "methods": [
+                "createServer"
+              ]
+            },
+            "UpdateServer": {
+              "methods": [
+                "updateServer"
+              ]
+            },
+            "DeleteServer": {
+              "methods": [
+                "deleteServer"
+              ]
+            },
+            "CreateUser": {
+              "methods": [
+                "createUser"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "updateUser"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
+            "StartServer": {
+              "methods": [
+                "startServer"
+              ]
+            },
+            "StopServer": {
+              "methods": [
+                "stopServer"
+              ]
+            },
+            "ListServers": {
+              "methods": [
+                "listServers",
+                "listServersStream",
+                "listServersAsync"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CloudFtpClient",
+          "rpcs": {
+            "GetServer": {
+              "methods": [
+                "getServer"
+              ]
+            },
+            "GetUser": {
+              "methods": [
+                "getUser"
+              ]
+            },
+            "CreateServer": {
+              "methods": [
+                "createServer"
+              ]
+            },
+            "UpdateServer": {
+              "methods": [
+                "updateServer"
+              ]
+            },
+            "DeleteServer": {
+              "methods": [
+                "deleteServer"
+              ]
+            },
+            "CreateUser": {
+              "methods": [
+                "createUser"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "updateUser"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
+            "StartServer": {
+              "methods": [
+                "startServer"
+              ]
+            },
+            "StopServer": {
+              "methods": [
+                "stopServer"
+              ]
+            },
+            "ListServers": {
+              "methods": [
+                "listServers",
+                "listServersStream",
+                "listServersAsync"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

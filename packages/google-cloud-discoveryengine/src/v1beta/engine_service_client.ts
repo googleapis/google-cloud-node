@@ -213,6 +213,15 @@ export class EngineServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclConfig',
+      ),
+      assistAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}',
+      ),
+      assistantPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}',
+      ),
       collectionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}',
       ),
@@ -225,8 +234,20 @@ export class EngineServiceClient {
       groundingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/groundingConfigs/{grounding_config}',
       ),
+      identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}',
+      ),
+      licenseConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/licenseConfigs/{license_config}',
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
+      ),
+      projectLocationCmekConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfig',
+      ),
+      projectLocationCmekConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfigs/{cmek_config}',
       ),
       projectLocationCollectionDataStorePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -283,6 +304,10 @@ export class EngineServiceClient {
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}',
+        ),
+      projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/collaborativeProjects/{collaborative_project}/sessions/{session}',
         ),
       projectLocationCollectionEngineControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -365,6 +390,9 @@ export class EngineServiceClient {
       sampleQuerySetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}',
       ),
+      userStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/userStores/{user_store}',
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -423,6 +451,9 @@ export class EngineServiceClient {
               get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',
             },
             {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*/engines/*/assistants/*/agents/*/operations/*}',
+            },
+            {
               get: '/v1beta/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',
             },
             {
@@ -439,6 +470,9 @@ export class EngineServiceClient {
             },
             {
               get: '/v1beta/{name=projects/*/locations/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
             },
             { get: '/v1beta/{name=projects/*/locations/*/operations/*}' },
             {
@@ -483,6 +517,9 @@ export class EngineServiceClient {
             },
             {
               get: '/v1beta/{name=projects/*/locations/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/identityMappingStores/*}/operations',
             },
             { get: '/v1beta/{name=projects/*/locations/*}/operations' },
             { get: '/v1beta/{name=projects/*}/operations' },
@@ -589,6 +626,8 @@ export class EngineServiceClient {
       'pauseEngine',
       'resumeEngine',
       'tuneEngine',
+      'getIamPolicy',
+      'setIamPolicy',
     ];
     for (const methodName of engineServiceStubMethods) {
       const callPromise = this.engineServiceStub.then(
@@ -684,7 +723,11 @@ export class EngineServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/discoveryengine.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.serving.readwrite',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -864,7 +907,7 @@ export class EngineServiceClient {
       });
   }
   /**
-   * Gets a {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}.
+   * Gets an {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1003,7 +1046,8 @@ export class EngineServiceClient {
       });
   }
   /**
-   * Pauses the training of an existing engine. Only applicable if
+   * Pauses the training of an existing
+   * {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}. Only applicable if
    * {@link protos.google.cloud.discoveryengine.v1beta.SolutionType|SolutionType} is
    * {@link protos.google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_RECOMMENDATION|SOLUTION_TYPE_RECOMMENDATION}.
    *
@@ -1150,7 +1194,8 @@ export class EngineServiceClient {
       });
   }
   /**
-   * Resumes the training of an existing engine. Only applicable if
+   * Resumes the training of an existing
+   * {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}. Only applicable if
    * {@link protos.google.cloud.discoveryengine.v1beta.SolutionType|SolutionType} is
    * {@link protos.google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_RECOMMENDATION|SOLUTION_TYPE_RECOMMENDATION}.
    *
@@ -1296,9 +1341,288 @@ export class EngineServiceClient {
         throw error;
       });
   }
+  /**
+   * Gets the IAM access control policy for an
+   * {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}. A `NOT_FOUND` error
+   * is returned if the resource does not exist. An empty policy is returned if
+   * the resource exists but does not have a policy set on it.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/engine_service.get_iam_policy.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_EngineService_GetIamPolicy_async
+   */
+  getIamPolicy(
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIamPolicy(
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getIamPolicy(
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Sets the IAM access control policy for an
+   * {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}. A `NOT_FOUND` error
+   * is returned if the resource does not exist.
+   *
+   * **Important:** When setting a policy directly on an Engine resource,
+   * the only recommended roles in the bindings are:
+   * `roles/discoveryengine.admin`,
+   * `roles/discoveryengine.agentspaceAdmin`,
+   * `roles/discoveryengine.user`,
+   * `roles/discoveryengine.agentspaceUser`,
+   * `roles/discoveryengine.viewer`,
+   * `roles/discoveryengine.agentspaceViewer`.
+   * Attempting to grant any other role will result in a warning in logging.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *   the fields in the mask will be modified. If no mask is provided, the
+   *   following default mask is used:
+   *
+   *   `paths: "bindings, etag"`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/engine_service.set_iam_policy.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_EngineService_SetIamPolicy_async
+   */
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setIamPolicy(
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setIamPolicy(
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setIamPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
-   * Creates a {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}.
+   * Creates an {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1480,7 +1804,7 @@ export class EngineServiceClient {
     >;
   }
   /**
-   * Deletes a {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}.
+   * Deletes an {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1658,7 +1982,8 @@ export class EngineServiceClient {
     >;
   }
   /**
-   * Tunes an existing engine. Only applicable if
+   * Tunes an existing {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}.
+   * Only applicable if
    * {@link protos.google.cloud.discoveryengine.v1beta.SolutionType|SolutionType} is
    * {@link protos.google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_RECOMMENDATION|SOLUTION_TYPE_RECOMMENDATION}.
    *
@@ -2369,6 +2694,230 @@ export class EngineServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified aclConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  aclConfigPath(project: string, location: string) {
+    return this.pathTemplates.aclConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .location;
+  }
+
+  /**
+   * Return a fully-qualified assistAnswer resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} session
+   * @param {string} assist_answer
+   * @returns {string} Resource name string.
+   */
+  assistAnswerPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    session: string,
+    assistAnswer: string,
+  ) {
+    return this.pathTemplates.assistAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+      assist_answer: assistAnswer,
+    });
+  }
+
+  /**
+   * Parse the project from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .collection;
+  }
+
+  /**
+   * Parse the engine from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .engine;
+  }
+
+  /**
+   * Parse the session from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .session;
+  }
+
+  /**
+   * Parse the assist_answer from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the assist_answer.
+   */
+  matchAssistAnswerFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .assist_answer;
+  }
+
+  /**
+   * Return a fully-qualified assistant resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} assistant
+   * @returns {string} Resource name string.
+   */
+  assistantPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    assistant: string,
+  ) {
+    return this.pathTemplates.assistantPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      assistant: assistant,
+    });
+  }
+
+  /**
+   * Parse the project from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .collection;
+  }
+
+  /**
+   * Parse the engine from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName).engine;
+  }
+
+  /**
+   * Parse the assistant from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the assistant.
+   */
+  matchAssistantFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .assistant;
+  }
+
+  /**
    * Return a fully-qualified collection resource name string.
    *
    * @param {string} project
@@ -2599,6 +3148,119 @@ export class EngineServiceClient {
   }
 
   /**
+   * Return a fully-qualified identityMappingStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} identity_mapping_store
+   * @returns {string} Resource name string.
+   */
+  identityMappingStorePath(
+    project: string,
+    location: string,
+    identityMappingStore: string,
+  ) {
+    return this.pathTemplates.identityMappingStorePathTemplate.render({
+      project: project,
+      location: location,
+      identity_mapping_store: identityMappingStore,
+    });
+  }
+
+  /**
+   * Parse the project from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(
+      identityMappingStoreName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(
+      identityMappingStoreName,
+    ).location;
+  }
+
+  /**
+   * Parse the identity_mapping_store from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the identity_mapping_store.
+   */
+  matchIdentityMappingStoreFromIdentityMappingStoreName(
+    identityMappingStoreName: string,
+  ) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(
+      identityMappingStoreName,
+    ).identity_mapping_store;
+  }
+
+  /**
+   * Return a fully-qualified licenseConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} license_config
+   * @returns {string} Resource name string.
+   */
+  licenseConfigPath(project: string, location: string, licenseConfig: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.render({
+      project: project,
+      location: location,
+      license_config: licenseConfig,
+    });
+  }
+
+  /**
+   * Parse the project from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the license_config from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the license_config.
+   */
+  matchLicenseConfigFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .license_config;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -2619,6 +3281,115 @@ export class EngineServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigName(
+    projectLocationCmekConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
+      projectLocationCmekConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigName(
+    projectLocationCmekConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
+      projectLocationCmekConfigName,
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfigs resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cmek_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigsPath(
+    project: string,
+    location: string,
+    cmekConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.render({
+      project: project,
+      location: location,
+      cmek_config: cmekConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigsName(
+    projectLocationCmekConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(
+      projectLocationCmekConfigsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigsName(
+    projectLocationCmekConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(
+      projectLocationCmekConfigsName,
+    ).location;
+  }
+
+  /**
+   * Parse the cmek_config from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the cmek_config.
+   */
+  matchCmekConfigFromProjectLocationCmekConfigsName(
+    projectLocationCmekConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(
+      projectLocationCmekConfigsName,
+    ).cmek_config;
   }
 
   /**
@@ -4079,6 +4850,127 @@ export class EngineServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName,
     ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineCollaborativeProjectSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} collaborative_project
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineCollaborativeProjectSessionsPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    collaborativeProject: string,
+    session: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        collaborative_project: collaborativeProject,
+        session: session,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).engine;
+  }
+
+  /**
+   * Parse the collaborative_project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collaborative_project.
+   */
+  matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collaborative_project;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).session;
   }
 
   /**
@@ -5948,6 +6840,58 @@ export class EngineServiceClient {
     return this.pathTemplates.sampleQuerySetPathTemplate.match(
       sampleQuerySetName,
     ).sample_query_set;
+  }
+
+  /**
+   * Return a fully-qualified userStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} user_store
+   * @returns {string} Resource name string.
+   */
+  userStorePath(project: string, location: string, userStore: string) {
+    return this.pathTemplates.userStorePathTemplate.render({
+      project: project,
+      location: location,
+      user_store: userStore,
+    });
+  }
+
+  /**
+   * Parse the project from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .location;
+  }
+
+  /**
+   * Parse the user_store from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the user_store.
+   */
+  matchUserStoreFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .user_store;
   }
 
   /**

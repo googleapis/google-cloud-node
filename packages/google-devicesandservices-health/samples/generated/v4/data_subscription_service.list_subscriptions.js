@@ -43,7 +43,7 @@ function main(parent) {
    *  - `user`
    *  - `data_type`
    *  The `user` identifier (e.g., `user1` in `users/user1`) refers to the public
-   *  `healthUserId`
+   *  `health_user_id`
    *  Example: user = "users/user1"
    *  Example: user = "users/user1" OR user = "users/user2"
    *  Example: user = "users/user1" AND (data_type = "sleep" OR data_type =

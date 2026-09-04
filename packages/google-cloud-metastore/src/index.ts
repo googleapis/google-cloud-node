@@ -17,15 +17,15 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
+import * as v1alpha from './v1alpha';
 
 const DataprocMetastoreClient = v1.DataprocMetastoreClient;
 type DataprocMetastoreClient = v1.DataprocMetastoreClient;
 const DataprocMetastoreFederationClient = v1.DataprocMetastoreFederationClient;
 type DataprocMetastoreFederationClient = v1.DataprocMetastoreFederationClient;
 
-export {v1, v1alpha, v1beta, DataprocMetastoreClient, DataprocMetastoreFederationClient};
-export default {v1, v1alpha, v1beta, DataprocMetastoreClient, DataprocMetastoreFederationClient};
+export {v1, v1beta, v1alpha, DataprocMetastoreClient, DataprocMetastoreFederationClient};
+export default {v1, v1beta, v1alpha, DataprocMetastoreClient, DataprocMetastoreFederationClient};
 import * as protos from '../protos/protos';
 export {protos};

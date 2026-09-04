@@ -1,17 +1,16 @@
 {
-  "name": "capacityplanner",
-  "name_pretty": "Capacity Planner API",
-  "product_documentation": "https://cloud.google.com/capacity-planner/docs",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/capacityplanner/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/capacityplanner",
-  "api_id": "capacityplanner.googleapis.com",
-  "default_version": "v1beta",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "capacityplanner"
+    "api_description": "Provides programmatic access to Capacity Planner features.",
+    "api_id": "capacityplanner.googleapis.com",
+    "api_shortname": "capacityplanner",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/capacityplanner/latest",
+    "default_version": "v1beta",
+    "distribution_name": "@google-cloud/capacityplanner",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1194830",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "capacityplanner",
+    "name_pretty": "Capacity Planner",
+    "product_documentation": "https://cloud.google.com/capacity-planner/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

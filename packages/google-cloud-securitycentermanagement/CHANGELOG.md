@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/securitycentermanagement-v0.8.0...securitycentermanagement-v0.9.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/securitycentermanagement-v0.7.2...securitycentermanagement-v0.8.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 3 ([#8614](https://github.com/googleapis/google-cloud-node/issues/8614)) ([fae15ec](https://github.com/googleapis/google-cloud-node/commit/fae15ecca725f8e978341156e2c99c623ce74fcc))
+
 ## [0.7.2](https://github.com/googleapis/google-cloud-node/compare/securitycentermanagement-v0.7.1...securitycentermanagement-v0.7.2) (2026-05-01)
 
 

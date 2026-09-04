@@ -17,12 +17,19 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  
   SqlBackupRunsServiceClient,
+  
   SqlConnectServiceClient,
   SqlDatabasesServiceClient,
+  
+  
   SqlFlagsServiceClient,
+  
+  
   SqlInstancesServiceClient,
   SqlOperationsServiceClient,
+  
   SqlSslCertsServiceClient,
   SqlTiersServiceClient,
   SqlUsersServiceClient,
@@ -31,30 +38,33 @@ import {
 // check that the client class type name can be used
 
 function doStuffWithSqlBackupRunsServiceClient(
-  client: SqlBackupRunsServiceClient
+  client: SqlBackupRunsServiceClient,
 ) {
   client.close();
 }
+
 function doStuffWithSqlConnectServiceClient(client: SqlConnectServiceClient) {
   client.close();
 }
 function doStuffWithSqlDatabasesServiceClient(
-  client: SqlDatabasesServiceClient
+  client: SqlDatabasesServiceClient,
 ) {
   client.close();
 }
+
 
 function doStuffWithSqlFlagsServiceClient(client: SqlFlagsServiceClient) {
   client.close();
 }
 
+
 function doStuffWithSqlInstancesServiceClient(
-  client: SqlInstancesServiceClient
+  client: SqlInstancesServiceClient,
 ) {
   client.close();
 }
 function doStuffWithSqlOperationsServiceClient(
-  client: SqlOperationsServiceClient
+  client: SqlOperationsServiceClient,
 ) {
   client.close();
 }
@@ -70,33 +80,31 @@ function doStuffWithSqlUsersServiceClient(client: SqlUsersServiceClient) {
 }
 
 function main() {
-  // check that the client instance can be created
+  
   // check that the client instance can be created
   const sqlBackupRunsServiceClient = new SqlBackupRunsServiceClient();
   doStuffWithSqlBackupRunsServiceClient(sqlBackupRunsServiceClient);
+  
   // check that the client instance can be created
   const sqlConnectServiceClient = new SqlConnectServiceClient();
   doStuffWithSqlConnectServiceClient(sqlConnectServiceClient);
   // check that the client instance can be created
   const sqlDatabasesServiceClient = new SqlDatabasesServiceClient();
   doStuffWithSqlDatabasesServiceClient(sqlDatabasesServiceClient);
-  // check that the client instance can be created
-
+  
+  
   // check that the client instance can be created
   const sqlFlagsServiceClient = new SqlFlagsServiceClient();
   doStuffWithSqlFlagsServiceClient(sqlFlagsServiceClient);
-  // check that the client instance can be created
-
-  // check that the client instance can be created
-
+  
+  
   // check that the client instance can be created
   const sqlInstancesServiceClient = new SqlInstancesServiceClient();
   doStuffWithSqlInstancesServiceClient(sqlInstancesServiceClient);
   // check that the client instance can be created
   const sqlOperationsServiceClient = new SqlOperationsServiceClient();
   doStuffWithSqlOperationsServiceClient(sqlOperationsServiceClient);
-  // check that the client instance can be created
-
+  
   // check that the client instance can be created
   const sqlSslCertsServiceClient = new SqlSslCertsServiceClient();
   doStuffWithSqlSslCertsServiceClient(sqlSslCertsServiceClient);

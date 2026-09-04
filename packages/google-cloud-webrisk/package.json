@@ -5,7 +5,7 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "name": "@google-cloud/web-risk",
-  "version": "5.3.2",
+  "version": "6.0.0",
   "author": "Google LLC",
   "description": "Web Risk API client for Node.js",
   "main": "build/src/index.js",
@@ -28,7 +28,7 @@
     "Web Risk API"
   ],
   "dependencies": {
-    "google-gax": "^5.0.0"
+    "google-gax": "^6.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.7",
@@ -37,16 +37,15 @@
     "@types/sinon": "^17.0.4",
     "c8": "^10.1.3",
     "chai": "^4.0.0",
-    "gapic-tools": "^1.0.0",
+    "gapic-tools": "^2.0.0",
     "gts": "^6.0.2",
     "http2spy": "^2.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^4.0.0",
-    "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "^6.1.2",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "long": "^5.3.1",
     "mocha": "^11.1.0",
-    "pack-n-play": "^3.0.0",
+    "pack-n-play": "^5.0.0",
     "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
@@ -55,20 +54,18 @@
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
-    "predocs-test": "npm run docs",
-    "docs-test": "linkinator docs",
     "fix": "gts fix",
     "lint": "gts check",
     "prepare": "npm run compile",
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",
-    "system-test": "c8 mocha build/system-test",
-    "test": "c8 mocha build/test"
+    "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-webrisk",
   "overrides": {

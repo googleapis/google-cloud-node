@@ -27,7 +27,17 @@ import {
   ServiceConfig,
   util,
 } from '@google-cloud/common';
-import {replaceProjectIdToken} from '@google-cloud/projectify';
+import {
+  replaceProjectIdToken,
+  isArray,
+  isBoolean,
+  isError,
+  isNull,
+  isNumber,
+  isObject,
+  isString,
+  isUndefined,
+} from '../helper';
 import {
   loadSync,
   PackageDefinition,
@@ -40,16 +50,6 @@ import {grpc, GrpcClient} from 'google-gax';
 import {Request, Response} from 'teeny-request';
 import * as retryRequest from 'retry-request';
 import {Duplex, PassThrough} from 'stream';
-import {
-  isArray,
-  isBoolean,
-  isError,
-  isNull,
-  isNumber,
-  isObject,
-  isString,
-  isUndefined,
-} from '../helper';
 
 const gaxProtoPath = path.join(
   path.dirname(require.resolve('google-gax')),
@@ -772,21 +772,28 @@ export class GrpcService extends Service {
    * @return {*} - The decoded value.
    */
   static decodeValue_(value) {
-    switch (value.kind) {
-      case 'structValue': {
-        return GrpcService.structToObj_(value.structValue);
+    const kind = value.kind;
+    switch (kind) {
+      case 'stringValue': {
+        return value.stringValue;
       }
-
+      case 'numberValue': {
+        return value.numberValue;
+      }
+      case 'boolValue': {
+        return value.boolValue;
+      }
       case 'nullValue': {
         return null;
       }
-
+      case 'structValue': {
+        return GrpcService.structToObj_(value.structValue);
+      }
       case 'listValue': {
         return value.listValue.values.map(GrpcService.decodeValue_);
       }
-
       default: {
-        return value[value.kind];
+        return value[kind];
       }
     }
   }

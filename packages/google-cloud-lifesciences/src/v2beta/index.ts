@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {WorkflowsServiceV2BetaClient} from './workflows_service_v2_beta_client';
+export { WorkflowsServiceV2BetaClient } from './workflows_service_v2_beta_client';

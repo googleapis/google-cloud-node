@@ -46,7 +46,7 @@ const version = require('../../../package.json').version;
  *  inspection, classification, and de-identification platform that works
  *  on text, images, and Google Cloud storage repositories.
  *  To learn more about concepts and find how-to guides see
- *  https://cloud.google.com/sensitive-data-protection/docs/.
+ *  https://docs.cloud.google.com/sensitive-data-protection/docs/.
  * @class
  * @memberof v2
  */
@@ -213,6 +213,9 @@ export class DlpServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      contentPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/contentPolicies/{content_policy}',
+      ),
       discoveryConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/discoveryConfigs/{discovery_config}',
       ),
@@ -394,6 +397,11 @@ export class DlpServiceClient {
         'nextPageToken',
         'connections',
       ),
+      listContentPolicies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'contentPolicies',
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -501,6 +509,11 @@ export class DlpServiceClient {
       'searchConnections',
       'deleteConnection',
       'updateConnection',
+      'createContentPolicy',
+      'updateContentPolicy',
+      'getContentPolicy',
+      'listContentPolicies',
+      'deleteContentPolicy',
     ];
     for (const methodName of dlpServiceStubMethods) {
       const callPromise = this.dlpServiceStub.then(
@@ -624,9 +637,9 @@ export class DlpServiceClient {
    * be all types, but may change over time as detectors are updated.
    *
    * For how to guides, see
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-images
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-images
    * and
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-text,
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-text,
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -635,7 +648,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -785,7 +798,7 @@ export class DlpServiceClient {
    * Redacts potentially sensitive info from an image.
    * This method has limits on input size, processing time, and output size.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/redacting-sensitive-data-images
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/redacting-sensitive-data-images
    * to learn more.
    *
    * When no InfoTypes or CustomInfoTypes are specified in this request, the
@@ -802,7 +815,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -963,7 +976,7 @@ export class DlpServiceClient {
    * De-identifies potentially sensitive info from a ContentItem.
    * This method has limits on input size and output size.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data
    * to learn more.
    *
    * When no InfoTypes or CustomInfoTypes are specified in this request, the
@@ -977,7 +990,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -1144,7 +1157,7 @@ export class DlpServiceClient {
   /**
    * Re-identifies content that has been de-identified.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
    * to learn more.
    *
    * @param {Object} request
@@ -1154,7 +1167,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -1321,7 +1334,7 @@ export class DlpServiceClient {
   /**
    * Returns a list of the sensitive information types that the DLP API
    * supports. See
-   * https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference
    * to learn more.
    *
    * @param {Object} request
@@ -1462,7 +1475,7 @@ export class DlpServiceClient {
    * Creates an InspectTemplate for reusing frequently used configuration
    * for inspecting content, images, and storage.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
    * to learn more.
    *
    * @param {Object} request
@@ -1472,7 +1485,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -1630,7 +1643,7 @@ export class DlpServiceClient {
   /**
    * Updates the InspectTemplate.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
    * to learn more.
    *
    * @param {Object} request
@@ -1776,7 +1789,7 @@ export class DlpServiceClient {
   /**
    * Gets an InspectTemplate.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
    * to learn more.
    *
    * @param {Object} request
@@ -1915,7 +1928,7 @@ export class DlpServiceClient {
   /**
    * Deletes an InspectTemplate.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
    * to learn more.
    *
    * @param {Object} request
@@ -2058,7 +2071,7 @@ export class DlpServiceClient {
    * Creates a DeidentifyTemplate for reusing frequently used configuration
    * for de-identifying content, images, and storage.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
    * to learn more.
    *
    * @param {Object} request
@@ -2068,7 +2081,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -2226,7 +2239,7 @@ export class DlpServiceClient {
   /**
    * Updates the DeidentifyTemplate.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
    * to learn more.
    *
    * @param {Object} request
@@ -2373,7 +2386,7 @@ export class DlpServiceClient {
   /**
    * Gets a DeidentifyTemplate.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
    * to learn more.
    *
    * @param {Object} request
@@ -2515,7 +2528,7 @@ export class DlpServiceClient {
   /**
    * Deletes a DeidentifyTemplate.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
    * to learn more.
    *
    * @param {Object} request
@@ -2659,7 +2672,7 @@ export class DlpServiceClient {
    * Creates a job trigger to run DLP actions such as scanning storage for
    * sensitive information on a set schedule.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
    * to learn more.
    *
    * @param {Object} request
@@ -2669,7 +2682,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -2814,7 +2827,7 @@ export class DlpServiceClient {
   /**
    * Updates a job trigger.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
    * to learn more.
    *
    * @param {Object} request
@@ -3092,7 +3105,7 @@ export class DlpServiceClient {
   /**
    * Gets a job trigger.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
    * to learn more.
    *
    * @param {Object} request
@@ -3220,7 +3233,7 @@ export class DlpServiceClient {
   /**
    * Deletes a job trigger.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
    * to learn more.
    *
    * @param {Object} request
@@ -4061,9 +4074,9 @@ export class DlpServiceClient {
   /**
    * Creates a new job to inspect storage or calculate risk metrics.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
    * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
    * to learn more.
    *
    * When no InfoTypes or CustomInfoTypes are specified in inspect jobs, the
@@ -4077,7 +4090,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -4221,9 +4234,9 @@ export class DlpServiceClient {
   /**
    * Gets the latest state of a long-running DlpJob.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
    * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
    * to learn more.
    *
    * @param {Object} request
@@ -4352,9 +4365,9 @@ export class DlpServiceClient {
    * no longer interested in the DlpJob result. The job will be canceled if
    * possible.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
    * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
    * to learn more.
    *
    * @param {Object} request
@@ -4483,9 +4496,9 @@ export class DlpServiceClient {
    * makes a best effort to cancel the DlpJob, but success is not
    * guaranteed.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
    * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
    * to learn more.
    *
    * @param {Object} request
@@ -4612,7 +4625,7 @@ export class DlpServiceClient {
   /**
    * Creates a pre-built stored infoType to be used for inspection.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
    * to learn more.
    *
    * @param {Object} request
@@ -4622,7 +4635,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -4778,7 +4791,7 @@ export class DlpServiceClient {
    * Updates the stored infoType by creating a new version. The existing version
    * will continue to be used until the new version is ready.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
    * to learn more.
    *
    * @param {Object} request
@@ -4923,7 +4936,7 @@ export class DlpServiceClient {
   /**
    * Gets a stored infoType.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
    * to learn more.
    *
    * @param {Object} request
@@ -5056,7 +5069,7 @@ export class DlpServiceClient {
   /**
    * Deletes a stored infoType.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
    * to learn more.
    *
    * @param {Object} request
@@ -6809,11 +6822,563 @@ export class DlpServiceClient {
         throw error;
       });
   }
+  /**
+   * Create a ContentPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent resource name.
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project):
+   *
+   *   + Projects scope:
+   *     `projects/{project_id}/locations/{location_id}`
+   * @param {google.privacy.dlp.v2.ContentPolicy} request.contentPolicy
+   *   Required. The content_policy resource.
+   * @param {string} [request.contentPolicyId]
+   *   Optional. The content policy ID can contain uppercase and lowercase
+   *   letters, numbers, and hyphens; that is, it must match the regular
+   *   expression:
+   *     `[a-zA-Z\d-_]+`.
+   *   The maximum length is 100 characters. If empty, the system will generate
+   *   a random id.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ContentPolicy|ContentPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.create_content_policy.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_CreateContentPolicy_async
+   */
+  createContentPolicy(
+    request?: protos.google.privacy.dlp.v2.ICreateContentPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      protos.google.privacy.dlp.v2.ICreateContentPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createContentPolicy(
+    request: protos.google.privacy.dlp.v2.ICreateContentPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      | protos.google.privacy.dlp.v2.ICreateContentPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createContentPolicy(
+    request: protos.google.privacy.dlp.v2.ICreateContentPolicyRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      | protos.google.privacy.dlp.v2.ICreateContentPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createContentPolicy(
+    request?: protos.google.privacy.dlp.v2.ICreateContentPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IContentPolicy,
+          | protos.google.privacy.dlp.v2.ICreateContentPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      | protos.google.privacy.dlp.v2.ICreateContentPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      protos.google.privacy.dlp.v2.ICreateContentPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('createContentPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.privacy.dlp.v2.IContentPolicy,
+          | protos.google.privacy.dlp.v2.ICreateContentPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createContentPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createContentPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.privacy.dlp.v2.IContentPolicy,
+          protos.google.privacy.dlp.v2.ICreateContentPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createContentPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Update a ContentPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name in the format:
+   *   `projects/{project}/locations/{location}/contentPolicies/{content_policy}`.
+   * @param {google.privacy.dlp.v2.ContentPolicy} request.contentPolicy
+   *   Required. The content_policy with new values for the relevant fields.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Mask to control which fields get updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ContentPolicy|ContentPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.update_content_policy.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_UpdateContentPolicy_async
+   */
+  updateContentPolicy(
+    request?: protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateContentPolicy(
+    request: protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      | protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateContentPolicy(
+    request: protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      | protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateContentPolicy(
+    request?: protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IContentPolicy,
+          | protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      | protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateContentPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.privacy.dlp.v2.IContentPolicy,
+          | protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateContentPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateContentPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.privacy.dlp.v2.IContentPolicy,
+          protos.google.privacy.dlp.v2.IUpdateContentPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateContentPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Get a ContentPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name in the format:
+   *   `projects/{project}/locations/{location}/contentPolicies/{content_policy}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.ContentPolicy|ContentPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.get_content_policy.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_GetContentPolicy_async
+   */
+  getContentPolicy(
+    request?: protos.google.privacy.dlp.v2.IGetContentPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      protos.google.privacy.dlp.v2.IGetContentPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getContentPolicy(
+    request: protos.google.privacy.dlp.v2.IGetContentPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      protos.google.privacy.dlp.v2.IGetContentPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getContentPolicy(
+    request: protos.google.privacy.dlp.v2.IGetContentPolicyRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      protos.google.privacy.dlp.v2.IGetContentPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getContentPolicy(
+    request?: protos.google.privacy.dlp.v2.IGetContentPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IContentPolicy,
+          | protos.google.privacy.dlp.v2.IGetContentPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      protos.google.privacy.dlp.v2.IGetContentPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IContentPolicy,
+      protos.google.privacy.dlp.v2.IGetContentPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getContentPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.privacy.dlp.v2.IContentPolicy,
+          | protos.google.privacy.dlp.v2.IGetContentPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getContentPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getContentPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.privacy.dlp.v2.IContentPolicy,
+          protos.google.privacy.dlp.v2.IGetContentPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getContentPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Delete a ContentPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the ContentPolicy to be deleted, in the format:
+   *   `projects/{project}/locations/{location}/contentPolicies/{content_policy}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.delete_content_policy.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_DeleteContentPolicy_async
+   */
+  deleteContentPolicy(
+    request?: protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteContentPolicy(
+    request: protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteContentPolicy(
+    request: protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteContentPolicy(
+    request?: protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('deleteContentPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteContentPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteContentPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.privacy.dlp.v2.IDeleteContentPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteContentPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Lists InspectTemplates.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates
    * to learn more.
    *
    * @param {Object} request
@@ -6823,7 +7388,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -6985,7 +7550,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -7070,7 +7635,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -7147,7 +7712,7 @@ export class DlpServiceClient {
   /**
    * Lists DeidentifyTemplates.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-deid
    * to learn more.
    *
    * @param {Object} request
@@ -7157,7 +7722,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -7319,7 +7884,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -7404,7 +7969,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -7481,7 +8046,7 @@ export class DlpServiceClient {
   /**
    * Lists job triggers.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-job-triggers
    * to learn more.
    *
    * @param {Object} request
@@ -7491,7 +8056,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -7674,7 +8239,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -7786,7 +8351,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -8182,9 +8747,9 @@ export class DlpServiceClient {
   /**
    * Lists DlpJobs that match the specified filter in the request.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/inspecting-storage
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage
    * and
-   * https://cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/compute-risk-analysis
    * to learn more.
    *
    * @param {Object} request
@@ -8194,7 +8759,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -8373,7 +8938,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -8485,7 +9050,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on whether you have [specified a
    *   processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -8589,7 +9154,7 @@ export class DlpServiceClient {
   /**
    * Lists stored infoTypes.
    * See
-   * https://cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
+   * https://docs.cloud.google.com/sensitive-data-protection/docs/creating-stored-infotypes
    * to learn more.
    *
    * @param {Object} request
@@ -8599,7 +9164,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -8758,7 +9323,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -8840,7 +9405,7 @@ export class DlpServiceClient {
    *
    *   The format of this value varies depending on the scope of the request
    *   (project or organization) and whether you have [specified a processing
-   *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
+   *   location](https://docs.cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
    *     `projects/{project_id}/locations/{location_id}`
@@ -10967,6 +11532,232 @@ export class DlpServiceClient {
       callSettings,
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IConnection>;
   }
+  /**
+   * Lists ContentPolicies in a parent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the project,
+   *   for example, `projects/project-id/locations/asia`.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results per page, max 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from a previous page to return the next set of
+   *   results. If set, all other request fields must match the original request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.ContentPolicy|ContentPolicy}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listContentPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listContentPolicies(
+    request?: protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IContentPolicy[],
+      protos.google.privacy.dlp.v2.IListContentPoliciesRequest | null,
+      protos.google.privacy.dlp.v2.IListContentPoliciesResponse,
+    ]
+  >;
+  listContentPolicies(
+    request: protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+      | protos.google.privacy.dlp.v2.IListContentPoliciesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IContentPolicy
+    >,
+  ): void;
+  listContentPolicies(
+    request: protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+      | protos.google.privacy.dlp.v2.IListContentPoliciesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IContentPolicy
+    >,
+  ): void;
+  listContentPolicies(
+    request?: protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+          | protos.google.privacy.dlp.v2.IListContentPoliciesResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IContentPolicy
+        >,
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+      | protos.google.privacy.dlp.v2.IListContentPoliciesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IContentPolicy
+    >,
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IContentPolicy[],
+      protos.google.privacy.dlp.v2.IListContentPoliciesRequest | null,
+      protos.google.privacy.dlp.v2.IListContentPoliciesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+          | protos.google.privacy.dlp.v2.IListContentPoliciesResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IContentPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listContentPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listContentPolicies request %j', request);
+    return this.innerApiCalls
+      .listContentPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.privacy.dlp.v2.IContentPolicy[],
+          protos.google.privacy.dlp.v2.IListContentPoliciesRequest | null,
+          protos.google.privacy.dlp.v2.IListContentPoliciesResponse,
+        ]) => {
+          this._log.info('listContentPolicies values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listContentPolicies`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the project,
+   *   for example, `projects/project-id/locations/asia`.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results per page, max 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from a previous page to return the next set of
+   *   results. If set, all other request fields must match the original request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.ContentPolicy|ContentPolicy} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listContentPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listContentPoliciesStream(
+    request?: protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listContentPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listContentPolicies stream %j', request);
+    return this.descriptors.page.listContentPolicies.createStream(
+      this.innerApiCalls.listContentPolicies as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listContentPolicies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the project,
+   *   for example, `projects/project-id/locations/asia`.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of results per page, max 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from a previous page to return the next set of
+   *   results. If set, all other request fields must match the original request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.privacy.dlp.v2.ContentPolicy|ContentPolicy}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.list_content_policies.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_ListContentPolicies_async
+   */
+  listContentPoliciesAsync(
+    request?: protos.google.privacy.dlp.v2.IListContentPoliciesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IContentPolicy> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listContentPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listContentPolicies iterate %j', request);
+    return this.descriptors.page.listContentPolicies.asyncIterate(
+      this.innerApiCalls['listContentPolicies'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IContentPolicy>;
+  }
 
   /**
    * Gets information about a location.
@@ -11048,6 +11839,58 @@ export class DlpServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified contentPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} content_policy
+   * @returns {string} Resource name string.
+   */
+  contentPolicyPath(project: string, location: string, contentPolicy: string) {
+    return this.pathTemplates.contentPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      content_policy: contentPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from ContentPolicy resource.
+   *
+   * @param {string} contentPolicyName
+   *   A fully-qualified path representing ContentPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromContentPolicyName(contentPolicyName: string) {
+    return this.pathTemplates.contentPolicyPathTemplate.match(contentPolicyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from ContentPolicy resource.
+   *
+   * @param {string} contentPolicyName
+   *   A fully-qualified path representing ContentPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromContentPolicyName(contentPolicyName: string) {
+    return this.pathTemplates.contentPolicyPathTemplate.match(contentPolicyName)
+      .location;
+  }
+
+  /**
+   * Parse the content_policy from ContentPolicy resource.
+   *
+   * @param {string} contentPolicyName
+   *   A fully-qualified path representing ContentPolicy resource.
+   * @returns {string} A string representing the content_policy.
+   */
+  matchContentPolicyFromContentPolicyName(contentPolicyName: string) {
+    return this.pathTemplates.contentPolicyPathTemplate.match(contentPolicyName)
+      .content_policy;
+  }
 
   /**
    * Return a fully-qualified discoveryConfig resource name string.

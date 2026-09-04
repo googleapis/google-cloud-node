@@ -79,6 +79,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "GetPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdatePolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateFirewallPolicy": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

@@ -42,6 +42,11 @@ import {
   ExternalAccountAuthorizedUserClient,
   ExternalAccountAuthorizedUserClientOptions,
 } from './externalAccountAuthorizedUserClient';
+import {
+  GdchClient,
+  GDCH_SERVICE_ACCOUNT_TYPE,
+  GdchCredentialsInput,
+} from './gdchclient';
 import {originalOrCamelOptions} from '../util';
 import {AnyAuthClient, AnyAuthClientConstructor} from '..';
 
@@ -54,7 +59,8 @@ export type JSONClient =
   | UserRefreshClient
   | BaseExternalAccountClient
   | ExternalAccountAuthorizedUserClient
-  | Impersonated;
+  | Impersonated
+  | GdchClient;
 
 export interface ProjectIdCallback {
   (err?: Error | null, projectId?: string | null): void;
@@ -174,7 +180,7 @@ export interface GoogleAuthOptions<T extends AuthClient = AnyAuthClient> {
    *
    * For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.
    */
-  credentials?: JWTInput | ExternalAccountClientOptions;
+  credentials?: JWTInput | ExternalAccountClientOptions | GdchCredentialsInput;
 
   /**
    * `AuthClientOptions` object passed to the constructor of the client
@@ -242,7 +248,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
   private _cachedProjectId?: string | null;
 
   // To save the contents of the JSON credential file
-  jsonContent: JWTInput | ExternalAccountClientOptions | null = null;
+  jsonContent: JWTInput | ExternalAccountClientOptions | GdchCredentialsInput | null = null;
   apiKey: string | null;
 
   cachedCredential: AnyAuthClient | T | null = null;
@@ -565,7 +571,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       return null;
     }
     try {
-      return this._getApplicationCredentialsFromFilePath(
+      return await this._getApplicationCredentialsFromFilePath(
         credentialsPath,
         options,
       );
@@ -586,31 +592,35 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
   async _tryGetApplicationCredentialsFromWellKnownFile(
     options?: AuthClientOptions,
   ): Promise<JSONClient | null> {
-    // First, figure out the location of the file, depending upon the OS type.
-    let location = null;
-    if (this._isWindows()) {
-      // Windows
-      location = process.env['APPDATA'];
-    } else {
-      // Linux or Mac
-      const home = process.env['HOME'];
-      if (home) {
-        location = path.join(home, '.config');
+    // First, figure out the location of the Cloud SDK config directory. The
+    // `CLOUDSDK_CONFIG` environment variable overrides the platform-specific
+    // default location; when it is set, `gcloud` stores the application default
+    // credentials file there, so it takes precedence.
+    let configDir: string | undefined = process.env['CLOUDSDK_CONFIG'];
+    if (!configDir) {
+      if (this._isWindows()) {
+        // Windows
+        if (process.env['APPDATA']) {
+          configDir = path.join(process.env['APPDATA'], 'gcloud');
+        }
+      } else {
+        // Linux or Mac
+        const home = process.env['HOME'];
+        if (home) {
+          configDir = path.join(home, '.config', 'gcloud');
+        }
       }
     }
-    // If we found the root path, expand it.
-    if (location) {
-      location = path.join(
-        location,
-        'gcloud',
-        'application_default_credentials.json',
-      );
-      if (!fs.existsSync(location)) {
-        location = null;
-      }
+    // The config directory could not be determined.
+    if (!configDir) {
+      return null;
     }
+    const location = path.join(
+      configDir,
+      'application_default_credentials.json',
+    );
     // The file does not exist.
-    if (!location) {
+    if (!fs.existsSync(location)) {
       return null;
     }
     // The file seems to exist. Try to use it.
@@ -764,7 +774,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
    * @returns JWT or UserRefresh Client with data
    */
   fromJSON(
-    json: JWTInput | ImpersonatedJWTInput,
+    json: JWTInput | ImpersonatedJWTInput | GdchCredentialsInput | ExternalAccountClientOptions,
     options: AuthClientOptions = {},
   ): JSONClient {
     let client: JSONClient;
@@ -775,7 +785,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
 
     if (json.type === USER_REFRESH_ACCOUNT_TYPE) {
       client = new UserRefreshClient(options);
-      client.fromJSON(json);
+      client.fromJSON(json as JWTInput);
     } else if (json.type === IMPERSONATED_ACCOUNT_TYPE) {
       client = this.fromImpersonatedJSON(json as ImpersonatedJWTInput);
     } else if (json.type === EXTERNAL_ACCOUNT_TYPE) {
@@ -789,11 +799,14 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
         ...json,
         ...options,
       } as ExternalAccountAuthorizedUserClientOptions);
+    } else if (json.type === GDCH_SERVICE_ACCOUNT_TYPE) {
+      client = new GdchClient(options);
+      client.fromJSON(json as GdchCredentialsInput);
     } else {
       (options as JWTOptions).scopes = this.scopes;
       client = new JWT(options);
       this.setGapicJWTValues(client);
-      client.fromJSON(json);
+      client.fromJSON(json as JWTInput);
     }
 
     if (preferredUniverseDomain) {
@@ -811,7 +824,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
    * @returns JWT or UserRefresh Client with data
    */
   private _cacheClientFromJSON(
-    json: JWTInput | ImpersonatedJWTInput,
+    json: JWTInput | ImpersonatedJWTInput | GdchCredentialsInput | ExternalAccountClientOptions,
     options?: AuthClientOptions,
   ): JSONClient {
     const client = this.fromJSON(json, options);
@@ -1109,7 +1122,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       return {
         client_email: (this.jsonContent as JWTInput).client_email,
         private_key: (this.jsonContent as JWTInput).private_key,
-        universe_domain: this.jsonContent.universe_domain,
+        universe_domain: (this.jsonContent as any).universe_domain,
       };
     }
 
@@ -1140,7 +1153,19 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       this.#pendingAuthClient || this.#determineClient();
 
     try {
-      return await this.#pendingAuthClient;
+      const client = await this.#pendingAuthClient;
+      if (client instanceof GdchClient && !client.apiAudience) {
+        const opts = this.clientOptions as any;
+        const endpoint = opts.apiEndpoint || opts.servicePath;
+        if (endpoint) {
+          const scheme = endpoint.startsWith('http') ? '' : 'https://';
+          const formattedAudience = `${scheme}${endpoint}`.replace(/\/+$/, '');
+          const newClient = client.createWithGdchAudience(formattedAudience);
+          this.cachedCredential = newClient;
+          return newClient;
+        }
+      }
+      return client;
     } finally {
       // reset the pending auth client in case it is changed later
       this.#pendingAuthClient = null;

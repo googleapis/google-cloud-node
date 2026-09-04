@@ -371,21 +371,21 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
    */
   setMetadata(
     metadata: HmacKeyMetadata,
-    options?: SetMetadataOptions,
+    options?: SetMetadataOptions
   ): Promise<SetMetadataResponse<HmacKeyMetadata>>;
   setMetadata(
     metadata: HmacKeyMetadata,
-    callback: MetadataCallback<HmacKeyMetadata>,
+    callback: MetadataCallback<HmacKeyMetadata>
   ): void;
   setMetadata(
     metadata: HmacKeyMetadata,
     options: SetMetadataOptions,
-    callback: MetadataCallback<HmacKeyMetadata>,
+    callback: MetadataCallback<HmacKeyMetadata>
   ): void;
   setMetadata(
     metadata: HmacKeyMetadata,
     optionsOrCallback: SetMetadataOptions | MetadataCallback<HmacKeyMetadata>,
-    cb?: MetadataCallback<HmacKeyMetadata>,
+    cb?: MetadataCallback<HmacKeyMetadata>
   ): Promise<SetMetadataResponse<HmacKeyMetadata>> | void {
     // ETag preconditions are not currently supported. Retries should be disabled if the idempotency strategy is not set to RetryAlways
     if (
@@ -401,13 +401,18 @@ export class HmacKey extends ServiceObject<HmacKey, HmacKeyMetadata> {
         ? (optionsOrCallback as MetadataCallback<HmacKeyMetadata>)
         : cb;
 
-    super
-      .setMetadata(metadata, options)
-      .then(resp => cb!(null, ...resp))
-      .catch(cb!)
-      .finally(() => {
+    void (async () => {
+      let resp;
+      try {
+        resp = await super.setMetadata(metadata, options);
+      } catch (err) {
+        cb!(err as Error);
+        return;
+      } finally {
         this.storage.retryOptions.autoRetry = this.instanceRetryValue;
-      });
+      }
+      cb!(null, ...resp);
+    })();
   }
 }
 

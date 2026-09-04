@@ -16,16 +16,24 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DataObjectSearchServiceClient, DataObjectServiceClient, VectorSearchServiceClient} from '@google-cloud/vectorsearch';
+import {
+  DataObjectSearchServiceClient,
+  DataObjectServiceClient,
+  VectorSearchServiceClient,
+} from '@google-cloud/vectorsearch';
 
 // check that the client class type name can be used
-function doStuffWithDataObjectSearchServiceClient(client: DataObjectSearchServiceClient) {
+function doStuffWithDataObjectSearchServiceClient(
+  client: DataObjectSearchServiceClient,
+) {
   client.close();
 }
 function doStuffWithDataObjectServiceClient(client: DataObjectServiceClient) {
   client.close();
 }
-function doStuffWithVectorSearchServiceClient(client: VectorSearchServiceClient) {
+function doStuffWithVectorSearchServiceClient(
+  client: VectorSearchServiceClient,
+) {
   client.close();
 }
 

@@ -40,9 +40,8 @@ import {
   RequestConfig,
 } from '../src/request';
 import {SECOND_DATABASE_ID} from './index';
-import {google} from '../protos/protos';
+import {protos, google} from '../src/protos';
 import {RunCallback} from '../src/transaction';
-import * as protos from '../protos/protos';
 import {AggregateQuery} from '../src/aggregate';
 import {RunQueryCallback, RunQueryInfo, RunQueryOptions} from '../src/query';
 import * as mocha from 'mocha';

@@ -37,8 +37,6 @@ function main(query) {
    *  Requires either the `chat.admin.spaces.readonly` or `chat.admin.spaces`
    *  OAuth 2.0
    *  scope (https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
-   *  This method currently only supports admin access, thus only `true` is
-   *  accepted for this field.
    */
   // const useAdminAccess = true
   /**
@@ -59,7 +57,8 @@ function main(query) {
   // const pageToken = 'abc123'
   /**
    *  Required. A search query.
-   *  You can search by using the following parameters:
+   *  You can search by using the following parameters when `useAdminAccess`
+   *  is set to `true`:
    *  - `create_time`
    *  - `customer`
    *  - `display_name`
@@ -67,16 +66,23 @@ function main(query) {
    *  - `last_active_time`
    *  - `space_history_state`
    *  - `space_type`
+   *  When `useAdminAccess` is set to `false`:
+   *  - `display_name`
+   *  - `external_user_allowed`
+   *  - `space_type`
    *  `create_time` and `last_active_time` accept a timestamp in
    *  RFC-3339 (https://www.rfc-editor.org/rfc/rfc3339) format and the supported
    *  comparison operators are: `=`, `<`, `>`, `<=`, `>=`.
-   *  `customer` is required and is used to indicate which customer
-   *  to fetch spaces from. `customers/my_customer` is the only supported value.
+   *  `customer` is required when `useAdminAccess` is set to `true`, and is
+   *  used to indicate which customer to fetch spaces from.
+   *  `customers/my_customer` is the only supported value.
    *  `display_name` only accepts the `HAS` (`:`) operator. The text to
    *  match is first tokenized into tokens and each token is prefix-matched
    *  case-insensitively and independently as a substring anywhere in the space's
    *  `display_name`. For example, `Fun Eve` matches `Fun event` or `The
-   *  evening was fun`, but not `notFun event` or `even`.
+   *  evening was fun`, but not `notFun event` or `even`. When `useAdminAccess`
+   *  is set to `false`, `display_name` is required to retrieve meaningful
+   *  results. Otherwise, the default behavior is to return an empty response.
    *  `external_user_allowed` accepts either `true` or `false`.
    *  `space_history_state` only accepts values from the `historyState` 
    *  (https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces#Space.HistoryState)
@@ -93,7 +99,8 @@ function main(query) {
    *  `AND` can only be used to represent an interval, such as `last_active_time
    *  < "2022-01-01T00:00:00+00:00" AND last_active_time >
    *  "2023-01-01T00:00:00+00:00"`.
-   *  The following example queries are valid:
+   *  The following example queries are valid when `useAdminAccess` is set to
+   *  `true`:
    *  ```
    *  customer = "customers/my_customer" AND space_type = "SPACE"
    *  customer = "customers/my_customer" AND space_type = "SPACE" AND
@@ -110,6 +117,16 @@ function main(query) {
    *  "2020-01-01T00:00:00+00:00") AND (external_user_allowed = "true") AND
    *  (space_history_state = "HISTORY_ON" OR space_history_state = "HISTORY_OFF")
    *  ```
+   *  The following example queries are valid when `useAdminAccess` is set to
+   *  `false`:
+   *  ```
+   *  display_name:"Hello World" AND space_type = "SPACE"
+   *  (display_name:"Hello" OR display_name:"Fun") AND space_type = "SPACE"
+   *  (external_user_allowed = "true" AND space_type = "SPACE") // Returns an
+   *  empty response.
+   *  (external_user_allowed = "true" AND display_name:"Hello" AND space_type =
+   *  "SPACE")
+   *  ```
    */
   // const query = 'abc123'
   /**
@@ -120,16 +137,23 @@ function main(query) {
    *  - `last_active_time` — Denotes the time when last eligible item is added to
    *  any topic of this space.
    *  - `create_time` — Denotes the time of the space creation.
+   *  When `useAdminAccess` is `false`, only `create_time` and `relevance` are
+   *  supported for ordering. Only `DESC` is supported for these fields in
+   *  non-admin searches.
    *  Valid ordering operation values are:
    *  - `ASC` for ascending. Default value.
    *  - `DESC` for descending.
-   *  The supported syntax are:
+   *  The supported syntax are when `useAdminAccess` is set to `true`:
    *  - `membership_count.joined_direct_human_user_count DESC`
    *  - `membership_count.joined_direct_human_user_count ASC`
    *  - `last_active_time DESC`
    *  - `last_active_time ASC`
    *  - `create_time DESC`
    *  - `create_time ASC`
+   *  When `useAdminAccess` is set to `false`:
+   *  - `create_time DESC`
+   *  - `relevance DESC`
+   *     Developer Preview (https://developers.google.com/workspace/preview).
    */
   // const orderBy = 'abc123'
 

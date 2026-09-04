@@ -46,9 +46,9 @@ function main(completionConfig, query) {
    */
   // const query = 'abc123'
   /**
-   *  Specifies the autocomplete data model. This overrides any model specified
-   *  in the Configuration > Autocomplete section of the Cloud console. Currently
-   *  supported values:
+   *  Specifies the autocomplete query model, which only applies to the QUERY
+   *  SuggestionType. This overrides any model specified in the Configuration >
+   *  Autocomplete section of the Cloud console. Currently supported values:
    *  * `document` - Using suggestions generated from user-imported documents.
    *  * `search-history` - Using suggestions generated from the past history of
    *  SearchService.Search google.cloud.discoveryengine.v1beta.SearchService.Search 
@@ -63,10 +63,10 @@ function main(completionConfig, query) {
    */
   // const queryModel = 'abc123'
   /**
-   *  A unique identifier for tracking visitors. For example, this could be
-   *  implemented with an HTTP cookie, which should be able to uniquely identify
-   *  a visitor on a single device. This unique identifier should not change if
-   *  the visitor logs in or out of the website.
+   *  Optional. A unique identifier for tracking visitors. For example, this
+   *  could be implemented with an HTTP cookie, which should be able to uniquely
+   *  identify a visitor on a single device. This unique identifier should not
+   *  change if the visitor logs in or out of the website.
    *  This field should NOT have a fixed value such as `unknown_visitor`.
    *  This should be the same identifier as
    *  UserEvent.user_pseudo_id google.cloud.discoveryengine.v1beta.UserEvent.user_pseudo_id 
@@ -100,6 +100,14 @@ function main(completionConfig, query) {
    *  moment.
    */
   // const suggestionTypes = [1,2,3,4]
+  /**
+   *  Optional. Specification of each suggestion type.
+   */
+  // const suggestionTypeSpecs = [1,2,3,4]
+  /**
+   *  Optional. Experiment ids for this request.
+   */
+  // const experimentIds = ['abc','def']
 
   // Imports the Discoveryengine library
   const {CompletionServiceClient} = require('@google-cloud/discoveryengine').v1beta;

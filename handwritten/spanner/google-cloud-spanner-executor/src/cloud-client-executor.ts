@@ -17,9 +17,9 @@
 import {ServerDuplexStream, status} from '@grpc/grpc-js';
 import {Spanner} from '../../src';
 import {trace, context, Tracer} from '@opentelemetry/api';
-import * as protos from '../../protos/protos';
 import {CloudUtil} from './cloud-util';
 import {OutcomeSender, ExecutionFlowContextInterface} from './cloud-executor';
+import {protos} from '@google-cloud/spanner-api';
 import spanner = protos.google.spanner;
 import SpannerAsyncActionRequest = spanner.executor.v1.SpannerAsyncActionRequest;
 import SpannerAsyncActionResponse = spanner.executor.v1.SpannerAsyncActionResponse;

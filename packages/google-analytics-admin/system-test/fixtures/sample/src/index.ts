@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AnalyticsAdminServiceClient} from '@google-analytics/admin';
+import { AnalyticsAdminServiceClient } from '@google-analytics/admin';
 
 // check that the client class type name can be used
-function doStuffWithAnalyticsAdminServiceClient(client: AnalyticsAdminServiceClient) {
+function doStuffWithAnalyticsAdminServiceClient(
+  client: AnalyticsAdminServiceClient,
+) {
   client.close();
 }
 

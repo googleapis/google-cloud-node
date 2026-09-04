@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class AppOptimizeClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('appoptimize');
@@ -57,11 +68,11 @@ export class AppOptimizeClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  appOptimizeStub?: Promise<{[name: string]: Function}>;
+  appOptimizeStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of AppOptimizeClient.
@@ -102,21 +113,42 @@ export class AppOptimizeClient {
    *     const client = new AppOptimizeClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AppOptimizeClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'appoptimize.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +173,7 @@ export class AppOptimizeClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +187,11 @@ export class AppOptimizeClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,16 +213,16 @@ export class AppOptimizeClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/applications/{application}'
+        'projects/{project}/locations/{location}/applications/{application}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/reports/{report}'
+        'projects/{project}/locations/{location}/reports/{report}',
       ),
     };
 
@@ -202,10 +230,16 @@ export class AppOptimizeClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listReports:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reports'),
-      readReport:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rows')
+      listReports: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'reports',
+      ),
+      readReport: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'rows',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -214,29 +248,63 @@ export class AppOptimizeClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1beta/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1beta/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1beta/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1beta/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1beta/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1beta/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1beta/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createReportResponse = protoFilesRoot.lookup(
-      '.google.cloud.appoptimize.v1beta.Report') as gax.protobuf.Type;
+      '.google.cloud.appoptimize.v1beta.Report',
+    ) as gax.protobuf.Type;
     const createReportMetadata = protoFilesRoot.lookup(
-      '.google.cloud.appoptimize.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.appoptimize.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createReport: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createReportResponse.decode.bind(createReportResponse),
-        createReportMetadata.decode.bind(createReportMetadata))
+        createReportMetadata.decode.bind(createReportMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.appoptimize.v1beta.AppOptimize', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.appoptimize.v1beta.AppOptimize',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -267,28 +335,39 @@ export class AppOptimizeClient {
     // Put together the "service stub" for
     // google.cloud.appoptimize.v1beta.AppOptimize.
     this.appOptimizeStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.appoptimize.v1beta.AppOptimize') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.appoptimize.v1beta.AppOptimize',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.appoptimize.v1beta.AppOptimize,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const appOptimizeStubMethods =
-        ['createReport', 'getReport', 'listReports', 'deleteReport', 'readReport'];
+    const appOptimizeStubMethods = [
+      'createReport',
+      'getReport',
+      'listReports',
+      'deleteReport',
+      'readReport',
+    ];
     for (const methodName of appOptimizeStubMethods) {
       const callPromise = this.appOptimizeStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -298,7 +377,7 @@ export class AppOptimizeClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -313,8 +392,14 @@ export class AppOptimizeClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'appoptimize.googleapis.com';
   }
@@ -325,8 +410,14 @@ export class AppOptimizeClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'appoptimize.googleapis.com';
   }
@@ -357,9 +448,7 @@ export class AppOptimizeClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -368,8 +457,9 @@ export class AppOptimizeClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -380,414 +470,584 @@ export class AppOptimizeClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieves the details of a report configuration.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the report to retrieve.
- *
- *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.appoptimize.v1beta.Report|Report}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/app_optimize.get_report.js</caption>
- * region_tag:appoptimize_v1beta_generated_AppOptimize_GetReport_async
- */
+  /**
+   * Retrieves the details of a report configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the report to retrieve.
+   *
+   *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.appoptimize.v1beta.Report|Report}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/app_optimize.get_report.js</caption>
+   * region_tag:appoptimize_v1beta_generated_AppOptimize_GetReport_async
+   */
   getReport(
-      request?: protos.google.cloud.appoptimize.v1beta.IGetReportRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.appoptimize.v1beta.IReport,
-        protos.google.cloud.appoptimize.v1beta.IGetReportRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.appoptimize.v1beta.IGetReportRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.appoptimize.v1beta.IReport,
+      protos.google.cloud.appoptimize.v1beta.IGetReportRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getReport(
-      request: protos.google.cloud.appoptimize.v1beta.IGetReportRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.appoptimize.v1beta.IReport,
-          protos.google.cloud.appoptimize.v1beta.IGetReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.appoptimize.v1beta.IGetReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.appoptimize.v1beta.IReport,
+      | protos.google.cloud.appoptimize.v1beta.IGetReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getReport(
-      request: protos.google.cloud.appoptimize.v1beta.IGetReportRequest,
-      callback: Callback<
-          protos.google.cloud.appoptimize.v1beta.IReport,
-          protos.google.cloud.appoptimize.v1beta.IGetReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.appoptimize.v1beta.IGetReportRequest,
+    callback: Callback<
+      protos.google.cloud.appoptimize.v1beta.IReport,
+      | protos.google.cloud.appoptimize.v1beta.IGetReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getReport(
-      request?: protos.google.cloud.appoptimize.v1beta.IGetReportRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.appoptimize.v1beta.IGetReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.appoptimize.v1beta.IReport,
-          protos.google.cloud.appoptimize.v1beta.IGetReportRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.appoptimize.v1beta.IReport,
-          protos.google.cloud.appoptimize.v1beta.IGetReportRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.appoptimize.v1beta.IReport,
-        protos.google.cloud.appoptimize.v1beta.IGetReportRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.appoptimize.v1beta.IGetReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.appoptimize.v1beta.IReport,
+      | protos.google.cloud.appoptimize.v1beta.IGetReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.appoptimize.v1beta.IReport,
+      protos.google.cloud.appoptimize.v1beta.IGetReportRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getReport request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.appoptimize.v1beta.IReport,
-        protos.google.cloud.appoptimize.v1beta.IGetReportRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.appoptimize.v1beta.IReport,
+          | protos.google.cloud.appoptimize.v1beta.IGetReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getReport(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.appoptimize.v1beta.IReport,
-        protos.google.cloud.appoptimize.v1beta.IGetReportRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getReport response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.appoptimize.v1beta.IReport,
+          protos.google.cloud.appoptimize.v1beta.IGetReportRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getReport response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified report.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the report to delete.
- *
- *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
- * @param {boolean} [request.allowMissing]
- *   Optional. If set to true, and the report is not found, the request will
- *   succeed but no action will be taken on the server.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/app_optimize.delete_report.js</caption>
- * region_tag:appoptimize_v1beta_generated_AppOptimize_DeleteReport_async
- */
+  /**
+   * Deletes the specified report.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the report to delete.
+   *
+   *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the report is not found, the request will
+   *   succeed but no action will be taken on the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/app_optimize.delete_report.js</caption>
+   * region_tag:appoptimize_v1beta_generated_AppOptimize_DeleteReport_async
+   */
   deleteReport(
-      request?: protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteReport(
-      request: protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteReport(
-      request: protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteReport(
-      request?: protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteReport request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteReport response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteReport(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteReport response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.appoptimize.v1beta.IDeleteReportRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteReport response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new report.
- *
- * This initiates a long-running operation that, upon completion, results
- * in a report resource. Once the report is created, its results can be read
- * via `ReadReport`.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent Google Cloud project that will own the report.
- *
- *   This value does not define the scope of the report data. See `Report.scope`
- *   for setting the data scope.
- *
- *   Format: `projects/{project}/locations/{location}`.
- * @param {string} request.reportId
- *   Required. The ID to use for this report. This ID must be unique within
- *   the parent project and should comply with RFC 1034 restrictions (letters,
- *   numbers, and hyphen, with the first character a letter, the last a letter
- *   or a number, and a 63 character maximum).
- * @param {google.cloud.appoptimize.v1beta.Report} request.report
- *   Required. The report resource to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/app_optimize.create_report.js</caption>
- * region_tag:appoptimize_v1beta_generated_AppOptimize_CreateReport_async
- */
+  /**
+   * Creates a new report.
+   *
+   * This initiates a long-running operation that, upon completion, results
+   * in a report resource. Once the report is created, its results can be read
+   * via `ReadReport`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent Google Cloud project that will own the report.
+   *
+   *   This value does not define the scope of the report data. See `Report.scope`
+   *   for setting the data scope.
+   *
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {string} request.reportId
+   *   Required. The ID to use for this report. This ID must be unique within
+   *   the parent project and should comply with RFC 1034 restrictions (letters,
+   *   numbers, and hyphen, with the first character a letter, the last a letter
+   *   or a number, and a 63 character maximum).
+   * @param {google.cloud.appoptimize.v1beta.Report} request.report
+   *   Required. The report resource to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/app_optimize.create_report.js</caption>
+   * region_tag:appoptimize_v1beta_generated_AppOptimize_CreateReport_async
+   */
   createReport(
-      request?: protos.google.cloud.appoptimize.v1beta.ICreateReportRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.appoptimize.v1beta.ICreateReportRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.appoptimize.v1beta.IReport,
+        protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createReport(
-      request: protos.google.cloud.appoptimize.v1beta.ICreateReportRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.appoptimize.v1beta.ICreateReportRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.appoptimize.v1beta.IReport,
+        protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createReport(
-      request: protos.google.cloud.appoptimize.v1beta.ICreateReportRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.appoptimize.v1beta.ICreateReportRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.appoptimize.v1beta.IReport,
+        protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createReport(
-      request?: protos.google.cloud.appoptimize.v1beta.ICreateReportRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.appoptimize.v1beta.ICreateReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.appoptimize.v1beta.IReport,
+            protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.appoptimize.v1beta.IReport,
+        protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.appoptimize.v1beta.IReport,
+        protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.appoptimize.v1beta.IReport,
+            protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createReport response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createReport request %j', request);
-    return this.innerApiCalls.createReport(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.appoptimize.v1beta.IReport, protos.google.cloud.appoptimize.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createReport response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createReport(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.appoptimize.v1beta.IReport,
+            protos.google.cloud.appoptimize.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createReport response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createReport()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/app_optimize.create_report.js</caption>
- * region_tag:appoptimize_v1beta_generated_AppOptimize_CreateReport_async
- */
-  async checkCreateReportProgress(name: string): Promise<LROperation<protos.google.cloud.appoptimize.v1beta.Report, protos.google.cloud.appoptimize.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createReport()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/app_optimize.create_report.js</caption>
+   * region_tag:appoptimize_v1beta_generated_AppOptimize_CreateReport_async
+   */
+  async checkCreateReportProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.appoptimize.v1beta.Report,
+      protos.google.cloud.appoptimize.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('createReport long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createReport, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.appoptimize.v1beta.Report, protos.google.cloud.appoptimize.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createReport,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.appoptimize.v1beta.Report,
+      protos.google.cloud.appoptimize.v1beta.OperationMetadata
+    >;
   }
- /**
- * Lists reports within a given project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent project whose reports are to be listed.
- *
- *   Format: `projects/{project}/locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of reports to return. The service may return
- *   fewer than this value. If unspecified, the server will determine the number
- *   of results to return.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListReports` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListReports` must match
- *   the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.appoptimize.v1beta.Report|Report}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listReportsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists reports within a given project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent project whose reports are to be listed.
+   *
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of reports to return. The service may return
+   *   fewer than this value. If unspecified, the server will determine the number
+   *   of results to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListReports` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListReports` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.appoptimize.v1beta.Report|Report}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listReportsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listReports(
-      request?: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.appoptimize.v1beta.IReport[],
-        protos.google.cloud.appoptimize.v1beta.IListReportsRequest|null,
-        protos.google.cloud.appoptimize.v1beta.IListReportsResponse
-      ]>;
+    request?: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.appoptimize.v1beta.IReport[],
+      protos.google.cloud.appoptimize.v1beta.IListReportsRequest | null,
+      protos.google.cloud.appoptimize.v1beta.IListReportsResponse,
+    ]
+  >;
   listReports(
-      request: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-          protos.google.cloud.appoptimize.v1beta.IListReportsResponse|null|undefined,
-          protos.google.cloud.appoptimize.v1beta.IReport>): void;
+    request: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+      | protos.google.cloud.appoptimize.v1beta.IListReportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.appoptimize.v1beta.IReport
+    >,
+  ): void;
   listReports(
-      request: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-          protos.google.cloud.appoptimize.v1beta.IListReportsResponse|null|undefined,
-          protos.google.cloud.appoptimize.v1beta.IReport>): void;
+    request: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+      | protos.google.cloud.appoptimize.v1beta.IListReportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.appoptimize.v1beta.IReport
+    >,
+  ): void;
   listReports(
-      request?: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-          protos.google.cloud.appoptimize.v1beta.IListReportsResponse|null|undefined,
-          protos.google.cloud.appoptimize.v1beta.IReport>,
-      callback?: PaginationCallback<
-          protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-          protos.google.cloud.appoptimize.v1beta.IListReportsResponse|null|undefined,
-          protos.google.cloud.appoptimize.v1beta.IReport>):
-      Promise<[
-        protos.google.cloud.appoptimize.v1beta.IReport[],
-        protos.google.cloud.appoptimize.v1beta.IListReportsRequest|null,
-        protos.google.cloud.appoptimize.v1beta.IListReportsResponse
-      ]>|void {
+          | protos.google.cloud.appoptimize.v1beta.IListReportsResponse
+          | null
+          | undefined,
+          protos.google.cloud.appoptimize.v1beta.IReport
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+      | protos.google.cloud.appoptimize.v1beta.IListReportsResponse
+      | null
+      | undefined,
+      protos.google.cloud.appoptimize.v1beta.IReport
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.appoptimize.v1beta.IReport[],
+      protos.google.cloud.appoptimize.v1beta.IListReportsRequest | null,
+      protos.google.cloud.appoptimize.v1beta.IListReportsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-      protos.google.cloud.appoptimize.v1beta.IListReportsResponse|null|undefined,
-      protos.google.cloud.appoptimize.v1beta.IReport>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+          | protos.google.cloud.appoptimize.v1beta.IListReportsResponse
+          | null
+          | undefined,
+          protos.google.cloud.appoptimize.v1beta.IReport
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReports values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -796,213 +1056,242 @@ export class AppOptimizeClient {
     this._log.info('listReports request %j', request);
     return this.innerApiCalls
       .listReports(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.appoptimize.v1beta.IReport[],
-        protos.google.cloud.appoptimize.v1beta.IListReportsRequest|null,
-        protos.google.cloud.appoptimize.v1beta.IListReportsResponse
-      ]) => {
-        this._log.info('listReports values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.appoptimize.v1beta.IReport[],
+          protos.google.cloud.appoptimize.v1beta.IListReportsRequest | null,
+          protos.google.cloud.appoptimize.v1beta.IListReportsResponse,
+        ]) => {
+          this._log.info('listReports values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listReports`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent project whose reports are to be listed.
- *
- *   Format: `projects/{project}/locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of reports to return. The service may return
- *   fewer than this value. If unspecified, the server will determine the number
- *   of results to return.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListReports` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListReports` must match
- *   the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.appoptimize.v1beta.Report|Report} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listReportsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listReports`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent project whose reports are to be listed.
+   *
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of reports to return. The service may return
+   *   fewer than this value. If unspecified, the server will determine the number
+   *   of results to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListReports` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListReports` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.appoptimize.v1beta.Report|Report} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listReportsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listReportsStream(
-      request?: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listReports stream %j', request);
     return this.descriptors.page.listReports.createStream(
       this.innerApiCalls.listReports as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listReports`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent project whose reports are to be listed.
- *
- *   Format: `projects/{project}/locations/{location}`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of reports to return. The service may return
- *   fewer than this value. If unspecified, the server will determine the number
- *   of results to return.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListReports` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListReports` must match
- *   the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.appoptimize.v1beta.Report|Report}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/app_optimize.list_reports.js</caption>
- * region_tag:appoptimize_v1beta_generated_AppOptimize_ListReports_async
- */
+  /**
+   * Equivalent to `listReports`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent project whose reports are to be listed.
+   *
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of reports to return. The service may return
+   *   fewer than this value. If unspecified, the server will determine the number
+   *   of results to return.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListReports` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListReports` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.appoptimize.v1beta.Report|Report}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/app_optimize.list_reports.js</caption>
+   * region_tag:appoptimize_v1beta_generated_AppOptimize_ListReports_async
+   */
   listReportsAsync(
-      request?: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.appoptimize.v1beta.IReport>{
+    request?: protos.google.cloud.appoptimize.v1beta.IListReportsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.appoptimize.v1beta.IReport> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listReports'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listReports iterate %j', request);
     return this.descriptors.page.listReports.asyncIterate(
       this.innerApiCalls['listReports'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.appoptimize.v1beta.IReport>;
   }
- /**
- * Reads data within a specified report.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the report to query.
- *
- *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of rows to return. The service may return
- *   fewer than this value. If unspecified, at most 10,000 rows will be returned
- *   per page. The maximum allowed value is 25,000; values above 25,000 are
- *   coerced to 25,000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ReadReport` call, to
- *   retrieve the subsequent page of results. When `page_token` is specified,
- *   `job_reference` must also be provided from the previous response, and the
- *   `statement` field must not be set.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.protobuf.ListValue|ListValue}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `readReportAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Reads data within a specified report.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the report to query.
+   *
+   *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of rows to return. The service may return
+   *   fewer than this value. If unspecified, at most 10,000 rows will be returned
+   *   per page. The maximum allowed value is 25,000; values above 25,000 are
+   *   coerced to 25,000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ReadReport` call, to
+   *   retrieve the subsequent page of results. When `page_token` is specified,
+   *   `job_reference` must also be provided from the previous response, and the
+   *   `statement` field must not be set.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.protobuf.ListValue|ListValue}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `readReportAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   readReport(
-      request?: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IListValue[],
-        protos.google.cloud.appoptimize.v1beta.IReadReportRequest|null,
-        protos.google.cloud.appoptimize.v1beta.IReadReportResponse
-      ]>;
+    request?: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IListValue[],
+      protos.google.cloud.appoptimize.v1beta.IReadReportRequest | null,
+      protos.google.cloud.appoptimize.v1beta.IReadReportResponse,
+    ]
+  >;
   readReport(
-      request: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-          protos.google.cloud.appoptimize.v1beta.IReadReportResponse|null|undefined,
-          protos.google.protobuf.IListValue>): void;
+    request: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+      | protos.google.cloud.appoptimize.v1beta.IReadReportResponse
+      | null
+      | undefined,
+      protos.google.protobuf.IListValue
+    >,
+  ): void;
   readReport(
-      request: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-          protos.google.cloud.appoptimize.v1beta.IReadReportResponse|null|undefined,
-          protos.google.protobuf.IListValue>): void;
+    request: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+      | protos.google.cloud.appoptimize.v1beta.IReadReportResponse
+      | null
+      | undefined,
+      protos.google.protobuf.IListValue
+    >,
+  ): void;
   readReport(
-      request?: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-          protos.google.cloud.appoptimize.v1beta.IReadReportResponse|null|undefined,
-          protos.google.protobuf.IListValue>,
-      callback?: PaginationCallback<
-          protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-          protos.google.cloud.appoptimize.v1beta.IReadReportResponse|null|undefined,
-          protos.google.protobuf.IListValue>):
-      Promise<[
-        protos.google.protobuf.IListValue[],
-        protos.google.cloud.appoptimize.v1beta.IReadReportRequest|null,
-        protos.google.cloud.appoptimize.v1beta.IReadReportResponse
-      ]>|void {
+          | protos.google.cloud.appoptimize.v1beta.IReadReportResponse
+          | null
+          | undefined,
+          protos.google.protobuf.IListValue
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+      | protos.google.cloud.appoptimize.v1beta.IReadReportResponse
+      | null
+      | undefined,
+      protos.google.protobuf.IListValue
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IListValue[],
+      protos.google.cloud.appoptimize.v1beta.IReadReportRequest | null,
+      protos.google.cloud.appoptimize.v1beta.IReadReportResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-      protos.google.cloud.appoptimize.v1beta.IReadReportResponse|null|undefined,
-      protos.google.protobuf.IListValue>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+          | protos.google.cloud.appoptimize.v1beta.IReadReportResponse
+          | null
+          | undefined,
+          protos.google.protobuf.IListValue
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('readReport values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1011,125 +1300,130 @@ export class AppOptimizeClient {
     this._log.info('readReport request %j', request);
     return this.innerApiCalls
       .readReport(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.protobuf.IListValue[],
-        protos.google.cloud.appoptimize.v1beta.IReadReportRequest|null,
-        protos.google.cloud.appoptimize.v1beta.IReadReportResponse
-      ]) => {
-        this._log.info('readReport values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.protobuf.IListValue[],
+          protos.google.cloud.appoptimize.v1beta.IReadReportRequest | null,
+          protos.google.cloud.appoptimize.v1beta.IReadReportResponse,
+        ]) => {
+          this._log.info('readReport values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `readReport`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the report to query.
- *
- *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of rows to return. The service may return
- *   fewer than this value. If unspecified, at most 10,000 rows will be returned
- *   per page. The maximum allowed value is 25,000; values above 25,000 are
- *   coerced to 25,000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ReadReport` call, to
- *   retrieve the subsequent page of results. When `page_token` is specified,
- *   `job_reference` must also be provided from the previous response, and the
- *   `statement` field must not be set.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.protobuf.ListValue|ListValue} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `readReportAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `readReport`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the report to query.
+   *
+   *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of rows to return. The service may return
+   *   fewer than this value. If unspecified, at most 10,000 rows will be returned
+   *   per page. The maximum allowed value is 25,000; values above 25,000 are
+   *   coerced to 25,000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ReadReport` call, to
+   *   retrieve the subsequent page of results. When `page_token` is specified,
+   *   `job_reference` must also be provided from the previous response, and the
+   *   `statement` field must not be set.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.protobuf.ListValue|ListValue} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `readReportAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   readReportStream(
-      request?: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     const defaultCallSettings = this._defaults['readReport'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('readReport stream %j', request);
     return this.descriptors.page.readReport.createStream(
       this.innerApiCalls.readReport as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `readReport`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the report to query.
- *
- *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of rows to return. The service may return
- *   fewer than this value. If unspecified, at most 10,000 rows will be returned
- *   per page. The maximum allowed value is 25,000; values above 25,000 are
- *   coerced to 25,000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ReadReport` call, to
- *   retrieve the subsequent page of results. When `page_token` is specified,
- *   `job_reference` must also be provided from the previous response, and the
- *   `statement` field must not be set.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.protobuf.ListValue|ListValue}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/app_optimize.read_report.js</caption>
- * region_tag:appoptimize_v1beta_generated_AppOptimize_ReadReport_async
- */
+  /**
+   * Equivalent to `readReport`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the report to query.
+   *
+   *   Format: `projects/{project}/locations/{location}/reports/{report_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of rows to return. The service may return
+   *   fewer than this value. If unspecified, at most 10,000 rows will be returned
+   *   per page. The maximum allowed value is 25,000; values above 25,000 are
+   *   coerced to 25,000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ReadReport` call, to
+   *   retrieve the subsequent page of results. When `page_token` is specified,
+   *   `job_reference` must also be provided from the previous response, and the
+   *   `statement` field must not be set.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.protobuf.ListValue|ListValue}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/app_optimize.read_report.js</caption>
+   * region_tag:appoptimize_v1beta_generated_AppOptimize_ReadReport_async
+   */
   readReportAsync(
-      request?: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.protobuf.IListValue>{
+    request?: protos.google.cloud.appoptimize.v1beta.IReadReportRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.protobuf.IListValue> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     const defaultCallSettings = this._defaults['readReport'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('readReport iterate %j', request);
     return this.descriptors.page.readReport.asyncIterate(
       this.innerApiCalls['readReport'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.protobuf.IListValue>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1164,12 +1458,11 @@ export class AppOptimizeClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1202,12 +1495,12 @@ export class AppOptimizeClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1250,22 +1543,22 @@ export class AppOptimizeClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1300,15 +1593,15 @@ export class AppOptimizeClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1342,7 +1635,7 @@ export class AppOptimizeClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1355,25 +1648,24 @@ export class AppOptimizeClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1412,22 +1704,22 @@ export class AppOptimizeClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1443,7 +1735,7 @@ export class AppOptimizeClient {
    * @param {string} application
    * @returns {string} Resource name string.
    */
-  applicationPath(project:string,location:string,application:string) {
+  applicationPath(project: string, location: string, application: string) {
     return this.pathTemplates.applicationPathTemplate.render({
       project: project,
       location: location,
@@ -1459,7 +1751,8 @@ export class AppOptimizeClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).project;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .project;
   }
 
   /**
@@ -1470,7 +1763,8 @@ export class AppOptimizeClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).location;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .location;
   }
 
   /**
@@ -1481,7 +1775,8 @@ export class AppOptimizeClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).application;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .application;
   }
 
   /**
@@ -1491,7 +1786,7 @@ export class AppOptimizeClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1526,7 +1821,7 @@ export class AppOptimizeClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1551,7 +1846,7 @@ export class AppOptimizeClient {
    * @param {string} report
    * @returns {string} Resource name string.
    */
-  reportPath(project:string,location:string,report:string) {
+  reportPath(project: string, location: string, report: string) {
     return this.pathTemplates.reportPathTemplate.render({
       project: project,
       location: location,
@@ -1600,11 +1895,13 @@ export class AppOptimizeClient {
    */
   close(): Promise<void> {
     if (this.appOptimizeStub && !this._terminated) {
-      return this.appOptimizeStub.then(stub => {
+      return this.appOptimizeStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

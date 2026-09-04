@@ -19,7 +19,7 @@
 import * as v1 from './v1';
 const TestServiceClient = v1.TestServiceClient;
 type TestServiceClient = v1.TestServiceClient;
-export { v1, TestServiceClient };
-export default { v1, TestServiceClient };
+export {v1, TestServiceClient};
+export default {v1, TestServiceClient};
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

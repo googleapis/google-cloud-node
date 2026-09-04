@@ -85,6 +85,11 @@
                 "stopWorkstation"
               ]
             },
+            "PushCredentials": {
+              "methods": [
+                "pushCredentials"
+              ]
+            },
             "ListWorkstationClusters": {
               "methods": [
                 "listWorkstationClusters",
@@ -198,6 +203,11 @@
             "StopWorkstation": {
               "methods": [
                 "stopWorkstation"
+              ]
+            },
+            "PushCredentials": {
+              "methods": [
+                "pushCredentials"
               ]
             },
             "ListWorkstationClusters": {

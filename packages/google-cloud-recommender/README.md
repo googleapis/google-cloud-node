@@ -71,7 +71,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | mark recommendation succeeded | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1/recommender.mark_recommendation_succeeded.js) |
 | update insight type config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1/recommender.update_insight_type_config.js) |
 | update recommender config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1/recommender.update_recommender_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1/snippet_metadata_google.cloud.recommender.v1.json) |
 | get insight | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/recommender.get_insight.js) |
 | get insight type config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/recommender.get_insight_type_config.js) |
 | get recommendation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/recommender.get_recommendation.js) |
@@ -86,7 +85,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | mark recommendation succeeded | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/recommender.mark_recommendation_succeeded.js) |
 | update insight type config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/recommender.update_insight_type_config.js) |
 | update recommender config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/recommender.update_recommender_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recommender/samples/generated/v1beta1/snippet_metadata_google.cloud.recommender.v1beta1.json) |
 
 
 ## Supported Node.js Versions

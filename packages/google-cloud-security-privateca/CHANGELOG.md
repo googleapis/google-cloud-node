@@ -1,5 +1,30 @@
 # Changelog
 
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v7.2.0...security-private-ca-v8.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v7.1.0...security-private-ca-v7.2.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 2 ([#8613](https://github.com/googleapis/google-cloud-node/issues/8613)) ([243fb1a](https://github.com/googleapis/google-cloud-node/commit/243fb1a66876934bd68ca96e420937ae8adeb77d))
+
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v7.0.2...security-private-ca-v7.1.0) (2026-06-01)
+
+
+### Features
+
+* [security] add allow_requester_specified_not_before_time and requested_not_before_time fields to PrivateCA v1 API ([#8364](https://github.com/googleapis/google-cloud-node/issues/8364)) ([c57233c](https://github.com/googleapis/google-cloud-node/commit/c57233c171eaf119ed7a98dd9a3a8ea8610fbc59))
+
 ## [7.0.2](https://github.com/googleapis/google-cloud-node/compare/security-private-ca-v7.0.1...security-private-ca-v7.0.2) (2026-05-01)
 
 

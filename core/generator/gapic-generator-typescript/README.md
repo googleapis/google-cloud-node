@@ -2,7 +2,7 @@
 
 ## Background
 
-This tool is a TypeScript client library generator for network APIs specified
+This tool is a TypeScript client library generator for network APIs specified 
 by [protocol
 buffers](https://developers.google.com/protocol-buffers/) (including, but
 not limited to, [client libraries](https://www.npmjs.com/search?q=%40google-cloud)

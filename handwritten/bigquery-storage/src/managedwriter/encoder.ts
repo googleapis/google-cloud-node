@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import * as protobuf from 'protobufjs';
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import {
   generatePlaceholderFieldName,
   isProtoCompatible,

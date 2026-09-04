@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v2 from './v2';
-import * as v2alpha from './v2alpha';
 import * as v2beta from './v2beta';
+import * as v2alpha from './v2alpha';
 
 const AnalyticsServiceClient = v2beta.AnalyticsServiceClient;
 type AnalyticsServiceClient = v2beta.AnalyticsServiceClient;
@@ -47,7 +47,7 @@ type ServingConfigServiceClient = v2beta.ServingConfigServiceClient;
 const UserEventServiceClient = v2beta.UserEventServiceClient;
 type UserEventServiceClient = v2beta.UserEventServiceClient;
 
-export {v2, v2alpha, v2beta, AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, ProjectServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient};
-export default {v2, v2alpha, v2beta, AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, ProjectServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient};
+export {v2, v2beta, v2alpha, AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, ProjectServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient};
+export default {v2, v2beta, v2alpha, AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, ProjectServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

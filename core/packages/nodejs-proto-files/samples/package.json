@@ -6,15 +6,15 @@
     "*.js"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
-  "repository": "googleapis/nodejs-proto-files",
+  "repository": "googleapis/google-cloud-node",
   "private": true,
   "scripts": {
     "test": "mocha"
   },
   "dependencies": {
-    "google-proto-files": "^5.0.2"
+    "google-proto-files": "^6.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

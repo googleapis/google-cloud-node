@@ -74,7 +74,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.test_iam_permissions.js) |
 | update queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.update_queue.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/snippet_metadata_google.cloud.tasks.v2.json) |
 | acknowledge task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.acknowledge_task.js) |
 | cancel lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.cancel_lease.js) |
 | create queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.create_queue.js) |
@@ -96,7 +95,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.test_iam_permissions.js) |
 | update queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.update_queue.js) |
 | upload queue yaml | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.upload_queue_yaml.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/snippet_metadata_google.cloud.tasks.v2beta2.json) |
 | create queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.create_queue.js) |
 | create task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.create_task.js) |
 | delete queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.delete_queue.js) |
@@ -113,7 +111,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.test_iam_permissions.js) |
 | update queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.update_queue.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/snippet_metadata_google.cloud.tasks.v2beta3.json) |
 
 
 ## Supported Node.js Versions
@@ -147,7 +144,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -157,7 +154,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

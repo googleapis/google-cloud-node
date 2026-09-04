@@ -13476,5 +13476,60 @@ describe('v1.SecureSourceManagerClient', () => {
         );
       });
     });
+
+    describe('serviceAccount', async () => {
+      const fakePath = '/rendered/path/serviceAccount';
+      const expectedParameters = {
+        project: 'projectValue',
+        service_account: 'serviceAccountValue',
+      };
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.serviceAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.serviceAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('serviceAccountPath', () => {
+        const result = client.serviceAccountPath(
+          'projectValue',
+          'serviceAccountValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.serviceAccountPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromServiceAccountName', () => {
+        const result = client.matchProjectFromServiceAccountName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchServiceAccountFromServiceAccountName', () => {
+        const result =
+          client.matchServiceAccountFromServiceAccountName(fakePath);
+        assert.strictEqual(result, 'serviceAccountValue');
+        assert(
+          (client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
   });
 });

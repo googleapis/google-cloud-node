@@ -13,7 +13,8 @@
 // limitations under the License.
 
 import {PreciseDate} from '@google-cloud/precise-date';
-import {google} from '../../protos/protos';
+import {protos} from '..';
+import google = protos.google;
 import {BigtableDate, ExecuteQueryParameterValue} from './values';
 import * as SqlTypes from './types';
 import * as is from 'is';

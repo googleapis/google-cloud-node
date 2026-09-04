@@ -209,6 +209,15 @@ export class SearchServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclConfig',
+      ),
+      assistAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}',
+      ),
+      assistantPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}',
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}',
       ),
@@ -218,8 +227,20 @@ export class SearchServiceClient {
       groundingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/groundingConfigs/{grounding_config}',
       ),
+      identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}',
+      ),
+      licenseConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/licenseConfigs/{license_config}',
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
+      ),
+      projectLocationCmekConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfig',
+      ),
+      projectLocationCmekConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfigs/{cmek_config}',
       ),
       projectLocationCollectionDataStorePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -280,6 +301,10 @@ export class SearchServiceClient {
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}',
+        ),
+      projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/collaborativeProjects/{collaborative_project}/sessions/{session}',
         ),
       projectLocationCollectionEngineControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -365,6 +390,9 @@ export class SearchServiceClient {
       ),
       sampleQuerySetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}',
+      ),
+      userStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/userStores/{user_store}',
       ),
     };
 
@@ -526,7 +554,12 @@ export class SearchServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/discoveryengine.assist.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.serving.readwrite',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -569,6 +602,24 @@ export class SearchServiceClient {
    *   documents under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   * @param {string[]} [request.pageCategories]
+   *   Optional. The categories associated with a category page. Must be set for
+   *   category navigation queries to achieve good search quality. The format
+   *   should be the same as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.PageInfo.page_category|PageInfo.page_category}.
+   *   This field is the equivalent of the query for browse (navigation) queries.
+   *   It's used by the browse model when the query is empty.
+   *
+   *   If the field is empty, it will not be used by the browse model.
+   *   If the field contains more than one element, only the first element will
+   *   be used.
+   *
+   *   To represent full path of a category, use '>' character to separate
+   *   different hierarchies. If '>' is part of the category name, replace it with
+   *   other character(s).
+   *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+   *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+   *   > Founders Edition`
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery} request.imageQuery
    *   Raw image query.
    * @param {number} request.pageSize
@@ -599,15 +650,25 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *
+   *   A large offset may be capped to a reasonable threshold.
    * @param {number} request.oneBoxPageSize
    *   The maximum number of results to return for OneBox.
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1beta.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}s with multiple
+   *   data stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest|SearchRequest} should
+   *   be used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -652,7 +713,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -697,11 +758,11 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction takes effect.
-   * @param {string} request.userPseudoId
-   *   A unique identifier for tracking visitors. For example, this could be
-   *   implemented with an HTTP cookie, which should be able to uniquely identify
-   *   a visitor on a single device. This unique identifier should not change if
-   *   the visitor logs in or out of the website.
+   * @param {string} [request.userPseudoId]
+   *   Optional. A unique identifier for tracking visitors. For example, this
+   *   could be implemented with an HTTP cookie, which should be able to uniquely
+   *   identify a visitor on a single device. This unique identifier should not
+   *   change if the visitor logs in or out of the website.
    *
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
@@ -725,9 +786,9 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
    *   is not provided, it will use
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
-   * @param {string} request.rankingExpression
-   *   The ranking expression controls the customized ranking on retrieval
-   *   documents. This overrides
+   * @param {string} [request.rankingExpression]
+   *   Optional. The ranking expression controls the customized ranking on
+   *   retrieval documents. This overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
    *   The syntax and supported features depend on the
    *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -816,8 +877,17 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
-   *   The backend to use for the ranking expression evaluation.
+   *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
    *   website search.
@@ -839,13 +909,30 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+   *   Optional. Config for natural language query understanding capabilities,
+   *   such as extracting structured field filters from the query. Refer to [this
+   *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+   *   for more information.
    *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
    *   natural language query understanding will be done.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
+   * @param {number[]} [request.crowdingSpecs]
+   *   Optional. Crowding specifications for improving result diversity.
+   *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+   *   each unique combination of the `field` values, and max_count will be the
+   *   maximum value of `max_count` across all CrowdingSpecs.
+   *   For example, if the first CrowdingSpec has `field` = "color" and
+   *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+   *   `max_count` = 2, then after 3 documents that share the same color AND size
+   *   have been returned, subsequent ones should be
+   *   removed or demoted.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -863,20 +950,29 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
    *   Can be used only when `session` is set.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
-   *   The relevance threshold of the search results.
+   *   The global relevance threshold of the search results.
    *
-   *   Default to Google defined threshold, leveraging a balance of
+   *   Defaults to Google defined threshold, leveraging a balance of
    *   precision and recall to deliver both highly accurate results and
    *   comprehensive coverage of relevant information.
+   *
+   *   If more granular relevance filtering is required, use the
+   *   `relevance_filter_spec` instead.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
    *
@@ -888,6 +984,21 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
    *   overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.entity|UserEvent.entity} to
+   *   get search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1022,6 +1133,24 @@ export class SearchServiceClient {
    *   documents under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   * @param {string[]} [request.pageCategories]
+   *   Optional. The categories associated with a category page. Must be set for
+   *   category navigation queries to achieve good search quality. The format
+   *   should be the same as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.PageInfo.page_category|PageInfo.page_category}.
+   *   This field is the equivalent of the query for browse (navigation) queries.
+   *   It's used by the browse model when the query is empty.
+   *
+   *   If the field is empty, it will not be used by the browse model.
+   *   If the field contains more than one element, only the first element will
+   *   be used.
+   *
+   *   To represent full path of a category, use '>' character to separate
+   *   different hierarchies. If '>' is part of the category name, replace it with
+   *   other character(s).
+   *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+   *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+   *   > Founders Edition`
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery} request.imageQuery
    *   Raw image query.
    * @param {number} request.pageSize
@@ -1052,15 +1181,25 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *
+   *   A large offset may be capped to a reasonable threshold.
    * @param {number} request.oneBoxPageSize
    *   The maximum number of results to return for OneBox.
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1beta.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}s with multiple
+   *   data stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest|SearchRequest} should
+   *   be used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -1105,7 +1244,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -1150,11 +1289,11 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction takes effect.
-   * @param {string} request.userPseudoId
-   *   A unique identifier for tracking visitors. For example, this could be
-   *   implemented with an HTTP cookie, which should be able to uniquely identify
-   *   a visitor on a single device. This unique identifier should not change if
-   *   the visitor logs in or out of the website.
+   * @param {string} [request.userPseudoId]
+   *   Optional. A unique identifier for tracking visitors. For example, this
+   *   could be implemented with an HTTP cookie, which should be able to uniquely
+   *   identify a visitor on a single device. This unique identifier should not
+   *   change if the visitor logs in or out of the website.
    *
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
@@ -1178,9 +1317,9 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
    *   is not provided, it will use
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
-   * @param {string} request.rankingExpression
-   *   The ranking expression controls the customized ranking on retrieval
-   *   documents. This overrides
+   * @param {string} [request.rankingExpression]
+   *   Optional. The ranking expression controls the customized ranking on
+   *   retrieval documents. This overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
    *   The syntax and supported features depend on the
    *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -1269,8 +1408,17 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
-   *   The backend to use for the ranking expression evaluation.
+   *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
    *   website search.
@@ -1292,13 +1440,30 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+   *   Optional. Config for natural language query understanding capabilities,
+   *   such as extracting structured field filters from the query. Refer to [this
+   *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+   *   for more information.
    *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
    *   natural language query understanding will be done.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
+   * @param {number[]} [request.crowdingSpecs]
+   *   Optional. Crowding specifications for improving result diversity.
+   *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+   *   each unique combination of the `field` values, and max_count will be the
+   *   maximum value of `max_count` across all CrowdingSpecs.
+   *   For example, if the first CrowdingSpec has `field` = "color" and
+   *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+   *   `max_count` = 2, then after 3 documents that share the same color AND size
+   *   have been returned, subsequent ones should be
+   *   removed or demoted.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -1316,20 +1481,29 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
    *   Can be used only when `session` is set.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
-   *   The relevance threshold of the search results.
+   *   The global relevance threshold of the search results.
    *
-   *   Default to Google defined threshold, leveraging a balance of
+   *   Defaults to Google defined threshold, leveraging a balance of
    *   precision and recall to deliver both highly accurate results and
    *   comprehensive coverage of relevant information.
+   *
+   *   If more granular relevance filtering is required, use the
+   *   `relevance_filter_spec` instead.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
    *
@@ -1341,6 +1515,21 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
    *   overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.entity|UserEvent.entity} to
+   *   get search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1398,6 +1587,24 @@ export class SearchServiceClient {
    *   documents under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   * @param {string[]} [request.pageCategories]
+   *   Optional. The categories associated with a category page. Must be set for
+   *   category navigation queries to achieve good search quality. The format
+   *   should be the same as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.PageInfo.page_category|PageInfo.page_category}.
+   *   This field is the equivalent of the query for browse (navigation) queries.
+   *   It's used by the browse model when the query is empty.
+   *
+   *   If the field is empty, it will not be used by the browse model.
+   *   If the field contains more than one element, only the first element will
+   *   be used.
+   *
+   *   To represent full path of a category, use '>' character to separate
+   *   different hierarchies. If '>' is part of the category name, replace it with
+   *   other character(s).
+   *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+   *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+   *   > Founders Edition`
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery} request.imageQuery
    *   Raw image query.
    * @param {number} request.pageSize
@@ -1428,15 +1635,25 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *
+   *   A large offset may be capped to a reasonable threshold.
    * @param {number} request.oneBoxPageSize
    *   The maximum number of results to return for OneBox.
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1beta.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}s with multiple
+   *   data stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest|SearchRequest} should
+   *   be used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -1481,7 +1698,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -1526,11 +1743,11 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction takes effect.
-   * @param {string} request.userPseudoId
-   *   A unique identifier for tracking visitors. For example, this could be
-   *   implemented with an HTTP cookie, which should be able to uniquely identify
-   *   a visitor on a single device. This unique identifier should not change if
-   *   the visitor logs in or out of the website.
+   * @param {string} [request.userPseudoId]
+   *   Optional. A unique identifier for tracking visitors. For example, this
+   *   could be implemented with an HTTP cookie, which should be able to uniquely
+   *   identify a visitor on a single device. This unique identifier should not
+   *   change if the visitor logs in or out of the website.
    *
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
@@ -1554,9 +1771,9 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
    *   is not provided, it will use
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
-   * @param {string} request.rankingExpression
-   *   The ranking expression controls the customized ranking on retrieval
-   *   documents. This overrides
+   * @param {string} [request.rankingExpression]
+   *   Optional. The ranking expression controls the customized ranking on
+   *   retrieval documents. This overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
    *   The syntax and supported features depend on the
    *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -1645,8 +1862,17 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
-   *   The backend to use for the ranking expression evaluation.
+   *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
    *   website search.
@@ -1668,13 +1894,30 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+   *   Optional. Config for natural language query understanding capabilities,
+   *   such as extracting structured field filters from the query. Refer to [this
+   *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+   *   for more information.
    *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
    *   natural language query understanding will be done.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
+   * @param {number[]} [request.crowdingSpecs]
+   *   Optional. Crowding specifications for improving result diversity.
+   *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+   *   each unique combination of the `field` values, and max_count will be the
+   *   maximum value of `max_count` across all CrowdingSpecs.
+   *   For example, if the first CrowdingSpec has `field` = "color" and
+   *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+   *   `max_count` = 2, then after 3 documents that share the same color AND size
+   *   have been returned, subsequent ones should be
+   *   removed or demoted.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -1692,20 +1935,29 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
    *   Can be used only when `session` is set.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
-   *   The relevance threshold of the search results.
+   *   The global relevance threshold of the search results.
    *
-   *   Default to Google defined threshold, leveraging a balance of
+   *   Defaults to Google defined threshold, leveraging a balance of
    *   precision and recall to deliver both highly accurate results and
    *   comprehensive coverage of relevant information.
+   *
+   *   If more granular relevance filtering is required, use the
+   *   `relevance_filter_spec` instead.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
    *
@@ -1717,6 +1969,21 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
    *   overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.entity|UserEvent.entity} to
+   *   get search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1785,6 +2052,24 @@ export class SearchServiceClient {
    *   documents under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   * @param {string[]} [request.pageCategories]
+   *   Optional. The categories associated with a category page. Must be set for
+   *   category navigation queries to achieve good search quality. The format
+   *   should be the same as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.PageInfo.page_category|PageInfo.page_category}.
+   *   This field is the equivalent of the query for browse (navigation) queries.
+   *   It's used by the browse model when the query is empty.
+   *
+   *   If the field is empty, it will not be used by the browse model.
+   *   If the field contains more than one element, only the first element will
+   *   be used.
+   *
+   *   To represent full path of a category, use '>' character to separate
+   *   different hierarchies. If '>' is part of the category name, replace it with
+   *   other character(s).
+   *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+   *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+   *   > Founders Edition`
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery} request.imageQuery
    *   Raw image query.
    * @param {number} request.pageSize
@@ -1815,15 +2100,25 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *
+   *   A large offset may be capped to a reasonable threshold.
    * @param {number} request.oneBoxPageSize
    *   The maximum number of results to return for OneBox.
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1beta.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}s with multiple
+   *   data stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest|SearchRequest} should
+   *   be used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -1868,7 +2163,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -1913,11 +2208,11 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction takes effect.
-   * @param {string} request.userPseudoId
-   *   A unique identifier for tracking visitors. For example, this could be
-   *   implemented with an HTTP cookie, which should be able to uniquely identify
-   *   a visitor on a single device. This unique identifier should not change if
-   *   the visitor logs in or out of the website.
+   * @param {string} [request.userPseudoId]
+   *   Optional. A unique identifier for tracking visitors. For example, this
+   *   could be implemented with an HTTP cookie, which should be able to uniquely
+   *   identify a visitor on a single device. This unique identifier should not
+   *   change if the visitor logs in or out of the website.
    *
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
@@ -1941,9 +2236,9 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
    *   is not provided, it will use
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
-   * @param {string} request.rankingExpression
-   *   The ranking expression controls the customized ranking on retrieval
-   *   documents. This overrides
+   * @param {string} [request.rankingExpression]
+   *   Optional. The ranking expression controls the customized ranking on
+   *   retrieval documents. This overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
    *   The syntax and supported features depend on the
    *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -2032,8 +2327,17 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
-   *   The backend to use for the ranking expression evaluation.
+   *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
    *   website search.
@@ -2055,13 +2359,30 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+   *   Optional. Config for natural language query understanding capabilities,
+   *   such as extracting structured field filters from the query. Refer to [this
+   *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+   *   for more information.
    *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
    *   natural language query understanding will be done.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
+   * @param {number[]} [request.crowdingSpecs]
+   *   Optional. Crowding specifications for improving result diversity.
+   *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+   *   each unique combination of the `field` values, and max_count will be the
+   *   maximum value of `max_count` across all CrowdingSpecs.
+   *   For example, if the first CrowdingSpec has `field` = "color" and
+   *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+   *   `max_count` = 2, then after 3 documents that share the same color AND size
+   *   have been returned, subsequent ones should be
+   *   removed or demoted.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -2079,20 +2400,29 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
    *   Can be used only when `session` is set.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
-   *   The relevance threshold of the search results.
+   *   The global relevance threshold of the search results.
    *
-   *   Default to Google defined threshold, leveraging a balance of
+   *   Defaults to Google defined threshold, leveraging a balance of
    *   precision and recall to deliver both highly accurate results and
    *   comprehensive coverage of relevant information.
+   *
+   *   If more granular relevance filtering is required, use the
+   *   `relevance_filter_spec` instead.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
    *
@@ -2104,6 +2434,21 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
    *   overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.entity|UserEvent.entity} to
+   *   get search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2238,6 +2583,24 @@ export class SearchServiceClient {
    *   documents under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   * @param {string[]} [request.pageCategories]
+   *   Optional. The categories associated with a category page. Must be set for
+   *   category navigation queries to achieve good search quality. The format
+   *   should be the same as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.PageInfo.page_category|PageInfo.page_category}.
+   *   This field is the equivalent of the query for browse (navigation) queries.
+   *   It's used by the browse model when the query is empty.
+   *
+   *   If the field is empty, it will not be used by the browse model.
+   *   If the field contains more than one element, only the first element will
+   *   be used.
+   *
+   *   To represent full path of a category, use '>' character to separate
+   *   different hierarchies. If '>' is part of the category name, replace it with
+   *   other character(s).
+   *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+   *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+   *   > Founders Edition`
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery} request.imageQuery
    *   Raw image query.
    * @param {number} request.pageSize
@@ -2268,15 +2631,25 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *
+   *   A large offset may be capped to a reasonable threshold.
    * @param {number} request.oneBoxPageSize
    *   The maximum number of results to return for OneBox.
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1beta.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}s with multiple
+   *   data stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest|SearchRequest} should
+   *   be used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -2321,7 +2694,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -2366,11 +2739,11 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction takes effect.
-   * @param {string} request.userPseudoId
-   *   A unique identifier for tracking visitors. For example, this could be
-   *   implemented with an HTTP cookie, which should be able to uniquely identify
-   *   a visitor on a single device. This unique identifier should not change if
-   *   the visitor logs in or out of the website.
+   * @param {string} [request.userPseudoId]
+   *   Optional. A unique identifier for tracking visitors. For example, this
+   *   could be implemented with an HTTP cookie, which should be able to uniquely
+   *   identify a visitor on a single device. This unique identifier should not
+   *   change if the visitor logs in or out of the website.
    *
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
@@ -2394,9 +2767,9 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
    *   is not provided, it will use
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
-   * @param {string} request.rankingExpression
-   *   The ranking expression controls the customized ranking on retrieval
-   *   documents. This overrides
+   * @param {string} [request.rankingExpression]
+   *   Optional. The ranking expression controls the customized ranking on
+   *   retrieval documents. This overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
    *   The syntax and supported features depend on the
    *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -2485,8 +2858,17 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
-   *   The backend to use for the ranking expression evaluation.
+   *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
    *   website search.
@@ -2508,13 +2890,30 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+   *   Optional. Config for natural language query understanding capabilities,
+   *   such as extracting structured field filters from the query. Refer to [this
+   *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+   *   for more information.
    *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
    *   natural language query understanding will be done.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
+   * @param {number[]} [request.crowdingSpecs]
+   *   Optional. Crowding specifications for improving result diversity.
+   *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+   *   each unique combination of the `field` values, and max_count will be the
+   *   maximum value of `max_count` across all CrowdingSpecs.
+   *   For example, if the first CrowdingSpec has `field` = "color" and
+   *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+   *   `max_count` = 2, then after 3 documents that share the same color AND size
+   *   have been returned, subsequent ones should be
+   *   removed or demoted.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -2532,20 +2931,29 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
    *   Can be used only when `session` is set.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
-   *   The relevance threshold of the search results.
+   *   The global relevance threshold of the search results.
    *
-   *   Default to Google defined threshold, leveraging a balance of
+   *   Defaults to Google defined threshold, leveraging a balance of
    *   precision and recall to deliver both highly accurate results and
    *   comprehensive coverage of relevant information.
+   *
+   *   If more granular relevance filtering is required, use the
+   *   `relevance_filter_spec` instead.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
    *
@@ -2557,6 +2965,21 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
    *   overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.entity|UserEvent.entity} to
+   *   get search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2614,6 +3037,24 @@ export class SearchServiceClient {
    *   documents under the default branch.
    * @param {string} request.query
    *   Raw search query.
+   * @param {string[]} [request.pageCategories]
+   *   Optional. The categories associated with a category page. Must be set for
+   *   category navigation queries to achieve good search quality. The format
+   *   should be the same as
+   *   {@link protos.google.cloud.discoveryengine.v1beta.PageInfo.page_category|PageInfo.page_category}.
+   *   This field is the equivalent of the query for browse (navigation) queries.
+   *   It's used by the browse model when the query is empty.
+   *
+   *   If the field is empty, it will not be used by the browse model.
+   *   If the field contains more than one element, only the first element will
+   *   be used.
+   *
+   *   To represent full path of a category, use '>' character to separate
+   *   different hierarchies. If '>' is part of the category name, replace it with
+   *   other character(s).
+   *   For example, `Graphics Cards > RTX>4090 > Founders Edition` where "RTX >
+   *   4090" represents one level, can be rewritten as `Graphics Cards > RTX_4090
+   *   > Founders Edition`
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.ImageQuery} request.imageQuery
    *   Raw image query.
    * @param {number} request.pageSize
@@ -2644,15 +3085,25 @@ export class SearchServiceClient {
    *   is unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   *
+   *   A large offset may be capped to a reasonable threshold.
    * @param {number} request.oneBoxPageSize
    *   The maximum number of results to return for OneBox.
    *   This applies to each OneBox type individually.
    *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
-   *   Specs defining dataStores to filter on in a search call and configurations
-   *   for those dataStores. This is only considered for engines with multiple
-   *   dataStores use case. For single dataStore within an engine, they should
-   *   use the specs at the top level.
+   *   Specifications that define the specific
+   *   {@link protos.google.cloud.discoveryengine.v1beta.DataStore|DataStore}s to be searched,
+   *   along with configurations for those data stores. This is only considered
+   *   for {@link protos.google.cloud.discoveryengine.v1beta.Engine|Engine}s with multiple
+   *   data stores. For engines with a single data store, the specs directly under
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest|SearchRequest} should
+   *   be used.
+   * @param {number} [request.numResultsPerDataStore]
+   *   Optional. The maximum number of results to retrieve from each data store.
+   *   If not specified, it will use the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.DataStoreSpec.num_results|SearchRequest.DataStoreSpec.num_results}
+   *   if provided, otherwise there is no limit.
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the documents being filtered. Filter
@@ -2697,7 +3148,7 @@ export class SearchServiceClient {
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
    *   Information about the end user.
-   *   Highly recommended for analytics.
+   *   Highly recommended for analytics and personalization.
    *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
    * @param {string} request.languageCode
@@ -2742,11 +3193,11 @@ export class SearchServiceClient {
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SpellCorrectionSpec} request.spellCorrectionSpec
    *   The spell correction specification that specifies the mode under
    *   which spell correction takes effect.
-   * @param {string} request.userPseudoId
-   *   A unique identifier for tracking visitors. For example, this could be
-   *   implemented with an HTTP cookie, which should be able to uniquely identify
-   *   a visitor on a single device. This unique identifier should not change if
-   *   the visitor logs in or out of the website.
+   * @param {string} [request.userPseudoId]
+   *   Optional. A unique identifier for tracking visitors. For example, this
+   *   could be implemented with an HTTP cookie, which should be able to uniquely
+   *   identify a visitor on a single device. This unique identifier should not
+   *   change if the visitor logs in or out of the website.
    *
    *   This field should NOT have a fixed value such as `unknown_visitor`.
    *
@@ -2770,9 +3221,9 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.EmbeddingSpec.EmbeddingVector.field_path|SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
    *   is not provided, it will use
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.embedding_config|ServingConfig.EmbeddingConfig.field_path}.
-   * @param {string} request.rankingExpression
-   *   The ranking expression controls the customized ranking on retrieval
-   *   documents. This overrides
+   * @param {string} [request.rankingExpression]
+   *   Optional. The ranking expression controls the customized ranking on
+   *   retrieval documents. This overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
    *   The syntax and supported features depend on the
    *   `ranking_expression_backend` value. If `ranking_expression_backend` is not
@@ -2861,8 +3312,17 @@ export class SearchServiceClient {
    *     Google model to determine the keyword-based overlap between the query and
    *     the document.
    *     * `base_rank`: the default rank of the result
+   *     * `media_actor_match`: whether the media actor matches the query
+   *     * `media_director_match`: whether the media director matches the query
+   *     * `media_genre_match`: whether the media genre matches the query
+   *     * `media_language_match`: whether the media language matches the query
+   *     * `media_title_match`: whether the media title matches the query
+   *     * `media_prefix_similarity_rank`: prefix similarity rank for media
+   *     results
+   *     * `media_semantic_similarity_rank`: semantic similarity rank for media
+   *     results
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RankingExpressionBackend} [request.rankingExpressionBackend]
-   *   The backend to use for the ranking expression evaluation.
+   *   Optional. The backend to use for the ranking expression evaluation.
    * @param {boolean} request.safeSearch
    *   Whether to turn on safe search. This is only supported for
    *   website search.
@@ -2884,13 +3344,30 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
-   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} [request.naturalLanguageQueryUnderstandingSpec]
+   *   Optional. Config for natural language query understanding capabilities,
+   *   such as extracting structured field filters from the query. Refer to [this
+   *   documentation](https://cloud.google.com/generative-ai-app-builder/docs/natural-language-queries)
+   *   for more information.
    *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
    *   natural language query understanding will be done.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
    *   Search as you type configuration. Only supported for the
    *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
    *   vertical.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.DisplaySpec} [request.displaySpec]
+   *   Optional. Config for display feature, like match highlighting on search
+   *   results.
+   * @param {number[]} [request.crowdingSpecs]
+   *   Optional. Crowding specifications for improving result diversity.
+   *   If multiple CrowdingSpecs are specified, crowding will be evaluated on
+   *   each unique combination of the `field` values, and max_count will be the
+   *   maximum value of `max_count` across all CrowdingSpecs.
+   *   For example, if the first CrowdingSpec has `field` = "color" and
+   *   `max_count` = 3, and the second CrowdingSpec has `field` = "size" and
+   *   `max_count` = 2, then after 3 documents that share the same color AND size
+   *   have been returned, subsequent ones should be
+   *   removed or demoted.
    * @param {string} request.session
    *   The session resource name. Optional.
    *
@@ -2908,20 +3385,29 @@ export class SearchServiceClient {
    *     Call /answer API with the session ID generated in the first call.
    *     Here, the answer generation happens in the context of the search
    *     results from the first search call.
-   *
-   *   Multi-turn Search feature is currently at private GA stage. Please use
-   *   v1alpha or v1beta version instead before we launch this feature to public
-   *   GA. Or ask for allowlisting through Google Support team.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
    *   Session specification.
    *
    *   Can be used only when `session` is set.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
-   *   The relevance threshold of the search results.
+   *   The global relevance threshold of the search results.
    *
-   *   Default to Google defined threshold, leveraging a balance of
+   *   Defaults to Google defined threshold, leveraging a balance of
    *   precision and recall to deliver both highly accurate results and
    *   comprehensive coverage of relevant information.
+   *
+   *   If more granular relevance filtering is required, use the
+   *   `relevance_filter_spec` instead.
+   *
+   *   This feature is not supported for healthcare search.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceFilterSpec} [request.relevanceFilterSpec]
+   *   Optional. The granular relevance filtering specification.
+   *
+   *   If not specified, the global `relevance_threshold` will be used for all
+   *   sub-searches. If specified, this overrides the global
+   *   `relevance_threshold` to use thresholds on a per sub-search basis.
+   *
+   *   This feature is currently supported only for custom and site search.
    * @param {google.cloud.discoveryengine.v1beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
    *
@@ -2933,6 +3419,21 @@ export class SearchServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
    *   overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceScoreSpec} [request.relevanceScoreSpec]
+   *   Optional. The specification for returning the relevance score.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAddonSpec} [request.searchAddonSpec]
+   *   Optional. SearchAddonSpec is used to disable add-ons for search as per new
+   *   repricing model.
+   *   This field is only supported for search requests.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.CustomRankingParams} [request.customRankingParams]
+   *   Optional. Optional configuration for the Custom Ranking feature.
+   * @param {string} [request.entity]
+   *   Optional. The entity for customers that may run multiple different
+   *   entities, domains, sites or regions, for example, "Google US", "Google
+   *   Ads", "Waymo", "google.com", "youtube.com", etc. If this is set, it should
+   *   be exactly matched with
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.entity|UserEvent.entity} to
+   *   get search results boosted by entity.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3050,6 +3551,230 @@ export class SearchServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified aclConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  aclConfigPath(project: string, location: string) {
+    return this.pathTemplates.aclConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .location;
+  }
+
+  /**
+   * Return a fully-qualified assistAnswer resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} session
+   * @param {string} assist_answer
+   * @returns {string} Resource name string.
+   */
+  assistAnswerPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    session: string,
+    assistAnswer: string,
+  ) {
+    return this.pathTemplates.assistAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+      assist_answer: assistAnswer,
+    });
+  }
+
+  /**
+   * Parse the project from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .collection;
+  }
+
+  /**
+   * Parse the engine from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .engine;
+  }
+
+  /**
+   * Parse the session from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .session;
+  }
+
+  /**
+   * Parse the assist_answer from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the assist_answer.
+   */
+  matchAssistAnswerFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .assist_answer;
+  }
+
+  /**
+   * Return a fully-qualified assistant resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} assistant
+   * @returns {string} Resource name string.
+   */
+  assistantPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    assistant: string,
+  ) {
+    return this.pathTemplates.assistantPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      assistant: assistant,
+    });
+  }
+
+  /**
+   * Parse the project from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .collection;
+  }
+
+  /**
+   * Parse the engine from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName).engine;
+  }
+
+  /**
+   * Parse the assistant from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the assistant.
+   */
+  matchAssistantFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .assistant;
+  }
 
   /**
    * Return a fully-qualified engine resource name string.
@@ -3230,6 +3955,119 @@ export class SearchServiceClient {
   }
 
   /**
+   * Return a fully-qualified identityMappingStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} identity_mapping_store
+   * @returns {string} Resource name string.
+   */
+  identityMappingStorePath(
+    project: string,
+    location: string,
+    identityMappingStore: string,
+  ) {
+    return this.pathTemplates.identityMappingStorePathTemplate.render({
+      project: project,
+      location: location,
+      identity_mapping_store: identityMappingStore,
+    });
+  }
+
+  /**
+   * Parse the project from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(
+      identityMappingStoreName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(
+      identityMappingStoreName,
+    ).location;
+  }
+
+  /**
+   * Parse the identity_mapping_store from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the identity_mapping_store.
+   */
+  matchIdentityMappingStoreFromIdentityMappingStoreName(
+    identityMappingStoreName: string,
+  ) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(
+      identityMappingStoreName,
+    ).identity_mapping_store;
+  }
+
+  /**
+   * Return a fully-qualified licenseConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} license_config
+   * @returns {string} Resource name string.
+   */
+  licenseConfigPath(project: string, location: string, licenseConfig: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.render({
+      project: project,
+      location: location,
+      license_config: licenseConfig,
+    });
+  }
+
+  /**
+   * Parse the project from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the license_config from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the license_config.
+   */
+  matchLicenseConfigFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .license_config;
+  }
+
+  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -3250,6 +4088,115 @@ export class SearchServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigName(
+    projectLocationCmekConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
+      projectLocationCmekConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigName(
+    projectLocationCmekConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
+      projectLocationCmekConfigName,
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfigs resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cmek_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigsPath(
+    project: string,
+    location: string,
+    cmekConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.render({
+      project: project,
+      location: location,
+      cmek_config: cmekConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigsName(
+    projectLocationCmekConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(
+      projectLocationCmekConfigsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigsName(
+    projectLocationCmekConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(
+      projectLocationCmekConfigsName,
+    ).location;
+  }
+
+  /**
+   * Parse the cmek_config from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the cmek_config.
+   */
+  matchCmekConfigFromProjectLocationCmekConfigsName(
+    projectLocationCmekConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(
+      projectLocationCmekConfigsName,
+    ).cmek_config;
   }
 
   /**
@@ -4813,6 +5760,127 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName,
     ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineCollaborativeProjectSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} collaborative_project
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineCollaborativeProjectSessionsPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    collaborativeProject: string,
+    session: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        collaborative_project: collaborativeProject,
+        session: session,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).engine;
+  }
+
+  /**
+   * Parse the collaborative_project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collaborative_project.
+   */
+  matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collaborative_project;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).session;
   }
 
   /**
@@ -6767,6 +7835,58 @@ export class SearchServiceClient {
     return this.pathTemplates.sampleQuerySetPathTemplate.match(
       sampleQuerySetName,
     ).sample_query_set;
+  }
+
+  /**
+   * Return a fully-qualified userStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} user_store
+   * @returns {string} Resource name string.
+   */
+  userStorePath(project: string, location: string, userStore: string) {
+    return this.pathTemplates.userStorePathTemplate.render({
+      project: project,
+      location: location,
+      user_store: userStore,
+    });
+  }
+
+  /**
+   * Parse the project from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .location;
+  }
+
+  /**
+   * Parse the user_store from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the user_store.
+   */
+  matchUserStoreFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .user_store;
   }
 
   /**

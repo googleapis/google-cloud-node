@@ -1,0 +1,34 @@
+name: "Run Unit Test Shard"
+description: "Sets up Node.js, pnpm, and runs a unit test shard"
+inputs:
+  node-version:
+    required: true
+    description: "Node.js version to test"
+  shard-total:
+    required: true
+    description: "Total number of shards"
+  shard-index:
+    required: true
+    description: "0-based shard index"
+runs:
+  using: "composite"
+  steps:
+    - name: Use Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+      with:
+        node-version: ${{ inputs.node-version }}
+    - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      with:
+        version: ^10.0.0
+    - run: node --version
+      shell: bash
+    - name: Run unit tests
+      shell: bash
+      run: bash ci/run_conditional_tests.sh --strict
+      env:
+        RUN_TESTS_MODE: RUN_UNIT_TESTS
+        BUILD_TYPE: presubmit
+        TEST_TYPE: units
+        SHARD_TOTAL: ${{ inputs.shard-total }}
+        SHARD_INDEX: ${{ inputs.shard-index }}
+        GIT_DIFF_ARG: HEAD^1

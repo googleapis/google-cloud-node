@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.6.0...areainsights-v0.7.0) (2026-09-02)
+
+
+### Features
+
+* Update API sources and regenerate ([#9219](https://github.com/googleapis/google-cloud-node/issues/9219)) ([09ff86e](https://github.com/googleapis/google-cloud-node/commit/09ff86ef811de9215c587496ece57ff8b5fb2b77))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.5.2...areainsights-v0.6.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [0.5.2](https://github.com/googleapis/google-cloud-node/compare/areainsights-v0.5.1...areainsights-v0.5.2) (2026-05-01)
 
 

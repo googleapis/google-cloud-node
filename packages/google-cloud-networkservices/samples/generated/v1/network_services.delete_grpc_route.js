@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. A name of the GrpcRoute to delete. Must be in the format
-   *  `projects/* /locations/global/grpcRoutes/*`.
+   *  `projects/* /locations/* /grpcRoutes/*`.
    */
   // const name = 'abc123'
 

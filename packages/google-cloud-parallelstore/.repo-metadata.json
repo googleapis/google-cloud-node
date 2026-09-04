@@ -1,17 +1,16 @@
 {
-  "name": "parallelstore",
-  "name_pretty": "Parallelstore API",
-  "product_documentation": "http://cloud/parallelstore?hl=en",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/parallelstore/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/parallelstore",
-  "api_id": "parallelstore.googleapis.com",
-  "default_version": "v1beta",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "parallelstore"
+    "api_description": "Parallelstore is a high performance, managed parallel file service based on DAOS. It delivers up to 6x greater read throughput performance compared to competitive Lustre scratch offerings.",
+    "api_id": "parallelstore.googleapis.com",
+    "api_shortname": "parallelstore",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/parallelstore/latest",
+    "default_version": "v1beta",
+    "distribution_name": "@google-cloud/parallelstore",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1181190",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "parallelstore",
+    "name_pretty": "Parallelstore",
+    "product_documentation": "https://cloud.google.com/parallelstore?hl=en/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

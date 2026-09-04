@@ -35,6 +35,16 @@
                 "getBackup"
               ]
             },
+            "GetTokenAuthUser": {
+              "methods": [
+                "getTokenAuthUser"
+              ]
+            },
+            "GetAuthToken": {
+              "methods": [
+                "getAuthToken"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -70,6 +80,36 @@
                 "backupInstance"
               ]
             },
+            "StartMigration": {
+              "methods": [
+                "startMigration"
+              ]
+            },
+            "FinishMigration": {
+              "methods": [
+                "finishMigration"
+              ]
+            },
+            "AddTokenAuthUser": {
+              "methods": [
+                "addTokenAuthUser"
+              ]
+            },
+            "DeleteTokenAuthUser": {
+              "methods": [
+                "deleteTokenAuthUser"
+              ]
+            },
+            "AddAuthToken": {
+              "methods": [
+                "addAuthToken"
+              ]
+            },
+            "DeleteAuthToken": {
+              "methods": [
+                "deleteAuthToken"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -89,6 +129,20 @@
                 "listBackups",
                 "listBackupsStream",
                 "listBackupsAsync"
+              ]
+            },
+            "ListTokenAuthUsers": {
+              "methods": [
+                "listTokenAuthUsers",
+                "listTokenAuthUsersStream",
+                "listTokenAuthUsersAsync"
+              ]
+            },
+            "ListAuthTokens": {
+              "methods": [
+                "listAuthTokens",
+                "listAuthTokensStream",
+                "listAuthTokensAsync"
               ]
             }
           }
@@ -121,6 +175,16 @@
                 "getBackup"
               ]
             },
+            "GetTokenAuthUser": {
+              "methods": [
+                "getTokenAuthUser"
+              ]
+            },
+            "GetAuthToken": {
+              "methods": [
+                "getAuthToken"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "createInstance"
@@ -156,6 +220,36 @@
                 "backupInstance"
               ]
             },
+            "StartMigration": {
+              "methods": [
+                "startMigration"
+              ]
+            },
+            "FinishMigration": {
+              "methods": [
+                "finishMigration"
+              ]
+            },
+            "AddTokenAuthUser": {
+              "methods": [
+                "addTokenAuthUser"
+              ]
+            },
+            "DeleteTokenAuthUser": {
+              "methods": [
+                "deleteTokenAuthUser"
+              ]
+            },
+            "AddAuthToken": {
+              "methods": [
+                "addAuthToken"
+              ]
+            },
+            "DeleteAuthToken": {
+              "methods": [
+                "deleteAuthToken"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "listInstances",
@@ -175,6 +269,20 @@
                 "listBackups",
                 "listBackupsStream",
                 "listBackupsAsync"
+              ]
+            },
+            "ListTokenAuthUsers": {
+              "methods": [
+                "listTokenAuthUsers",
+                "listTokenAuthUsersStream",
+                "listTokenAuthUsersAsync"
+              ]
+            },
+            "ListAuthTokens": {
+              "methods": [
+                "listAuthTokens",
+                "listAuthTokensStream",
+                "listAuthTokensAsync"
               ]
             }
           }

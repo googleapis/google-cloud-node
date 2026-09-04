@@ -74,7 +74,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | start manual transfer runs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.start_manual_transfer_runs.js) |
 | unenroll data sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.unenroll_data_sources.js) |
 | update transfer config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/data_transfer_service.update_transfer_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datatransfer/samples/generated/v1/snippet_metadata_google.cloud.bigquery.datatransfer.v1.json) |
 
 
 ## Supported Node.js Versions

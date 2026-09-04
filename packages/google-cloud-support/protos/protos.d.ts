@@ -3026,6 +3026,1153 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of a SupportEventSubscription. */
+                interface ISupportEventSubscription {
+
+                    /** SupportEventSubscription name */
+                    name?: (string|null);
+
+                    /** SupportEventSubscription pubSubTopic */
+                    pubSubTopic?: (string|null);
+
+                    /** SupportEventSubscription state */
+                    state?: (google.cloud.support.v2.SupportEventSubscription.State|keyof typeof google.cloud.support.v2.SupportEventSubscription.State|null);
+
+                    /** SupportEventSubscription failureReason */
+                    failureReason?: (google.cloud.support.v2.SupportEventSubscription.FailureReason|keyof typeof google.cloud.support.v2.SupportEventSubscription.FailureReason|null);
+
+                    /** SupportEventSubscription createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription purgeTime */
+                    purgeTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SupportEventSubscription. */
+                class SupportEventSubscription implements ISupportEventSubscription {
+
+                    /**
+                     * Constructs a new SupportEventSubscription.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.ISupportEventSubscription);
+
+                    /** SupportEventSubscription name. */
+                    public name: string;
+
+                    /** SupportEventSubscription pubSubTopic. */
+                    public pubSubTopic: string;
+
+                    /** SupportEventSubscription state. */
+                    public state: (google.cloud.support.v2.SupportEventSubscription.State|keyof typeof google.cloud.support.v2.SupportEventSubscription.State);
+
+                    /** SupportEventSubscription failureReason. */
+                    public failureReason: (google.cloud.support.v2.SupportEventSubscription.FailureReason|keyof typeof google.cloud.support.v2.SupportEventSubscription.FailureReason);
+
+                    /** SupportEventSubscription createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription purgeTime. */
+                    public purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SupportEventSubscription instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SupportEventSubscription instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.ISupportEventSubscription): google.cloud.support.v2.SupportEventSubscription;
+
+                    /**
+                     * Encodes the specified SupportEventSubscription message. Does not implicitly {@link google.cloud.support.v2.SupportEventSubscription.verify|verify} messages.
+                     * @param message SupportEventSubscription message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.ISupportEventSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SupportEventSubscription message, length delimited. Does not implicitly {@link google.cloud.support.v2.SupportEventSubscription.verify|verify} messages.
+                     * @param message SupportEventSubscription message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.ISupportEventSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SupportEventSubscription message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SupportEventSubscription
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.SupportEventSubscription;
+
+                    /**
+                     * Decodes a SupportEventSubscription message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SupportEventSubscription
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.SupportEventSubscription;
+
+                    /**
+                     * Verifies a SupportEventSubscription message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SupportEventSubscription message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SupportEventSubscription
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.SupportEventSubscription;
+
+                    /**
+                     * Creates a plain object from a SupportEventSubscription message. Also converts values to other types if specified.
+                     * @param message SupportEventSubscription
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.SupportEventSubscription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SupportEventSubscription to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SupportEventSubscription
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SupportEventSubscription {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        WORKING = 1,
+                        FAILING = 2,
+                        DELETED = 3
+                    }
+
+                    /** FailureReason enum. */
+                    enum FailureReason {
+                        FAILURE_REASON_UNSPECIFIED = 0,
+                        PERMISSION_DENIED = 1,
+                        TOPIC_NOT_FOUND = 2,
+                        OTHER = 3
+                    }
+                }
+
+                /** Represents a SupportEventSubscriptionService */
+                class SupportEventSubscriptionService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SupportEventSubscriptionService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SupportEventSubscriptionService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SupportEventSubscriptionService;
+
+                    /**
+                     * Calls CreateSupportEventSubscription.
+                     * @param request CreateSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public createSupportEventSubscription(request: google.cloud.support.v2.ICreateSupportEventSubscriptionRequest, callback: google.cloud.support.v2.SupportEventSubscriptionService.CreateSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls CreateSupportEventSubscription.
+                     * @param request CreateSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSupportEventSubscription(request: google.cloud.support.v2.ICreateSupportEventSubscriptionRequest): Promise<google.cloud.support.v2.SupportEventSubscription>;
+
+                    /**
+                     * Calls GetSupportEventSubscription.
+                     * @param request GetSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public getSupportEventSubscription(request: google.cloud.support.v2.IGetSupportEventSubscriptionRequest, callback: google.cloud.support.v2.SupportEventSubscriptionService.GetSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls GetSupportEventSubscription.
+                     * @param request GetSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSupportEventSubscription(request: google.cloud.support.v2.IGetSupportEventSubscriptionRequest): Promise<google.cloud.support.v2.SupportEventSubscription>;
+
+                    /**
+                     * Calls ListSupportEventSubscriptions.
+                     * @param request ListSupportEventSubscriptionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSupportEventSubscriptionsResponse
+                     */
+                    public listSupportEventSubscriptions(request: google.cloud.support.v2.IListSupportEventSubscriptionsRequest, callback: google.cloud.support.v2.SupportEventSubscriptionService.ListSupportEventSubscriptionsCallback): void;
+
+                    /**
+                     * Calls ListSupportEventSubscriptions.
+                     * @param request ListSupportEventSubscriptionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSupportEventSubscriptions(request: google.cloud.support.v2.IListSupportEventSubscriptionsRequest): Promise<google.cloud.support.v2.ListSupportEventSubscriptionsResponse>;
+
+                    /**
+                     * Calls UpdateSupportEventSubscription.
+                     * @param request UpdateSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public updateSupportEventSubscription(request: google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest, callback: google.cloud.support.v2.SupportEventSubscriptionService.UpdateSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls UpdateSupportEventSubscription.
+                     * @param request UpdateSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSupportEventSubscription(request: google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest): Promise<google.cloud.support.v2.SupportEventSubscription>;
+
+                    /**
+                     * Calls DeleteSupportEventSubscription.
+                     * @param request DeleteSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public deleteSupportEventSubscription(request: google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest, callback: google.cloud.support.v2.SupportEventSubscriptionService.DeleteSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls DeleteSupportEventSubscription.
+                     * @param request DeleteSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSupportEventSubscription(request: google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest): Promise<google.cloud.support.v2.SupportEventSubscription>;
+
+                    /**
+                     * Calls UndeleteSupportEventSubscription.
+                     * @param request UndeleteSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public undeleteSupportEventSubscription(request: google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest, callback: google.cloud.support.v2.SupportEventSubscriptionService.UndeleteSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls UndeleteSupportEventSubscription.
+                     * @param request UndeleteSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public undeleteSupportEventSubscription(request: google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest): Promise<google.cloud.support.v2.SupportEventSubscription>;
+
+                    /**
+                     * Calls ExpungeSupportEventSubscription.
+                     * @param request ExpungeSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public expungeSupportEventSubscription(request: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest, callback: google.cloud.support.v2.SupportEventSubscriptionService.ExpungeSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls ExpungeSupportEventSubscription.
+                     * @param request ExpungeSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public expungeSupportEventSubscription(request: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace SupportEventSubscriptionService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|createSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type CreateSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|getSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type GetSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|listSupportEventSubscriptions}.
+                     * @param error Error, if any
+                     * @param [response] ListSupportEventSubscriptionsResponse
+                     */
+                    type ListSupportEventSubscriptionsCallback = (error: (Error|null), response?: google.cloud.support.v2.ListSupportEventSubscriptionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|updateSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type UpdateSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|deleteSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type DeleteSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|undeleteSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type UndeleteSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2.SupportEventSubscriptionService|expungeSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type ExpungeSupportEventSubscriptionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a CreateSupportEventSubscriptionRequest. */
+                interface ICreateSupportEventSubscriptionRequest {
+
+                    /** CreateSupportEventSubscriptionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSupportEventSubscriptionRequest supportEventSubscription */
+                    supportEventSubscription?: (google.cloud.support.v2.ISupportEventSubscription|null);
+                }
+
+                /** Represents a CreateSupportEventSubscriptionRequest. */
+                class CreateSupportEventSubscriptionRequest implements ICreateSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new CreateSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.ICreateSupportEventSubscriptionRequest);
+
+                    /** CreateSupportEventSubscriptionRequest parent. */
+                    public parent: string;
+
+                    /** CreateSupportEventSubscriptionRequest supportEventSubscription. */
+                    public supportEventSubscription?: (google.cloud.support.v2.ISupportEventSubscription|null);
+
+                    /**
+                     * Creates a new CreateSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.ICreateSupportEventSubscriptionRequest): google.cloud.support.v2.CreateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified CreateSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.CreateSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message CreateSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.ICreateSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.CreateSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message CreateSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.ICreateSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.CreateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes a CreateSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.CreateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies a CreateSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.CreateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message CreateSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.CreateSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSupportEventSubscriptionRequest. */
+                interface IGetSupportEventSubscriptionRequest {
+
+                    /** GetSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSupportEventSubscriptionRequest. */
+                class GetSupportEventSubscriptionRequest implements IGetSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new GetSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.IGetSupportEventSubscriptionRequest);
+
+                    /** GetSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.IGetSupportEventSubscriptionRequest): google.cloud.support.v2.GetSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified GetSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.GetSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message GetSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.IGetSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.GetSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message GetSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.IGetSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.GetSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes a GetSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.GetSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies a GetSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.GetSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from a GetSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message GetSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.GetSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSupportEventSubscriptionsRequest. */
+                interface IListSupportEventSubscriptionsRequest {
+
+                    /** ListSupportEventSubscriptionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSupportEventSubscriptionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListSupportEventSubscriptionsRequest showDeleted */
+                    showDeleted?: (boolean|null);
+
+                    /** ListSupportEventSubscriptionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSupportEventSubscriptionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSupportEventSubscriptionsRequest. */
+                class ListSupportEventSubscriptionsRequest implements IListSupportEventSubscriptionsRequest {
+
+                    /**
+                     * Constructs a new ListSupportEventSubscriptionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.IListSupportEventSubscriptionsRequest);
+
+                    /** ListSupportEventSubscriptionsRequest parent. */
+                    public parent: string;
+
+                    /** ListSupportEventSubscriptionsRequest filter. */
+                    public filter: string;
+
+                    /** ListSupportEventSubscriptionsRequest showDeleted. */
+                    public showDeleted: boolean;
+
+                    /** ListSupportEventSubscriptionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSupportEventSubscriptionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSupportEventSubscriptionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSupportEventSubscriptionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.IListSupportEventSubscriptionsRequest): google.cloud.support.v2.ListSupportEventSubscriptionsRequest;
+
+                    /**
+                     * Encodes the specified ListSupportEventSubscriptionsRequest message. Does not implicitly {@link google.cloud.support.v2.ListSupportEventSubscriptionsRequest.verify|verify} messages.
+                     * @param message ListSupportEventSubscriptionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.IListSupportEventSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSupportEventSubscriptionsRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.ListSupportEventSubscriptionsRequest.verify|verify} messages.
+                     * @param message ListSupportEventSubscriptionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.IListSupportEventSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSupportEventSubscriptionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSupportEventSubscriptionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.ListSupportEventSubscriptionsRequest;
+
+                    /**
+                     * Decodes a ListSupportEventSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSupportEventSubscriptionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.ListSupportEventSubscriptionsRequest;
+
+                    /**
+                     * Verifies a ListSupportEventSubscriptionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSupportEventSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSupportEventSubscriptionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.ListSupportEventSubscriptionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSupportEventSubscriptionsRequest message. Also converts values to other types if specified.
+                     * @param message ListSupportEventSubscriptionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.ListSupportEventSubscriptionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSupportEventSubscriptionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSupportEventSubscriptionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSupportEventSubscriptionsResponse. */
+                interface IListSupportEventSubscriptionsResponse {
+
+                    /** ListSupportEventSubscriptionsResponse supportEventSubscriptions */
+                    supportEventSubscriptions?: (google.cloud.support.v2.ISupportEventSubscription[]|null);
+
+                    /** ListSupportEventSubscriptionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSupportEventSubscriptionsResponse. */
+                class ListSupportEventSubscriptionsResponse implements IListSupportEventSubscriptionsResponse {
+
+                    /**
+                     * Constructs a new ListSupportEventSubscriptionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.IListSupportEventSubscriptionsResponse);
+
+                    /** ListSupportEventSubscriptionsResponse supportEventSubscriptions. */
+                    public supportEventSubscriptions: google.cloud.support.v2.ISupportEventSubscription[];
+
+                    /** ListSupportEventSubscriptionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSupportEventSubscriptionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSupportEventSubscriptionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.IListSupportEventSubscriptionsResponse): google.cloud.support.v2.ListSupportEventSubscriptionsResponse;
+
+                    /**
+                     * Encodes the specified ListSupportEventSubscriptionsResponse message. Does not implicitly {@link google.cloud.support.v2.ListSupportEventSubscriptionsResponse.verify|verify} messages.
+                     * @param message ListSupportEventSubscriptionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.IListSupportEventSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSupportEventSubscriptionsResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2.ListSupportEventSubscriptionsResponse.verify|verify} messages.
+                     * @param message ListSupportEventSubscriptionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.IListSupportEventSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSupportEventSubscriptionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSupportEventSubscriptionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.ListSupportEventSubscriptionsResponse;
+
+                    /**
+                     * Decodes a ListSupportEventSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSupportEventSubscriptionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.ListSupportEventSubscriptionsResponse;
+
+                    /**
+                     * Verifies a ListSupportEventSubscriptionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSupportEventSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSupportEventSubscriptionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.ListSupportEventSubscriptionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSupportEventSubscriptionsResponse message. Also converts values to other types if specified.
+                     * @param message ListSupportEventSubscriptionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.ListSupportEventSubscriptionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSupportEventSubscriptionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSupportEventSubscriptionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSupportEventSubscriptionRequest. */
+                interface IUpdateSupportEventSubscriptionRequest {
+
+                    /** UpdateSupportEventSubscriptionRequest supportEventSubscription */
+                    supportEventSubscription?: (google.cloud.support.v2.ISupportEventSubscription|null);
+
+                    /** UpdateSupportEventSubscriptionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateSupportEventSubscriptionRequest. */
+                class UpdateSupportEventSubscriptionRequest implements IUpdateSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new UpdateSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest);
+
+                    /** UpdateSupportEventSubscriptionRequest supportEventSubscription. */
+                    public supportEventSubscription?: (google.cloud.support.v2.ISupportEventSubscription|null);
+
+                    /** UpdateSupportEventSubscriptionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest): google.cloud.support.v2.UpdateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified UpdateSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.UpdateSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message UpdateSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.UpdateSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message UpdateSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.IUpdateSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.UpdateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes an UpdateSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.UpdateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies an UpdateSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.UpdateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.UpdateSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSupportEventSubscriptionRequest. */
+                interface IDeleteSupportEventSubscriptionRequest {
+
+                    /** DeleteSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteSupportEventSubscriptionRequest. */
+                class DeleteSupportEventSubscriptionRequest implements IDeleteSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new DeleteSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest);
+
+                    /** DeleteSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest): google.cloud.support.v2.DeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified DeleteSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.DeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message DeleteSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.DeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message DeleteSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.IDeleteSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.DeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes a DeleteSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.DeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies a DeleteSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.DeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.DeleteSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UndeleteSupportEventSubscriptionRequest. */
+                interface IUndeleteSupportEventSubscriptionRequest {
+
+                    /** UndeleteSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an UndeleteSupportEventSubscriptionRequest. */
+                class UndeleteSupportEventSubscriptionRequest implements IUndeleteSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new UndeleteSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest);
+
+                    /** UndeleteSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new UndeleteSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UndeleteSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest): google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified UndeleteSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message UndeleteSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UndeleteSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message UndeleteSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.IUndeleteSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UndeleteSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UndeleteSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes an UndeleteSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UndeleteSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies an UndeleteSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UndeleteSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UndeleteSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from an UndeleteSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message UndeleteSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.UndeleteSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UndeleteSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UndeleteSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExpungeSupportEventSubscriptionRequest. */
+                interface IExpungeSupportEventSubscriptionRequest {
+
+                    /** ExpungeSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExpungeSupportEventSubscriptionRequest. */
+                class ExpungeSupportEventSubscriptionRequest implements IExpungeSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new ExpungeSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest);
+
+                    /** ExpungeSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ExpungeSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExpungeSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest): google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified ExpungeSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message ExpungeSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExpungeSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message ExpungeSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2.IExpungeSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExpungeSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes an ExpungeSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies an ExpungeSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExpungeSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from an ExpungeSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message ExpungeSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2.ExpungeSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExpungeSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExpungeSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
 
             /** Namespace v2beta. */
@@ -6770,6 +7917,1153 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of a SupportEventSubscription. */
+                interface ISupportEventSubscription {
+
+                    /** SupportEventSubscription name */
+                    name?: (string|null);
+
+                    /** SupportEventSubscription pubSubTopic */
+                    pubSubTopic?: (string|null);
+
+                    /** SupportEventSubscription state */
+                    state?: (google.cloud.support.v2beta.SupportEventSubscription.State|keyof typeof google.cloud.support.v2beta.SupportEventSubscription.State|null);
+
+                    /** SupportEventSubscription failureReason */
+                    failureReason?: (google.cloud.support.v2beta.SupportEventSubscription.FailureReason|keyof typeof google.cloud.support.v2beta.SupportEventSubscription.FailureReason|null);
+
+                    /** SupportEventSubscription createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription deleteTime */
+                    deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription purgeTime */
+                    purgeTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a SupportEventSubscription. */
+                class SupportEventSubscription implements ISupportEventSubscription {
+
+                    /**
+                     * Constructs a new SupportEventSubscription.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ISupportEventSubscription);
+
+                    /** SupportEventSubscription name. */
+                    public name: string;
+
+                    /** SupportEventSubscription pubSubTopic. */
+                    public pubSubTopic: string;
+
+                    /** SupportEventSubscription state. */
+                    public state: (google.cloud.support.v2beta.SupportEventSubscription.State|keyof typeof google.cloud.support.v2beta.SupportEventSubscription.State);
+
+                    /** SupportEventSubscription failureReason. */
+                    public failureReason: (google.cloud.support.v2beta.SupportEventSubscription.FailureReason|keyof typeof google.cloud.support.v2beta.SupportEventSubscription.FailureReason);
+
+                    /** SupportEventSubscription createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription deleteTime. */
+                    public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                    /** SupportEventSubscription purgeTime. */
+                    public purgeTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new SupportEventSubscription instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SupportEventSubscription instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ISupportEventSubscription): google.cloud.support.v2beta.SupportEventSubscription;
+
+                    /**
+                     * Encodes the specified SupportEventSubscription message. Does not implicitly {@link google.cloud.support.v2beta.SupportEventSubscription.verify|verify} messages.
+                     * @param message SupportEventSubscription message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ISupportEventSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SupportEventSubscription message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.SupportEventSubscription.verify|verify} messages.
+                     * @param message SupportEventSubscription message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ISupportEventSubscription, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SupportEventSubscription message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SupportEventSubscription
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.SupportEventSubscription;
+
+                    /**
+                     * Decodes a SupportEventSubscription message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SupportEventSubscription
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.SupportEventSubscription;
+
+                    /**
+                     * Verifies a SupportEventSubscription message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SupportEventSubscription message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SupportEventSubscription
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.SupportEventSubscription;
+
+                    /**
+                     * Creates a plain object from a SupportEventSubscription message. Also converts values to other types if specified.
+                     * @param message SupportEventSubscription
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.SupportEventSubscription, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SupportEventSubscription to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SupportEventSubscription
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SupportEventSubscription {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        WORKING = 1,
+                        FAILING = 2,
+                        DELETED = 3
+                    }
+
+                    /** FailureReason enum. */
+                    enum FailureReason {
+                        FAILURE_REASON_UNSPECIFIED = 0,
+                        PERMISSION_DENIED = 1,
+                        TOPIC_NOT_FOUND = 2,
+                        OTHER = 3
+                    }
+                }
+
+                /** Represents a SupportEventSubscriptionService */
+                class SupportEventSubscriptionService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new SupportEventSubscriptionService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new SupportEventSubscriptionService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): SupportEventSubscriptionService;
+
+                    /**
+                     * Calls CreateSupportEventSubscription.
+                     * @param request CreateSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public createSupportEventSubscription(request: google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest, callback: google.cloud.support.v2beta.SupportEventSubscriptionService.CreateSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls CreateSupportEventSubscription.
+                     * @param request CreateSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSupportEventSubscription(request: google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest): Promise<google.cloud.support.v2beta.SupportEventSubscription>;
+
+                    /**
+                     * Calls GetSupportEventSubscription.
+                     * @param request GetSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public getSupportEventSubscription(request: google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest, callback: google.cloud.support.v2beta.SupportEventSubscriptionService.GetSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls GetSupportEventSubscription.
+                     * @param request GetSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSupportEventSubscription(request: google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest): Promise<google.cloud.support.v2beta.SupportEventSubscription>;
+
+                    /**
+                     * Calls ListSupportEventSubscriptions.
+                     * @param request ListSupportEventSubscriptionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSupportEventSubscriptionsResponse
+                     */
+                    public listSupportEventSubscriptions(request: google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest, callback: google.cloud.support.v2beta.SupportEventSubscriptionService.ListSupportEventSubscriptionsCallback): void;
+
+                    /**
+                     * Calls ListSupportEventSubscriptions.
+                     * @param request ListSupportEventSubscriptionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSupportEventSubscriptions(request: google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest): Promise<google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse>;
+
+                    /**
+                     * Calls UpdateSupportEventSubscription.
+                     * @param request UpdateSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public updateSupportEventSubscription(request: google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest, callback: google.cloud.support.v2beta.SupportEventSubscriptionService.UpdateSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls UpdateSupportEventSubscription.
+                     * @param request UpdateSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSupportEventSubscription(request: google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest): Promise<google.cloud.support.v2beta.SupportEventSubscription>;
+
+                    /**
+                     * Calls DeleteSupportEventSubscription.
+                     * @param request DeleteSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public deleteSupportEventSubscription(request: google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest, callback: google.cloud.support.v2beta.SupportEventSubscriptionService.DeleteSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls DeleteSupportEventSubscription.
+                     * @param request DeleteSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSupportEventSubscription(request: google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest): Promise<google.cloud.support.v2beta.SupportEventSubscription>;
+
+                    /**
+                     * Calls UndeleteSupportEventSubscription.
+                     * @param request UndeleteSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SupportEventSubscription
+                     */
+                    public undeleteSupportEventSubscription(request: google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest, callback: google.cloud.support.v2beta.SupportEventSubscriptionService.UndeleteSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls UndeleteSupportEventSubscription.
+                     * @param request UndeleteSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public undeleteSupportEventSubscription(request: google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest): Promise<google.cloud.support.v2beta.SupportEventSubscription>;
+
+                    /**
+                     * Calls ExpungeSupportEventSubscription.
+                     * @param request ExpungeSupportEventSubscriptionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public expungeSupportEventSubscription(request: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest, callback: google.cloud.support.v2beta.SupportEventSubscriptionService.ExpungeSupportEventSubscriptionCallback): void;
+
+                    /**
+                     * Calls ExpungeSupportEventSubscription.
+                     * @param request ExpungeSupportEventSubscriptionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public expungeSupportEventSubscription(request: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest): Promise<google.protobuf.Empty>;
+                }
+
+                namespace SupportEventSubscriptionService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|createSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type CreateSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2beta.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|getSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type GetSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2beta.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|listSupportEventSubscriptions}.
+                     * @param error Error, if any
+                     * @param [response] ListSupportEventSubscriptionsResponse
+                     */
+                    type ListSupportEventSubscriptionsCallback = (error: (Error|null), response?: google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|updateSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type UpdateSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2beta.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|deleteSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type DeleteSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2beta.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|undeleteSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] SupportEventSubscription
+                     */
+                    type UndeleteSupportEventSubscriptionCallback = (error: (Error|null), response?: google.cloud.support.v2beta.SupportEventSubscription) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.support.v2beta.SupportEventSubscriptionService|expungeSupportEventSubscription}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type ExpungeSupportEventSubscriptionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a CreateSupportEventSubscriptionRequest. */
+                interface ICreateSupportEventSubscriptionRequest {
+
+                    /** CreateSupportEventSubscriptionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSupportEventSubscriptionRequest supportEventSubscription */
+                    supportEventSubscription?: (google.cloud.support.v2beta.ISupportEventSubscription|null);
+                }
+
+                /** Represents a CreateSupportEventSubscriptionRequest. */
+                class CreateSupportEventSubscriptionRequest implements ICreateSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new CreateSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest);
+
+                    /** CreateSupportEventSubscriptionRequest parent. */
+                    public parent: string;
+
+                    /** CreateSupportEventSubscriptionRequest supportEventSubscription. */
+                    public supportEventSubscription?: (google.cloud.support.v2beta.ISupportEventSubscription|null);
+
+                    /**
+                     * Creates a new CreateSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest): google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified CreateSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message CreateSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message CreateSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.ICreateSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes a CreateSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies a CreateSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message CreateSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.CreateSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSupportEventSubscriptionRequest. */
+                interface IGetSupportEventSubscriptionRequest {
+
+                    /** GetSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSupportEventSubscriptionRequest. */
+                class GetSupportEventSubscriptionRequest implements IGetSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new GetSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest);
+
+                    /** GetSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest): google.cloud.support.v2beta.GetSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified GetSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.GetSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message GetSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.GetSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message GetSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IGetSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.GetSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes a GetSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.GetSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies a GetSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.GetSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from a GetSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message GetSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.GetSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSupportEventSubscriptionsRequest. */
+                interface IListSupportEventSubscriptionsRequest {
+
+                    /** ListSupportEventSubscriptionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSupportEventSubscriptionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListSupportEventSubscriptionsRequest showDeleted */
+                    showDeleted?: (boolean|null);
+
+                    /** ListSupportEventSubscriptionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSupportEventSubscriptionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListSupportEventSubscriptionsRequest. */
+                class ListSupportEventSubscriptionsRequest implements IListSupportEventSubscriptionsRequest {
+
+                    /**
+                     * Constructs a new ListSupportEventSubscriptionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest);
+
+                    /** ListSupportEventSubscriptionsRequest parent. */
+                    public parent: string;
+
+                    /** ListSupportEventSubscriptionsRequest filter. */
+                    public filter: string;
+
+                    /** ListSupportEventSubscriptionsRequest showDeleted. */
+                    public showDeleted: boolean;
+
+                    /** ListSupportEventSubscriptionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSupportEventSubscriptionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListSupportEventSubscriptionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSupportEventSubscriptionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest): google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest;
+
+                    /**
+                     * Encodes the specified ListSupportEventSubscriptionsRequest message. Does not implicitly {@link google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest.verify|verify} messages.
+                     * @param message ListSupportEventSubscriptionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSupportEventSubscriptionsRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest.verify|verify} messages.
+                     * @param message ListSupportEventSubscriptionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IListSupportEventSubscriptionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSupportEventSubscriptionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSupportEventSubscriptionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest;
+
+                    /**
+                     * Decodes a ListSupportEventSubscriptionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSupportEventSubscriptionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest;
+
+                    /**
+                     * Verifies a ListSupportEventSubscriptionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSupportEventSubscriptionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSupportEventSubscriptionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListSupportEventSubscriptionsRequest message. Also converts values to other types if specified.
+                     * @param message ListSupportEventSubscriptionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ListSupportEventSubscriptionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSupportEventSubscriptionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSupportEventSubscriptionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListSupportEventSubscriptionsResponse. */
+                interface IListSupportEventSubscriptionsResponse {
+
+                    /** ListSupportEventSubscriptionsResponse supportEventSubscriptions */
+                    supportEventSubscriptions?: (google.cloud.support.v2beta.ISupportEventSubscription[]|null);
+
+                    /** ListSupportEventSubscriptionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListSupportEventSubscriptionsResponse. */
+                class ListSupportEventSubscriptionsResponse implements IListSupportEventSubscriptionsResponse {
+
+                    /**
+                     * Constructs a new ListSupportEventSubscriptionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IListSupportEventSubscriptionsResponse);
+
+                    /** ListSupportEventSubscriptionsResponse supportEventSubscriptions. */
+                    public supportEventSubscriptions: google.cloud.support.v2beta.ISupportEventSubscription[];
+
+                    /** ListSupportEventSubscriptionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListSupportEventSubscriptionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSupportEventSubscriptionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IListSupportEventSubscriptionsResponse): google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse;
+
+                    /**
+                     * Encodes the specified ListSupportEventSubscriptionsResponse message. Does not implicitly {@link google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse.verify|verify} messages.
+                     * @param message ListSupportEventSubscriptionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IListSupportEventSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSupportEventSubscriptionsResponse message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse.verify|verify} messages.
+                     * @param message ListSupportEventSubscriptionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IListSupportEventSubscriptionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSupportEventSubscriptionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSupportEventSubscriptionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse;
+
+                    /**
+                     * Decodes a ListSupportEventSubscriptionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSupportEventSubscriptionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse;
+
+                    /**
+                     * Verifies a ListSupportEventSubscriptionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSupportEventSubscriptionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSupportEventSubscriptionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListSupportEventSubscriptionsResponse message. Also converts values to other types if specified.
+                     * @param message ListSupportEventSubscriptionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ListSupportEventSubscriptionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSupportEventSubscriptionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListSupportEventSubscriptionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateSupportEventSubscriptionRequest. */
+                interface IUpdateSupportEventSubscriptionRequest {
+
+                    /** UpdateSupportEventSubscriptionRequest supportEventSubscription */
+                    supportEventSubscription?: (google.cloud.support.v2beta.ISupportEventSubscription|null);
+
+                    /** UpdateSupportEventSubscriptionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateSupportEventSubscriptionRequest. */
+                class UpdateSupportEventSubscriptionRequest implements IUpdateSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new UpdateSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest);
+
+                    /** UpdateSupportEventSubscriptionRequest supportEventSubscription. */
+                    public supportEventSubscription?: (google.cloud.support.v2beta.ISupportEventSubscription|null);
+
+                    /** UpdateSupportEventSubscriptionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest): google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified UpdateSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message UpdateSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message UpdateSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IUpdateSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes an UpdateSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies an UpdateSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.UpdateSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSupportEventSubscriptionRequest. */
+                interface IDeleteSupportEventSubscriptionRequest {
+
+                    /** DeleteSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteSupportEventSubscriptionRequest. */
+                class DeleteSupportEventSubscriptionRequest implements IDeleteSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new DeleteSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest);
+
+                    /** DeleteSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest): google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified DeleteSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message DeleteSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message DeleteSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IDeleteSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes a DeleteSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies a DeleteSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.DeleteSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UndeleteSupportEventSubscriptionRequest. */
+                interface IUndeleteSupportEventSubscriptionRequest {
+
+                    /** UndeleteSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an UndeleteSupportEventSubscriptionRequest. */
+                class UndeleteSupportEventSubscriptionRequest implements IUndeleteSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new UndeleteSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest);
+
+                    /** UndeleteSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new UndeleteSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UndeleteSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest): google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified UndeleteSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message UndeleteSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UndeleteSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message UndeleteSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IUndeleteSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UndeleteSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UndeleteSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes an UndeleteSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UndeleteSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies an UndeleteSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UndeleteSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UndeleteSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from an UndeleteSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message UndeleteSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.UndeleteSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UndeleteSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UndeleteSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExpungeSupportEventSubscriptionRequest. */
+                interface IExpungeSupportEventSubscriptionRequest {
+
+                    /** ExpungeSupportEventSubscriptionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExpungeSupportEventSubscriptionRequest. */
+                class ExpungeSupportEventSubscriptionRequest implements IExpungeSupportEventSubscriptionRequest {
+
+                    /**
+                     * Constructs a new ExpungeSupportEventSubscriptionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest);
+
+                    /** ExpungeSupportEventSubscriptionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ExpungeSupportEventSubscriptionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExpungeSupportEventSubscriptionRequest instance
+                     */
+                    public static create(properties?: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest): google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Encodes the specified ExpungeSupportEventSubscriptionRequest message. Does not implicitly {@link google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message ExpungeSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExpungeSupportEventSubscriptionRequest message, length delimited. Does not implicitly {@link google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest.verify|verify} messages.
+                     * @param message ExpungeSupportEventSubscriptionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.support.v2beta.IExpungeSupportEventSubscriptionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExpungeSupportEventSubscriptionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Decodes an ExpungeSupportEventSubscriptionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Verifies an ExpungeSupportEventSubscriptionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExpungeSupportEventSubscriptionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExpungeSupportEventSubscriptionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest;
+
+                    /**
+                     * Creates a plain object from an ExpungeSupportEventSubscriptionRequest message. Also converts values to other types if specified.
+                     * @param message ExpungeSupportEventSubscriptionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.support.v2beta.ExpungeSupportEventSubscriptionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExpungeSupportEventSubscriptionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExpungeSupportEventSubscriptionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }
@@ -8036,6 +10330,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -8049,6 +10346,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -8778,6 +11078,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -8797,6 +11100,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -9116,6 +11422,365 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -9237,6 +11902,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -11608,6 +14275,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -11630,6 +14300,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -12569,6 +15242,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -12603,6 +15279,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -12731,7 +15410,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -12834,6 +15514,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }
@@ -13815,6 +16596,97 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

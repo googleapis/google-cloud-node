@@ -25,14 +25,21 @@ function replaceInFile(filePath, pattern, replacement) {
   try {
     const data = fs.readFileSync(filePath, 'utf8');
     const result = data.replace(pattern, replacement);
+    if (result === data) {
+      throw new Error(`Pattern ${pattern} was not found or did not result in any changes.`);
+    }
     fs.writeFileSync(filePath, result, 'utf8');
     console.log(`Successfully updated: ${filePath}`);
   } catch (err) {
     console.error(`Error processing file ${filePath}:`, err);
+    process.exitCode = 1;
   }
 }
 
-const filePath = 'packages/google-cloud-secretmanager/src/v1/secret_manager_service_client.ts';
+const filePaths = [
+  path.resolve(__dirname, 'src/v1/secret_manager_service_client.ts'),
+  path.resolve(__dirname, 'src/v1beta2/secret_manager_service_client.ts')
+];
 
 const replacement1 = `return Promise.resolve();
   }
@@ -106,7 +113,7 @@ const replacement1 = `return Promise.resolve();
    *   A fully-qualified path representing SecretVersion resource.
    * @returns {string} A string representing the secret.
    */
-    matchSecretFromSecretVersionName(secretVersionName: string) {
+  matchSecretFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret;
   }
@@ -135,5 +142,9 @@ const replacement2 = `topicPathTemplate: new this._gaxModule.PathTemplate(
       ),
     };`;
 
-replaceInFile(path.resolve(filePath), /return\sPromise\.resolve\(\);\s+}\s+}/g, replacement1);
-replaceInFile(path.resolve(filePath), /topicPathTemplate:\s+new\s+this\._gaxModule\.PathTemplate\(\s+'projects\/{project}\/topics\/{topic}'\s+\),\s+};/g, replacement2);
+filePaths.forEach(filePath => {
+  if (fs.existsSync(filePath)) {
+    replaceInFile(filePath, /return\sPromise\.resolve\(\);\s+}\s+}/g, replacement1);
+    replaceInFile(filePath, /topicPathTemplate:\s+new\s+this\._gaxModule\.PathTemplate\(\s+'projects\/{project}\/topics\/{topic}',?\s*\),?\s*};/g, replacement2);
+  }
+});

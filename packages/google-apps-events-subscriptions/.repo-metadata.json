@@ -1,17 +1,16 @@
 {
-  "name": "workspaceevents",
-  "name_pretty": "Google Workspace Events API",
-  "product_documentation": "https://developers.google.com/workspace/events",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/workspaceevents/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/subscriptions",
-  "api_id": "workspaceevents.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "workspaceevents"
+    "api_description": "The Google Workspace Events API lets you subscribe to events and manage\nchange notifications across Google Workspace applications.",
+    "api_id": "workspaceevents.googleapis.com",
+    "api_shortname": "workspaceevents",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/workspaceevents/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/subscriptions",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1208006&template=1723043",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "workspaceevents",
+    "name_pretty": "Google Workspace Events",
+    "product_documentation": "https://developers.google.com/workspace/events",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {NetAppClient} from './net_app_client';
+export { NetAppClient } from './net_app_client';

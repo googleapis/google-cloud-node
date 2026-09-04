@@ -355,6 +355,7 @@ export class ReservationServiceClient {
       'getReservationGroup',
       'deleteReservationGroup',
       'listReservationGroups',
+      'updateReservationGroup',
     ];
     for (const methodName of reservationServiceStubMethods) {
       const callPromise = this.reservationServiceStub.then(
@@ -3910,6 +3911,151 @@ export class ReservationServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('deleteReservationGroup response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates an existing reservation group resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.bigquery.reservation.v1.ReservationGroup} request.reservationGroup
+   *   Required. Content of the reservation group to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Standard field mask for the set of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.ReservationGroup|ReservationGroup}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/reservation_service.update_reservation_group.js</caption>
+   * region_tag:bigqueryreservation_v1_generated_ReservationService_UpdateReservationGroup_async
+   */
+  updateReservationGroup(
+    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+      (
+        | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateReservationGroup(
+    request: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+      | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateReservationGroup(
+    request: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest,
+    callback: Callback<
+      protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+      | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateReservationGroup(
+    request?: protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+      | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+      (
+        | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'reservation_group.name': request.reservationGroup!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateReservationGroup request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateReservationGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateReservationGroup(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          (
+            | protos.google.cloud.bigquery.reservation.v1.IUpdateReservationGroupRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateReservationGroup response %j', response);
           return [response, options, rawResponse];
         },
       )

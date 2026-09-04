@@ -33,7 +33,7 @@ import {ExplainOptions, ExplainMetrics, RunQueryInfo} from '../src/query';
 import * as is from 'is';
 import * as sinon from 'sinon';
 import * as extend from 'extend';
-import {google} from '../protos/protos';
+import {google} from '../src/protos';
 import {ServiceError} from 'google-gax';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

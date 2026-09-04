@@ -18,7 +18,7 @@ import * as gax from 'google-gax';
 import * as crypto from 'crypto';
 import * as sinon from 'sinon';
 import {BigQuery, TableRow, TableSchema} from '@google-cloud/bigquery';
-import * as protos from '../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import * as protobuf from 'protobufjs';
 import {ClientOptions} from 'google-gax';
 import * as customerRecordProtoJson from './fixtures/customer_record.json';

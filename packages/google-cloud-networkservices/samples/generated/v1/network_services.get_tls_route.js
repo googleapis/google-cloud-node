@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. A name of the TlsRoute to get. Must be in the format
-   *  `projects/* /locations/global/tlsRoutes/*`.
+   *  `projects/* /locations/* /tlsRoutes/*`.
    */
   // const name = 'abc123'
 

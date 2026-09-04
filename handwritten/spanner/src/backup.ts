@@ -31,7 +31,8 @@ import {
   Operation as GaxOperation,
 } from 'google-gax';
 import {DateStruct, PreciseDate} from '@google-cloud/precise-date';
-import {google as databaseAdmin} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import databaseAdmin = protos.google;
 import {common as p} from 'protobufjs';
 
 export type CreateBackupCallback = LongRunningCallback<Backup>;

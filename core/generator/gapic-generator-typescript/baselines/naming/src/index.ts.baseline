@@ -19,7 +19,7 @@
 import * as v1beta1 from './v1beta1';
 const NamingClient = v1beta1.NamingClient;
 type NamingClient = v1beta1.NamingClient;
-export { v1beta1, NamingClient };
-export default { v1beta1, NamingClient };
+export {v1beta1, NamingClient};
+export default {v1beta1, NamingClient};
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

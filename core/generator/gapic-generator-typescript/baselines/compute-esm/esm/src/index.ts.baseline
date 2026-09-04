@@ -21,8 +21,8 @@ const AddressesClient = v1.AddressesClient;
 type AddressesClient = v1.AddressesClient;
 const RegionOperationsClient = v1.RegionOperationsClient;
 type RegionOperationsClient = v1.RegionOperationsClient;
-export { v1, AddressesClient, RegionOperationsClient };
-export default { v1, AddressesClient, RegionOperationsClient };
+export {v1, AddressesClient, RegionOperationsClient};
+export default {v1, AddressesClient, RegionOperationsClient};
 // @ts-ignore
 import * as protos from '../../protos/protos.js';
-export { protos };
+export {protos};

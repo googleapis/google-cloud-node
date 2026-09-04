@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
-import {PassThrough} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
+import { PassThrough } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +51,7 @@ export class TetherClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('apigee-connect');
@@ -59,8 +64,8 @@ export class TetherClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  tetherStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  tetherStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of TetherClient.
@@ -101,21 +106,42 @@ export class TetherClient {
    *     const client = new TetherClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof TetherClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'apigeeconnect.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +166,7 @@ export class TetherClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,10 +180,7 @@ export class TetherClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -177,13 +200,20 @@ export class TetherClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      egress: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.BIDI_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
+      egress: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.BIDI_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries,
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.apigeeconnect.v1.Tether', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.apigeeconnect.v1.Tether',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -214,44 +244,52 @@ export class TetherClient {
     // Put together the "service stub" for
     // google.cloud.apigeeconnect.v1.Tether.
     this.tetherStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.apigeeconnect.v1.Tether') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.apigeeconnect.v1.Tether',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.apigeeconnect.v1.Tether,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const tetherStubMethods =
-        ['egress'];
+    const tetherStubMethods = ['egress'];
     for (const methodName of tetherStubMethods) {
       const callPromise = this.tetherStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            if (methodName in this.descriptors.stream) {
-              const stream = new PassThrough({objectMode: true});
-              setImmediate(() => {
-                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
-              });
-              return stream;
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough({ objectMode: true });
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.',
+                    ),
+                  );
+                });
+                return stream;
+              }
+              return Promise.reject('The client has already been closed.');
             }
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.stream[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.stream[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -266,8 +304,14 @@ export class TetherClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'apigeeconnect.googleapis.com';
   }
@@ -278,8 +322,14 @@ export class TetherClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'apigeeconnect.googleapis.com';
   }
@@ -310,9 +360,7 @@ export class TetherClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -321,8 +369,9 @@ export class TetherClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -334,34 +383,33 @@ export class TetherClient {
   // -- Service calls --
   // -------------------
 
-/**
- * Egress streams egress requests and responses. Logically, this is not
- * actually a streaming request, but uses streaming as a mechanism to flip
- * the client-server relationship of gRPC so that the server can act as a
- * client.
- * The listener, the RPC server, accepts connections from the dialer,
- * the RPC client.
- * The listener streams http requests and the dialer streams http responses.
- *
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which is both readable and writable. It accepts objects
- *   representing {@link protos.google.cloud.apigeeconnect.v1.EgressResponse|EgressResponse} for write() method, and
- *   will emit objects representing {@link protos.google.cloud.apigeeconnect.v1.EgressRequest|EgressRequest} on 'data' event asynchronously.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/tether.egress.js</caption>
- * region_tag:apigeeconnect_v1_generated_Tether_Egress_async
- */
-  egress(
-      options?: CallOptions):
-    gax.CancellableStream {
-    this.initialize().catch(err => {throw err});
+  /**
+   * Egress streams egress requests and responses. Logically, this is not
+   * actually a streaming request, but uses streaming as a mechanism to flip
+   * the client-server relationship of gRPC so that the server can act as a
+   * client.
+   * The listener, the RPC server, accepts connections from the dialer,
+   * the RPC client.
+   * The listener streams http requests and the dialer streams http responses.
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing {@link protos.google.cloud.apigeeconnect.v1.EgressResponse|EgressResponse} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.apigeeconnect.v1.EgressRequest|EgressRequest} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/tether.egress.js</caption>
+   * region_tag:apigeeconnect_v1_generated_Tether_Egress_async
+   */
+  egress(options?: CallOptions): gax.CancellableStream {
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('egress stream %j', options);
     return this.innerApiCalls.egress(null, options);
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.
@@ -371,7 +419,7 @@ export class TetherClient {
    */
   close(): Promise<void> {
     if (this.tetherStub && !this._terminated) {
-      return this.tetherStub.then(stub => {
+      return this.tetherStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

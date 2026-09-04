@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DeviceManagerClient} from './device_manager_client';
+export { DeviceManagerClient } from './device_manager_client';

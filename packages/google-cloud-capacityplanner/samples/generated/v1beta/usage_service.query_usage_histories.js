@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(parent) {
+function main(parent, cloudResourceType) {
   // [START capacityplanner_v1beta_generated_UsageService_QueryUsageHistories_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -79,10 +79,10 @@ function main(parent) {
    */
   // const tpuType = 'abc123'
   /**
-   *  The resource for the `UsageHistory` values to return. Possible values
-   *  include "gce-vcpus", "gce-ram", "gce-local-ssd", "gce-persistent-disk",
-   *  "gce-gpu" and "gce-tpu".
-   *  Empty cloud_resource_type will return results matching all resources.
+   *  Required. The resource for the `UsageHistory` values to return. Possible
+   *  values include "gce-vcpus", "gce-ram", "gce-local-ssd",
+   *  "gce-persistent-disk", "gce-gpu" and "gce-tpu". Empty cloud_resource_type
+   *  will return results matching all resources.
    */
   // const cloudResourceType = 'abc123'
   /**
@@ -111,6 +111,7 @@ function main(parent) {
     // Construct request
     const request = {
       parent,
+      cloudResourceType,
     };
 
     // Run request

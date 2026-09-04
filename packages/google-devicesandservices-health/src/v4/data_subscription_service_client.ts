@@ -977,8 +977,8 @@ export class DataSubscriptionServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource where this subscriber will be created.
-   *   Format: projects/{project}
-   *   Example: projects/my-project-123
+   *   Format: projects/{project_number}
+   *   Example: projects/1234567890
    * @param {google.devicesandservices.health.v4.CreateSubscriberPayload} request.subscriber
    *   Required. The subscriber to create.
    * @param {string} [request.subscriberId]
@@ -1786,7 +1786,7 @@ export class DataSubscriptionServiceClient {
    *   - `data_type`
    *
    *   The `user` identifier (e.g., `user1` in `users/user1`) refers to the public
-   *   `healthUserId`
+   *   `health_user_id`
    *
    *   Example: user = "users/user1"
    *   Example: user = "users/user1" OR user = "users/user2"
@@ -1935,7 +1935,7 @@ export class DataSubscriptionServiceClient {
    *   - `data_type`
    *
    *   The `user` identifier (e.g., `user1` in `users/user1`) refers to the public
-   *   `healthUserId`
+   *   `health_user_id`
    *
    *   Example: user = "users/user1"
    *   Example: user = "users/user1" OR user = "users/user2"
@@ -2007,7 +2007,7 @@ export class DataSubscriptionServiceClient {
    *   - `data_type`
    *
    *   The `user` identifier (e.g., `user1` in `users/user1`) refers to the public
-   *   `healthUserId`
+   *   `health_user_id`
    *
    *   Example: user = "users/user1"
    *   Example: user = "users/user1" OR user = "users/user2"

@@ -1,5 +1,23 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/apigee-connect-v4.3.0...apigee-connect-v5.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/apigee-connect-v4.2.2...apigee-connect-v4.3.0) (2026-06-16)
+
+
+### Features
+
+* Migrate google-cloud-apigeeconnect to librarian ([#8493](https://github.com/googleapis/google-cloud-node/issues/8493)) ([e314fa8](https://github.com/googleapis/google-cloud-node/commit/e314fa8c1aada689298f0ba84619f6918d17cb05))
+
 ## [4.2.2](https://github.com/googleapis/google-cloud-node/compare/apigee-connect-v4.2.1...apigee-connect-v4.2.2) (2026-05-01)
 
 

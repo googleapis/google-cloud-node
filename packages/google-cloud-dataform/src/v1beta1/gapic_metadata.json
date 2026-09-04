@@ -115,6 +115,26 @@
                 "pullGitCommits"
               ]
             },
+            "SyncWorkspaceRefs": {
+              "methods": [
+                "syncWorkspaceRefs"
+              ]
+            },
+            "DeleteBranch": {
+              "methods": [
+                "deleteBranch"
+              ]
+            },
+            "CheckoutWorkspaceBranch": {
+              "methods": [
+                "checkoutWorkspaceBranch"
+              ]
+            },
+            "FetchCurrentWorkspaceBranch": {
+              "methods": [
+                "fetchCurrentWorkspaceBranch"
+              ]
+            },
             "PushGitCommits": {
               "methods": [
                 "pushGitCommits"
@@ -275,9 +295,24 @@
                 "testIamPermissions"
               ]
             },
+            "DeleteTeamFolderTree": {
+              "methods": [
+                "deleteTeamFolderTree"
+              ]
+            },
+            "DeleteFolderTree": {
+              "methods": [
+                "deleteFolderTree"
+              ]
+            },
             "MoveFolder": {
               "methods": [
                 "moveFolder"
+              ]
+            },
+            "DeleteRepositoryLongRunning": {
+              "methods": [
+                "deleteRepositoryLongRunning"
               ]
             },
             "MoveRepository": {
@@ -339,6 +374,13 @@
                 "listWorkspaces",
                 "listWorkspacesStream",
                 "listWorkspacesAsync"
+              ]
+            },
+            "FetchWorkspaceBranches": {
+              "methods": [
+                "fetchWorkspaceBranches",
+                "fetchWorkspaceBranchesStream",
+                "fetchWorkspaceBranchesAsync"
               ]
             },
             "QueryDirectoryContents": {
@@ -507,6 +549,26 @@
                 "pullGitCommits"
               ]
             },
+            "SyncWorkspaceRefs": {
+              "methods": [
+                "syncWorkspaceRefs"
+              ]
+            },
+            "DeleteBranch": {
+              "methods": [
+                "deleteBranch"
+              ]
+            },
+            "CheckoutWorkspaceBranch": {
+              "methods": [
+                "checkoutWorkspaceBranch"
+              ]
+            },
+            "FetchCurrentWorkspaceBranch": {
+              "methods": [
+                "fetchCurrentWorkspaceBranch"
+              ]
+            },
             "PushGitCommits": {
               "methods": [
                 "pushGitCommits"
@@ -667,9 +729,24 @@
                 "testIamPermissions"
               ]
             },
+            "DeleteTeamFolderTree": {
+              "methods": [
+                "deleteTeamFolderTree"
+              ]
+            },
+            "DeleteFolderTree": {
+              "methods": [
+                "deleteFolderTree"
+              ]
+            },
             "MoveFolder": {
               "methods": [
                 "moveFolder"
+              ]
+            },
+            "DeleteRepositoryLongRunning": {
+              "methods": [
+                "deleteRepositoryLongRunning"
               ]
             },
             "MoveRepository": {
@@ -731,6 +808,13 @@
                 "listWorkspaces",
                 "listWorkspacesStream",
                 "listWorkspacesAsync"
+              ]
+            },
+            "FetchWorkspaceBranches": {
+              "methods": [
+                "fetchWorkspaceBranches",
+                "fetchWorkspaceBranchesStream",
+                "fetchWorkspaceBranchesAsync"
               ]
             },
             "QueryDirectoryContents": {

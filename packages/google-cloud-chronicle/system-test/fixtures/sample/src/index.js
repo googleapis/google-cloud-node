@@ -28,9 +28,11 @@ function main() {
   const dataTableServiceClient = new chronicle.DataTableServiceClient();
   const entityServiceClient = new chronicle.EntityServiceClient();
   const featuredContentNativeDashboardServiceClient = new chronicle.FeaturedContentNativeDashboardServiceClient();
+  const findingsRefinementServiceClient = new chronicle.FindingsRefinementServiceClient();
   const instanceServiceClient = new chronicle.InstanceServiceClient();
   const nativeDashboardServiceClient = new chronicle.NativeDashboardServiceClient();
   const referenceListServiceClient = new chronicle.ReferenceListServiceClient();
+  const ruleExecutionErrorServiceClient = new chronicle.RuleExecutionErrorServiceClient();
   const ruleServiceClient = new chronicle.RuleServiceClient();
 }
 

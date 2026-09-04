@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {StorageInsightsClient} from './storage_insights_client';
+export { StorageInsightsClient } from './storage_insights_client';

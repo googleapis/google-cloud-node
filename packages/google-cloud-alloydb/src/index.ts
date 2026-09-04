@@ -17,15 +17,15 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
+import * as v1alpha from './v1alpha';
 
 const AlloyDBAdminClient = v1.AlloyDBAdminClient;
 type AlloyDBAdminClient = v1.AlloyDBAdminClient;
 const AlloyDBCSQLAdminClient = v1.AlloyDBCSQLAdminClient;
 type AlloyDBCSQLAdminClient = v1.AlloyDBCSQLAdminClient;
 
-export {v1, v1alpha, v1beta, AlloyDBAdminClient, AlloyDBCSQLAdminClient};
-export default {v1, v1alpha, v1beta, AlloyDBAdminClient, AlloyDBCSQLAdminClient};
+export {v1, v1beta, v1alpha, AlloyDBAdminClient, AlloyDBCSQLAdminClient};
+export default {v1, v1beta, v1alpha, AlloyDBAdminClient, AlloyDBCSQLAdminClient};
 import * as protos from '../protos/protos';
 export {protos};

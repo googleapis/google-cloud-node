@@ -92,7 +92,7 @@ export class ExecutionUtil {
     transactionOrReadTime?: Uint8Array | Timestamp | api.ITransactionOptions,
   ): Promise<PipelineResponse> {
     // Capture the error stack to preserve stack tracing across async calls.
-    const stack = Error().stack!;
+    const callsiteError = Error();
 
     return new Promise((resolve, reject): void => {
       const result: Array<PipelineResult> = [];
@@ -103,7 +103,7 @@ export class ExecutionUtil {
         transactionOrReadTime,
       );
       stream.on('error', err => {
-        reject(wrapError(err, stack));
+        reject(wrapError(err, callsiteError.stack!));
       });
       stream.on('data', (data: PipelineStreamElement[]) => {
         for (const element of data) {

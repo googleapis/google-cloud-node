@@ -644,6 +644,11 @@
                                 "pickupSla"
                               ]
                             },
+                            "_pickupCost": {
+                              "oneof": [
+                                "pickupCost"
+                              ]
+                            },
                             "_linkTemplate": {
                               "oneof": [
                                 "linkTemplate"
@@ -702,6 +707,36 @@
                             "_structuredDescription": {
                               "oneof": [
                                 "structuredDescription"
+                              ]
+                            },
+                            "_latitude": {
+                              "oneof": [
+                                "latitude"
+                              ]
+                            },
+                            "_longitude": {
+                              "oneof": [
+                                "longitude"
+                              ]
+                            },
+                            "_numberOfUnits": {
+                              "oneof": [
+                                "numberOfUnits"
+                              ]
+                            },
+                            "_numberOfBedrooms": {
+                              "oneof": [
+                                "numberOfBedrooms"
+                              ]
+                            },
+                            "_numberOfBathrooms": {
+                              "oneof": [
+                                "numberOfBathrooms"
+                              ]
+                            },
+                            "_shortTitle": {
+                              "oneof": [
+                                "shortTitle"
                               ]
                             }
                           },
@@ -1150,6 +1185,14 @@
                                 "proto3_optional": true
                               }
                             },
+                            "pickupCost": {
+                              "type": "PickupCost",
+                              "id": 172,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
                             "linkTemplate": {
                               "type": "string",
                               "id": 82,
@@ -1277,6 +1320,226 @@
                               "rule": "repeated",
                               "type": "string",
                               "id": 169,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "minimumOrderValues": {
+                              "rule": "repeated",
+                              "type": "ProductMinimumOrderValue",
+                              "id": 146
+                            },
+                            "vin": {
+                              "type": "string",
+                              "id": 147
+                            },
+                            "model": {
+                              "type": "string",
+                              "id": 148
+                            },
+                            "trim": {
+                              "type": "string",
+                              "id": 149
+                            },
+                            "bodyStyle": {
+                              "type": "VehicleBodyStyle",
+                              "id": 150
+                            },
+                            "year": {
+                              "type": "int64",
+                              "id": 151
+                            },
+                            "mileage": {
+                              "type": "Mileage",
+                              "id": 152
+                            },
+                            "electricRange": {
+                              "type": "Mileage",
+                              "id": 153
+                            },
+                            "fuelConsumption": {
+                              "type": "FuelConsumption",
+                              "id": 154
+                            },
+                            "fuelConsumptionDischargedBattery": {
+                              "type": "FuelConsumption",
+                              "id": 155
+                            },
+                            "energyConsumption": {
+                              "type": "EnergyConsumption",
+                              "id": 156
+                            },
+                            "co2Emissions": {
+                              "type": "Co2Emissions",
+                              "id": 157
+                            },
+                            "dateFirstRegistered": {
+                              "type": "string",
+                              "id": 158
+                            },
+                            "engine": {
+                              "type": "EngineType",
+                              "id": 159
+                            },
+                            "emissionsStandard": {
+                              "type": "EmissionsStandard",
+                              "id": 160
+                            },
+                            "certifiedPreOwned": {
+                              "type": "bool",
+                              "id": 161
+                            },
+                            "vehicleMsrp": {
+                              "type": "google.shopping.type.Price",
+                              "id": 162
+                            },
+                            "vehicleAllInPrice": {
+                              "type": "google.shopping.type.Price",
+                              "id": 163
+                            },
+                            "vehiclePriceType": {
+                              "type": "VehiclePriceType",
+                              "id": 164
+                            },
+                            "vehicleMandatoryInspectionIncluded": {
+                              "type": "bool",
+                              "id": 166
+                            },
+                            "vehicleExpenses": {
+                              "type": "google.shopping.type.Price",
+                              "id": 167
+                            },
+                            "warranty": {
+                              "type": "Warranty",
+                              "id": 168
+                            },
+                            "displayAddress": {
+                              "type": "DisplayAddress",
+                              "id": 179
+                            },
+                            "latitude": {
+                              "type": "double",
+                              "id": 180,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "longitude": {
+                              "type": "double",
+                              "id": 181,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "neighborhood": {
+                              "type": "string",
+                              "id": 182
+                            },
+                            "unitArea": {
+                              "type": "UnitArea",
+                              "id": 183
+                            },
+                            "numberOfUnits": {
+                              "type": "int64",
+                              "id": 184,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "propertyName": {
+                              "type": "string",
+                              "id": 185
+                            },
+                            "numberOfBedrooms": {
+                              "type": "double",
+                              "id": 186,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "numberOfBathrooms": {
+                              "type": "double",
+                              "id": 187,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "propertyType": {
+                              "type": "PropertyType",
+                              "id": 188
+                            },
+                            "amenityFeature": {
+                              "rule": "repeated",
+                              "type": "AmenityFeature",
+                              "id": 189
+                            },
+                            "utilitiesIncluded": {
+                              "rule": "repeated",
+                              "type": "UtilitiesIncluded",
+                              "id": 190
+                            },
+                            "petPolicy": {
+                              "type": "PetPolicy",
+                              "id": 191
+                            },
+                            "specialtyHousingType": {
+                              "type": "SpecialtyHousingType",
+                              "id": 192
+                            },
+                            "productFee": {
+                              "rule": "repeated",
+                              "type": "ProductFee",
+                              "id": 193
+                            },
+                            "shortTitle": {
+                              "type": "string",
+                              "id": 194,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "questionsAndAnswers": {
+                              "rule": "repeated",
+                              "type": "QuestionAndAnswer",
+                              "id": 173,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "popularityRank": {
+                              "type": "float",
+                              "id": 174,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "itemGroupTitle": {
+                              "type": "string",
+                              "id": 175,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "documentLinks": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 176,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "variantOptions": {
+                              "rule": "repeated",
+                              "type": "VariantOption",
+                              "id": 177,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "relatedProducts": {
+                              "rule": "repeated",
+                              "type": "RelatedProduct",
+                              "id": 178,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -1475,6 +1738,321 @@
                                 }
                               }
                             },
+                            "Mileage": {
+                              "oneofs": {
+                                "_value": {
+                                  "oneof": [
+                                    "value"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "value": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "unit": {
+                                  "type": "Unit",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "Unit": {
+                                  "values": {
+                                    "UNIT_UNSPECIFIED": 0,
+                                    "MILES": 1,
+                                    "KM": 2
+                                  }
+                                }
+                              }
+                            },
+                            "FuelConsumption": {
+                              "oneofs": {
+                                "_value": {
+                                  "oneof": [
+                                    "value"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "value": {
+                                  "type": "double",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "unit": {
+                                  "type": "Unit",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "Unit": {
+                                  "values": {
+                                    "UNIT_UNSPECIFIED": 0,
+                                    "LPER100KM": 1,
+                                    "KGPER100KM": 2
+                                  }
+                                }
+                              }
+                            },
+                            "EnergyConsumption": {
+                              "oneofs": {
+                                "_value": {
+                                  "oneof": [
+                                    "value"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "value": {
+                                  "type": "double",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "unit": {
+                                  "type": "Unit",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "Unit": {
+                                  "values": {
+                                    "UNIT_UNSPECIFIED": 0,
+                                    "KWHPER100KM": 1
+                                  }
+                                }
+                              }
+                            },
+                            "Co2Emissions": {
+                              "oneofs": {
+                                "_value": {
+                                  "oneof": [
+                                    "value"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "value": {
+                                  "type": "int64",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "unit": {
+                                  "type": "Unit",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "Unit": {
+                                  "values": {
+                                    "UNIT_UNSPECIFIED": 0,
+                                    "GPERKM": 1
+                                  }
+                                }
+                              }
+                            },
+                            "Warranty": {
+                              "fields": {
+                                "duration": {
+                                  "type": "int64",
+                                  "id": 1
+                                },
+                                "mileage": {
+                                  "type": "Mileage",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "ProductFee": {
+                              "fields": {
+                                "type": {
+                                  "type": "FeeType",
+                                  "id": 1
+                                },
+                                "amount": {
+                                  "type": "google.shopping.type.Price",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "FeeType": {
+                                  "values": {
+                                    "FEE_TYPE_UNSPECIFIED": 0,
+                                    "ADMIN_FEE": 1,
+                                    "APPLICATION_FEE": 2,
+                                    "SECURITY_DEPOSIT": 3
+                                  }
+                                }
+                              }
+                            },
+                            "DisplayAddress": {
+                              "fields": {
+                                "streetNumber": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "streetName": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "city": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "region": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "postalCode": {
+                                  "type": "string",
+                                  "id": 5
+                                }
+                              }
+                            },
+                            "UnitArea": {
+                              "oneofs": {
+                                "_value": {
+                                  "oneof": [
+                                    "value"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "value": {
+                                  "type": "double",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "unit": {
+                                  "type": "Unit",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "Unit": {
+                                  "values": {
+                                    "UNIT_UNSPECIFIED": 0,
+                                    "SQM": 1,
+                                    "SQFT": 2
+                                  }
+                                }
+                              }
+                            },
+                            "PetPolicy": {
+                              "fields": {
+                                "petsAllowed": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "petTypes": {
+                                  "rule": "repeated",
+                                  "type": "PetType",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "PetType": {
+                                  "values": {
+                                    "PET_TYPE_UNSPECIFIED": 0,
+                                    "CATS": 1,
+                                    "LARGE_DOGS": 2,
+                                    "SMALL_DOGS": 3
+                                  }
+                                }
+                              }
+                            },
+                            "QuestionAndAnswer": {
+                              "fields": {
+                                "question": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "answer": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "VariantOption": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "RelatedProduct": {
+                              "fields": {
+                                "relationshipType": {
+                                  "type": "RelationshipType",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "idType": {
+                                  "type": "IdType",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "RelationshipType": {
+                                  "values": {
+                                    "RELATIONSHIP_TYPE_UNSPECIFIED": 0,
+                                    "PART_OF_SET": 1,
+                                    "REQUIRED_PART": 2,
+                                    "OFTEN_BOUGHT_WITH": 3,
+                                    "SUBSTITUTE": 4,
+                                    "DIFFERENT_BRAND": 5,
+                                    "ACCESSORY": 6
+                                  }
+                                },
+                                "IdType": {
+                                  "values": {
+                                    "ID_TYPE_UNSPECIFIED": 0,
+                                    "GTIN": 1,
+                                    "ID": 2
+                                  }
+                                }
+                              }
+                            },
                             "CarrierPriceOption": {
                               "values": {
                                 "CARRIER_PRICE_OPTION_UNSPECIFIED": 0,
@@ -1539,6 +2117,157 @@
                                 "USPS_GROUND_ADVANTAGE_RETAIL": 59,
                                 "USPS_PRIORITY_MAIL": 60,
                                 "USPS_GROUND_ADVANTAGE_COMMERCIAL": 61
+                              }
+                            },
+                            "VehicleBodyStyle": {
+                              "values": {
+                                "VEHICLE_BODY_STYLE_UNSPECIFIED": 0,
+                                "ATV_SPORT": 1,
+                                "ATV_TOURING": 2,
+                                "ATV_UTILITY": 3,
+                                "ATV_YOUTH": 4,
+                                "CITY_CAR": 5,
+                                "CLASS_A_MOTORHOME": 6,
+                                "CLASS_B_MOTORHOME": 7,
+                                "CLASS_C_MOTORHOME": 8,
+                                "COMPACT_SUV": 9,
+                                "CONVERTIBLE": 10,
+                                "COUPE": 11,
+                                "CROSSOVER": 12,
+                                "FIFTH_WHEEL": 13,
+                                "FULL_SIZE_VAN": 14,
+                                "HATCHBACK": 15,
+                                "LIMOUSINE": 16,
+                                "MINIVAN": 17,
+                                "NOTCHBACK": 18,
+                                "POP_UP_CAMPER": 19,
+                                "SEDAN": 20,
+                                "SIDE_BY_SIDE": 21,
+                                "STATION_WAGON": 22,
+                                "SUV": 23,
+                                "TRAVEL_TRAILER": 24,
+                                "TRUCK": 25,
+                                "TRUCK_CAMPER": 26,
+                                "UTE": 27,
+                                "UTV_RECREATIONAL_UTILITY": 28,
+                                "UTV_SPORT": 29,
+                                "UTV_UTILITY": 30,
+                                "UTV_YOUTH": 31
+                              }
+                            },
+                            "EngineType": {
+                              "values": {
+                                "ENGINE_TYPE_UNSPECIFIED": 0,
+                                "GASOLINE": 1,
+                                "DIESEL": 2,
+                                "ELECTRIC": 3,
+                                "HYBRID": 4,
+                                "PLUG_IN_HYBRID": 5,
+                                "NATURAL_GAS": 6,
+                                "LPG": 7,
+                                "METHANE": 8,
+                                "OTHER": 9
+                              }
+                            },
+                            "EmissionsStandard": {
+                              "values": {
+                                "EMISSIONS_STANDARD_UNSPECIFIED": 0,
+                                "ZERO_EMISSIONS": 1,
+                                "EURO1": 2,
+                                "EURO2": 3,
+                                "EURO3": 4,
+                                "EURO4": 5,
+                                "EURO5": 6,
+                                "EURO5B": 7,
+                                "EURO6": 8,
+                                "EURO6C": 9,
+                                "EURO6D": 10,
+                                "EURO6D_TEMP": 11,
+                                "EURO6E": 12
+                              }
+                            },
+                            "VehiclePriceType": {
+                              "values": {
+                                "VEHICLE_PRICE_TYPE_UNSPECIFIED": 0,
+                                "ALL_IN_PRICE": 1,
+                                "DRIVE_AWAY_PRICE": 2,
+                                "ESTIMATED_DRIVE_AWAY_PRICE": 3,
+                                "EXCLUDING_GOVERNMENT_CHARGES_PRICE": 4,
+                                "VEHICLE_BASE_PRICE": 5
+                              }
+                            },
+                            "PropertyType": {
+                              "values": {
+                                "PROPERTY_TYPE_UNSPECIFIED": 0,
+                                "APARTMENT": 1,
+                                "CONDO": 2,
+                                "LOFT": 3,
+                                "MULTI_FAMILY_HOME": 4,
+                                "PENTHOUSE": 5,
+                                "ROOM": 6,
+                                "SINGLE_FAMILY_HOME": 7,
+                                "STUDIO": 8,
+                                "TOWNHOUSE": 9
+                              }
+                            },
+                            "AmenityFeature": {
+                              "values": {
+                                "AMENITY_FEATURE_UNSPECIFIED": 0,
+                                "BALCONY": 1,
+                                "BASEMENT": 2,
+                                "BASKETBALL_COURT": 3,
+                                "BIKE_STORAGE": 4,
+                                "CENTRAL_AC": 5,
+                                "DISHWASHER": 6,
+                                "DOG_PARK": 7,
+                                "ELEVATOR": 8,
+                                "EV_CHARGING": 9,
+                                "FENCED_LOT": 10,
+                                "FIREPLACE": 11,
+                                "FITNESS_CENTER": 12,
+                                "FORCED_AIR_HEATING": 13,
+                                "FULLY_FURNISHED": 14,
+                                "GARAGE": 15,
+                                "GATED_COMMUNITY": 16,
+                                "HARDWOOD_FLOORS": 17,
+                                "HIGH_SPEED_INTERNET": 18,
+                                "INTERCOM": 19,
+                                "IN_UNIT_WASHER_DRYER": 20,
+                                "KITCHEN": 21,
+                                "LARGE_CLOSETS": 22,
+                                "MULTISPORT_COURT": 23,
+                                "ONSITE_LAUNDRY": 24,
+                                "OUTDOOR_LOUNGE": 25,
+                                "PARKING": 26,
+                                "PATIO": 27,
+                                "PICKLEBALL_COURT": 28,
+                                "POOL": 29,
+                                "REFRIGERATOR": 30,
+                                "SOCCER_FIELD": 31,
+                                "TENNIS_COURT": 32,
+                                "WALK_IN_CLOSETS": 33,
+                                "WHEELCHAIR_ACCESS": 34
+                              }
+                            },
+                            "UtilitiesIncluded": {
+                              "values": {
+                                "UTILITIES_INCLUDED_UNSPECIFIED": 0,
+                                "ELECTRICITY": 1,
+                                "GAS": 2,
+                                "INTERNET": 3,
+                                "TRASH": 4,
+                                "WATER": 5
+                              }
+                            },
+                            "SpecialtyHousingType": {
+                              "values": {
+                                "SPECIALTY_HOUSING_TYPE_UNSPECIFIED": 0,
+                                "CORPORATE": 1,
+                                "LOW_INCOME": 2,
+                                "MILITARY": 3,
+                                "SENIOR": 4,
+                                "SHORT_TERM": 5,
+                                "STUDENT": 6
                               }
                             }
                           }
@@ -1623,6 +2352,11 @@
                               "oneof": [
                                 "annualPercentageRate"
                               ]
+                            },
+                            "_totalAmount": {
+                              "oneof": [
+                                "totalAmount"
+                              ]
                             }
                           },
                           "fields": {
@@ -1651,6 +2385,14 @@
                             "annualPercentageRate": {
                               "type": "double",
                               "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "totalAmount": {
+                              "type": "google.shopping.type.Price",
+                              "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
@@ -1866,6 +2608,20 @@
                               "id": 13,
                               "options": {
                                 "proto3_optional": true
+                              }
+                            },
+                            "loyaltyProgramLabel": {
+                              "type": "string",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "loyaltyTierLabel": {
+                              "type": "string",
+                              "id": 15,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -2306,6 +3062,38 @@
                             }
                           }
                         },
+                        "PickupCost": {
+                          "oneofs": {
+                            "_flatRate": {
+                              "oneof": [
+                                "flatRate"
+                              ]
+                            },
+                            "_freeThreshold": {
+                              "oneof": [
+                                "freeThreshold"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "flatRate": {
+                              "type": "google.shopping.type.Price",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
+                              }
+                            },
+                            "freeThreshold": {
+                              "type": "google.shopping.type.Price",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
                         "HandlingCutoffTime": {
                           "oneofs": {
                             "_country": {
@@ -2356,6 +3144,72 @@
                               "id": 4,
                               "options": {
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ProductMinimumOrderValue": {
+                          "oneofs": {
+                            "_country": {
+                              "oneof": [
+                                "country"
+                              ]
+                            },
+                            "_service": {
+                              "oneof": [
+                                "service"
+                              ]
+                            },
+                            "_surface": {
+                              "oneof": [
+                                "surface"
+                              ]
+                            },
+                            "_price": {
+                              "oneof": [
+                                "price"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "country": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
+                              }
+                            },
+                            "service": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "surface": {
+                              "type": "Surface",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "price": {
+                              "type": "google.shopping.type.Price",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Surface": {
+                              "values": {
+                                "SURFACE_UNSPECIFIED": 0,
+                                "ONLINE": 1,
+                                "LOCAL": 2,
+                                "ONLINE_LOCAL": 3
                               }
                             }
                           }
@@ -2496,6 +3350,13 @@
                             "automatedDiscounts": {
                               "type": "AutomatedDiscounts",
                               "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "archived": {
+                              "type": "bool",
+                              "id": 14,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -4993,6 +5854,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -5102,6 +5967,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -5156,6 +6025,79 @@
                 "generateOmittedAsInternal": {
                   "type": "bool",
                   "id": 2
+                }
+              }
+            },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
                 }
               }
             },
@@ -5308,6 +6250,8 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -5502,6 +6446,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -5777,7 +6725,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -5837,7 +6788,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -5879,6 +6832,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -5951,6 +6908,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6066,6 +7027,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -6145,6 +7110,10 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 }
@@ -6164,6 +7133,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6202,6 +7175,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6247,6 +7224,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -6273,6 +7254,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6307,6 +7292,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -6448,8 +7437,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -6461,6 +7450,17 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -6538,7 +7538,8 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
                   }
                 },
                 "VisibilityFeature": {
@@ -6557,6 +7558,18 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }
@@ -6758,7 +7771,6 @@
         },
         "type": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/type/interval;interval",
             "java_multiple_files": true,
             "java_outer_classname": "IntervalProto",

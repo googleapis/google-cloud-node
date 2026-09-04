@@ -56,7 +56,7 @@ function main() {
   // const flags = 'abc123'
 
   // Imports the Servicecontrol library
-  const {ServiceControllerClient} = require('@google-cloud/servicecontrol').v2;
+  const {ServiceControllerClient} = require('@google-cloud/service-control').v2;
 
   // Instantiates a client
   const servicecontrolClient = new ServiceControllerClient();

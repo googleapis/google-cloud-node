@@ -21,7 +21,8 @@
 import {Entry} from '../entry';
 import * as extend from 'extend';
 import arrify = require('arrify');
-import {google} from '../../protos/protos';
+import {protos} from '@google-cloud/logging-api';
+import google = protos.google;
 
 export interface WriteOptions {
   labels?: {[index: string]: string};

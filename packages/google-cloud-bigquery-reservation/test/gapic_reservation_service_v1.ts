@@ -3434,6 +3434,149 @@ describe('v1.ReservationServiceClient', () => {
     });
   });
 
+  describe('updateReservationGroup', () => {
+    it('invokes updateReservationGroup without error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest(),
+      );
+      request.reservationGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest',
+        ['reservationGroup', 'name'],
+      );
+      request.reservationGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `reservation_group.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.ReservationGroup(),
+      );
+      client.innerApiCalls.updateReservationGroup =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateReservationGroup(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateReservationGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateReservationGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateReservationGroup without error using callback', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest(),
+      );
+      request.reservationGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest',
+        ['reservationGroup', 'name'],
+      );
+      request.reservationGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `reservation_group.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.ReservationGroup(),
+      );
+      client.innerApiCalls.updateReservationGroup =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateReservationGroup(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.bigquery.reservation.v1.IReservationGroup | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateReservationGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateReservationGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateReservationGroup with error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest(),
+      );
+      request.reservationGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest',
+        ['reservationGroup', 'name'],
+      );
+      request.reservationGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `reservation_group.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateReservationGroup = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateReservationGroup(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateReservationGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateReservationGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateReservationGroup with closed client', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest(),
+      );
+      request.reservationGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateReservationGroupRequest',
+        ['reservationGroup', 'name'],
+      );
+      request.reservationGroup.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateReservationGroup(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('listReservations', () => {
     it('invokes listReservations without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({

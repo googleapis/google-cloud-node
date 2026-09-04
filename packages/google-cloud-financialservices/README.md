@@ -95,7 +95,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_instance.js) |
 | update model | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_model.js) |
 | update prediction result | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/a_m_l.update_prediction_result.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-financialservices/samples/generated/v1/snippet_metadata_google.cloud.financialservices.v1.json) |
 
 
 ## Supported Node.js Versions

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {VideoStitcherServiceClient} from './video_stitcher_service_client';
+export { VideoStitcherServiceClient } from './video_stitcher_service_client';

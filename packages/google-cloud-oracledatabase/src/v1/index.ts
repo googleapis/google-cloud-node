@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {OracleDatabaseClient} from './oracle_database_client';
+export { OracleDatabaseClient } from './oracle_database_client';

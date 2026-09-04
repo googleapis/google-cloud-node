@@ -21,54 +21,67 @@
       },
       "methods": {
         "AddAssociation": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "AddTrafficClassificationRule": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "AggregatedList": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "Delete": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Get": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetAssociation": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetTrafficClassificationRule": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "Insert": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "List": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "Patch": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "PatchTrafficClassificationRule": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "RemoveAssociation": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "RemoveTrafficClassificationRule": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

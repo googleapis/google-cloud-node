@@ -21,8 +21,10 @@ import * as v1beta from './v1beta';
 
 const CloudQuotasClient = v1.CloudQuotasClient;
 type CloudQuotasClient = v1.CloudQuotasClient;
+const QuotaAdjusterSettingsManagerClient = v1.QuotaAdjusterSettingsManagerClient;
+type QuotaAdjusterSettingsManagerClient = v1.QuotaAdjusterSettingsManagerClient;
 
-export {v1, v1beta, CloudQuotasClient};
-export default {v1, v1beta, CloudQuotasClient};
+export {v1, v1beta, CloudQuotasClient, QuotaAdjusterSettingsManagerClient};
+export default {v1, v1beta, CloudQuotasClient, QuotaAdjusterSettingsManagerClient};
 import * as protos from '../protos/protos';
 export {protos};

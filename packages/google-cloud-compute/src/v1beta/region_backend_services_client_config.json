@@ -21,50 +21,62 @@
       },
       "methods": {
         "Delete": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Get": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetHealth": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetIamPolicy": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "Insert": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "List": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListUsable": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "Patch": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetIamPolicy": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetSecurityPolicy": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "TestIamPermissions": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Update": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

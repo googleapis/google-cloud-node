@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. A name of the HttpRoute to delete. Must be in the format
-   *  `projects/* /locations/global/httpRoutes/*`.
+   *  `projects/* /locations/* /httpRoutes/*`.
    */
   // const name = 'abc123'
 

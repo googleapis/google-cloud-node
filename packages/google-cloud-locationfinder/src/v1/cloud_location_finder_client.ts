@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +53,7 @@ export class CloudLocationFinderClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('locationfinder');
@@ -57,10 +66,10 @@ export class CloudLocationFinderClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  cloudLocationFinderStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  cloudLocationFinderStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of CloudLocationFinderClient.
@@ -101,21 +110,42 @@ export class CloudLocationFinderClient {
    *     const client = new CloudLocationFinderClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CloudLocationFinderClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'cloudlocationfinder.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +170,7 @@ export class CloudLocationFinderClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,15 +184,11 @@ export class CloudLocationFinderClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,7 +210,7 @@ export class CloudLocationFinderClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       cloudLocationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/cloudLocations/{cloud_location}'
+        'projects/{project}/locations/{location}/cloudLocations/{cloud_location}',
       ),
     };
 
@@ -192,16 +218,25 @@ export class CloudLocationFinderClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCloudLocations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cloudLocations'),
-      searchCloudLocations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cloudLocations')
+      listCloudLocations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'cloudLocations',
+      ),
+      searchCloudLocations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'cloudLocations',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.locationfinder.v1.CloudLocationFinder', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.locationfinder.v1.CloudLocationFinder',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -232,37 +267,45 @@ export class CloudLocationFinderClient {
     // Put together the "service stub" for
     // google.cloud.locationfinder.v1.CloudLocationFinder.
     this.cloudLocationFinderStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.locationfinder.v1.CloudLocationFinder') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.locationfinder.v1.CloudLocationFinder,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.locationfinder.v1.CloudLocationFinder',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.locationfinder.v1
+            .CloudLocationFinder,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const cloudLocationFinderStubMethods =
-        ['listCloudLocations', 'getCloudLocation', 'searchCloudLocations'];
+    const cloudLocationFinderStubMethods = [
+      'listCloudLocations',
+      'getCloudLocation',
+      'searchCloudLocations',
+    ];
     for (const methodName of cloudLocationFinderStubMethods) {
       const callPromise = this.cloudLocationFinderStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -277,8 +320,14 @@ export class CloudLocationFinderClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudlocationfinder.googleapis.com';
   }
@@ -289,8 +338,14 @@ export class CloudLocationFinderClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudlocationfinder.googleapis.com';
   }
@@ -321,9 +376,7 @@ export class CloudLocationFinderClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -332,8 +385,9 @@ export class CloudLocationFinderClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -344,197 +398,271 @@ export class CloudLocationFinderClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieves a resource containing information about a cloud location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/cloud_location_finder.get_cloud_location.js</caption>
- * region_tag:cloudlocationfinder_v1_generated_CloudLocationFinder_GetCloudLocation_async
- */
+  /**
+   * Retrieves a resource containing information about a cloud location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_location_finder.get_cloud_location.js</caption>
+   * region_tag:cloudlocationfinder_v1_generated_CloudLocationFinder_GetCloudLocation_async
+   */
   getCloudLocation(
-      request?: protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.locationfinder.v1.ICloudLocation,
-        protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.locationfinder.v1.ICloudLocation,
+      (
+        | protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getCloudLocation(
-      request: protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.locationfinder.v1.ICloudLocation,
-          protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.locationfinder.v1.ICloudLocation,
+      | protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCloudLocation(
-      request: protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest,
-      callback: Callback<
-          protos.google.cloud.locationfinder.v1.ICloudLocation,
-          protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest,
+    callback: Callback<
+      protos.google.cloud.locationfinder.v1.ICloudLocation,
+      | protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCloudLocation(
-      request?: protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.locationfinder.v1.ICloudLocation,
-          protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.locationfinder.v1.ICloudLocation,
-          protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.locationfinder.v1.ICloudLocation,
-        protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.locationfinder.v1.ICloudLocation,
+      | protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.locationfinder.v1.ICloudLocation,
+      (
+        | protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getCloudLocation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.locationfinder.v1.ICloudLocation,
-        protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.locationfinder.v1.ICloudLocation,
+          | protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCloudLocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getCloudLocation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.locationfinder.v1.ICloudLocation,
-        protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getCloudLocation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getCloudLocation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.locationfinder.v1.ICloudLocation,
+          (
+            | protos.google.cloud.locationfinder.v1.IGetCloudLocationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCloudLocation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists cloud locations under a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of cloud locations.
- *   Format: projects/{project}/locations/{location}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cloud locations to return per page. The
- *   service might return fewer cloud locations than this value. If unspecified,
- *   server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- *   Provide page token returned by a previous 'ListCloudLocations' call to
- *   retrieve the next page of results. When paginating, all other parameters
- *   provided to 'ListCloudLocations' must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. A filter expression that filters resources listed in the
- *   response. The expression is in the form of field=value. For example,
- *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION'. Multiple filter queries
- *   are space-separated. For example,
- *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION territory_code="US"' By
- *   default, each expression is an AND expression. However, you can include AND
- *   and OR expressions explicitly.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listCloudLocationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists cloud locations under a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of cloud locations.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cloud locations to return per page. The
+   *   service might return fewer cloud locations than this value. If unspecified,
+   *   server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Provide page token returned by a previous 'ListCloudLocations' call to
+   *   retrieve the next page of results. When paginating, all other parameters
+   *   provided to 'ListCloudLocations' must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response. The expression is in the form of field=value. For example,
+   *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION'. Multiple filter queries
+   *   are space-separated. For example,
+   *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION territory_code="US"' By
+   *   default, each expression is an AND expression. However, you can include AND
+   *   and OR expressions explicitly.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCloudLocationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCloudLocations(
-      request?: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.locationfinder.v1.ICloudLocation[],
-        protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest|null,
-        protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse
-      ]>;
+    request?: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.locationfinder.v1.ICloudLocation[],
+      protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest | null,
+      protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse,
+    ]
+  >;
   listCloudLocations(
-      request: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-          protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse|null|undefined,
-          protos.google.cloud.locationfinder.v1.ICloudLocation>): void;
+    request: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+      | protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.locationfinder.v1.ICloudLocation
+    >,
+  ): void;
   listCloudLocations(
-      request: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-          protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse|null|undefined,
-          protos.google.cloud.locationfinder.v1.ICloudLocation>): void;
+    request: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+      | protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.locationfinder.v1.ICloudLocation
+    >,
+  ): void;
   listCloudLocations(
-      request?: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-          protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse|null|undefined,
-          protos.google.cloud.locationfinder.v1.ICloudLocation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-          protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse|null|undefined,
-          protos.google.cloud.locationfinder.v1.ICloudLocation>):
-      Promise<[
-        protos.google.cloud.locationfinder.v1.ICloudLocation[],
-        protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest|null,
-        protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse
-      ]>|void {
+          | protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.locationfinder.v1.ICloudLocation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+      | protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.locationfinder.v1.ICloudLocation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.locationfinder.v1.ICloudLocation[],
+      protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest | null,
+      protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-      protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse|null|undefined,
-      protos.google.cloud.locationfinder.v1.ICloudLocation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+          | protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.locationfinder.v1.ICloudLocation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCloudLocations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -543,234 +671,263 @@ export class CloudLocationFinderClient {
     this._log.info('listCloudLocations request %j', request);
     return this.innerApiCalls
       .listCloudLocations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.locationfinder.v1.ICloudLocation[],
-        protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest|null,
-        protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse
-      ]) => {
-        this._log.info('listCloudLocations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.locationfinder.v1.ICloudLocation[],
+          protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest | null,
+          protos.google.cloud.locationfinder.v1.IListCloudLocationsResponse,
+        ]) => {
+          this._log.info('listCloudLocations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listCloudLocations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of cloud locations.
- *   Format: projects/{project}/locations/{location}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cloud locations to return per page. The
- *   service might return fewer cloud locations than this value. If unspecified,
- *   server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- *   Provide page token returned by a previous 'ListCloudLocations' call to
- *   retrieve the next page of results. When paginating, all other parameters
- *   provided to 'ListCloudLocations' must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. A filter expression that filters resources listed in the
- *   response. The expression is in the form of field=value. For example,
- *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION'. Multiple filter queries
- *   are space-separated. For example,
- *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION territory_code="US"' By
- *   default, each expression is an AND expression. However, you can include AND
- *   and OR expressions explicitly.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listCloudLocationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listCloudLocations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of cloud locations.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cloud locations to return per page. The
+   *   service might return fewer cloud locations than this value. If unspecified,
+   *   server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Provide page token returned by a previous 'ListCloudLocations' call to
+   *   retrieve the next page of results. When paginating, all other parameters
+   *   provided to 'ListCloudLocations' must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response. The expression is in the form of field=value. For example,
+   *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION'. Multiple filter queries
+   *   are space-separated. For example,
+   *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION territory_code="US"' By
+   *   default, each expression is an AND expression. However, you can include AND
+   *   and OR expressions explicitly.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCloudLocationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCloudLocationsStream(
-      request?: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCloudLocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCloudLocations stream %j', request);
     return this.descriptors.page.listCloudLocations.createStream(
       this.innerApiCalls.listCloudLocations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listCloudLocations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of cloud locations.
- *   Format: projects/{project}/locations/{location}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cloud locations to return per page. The
- *   service might return fewer cloud locations than this value. If unspecified,
- *   server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- *   Provide page token returned by a previous 'ListCloudLocations' call to
- *   retrieve the next page of results. When paginating, all other parameters
- *   provided to 'ListCloudLocations' must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. A filter expression that filters resources listed in the
- *   response. The expression is in the form of field=value. For example,
- *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION'. Multiple filter queries
- *   are space-separated. For example,
- *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION territory_code="US"' By
- *   default, each expression is an AND expression. However, you can include AND
- *   and OR expressions explicitly.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/cloud_location_finder.list_cloud_locations.js</caption>
- * region_tag:cloudlocationfinder_v1_generated_CloudLocationFinder_ListCloudLocations_async
- */
+  /**
+   * Equivalent to `listCloudLocations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of cloud locations.
+   *   Format: projects/{project}/locations/{location}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cloud locations to return per page. The
+   *   service might return fewer cloud locations than this value. If unspecified,
+   *   server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Provide page token returned by a previous 'ListCloudLocations' call to
+   *   retrieve the next page of results. When paginating, all other parameters
+   *   provided to 'ListCloudLocations' must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. A filter expression that filters resources listed in the
+   *   response. The expression is in the form of field=value. For example,
+   *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION'. Multiple filter queries
+   *   are space-separated. For example,
+   *   'cloud_location_type=CLOUD_LOCATION_TYPE_REGION territory_code="US"' By
+   *   default, each expression is an AND expression. However, you can include AND
+   *   and OR expressions explicitly.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_location_finder.list_cloud_locations.js</caption>
+   * region_tag:cloudlocationfinder_v1_generated_CloudLocationFinder_ListCloudLocations_async
+   */
   listCloudLocationsAsync(
-      request?: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.locationfinder.v1.ICloudLocation>{
+    request?: protos.google.cloud.locationfinder.v1.IListCloudLocationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.locationfinder.v1.ICloudLocation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCloudLocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCloudLocations iterate %j', request);
     return this.descriptors.page.listCloudLocations.asyncIterate(
       this.innerApiCalls['listCloudLocations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.locationfinder.v1.ICloudLocation>;
   }
- /**
- * Searches for cloud locations from a given source location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of cloud locations.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.sourceCloudLocation
- *   Required. The source cloud location to search from.
- *   Example search can be searching nearby cloud locations from the source
- *   cloud location by latency.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cloud locations to return. The service
- *   might return fewer cloud locations than this value. If unspecified, server
- *   will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- *   Provide Page token returned by a previous 'ListCloudLocations' call to
- *   retrieve the next page of results. When paginating, all other parameters
- *   provided to 'ListCloudLocations' must match the call that provided the page
- *   token.
- * @param {string} [request.query]
- *   Optional. The query string in search query syntax. While filter is used to
- *   filter the search results by attributes, query is used to specify the
- *   search requirements.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `searchCloudLocationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Searches for cloud locations from a given source location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of cloud locations.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.sourceCloudLocation
+   *   Required. The source cloud location to search from.
+   *   Example search can be searching nearby cloud locations from the source
+   *   cloud location by latency.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cloud locations to return. The service
+   *   might return fewer cloud locations than this value. If unspecified, server
+   *   will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Provide Page token returned by a previous 'ListCloudLocations' call to
+   *   retrieve the next page of results. When paginating, all other parameters
+   *   provided to 'ListCloudLocations' must match the call that provided the page
+   *   token.
+   * @param {string} [request.query]
+   *   Optional. The query string in search query syntax. While filter is used to
+   *   filter the search results by attributes, query is used to specify the
+   *   search requirements.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchCloudLocationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchCloudLocations(
-      request?: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.locationfinder.v1.ICloudLocation[],
-        protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest|null,
-        protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse
-      ]>;
+    request?: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.locationfinder.v1.ICloudLocation[],
+      protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest | null,
+      protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse,
+    ]
+  >;
   searchCloudLocations(
-      request: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse|null|undefined,
-          protos.google.cloud.locationfinder.v1.ICloudLocation>): void;
+    request: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+      | protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.locationfinder.v1.ICloudLocation
+    >,
+  ): void;
   searchCloudLocations(
-      request: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse|null|undefined,
-          protos.google.cloud.locationfinder.v1.ICloudLocation>): void;
+    request: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+      | protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.locationfinder.v1.ICloudLocation
+    >,
+  ): void;
   searchCloudLocations(
-      request?: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse|null|undefined,
-          protos.google.cloud.locationfinder.v1.ICloudLocation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse|null|undefined,
-          protos.google.cloud.locationfinder.v1.ICloudLocation>):
-      Promise<[
-        protos.google.cloud.locationfinder.v1.ICloudLocation[],
-        protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest|null,
-        protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse
-      ]>|void {
+          | protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.locationfinder.v1.ICloudLocation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+      | protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.locationfinder.v1.ICloudLocation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.locationfinder.v1.ICloudLocation[],
+      protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest | null,
+      protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-      protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse|null|undefined,
-      protos.google.cloud.locationfinder.v1.ICloudLocation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+          | protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.locationfinder.v1.ICloudLocation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchCloudLocations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -779,139 +936,144 @@ export class CloudLocationFinderClient {
     this._log.info('searchCloudLocations request %j', request);
     return this.innerApiCalls
       .searchCloudLocations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.locationfinder.v1.ICloudLocation[],
-        protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest|null,
-        protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse
-      ]) => {
-        this._log.info('searchCloudLocations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.locationfinder.v1.ICloudLocation[],
+          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest | null,
+          protos.google.cloud.locationfinder.v1.ISearchCloudLocationsResponse,
+        ]) => {
+          this._log.info('searchCloudLocations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `searchCloudLocations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of cloud locations.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.sourceCloudLocation
- *   Required. The source cloud location to search from.
- *   Example search can be searching nearby cloud locations from the source
- *   cloud location by latency.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cloud locations to return. The service
- *   might return fewer cloud locations than this value. If unspecified, server
- *   will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- *   Provide Page token returned by a previous 'ListCloudLocations' call to
- *   retrieve the next page of results. When paginating, all other parameters
- *   provided to 'ListCloudLocations' must match the call that provided the page
- *   token.
- * @param {string} [request.query]
- *   Optional. The query string in search query syntax. While filter is used to
- *   filter the search results by attributes, query is used to specify the
- *   search requirements.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `searchCloudLocationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `searchCloudLocations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of cloud locations.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.sourceCloudLocation
+   *   Required. The source cloud location to search from.
+   *   Example search can be searching nearby cloud locations from the source
+   *   cloud location by latency.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cloud locations to return. The service
+   *   might return fewer cloud locations than this value. If unspecified, server
+   *   will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Provide Page token returned by a previous 'ListCloudLocations' call to
+   *   retrieve the next page of results. When paginating, all other parameters
+   *   provided to 'ListCloudLocations' must match the call that provided the page
+   *   token.
+   * @param {string} [request.query]
+   *   Optional. The query string in search query syntax. While filter is used to
+   *   filter the search results by attributes, query is used to specify the
+   *   search requirements.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchCloudLocationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchCloudLocationsStream(
-      request?: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchCloudLocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchCloudLocations stream %j', request);
     return this.descriptors.page.searchCloudLocations.createStream(
       this.innerApiCalls.searchCloudLocations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `searchCloudLocations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of cloud locations.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.sourceCloudLocation
- *   Required. The source cloud location to search from.
- *   Example search can be searching nearby cloud locations from the source
- *   cloud location by latency.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cloud locations to return. The service
- *   might return fewer cloud locations than this value. If unspecified, server
- *   will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- *   Provide Page token returned by a previous 'ListCloudLocations' call to
- *   retrieve the next page of results. When paginating, all other parameters
- *   provided to 'ListCloudLocations' must match the call that provided the page
- *   token.
- * @param {string} [request.query]
- *   Optional. The query string in search query syntax. While filter is used to
- *   filter the search results by attributes, query is used to specify the
- *   search requirements.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/cloud_location_finder.search_cloud_locations.js</caption>
- * region_tag:cloudlocationfinder_v1_generated_CloudLocationFinder_SearchCloudLocations_async
- */
+  /**
+   * Equivalent to `searchCloudLocations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of cloud locations.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.sourceCloudLocation
+   *   Required. The source cloud location to search from.
+   *   Example search can be searching nearby cloud locations from the source
+   *   cloud location by latency.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cloud locations to return. The service
+   *   might return fewer cloud locations than this value. If unspecified, server
+   *   will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Provide Page token returned by a previous 'ListCloudLocations' call to
+   *   retrieve the next page of results. When paginating, all other parameters
+   *   provided to 'ListCloudLocations' must match the call that provided the page
+   *   token.
+   * @param {string} [request.query]
+   *   Optional. The query string in search query syntax. While filter is used to
+   *   filter the search results by attributes, query is used to specify the
+   *   search requirements.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.locationfinder.v1.CloudLocation|CloudLocation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cloud_location_finder.search_cloud_locations.js</caption>
+   * region_tag:cloudlocationfinder_v1_generated_CloudLocationFinder_SearchCloudLocations_async
+   */
   searchCloudLocationsAsync(
-      request?: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.locationfinder.v1.ICloudLocation>{
+    request?: protos.google.cloud.locationfinder.v1.ISearchCloudLocationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.locationfinder.v1.ICloudLocation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchCloudLocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchCloudLocations iterate %j', request);
     return this.descriptors.page.searchCloudLocations.asyncIterate(
       this.innerApiCalls['searchCloudLocations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.locationfinder.v1.ICloudLocation>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -946,12 +1108,11 @@ export class CloudLocationFinderClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -984,7 +1145,7 @@ export class CloudLocationFinderClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1001,7 +1162,7 @@ export class CloudLocationFinderClient {
    * @param {string} cloud_location
    * @returns {string} Resource name string.
    */
-  cloudLocationPath(project:string,location:string,cloudLocation:string) {
+  cloudLocationPath(project: string, location: string, cloudLocation: string) {
     return this.pathTemplates.cloudLocationPathTemplate.render({
       project: project,
       location: location,
@@ -1017,7 +1178,8 @@ export class CloudLocationFinderClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCloudLocationName(cloudLocationName: string) {
-    return this.pathTemplates.cloudLocationPathTemplate.match(cloudLocationName).project;
+    return this.pathTemplates.cloudLocationPathTemplate.match(cloudLocationName)
+      .project;
   }
 
   /**
@@ -1028,7 +1190,8 @@ export class CloudLocationFinderClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCloudLocationName(cloudLocationName: string) {
-    return this.pathTemplates.cloudLocationPathTemplate.match(cloudLocationName).location;
+    return this.pathTemplates.cloudLocationPathTemplate.match(cloudLocationName)
+      .location;
   }
 
   /**
@@ -1039,7 +1202,8 @@ export class CloudLocationFinderClient {
    * @returns {string} A string representing the cloud_location.
    */
   matchCloudLocationFromCloudLocationName(cloudLocationName: string) {
-    return this.pathTemplates.cloudLocationPathTemplate.match(cloudLocationName).cloud_location;
+    return this.pathTemplates.cloudLocationPathTemplate.match(cloudLocationName)
+      .cloud_location;
   }
 
   /**
@@ -1050,11 +1214,13 @@ export class CloudLocationFinderClient {
    */
   close(): Promise<void> {
     if (this.cloudLocationFinderStub && !this._terminated) {
-      return this.cloudLocationFinderStub.then(stub => {
+      return this.cloudLocationFinderStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

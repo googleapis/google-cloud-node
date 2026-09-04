@@ -1,5 +1,6 @@
 [
   "../../protos/google/cloud/ces/v1beta/agent.proto",
+  "../../protos/google/cloud/ces/v1beta/agent_card.proto",
   "../../protos/google/cloud/ces/v1beta/agent_service.proto",
   "../../protos/google/cloud/ces/v1beta/agent_tool.proto",
   "../../protos/google/cloud/ces/v1beta/agent_transfers.proto",
@@ -17,6 +18,7 @@
   "../../protos/google/cloud/ces/v1beta/data_store_tool.proto",
   "../../protos/google/cloud/ces/v1beta/deployment.proto",
   "../../protos/google/cloud/ces/v1beta/evaluation.proto",
+  "../../protos/google/cloud/ces/v1beta/evaluation_metrics_config.proto",
   "../../protos/google/cloud/ces/v1beta/evaluation_service.proto",
   "../../protos/google/cloud/ces/v1beta/example.proto",
   "../../protos/google/cloud/ces/v1beta/fakes.proto",

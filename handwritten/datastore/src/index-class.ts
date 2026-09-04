@@ -16,7 +16,7 @@ import {CallOptions, ServiceError} from 'google-gax';
 import {promisifyAll} from '@google-cloud/promisify';
 
 import {Datastore} from './';
-import {google} from '../protos/protos';
+import {google} from './protos';
 
 export interface GenericIndexCallback<T> {
   (

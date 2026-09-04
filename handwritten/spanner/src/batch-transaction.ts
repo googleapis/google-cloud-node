@@ -16,7 +16,6 @@
 
 import {PreciseDate} from '@google-cloud/precise-date';
 import {promisifyAll} from '@google-cloud/promisify';
-import * as extend from 'extend';
 import {
   ExecuteSqlRequest,
   ReadCallback,
@@ -26,7 +25,8 @@ import {
   RunResponse,
   Snapshot,
 } from './transaction';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {Session, Database} from '.';
 import {
   CLOUD_RESOURCE_HEADER,
@@ -233,11 +233,11 @@ class BatchTransaction extends Snapshot {
       'BatchTransaction.createPartitions_',
       traceConfig,
       span => {
-        const query = extend({}, config.reqOpts, {
+        const query = Object.assign({}, config.reqOpts, {
           session: this.session.formattedName_,
           transaction: {id: this.id},
         });
-        config.reqOpts = extend({}, query);
+        config.reqOpts = Object.assign({}, query);
         const headers = {
           [CLOUD_RESOURCE_HEADER]: (this.session.parent as Database)
             .formattedName_,
@@ -253,7 +253,7 @@ class BatchTransaction extends Snapshot {
           }
 
           const partitions = resp.partitions.map(partition => {
-            return extend({}, query, partition);
+            return Object.assign({}, query, partition);
           });
 
           if (resp.transaction) {

@@ -38,7 +38,7 @@ function main(cachedContent) {
   // const updateMask = {}
 
   // Imports the Generativelanguage library
-  const {CacheServiceClient} = require('@google-cloud/generativelanguage').v1alpha;
+  const {CacheServiceClient} = require('@google-ai/generativelanguage').v1alpha;
 
   // Instantiates a client
   const generativelanguageClient = new CacheServiceClient();

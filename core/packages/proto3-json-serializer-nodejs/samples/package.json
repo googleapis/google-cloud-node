@@ -3,9 +3,9 @@
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
-  "repository": "googleapis/proto3-json-serializer-nodejs",
+  "repository": "googleapis/google-cloud-node",
   "private": true,
   "scripts": {
     "test": "c8 mocha system-test"
@@ -14,8 +14,8 @@
     "*.js"
   ],
   "dependencies": {
-    "google-proto-files": "^5.0.0",
-    "proto3-json-serializer": "^3.0.5",
+    "google-proto-files": "^6.0.0",
+    "proto3-json-serializer": "^4.0.2",
     "protobufjs": "^7.0.0"
   },
   "devDependencies": {

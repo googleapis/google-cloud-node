@@ -1123,6 +1123,71 @@ describe('v1.ConfidentialComputingClient', () => {
       });
     });
 
+    describe('instance', async () => {
+      const fakePath = '/rendered/path/instance';
+      const expectedParameters = {
+        project: 'projectValue',
+        zone: 'zoneValue',
+        instance: 'instanceValue',
+      };
+      const client =
+        new confidentialcomputingModule.v1.ConfidentialComputingClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.instancePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.instancePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('instancePath', () => {
+        const result = client.instancePath(
+          'projectValue',
+          'zoneValue',
+          'instanceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.instancePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInstanceName', () => {
+        const result = client.matchProjectFromInstanceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchZoneFromInstanceName', () => {
+        const result = client.matchZoneFromInstanceName(fakePath);
+        assert.strictEqual(result, 'zoneValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromInstanceName', () => {
+        const result = client.matchInstanceFromInstanceName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {

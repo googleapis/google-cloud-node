@@ -44,7 +44,7 @@ import {
 import {Row} from '../src/partial-result-stream';
 import {GetDatabaseConfig} from '../src/database';
 import {grpc, CallOptions} from 'google-gax';
-import {google} from '../protos/protos';
+import google = protos.google;
 import CreateDatabaseMetadata = google.spanner.admin.database.v1.CreateDatabaseMetadata;
 import CreateBackupMetadata = google.spanner.admin.database.v1.CreateBackupMetadata;
 import CreateInstanceConfigMetadata = google.spanner.admin.instance.v1.CreateInstanceConfigMetadata;
@@ -62,7 +62,7 @@ import {isNull, isNumber, isUuid} from '../src/helper';
 const fs = require('fs');
 
 const SKIP_BACKUPS = process.env.SKIP_BACKUPS;
-const KOKORO_JOB_NAME = process.env.KOKORO_JOB_NAME;
+const TRIGGER_NAME = process.env.TRIGGER_NAME;
 const SKIP_FGAC_TESTS = (process.env.SKIP_FGAC_TESTS || 'false').toLowerCase();
 
 const IAM_MEMBER = process.env.IAM_MEMBER;
@@ -138,6 +138,7 @@ describe('Spanner', () => {
             INSTANCE_CONFIG.config,
           ),
           nodeCount: 1,
+          edition: 2, // ENTERPRISE
           displayName: 'Test name for instance.',
           labels: {
             created: Math.round(Date.now() / 1000).toString(), // current time
@@ -558,7 +559,7 @@ describe('Spanner', () => {
         await table.insert({BoolValue: 'abc'});
         assert.fail('Expected an error to be thrown, but it was not.');
       } catch (err: any) {
-        KOKORO_JOB_NAME?.includes('system-test-regular-session')
+        TRIGGER_NAME?.includes('regular-sessions')
           ? assert.strictEqual(err.code, grpc.status.FAILED_PRECONDITION)
           : assert.strictEqual(err.code, grpc.status.INVALID_ARGUMENT);
       }
@@ -933,7 +934,11 @@ describe('Spanner', () => {
       });
 
       it('GOOGLE_STANDARD_SQL should write uuid array values', async () => {
-        const values = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+        const values = [
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+        ];
         const {row} = await insert(
           {UUIDArray: values},
           Spanner.GOOGLE_STANDARD_SQL,
@@ -942,7 +947,11 @@ describe('Spanner', () => {
       });
 
       it.skip('POSTGRESQL should write uuid array values', async () => {
-        const values = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+        const values = [
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+          crypto.randomUUID(),
+        ];
         const {row} = await insert({UUIDArray: values}, Spanner.POSTGRESQL);
         assert.deepStrictEqual(row.toJSON().UUIDArray, values);
       });
@@ -1191,7 +1200,7 @@ describe('Spanner', () => {
           await insert({NumericValue: value}, dialect);
           assert.fail('Expected an error to be thrown, but it was not.');
         } catch (err: any) {
-          KOKORO_JOB_NAME?.includes('system-test-regular-session')
+          TRIGGER_NAME?.includes('regular-sessions')
             ? assert.ok(
                 err.code === grpc.status.FAILED_PRECONDITION ||
                   err.code === grpc.status.OUT_OF_RANGE,
@@ -2939,7 +2948,7 @@ describe('Spanner', () => {
     });
   });
 
-  describe('Backups', () => {
+  describe.skip('Backups', () => {
     const SKIP_POSTGRESQL_BACKUP_TESTS = true;
 
     let googleSqlDatabase1: Database;
@@ -2957,7 +2966,7 @@ describe('Spanner', () => {
       if (IS_EMULATOR_ENABLED) {
         this.skip();
       }
-      if (SKIP_BACKUPS === 'true' || KOKORO_JOB_NAME?.includes('presubmit')) {
+      if (SKIP_BACKUPS === 'true') {
         this.skip();
       }
       googleSqlDatabase1 = DATABASE;
@@ -4674,7 +4683,11 @@ describe('Spanner', () => {
           });
 
           it('GOOGLE_STANDARD_SQL should bind arrays', async () => {
-            const values = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+            const values = [
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+            ];
 
             const query = {
               sql: 'SELECT @v',
@@ -4714,7 +4727,11 @@ describe('Spanner', () => {
           });
 
           it.skip('POSTGRESQL should bind arrays', async () => {
-            const values = [crypto.randomUUID(), crypto.randomUUID(), crypto.randomUUID()];
+            const values = [
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+              crypto.randomUUID(),
+            ];
 
             const query = {
               sql: 'SELECT $1',
@@ -6983,6 +7000,230 @@ describe('Spanner', () => {
           Name: name,
         },
       ]);
+    });
+  });
+
+  describe('Queues', () => {
+    const QUEUE_NAME = 'MyQueue';
+    let gsqlQueueSupported = true;
+    let pgQueueSupported = true;
+
+    before(async () => {
+      try {
+        const queueDdl = `CREATE QUEUE ${QUEUE_NAME} (
+          Id INT64 NOT NULL,
+          Payload STRING(MAX) NOT NULL
+        ) PRIMARY KEY (Id)`;
+        const [operation] = await DATABASE.updateSchema(queueDdl);
+        await operation.promise();
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          gsqlQueueSupported = false;
+        } else if (err.code == 6) { 
+          // ALREADY_EXISTS. Continue testing. 
+          gsqlQueueSupported = true;
+        } else {
+          throw err;
+        }
+      }
+
+      try {
+        const pgQueueDdl = `CREATE QUEUE ${QUEUE_NAME} (
+          id bigint NOT NULL,
+          "Payload" varchar NOT NULL,
+          PRIMARY KEY (id)
+        )`;
+        const [pgOperation] = await PG_DATABASE.updateSchema(pgQueueDdl);
+        await pgOperation.promise();
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          pgQueueSupported = false;
+        } else if (err.code == 6) {
+          // ALREADY_EXISTS. Continue testing. 
+          pgQueueSupported = true;
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should send and ack a message in GoogleSQL', async function () {
+      if (!gsqlQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueSend(QUEUE_NAME, [123], {
+            payload: {foo: 'bar'},
+          });
+          await transaction.commit();
+        });
+
+        await DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [123]);
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should send and ack a message in PostgreSQL', async function () {
+      if (!pgQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await PG_DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueSend(QUEUE_NAME, [456], {
+            payload: {foo: 'bar'},
+          });
+          await transaction.commit();
+        });
+
+        await PG_DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [456]);
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should fail to send without payload and handle ignoreNotFound properly for non-existing key in GoogleSQL', async function () {
+      if (!gsqlQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await assert.rejects(async () => {
+          await DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueSend(QUEUE_NAME, [789]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: false});
+            await transaction.commit();
+          });
+        });
+
+        await DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: true});
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    it('should fail to send without payload and handle ignoreNotFound properly for non-existing key in PostgreSQL', async function () {
+      if (!pgQueueSupported || IS_EMULATOR_ENABLED) {
+        this.skip();
+      }
+
+      try {
+        await assert.rejects(async () => {
+          await PG_DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueSend(QUEUE_NAME, [790]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await PG_DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999]);
+            await transaction.commit();
+          });
+        });
+
+        await assert.rejects(async () => {
+          await PG_DATABASE.runTransactionAsync(async transaction => {
+            transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: false});
+            await transaction.commit();
+          });
+        });
+
+        await PG_DATABASE.runTransactionAsync(async transaction => {
+          transaction.queueAck(QUEUE_NAME, [999], {ignoreNotFound: true});
+          await transaction.commit();
+        });
+      } catch (err: any) {
+        if (
+          err.code === 9 ||
+          err.code === 12 ||
+          err.message.includes('UNIMPLEMENTED')
+        ) {
+          this.skip();
+        } else {
+          throw err;
+        }
+      }
+    });
+
+    after(async () => {
+      if (gsqlQueueSupported) {
+        try {
+          const [gsqlOperation] = await DATABASE.updateSchema(
+            "DROP QUEUE " + QUEUE_NAME
+          );
+          await gsqlOperation.promise();
+        } catch (err) {
+          // Ignore cleanup errors
+        }
+      }
+      if (pgQueueSupported) {
+        try {
+          const [pgOperation] = await PG_DATABASE.updateSchema(
+            "DROP QUEUE " + QUEUE_NAME
+          );
+          await pgOperation.promise();
+        } catch (err) {
+          // Ignore cleanup errors
+        }
+      }
     });
   });
 

@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class DataObjectServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('vectorsearch');
@@ -57,10 +64,10 @@ export class DataObjectServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  dataObjectServiceStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  dataObjectServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DataObjectServiceClient.
@@ -101,21 +108,42 @@ export class DataObjectServiceClient {
    *     const client = new DataObjectServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataObjectServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'vectorsearch.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +168,7 @@ export class DataObjectServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,15 +182,11 @@ export class DataObjectServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,20 +208,23 @@ export class DataObjectServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       collectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}'
+        'projects/{project}/locations/{location}/collections/{collection}',
       ),
       dataObjectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}'
+        'projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}',
       ),
       indexPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/collections/{collection}/indexes/{index}'
+        'projects/{project}/locations/{location}/collections/{collection}/indexes/{index}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.vectorsearch.v1beta.DataObjectService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.vectorsearch.v1beta.DataObjectService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -228,36 +255,49 @@ export class DataObjectServiceClient {
     // Put together the "service stub" for
     // google.cloud.vectorsearch.v1beta.DataObjectService.
     this.dataObjectServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.vectorsearch.v1beta.DataObjectService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.vectorsearch.v1beta.DataObjectService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.vectorsearch.v1beta.DataObjectService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.vectorsearch.v1beta
+            .DataObjectService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataObjectServiceStubMethods =
-        ['createDataObject', 'batchCreateDataObjects', 'getDataObject', 'updateDataObject', 'batchUpdateDataObjects', 'deleteDataObject', 'batchDeleteDataObjects'];
+    const dataObjectServiceStubMethods = [
+      'createDataObject',
+      'batchCreateDataObjects',
+      'getDataObject',
+      'updateDataObject',
+      'batchUpdateDataObjects',
+      'deleteDataObject',
+      'batchDeleteDataObjects',
+    ];
     for (const methodName of dataObjectServiceStubMethods) {
       const callPromise = this.dataObjectServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -272,8 +312,14 @@ export class DataObjectServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'vectorsearch.googleapis.com';
   }
@@ -284,8 +330,14 @@ export class DataObjectServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'vectorsearch.googleapis.com';
   }
@@ -316,9 +368,7 @@ export class DataObjectServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -327,8 +377,9 @@ export class DataObjectServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -339,702 +390,1039 @@ export class DataObjectServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a dataObject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection to create the DataObject in.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`
- * @param {string} request.dataObjectId
- *   Required. The id of the dataObject to create.
- *   The id must be 1-63 characters long, and comply with
- *   [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
- *   Specifically, it must be 1-63 characters long and match the regular
- *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?`.
- * @param {google.cloud.vectorsearch.v1beta.DataObject} request.dataObject
- *   Required. The DataObject to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.DataObject|DataObject}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_object_service.create_data_object.js</caption>
- * region_tag:vectorsearch_v1beta_generated_DataObjectService_CreateDataObject_async
- */
+  /**
+   * Creates a dataObject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection to create the DataObject in.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`
+   * @param {string} request.dataObjectId
+   *   Required. The id of the dataObject to create.
+   *   The id must be 1-63 characters long, and comply with
+   *   [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
+   *   Specifically, it must be 1-63 characters long and match the regular
+   *   expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?`.
+   * @param {google.cloud.vectorsearch.v1beta.DataObject} request.dataObject
+   *   Required. The DataObject to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.DataObject|DataObject}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_object_service.create_data_object.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_DataObjectService_CreateDataObject_async
+   */
   createDataObject(
-      request?: protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createDataObject(
-      request: protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      | protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataObject(
-      request: protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      | protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataObject(
-      request?: protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      | protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createDataObject request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vectorsearch.v1beta.IDataObject,
+          | protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDataObject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createDataObject(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createDataObject response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createDataObject(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vectorsearch.v1beta.IDataObject,
+          (
+            | protos.google.cloud.vectorsearch.v1beta.ICreateDataObjectRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataObject response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a batch of dataObjects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection to create the DataObjects in.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`.
- *   The parent field in the CreateDataObjectRequest messages must match this
- *   field.
- * @param {number[]} request.requests
- *   Required. The request message specifying the resources to create.
- *   A maximum of 1000 DataObjects can be created in a batch.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.BatchCreateDataObjectsResponse|BatchCreateDataObjectsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_object_service.batch_create_data_objects.js</caption>
- * region_tag:vectorsearch_v1beta_generated_DataObjectService_BatchCreateDataObjects_async
- */
+  /**
+   * Creates a batch of dataObjects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection to create the DataObjects in.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`.
+   *   The parent field in the CreateDataObjectRequest messages must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the resources to create.
+   *   A maximum of 1000 DataObjects can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.BatchCreateDataObjectsResponse|BatchCreateDataObjectsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_object_service.batch_create_data_objects.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_DataObjectService_BatchCreateDataObjects_async
+   */
   batchCreateDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   batchCreateDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchCreateDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchCreateDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchCreateDataObjects request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
+          | protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchCreateDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchCreateDataObjects(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchCreateDataObjects response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchCreateDataObjects(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsResponse,
+          (
+            | protos.google.cloud.vectorsearch.v1beta.IBatchCreateDataObjectsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateDataObjects response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a data object.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the DataObject resource.
- *   Format:
- *   `projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.DataObject|DataObject}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_object_service.get_data_object.js</caption>
- * region_tag:vectorsearch_v1beta_generated_DataObjectService_GetDataObject_async
- */
+  /**
+   * Gets a data object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataObject resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.DataObject|DataObject}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_object_service.get_data_object.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_DataObjectService_GetDataObject_async
+   */
   getDataObject(
-      request?: protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getDataObject(
-      request: protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      | protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataObject(
-      request: protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      | protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataObject(
-      request?: protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      | protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDataObject request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vectorsearch.v1beta.IDataObject,
+          | protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataObject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDataObject(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDataObject response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDataObject(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vectorsearch.v1beta.IDataObject,
+          (
+            | protos.google.cloud.vectorsearch.v1beta.IGetDataObjectRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataObject response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a dataObject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.vectorsearch.v1beta.DataObject} request.dataObject
- *   Required. The DataObject which replaces the resource on the server.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The update mask applies to the resource. See
- *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.DataObject|DataObject}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_object_service.update_data_object.js</caption>
- * region_tag:vectorsearch_v1beta_generated_DataObjectService_UpdateDataObject_async
- */
+  /**
+   * Updates a dataObject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.vectorsearch.v1beta.DataObject} request.dataObject
+   *   Required. The DataObject which replaces the resource on the server.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The update mask applies to the resource. See
+   *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.DataObject|DataObject}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_object_service.update_data_object.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_DataObjectService_UpdateDataObject_async
+   */
   updateDataObject(
-      request?: protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateDataObject(
-      request: protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      | protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataObject(
-      request: protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      | protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataObject(
-      request?: protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IDataObject,
-          protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      | protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IDataObject,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'data_object.name': request.dataObject!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'data_object.name': request.dataObject!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateDataObject request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vectorsearch.v1beta.IDataObject,
+          | protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDataObject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateDataObject(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.vectorsearch.v1beta.IDataObject,
-        protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateDataObject response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateDataObject(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vectorsearch.v1beta.IDataObject,
+          (
+            | protos.google.cloud.vectorsearch.v1beta.IUpdateDataObjectRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataObject response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates dataObjects in a batch.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection to update the DataObjects in.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`.
- *   The parent field in the UpdateDataObjectRequest messages must match this
- *   field.
- * @param {number[]} request.requests
- *   Required. The request message specifying the resources to update.
- *   A maximum of 1000 DataObjects can be updated in a batch.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.BatchUpdateDataObjectsResponse|BatchUpdateDataObjectsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_object_service.batch_update_data_objects.js</caption>
- * region_tag:vectorsearch_v1beta_generated_DataObjectService_BatchUpdateDataObjects_async
- */
+  /**
+   * Updates dataObjects in a batch.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection to update the DataObjects in.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`.
+   *   The parent field in the UpdateDataObjectRequest messages must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the resources to update.
+   *   A maximum of 1000 DataObjects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.vectorsearch.v1beta.BatchUpdateDataObjectsResponse|BatchUpdateDataObjectsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_object_service.batch_update_data_objects.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_DataObjectService_BatchUpdateDataObjects_async
+   */
   batchUpdateDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   batchUpdateDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchUpdateDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest,
-      callback: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest,
+    callback: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchUpdateDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
-          protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
+      | protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchUpdateDataObjects request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
+          | protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchUpdateDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchUpdateDataObjects(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
-        protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchUpdateDataObjects response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchUpdateDataObjects(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsResponse,
+          (
+            | protos.google.cloud.vectorsearch.v1beta.IBatchUpdateDataObjectsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateDataObjects response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a dataObject.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the DataObject resource to be deleted.
- *   Format:
- *   `projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}`
- * @param {string} [request.etag]
- *   Optional. The current etag of the DataObject.
- *   If an etag is provided and does not match the current etag of the
- *   DataObject, deletion will be blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_object_service.delete_data_object.js</caption>
- * region_tag:vectorsearch_v1beta_generated_DataObjectService_DeleteDataObject_async
- */
+  /**
+   * Deletes a dataObject.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the DataObject resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataObjects/{dataObject}`
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the DataObject.
+   *   If an etag is provided and does not match the current etag of the
+   *   DataObject, deletion will be blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_object_service.delete_data_object.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_DataObjectService_DeleteDataObject_async
+   */
   deleteDataObject(
-      request?: protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteDataObject(
-      request: protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDataObject(
-      request: protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDataObject(
-      request?: protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteDataObject request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDataObject response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteDataObject(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteDataObject response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteDataObject(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.vectorsearch.v1beta.IDeleteDataObjectRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataObject response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes dataObjects in a batch.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the Collection to delete the DataObjects in.
- *   Format: `projects/{project}/locations/{location}/collections/{collection}`.
- * @param {number[]} request.requests
- *   Required. The request message specifying the resources to delete.
- *   A maximum of 1000 DataObjects can be deleted in a batch.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_object_service.batch_delete_data_objects.js</caption>
- * region_tag:vectorsearch_v1beta_generated_DataObjectService_BatchDeleteDataObjects_async
- */
+  /**
+   * Deletes dataObjects in a batch.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Collection to delete the DataObjects in.
+   *   Format: `projects/{project}/locations/{location}/collections/{collection}`.
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the resources to delete.
+   *   A maximum of 1000 DataObjects can be deleted in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_object_service.batch_delete_data_objects.js</caption>
+   * region_tag:vectorsearch_v1beta_generated_DataObjectService_BatchDeleteDataObjects_async
+   */
   batchDeleteDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   batchDeleteDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchDeleteDataObjects(
-      request: protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchDeleteDataObjects(
-      request?: protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchDeleteDataObjects request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchDeleteDataObjects response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchDeleteDataObjects(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchDeleteDataObjects response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchDeleteDataObjects(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.vectorsearch.v1beta.IBatchDeleteDataObjectsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteDataObjects response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1069,12 +1457,11 @@ export class DataObjectServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1107,7 +1494,7 @@ export class DataObjectServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1124,7 +1511,7 @@ export class DataObjectServiceClient {
    * @param {string} collection
    * @returns {string} Resource name string.
    */
-  collectionPath(project:string,location:string,collection:string) {
+  collectionPath(project: string, location: string, collection: string) {
     return this.pathTemplates.collectionPathTemplate.render({
       project: project,
       location: location,
@@ -1140,7 +1527,8 @@ export class DataObjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).project;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .project;
   }
 
   /**
@@ -1151,7 +1539,8 @@ export class DataObjectServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).location;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .location;
   }
 
   /**
@@ -1162,7 +1551,8 @@ export class DataObjectServiceClient {
    * @returns {string} A string representing the collection.
    */
   matchCollectionFromCollectionName(collectionName: string) {
-    return this.pathTemplates.collectionPathTemplate.match(collectionName).collection;
+    return this.pathTemplates.collectionPathTemplate.match(collectionName)
+      .collection;
   }
 
   /**
@@ -1174,7 +1564,12 @@ export class DataObjectServiceClient {
    * @param {string} dataObject
    * @returns {string} Resource name string.
    */
-  dataObjectPath(project:string,location:string,collection:string,dataObject:string) {
+  dataObjectPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataObject: string,
+  ) {
     return this.pathTemplates.dataObjectPathTemplate.render({
       project: project,
       location: location,
@@ -1191,7 +1586,8 @@ export class DataObjectServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).project;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .project;
   }
 
   /**
@@ -1202,7 +1598,8 @@ export class DataObjectServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).location;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .location;
   }
 
   /**
@@ -1213,7 +1610,8 @@ export class DataObjectServiceClient {
    * @returns {string} A string representing the collection.
    */
   matchCollectionFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).collection;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .collection;
   }
 
   /**
@@ -1224,7 +1622,8 @@ export class DataObjectServiceClient {
    * @returns {string} A string representing the dataObject.
    */
   matchDataObjectFromDataObjectName(dataObjectName: string) {
-    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName).dataObject;
+    return this.pathTemplates.dataObjectPathTemplate.match(dataObjectName)
+      .dataObject;
   }
 
   /**
@@ -1236,7 +1635,12 @@ export class DataObjectServiceClient {
    * @param {string} index
    * @returns {string} Resource name string.
    */
-  indexPath(project:string,location:string,collection:string,index:string) {
+  indexPath(
+    project: string,
+    location: string,
+    collection: string,
+    index: string,
+  ) {
     return this.pathTemplates.indexPathTemplate.render({
       project: project,
       location: location,
@@ -1297,11 +1701,13 @@ export class DataObjectServiceClient {
    */
   close(): Promise<void> {
     if (this.dataObjectServiceStub && !this._terminated) {
-      return this.dataObjectServiceStub.then(stub => {
+      return this.dataObjectServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

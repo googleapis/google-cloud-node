@@ -213,6 +213,15 @@ export class EvaluationServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclConfig',
+      ),
+      assistAnswerPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}/assistAnswers/{assist_answer}',
+      ),
+      assistantPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}',
+      ),
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}',
       ),
@@ -222,11 +231,23 @@ export class EvaluationServiceClient {
       groundingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/groundingConfigs/{grounding_config}',
       ),
+      identityMappingStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/identityMappingStores/{identity_mapping_store}',
+      ),
+      licenseConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/licenseConfigs/{license_config}',
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}',
+      ),
+      projectLocationCmekConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfig',
+      ),
+      projectLocationCmekConfigsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmekConfigs/{cmek_config}',
       ),
       projectLocationCollectionDataStorePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -283,6 +304,10 @@ export class EvaluationServiceClient {
       projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}',
+        ),
+      projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/collaborativeProjects/{collaborative_project}/sessions/{session}',
         ),
       projectLocationCollectionEngineControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -365,6 +390,9 @@ export class EvaluationServiceClient {
       sampleQuerySetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}',
       ),
+      userStorePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/userStores/{user_store}',
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -428,6 +456,9 @@ export class EvaluationServiceClient {
               get: '/v1beta/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',
             },
             {
+              get: '/v1beta/{name=projects/*/locations/*/collections/*/engines/*/assistants/*/agents/*/operations/*}',
+            },
+            {
               get: '/v1beta/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',
             },
             {
@@ -444,6 +475,9 @@ export class EvaluationServiceClient {
             },
             {
               get: '/v1beta/{name=projects/*/locations/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
             },
             { get: '/v1beta/{name=projects/*/locations/*/operations/*}' },
             {
@@ -488,6 +522,9 @@ export class EvaluationServiceClient {
             },
             {
               get: '/v1beta/{name=projects/*/locations/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1beta/{name=projects/*/locations/*/identityMappingStores/*}/operations',
             },
             { get: '/v1beta/{name=projects/*/locations/*}/operations' },
             { get: '/v1beta/{name=projects/*}/operations' },
@@ -663,7 +700,12 @@ export class EvaluationServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/discoveryengine.assist.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.readwrite',
+      'https://www.googleapis.com/auth/discoveryengine.serving.readwrite',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -1029,15 +1071,15 @@ export class EvaluationServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.Evaluation|Evaluation}s under this
    *   location, regardless of whether or not this location exists, a
    *   `PERMISSION_DENIED` error is returned.
-   * @param {number} request.pageSize
-   *   Maximum number of
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of
    *   {@link protos.google.cloud.discoveryengine.v1beta.Evaluation|Evaluation}s to return. If
    *   unspecified, defaults to 100. The maximum allowed value is 1000. Values
    *   above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
-   * @param {string} request.pageToken
-   *   A page token
+   * @param {string} [request.pageToken]
+   *   Optional. A page token
    *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationsResponse.next_page_token|ListEvaluationsResponse.next_page_token},
    *   received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
@@ -1174,15 +1216,15 @@ export class EvaluationServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.Evaluation|Evaluation}s under this
    *   location, regardless of whether or not this location exists, a
    *   `PERMISSION_DENIED` error is returned.
-   * @param {number} request.pageSize
-   *   Maximum number of
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of
    *   {@link protos.google.cloud.discoveryengine.v1beta.Evaluation|Evaluation}s to return. If
    *   unspecified, defaults to 100. The maximum allowed value is 1000. Values
    *   above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
-   * @param {string} request.pageToken
-   *   A page token
+   * @param {string} [request.pageToken]
+   *   Optional. A page token
    *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationsResponse.next_page_token|ListEvaluationsResponse.next_page_token},
    *   received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
@@ -1242,15 +1284,15 @@ export class EvaluationServiceClient {
    *   {@link protos.google.cloud.discoveryengine.v1beta.Evaluation|Evaluation}s under this
    *   location, regardless of whether or not this location exists, a
    *   `PERMISSION_DENIED` error is returned.
-   * @param {number} request.pageSize
-   *   Maximum number of
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of
    *   {@link protos.google.cloud.discoveryengine.v1beta.Evaluation|Evaluation}s to return. If
    *   unspecified, defaults to 100. The maximum allowed value is 1000. Values
    *   above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
-   * @param {string} request.pageToken
-   *   A page token
+   * @param {string} [request.pageToken]
+   *   Optional. A page token
    *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationsResponse.next_page_token|ListEvaluationsResponse.next_page_token},
    *   received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
@@ -1306,17 +1348,19 @@ export class EvaluationServiceClient {
    *   Required. The evaluation resource name, such as
    *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
    *
-   *   If the caller does not have permission to list {@link protos.|EvaluationResult}
-   *   under this evaluation, regardless of whether or not this evaluation
-   *   set exists, a `PERMISSION_DENIED` error is returned.
-   * @param {number} request.pageSize
-   *   Maximum number of {@link protos.|EvaluationResult} to return. If unspecified,
-   *   defaults to 100. The maximum allowed value is 1000. Values above 1000 will
-   *   be coerced to 1000.
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult|ListEvaluationResultsResponse.EvaluationResult}
+   *   under this evaluation, regardless of whether or not this evaluation set
+   *   exists, a `PERMISSION_DENIED` error is returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult|ListEvaluationResultsResponse.EvaluationResult}
+   *   to return. If unspecified, defaults to 100. The maximum allowed value is
+   *   1000. Values above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
-   * @param {string} request.pageToken
-   *   A page token
+   * @param {string} [request.pageToken]
+   *   Optional. A page token
    *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.next_page_token|ListEvaluationResultsResponse.next_page_token},
    *   received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
@@ -1449,17 +1493,19 @@ export class EvaluationServiceClient {
    *   Required. The evaluation resource name, such as
    *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
    *
-   *   If the caller does not have permission to list {@link protos.|EvaluationResult}
-   *   under this evaluation, regardless of whether or not this evaluation
-   *   set exists, a `PERMISSION_DENIED` error is returned.
-   * @param {number} request.pageSize
-   *   Maximum number of {@link protos.|EvaluationResult} to return. If unspecified,
-   *   defaults to 100. The maximum allowed value is 1000. Values above 1000 will
-   *   be coerced to 1000.
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult|ListEvaluationResultsResponse.EvaluationResult}
+   *   under this evaluation, regardless of whether or not this evaluation set
+   *   exists, a `PERMISSION_DENIED` error is returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult|ListEvaluationResultsResponse.EvaluationResult}
+   *   to return. If unspecified, defaults to 100. The maximum allowed value is
+   *   1000. Values above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
-   * @param {string} request.pageToken
-   *   A page token
+   * @param {string} [request.pageToken]
+   *   Optional. A page token
    *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.next_page_token|ListEvaluationResultsResponse.next_page_token},
    *   received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
@@ -1515,17 +1561,19 @@ export class EvaluationServiceClient {
    *   Required. The evaluation resource name, such as
    *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
    *
-   *   If the caller does not have permission to list {@link protos.|EvaluationResult}
-   *   under this evaluation, regardless of whether or not this evaluation
-   *   set exists, a `PERMISSION_DENIED` error is returned.
-   * @param {number} request.pageSize
-   *   Maximum number of {@link protos.|EvaluationResult} to return. If unspecified,
-   *   defaults to 100. The maximum allowed value is 1000. Values above 1000 will
-   *   be coerced to 1000.
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult|ListEvaluationResultsResponse.EvaluationResult}
+   *   under this evaluation, regardless of whether or not this evaluation set
+   *   exists, a `PERMISSION_DENIED` error is returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of
+   *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.EvaluationResult|ListEvaluationResultsResponse.EvaluationResult}
+   *   to return. If unspecified, defaults to 100. The maximum allowed value is
+   *   1000. Values above 1000 will be coerced to 1000.
    *
    *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
-   * @param {string} request.pageToken
-   *   A page token
+   * @param {string} [request.pageToken]
+   *   Optional. A page token
    *   {@link protos.google.cloud.discoveryengine.v1beta.ListEvaluationResultsResponse.next_page_token|ListEvaluationResultsResponse.next_page_token},
    *   received from a previous
    *   {@link protos.google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
@@ -1877,6 +1925,230 @@ export class EvaluationServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified aclConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  aclConfigPath(project: string, location: string) {
+    return this.pathTemplates.aclConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AclConfig resource.
+   *
+   * @param {string} aclConfigName
+   *   A fully-qualified path representing AclConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclConfigName(aclConfigName: string) {
+    return this.pathTemplates.aclConfigPathTemplate.match(aclConfigName)
+      .location;
+  }
+
+  /**
+   * Return a fully-qualified assistAnswer resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} session
+   * @param {string} assist_answer
+   * @returns {string} Resource name string.
+   */
+  assistAnswerPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    session: string,
+    assistAnswer: string,
+  ) {
+    return this.pathTemplates.assistAnswerPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      session: session,
+      assist_answer: assistAnswer,
+    });
+  }
+
+  /**
+   * Parse the project from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .collection;
+  }
+
+  /**
+   * Parse the engine from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .engine;
+  }
+
+  /**
+   * Parse the session from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .session;
+  }
+
+  /**
+   * Parse the assist_answer from AssistAnswer resource.
+   *
+   * @param {string} assistAnswerName
+   *   A fully-qualified path representing AssistAnswer resource.
+   * @returns {string} A string representing the assist_answer.
+   */
+  matchAssistAnswerFromAssistAnswerName(assistAnswerName: string) {
+    return this.pathTemplates.assistAnswerPathTemplate.match(assistAnswerName)
+      .assist_answer;
+  }
+
+  /**
+   * Return a fully-qualified assistant resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} assistant
+   * @returns {string} Resource name string.
+   */
+  assistantPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    assistant: string,
+  ) {
+    return this.pathTemplates.assistantPathTemplate.render({
+      project: project,
+      location: location,
+      collection: collection,
+      engine: engine,
+      assistant: assistant,
+    });
+  }
+
+  /**
+   * Parse the project from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .location;
+  }
+
+  /**
+   * Parse the collection from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .collection;
+  }
+
+  /**
+   * Parse the engine from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName).engine;
+  }
+
+  /**
+   * Parse the assistant from Assistant resource.
+   *
+   * @param {string} assistantName
+   *   A fully-qualified path representing Assistant resource.
+   * @returns {string} A string representing the assistant.
+   */
+  matchAssistantFromAssistantName(assistantName: string) {
+    return this.pathTemplates.assistantPathTemplate.match(assistantName)
+      .assistant;
+  }
+
+  /**
    * Return a fully-qualified engine resource name string.
    *
    * @param {string} project
@@ -2055,6 +2327,119 @@ export class EvaluationServiceClient {
   }
 
   /**
+   * Return a fully-qualified identityMappingStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} identity_mapping_store
+   * @returns {string} Resource name string.
+   */
+  identityMappingStorePath(
+    project: string,
+    location: string,
+    identityMappingStore: string,
+  ) {
+    return this.pathTemplates.identityMappingStorePathTemplate.render({
+      project: project,
+      location: location,
+      identity_mapping_store: identityMappingStore,
+    });
+  }
+
+  /**
+   * Parse the project from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(
+      identityMappingStoreName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIdentityMappingStoreName(identityMappingStoreName: string) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(
+      identityMappingStoreName,
+    ).location;
+  }
+
+  /**
+   * Parse the identity_mapping_store from IdentityMappingStore resource.
+   *
+   * @param {string} identityMappingStoreName
+   *   A fully-qualified path representing IdentityMappingStore resource.
+   * @returns {string} A string representing the identity_mapping_store.
+   */
+  matchIdentityMappingStoreFromIdentityMappingStoreName(
+    identityMappingStoreName: string,
+  ) {
+    return this.pathTemplates.identityMappingStorePathTemplate.match(
+      identityMappingStoreName,
+    ).identity_mapping_store;
+  }
+
+  /**
+   * Return a fully-qualified licenseConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} license_config
+   * @returns {string} Resource name string.
+   */
+  licenseConfigPath(project: string, location: string, licenseConfig: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.render({
+      project: project,
+      location: location,
+      license_config: licenseConfig,
+    });
+  }
+
+  /**
+   * Parse the project from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .project;
+  }
+
+  /**
+   * Parse the location from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .location;
+  }
+
+  /**
+   * Parse the license_config from LicenseConfig resource.
+   *
+   * @param {string} licenseConfigName
+   *   A fully-qualified path representing LicenseConfig resource.
+   * @returns {string} A string representing the license_config.
+   */
+  matchLicenseConfigFromLicenseConfigName(licenseConfigName: string) {
+    return this.pathTemplates.licenseConfigPathTemplate.match(licenseConfigName)
+      .license_config;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -2111,6 +2496,115 @@ export class EvaluationServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigName(
+    projectLocationCmekConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
+      projectLocationCmekConfigName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfig resource.
+   *
+   * @param {string} projectLocationCmekConfigName
+   *   A fully-qualified path representing project_location_cmekConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigName(
+    projectLocationCmekConfigName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigPathTemplate.match(
+      projectLocationCmekConfigName,
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmekConfigs resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cmek_config
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmekConfigsPath(
+    project: string,
+    location: string,
+    cmekConfig: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.render({
+      project: project,
+      location: location,
+      cmek_config: cmekConfig,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmekConfigsName(
+    projectLocationCmekConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(
+      projectLocationCmekConfigsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmekConfigsName(
+    projectLocationCmekConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(
+      projectLocationCmekConfigsName,
+    ).location;
+  }
+
+  /**
+   * Parse the cmek_config from ProjectLocationCmekConfigs resource.
+   *
+   * @param {string} projectLocationCmekConfigsName
+   *   A fully-qualified path representing project_location_cmekConfigs resource.
+   * @returns {string} A string representing the cmek_config.
+   */
+  matchCmekConfigFromProjectLocationCmekConfigsName(
+    projectLocationCmekConfigsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmekConfigsPathTemplate.match(
+      projectLocationCmekConfigsName,
+    ).cmek_config;
   }
 
   /**
@@ -3571,6 +4065,127 @@ export class EvaluationServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.match(
       projectLocationCollectionDataStoreSiteSearchEngineTargetSiteName,
     ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionEngineCollaborativeProjectSessions resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} engine
+   * @param {string} collaborative_project
+   * @param {string} session
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionEngineCollaborativeProjectSessionsPath(
+    project: string,
+    location: string,
+    collection: string,
+    engine: string,
+    collaborativeProject: string,
+    session: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        engine: engine,
+        collaborative_project: collaborativeProject,
+        session: session,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collection;
+  }
+
+  /**
+   * Parse the engine from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the engine.
+   */
+  matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).engine;
+  }
+
+  /**
+   * Parse the collaborative_project from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the collaborative_project.
+   */
+  matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).collaborative_project;
+  }
+
+  /**
+   * Parse the session from ProjectLocationCollectionEngineCollaborativeProjectSessions resource.
+   *
+   * @param {string} projectLocationCollectionEngineCollaborativeProjectSessionsName
+   *   A fully-qualified path representing project_location_collection_engine_collaborative_project_sessions resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+    projectLocationCollectionEngineCollaborativeProjectSessionsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match(
+      projectLocationCollectionEngineCollaborativeProjectSessionsName,
+    ).session;
   }
 
   /**
@@ -5440,6 +6055,58 @@ export class EvaluationServiceClient {
     return this.pathTemplates.sampleQuerySetPathTemplate.match(
       sampleQuerySetName,
     ).sample_query_set;
+  }
+
+  /**
+   * Return a fully-qualified userStore resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} user_store
+   * @returns {string} Resource name string.
+   */
+  userStorePath(project: string, location: string, userStore: string) {
+    return this.pathTemplates.userStorePathTemplate.render({
+      project: project,
+      location: location,
+      user_store: userStore,
+    });
+  }
+
+  /**
+   * Parse the project from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .project;
+  }
+
+  /**
+   * Parse the location from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .location;
+  }
+
+  /**
+   * Parse the user_store from UserStore resource.
+   *
+   * @param {string} userStoreName
+   *   A fully-qualified path representing UserStore resource.
+   * @returns {string} A string representing the user_store.
+   */
+  matchUserStoreFromUserStoreName(userStoreName: string) {
+    return this.pathTemplates.userStorePathTemplate.match(userStoreName)
+      .user_store;
   }
 
   /**

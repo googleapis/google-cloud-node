@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {LookupServiceClient} from './lookup_service_client';
-export {RegistrationServiceClient} from './registration_service_client';
+export { LookupServiceClient } from './lookup_service_client';
+export { RegistrationServiceClient } from './registration_service_client';

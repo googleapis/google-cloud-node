@@ -66,7 +66,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.test_iam_permissions.js) |
 | update data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/data_policy_service.update_data_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1/snippet_metadata_google.cloud.bigquery.datapolicies.v1.json) |
 | create data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.create_data_policy.js) |
 | delete data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.delete_data_policy.js) |
 | get data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.get_data_policy.js) |
@@ -75,7 +74,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.test_iam_permissions.js) |
 | update data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/data_policy_service.update_data_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v1beta1/snippet_metadata_google.cloud.bigquery.datapolicies.v1beta1.json) |
 | add grantees | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.add_grantees.js) |
 | create data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.create_data_policy.js) |
 | delete data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.delete_data_policy.js) |
@@ -86,7 +84,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.test_iam_permissions.js) |
 | update data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/data_policy_service.update_data_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2/snippet_metadata_google.cloud.bigquery.datapolicies.v2.json) |
 | add grantees | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.add_grantees.js) |
 | create data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.create_data_policy.js) |
 | delete data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.delete_data_policy.js) |
@@ -97,7 +94,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.test_iam_permissions.js) |
 | update data policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/data_policy_service.update_data_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-datapolicies/samples/generated/v2beta1/snippet_metadata_google.cloud.bigquery.datapolicies.v2beta1.json) |
 
 
 ## Supported Node.js Versions

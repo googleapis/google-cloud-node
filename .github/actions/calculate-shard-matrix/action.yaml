@@ -1,0 +1,22 @@
+name: "Calculate Shard Matrix"
+description: "Calculates the dynamic test shard matrix and shard total"
+outputs:
+  shard_matrix:
+    description: "JSON array of shard indices"
+    value: ${{ steps.set-matrix.outputs.shard_matrix }}
+  shard_total:
+    description: "Total number of shards"
+    value: ${{ steps.set-matrix.outputs.shard_total }}
+runs:
+  using: "composite"
+  steps:
+    - name: Calculate Matrix
+      id: set-matrix
+      shell: bash
+      env:
+        RUN_TESTS_MODE: CALCULATE_SHARD_MATRIX
+        BUILD_TYPE: presubmit
+        TEST_TYPE: units
+        GIT_DIFF_ARG: "HEAD^1"
+      run: |
+        bash ci/run_conditional_tests.sh --strict

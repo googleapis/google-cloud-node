@@ -22,6 +22,7 @@ import {Session} from './session';
 import {Transaction} from './transaction';
 import {NormalCallback} from './common';
 import {GoogleError, grpc, ServiceError} from 'google-gax';
+import {context, ROOT_CONTEXT} from '@opentelemetry/api';
 import trace = require('stack-trace');
 import {
   ObservabilityOptions,
@@ -688,49 +689,55 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
       opts: this._observabilityOptions,
       dbName: this.database.formattedName_,
     };
-    return startTrace('SessionPool.createSessions', traceConfig, async span => {
-      span.addEvent(`Requesting ${amount} sessions`);
+    return context.with(ROOT_CONTEXT, () => {
+      return startTrace(
+        'SessionPool.createSessions',
+        traceConfig,
+        async span => {
+          span.addEvent(`Requesting ${amount} sessions`);
 
-      // while we can request as many sessions be created as we want, the backend
-      // will return at most 100 at a time, hence the need for a while loop.
-      while (amount > 0) {
-        let sessions: Session[] | null = null;
+          // while we can request as many sessions be created as we want, the backend
+          // will return at most 100 at a time, hence the need for a while loop.
+          while (amount > 0) {
+            let sessions: Session[] | null = null;
 
-        span.addEvent(`Creating ${amount} sessions`);
+            span.addEvent(`Creating ${amount} sessions`);
 
-        try {
-          [sessions] = await this.database.batchCreateSessions({
-            count: amount,
-            labels: labels,
-            databaseRole: databaseRole,
-          });
+            try {
+              [sessions] = await this.database.batchCreateSessions({
+                count: amount,
+                labels: labels,
+                databaseRole: databaseRole,
+              });
 
-          amount -= sessions.length;
-          nReturned += sessions.length;
-        } catch (e) {
-          this._pending -= amount;
-          this.emit('createError', e);
+              amount -= sessions.length;
+              nReturned += sessions.length;
+            } catch (e) {
+              this._pending -= amount;
+              this.emit('createError', e);
+              span.addEvent(
+                `Requested for ${nRequested} sessions returned ${nReturned}`,
+              );
+              setSpanErrorAndException(span, e as Error);
+              span.end();
+              throw e;
+            }
+
+            sessions.forEach((session: Session) => {
+              setImmediate(() => {
+                this._inventory.borrowed.add(session);
+                this._pending -= 1;
+                this.release(session);
+              });
+            });
+          }
+
           span.addEvent(
             `Requested for ${nRequested} sessions returned ${nReturned}`,
           );
-          setSpanErrorAndException(span, e as Error);
           span.end();
-          throw e;
-        }
-
-        sessions.forEach((session: Session) => {
-          setImmediate(() => {
-            this._inventory.borrowed.add(session);
-            this._pending -= 1;
-            this.release(session);
-          });
-        });
-      }
-
-      span.addEvent(
-        `Requested for ${nRequested} sessions returned ${nReturned}`,
+        },
       );
-      span.end();
     });
   }
 
@@ -1061,12 +1068,16 @@ export class SessionPool extends EventEmitter implements SessionPoolInterface {
   _startHouseKeeping(): void {
     const evictRate = this.options.idlesAfter! * 60000;
 
-    this._evictHandle = setInterval(() => this._evictIdleSessions(), evictRate);
+    this._evictHandle = context.with(ROOT_CONTEXT, () =>
+      setInterval(() => this._evictIdleSessions(), evictRate),
+    );
     this._evictHandle.unref();
 
     const pingRate = this.options.keepAlive! * 60000;
 
-    this._pingHandle = setInterval(() => this._pingIdleSessions(), pingRate);
+    this._pingHandle = context.with(ROOT_CONTEXT, () =>
+      setInterval(() => this._pingIdleSessions(), pingRate),
+    );
     this._pingHandle.unref();
   }
 

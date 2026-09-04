@@ -229,6 +229,9 @@ export class CaseAttachmentServiceClient {
       projectCaseEmailMessagesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}/emailMessages/{email_message}',
       ),
+      supportEventSubscriptionPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/supportEventSubscriptions/{support_event_subscription}',
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1248,6 +1251,53 @@ export class CaseAttachmentServiceClient {
     return this.pathTemplates.projectCaseEmailMessagesPathTemplate.match(
       projectCaseEmailMessagesName,
     ).email_message;
+  }
+
+  /**
+   * Return a fully-qualified supportEventSubscription resource name string.
+   *
+   * @param {string} organization
+   * @param {string} support_event_subscription
+   * @returns {string} Resource name string.
+   */
+  supportEventSubscriptionPath(
+    organization: string,
+    supportEventSubscription: string,
+  ) {
+    return this.pathTemplates.supportEventSubscriptionPathTemplate.render({
+      organization: organization,
+      support_event_subscription: supportEventSubscription,
+    });
+  }
+
+  /**
+   * Parse the organization from SupportEventSubscription resource.
+   *
+   * @param {string} supportEventSubscriptionName
+   *   A fully-qualified path representing SupportEventSubscription resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromSupportEventSubscriptionName(
+    supportEventSubscriptionName: string,
+  ) {
+    return this.pathTemplates.supportEventSubscriptionPathTemplate.match(
+      supportEventSubscriptionName,
+    ).organization;
+  }
+
+  /**
+   * Parse the support_event_subscription from SupportEventSubscription resource.
+   *
+   * @param {string} supportEventSubscriptionName
+   *   A fully-qualified path representing SupportEventSubscription resource.
+   * @returns {string} A string representing the support_event_subscription.
+   */
+  matchSupportEventSubscriptionFromSupportEventSubscriptionName(
+    supportEventSubscriptionName: string,
+  ) {
+    return this.pathTemplates.supportEventSubscriptionPathTemplate.match(
+      supportEventSubscriptionName,
+    ).support_event_subscription;
   }
 
   /**

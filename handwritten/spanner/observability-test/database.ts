@@ -20,7 +20,8 @@ import * as through from 'through2';
 import {EventEmitter} from 'events';
 import * as assert from 'assert';
 import * as extend from 'extend';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {
   BatchWriteOptions,
   CommitCallback,

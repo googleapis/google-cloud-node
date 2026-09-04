@@ -6265,6 +6265,8 @@ export class AgentServiceClient {
    * @param {google.cloud.ces.v1beta.Toolset} request.toolset
    *   The toolset resource to be used by the LLM assistant, can be empty for
    *   generating a new toolset.
+   * @param {google.cloud.ces.v1beta.GenerateAppResourceRequest.AppVersionContext} request.appVersionContext
+   *   The app version context specifying the base snapshot and target agent.
    * @param {string} request.parent
    *   Required. The resource name of the app to generate the resource for.
    * @param {number[]} [request.refineInstructions]

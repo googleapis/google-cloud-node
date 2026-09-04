@@ -78,7 +78,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.update_cluster.js) |
 | update node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.update_node_pool.js) |
 | upgrade cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.upgrade_cluster.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/snippet_metadata_google.cloud.edgecontainer.v1.json) |
 
 
 ## Supported Node.js Versions

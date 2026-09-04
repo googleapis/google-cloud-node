@@ -1932,6 +1932,295 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     });
   });
 
+  describe('getPolicy', () => {
+    it('invokes getPolicy without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.Policy(),
+      );
+      client.innerApiCalls.getPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPolicy without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.Policy(),
+      );
+      client.innerApiCalls.getPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recaptchaenterprise.v1.IPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPolicy with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPolicy = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getPolicy with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.GetPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getPolicy(request), expectedError);
+    });
+  });
+
+  describe('updatePolicy', () => {
+    it('invokes updatePolicy without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest(),
+      );
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest',
+        ['policy', 'name'],
+      );
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.Policy(),
+      );
+      client.innerApiCalls.updatePolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.updatePolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePolicy without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest(),
+      );
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest',
+        ['policy', 'name'],
+      );
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.Policy(),
+      );
+      client.innerApiCalls.updatePolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updatePolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recaptchaenterprise.v1.IPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePolicy with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest(),
+      );
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest',
+        ['policy', 'name'],
+      );
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updatePolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updatePolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updatePolicy with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest(),
+      );
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdatePolicyRequest',
+        ['policy', 'name'],
+      );
+      request.policy.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updatePolicy(request), expectedError);
+    });
+  });
+
   describe('createFirewallPolicy', () => {
     it('invokes createFirewallPolicy without error', async () => {
       const client =
@@ -5085,6 +5374,58 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         assert.strictEqual(result, 'keyValue');
         assert(
           (client.pathTemplates.metricsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('policy', async () => {
+      const fakePath = '/rendered/path/policy';
+      const expectedParameters = {
+        project: 'projectValue',
+        key: 'keyValue',
+      };
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.policyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.policyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('policyPath', () => {
+        const result = client.policyPath('projectValue', 'keyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.policyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromPolicyName', () => {
+        const result = client.matchProjectFromPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.policyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchKeyFromPolicyName', () => {
+        const result = client.matchKeyFromPolicyName(fakePath);
+        assert.strictEqual(result, 'keyValue');
+        assert(
+          (client.pathTemplates.policyPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

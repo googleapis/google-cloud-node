@@ -27,7 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class ComplianceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('showcase');
@@ -64,9 +64,9 @@ export class ComplianceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  complianceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  complianceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ComplianceClient.
@@ -142,7 +142,7 @@ export class ComplianceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -236,7 +236,7 @@ export class ComplianceClient {
       'google.showcase.v1beta1.Compliance',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -276,7 +276,7 @@ export class ComplianceClient {
           (this._protos as any).google.showcase.v1beta1.Compliance,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -294,7 +294,7 @@ export class ComplianceClient {
     ];
     for (const methodName of complianceStubMethods) {
       const callPromise = this.complianceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -494,7 +494,7 @@ export class ComplianceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('repeatDataBody request %j', request);
@@ -629,7 +629,7 @@ export class ComplianceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('repeatDataBodyInfo request %j', request);
@@ -763,7 +763,7 @@ export class ComplianceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('repeatDataQuery request %j', request);
@@ -906,7 +906,7 @@ export class ComplianceClient {
         'info.f_bool': request.info!.fBool ?? '',
         'info.f_kingdom': request.info!.fKingdom ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('repeatDataSimplePath request %j', request);
@@ -1045,7 +1045,7 @@ export class ComplianceClient {
         'info.f_child.f_string': request.info!.fChild!.fString ?? '',
         'info.f_bool': request.info!.fBool ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('repeatDataPathResource request %j', request);
@@ -1183,7 +1183,7 @@ export class ComplianceClient {
         'info.f_string': request.info!.fString ?? '',
         'info.f_child.f_string': request.info!.fChild!.fString ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('repeatDataPathTrailingResource request %j', request);
@@ -1322,7 +1322,7 @@ export class ComplianceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('repeatDataBodyPut request %j', request);
@@ -1455,7 +1455,7 @@ export class ComplianceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('repeatDataBodyPatch request %j', request);
@@ -1580,7 +1580,7 @@ export class ComplianceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEnum request %j', request);
@@ -1707,7 +1707,7 @@ export class ComplianceClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('verifyEnum request %j', request);
@@ -2177,7 +2177,7 @@ export class ComplianceClient {
    */
   close(): Promise<void> {
     if (this.complianceStub && !this._terminated) {
-      return this.complianceStub.then((stub) => {
+      return this.complianceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

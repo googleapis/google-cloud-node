@@ -43,6 +43,7 @@ import {
   IdentityPoolClient,
   PassThroughClient,
   AnyAuthClient,
+  GdchClient,
 } from '../src';
 import {CredentialBody} from '../src/auth/credentials';
 import * as envDetect from '../src/auth/envDetect';
@@ -549,6 +550,22 @@ describe('googleauth', () => {
       assert.strictEqual(300000, (result as JWT).eagerRefreshThresholdMillis);
     });
 
+    it('fromJSON should create GdchClient for GDCH service account credentials', () => {
+      const json = {
+        type: 'gdch_service_account',
+        format_version: '1',
+        project: 'test-project',
+        private_key_id: 'key-id-123',
+        private_key: 'private-key-pem-content',
+        name: 'sa-name',
+        token_uri: 'https://token-server.local/token',
+      };
+      const result = auth.fromJSON(json);
+      assert.ok(result instanceof GdchClient);
+      assert.strictEqual((result as GdchClient).projectId, 'test-project');
+      assert.strictEqual((result as GdchClient).privateKey, 'private-key-pem-content');
+    });
+
     it('fromStream should error on null stream', done => {
       // Test verifies invalid parameter tests, which requires cast to any.
       (auth as ReturnType<JSON['parse']>).fromStream(null, (err: Error) => {
@@ -765,12 +782,10 @@ describe('googleauth', () => {
     it('tryGetApplicationCredentialsFromEnvironmentVariable should handle invalid environment variable', async () => {
       // Set up a mock to return a path to an invalid file.
       mockEnvVar('GOOGLE_APPLICATION_CREDENTIALS', './nonexistantfile.json');
-      try {
-        await auth._tryGetApplicationCredentialsFromEnvironmentVariable();
-      } catch (e) {
-        return;
-      }
-      assert.fail('failed to throw');
+      await assert.rejects(
+        auth._tryGetApplicationCredentialsFromEnvironmentVariable(),
+        /Unable to read the credential file specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable/,
+      );
     });
 
     it('tryGetApplicationCredentialsFromEnvironmentVariable should handle valid environment variable', async () => {
@@ -875,6 +890,34 @@ describe('googleauth', () => {
         auth._tryGetApplicationCredentialsFromWellKnownFile(),
         /🤮/,
       );
+    });
+
+    it('_tryGetApplicationCredentialsFromWellKnownFile should honor CLOUDSDK_CONFIG over the default location', async () => {
+      // `gcloud` writes the ADC file under $CLOUDSDK_CONFIG when it is set, so
+      // it must take precedence over the platform default ($HOME/.config/gcloud
+      // here). The default Linux well-known file is left absent on purpose.
+      const cloudSdkConfigDir = path.join('/', 'fake', 'cloudsdk', 'config');
+      const cloudSdkAdcPath = path.join(
+        cloudSdkConfigDir,
+        'application_default_credentials.json',
+      );
+      mockEnvVar('CLOUDSDK_CONFIG', cloudSdkConfigDir);
+      (fs.existsSync as sinon.SinonStub)
+        .withArgs(cloudSdkAdcPath)
+        .returns(true);
+      (fs.createReadStream as sinon.SinonStub)
+        .withArgs(cloudSdkAdcPath)
+        .callsFake(() => fs.createReadStream('./test/fixtures/private2.json'));
+      (fs.realpathSync as unknown as sinon.SinonStub)
+        .withArgs(cloudSdkAdcPath)
+        .returnsArg(0);
+      (fs.lstatSync as sinon.SinonStub)
+        .withArgs(cloudSdkAdcPath)
+        .returns({isFile: () => true} as fs.Stats);
+
+      const client =
+        (await auth._tryGetApplicationCredentialsFromWellKnownFile()) as JWT;
+      assert.strictEqual(client.email, private2JSON.client_email);
     });
 
     it('getProjectId should return a new projectId the first time and a cached projectId the second time', async () => {
@@ -2990,5 +3033,82 @@ describe('googleauth', () => {
       'http://foo',
       (jwt as JWT).gtoken!.googleTokenOptions.scope,
     );
+  });
+
+  describe('GdchClient automatic audience resolution in getClient()', () => {
+    const gdchJson = {
+      type: 'gdch_service_account',
+      format_version: '1',
+      project: 'test-project',
+      private_key_id: 'key-id-123',
+      private_key: 'private-key-pem-content',
+      name: 'sa-name',
+      token_uri: 'https://token-server.local/token',
+    };
+
+    it('should dynamically resolve audience using apiEndpoint in clientOptions if missing', async () => {
+      const auth = new GoogleAuth({
+        credentials: gdchJson,
+        clientOptions: {
+          apiEndpoint: 'hardwaremanagement.us-west1.gdch.google.com',
+        } as any,
+      });
+
+      const client = await auth.getClient();
+      assert.ok(client instanceof GdchClient);
+      assert.strictEqual(
+        (client as GdchClient).apiAudience,
+        'https://hardwaremanagement.us-west1.gdch.google.com'
+      );
+    });
+
+    it('should dynamically resolve audience using servicePath in clientOptions if missing', async () => {
+      const auth = new GoogleAuth({
+        credentials: gdchJson,
+        clientOptions: {
+          servicePath: 'hardwaremanagement.us-west1.gdch.google.com',
+        } as any,
+      });
+
+      const client = await auth.getClient();
+      assert.ok(client instanceof GdchClient);
+      assert.strictEqual(
+        (client as GdchClient).apiAudience,
+        'https://hardwaremanagement.us-west1.gdch.google.com'
+      );
+    });
+
+    it('should format audience url correctly if it has http/https scheme or trailing slashes', async () => {
+      const auth = new GoogleAuth({
+        credentials: gdchJson,
+        clientOptions: {
+          apiEndpoint: 'http://hardwaremanagement.us-west1.gdch.google.com///',
+        } as any,
+      });
+
+      const client = await auth.getClient();
+      assert.ok(client instanceof GdchClient);
+      assert.strictEqual(
+        (client as GdchClient).apiAudience,
+        'http://hardwaremanagement.us-west1.gdch.google.com'
+      );
+    });
+
+    it('should keep explicit apiAudience if already provided', async () => {
+      const auth = new GoogleAuth({
+        credentials: gdchJson,
+        clientOptions: {
+          apiAudience: 'https://explicit-audience.local/',
+          apiEndpoint: 'hardwaremanagement.us-west1.gdch.google.com',
+        } as any,
+      });
+
+      const client = await auth.getClient();
+      assert.ok(client instanceof GdchClient);
+      assert.strictEqual(
+        (client as GdchClient).apiAudience,
+        'https://explicit-audience.local/'
+      );
+    });
   });
 });

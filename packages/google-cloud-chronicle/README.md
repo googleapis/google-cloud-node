@@ -126,7 +126,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list rules | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.list_rules.js) |
 | update rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.update_rule.js) |
 | update rule deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/rule_service.update_rule_deployment.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-chronicle/samples/generated/v1/snippet_metadata_google.cloud.chronicle.v1.json) |
 
 
 ## Supported Node.js Versions

@@ -16,7 +16,8 @@
 
 import * as assert from 'assert';
 import {grpc} from 'google-gax';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {Database, Instance, Spanner} from '../src';
 import {MutationSet} from '../src/transaction';
 import protobuf = google.spanner.v1;
@@ -147,7 +148,7 @@ describe('EndToEnd', async () => {
   const sandbox = sinon.createSandbox();
   const contextManager = new AsyncHooksContextManager();
   setGlobalContextManager(contextManager);
-  afterEach(() => {
+  afterEach(async () => {
     disableContextAndManager(contextManager);
   });
 
@@ -173,7 +174,7 @@ describe('EndToEnd', async () => {
   const instance = spanner.instance('instance');
 
   after(async () => {
-    spanner.close();
+    await spanner.close();
     await server.tryShutdown(() => {});
     sandbox.restore();
   });
@@ -427,7 +428,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
     sandbox = sinon.createSandbox();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     sandbox.restore();
   });
 
@@ -453,7 +454,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       traceExporter.reset();
       await tracerProvider.shutdown();
       spannerMock.resetRequests();
-      spanner.close();
+      await spanner.close();
       server.tryShutdown(() => {});
       sandbox.restore();
     });
@@ -514,7 +515,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       traceExporter.reset();
       await tracerProvider.shutdown();
       spannerMock.resetRequests();
-      spanner.close();
+      await spanner.close();
       server.tryShutdown(() => {});
     });
 
@@ -532,7 +533,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       traceExporter.reset();
     });
 
-    afterEach(() => {
+    afterEach(async () => {
       spannerMock.resetRequests();
     });
 
@@ -848,7 +849,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       injectedTraceExporter.reset();
       await injectedTracerProvider.shutdown();
       spannerMock.resetRequests();
-      spanner.close();
+      await spanner.close();
       server.tryShutdown(() => {});
     }
   });
@@ -886,7 +887,7 @@ describe('E2E traces with async/await', async () => {
     traceExporter.reset();
     provider.shutdown();
     spannerMock.resetRequests();
-    spanner.close();
+    await spanner.close();
     server.tryShutdown(() => {});
     sandbox.restore();
   });
@@ -1105,7 +1106,7 @@ SELECT 1p
     traceExporter.reset();
     provider.shutdown();
     spannerMock.resetRequests();
-    spanner.close();
+    await spanner.close();
     server.tryShutdown(() => {});
     sandbox.restore();
   });
@@ -1513,8 +1514,8 @@ describe('Traces for ExecuteStream broken stream retries', () => {
     instance = spanner.instance('instance');
   });
 
-  after(() => {
-    spanner.close();
+  after(async () => {
+    await spanner.close();
     server.tryShutdown(() => {});
     sandbox.restore();
   });
@@ -1987,7 +1988,7 @@ describe('End to end tracing headers', () => {
 
   afterEach(async () => {
     spannerMock.resetRequests();
-    spanner.close();
+    await spanner.close();
     server.tryShutdown(() => {});
     sandbox.restore();
   });

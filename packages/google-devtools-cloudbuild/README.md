@@ -49,7 +49,9 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/cloudbuild
 ```
 
-[//]: # "partials.body"
+### Using TypeScript
+
+`@google-cloud/cloudbuild` provides TypeScript type definitions.
 
 ## Samples
 
@@ -76,7 +78,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | run build trigger | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.run_build_trigger.js) |
 | update build trigger | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.update_build_trigger.js) |
 | update worker pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/cloud_build.update_worker_pool.js) |
-| devtools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v1/snippet_metadata_google.devtools.cloudbuild.v1.json) |
 | batch create repositories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.batch_create_repositories.js) |
 | create connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.create_connection.js) |
 | create repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.create_repository.js) |
@@ -91,7 +92,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.list_connections.js) |
 | list repositories | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.list_repositories.js) |
 | update connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/repository_manager.update_connection.js) |
-| devtools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/samples/generated/v2/snippet_metadata_google.devtools.cloudbuild.v2.json) |
 
 
 ## Supported Node.js Versions
@@ -125,7 +125,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -135,7 +135,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devtools-cloudbuild/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

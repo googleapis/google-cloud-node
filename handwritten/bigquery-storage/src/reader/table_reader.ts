@@ -14,7 +14,7 @@
 
 import {ResourceStream} from '@google-cloud/paginator';
 
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import {TableReference, ReadClient} from './read_client';
 import {logger} from '../util/logger';
 import {ArrowRecordBatchTableRowTransform} from './arrow_transform';

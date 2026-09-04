@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {QuotaControllerClient} from './quota_controller_client';
-export {ServiceControllerClient} from './service_controller_client';
+export { QuotaControllerClient } from './quota_controller_client';
+export { ServiceControllerClient } from './service_controller_client';

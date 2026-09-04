@@ -4,6 +4,45 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.8.0...dataproc-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.7.0...dataproc-v6.8.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.6.0...dataproc-v6.7.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.5.1...dataproc-v6.6.0) (2026-06-16)
+
+
+### Features
+
+* Regenerated google-cloud-dataproc ([#8604](https://github.com/googleapis/google-cloud-node/issues/8604)) ([3b7367a](https://github.com/googleapis/google-cloud-node/commit/3b7367a24115ccf43bd46646f257cee6e787c07c))
+
+## [6.5.1](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.5.0...dataproc-v6.5.1) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v6.4.0...dataproc-v6.5.0) (2026-05-12)
 
 

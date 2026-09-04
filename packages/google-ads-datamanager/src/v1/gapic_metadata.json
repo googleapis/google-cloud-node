@@ -20,9 +20,19 @@
                 "removeAudienceMembers"
               ]
             },
+            "RemoveAllAudienceMembers": {
+              "methods": [
+                "removeAllAudienceMembers"
+              ]
+            },
             "IngestEvents": {
               "methods": [
                 "ingestEvents"
+              ]
+            },
+            "IngestAdEvents": {
+              "methods": [
+                "ingestAdEvents"
               ]
             },
             "RetrieveRequestStatus": {
@@ -45,9 +55,19 @@
                 "removeAudienceMembers"
               ]
             },
+            "RemoveAllAudienceMembers": {
+              "methods": [
+                "removeAllAudienceMembers"
+              ]
+            },
             "IngestEvents": {
               "methods": [
                 "ingestEvents"
+              ]
+            },
+            "IngestAdEvents": {
+              "methods": [
+                "ingestAdEvents"
               ]
             },
             "RetrieveRequestStatus": {

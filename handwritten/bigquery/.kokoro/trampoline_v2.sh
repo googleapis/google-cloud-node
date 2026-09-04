@@ -45,7 +45,7 @@
 #
 # Here is an example for running this script.
 #   TRAMPOLINE_IMAGE=gcr.io/cloud-devrel-kokoro-resources/node:18-user \
-#     TRAMPOLINE_BUILD_FILE=.kokoro/system-test.sh \
+#     TRAMPOLINE_BUILD_FILE=.kokoro/test.sh \
 #     .kokoro/trampoline_v2.sh
 
 set -euo pipefail

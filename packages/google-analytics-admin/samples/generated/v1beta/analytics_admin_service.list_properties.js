@@ -47,14 +47,14 @@ function main(filter) {
    */
   // const filter = 'abc123'
   /**
-   *  The maximum number of resources to return. The service may return
+   *  Optional. The maximum number of resources to return. The service may return
    *  fewer than this value, even if there are additional pages.
    *  If unspecified, at most 50 resources will be returned.
    *  The maximum value is 200; (higher values will be coerced to the maximum)
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous `ListProperties` call.
+   *  Optional. A page token, received from a previous `ListProperties` call.
    *  Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to `ListProperties` must
    *  match the call that provided the page token.

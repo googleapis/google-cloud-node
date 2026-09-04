@@ -185,4 +185,16 @@ describe('Firestore Tracing Controls', () => {
       );
     }
   });
+
+  it('safely handles addEvent calls on ended spans without throwing', () => {
+    const tracerProvider = new NodeTracerProvider();
+    const tracer = tracerProvider.getTracer('test-tracer');
+    const otelSpan = tracer.startSpan('test-span');
+    const span = new (require('../src/telemetry/span').Span)(otelSpan);
+
+    span.end();
+    expect(() => {
+      span.addEvent('late-event', {key: 'value'});
+    }).to.not.throw();
+  });
 });

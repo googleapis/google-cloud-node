@@ -92,6 +92,10 @@ function main(app) {
    *  Optional. Whether to generate a latency report for the evaluation run.
    */
   // const generateLatencyReport = true
+  /**
+   *  Optional. The caching settings to use for the evaluation run.
+   */
+  // const evaluationRunCachingSettings = {}
 
   // Imports the Ces library
   const {EvaluationServiceClient} = require('@google-cloud/ces').v1beta;

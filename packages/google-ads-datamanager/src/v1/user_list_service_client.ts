@@ -1056,6 +1056,10 @@ export class UserListServiceClient {
    *   - `<=`
    *   - `:` (has)
    *
+   *   **Supported Functions:**
+   *   - `IN(field, value1, value2, ...)`: returns true if the field matches any
+   *   of the values.  Example: `IN(display_name, "name1", "name2")`
+   *
    *   Supported fields:
    *
    *   - `id`
@@ -1217,6 +1221,10 @@ export class UserListServiceClient {
    *   - `<=`
    *   - `:` (has)
    *
+   *   **Supported Functions:**
+   *   - `IN(field, value1, value2, ...)`: returns true if the field matches any
+   *   of the values.  Example: `IN(display_name, "name1", "name2")`
+   *
    *   Supported fields:
    *
    *   - `id`
@@ -1300,6 +1308,10 @@ export class UserListServiceClient {
    *   - `<`
    *   - `<=`
    *   - `:` (has)
+   *
+   *   **Supported Functions:**
+   *   - `IN(field, value1, value2, ...)`: returns true if the field matches any
+   *   of the values.  Example: `IN(display_name, "name1", "name2")`
    *
    *   Supported fields:
    *

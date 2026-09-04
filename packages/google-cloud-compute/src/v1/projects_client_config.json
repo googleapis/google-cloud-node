@@ -21,58 +21,72 @@
       },
       "methods": {
         "DisableXpnHost": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DisableXpnResource": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "EnableXpnHost": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "EnableXpnResource": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Get": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetXpnHost": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetXpnResources": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListXpnHosts": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "MoveDisk": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "MoveInstance": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetCloudArmorTier": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetCommonInstanceMetadata": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetDefaultNetworkTier": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetUsageExportBucket": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

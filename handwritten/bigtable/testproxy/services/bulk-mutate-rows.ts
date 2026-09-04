@@ -15,7 +15,8 @@
 import * as grpc from '@grpc/grpc-js';
 
 import {normalizeCallback, ClientImplMaker, getTableInfo} from './utils';
-import {google} from '../protos/protos';
+import * as protos from '../protos/protos';
+import google = protos.google;
 import {PartialFailureError} from '../../src';
 type IMutateRowsRequest = google.bigtable.testproxy.IMutateRowsRequest;
 type IMutateRowsResult = google.bigtable.testproxy.IMutateRowsResult;

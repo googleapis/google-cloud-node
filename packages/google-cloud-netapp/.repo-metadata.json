@@ -1,17 +1,16 @@
 {
-  "name": "netapp",
-  "name_pretty": "NetApp API",
-  "product_documentation": "https://cloud.google.com/netapp/volumes/docs/discover/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/netapp/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/netapp",
-  "api_id": "netapp.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "netapp"
+    "api_description": "Google Cloud NetApp Volumes is a fully-managed, cloud-based data storage\nservice that provides advanced data management capabilities and highly\nscalable performance with global availability.",
+    "api_id": "netapp.googleapis.com",
+    "api_shortname": "netapp",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/netapp/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/netapp",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1144971",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "netapp",
+    "name_pretty": "NetApp",
+    "product_documentation": "https://cloud.google.com/netapp/volumes/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

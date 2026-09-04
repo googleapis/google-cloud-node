@@ -21,206 +21,257 @@
       },
       "methods": {
         "AddAccessConfig": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "AddNetworkInterface": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "AddResourcePolicies": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "AggregatedList": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "AttachDisk": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "BulkInsert": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Delete": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteAccessConfig": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteNetworkInterface": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DetachDisk": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Get": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetEffectiveFirewalls": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetGuestAttributes": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetIamPolicy": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetScreenshot": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetSerialPortOutput": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetShieldedInstanceIdentity": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "Insert": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "List": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "ListReferrers": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 600000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "PerformMaintenance": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "RemoveResourcePolicies": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ReportHostAsFaulty": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Reset": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Resume": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SendDiagnosticInterrupt": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetDeletionProtection": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetDiskAutoDelete": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetIamPolicy": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetLabels": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetMachineResources": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetMachineType": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetMetadata": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetMinCpuPlatform": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetName": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetScheduling": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetSecurityPolicy": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetServiceAccount": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetShieldedInstanceIntegrityPolicy": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SetTags": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SimulateMaintenanceEvent": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Start": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "StartWithEncryptionKey": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Stop": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Suspend": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "TestIamPermissions": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "Update": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateAccessConfig": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateDisplayDevice": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateNetworkInterface": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateShieldedInstanceConfig": {
+          "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

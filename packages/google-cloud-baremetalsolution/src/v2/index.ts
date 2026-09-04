@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {BareMetalSolutionClient} from './bare_metal_solution_client';
+export { BareMetalSolutionClient } from './bare_metal_solution_client';

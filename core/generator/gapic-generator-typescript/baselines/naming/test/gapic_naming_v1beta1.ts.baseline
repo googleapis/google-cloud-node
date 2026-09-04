@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as namingModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -222,7 +222,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.namingStub, undefined);
@@ -230,12 +230,12 @@ describe('v1beta1.NamingClient', () => {
       assert(client.namingStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize1().catch((err) => {
+      client.initialize1().catch(err => {
         throw err;
       });
       assert(client.namingStub);
@@ -244,14 +244,14 @@ describe('v1beta1.NamingClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.namingStub, undefined);
@@ -260,7 +260,7 @@ describe('v1beta1.NamingClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -268,7 +268,7 @@ describe('v1beta1.NamingClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -280,7 +280,7 @@ describe('v1beta1.NamingClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -305,7 +305,7 @@ describe('v1beta1.NamingClient', () => {
   describe('paginatedMethodStream', () => {
     it('invokes paginatedMethodStream without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -321,7 +321,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethodStream without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -352,7 +352,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethodStream with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -370,13 +370,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethodStream with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -389,7 +389,7 @@ describe('v1beta1.NamingClient', () => {
   describe('paginatedMethodAsync', () => {
     it('invokes paginatedMethodAsync without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -405,7 +405,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethodAsync without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -436,7 +436,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethodAsync with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -451,13 +451,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethodAsync with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.paginatedMethodAsync(request), expectedError);
@@ -467,7 +467,7 @@ describe('v1beta1.NamingClient', () => {
   describe('checkLongRunningProgress', () => {
     it('invokes checkLongRunningProgress without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -483,7 +483,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes checkLongRunningProgress without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -514,7 +514,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes checkLongRunningProgress with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -532,13 +532,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes checkLongRunningProgress with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -551,7 +551,7 @@ describe('v1beta1.NamingClient', () => {
   describe('initialize', () => {
     it('invokes initialize without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -566,7 +566,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes initialize without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -597,7 +597,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes initialize with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -612,13 +612,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes initialize with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.initialize(request), expectedError);
@@ -628,7 +628,7 @@ describe('v1beta1.NamingClient', () => {
   describe('servicePath', () => {
     it('invokes servicePath without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -643,7 +643,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes servicePath without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -674,7 +674,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes servicePath with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -689,13 +689,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes servicePath with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.servicePath(request), expectedError);
@@ -705,7 +705,7 @@ describe('v1beta1.NamingClient', () => {
   describe('apiEndpoint', () => {
     it('invokes apiEndpoint without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -720,7 +720,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes apiEndpoint without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -751,7 +751,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes apiEndpoint with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -766,13 +766,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes apiEndpoint with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.apiEndpoint(request), expectedError);
@@ -782,7 +782,7 @@ describe('v1beta1.NamingClient', () => {
   describe('port', () => {
     it('invokes port without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -797,7 +797,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes port without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -827,7 +827,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes port with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -839,13 +839,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes port with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.port(request), expectedError);
@@ -855,7 +855,7 @@ describe('v1beta1.NamingClient', () => {
   describe('scopes', () => {
     it('invokes scopes without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -870,7 +870,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes scopes without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -901,7 +901,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes scopes with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -913,13 +913,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes scopes with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.scopes(request), expectedError);
@@ -929,7 +929,7 @@ describe('v1beta1.NamingClient', () => {
   describe('getProjectId', () => {
     it('invokes getProjectId without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -944,7 +944,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes getProjectId without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -975,7 +975,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes getProjectId with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -990,13 +990,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes getProjectId with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProjectId(request), expectedError);
@@ -1006,7 +1006,7 @@ describe('v1beta1.NamingClient', () => {
   describe('getReservedWord', () => {
     it('invokes getReservedWord without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1023,7 +1023,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes getReservedWord without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1056,7 +1056,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes getReservedWord with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1073,7 +1073,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes getReservedWord with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1081,7 +1081,7 @@ describe('v1beta1.NamingClient', () => {
         new protos.google.naming.v1beta1.GetReservedWordRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReservedWord(request), expectedError);
@@ -1091,7 +1091,7 @@ describe('v1beta1.NamingClient', () => {
   describe('createABCDESomething', () => {
     it('invokes createABCDESomething without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1107,7 +1107,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes createABCDESomething without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1138,7 +1138,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes createABCDESomething with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1153,13 +1153,13 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes createABCDESomething with closed client', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
       const request = generateSampleMessage(new protos.google.protobuf.Empty());
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createABCDESomething(request), expectedError);
@@ -1169,7 +1169,7 @@ describe('v1beta1.NamingClient', () => {
   describe('longRunning', () => {
     it('invokes longRunning without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1185,7 +1185,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes longRunning without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1223,7 +1223,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes longRunning with call error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1238,7 +1238,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes longRunning with LRO error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1255,7 +1255,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes checkLongRunningProgress1 without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1263,8 +1263,8 @@ describe('v1beta1.NamingClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkLongRunningProgress1(
@@ -1277,7 +1277,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes checkLongRunningProgress1 with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1295,7 +1295,7 @@ describe('v1beta1.NamingClient', () => {
   describe('paginatedMethod', () => {
     it('invokes paginatedMethod without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1314,7 +1314,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethod without error using callback', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1349,7 +1349,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethod with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1366,7 +1366,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethodStream1 without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1404,7 +1404,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('invokes paginatedMethodStream1 with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1437,7 +1437,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('uses async iteration with paginatedMethod without error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1467,7 +1467,7 @@ describe('v1beta1.NamingClient', () => {
 
     it('uses async iteration with paginatedMethod with error', async () => {
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1501,7 +1501,7 @@ describe('v1beta1.NamingClient', () => {
         export: 'exportValue',
       };
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();
@@ -1550,7 +1550,7 @@ describe('v1beta1.NamingClient', () => {
         package: 'packageValue',
       };
       const client = new namingModule.v1beta1.NamingClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize1();

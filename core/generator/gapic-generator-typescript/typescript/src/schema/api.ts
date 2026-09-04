@@ -45,6 +45,7 @@ export class API {
   restNumericEnums: boolean;
   documentationUri: any;
   newIssueUri: string;
+  enableTelemetryTracing?: boolean;
   title?: string;
 
   static isIgnoredService(
@@ -112,6 +113,7 @@ export class API {
     this.documentationUri =
       options.serviceYaml?.publishing?.documentation_uri ?? '';
     this.newIssueUri = options.serviceYaml?.publishing?.new_issue_uri ?? '';
+    this.enableTelemetryTracing = options.enableTelemetryTracing ?? false;
     this.title = options.serviceYaml?.title;
 
     const [allResourceDatabase, resourceDatabase] =
@@ -207,7 +209,16 @@ export class API {
       .filter(proto => proto.fileToGenerate)
       .reduce((retval, proto) => {
         retval.push(
-          ...Object.keys(proto.services).map(name => proto.services[name]),
+          ...Object.keys(proto.services)
+            .map(name => proto.services[name])
+            .filter(
+              service =>
+                (service.method && service.method.length > 0) ||
+                !!service.IAMPolicyMixin ||
+                !!service.LocationMixin ||
+                !!service.LongRunningOperationsMixin ||
+                (service.serviceYaml?.apis?.length ?? 0) > 0,
+            ),
         );
         return retval;
       }, [] as ServiceDescriptorProto[])

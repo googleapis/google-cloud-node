@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {MemorystoreClient} from './memorystore_client';
+export { MemorystoreClient } from './memorystore_client';

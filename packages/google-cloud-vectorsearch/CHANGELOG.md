@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.9.0...vectorsearch-v0.10.0) (2026-08-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#9140](https://github.com/googleapis/google-cloud-node/issues/9140)) ([863bc96](https://github.com/googleapis/google-cloud-node/commit/863bc964abda34bc82b58409af164ff9c7346c55))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.8.0...vectorsearch-v0.9.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.7.0...vectorsearch-v0.8.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/vectorsearch-v0.6.1...vectorsearch-v0.7.0) (2026-05-12)
 
 

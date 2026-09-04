@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {LivestreamServiceClient} from './livestream_service_client';
+export { LivestreamServiceClient } from './livestream_service_client';

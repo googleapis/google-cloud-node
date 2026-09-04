@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. A name of the Mesh to get. Must be in the format
-   *  `projects/* /locations/global/meshes/*`.
+   *  `projects/* /locations/* /meshes/*`.
    */
   // const name = 'abc123'
 

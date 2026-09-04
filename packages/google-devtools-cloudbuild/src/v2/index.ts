@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {RepositoryManagerClient} from './repository_manager_client';
+export { RepositoryManagerClient } from './repository_manager_client';

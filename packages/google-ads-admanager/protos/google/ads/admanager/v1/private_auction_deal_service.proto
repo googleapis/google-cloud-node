@@ -38,7 +38,7 @@ service PrivateAuctionDealService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `PrivateAuctionDeal` object.
+  // Retrieves a `PrivateAuctionDeal` object.
   rpc GetPrivateAuctionDeal(GetPrivateAuctionDealRequest)
       returns (PrivateAuctionDeal) {
     option (google.api.http) = {
@@ -47,7 +47,7 @@ service PrivateAuctionDealService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `PrivateAuctionDeal` objects.
+  // Lists `PrivateAuctionDeal` objects.
   rpc ListPrivateAuctionDeals(ListPrivateAuctionDealsRequest)
       returns (ListPrivateAuctionDealsResponse) {
     option (google.api.http) = {
@@ -56,7 +56,7 @@ service PrivateAuctionDealService {
     option (google.api.method_signature) = "parent";
   }
 
-  // API to create a `PrivateAuctionDeal` object.
+  // Creates a `PrivateAuctionDeal` object.
   rpc CreatePrivateAuctionDeal(CreatePrivateAuctionDealRequest)
       returns (PrivateAuctionDeal) {
     option (google.api.http) = {
@@ -66,7 +66,7 @@ service PrivateAuctionDealService {
     option (google.api.method_signature) = "parent,private_auction_deal";
   }
 
-  // API to update a `PrivateAuctionDeal` object.
+  // Updates a `PrivateAuctionDeal` object.
   rpc UpdatePrivateAuctionDeal(UpdatePrivateAuctionDealRequest)
       returns (PrivateAuctionDeal) {
     option (google.api.http) = {
@@ -120,22 +120,21 @@ message ListPrivateAuctionDealsRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>auctionPriorityEnabled</code></li>
-  //   <li><code>blockOverrideEnabled</code></li>
-  //   <li><code>buyerAccountId</code></li>
-  //   <li><code>buyerPermissionType</code></li>
-  //   <li><code>endTime</code></li>
-  //   <li><code>externalDealId</code></li>
-  //   <li><code>floorPrice</code></li>
-  //   <li><code>name</code></li>
-  //   <li><code>privateAuctionDealId</code></li>
-  //   <li><code>privateAuctionDisplayName</code></li>
-  //   <li><code>privateAuctionId</code></li>
-  //   <li><code>status</code></li>
-  //   <li><code>updateTime</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `auctionPriorityEnabled`
+  // * `blockOverrideEnabled`
+  // * `buyerAccountId`
+  // * `buyerPermissionType`
+  // * `endTime`
+  // * `externalDealId`
+  // * `floorPrice`
+  // * `name`
+  // * `privateAuctionDealId`
+  // * `privateAuctionDisplayName`
+  // * `privateAuctionId`
+  // * `status`
+  // * `updateTime`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

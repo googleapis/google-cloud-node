@@ -478,13 +478,98 @@ describe('Service', () => {
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+)$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+)$`
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();
       };
 
       service.request_(reqOpts, assert.ifError);
+    });
+
+    it('should add the x-goog-gcs-idempotency-token header matching the gccl-invocation-id', done => {
+      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
+        const pkg = service.packageJson;
+        const r = new RegExp(
+          `^gl-node/${process.versions.node} gccl/${
+            pkg.version
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+)$`
+        );
+        const match = r.exec(reqOpts.headers!['x-goog-api-client']);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+        const idempotencyToken =
+          reqOpts.headers!['x-goog-gcs-idempotency-token'];
+        assert.strictEqual(idempotencyToken, invocationId);
+        done();
+      };
+
+      service.request_(reqOpts, assert.ifError);
+    });
+
+    it('should respect user-provided x-goog-gcs-idempotency-token case-insensitively and align it with gccl-invocation-id', done => {
+      const customToken = 'Custom-Token-With-W-123';
+      const customReqOpts = {
+        ...reqOpts,
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': customToken,
+        },
+      };
+
+      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
+        const pkg = service.packageJson;
+        const r = new RegExp(
+          `^gl-node/${process.versions.node} gccl/${
+            pkg.version
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+)$`
+        );
+        const match = r.exec(reqOpts.headers!['x-goog-api-client']);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+        assert.strictEqual(invocationId, customToken);
+
+        // Verify there is no duplicate x-goog-gcs-idempotency-token header
+        assert.strictEqual(
+          reqOpts.headers!['x-goog-gcs-idempotency-token'],
+          undefined
+        );
+        assert.strictEqual(
+          reqOpts.headers!['X-Goog-Gcs-Idempotency-Token'],
+          customToken
+        );
+        done();
+      };
+
+      service.request_(customReqOpts, assert.ifError);
+    });
+
+    it('should ignore invalid user-provided idempotency tokens and fallback to generating a UUID', done => {
+      const customReqOpts = {
+        ...reqOpts,
+        headers: {
+          'X-Goog-Gcs-Idempotency-Token': undefined as unknown as string,
+        },
+      };
+
+      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
+        const pkg = service.packageJson;
+        const r = new RegExp(
+          `^gl-node/${process.versions.node} gccl/${
+            pkg.version
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+)$`
+        );
+        const match = r.exec(reqOpts.headers!['x-goog-api-client']);
+        assert.ok(match);
+        const invocationId = match.groups!.gcclInvocationId;
+
+        // Verify a fallback token was generated and matches the invocation ID
+        const idempotencyToken =
+          reqOpts.headers!['x-goog-gcs-idempotency-token'];
+        assert.strictEqual(idempotencyToken, invocationId);
+        done();
+      };
+
+      service.request_(customReqOpts, assert.ifError);
     });
 
     it('should add the `gccl-gcs-cmd` to the api-client header when provided', done => {
@@ -494,7 +579,7 @@ describe('Service', () => {
         const r = new RegExp(
           `^gl-node/${process.versions.node} gccl/${
             pkg.version
-          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>[^W]+) gccl-gcs-cmd/${expected}$`
+          }-${getModuleFormat()} gccl-invocation-id/(?<gcclInvocationId>\\S+) gccl-gcs-cmd/${expected}$`
         );
         assert.ok(r.test(reqOpts.headers!['x-goog-api-client']));
         done();

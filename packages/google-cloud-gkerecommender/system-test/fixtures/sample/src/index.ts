@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {GkeInferenceQuickstartClient} from '@google-cloud/gkerecommender';
+import { GkeInferenceQuickstartClient } from '@google-cloud/gkerecommender';
 
 // check that the client class type name can be used
-function doStuffWithGkeInferenceQuickstartClient(client: GkeInferenceQuickstartClient) {
+function doStuffWithGkeInferenceQuickstartClient(
+  client: GkeInferenceQuickstartClient,
+) {
   client.close();
 }
 

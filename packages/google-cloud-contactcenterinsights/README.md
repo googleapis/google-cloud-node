@@ -132,7 +132,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_settings.js) |
 | update view | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.update_view.js) |
 | upload conversation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.upload_conversation.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/snippet_metadata_google.cloud.contactcenterinsights.v1.json) |
 
 
 ## Supported Node.js Versions

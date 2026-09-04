@@ -2037,6 +2037,18 @@
                       }
                     },
                     "CesAppSpec": {
+                      "oneofs": {
+                        "_proactiveEnabled": {
+                          "oneof": [
+                            "proactiveEnabled"
+                          ]
+                        },
+                        "_reactiveEnabled": {
+                          "oneof": [
+                            "reactiveEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "cesApp": {
                           "type": "string",
@@ -2051,6 +2063,22 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "proactiveEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "reactiveEnabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -2956,15 +2984,24 @@
                         },
                         "error": {
                           "type": "Error",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "rawContent": {
                           "type": "bytes",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "content": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -4275,6 +4312,14 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 3
+                        },
+                        "additionalSuggestedQueryResults": {
+                          "rule": "repeated",
+                          "type": "KnowledgeAssistAnswer.AdditionalSuggestedQueryResult",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4378,6 +4423,14 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 6
+                        },
+                        "queryGenerationDebugInfo": {
+                          "type": "QueryGenerationDebugInfo",
+                          "id": 7
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -4475,6 +4528,22 @@
                               "id": 18
                             }
                           }
+                        },
+                        "QueryGenerationDebugInfo": {
+                          "fields": {
+                            "promptTokenCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "candidatesTokenCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "totalTokenCount": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
@@ -4503,6 +4572,53 @@
                             "queryText": {
                               "type": "string",
                               "id": 1
+                            },
+                            "searchContexts": {
+                              "rule": "repeated",
+                              "type": "SearchContext",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SearchContext": {
+                              "fields": {
+                                "key": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AdditionalSuggestedQueryResult": {
+                          "fields": {
+                            "suggestedQuery": {
+                              "type": "SuggestedQuery",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "answerRecord": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
+                              }
                             }
                           }
                         },
@@ -4511,7 +4627,9 @@
                             "source": {
                               "oneof": [
                                 "faqSource",
-                                "generativeSource"
+                                "generativeSource",
+                                "playbookSource",
+                                "eventSource"
                               ]
                             }
                           },
@@ -4527,6 +4645,14 @@
                             "generativeSource": {
                               "type": "GenerativeSource",
                               "id": 4
+                            },
+                            "playbookSource": {
+                              "type": "GenerativeSource",
+                              "id": 7
+                            },
+                            "eventSource": {
+                              "type": "EventSource",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -4566,6 +4692,18 @@
                                       "id": 5
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "EventSource": {
+                              "fields": {
+                                "event": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "snippets": {
+                                  "type": "GenerativeSource",
+                                  "id": 2
                                 }
                               }
                             }
@@ -4677,6 +4815,13 @@
                         "singleUtterance": {
                           "type": "bool",
                           "id": 8
+                        },
+                        "enableVoiceActivityEvents": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "disableNoSpeechRecognizedEvent": {
                           "type": "bool",
@@ -4910,6 +5055,11 @@
                       }
                     },
                     "OutputAudioEncoding": {
+                      "valuesOptions": {
+                        "OUTPUT_AUDIO_ENCODING_MP3": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
                         "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
@@ -5362,7 +5512,11 @@
                           "values": {
                             "MESSAGE_TYPE_UNSPECIFIED": 0,
                             "TRANSCRIPT": 1,
-                            "END_OF_SINGLE_UTTERANCE": 2
+                            "DTMF_DIGITS": 3,
+                            "END_OF_SINGLE_UTTERANCE": 2,
+                            "PARTIAL_DTMF_DIGITS": 4,
+                            "SPEECH_ACTIVITY_BEGIN": 5,
+                            "SPEECH_ACTIVITY_END": 6
                           }
                         }
                       }
@@ -9545,6 +9699,13 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 4
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -9612,7 +9773,9 @@
                             "ANSWER_TYPE_UNSPECIFIED": 0,
                             "FAQ": 1,
                             "GENERATIVE": 2,
-                            "INTENT": 3
+                            "INTENT": 3,
+                            "PLAYBOOK": 4,
+                            "EVENT": 5
                           }
                         },
                         "AnswerSource": {
@@ -9935,6 +10098,13 @@
                           "type": "string",
                           "id": 10
                         },
+                        "sipConfig": {
+                          "type": "SipConfig",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "timeZone": {
                           "type": "string",
                           "id": 14
@@ -10145,6 +10315,20 @@
                             "raiSettings": {
                               "type": "RaiSettings",
                               "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "suggestionTriggerEvent": {
+                              "type": "TriggerEvent",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disableQuerySearchContext": {
+                              "type": "bool",
+                              "id": 21,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -10502,6 +10686,39 @@
                         "enableStackdriverLogging": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "SipConfig": {
+                      "fields": {
+                        "createConversationOnTheFly": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "inactiveStart": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "maxAudioRecordingDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "allowVirtualAgentInteraction": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "keepConversationRunning": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "copyInboundCallLegHeaders": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "ignoreReinviteMediaDirection": {
+                          "type": "bool",
+                          "id": 9
                         }
                       }
                     },
@@ -17231,6 +17448,18 @@
                       }
                     },
                     "CesAppSpec": {
+                      "oneofs": {
+                        "_proactiveEnabled": {
+                          "oneof": [
+                            "proactiveEnabled"
+                          ]
+                        },
+                        "_reactiveEnabled": {
+                          "oneof": [
+                            "reactiveEnabled"
+                          ]
+                        }
+                      },
                       "fields": {
                         "cesApp": {
                           "type": "string",
@@ -17245,6 +17474,22 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "proactiveEnabled": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "reactiveEnabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -18150,15 +18395,24 @@
                         },
                         "error": {
                           "type": "Error",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "rawContent": {
                           "type": "bytes",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "content": {
                           "type": "string",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
@@ -19931,6 +20185,14 @@
                         "contextSize": {
                           "type": "int32",
                           "id": 3
+                        },
+                        "additionalSuggestedQueryResults": {
+                          "rule": "repeated",
+                          "type": "KnowledgeAssistAnswer.AdditionalSuggestedQueryResult",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -20034,6 +20296,14 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 6
+                        },
+                        "queryGenerationDebugInfo": {
+                          "type": "QueryGenerationDebugInfo",
+                          "id": 7
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -20131,6 +20401,22 @@
                               "id": 18
                             }
                           }
+                        },
+                        "QueryGenerationDebugInfo": {
+                          "fields": {
+                            "promptTokenCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "candidatesTokenCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "totalTokenCount": {
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
@@ -20159,6 +20445,53 @@
                             "queryText": {
                               "type": "string",
                               "id": 1
+                            },
+                            "searchContexts": {
+                              "rule": "repeated",
+                              "type": "SearchContext",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "SearchContext": {
+                              "fields": {
+                                "key": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "value": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AdditionalSuggestedQueryResult": {
+                          "fields": {
+                            "suggestedQuery": {
+                              "type": "SuggestedQuery",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "answerRecord": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/AnswerRecord"
+                              }
                             }
                           }
                         },
@@ -20167,7 +20500,9 @@
                             "source": {
                               "oneof": [
                                 "faqSource",
-                                "generativeSource"
+                                "generativeSource",
+                                "playbookSource",
+                                "eventSource"
                               ]
                             }
                           },
@@ -20183,6 +20518,14 @@
                             "generativeSource": {
                               "type": "GenerativeSource",
                               "id": 4
+                            },
+                            "playbookSource": {
+                              "type": "GenerativeSource",
+                              "id": 7
+                            },
+                            "eventSource": {
+                              "type": "EventSource",
+                              "id": 8
                             }
                           },
                           "nested": {
@@ -20222,6 +20565,18 @@
                                       "id": 5
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "EventSource": {
+                              "fields": {
+                                "event": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "snippets": {
+                                  "type": "GenerativeSource",
+                                  "id": 2
                                 }
                               }
                             }
@@ -20545,6 +20900,13 @@
                           "type": "bool",
                           "id": 8
                         },
+                        "enableVoiceActivityEvents": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "disableNoSpeechRecognizedEvent": {
                           "type": "bool",
                           "id": 14
@@ -20782,6 +21144,11 @@
                       }
                     },
                     "OutputAudioEncoding": {
+                      "valuesOptions": {
+                        "OUTPUT_AUDIO_ENCODING_MP3": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "OUTPUT_AUDIO_ENCODING_UNSPECIFIED": 0,
                         "OUTPUT_AUDIO_ENCODING_LINEAR_16": 1,
@@ -21321,7 +21688,9 @@
                             "TRANSCRIPT": 1,
                             "END_OF_SINGLE_UTTERANCE": 2,
                             "DTMF_DIGITS": 3,
-                            "PARTIAL_DTMF_DIGITS": 4
+                            "PARTIAL_DTMF_DIGITS": 4,
+                            "SPEECH_ACTIVITY_BEGIN": 5,
+                            "SPEECH_ACTIVITY_END": 6
                           }
                         }
                       }
@@ -25606,6 +25975,13 @@
                         "serviceLatency": {
                           "type": "ServiceLatency",
                           "id": 4
+                        },
+                        "cesDebugInfo": {
+                          "type": "google.protobuf.Struct",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -25673,7 +26049,9 @@
                             "ANSWER_TYPE_UNSPECIFIED": 0,
                             "FAQ": 1,
                             "GENERATIVE": 2,
-                            "INTENT": 3
+                            "INTENT": 3,
+                            "PLAYBOOK": 4,
+                            "EVENT": 5
                           }
                         },
                         "AnswerSource": {
@@ -26003,6 +26381,13 @@
                           "type": "string",
                           "id": 10
                         },
+                        "sipConfig": {
+                          "type": "SipConfig",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "timeZone": {
                           "type": "string",
                           "id": 14
@@ -26123,6 +26508,20 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "suggestionTriggerEvent": {
+                              "type": "TriggerEvent",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disableQuerySearchContext": {
+                              "type": "bool",
+                              "id": 21,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "suggestionTriggerSettings": {
                               "type": "SuggestionTriggerSettings",
                               "id": 10
@@ -26130,10 +26529,6 @@
                             "queryConfig": {
                               "type": "SuggestionQueryConfig",
                               "id": 6
-                            },
-                            "conversationModelConfig": {
-                              "type": "ConversationModelConfig",
-                              "id": 7
                             },
                             "conversationProcessConfig": {
                               "type": "ConversationProcessConfig",
@@ -26338,21 +26733,6 @@
                             }
                           }
                         },
-                        "ConversationModelConfig": {
-                          "fields": {
-                            "model": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/ConversationModel"
-                              }
-                            },
-                            "baselineModelVersion": {
-                              "type": "string",
-                              "id": 8
-                            }
-                          }
-                        },
                         "ConversationProcessConfig": {
                           "fields": {
                             "recentSentencesCount": {
@@ -26473,6 +26853,39 @@
                         "enableStackdriverLogging": {
                           "type": "bool",
                           "id": 3
+                        }
+                      }
+                    },
+                    "SipConfig": {
+                      "fields": {
+                        "createConversationOnTheFly": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "inactiveStart": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "maxAudioRecordingDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "allowVirtualAgentInteraction": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "keepConversationRunning": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "copyInboundCallLegHeaders": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "ignoreReinviteMediaDirection": {
+                          "type": "bool",
+                          "id": 9
                         }
                       }
                     },
@@ -29814,6 +30227,29 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "peerHostnames": {
+                          "rule": "repeated",
+                          "type": "SipHostname",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "googleRootCertFile": {
+                          "type": "GoogleRootCertFile",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GoogleRootCertFile": {
+                          "values": {
+                            "CERT_FILE_UNSPECIFIED": 0,
+                            "EXTERNAL_PRIVATE_CA": 5
+                          }
                         }
                       }
                     },
@@ -29914,6 +30350,135 @@
                                 "proto3_optional": true
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "SipHostname": {
+                      "fields": {
+                        "peerHostname": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "enabledSipPing": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pingInterval": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "peerSocketAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "probeDetails": {
+                          "type": "ProbeDetails",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "connectionState": {
+                          "type": "ConnectionState",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorDetails": {
+                          "type": "HostnameErrorDetails",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ConnectionState": {
+                          "values": {
+                            "CONNECTION_STATE_UNSPECIFIED": 0,
+                            "CONNECTED": 1,
+                            "DISCONNECTED": 2,
+                            "AUTHENTICATION_FAILED": 3,
+                            "KEEPALIVE": 4
+                          }
+                        },
+                        "HostnameCertificateState": {
+                          "values": {
+                            "HOSTNAME_CERTIFICATE_STATE_UNSPECIFIED": 0,
+                            "VALID": 1,
+                            "INVALID": 2,
+                            "EXPIRED": 3,
+                            "HOSTNAME_NOT_FOUND": 4,
+                            "UNAUTHENTICATED": 5,
+                            "TRUST_STORE_NOT_FOUND": 6,
+                            "HOSTNAME_INVALID_FORMAT": 7,
+                            "QUOTA_EXCEEDED": 8
+                          }
+                        },
+                        "HostnameErrorDetails": {
+                          "fields": {
+                            "certificateState": {
+                              "type": "HostnameCertificateState",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ProbeDetails": {
+                      "fields": {
+                        "optionsLatency": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "probeStatus": {
+                          "type": "ProbeStatus",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "initTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ProbeStatus": {
+                          "values": {
+                            "PROBE_STATUS_UNSPECIFIED": 0,
+                            "PROBE_STATUS_SUCCESS": 1,
+                            "PROBE_STATUS_FAILED": 2
                           }
                         }
                       }
@@ -30553,6 +31118,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -30662,6 +31231,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -30716,6 +31289,79 @@
                 "generateOmittedAsInternal": {
                   "type": "bool",
                   "id": 2
+                }
+              }
+            },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
                 }
               }
             },
@@ -30868,6 +31514,8 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -31062,6 +31710,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -31337,7 +31989,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -31397,7 +32052,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -31439,6 +32096,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -31511,6 +32172,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -31626,6 +32291,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -31705,6 +32374,10 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 }
@@ -31724,6 +32397,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -31762,6 +32439,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -31807,6 +32488,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -31833,6 +32518,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -31867,6 +32556,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -32008,8 +32701,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -32021,6 +32714,17 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -32098,7 +32802,8 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
                   }
                 },
                 "VisibilityFeature": {
@@ -32117,6 +32822,18 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }
@@ -32393,7 +33110,6 @@
         },
         "longrunning": {
           "options": {
-            "cc_enable_arenas": true,
             "csharp_namespace": "Google.LongRunning",
             "go_package": "cloud.google.com/go/longrunning/autogen/longrunningpb;longrunningpb",
             "java_multiple_files": true,
@@ -32550,6 +33266,10 @@
                 "pageToken": {
                   "type": "string",
                   "id": 3
+                },
+                "returnPartialSuccess": {
+                  "type": "bool",
+                  "id": 5
                 }
               }
             },
@@ -32563,6 +33283,14 @@
                 "nextPageToken": {
                   "type": "string",
                   "id": 2
+                },
+                "unreachable": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3,
+                  "options": {
+                    "(google.api.field_behavior)": "UNORDERED_LIST"
+                  }
                 }
               }
             },
@@ -32610,7 +33338,6 @@
         },
         "rpc": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
             "java_multiple_files": true,
             "java_outer_classname": "StatusProto",
@@ -32639,7 +33366,6 @@
         },
         "type": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/type/latlng;latlng",
             "java_multiple_files": true,
             "java_outer_classname": "LatLngProto",

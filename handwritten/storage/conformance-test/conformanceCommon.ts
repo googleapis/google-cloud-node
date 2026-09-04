@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 import * as jsonToNodeApiMapping from './test-data/retryInvocationMap.json';
-import * as libraryMethods from './libraryMethods';
+import * as libraryMethods from './libraryMethods.js';
 import {Bucket, File, HmacKey, Notification, Storage} from '../src/';
 import * as crypto from 'crypto';
 import * as assert from 'assert';
 import {DecorateRequestOptions} from '../src/nodejs-common';
-import fetch from 'node-fetch';
 
 interface RetryCase {
   instructions: String[];

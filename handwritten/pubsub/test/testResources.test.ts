@@ -14,7 +14,7 @@
 
 import {describe, it, beforeEach} from 'mocha';
 import {TestResources} from './testResources';
-import * as assert from 'assert';
+import * as assert from 'node:assert';
 
 describe('testResources (unit)', () => {
   const fixedId = 'fixed';

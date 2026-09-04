@@ -1,17 +1,16 @@
 {
-  "name": "storage",
-  "name_pretty": "Cloud Storage API",
-  "product_documentation": "https://cloud.google.com/storage/docs/reference/rpc",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/storage-control/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/storage-control",
-  "api_id": "storage.googleapis.com",
-  "default_version": "v2",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "storage"
+    "api_description": "Lets you store and retrieve potentially-large, immutable data objects.",
+    "api_id": "storage.googleapis.com",
+    "api_shortname": "storage",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/storage-control/latest",
+    "default_version": "v2",
+    "distribution_name": "@google-cloud/storage-control",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=187243&template=1162869",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "storage",
+    "name_pretty": "Cloud Storage",
+    "product_documentation": "https://cloud.google.com/storage/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

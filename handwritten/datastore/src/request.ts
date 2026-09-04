@@ -21,7 +21,7 @@ import arrify = require('arrify');
 const concat = require('concat-stream');
 import * as extend from 'extend';
 import {split} from 'split-array-stream';
-import {google} from '../protos/protos';
+import {google} from './protos';
 import {CallOptions, CancellableStream} from 'google-gax';
 import {Duplex, PassThrough, Transform} from 'stream';
 
@@ -65,7 +65,7 @@ import {Datastore, Transaction} from '.';
 import ITimestamp = google.protobuf.ITimestamp;
 import {AggregateQuery} from './aggregate';
 import {RunOptions} from './transaction';
-import * as protos from '../protos/protos';
+import * as protos from './protos';
 import {serializer} from 'google-gax';
 import * as gax from 'google-gax';
 import {SaveDataValue} from './interfaces/save';

@@ -568,6 +568,9 @@ export class ForwardingRulesClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region scoping this request.
+   * @param {string} request.view
+   *
+   *   Check the View enum for the list of possible values.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

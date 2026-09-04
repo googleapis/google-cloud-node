@@ -39,6 +39,10 @@ function main(instance, project, zone) {
    */
   // const instance = 'abc123'
   /**
+   *  If set to true, Graceful Shutdown is skipped.
+   */
+  // const noGracefulShutdown = true
+  /**
    *  Project ID for this request.
    */
   // const project = 'my-project'

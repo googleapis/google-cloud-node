@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {TablesServiceClient} from './tables_service_client';
+export { TablesServiceClient } from './tables_service_client';

@@ -26,7 +26,8 @@ import {defaultOptions} from './default-options';
 import {Duration} from './temporal';
 import {ExponentialRetry} from './exponential-retry';
 import {DebugMessage} from './debug';
-import {logs as baseLogs} from './logs';
+import {randomUUID} from 'crypto';
+import {logs as baseLogs, LoggingFunction} from './logs';
 
 /**
  * Loggers. Exported for unit tests.
@@ -34,7 +35,7 @@ import {logs as baseLogs} from './logs';
  * @private
  */
 export const logs = {
-  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams'),
+  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams') as LoggingFunction,
 };
 
 /*!
@@ -43,9 +44,10 @@ export const logs = {
 const KEEP_ALIVE_INTERVAL = 30000;
 
 /*!
- * Deadline for the stream.
+ * Deadline for the stream. This will need to go away and be replaced with something
+ * more graceful for pulling the config out of the pubsub-api package.
  */
-const PULL_TIMEOUT = require('./v1/subscriber_client_config.json').interfaces[
+const PULL_TIMEOUT = require('./v1-old/subscriber_client_config.json').interfaces[
   'google.pubsub.v1.Subscriber'
 ].methods.StreamingPull.timeout_millis;
 
@@ -76,6 +78,8 @@ const DEFAULT_OPTIONS: MessageStreamOptions = {
   retryMinBackoff: Duration.from({milliseconds: 100}),
   retryMaxBackoff: Duration.from({seconds: 60}),
 };
+
+const SERVER_KEEP_ALIVE_INTERVAL = 15000;
 
 interface StreamState {
   highWaterMark: number;
@@ -139,6 +143,9 @@ export class ChannelError extends Error implements grpc.ServiceError {
 interface StreamTracked {
   stream?: PullStream;
   receivedStatus?: boolean;
+  lastPingTime?: number;
+  lastResponseTime?: number;
+  aliveTimer?: NodeJS.Timeout;
 }
 
 /**
@@ -200,7 +207,7 @@ export class MessageStream extends PassThrough {
    */
   setStreamAckDeadline(deadline: Duration) {
     const request: StreamingPullRequest = {
-      streamAckDeadlineSeconds: deadline.totalOf('second'),
+      streamAckDeadlineSeconds: deadline.seconds,
     };
 
     for (const tracker of this._streams) {
@@ -227,6 +234,9 @@ export class MessageStream extends PassThrough {
 
     for (let i = 0; i < this._streams.length; i++) {
       const tracker = this._streams[i];
+      if (tracker.aliveTimer) {
+        this._clearAliveTimer(tracker);
+      }
       if (tracker.stream) {
         this._removeStream(i, 'overall message stream destroyed', 'n/a');
       }
@@ -253,6 +263,7 @@ export class MessageStream extends PassThrough {
     const tracker = this._streams[index];
     tracker.stream = stream;
     tracker.receivedStatus = false;
+    tracker.lastResponseTime = Date.now();
 
     stream
       .on('error', err => this._onError(index, err))
@@ -263,9 +274,44 @@ export class MessageStream extends PassThrough {
   private _onData(index: number, data: PullResponse): void {
     // Mark this stream as alive again. (reset backoff)
     const tracker = this._streams[index];
+    tracker.lastResponseTime = Date.now();
     this._retrier.reset(tracker);
 
     this.emit('data', data);
+  }
+
+  private _clearAliveTimer(tracker: StreamTracked): void {
+    if (tracker.aliveTimer) {
+      clearTimeout(tracker.aliveTimer);
+      tracker.aliveTimer = undefined;
+    }
+  }
+
+  private _checkAliveTimer(index: number): void {
+    const tracker = this._streams[index];
+    const lastPingTime = tracker.lastPingTime ?? -1;
+    const lastResponseTime = tracker.lastResponseTime ?? 0;
+    if (lastPingTime <= lastResponseTime) {
+      return;
+    }
+
+    this._removeStream(
+      index,
+      'no keepalive response from server within 15 seconds',
+      'will be retried',
+    );
+    this._retrier.retryLater(tracker, () =>
+      this._fillOne(index, undefined, 'retry'),
+    );
+  }
+
+  private _setAliveTimer(index: number): void {
+    const tracker = this._streams[index];
+    this._clearAliveTimer(tracker);
+
+    tracker.aliveTimer = setTimeout(() => {
+      this._checkAliveTimer(index);
+    }, SERVER_KEEP_ALIVE_INTERVAL);
   }
 
   /**
@@ -347,6 +393,8 @@ export class MessageStream extends PassThrough {
       maxOutstandingBytes: this._subscriber.useLegacyFlowControl
         ? 0
         : this._subscriber.maxBytes,
+      clientId: randomUUID().toString(),
+      protocolVersion: 1, // Set protocol version to enable server keepalives
     };
     const otherArgs = {
       headers: {
@@ -386,12 +434,14 @@ export class MessageStream extends PassThrough {
       'sending keepAlive to %i streams',
       this._streams.length,
     );
-    this._streams.forEach(tracker => {
+    this._streams.forEach((tracker, index) => {
       // It's possible that a status event fires off (signaling the rpc being
       // closed) but the stream hasn't drained yet. Writing to such a stream will
       // result in a `write after end` error.
       if (!tracker.receivedStatus && tracker.stream) {
         tracker.stream.write({});
+        tracker.lastPingTime = Date.now();
+        this._setAliveTimer(index);
       }
     });
   }
@@ -511,6 +561,9 @@ export class MessageStream extends PassThrough {
     whatNext?: string,
   ): void {
     const tracker = this._streams[index];
+    if (tracker.aliveTimer) {
+      this._clearAliveTimer(tracker);
+    }
     if (tracker.stream) {
       logs.subscriberStreams.info(
         'closing stream %i; why: %s; next: %s',

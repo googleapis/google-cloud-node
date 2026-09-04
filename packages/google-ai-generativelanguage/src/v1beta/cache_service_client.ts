@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -47,7 +54,7 @@ export class CacheServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('generativelanguage');
@@ -60,9 +67,9 @@ export class CacheServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  cacheServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  cacheServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of CacheServiceClient.
@@ -103,21 +110,42 @@ export class CacheServiceClient {
    *     const client = new CacheServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CacheServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +170,7 @@ export class CacheServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,10 +184,7 @@ export class CacheServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -181,31 +206,25 @@ export class CacheServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       cachedContentPathTemplate: new this._gaxModule.PathTemplate(
-        'cachedContents/{id}'
+        'cachedContents/{id}',
       ),
       chunkPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}/documents/{document}/chunks/{chunk}'
+        'corpora/{corpus}/documents/{document}/chunks/{chunk}',
       ),
-      corpusPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}'
-      ),
+      corpusPathTemplate: new this._gaxModule.PathTemplate('corpora/{corpus}'),
       corpusPermissionsPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}/permissions/{permission}'
+        'corpora/{corpus}/permissions/{permission}',
       ),
       documentPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}/documents/{document}'
+        'corpora/{corpus}/documents/{document}',
       ),
-      filePathTemplate: new this._gaxModule.PathTemplate(
-        'files/{file}'
-      ),
-      modelPathTemplate: new this._gaxModule.PathTemplate(
-        'models/{model}'
-      ),
+      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
+      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
-        'tunedModels/{tuned_model}'
+        'tunedModels/{tuned_model}',
       ),
       tunedModelPermissionsPathTemplate: new this._gaxModule.PathTemplate(
-        'tunedModels/{tuned_model}/permissions/{permission}'
+        'tunedModels/{tuned_model}/permissions/{permission}',
       ),
     };
 
@@ -213,14 +232,20 @@ export class CacheServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listCachedContents:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cachedContents')
+      listCachedContents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'cachedContents',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.ai.generativelanguage.v1beta.CacheService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.ai.generativelanguage.v1beta.CacheService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -251,37 +276,47 @@ export class CacheServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1beta.CacheService.
     this.cacheServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1beta.CacheService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ai.generativelanguage.v1beta.CacheService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.ai.generativelanguage.v1beta.CacheService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ai.generativelanguage.v1beta
+            .CacheService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const cacheServiceStubMethods =
-        ['listCachedContents', 'createCachedContent', 'getCachedContent', 'updateCachedContent', 'deleteCachedContent'];
+    const cacheServiceStubMethods = [
+      'listCachedContents',
+      'createCachedContent',
+      'getCachedContent',
+      'updateCachedContent',
+      'deleteCachedContent',
+    ];
     for (const methodName of cacheServiceStubMethods) {
       const callPromise = this.cacheServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -296,8 +331,14 @@ export class CacheServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -308,8 +349,14 @@ export class CacheServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -349,8 +396,9 @@ export class CacheServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -361,463 +409,686 @@ export class CacheServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates CachedContent resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.ai.generativelanguage.v1beta.CachedContent} request.cachedContent
- *   Required. The cached content to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/cache_service.create_cached_content.js</caption>
- * region_tag:generativelanguage_v1beta_generated_CacheService_CreateCachedContent_async
- */
+  /**
+   * Creates CachedContent resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ai.generativelanguage.v1beta.CachedContent} request.cachedContent
+   *   Required. The cached content to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/cache_service.create_cached_content.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_CacheService_CreateCachedContent_async
+   */
   createCachedContent(
-      request?: protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      (
+        | protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createCachedContent(
-      request: protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      | protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCachedContent(
-      request: protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      | protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCachedContent(
-      request?: protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      | protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      (
+        | protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('createCachedContent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.ICachedContent,
+          | protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCachedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createCachedContent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createCachedContent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createCachedContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.ICachedContent,
+          (
+            | protos.google.ai.generativelanguage.v1beta.ICreateCachedContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCachedContent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Reads CachedContent resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name referring to the content cache entry.
- *   Format: `cachedContents/{id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/cache_service.get_cached_content.js</caption>
- * region_tag:generativelanguage_v1beta_generated_CacheService_GetCachedContent_async
- */
+  /**
+   * Reads CachedContent resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name referring to the content cache entry.
+   *   Format: `cachedContents/{id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/cache_service.get_cached_content.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_CacheService_GetCachedContent_async
+   */
   getCachedContent(
-      request?: protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getCachedContent(
-      request: protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      | protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCachedContent(
-      request: protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      | protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCachedContent(
-      request?: protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      | protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getCachedContent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.ICachedContent,
+          | protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCachedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getCachedContent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getCachedContent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getCachedContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.ICachedContent,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IGetCachedContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCachedContent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates CachedContent resource (only expiration is updatable).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.ai.generativelanguage.v1beta.CachedContent} request.cachedContent
- *   Required. The content cache entry to update
- * @param {google.protobuf.FieldMask} request.updateMask
- *   The list of fields to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/cache_service.update_cached_content.js</caption>
- * region_tag:generativelanguage_v1beta_generated_CacheService_UpdateCachedContent_async
- */
+  /**
+   * Updates CachedContent resource (only expiration is updatable).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ai.generativelanguage.v1beta.CachedContent} request.cachedContent
+   *   Required. The content cache entry to update
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/cache_service.update_cached_content.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_CacheService_UpdateCachedContent_async
+   */
   updateCachedContent(
-      request?: protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateCachedContent(
-      request: protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      | protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCachedContent(
-      request: protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      | protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCachedContent(
-      request?: protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ai.generativelanguage.v1beta.ICachedContent,
-          protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      | protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICachedContent,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'cached_content.name': request.cachedContent!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'cached_content.name': request.cachedContent!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateCachedContent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.ICachedContent,
+          | protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCachedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateCachedContent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ai.generativelanguage.v1beta.ICachedContent,
-        protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateCachedContent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateCachedContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.ICachedContent,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCachedContent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes CachedContent resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name referring to the content cache entry
- *   Format: `cachedContents/{id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/cache_service.delete_cached_content.js</caption>
- * region_tag:generativelanguage_v1beta_generated_CacheService_DeleteCachedContent_async
- */
+  /**
+   * Deletes CachedContent resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name referring to the content cache entry
+   *   Format: `cachedContents/{id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/cache_service.delete_cached_content.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_CacheService_DeleteCachedContent_async
+   */
   deleteCachedContent(
-      request?: protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteCachedContent(
-      request: protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCachedContent(
-      request: protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCachedContent(
-      request?: protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteCachedContent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCachedContent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteCachedContent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteCachedContent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteCachedContent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCachedContent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists CachedContents.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cached contents to return. The service may
- *   return fewer than this value. If unspecified, some default (under maximum)
- *   number of items will be returned. The maximum value is 1000; values above
- *   1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListCachedContents` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListCachedContents` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listCachedContentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists CachedContents.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cached contents to return. The service may
+   *   return fewer than this value. If unspecified, some default (under maximum)
+   *   number of items will be returned. The maximum value is 1000; values above
+   *   1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCachedContents` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCachedContents` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCachedContentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCachedContents(
-      request?: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICachedContent[],
-        protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICachedContent[],
+      protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest | null,
+      protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse,
+    ]
+  >;
   listCachedContents(
-      request: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.ICachedContent>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.ICachedContent
+    >,
+  ): void;
   listCachedContents(
-      request: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-      callback: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.ICachedContent>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+    callback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.ICachedContent
+    >,
+  ): void;
   listCachedContents(
-      request?: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.ICachedContent>,
-      callback?: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.ICachedContent>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ICachedContent[],
-        protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.ICachedContent
+        >,
+    callback?: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.ICachedContent
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ICachedContent[],
+      protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest | null,
+      protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-      protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse|null|undefined,
-      protos.google.ai.generativelanguage.v1beta.ICachedContent>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+          | protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.ICachedContent
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCachedContents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -826,106 +1097,112 @@ export class CacheServiceClient {
     this._log.info('listCachedContents request %j', request);
     return this.innerApiCalls
       .listCachedContents(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.ai.generativelanguage.v1beta.ICachedContent[],
-        protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse
-      ]) => {
-        this._log.info('listCachedContents values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1beta.ICachedContent[],
+          protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest | null,
+          protos.google.ai.generativelanguage.v1beta.IListCachedContentsResponse,
+        ]) => {
+          this._log.info('listCachedContents values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listCachedContents`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cached contents to return. The service may
- *   return fewer than this value. If unspecified, some default (under maximum)
- *   number of items will be returned. The maximum value is 1000; values above
- *   1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListCachedContents` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListCachedContents` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listCachedContentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listCachedContents`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cached contents to return. The service may
+   *   return fewer than this value. If unspecified, some default (under maximum)
+   *   number of items will be returned. The maximum value is 1000; values above
+   *   1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCachedContents` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCachedContents` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCachedContentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCachedContentsStream(
-      request?: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCachedContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCachedContents stream %j', request);
     return this.descriptors.page.listCachedContents.createStream(
       this.innerApiCalls.listCachedContents as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listCachedContents`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cached contents to return. The service may
- *   return fewer than this value. If unspecified, some default (under maximum)
- *   number of items will be returned. The maximum value is 1000; values above
- *   1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListCachedContents` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListCachedContents` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/cache_service.list_cached_contents.js</caption>
- * region_tag:generativelanguage_v1beta_generated_CacheService_ListCachedContents_async
- */
+  /**
+   * Equivalent to `listCachedContents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cached contents to return. The service may
+   *   return fewer than this value. If unspecified, some default (under maximum)
+   *   number of items will be returned. The maximum value is 1000; values above
+   *   1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListCachedContents` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCachedContents` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.ai.generativelanguage.v1beta.CachedContent|CachedContent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/cache_service.list_cached_contents.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_CacheService_ListCachedContents_async
+   */
   listCachedContentsAsync(
-      request?: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.ai.generativelanguage.v1beta.ICachedContent>{
+    request?: protos.google.ai.generativelanguage.v1beta.IListCachedContentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.ai.generativelanguage.v1beta.ICachedContent> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listCachedContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCachedContents iterate %j', request);
     return this.descriptors.page.listCachedContents.asyncIterate(
       this.innerApiCalls['listCachedContents'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.ai.generativelanguage.v1beta.ICachedContent>;
   }
   // --------------------
@@ -938,7 +1215,7 @@ export class CacheServiceClient {
    * @param {string} id
    * @returns {string} Resource name string.
    */
-  cachedContentPath(id:string) {
+  cachedContentPath(id: string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       id: id,
     });
@@ -952,7 +1229,8 @@ export class CacheServiceClient {
    * @returns {string} A string representing the id.
    */
   matchIdFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).id;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .id;
   }
 
   /**
@@ -963,7 +1241,7 @@ export class CacheServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  chunkPath(corpus:string,document:string,chunk:string) {
+  chunkPath(corpus: string, document: string, chunk: string) {
     return this.pathTemplates.chunkPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -1010,7 +1288,7 @@ export class CacheServiceClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(corpus:string) {
+  corpusPath(corpus: string) {
     return this.pathTemplates.corpusPathTemplate.render({
       corpus: corpus,
     });
@@ -1034,7 +1312,7 @@ export class CacheServiceClient {
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  corpusPermissionsPath(corpus:string,permission:string) {
+  corpusPermissionsPath(corpus: string, permission: string) {
     return this.pathTemplates.corpusPermissionsPathTemplate.render({
       corpus: corpus,
       permission: permission,
@@ -1049,7 +1327,9 @@ export class CacheServiceClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromCorpusPermissionsName(corpusPermissionsName: string) {
-    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).corpus;
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(
+      corpusPermissionsName,
+    ).corpus;
   }
 
   /**
@@ -1060,7 +1340,9 @@ export class CacheServiceClient {
    * @returns {string} A string representing the permission.
    */
   matchPermissionFromCorpusPermissionsName(corpusPermissionsName: string) {
-    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).permission;
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(
+      corpusPermissionsName,
+    ).permission;
   }
 
   /**
@@ -1070,7 +1352,7 @@ export class CacheServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  documentPath(corpus:string,document:string) {
+  documentPath(corpus: string, document: string) {
     return this.pathTemplates.documentPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -1105,7 +1387,7 @@ export class CacheServiceClient {
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(file:string) {
+  filePath(file: string) {
     return this.pathTemplates.filePathTemplate.render({
       file: file,
     });
@@ -1128,7 +1410,7 @@ export class CacheServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model:string) {
+  modelPath(model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });
@@ -1151,7 +1433,7 @@ export class CacheServiceClient {
    * @param {string} tuned_model
    * @returns {string} Resource name string.
    */
-  tunedModelPath(tunedModel:string) {
+  tunedModelPath(tunedModel: string) {
     return this.pathTemplates.tunedModelPathTemplate.render({
       tuned_model: tunedModel,
     });
@@ -1165,7 +1447,8 @@ export class CacheServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromTunedModelName(tunedModelName: string) {
-    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName).tuned_model;
+    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName)
+      .tuned_model;
   }
 
   /**
@@ -1175,7 +1458,7 @@ export class CacheServiceClient {
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  tunedModelPermissionsPath(tunedModel:string,permission:string) {
+  tunedModelPermissionsPath(tunedModel: string, permission: string) {
     return this.pathTemplates.tunedModelPermissionsPathTemplate.render({
       tuned_model: tunedModel,
       permission: permission,
@@ -1189,8 +1472,12 @@ export class CacheServiceClient {
    *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the tuned_model.
    */
-  matchTunedModelFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
-    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).tuned_model;
+  matchTunedModelFromTunedModelPermissionsName(
+    tunedModelPermissionsName: string,
+  ) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(
+      tunedModelPermissionsName,
+    ).tuned_model;
   }
 
   /**
@@ -1200,8 +1487,12 @@ export class CacheServiceClient {
    *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
-    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).permission;
+  matchPermissionFromTunedModelPermissionsName(
+    tunedModelPermissionsName: string,
+  ) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(
+      tunedModelPermissionsName,
+    ).permission;
   }
 
   /**
@@ -1212,7 +1503,7 @@ export class CacheServiceClient {
    */
   close(): Promise<void> {
     if (this.cacheServiceStub && !this._terminated) {
-      return this.cacheServiceStub.then(stub => {
+      return this.cacheServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

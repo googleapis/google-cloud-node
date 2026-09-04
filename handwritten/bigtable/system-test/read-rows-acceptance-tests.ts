@@ -22,7 +22,6 @@ import {Table} from '../src/table.js';
 import {Row} from '../src/row.js';
 import {protobuf} from 'google-gax';
 import * as fs from 'fs';
-import * as path from 'path';
 import {Instance} from '../src/instance';
 import {Bigtable, AbortableDuplex} from '../src';
 import {ClientSideMetricsConfigManager} from '../src/client-side-metrics/metrics-config-manager';
@@ -34,6 +33,7 @@ import {
   MethodName,
   StreamingState,
 } from '../src/client-side-metrics/client-side-metrics-attributes';
+import {getProtoPath} from '../src/utils/protos';
 
 class FakeOperationMetricsCollector extends OperationMetricsCollector {
   onOperationComplete() {}
@@ -57,7 +57,8 @@ class FakeMetricsConfigManager extends ClientSideMetricsConfigManager {
   }
 }
 
-const protosJson = path.resolve(__dirname, '../protos/protos.json');
+const protosJson = getProtoPath('protos.json');
+
 const root = protobuf.Root.fromJSON(
   JSON.parse(fs.readFileSync(protosJson).toString()),
 );

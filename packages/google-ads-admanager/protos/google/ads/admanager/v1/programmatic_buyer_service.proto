@@ -37,7 +37,7 @@ service ProgrammaticBuyerService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `ProgrammaticBuyer` object.
+  // Retrieves a `ProgrammaticBuyer` object.
   rpc GetProgrammaticBuyer(GetProgrammaticBuyerRequest)
       returns (ProgrammaticBuyer) {
     option (google.api.http) = {
@@ -46,7 +46,7 @@ service ProgrammaticBuyerService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `ProgrammaticBuyer` objects.
+  // Lists `ProgrammaticBuyer` objects.
   rpc ListProgrammaticBuyers(ListProgrammaticBuyersRequest)
       returns (ListProgrammaticBuyersResponse) {
     option (google.api.http) = {
@@ -97,17 +97,16 @@ message ListProgrammaticBuyersRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>agency</code></li>
-  //   <li><code>buyerAccountId</code></li>
-  //   <li><code>displayName</code></li>
-  //   <li><code>name</code></li>
-  //   <li><code>parentAccountId</code></li>
-  //   <li><code>partnerClientId</code></li>
-  //   <li><code>preferredDealsEnabled</code></li>
-  //   <li><code>programmaticGuaranteedEnabled</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `agency`
+  // * `buyerAccountId`
+  // * `displayName`
+  // * `name`
+  // * `parentAccountId`
+  // * `partnerClientId`
+  // * `preferredDealsEnabled`
+  // * `programmaticGuaranteedEnabled`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

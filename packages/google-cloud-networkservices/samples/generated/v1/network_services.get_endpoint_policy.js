@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. A name of the EndpointPolicy to get. Must be in the format
-   *  `projects/* /locations/global/endpointPolicies/*`.
+   *  `projects/* /locations/* /endpointPolicies/*`.
    */
   // const name = 'abc123'
 

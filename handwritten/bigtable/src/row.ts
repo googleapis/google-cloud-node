@@ -28,7 +28,8 @@ import {
 import {Chunk} from './chunktransformer';
 import {CallOptions} from 'google-gax';
 import {ServiceError} from 'google-gax';
-import {google} from '../protos/protos';
+import {protos} from '.';
+import google = protos.google;
 import {RowDataUtils, RowProperties} from './row-data-utils';
 import {GetRowsOptions, TabularApiSurface} from './tabular-api-surface';
 import {getRowsInternal} from './utils/getRowsInternal';

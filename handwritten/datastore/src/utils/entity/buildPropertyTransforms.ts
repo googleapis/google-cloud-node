@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {entity, PropertyTransform} from '../../entity';
-import {google} from '../../../protos/protos';
+import {google} from '../../protos';
 import IValue = google.datastore.v1.IValue;
 import ServerValue = google.datastore.v1.PropertyTransform.ServerValue;
 

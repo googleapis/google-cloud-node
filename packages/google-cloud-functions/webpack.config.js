@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'CloudFunctionsService',
-    filename: './cloud-functions-service.js',
+    library: 'FunctionService',
+    filename: './function-service.js',
   },
   node: {
     child_process: 'empty',

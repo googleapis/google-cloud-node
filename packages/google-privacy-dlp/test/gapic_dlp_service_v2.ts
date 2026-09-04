@@ -6102,6 +6102,537 @@ describe('v2.DlpServiceClient', () => {
     });
   });
 
+  describe('createContentPolicy', () => {
+    it('invokes createContentPolicy without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateContentPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.createContentPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createContentPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createContentPolicy without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateContentPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.createContentPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createContentPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IContentPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createContentPolicy with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateContentPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createContentPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createContentPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createContentPolicy with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.CreateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateContentPolicyRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.createContentPolicy(request), expectedError);
+    });
+  });
+
+  describe('updateContentPolicy', () => {
+    it('invokes updateContentPolicy without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.updateContentPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateContentPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateContentPolicy without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.updateContentPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateContentPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IContentPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateContentPolicy with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateContentPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateContentPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateContentPolicy with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.UpdateContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateContentPolicy(request), expectedError);
+    });
+  });
+
+  describe('getContentPolicy', () => {
+    it('invokes getContentPolicy without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.getContentPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getContentPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getContentPolicy without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ContentPolicy(),
+      );
+      client.innerApiCalls.getContentPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getContentPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IContentPolicy | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getContentPolicy with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getContentPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getContentPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getContentPolicy with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getContentPolicy(request), expectedError);
+    });
+  });
+
+  describe('deleteContentPolicy', () => {
+    it('invokes deleteContentPolicy without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteContentPolicy =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteContentPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteContentPolicy without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteContentPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteContentPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteContentPolicy with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteContentPolicy = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteContentPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteContentPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteContentPolicy with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteContentPolicyRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteContentPolicyRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.deleteContentPolicy(request), expectedError);
+    });
+  });
+
   describe('listInspectTemplates', () => {
     it('invokes listInspectTemplates without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
@@ -10034,6 +10565,308 @@ describe('v2.DlpServiceClient', () => {
       );
     });
   });
+
+  describe('listContentPolicies', () => {
+    it('invokes listContentPolicies without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+      ];
+      client.innerApiCalls.listContentPolicies =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listContentPolicies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listContentPolicies without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+      ];
+      client.innerApiCalls.listContentPolicies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listContentPolicies(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IContentPolicy[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listContentPolicies with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listContentPolicies = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listContentPolicies(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listContentPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listContentPoliciesStream without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+      ];
+      client.descriptors.page.listContentPolicies.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listContentPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.ContentPolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.ContentPolicy) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listContentPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listContentPolicies, request),
+      );
+      assert(
+        (client.descriptors.page.listContentPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listContentPoliciesStream with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listContentPolicies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listContentPoliciesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.ContentPolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.ContentPolicy) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listContentPolicies.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listContentPolicies, request),
+      );
+      assert(
+        (client.descriptors.page.listContentPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listContentPolicies without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+        generateSampleMessage(new protos.google.privacy.dlp.v2.ContentPolicy()),
+      ];
+      client.descriptors.page.listContentPolicies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.privacy.dlp.v2.IContentPolicy[] = [];
+      const iterable = client.listContentPoliciesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listContentPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listContentPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listContentPolicies with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListContentPoliciesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListContentPoliciesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listContentPolicies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listContentPoliciesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.privacy.dlp.v2.IContentPolicy[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listContentPolicies.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listContentPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
@@ -10234,6 +11067,70 @@ describe('v2.DlpServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('contentPolicy', async () => {
+      const fakePath = '/rendered/path/contentPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        content_policy: 'contentPolicyValue',
+      };
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.contentPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.contentPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('contentPolicyPath', () => {
+        const result = client.contentPolicyPath(
+          'projectValue',
+          'locationValue',
+          'contentPolicyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.contentPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromContentPolicyName', () => {
+        const result = client.matchProjectFromContentPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.contentPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromContentPolicyName', () => {
+        const result = client.matchLocationFromContentPolicyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.contentPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchContentPolicyFromContentPolicyName', () => {
+        const result = client.matchContentPolicyFromContentPolicyName(fakePath);
+        assert.strictEqual(result, 'contentPolicyValue');
+        assert(
+          (client.pathTemplates.contentPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('discoveryConfig', async () => {
       const fakePath = '/rendered/path/discoveryConfig';
       const expectedParameters = {

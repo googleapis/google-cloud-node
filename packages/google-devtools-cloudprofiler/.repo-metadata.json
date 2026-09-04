@@ -1,17 +1,16 @@
 {
-  "name": "cloudprofiler",
-  "name_pretty": "Cloud Profiler API",
-  "product_documentation": "cloud.google.com/profiler/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudprofiler/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/cloudprofiler",
-  "api_id": "cloudprofiler.googleapis.com",
-  "default_version": "v2",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "cloudprofiler"
+    "api_description": "Manages continuous profiling information.",
+    "api_id": "cloudprofiler.googleapis.com",
+    "api_shortname": "cloudprofiler",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudprofiler/latest",
+    "default_version": "v2",
+    "distribution_name": "@google-cloud/cloudprofiler",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1227997&template=1161103",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "cloudprofiler",
+    "name_pretty": "Cloud Profiler",
+    "product_documentation": "https://cloud.google.com/profiler/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

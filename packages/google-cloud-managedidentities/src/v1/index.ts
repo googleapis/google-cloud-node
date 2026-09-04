@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ManagedIdentitiesServiceClient} from './managed_identities_service_client';
+export { ManagedIdentitiesServiceClient } from './managed_identities_service_client';

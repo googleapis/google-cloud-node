@@ -97,7 +97,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update restore | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore.js) |
 | update restore channel | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore_channel.js) |
 | update restore plan | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/backup_for_g_k_e.update_restore_plan.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkebackup/samples/generated/v1/snippet_metadata_google.cloud.gkebackup.v1.json) |
 
 
 ## Supported Node.js Versions

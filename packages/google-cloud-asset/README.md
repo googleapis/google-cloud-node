@@ -81,20 +81,15 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | search all resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1/asset_service.search_all_resources.js) |
 | update feed | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1/asset_service.update_feed.js) |
 | update saved query | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1/asset_service.update_saved_query.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1/snippet_metadata_google.cloud.asset.v1.json) |
 | search all iam policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p1beta1/asset_service.search_all_iam_policies.js) |
 | search all resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p1beta1/asset_service.search_all_resources.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p1beta1/snippet_metadata_google.cloud.asset.v1p1beta1.json) |
 | create feed | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p2beta1/asset_service.create_feed.js) |
 | delete feed | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p2beta1/asset_service.delete_feed.js) |
 | get feed | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p2beta1/asset_service.get_feed.js) |
 | list feeds | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p2beta1/asset_service.list_feeds.js) |
 | update feed | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p2beta1/asset_service.update_feed.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p2beta1/snippet_metadata_google.cloud.asset.v1p2beta1.json) |
 | list assets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p5beta1/asset_service.list_assets.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p5beta1/snippet_metadata_google.cloud.asset.v1p5beta1.json) |
 | export assets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p7beta1/asset_service.export_assets.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/samples/generated/v1p7beta1/snippet_metadata_google.cloud.asset.v1p7beta1.json) |
 
 
 ## Supported Node.js Versions
@@ -128,7 +123,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -138,7 +133,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-asset/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

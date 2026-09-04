@@ -23,7 +23,7 @@ import {
 import * as assert from 'assert';
 import * as proxyquire from 'proxyquire';
 import {Callback, CallOptions} from 'google-gax';
-import * as protos from '../../protos/protos';
+import * as protos from '../../src/protos';
 import * as ds from '../../src';
 import * as mocha from 'mocha';
 

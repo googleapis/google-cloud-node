@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AutoMlClient} from './auto_ml_client';
-export {PredictionServiceClient} from './prediction_service_client';
+export { AutoMlClient } from './auto_ml_client';
+export { PredictionServiceClient } from './prediction_service_client';

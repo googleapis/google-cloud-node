@@ -56,7 +56,7 @@ export class SecurityCenterClient {
   private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('securitycenter');
+  private _log = logging.log('security-center');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {

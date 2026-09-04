@@ -38,7 +38,7 @@ service ContactService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `Contact` object.
+  // Retrieves a `Contact` object.
   rpc GetContact(GetContactRequest) returns (Contact) {
     option (google.api.http) = {
       get: "/v1/{name=networks/*/contacts/*}"
@@ -46,7 +46,7 @@ service ContactService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `Contact` objects.
+  // Lists `Contact` objects.
   rpc ListContacts(ListContactsRequest) returns (ListContactsResponse) {
     option (google.api.http) = {
       get: "/v1/{parent=networks/*}/contacts"
@@ -54,7 +54,7 @@ service ContactService {
     option (google.api.method_signature) = "parent";
   }
 
-  // API to create a `Contact` object.
+  // Creates a `Contact` object.
   rpc CreateContact(CreateContactRequest) returns (Contact) {
     option (google.api.http) = {
       post: "/v1/{parent=networks/*}/contacts"
@@ -63,7 +63,7 @@ service ContactService {
     option (google.api.method_signature) = "parent,contact";
   }
 
-  // API to batch create `Contact` objects.
+  // Creates `Contact` objects.
   rpc BatchCreateContacts(BatchCreateContactsRequest)
       returns (BatchCreateContactsResponse) {
     option (google.api.http) = {
@@ -73,7 +73,7 @@ service ContactService {
     option (google.api.method_signature) = "parent,requests";
   }
 
-  // API to update a `Contact` object.
+  // Updates a `Contact` object.
   rpc UpdateContact(UpdateContactRequest) returns (Contact) {
     option (google.api.http) = {
       patch: "/v1/{contact.name=networks/*/contacts/*}"
@@ -82,7 +82,7 @@ service ContactService {
     option (google.api.method_signature) = "contact,update_mask";
   }
 
-  // API to batch update `Contact` objects.
+  // Batch updates `Contact` objects.
   rpc BatchUpdateContacts(BatchUpdateContactsRequest)
       returns (BatchUpdateContactsResponse) {
     option (google.api.http) = {
@@ -133,20 +133,19 @@ message ListContactsRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>address</code></li>
-  //   <li><code>cellPhone</code></li>
-  //   <li><code>comment</code></li>
-  //   <li><code>company</code></li>
-  //   <li><code>displayName</code></li>
-  //   <li><code>email</code></li>
-  //   <li><code>fax</code></li>
-  //   <li><code>name</code></li>
-  //   <li><code>status</code></li>
-  //   <li><code>title</code></li>
-  //   <li><code>workPhone</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `address`
+  // * `cellPhone`
+  // * `comment`
+  // * `company`
+  // * `displayName`
+  // * `email`
+  // * `fax`
+  // * `name`
+  // * `status`
+  // * `title`
+  // * `workPhone`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

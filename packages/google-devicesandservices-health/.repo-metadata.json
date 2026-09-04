@@ -1,17 +1,16 @@
 {
-  "name": "health",
-  "name_pretty": "Google Health API",
-  "product_documentation": "https://developers.google.com/health/api",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/health/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/health",
-  "api_id": "health.googleapis.com",
-  "default_version": "v4",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "health"
+    "api_description": "The Google Health API lets you view and manage health and fitness metrics\nand measurement data.",
+    "api_id": "health.googleapis.com",
+    "api_shortname": "health",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/health/latest",
+    "default_version": "v4",
+    "distribution_name": "@google-cloud/health",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1914241",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "health",
+    "name_pretty": "Google Health",
+    "product_documentation": "https://developers.google.com/health/api",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -1,17 +1,16 @@
 {
-  "name": "infra-manager",
-  "name_pretty": "Infrastructure Manager API",
-  "product_documentation": "https://cloud.google.com/infrastructure-manager/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/infra-manager/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/config",
-  "api_id": "config.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "config"
+    "api_description": "Creates and manages Google Cloud Platform resources and infrastructure.",
+    "api_id": "config.googleapis.com",
+    "api_shortname": "infra-manager",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/config/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/config",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=536700",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "infra-manager",
+    "name_pretty": "Infrastructure Manager",
+    "product_documentation": "https://cloud.google.com/infrastructure-manager/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

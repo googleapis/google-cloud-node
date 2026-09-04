@@ -68,7 +68,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | register collector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.register_collector.js) |
 | resume collector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.resume_collector.js) |
 | update collector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/rapid_migration_assessment.update_collector.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-rapidmigrationassessment/samples/generated/v1/snippet_metadata_google.cloud.rapidmigrationassessment.v1.json) |
 
 
 ## Supported Node.js Versions

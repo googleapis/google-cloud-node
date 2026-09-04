@@ -453,24 +453,42 @@ describe('src/schema/proto.ts', () => {
 
       assert.strictEqual(
         augmentedService.iamPolicyMixinFlags?.getIamPolicy,
-        false
+        false,
       ); // Native GetIamPolicy exists
-      assert.strictEqual(augmentedService.iamPolicyMixinFlags?.setIamPolicy, true);
+      assert.strictEqual(
+        augmentedService.iamPolicyMixinFlags?.setIamPolicy,
+        true,
+      );
       assert.strictEqual(
         augmentedService.iamPolicyMixinFlags?.testIamPermissions,
-        true
+        true,
       );
 
-      assert.strictEqual(augmentedService.locationMixinFlags?.getLocation, true);
+      assert.strictEqual(
+        augmentedService.locationMixinFlags?.getLocation,
+        true,
+      );
       assert.strictEqual(
         augmentedService.locationMixinFlags?.listLocations,
-        false
+        false,
       ); // Native ListLocations exists
 
-      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.getOperation, false); // Native GetOperation exists
-      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.cancelOperation, true);
-      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.deleteOperation, true);
-      assert.strictEqual(augmentedService.longRunningOperationsMixinFlags?.listOperations, true);
+      assert.strictEqual(
+        augmentedService.longRunningOperationsMixinFlags?.getOperation,
+        false,
+      ); // Native GetOperation exists
+      assert.strictEqual(
+        augmentedService.longRunningOperationsMixinFlags?.cancelOperation,
+        true,
+      );
+      assert.strictEqual(
+        augmentedService.longRunningOperationsMixinFlags?.deleteOperation,
+        true,
+      );
+      assert.strictEqual(
+        augmentedService.longRunningOperationsMixinFlags?.listOperations,
+        true,
+      );
     });
 
     it('should return api version if it exists', () => {

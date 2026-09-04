@@ -574,6 +574,8 @@ export class AssistantServiceClient {
    *   `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/sessions/{session}`
    * @param {google.cloud.discoveryengine.v1.AssistUserMetadata} [request.userMetadata]
    *   Optional. Information about the user initiating the query.
+   * @param {google.cloud.discoveryengine.v1.StreamAssistRequest.AgentsSpec} [request.agentsSpec]
+   *   Optional. Specification of agents that are used to serve the request.
    * @param {google.cloud.discoveryengine.v1.StreamAssistRequest.ToolsSpec} [request.toolsSpec]
    *   Optional. Specification of tools that are used to serve the request.
    * @param {google.cloud.discoveryengine.v1.StreamAssistRequest.GenerationSpec} [request.generationSpec]

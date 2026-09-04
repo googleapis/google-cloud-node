@@ -2108,6 +2108,285 @@ describe('v1.SecretManagerServiceClient', () => {
     });
   });
 
+  describe('enableManagedRotation', () => {
+    it('invokes enableManagedRotation without error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.EnableManagedRotationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.EnableManagedRotationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.SecretVersion(),
+      );
+      client.innerApiCalls.enableManagedRotation =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.enableManagedRotation(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.enableManagedRotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableManagedRotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes enableManagedRotation without error using callback', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.EnableManagedRotationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.EnableManagedRotationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.SecretVersion(),
+      );
+      client.innerApiCalls.enableManagedRotation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.enableManagedRotation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.secretmanager.v1.ISecretVersion | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.enableManagedRotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableManagedRotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes enableManagedRotation with error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.EnableManagedRotationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.EnableManagedRotationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.enableManagedRotation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.enableManagedRotation(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.enableManagedRotation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableManagedRotation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes enableManagedRotation with closed client', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.EnableManagedRotationRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.EnableManagedRotationRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.enableManagedRotation(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('rotateSecret', () => {
+    it('invokes rotateSecret without error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.RotateSecretRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.RotateSecretRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.SecretVersion(),
+      );
+      client.innerApiCalls.rotateSecret = stubSimpleCall(expectedResponse);
+      const [response] = await client.rotateSecret(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rotateSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rotateSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rotateSecret without error using callback', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.RotateSecretRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.RotateSecretRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.SecretVersion(),
+      );
+      client.innerApiCalls.rotateSecret =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.rotateSecret(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.secretmanager.v1.ISecretVersion | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.rotateSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rotateSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rotateSecret with error', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.RotateSecretRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.RotateSecretRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.rotateSecret = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.rotateSecret(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.rotateSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rotateSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes rotateSecret with closed client', async () => {
+      const client =
+        new secretmanagerserviceModule.v1.SecretManagerServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.secretmanager.v1.RotateSecretRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.RotateSecretRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.rotateSecret(request), expectedError);
+    });
+  });
+
   describe('listSecrets', () => {
     it('invokes listSecrets without error', async () => {
       const client =

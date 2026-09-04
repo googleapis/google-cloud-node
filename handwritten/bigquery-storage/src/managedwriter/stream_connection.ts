@@ -14,7 +14,7 @@
 
 import * as gax from 'google-gax';
 import {EventEmitter} from 'events';
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 
 import {WriterClient} from './writer_client';
 import {PendingWrite} from './pending_write';

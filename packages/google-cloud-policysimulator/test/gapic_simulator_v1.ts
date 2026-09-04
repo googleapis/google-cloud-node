@@ -19,1690 +19,2412 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as simulatorModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf, LROperation, operationsProtos} from 'google-gax';
+import { protobuf, LROperation, operationsProtos } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().rejects(callError) : sinon.stub().resolves([mockOperation]);
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
-    const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
-    const mockOperation = {
-        promise: innerStub,
-    };
-    return callError ? sinon.stub().callsArgWith(2, callError) : sinon.stub().callsArgWith(2, null, mockOperation);
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error,
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({ done: true, value: undefined });
+          }
+          return Promise.resolve({ done: false, value: responses![counter++] });
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.SimulatorClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new simulatorModule.v1.SimulatorClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'policysimulator.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client = new simulatorModule.v1.SimulatorClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'policysimulator.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new simulatorModule.v1.SimulatorClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath = simulatorModule.v1.SimulatorClient.servicePath;
+        assert.strictEqual(servicePath, 'policysimulator.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint = simulatorModule.v1.SimulatorClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'policysimulator.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'policysimulator.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'policysimulator.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new simulatorModule.v1.SimulatorClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'policysimulator.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new simulatorModule.v1.SimulatorClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new simulatorModule.v1.SimulatorClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'policysimulator.configured.example.com',
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
-
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = simulatorModule.v1.SimulatorClient.servicePath;
-                assert.strictEqual(servicePath, 'policysimulator.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
-
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = simulatorModule.v1.SimulatorClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'policysimulator.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
-        }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new simulatorModule.v1.SimulatorClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'policysimulator.example.com');
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new simulatorModule.v1.SimulatorClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
         });
+      });
+    });
 
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new simulatorModule.v1.SimulatorClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'policysimulator.example.com');
-        });
+    it('has port', () => {
+      const port = simulatorModule.v1.SimulatorClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new simulatorModule.v1.SimulatorClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'policysimulator.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('should create a client with no option', () => {
+      const client = new simulatorModule.v1.SimulatorClient();
+      assert(client);
+    });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new simulatorModule.v1.SimulatorClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'policysimulator.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
-        }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new simulatorModule.v1.SimulatorClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
+    it('should create a client with gRPC fallback', () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        fallback: true,
+      });
+      assert(client);
+    });
 
-        it('has port', () => {
-            const port = simulatorModule.v1.SimulatorClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.simulatorStub, undefined);
+      await client.initialize();
+      assert(client.simulatorStub);
+    });
 
-        it('should create a client with no option', () => {
-            const client = new simulatorModule.v1.SimulatorClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.simulatorStub, undefined);
-            await client.initialize();
-            assert(client.simulatorStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.simulatorStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.simulatorStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
+    it('has close method for the initialized client', (done) => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.simulatorStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
         });
     });
 
-    describe('getReplay', () => {
-        it('invokes getReplay without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.GetReplayRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.GetReplayRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.Replay()
-            );
-            client.innerApiCalls.getReplay = stubSimpleCall(expectedResponse);
-            const [response] = await client.getReplay(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getReplay as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getReplay as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getReplay without error using callback', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.GetReplayRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.GetReplayRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.Replay()
-            );
-            client.innerApiCalls.getReplay = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getReplay(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.policysimulator.v1.IReplay|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getReplay as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getReplay as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getReplay with error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.GetReplayRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.GetReplayRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getReplay = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getReplay(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getReplay as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getReplay as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getReplay with closed client', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.GetReplayRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.GetReplayRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getReplay(request), expectedError);
+    it('has close method for the non-initialized client', (done) => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.simulatorStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
         });
     });
 
-    describe('createReplay', () => {
-        it('invokes createReplay without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.CreateReplayRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.CreateReplayRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createReplay = stubLongRunningCall(expectedResponse);
-            const [operation] = await client.createReplay(request);
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createReplay as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createReplay as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createReplay without error using callback', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.CreateReplayRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.CreateReplayRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.longrunning.Operation()
-            );
-            client.innerApiCalls.createReplay = stubLongRunningCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createReplay(
-                    request,
-                    (err?: Error|null,
-                     result?: LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>|null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const operation = await promise as LROperation<protos.google.cloud.policysimulator.v1.IReplay, protos.google.cloud.policysimulator.v1.IReplayOperationMetadata>;
-            const [response] = await operation.promise();
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createReplay as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createReplay as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createReplay with call error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.CreateReplayRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.CreateReplayRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createReplay = stubLongRunningCall(undefined, expectedError);
-            await assert.rejects(client.createReplay(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createReplay as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createReplay as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createReplay with LRO error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.CreateReplayRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.CreateReplayRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createReplay = stubLongRunningCall(undefined, undefined, expectedError);
-            const [operation] = await client.createReplay(request);
-            await assert.rejects(operation.promise(), expectedError);
-            const actualRequest = (client.innerApiCalls.createReplay as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createReplay as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes checkCreateReplayProgress without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedResponse = generateSampleMessage(
-              new operationsProtos.google.longrunning.Operation()
-            );
-            expectedResponse.name = 'test';
-            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
-
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const decodedOperation = await client.checkCreateReplayProgress(expectedResponse.name);
-            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-            assert(decodedOperation.metadata);
-            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-        });
-
-        it('invokes checkCreateReplayProgress with error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const expectedError = new Error('expected');
-
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.checkCreateReplayProgress(''), expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
     });
 
-    describe('listReplayResults', () => {
-        it('invokes listReplayResults without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.ListReplayResultsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-            ];
-            client.innerApiCalls.listReplayResults = stubSimpleCall(expectedResponse);
-            const [response] = await client.listReplayResults(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listReplayResults as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listReplayResults as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
         });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
 
-        it('invokes listReplayResults without error using callback', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.ListReplayResultsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-            ];
-            client.innerApiCalls.listReplayResults = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listReplayResults(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.policysimulator.v1.IReplayResult[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listReplayResults as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listReplayResults as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+  describe('getReplay', () => {
+    it('invokes getReplay without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.GetReplayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.GetReplayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.Replay(),
+      );
+      client.innerApiCalls.getReplay = stubSimpleCall(expectedResponse);
+      const [response] = await client.getReplay(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getReplay as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReplay as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('invokes listReplayResults with error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.ListReplayResultsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listReplayResults = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listReplayResults(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listReplayResults as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listReplayResults as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listReplayResultsStream without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.ListReplayResultsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-            ];
-            client.descriptors.page.listReplayResults.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listReplayResultsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.policysimulator.v1.ReplayResult[] = [];
-                stream.on('data', (response: protos.google.cloud.policysimulator.v1.ReplayResult) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listReplayResults.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listReplayResults, request));
-            assert(
-                (client.descriptors.page.listReplayResults.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listReplayResultsStream with error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.ListReplayResultsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listReplayResults.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listReplayResultsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.policysimulator.v1.ReplayResult[] = [];
-                stream.on('data', (response: protos.google.cloud.policysimulator.v1.ReplayResult) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listReplayResults.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listReplayResults, request));
-            assert(
-                (client.descriptors.page.listReplayResults.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listReplayResults without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.ListReplayResultsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-              generateSampleMessage(new protos.google.cloud.policysimulator.v1.ReplayResult()),
-            ];
-            client.descriptors.page.listReplayResults.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.policysimulator.v1.IReplayResult[] = [];
-            const iterable = client.listReplayResultsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes getReplay without error using callback', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.GetReplayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.GetReplayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.Replay(),
+      );
+      client.innerApiCalls.getReplay =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getReplay(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.policysimulator.v1.IReplay | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listReplayResults.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listReplayResults.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getReplay as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReplay as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('uses async iteration with listReplayResults with error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.policysimulator.v1.ListReplayResultsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listReplayResults.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listReplayResultsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.policysimulator.v1.IReplayResult[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listReplayResults.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listReplayResults.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+    it('invokes getReplay with error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.GetReplayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.GetReplayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getReplay = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getReplay(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getReplay as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReplay as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
-    describe('getOperation', () => {
-        it('invokes getOperation without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-            const response = await client.getOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes getOperation without error using callback', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new operationsProtos.google.longrunning.Operation()
-            );
-            client.operationsClient.getOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.getOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: operationsProtos.google.longrunning.Operation | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes getOperation with error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.GetOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.getOperation(request)}, expectedError);
-            assert((client.operationsClient.getOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
+
+    it('invokes getReplay with closed client', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.GetReplayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.GetReplayRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getReplay(request), expectedError);
     });
-    describe('cancelOperation', () => {
-        it('invokes cancelOperation without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = stubSimpleCall(expectedResponse);
-            const response = await client.cancelOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes cancelOperation without error using callback', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.cancelOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.cancelOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes cancelOperation with error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.CancelOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.cancelOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.cancelOperation(request)}, expectedError);
-            assert((client.operationsClient.cancelOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
+  });
+
+  describe('createReplay', () => {
+    it('invokes createReplay without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.CreateReplayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.CreateReplayRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createReplay = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createReplay(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createReplay as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReplay as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
-    describe('deleteOperation', () => {
-        it('invokes deleteOperation without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = stubSimpleCall(expectedResponse);
-            const response = await client.deleteOperation(request);
-            assert.deepStrictEqual(response, [expectedResponse]);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request)
-            );
-        });
-        it('invokes deleteOperation without error using callback', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-                new protos.google.protobuf.Empty()
-            );
-            client.operationsClient.deleteOperation = sinon.stub().callsArgWith(2, null, expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.operationsClient.deleteOperation(
-                    request,
-                    undefined,
-                    (
-                        err?: Error | null,
-                        result?: protos.google.protobuf.Empty | null
-                    ) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    }).catch(err => {throw err});
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0));
-        });
-        it('invokes deleteOperation with error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.DeleteOperationRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.deleteOperation = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(async () => {await client.deleteOperation(request)}, expectedError);
-            assert((client.operationsClient.deleteOperation as SinonStub)
-                .getCall(0).calledWith(request));
-        });
-    });
-    describe('listOperationsAsync', () => {
-        it('uses async iteration with listOperations without error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedResponse = [
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-                generateSampleMessage(
-                    new operationsProtos.google.longrunning.ListOperationsResponse()
-                ),
-            ];
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: operationsProtos.google.longrunning.IOperation[] = [];
-            const iterable = client.operationsClient.listOperationsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+
+    it('invokes createReplay without error using callback', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.CreateReplayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.CreateReplayRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createReplay =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createReplay(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.policysimulator.v1.IReplay,
+              protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-        it('uses async iteration with listOperations with error', async () => {
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new operationsProtos.google.longrunning.ListOperationsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.operationsClient.descriptor.listOperations.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.operationsClient.listOperationsAsync(request);
-            await assert.rejects(async () => {
-                const responses: operationsProtos.google.longrunning.IOperation[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.operationsClient.descriptor.listOperations.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.policysimulator.v1.IReplay,
+        protos.google.cloud.policysimulator.v1.IReplayOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createReplay as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReplay as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('Path templates', () => {
-
-        describe('customConstraint', async () => {
-            const fakePath = "/rendered/path/customConstraint";
-            const expectedParameters = {
-                organization: "organizationValue",
-                custom_constraint: "customConstraintValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.customConstraintPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.customConstraintPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('customConstraintPath', () => {
-                const result = client.customConstraintPath("organizationValue", "customConstraintValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.customConstraintPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromCustomConstraintName', () => {
-                const result = client.matchOrganizationFromCustomConstraintName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.customConstraintPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchCustomConstraintFromCustomConstraintName', () => {
-                const result = client.matchCustomConstraintFromCustomConstraintName(fakePath);
-                assert.strictEqual(result, "customConstraintValue");
-                assert((client.pathTemplates.customConstraintPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('folderConstraint', async () => {
-            const fakePath = "/rendered/path/folderConstraint";
-            const expectedParameters = {
-                folder: "folderValue",
-                constraint: "constraintValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.folderConstraintPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.folderConstraintPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('folderConstraintPath', () => {
-                const result = client.folderConstraintPath("folderValue", "constraintValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.folderConstraintPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchFolderFromFolderConstraintName', () => {
-                const result = client.matchFolderFromFolderConstraintName(fakePath);
-                assert.strictEqual(result, "folderValue");
-                assert((client.pathTemplates.folderConstraintPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchConstraintFromFolderConstraintName', () => {
-                const result = client.matchConstraintFromFolderConstraintName(fakePath);
-                assert.strictEqual(result, "constraintValue");
-                assert((client.pathTemplates.folderConstraintPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('folderLocationReplay', async () => {
-            const fakePath = "/rendered/path/folderLocationReplay";
-            const expectedParameters = {
-                folder: "folderValue",
-                location: "locationValue",
-                replay: "replayValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.folderLocationReplayPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.folderLocationReplayPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('folderLocationReplayPath', () => {
-                const result = client.folderLocationReplayPath("folderValue", "locationValue", "replayValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.folderLocationReplayPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchFolderFromFolderLocationReplayName', () => {
-                const result = client.matchFolderFromFolderLocationReplayName(fakePath);
-                assert.strictEqual(result, "folderValue");
-                assert((client.pathTemplates.folderLocationReplayPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFolderLocationReplayName', () => {
-                const result = client.matchLocationFromFolderLocationReplayName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.folderLocationReplayPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReplayFromFolderLocationReplayName', () => {
-                const result = client.matchReplayFromFolderLocationReplayName(fakePath);
-                assert.strictEqual(result, "replayValue");
-                assert((client.pathTemplates.folderLocationReplayPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('folderLocationReplayReplayResult', async () => {
-            const fakePath = "/rendered/path/folderLocationReplayReplayResult";
-            const expectedParameters = {
-                folder: "folderValue",
-                location: "locationValue",
-                replay: "replayValue",
-                replay_result: "replayResultValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.folderLocationReplayReplayResultPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.folderLocationReplayReplayResultPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('folderLocationReplayReplayResultPath', () => {
-                const result = client.folderLocationReplayReplayResultPath("folderValue", "locationValue", "replayValue", "replayResultValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.folderLocationReplayReplayResultPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchFolderFromFolderLocationReplayReplayResultName', () => {
-                const result = client.matchFolderFromFolderLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "folderValue");
-                assert((client.pathTemplates.folderLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFolderLocationReplayReplayResultName', () => {
-                const result = client.matchLocationFromFolderLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.folderLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReplayFromFolderLocationReplayReplayResultName', () => {
-                const result = client.matchReplayFromFolderLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "replayValue");
-                assert((client.pathTemplates.folderLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReplayResultFromFolderLocationReplayReplayResultName', () => {
-                const result = client.matchReplayResultFromFolderLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "replayResultValue");
-                assert((client.pathTemplates.folderLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('folderPolicy', async () => {
-            const fakePath = "/rendered/path/folderPolicy";
-            const expectedParameters = {
-                folder: "folderValue",
-                policy: "policyValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.folderPolicyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.folderPolicyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('folderPolicyPath', () => {
-                const result = client.folderPolicyPath("folderValue", "policyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.folderPolicyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchFolderFromFolderPolicyName', () => {
-                const result = client.matchFolderFromFolderPolicyName(fakePath);
-                assert.strictEqual(result, "folderValue");
-                assert((client.pathTemplates.folderPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchPolicyFromFolderPolicyName', () => {
-                const result = client.matchPolicyFromFolderPolicyName(fakePath);
-                assert.strictEqual(result, "policyValue");
-                assert((client.pathTemplates.folderPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('orgPolicyViolation', async () => {
-            const fakePath = "/rendered/path/orgPolicyViolation";
-            const expectedParameters = {
-                organization: "organizationValue",
-                location: "locationValue",
-                org_policy_violations_preview: "orgPolicyViolationsPreviewValue",
-                org_policy_violation: "orgPolicyViolationValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.orgPolicyViolationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.orgPolicyViolationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('orgPolicyViolationPath', () => {
-                const result = client.orgPolicyViolationPath("organizationValue", "locationValue", "orgPolicyViolationsPreviewValue", "orgPolicyViolationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.orgPolicyViolationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrgPolicyViolationName', () => {
-                const result = client.matchOrganizationFromOrgPolicyViolationName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.orgPolicyViolationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromOrgPolicyViolationName', () => {
-                const result = client.matchLocationFromOrgPolicyViolationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.orgPolicyViolationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchOrgPolicyViolationsPreviewFromOrgPolicyViolationName', () => {
-                const result = client.matchOrgPolicyViolationsPreviewFromOrgPolicyViolationName(fakePath);
-                assert.strictEqual(result, "orgPolicyViolationsPreviewValue");
-                assert((client.pathTemplates.orgPolicyViolationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchOrgPolicyViolationFromOrgPolicyViolationName', () => {
-                const result = client.matchOrgPolicyViolationFromOrgPolicyViolationName(fakePath);
-                assert.strictEqual(result, "orgPolicyViolationValue");
-                assert((client.pathTemplates.orgPolicyViolationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('orgPolicyViolationsPreview', async () => {
-            const fakePath = "/rendered/path/orgPolicyViolationsPreview";
-            const expectedParameters = {
-                organization: "organizationValue",
-                location: "locationValue",
-                org_policy_violations_preview: "orgPolicyViolationsPreviewValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('orgPolicyViolationsPreviewPath', () => {
-                const result = client.orgPolicyViolationsPreviewPath("organizationValue", "locationValue", "orgPolicyViolationsPreviewValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrgPolicyViolationsPreviewName', () => {
-                const result = client.matchOrganizationFromOrgPolicyViolationsPreviewName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromOrgPolicyViolationsPreviewName', () => {
-                const result = client.matchLocationFromOrgPolicyViolationsPreviewName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchOrgPolicyViolationsPreviewFromOrgPolicyViolationsPreviewName', () => {
-                const result = client.matchOrgPolicyViolationsPreviewFromOrgPolicyViolationsPreviewName(fakePath);
-                assert.strictEqual(result, "orgPolicyViolationsPreviewValue");
-                assert((client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('organizationConstraint', async () => {
-            const fakePath = "/rendered/path/organizationConstraint";
-            const expectedParameters = {
-                organization: "organizationValue",
-                constraint: "constraintValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.organizationConstraintPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.organizationConstraintPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('organizationConstraintPath', () => {
-                const result = client.organizationConstraintPath("organizationValue", "constraintValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.organizationConstraintPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrganizationConstraintName', () => {
-                const result = client.matchOrganizationFromOrganizationConstraintName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.organizationConstraintPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchConstraintFromOrganizationConstraintName', () => {
-                const result = client.matchConstraintFromOrganizationConstraintName(fakePath);
-                assert.strictEqual(result, "constraintValue");
-                assert((client.pathTemplates.organizationConstraintPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('organizationLocationReplay', async () => {
-            const fakePath = "/rendered/path/organizationLocationReplay";
-            const expectedParameters = {
-                organization: "organizationValue",
-                location: "locationValue",
-                replay: "replayValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.organizationLocationReplayPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.organizationLocationReplayPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('organizationLocationReplayPath', () => {
-                const result = client.organizationLocationReplayPath("organizationValue", "locationValue", "replayValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.organizationLocationReplayPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrganizationLocationReplayName', () => {
-                const result = client.matchOrganizationFromOrganizationLocationReplayName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.organizationLocationReplayPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromOrganizationLocationReplayName', () => {
-                const result = client.matchLocationFromOrganizationLocationReplayName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.organizationLocationReplayPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReplayFromOrganizationLocationReplayName', () => {
-                const result = client.matchReplayFromOrganizationLocationReplayName(fakePath);
-                assert.strictEqual(result, "replayValue");
-                assert((client.pathTemplates.organizationLocationReplayPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('organizationLocationReplayReplayResult', async () => {
-            const fakePath = "/rendered/path/organizationLocationReplayReplayResult";
-            const expectedParameters = {
-                organization: "organizationValue",
-                location: "locationValue",
-                replay: "replayValue",
-                replay_result: "replayResultValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('organizationLocationReplayReplayResultPath', () => {
-                const result = client.organizationLocationReplayReplayResultPath("organizationValue", "locationValue", "replayValue", "replayResultValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrganizationLocationReplayReplayResultName', () => {
-                const result = client.matchOrganizationFromOrganizationLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromOrganizationLocationReplayReplayResultName', () => {
-                const result = client.matchLocationFromOrganizationLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReplayFromOrganizationLocationReplayReplayResultName', () => {
-                const result = client.matchReplayFromOrganizationLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "replayValue");
-                assert((client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReplayResultFromOrganizationLocationReplayReplayResultName', () => {
-                const result = client.matchReplayResultFromOrganizationLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "replayResultValue");
-                assert((client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('organizationPolicy', async () => {
-            const fakePath = "/rendered/path/organizationPolicy";
-            const expectedParameters = {
-                organization: "organizationValue",
-                policy: "policyValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.organizationPolicyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.organizationPolicyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('organizationPolicyPath', () => {
-                const result = client.organizationPolicyPath("organizationValue", "policyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.organizationPolicyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchOrganizationFromOrganizationPolicyName', () => {
-                const result = client.matchOrganizationFromOrganizationPolicyName(fakePath);
-                assert.strictEqual(result, "organizationValue");
-                assert((client.pathTemplates.organizationPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchPolicyFromOrganizationPolicyName', () => {
-                const result = client.matchPolicyFromOrganizationPolicyName(fakePath);
-                assert.strictEqual(result, "policyValue");
-                assert((client.pathTemplates.organizationPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectConstraint', async () => {
-            const fakePath = "/rendered/path/projectConstraint";
-            const expectedParameters = {
-                project: "projectValue",
-                constraint: "constraintValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectConstraintPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectConstraintPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectConstraintPath', () => {
-                const result = client.projectConstraintPath("projectValue", "constraintValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectConstraintPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectConstraintName', () => {
-                const result = client.matchProjectFromProjectConstraintName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectConstraintPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchConstraintFromProjectConstraintName', () => {
-                const result = client.matchConstraintFromProjectConstraintName(fakePath);
-                assert.strictEqual(result, "constraintValue");
-                assert((client.pathTemplates.projectConstraintPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationReplay', async () => {
-            const fakePath = "/rendered/path/projectLocationReplay";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                replay: "replayValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationReplayPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationReplayPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationReplayPath', () => {
-                const result = client.projectLocationReplayPath("projectValue", "locationValue", "replayValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationReplayPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationReplayName', () => {
-                const result = client.matchProjectFromProjectLocationReplayName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationReplayPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationReplayName', () => {
-                const result = client.matchLocationFromProjectLocationReplayName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationReplayPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReplayFromProjectLocationReplayName', () => {
-                const result = client.matchReplayFromProjectLocationReplayName(fakePath);
-                assert.strictEqual(result, "replayValue");
-                assert((client.pathTemplates.projectLocationReplayPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectLocationReplayReplayResult', async () => {
-            const fakePath = "/rendered/path/projectLocationReplayReplayResult";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                replay: "replayValue",
-                replay_result: "replayResultValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectLocationReplayReplayResultPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectLocationReplayReplayResultPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectLocationReplayReplayResultPath', () => {
-                const result = client.projectLocationReplayReplayResultPath("projectValue", "locationValue", "replayValue", "replayResultValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectLocationReplayReplayResultPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectLocationReplayReplayResultName', () => {
-                const result = client.matchProjectFromProjectLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromProjectLocationReplayReplayResultName', () => {
-                const result = client.matchLocationFromProjectLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.projectLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReplayFromProjectLocationReplayReplayResultName', () => {
-                const result = client.matchReplayFromProjectLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "replayValue");
-                assert((client.pathTemplates.projectLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReplayResultFromProjectLocationReplayReplayResultName', () => {
-                const result = client.matchReplayResultFromProjectLocationReplayReplayResultName(fakePath);
-                assert.strictEqual(result, "replayResultValue");
-                assert((client.pathTemplates.projectLocationReplayReplayResultPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('projectPolicy', async () => {
-            const fakePath = "/rendered/path/projectPolicy";
-            const expectedParameters = {
-                project: "projectValue",
-                policy: "policyValue",
-            };
-            const client = new simulatorModule.v1.SimulatorClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectPolicyPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPolicyPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPolicyPath', () => {
-                const result = client.projectPolicyPath("projectValue", "policyValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPolicyPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectPolicyName', () => {
-                const result = client.matchProjectFromProjectPolicyName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchPolicyFromProjectPolicyName', () => {
-                const result = client.matchPolicyFromProjectPolicyName(fakePath);
-                assert.strictEqual(result, "policyValue");
-                assert((client.pathTemplates.projectPolicyPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+    it('invokes createReplay with call error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.CreateReplayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.CreateReplayRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createReplay = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createReplay(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createReplay as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReplay as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
+
+    it('invokes createReplay with LRO error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.CreateReplayRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.CreateReplayRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createReplay = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createReplay(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createReplay as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReplay as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateReplayProgress without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateReplayProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateReplayProgress with error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.checkCreateReplayProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listReplayResults', () => {
+    it('invokes listReplayResults without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.ListReplayResultsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+      ];
+      client.innerApiCalls.listReplayResults = stubSimpleCall(expectedResponse);
+      const [response] = await client.listReplayResults(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReplayResults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReplayResults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReplayResults without error using callback', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.ListReplayResultsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+      ];
+      client.innerApiCalls.listReplayResults =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listReplayResults(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.policysimulator.v1.IReplayResult[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listReplayResults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReplayResults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReplayResults with error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.ListReplayResultsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listReplayResults = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listReplayResults(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listReplayResults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReplayResults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listReplayResultsStream without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.ListReplayResultsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+      ];
+      client.descriptors.page.listReplayResults.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listReplayResultsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.policysimulator.v1.ReplayResult[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.policysimulator.v1.ReplayResult) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listReplayResults.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listReplayResults, request),
+      );
+      assert(
+        (client.descriptors.page.listReplayResults.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listReplayResultsStream with error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.ListReplayResultsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReplayResults.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listReplayResultsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.policysimulator.v1.ReplayResult[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.policysimulator.v1.ReplayResult) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listReplayResults.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listReplayResults, request),
+      );
+      assert(
+        (client.descriptors.page.listReplayResults.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listReplayResults without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.ListReplayResultsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.policysimulator.v1.ReplayResult(),
+        ),
+      ];
+      client.descriptors.page.listReplayResults.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.policysimulator.v1.IReplayResult[] =
+        [];
+      const iterable = client.listReplayResultsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listReplayResults.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listReplayResults.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listReplayResults with error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.policysimulator.v1.ListReplayResultsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.policysimulator.v1.ListReplayResultsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listReplayResults.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listReplayResultsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.policysimulator.v1.IReplayResult[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listReplayResults.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listReplayResults.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .getOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: operationsProtos.google.longrunning.Operation | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .cancelOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient
+          .deleteOperation(
+            request,
+            undefined,
+            (
+              err?: Error | null,
+              result?: protos.google.protobuf.Empty | null,
+            ) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(result);
+              }
+            },
+          )
+          .catch((err) => {
+            throw err;
+          });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request),
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse(),
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.IOperation[] = [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.IOperation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('customConstraint', async () => {
+      const fakePath = '/rendered/path/customConstraint';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        custom_constraint: 'customConstraintValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.customConstraintPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.customConstraintPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('customConstraintPath', () => {
+        const result = client.customConstraintPath(
+          'organizationValue',
+          'customConstraintValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.customConstraintPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromCustomConstraintName', () => {
+        const result =
+          client.matchOrganizationFromCustomConstraintName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (client.pathTemplates.customConstraintPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCustomConstraintFromCustomConstraintName', () => {
+        const result =
+          client.matchCustomConstraintFromCustomConstraintName(fakePath);
+        assert.strictEqual(result, 'customConstraintValue');
+        assert(
+          (client.pathTemplates.customConstraintPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('folderConstraint', async () => {
+      const fakePath = '/rendered/path/folderConstraint';
+      const expectedParameters = {
+        folder: 'folderValue',
+        constraint: 'constraintValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.folderConstraintPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderConstraintPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderConstraintPath', () => {
+        const result = client.folderConstraintPath(
+          'folderValue',
+          'constraintValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderConstraintPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchFolderFromFolderConstraintName', () => {
+        const result = client.matchFolderFromFolderConstraintName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (client.pathTemplates.folderConstraintPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchConstraintFromFolderConstraintName', () => {
+        const result = client.matchConstraintFromFolderConstraintName(fakePath);
+        assert.strictEqual(result, 'constraintValue');
+        assert(
+          (client.pathTemplates.folderConstraintPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('folderLocationReplay', async () => {
+      const fakePath = '/rendered/path/folderLocationReplay';
+      const expectedParameters = {
+        folder: 'folderValue',
+        location: 'locationValue',
+        replay: 'replayValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.folderLocationReplayPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderLocationReplayPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderLocationReplayPath', () => {
+        const result = client.folderLocationReplayPath(
+          'folderValue',
+          'locationValue',
+          'replayValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderLocationReplayPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchFolderFromFolderLocationReplayName', () => {
+        const result = client.matchFolderFromFolderLocationReplayName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationReplayPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFolderLocationReplayName', () => {
+        const result =
+          client.matchLocationFromFolderLocationReplayName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationReplayPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReplayFromFolderLocationReplayName', () => {
+        const result = client.matchReplayFromFolderLocationReplayName(fakePath);
+        assert.strictEqual(result, 'replayValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationReplayPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('folderLocationReplayReplayResult', async () => {
+      const fakePath = '/rendered/path/folderLocationReplayReplayResult';
+      const expectedParameters = {
+        folder: 'folderValue',
+        location: 'locationValue',
+        replay: 'replayValue',
+        replay_result: 'replayResultValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.folderLocationReplayReplayResultPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderLocationReplayReplayResultPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderLocationReplayReplayResultPath', () => {
+        const result = client.folderLocationReplayReplayResultPath(
+          'folderValue',
+          'locationValue',
+          'replayValue',
+          'replayResultValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderLocationReplayReplayResultPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchFolderFromFolderLocationReplayReplayResultName', () => {
+        const result =
+          client.matchFolderFromFolderLocationReplayReplayResultName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFolderLocationReplayReplayResultName', () => {
+        const result =
+          client.matchLocationFromFolderLocationReplayReplayResultName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReplayFromFolderLocationReplayReplayResultName', () => {
+        const result =
+          client.matchReplayFromFolderLocationReplayReplayResultName(fakePath);
+        assert.strictEqual(result, 'replayValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReplayResultFromFolderLocationReplayReplayResultName', () => {
+        const result =
+          client.matchReplayResultFromFolderLocationReplayReplayResultName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'replayResultValue');
+        assert(
+          (
+            client.pathTemplates.folderLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('folderPolicy', async () => {
+      const fakePath = '/rendered/path/folderPolicy';
+      const expectedParameters = {
+        folder: 'folderValue',
+        policy: 'policyValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.folderPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderPolicyPath', () => {
+        const result = client.folderPolicyPath('folderValue', 'policyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.folderPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchFolderFromFolderPolicyName', () => {
+        const result = client.matchFolderFromFolderPolicyName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (client.pathTemplates.folderPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPolicyFromFolderPolicyName', () => {
+        const result = client.matchPolicyFromFolderPolicyName(fakePath);
+        assert.strictEqual(result, 'policyValue');
+        assert(
+          (client.pathTemplates.folderPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('orgPolicyViolation', async () => {
+      const fakePath = '/rendered/path/orgPolicyViolation';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        org_policy_violations_preview: 'orgPolicyViolationsPreviewValue',
+        org_policy_violation: 'orgPolicyViolationValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.orgPolicyViolationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.orgPolicyViolationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('orgPolicyViolationPath', () => {
+        const result = client.orgPolicyViolationPath(
+          'organizationValue',
+          'locationValue',
+          'orgPolicyViolationsPreviewValue',
+          'orgPolicyViolationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.orgPolicyViolationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrgPolicyViolationName', () => {
+        const result =
+          client.matchOrganizationFromOrgPolicyViolationName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.orgPolicyViolationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrgPolicyViolationName', () => {
+        const result = client.matchLocationFromOrgPolicyViolationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.orgPolicyViolationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchOrgPolicyViolationsPreviewFromOrgPolicyViolationName', () => {
+        const result =
+          client.matchOrgPolicyViolationsPreviewFromOrgPolicyViolationName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'orgPolicyViolationsPreviewValue');
+        assert(
+          (
+            client.pathTemplates.orgPolicyViolationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchOrgPolicyViolationFromOrgPolicyViolationName', () => {
+        const result =
+          client.matchOrgPolicyViolationFromOrgPolicyViolationName(fakePath);
+        assert.strictEqual(result, 'orgPolicyViolationValue');
+        assert(
+          (
+            client.pathTemplates.orgPolicyViolationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('orgPolicyViolationsPreview', async () => {
+      const fakePath = '/rendered/path/orgPolicyViolationsPreview';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        org_policy_violations_preview: 'orgPolicyViolationsPreviewValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.orgPolicyViolationsPreviewPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('orgPolicyViolationsPreviewPath', () => {
+        const result = client.orgPolicyViolationsPreviewPath(
+          'organizationValue',
+          'locationValue',
+          'orgPolicyViolationsPreviewValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.orgPolicyViolationsPreviewPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrgPolicyViolationsPreviewName', () => {
+        const result =
+          client.matchOrganizationFromOrgPolicyViolationsPreviewName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.orgPolicyViolationsPreviewPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrgPolicyViolationsPreviewName', () => {
+        const result =
+          client.matchLocationFromOrgPolicyViolationsPreviewName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.orgPolicyViolationsPreviewPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchOrgPolicyViolationsPreviewFromOrgPolicyViolationsPreviewName', () => {
+        const result =
+          client.matchOrgPolicyViolationsPreviewFromOrgPolicyViolationsPreviewName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'orgPolicyViolationsPreviewValue');
+        assert(
+          (
+            client.pathTemplates.orgPolicyViolationsPreviewPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationConstraint', async () => {
+      const fakePath = '/rendered/path/organizationConstraint';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        constraint: 'constraintValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationConstraintPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationConstraintPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationConstraintPath', () => {
+        const result = client.organizationConstraintPath(
+          'organizationValue',
+          'constraintValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationConstraintPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationConstraintName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationConstraintName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationConstraintPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchConstraintFromOrganizationConstraintName', () => {
+        const result =
+          client.matchConstraintFromOrganizationConstraintName(fakePath);
+        assert.strictEqual(result, 'constraintValue');
+        assert(
+          (
+            client.pathTemplates.organizationConstraintPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationLocationReplay', async () => {
+      const fakePath = '/rendered/path/organizationLocationReplay';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        replay: 'replayValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationLocationReplayPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationLocationReplayPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationLocationReplayPath', () => {
+        const result = client.organizationLocationReplayPath(
+          'organizationValue',
+          'locationValue',
+          'replayValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationReplayPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationReplayName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationReplayName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationReplayPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationReplayName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationReplayName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationReplayPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReplayFromOrganizationLocationReplayName', () => {
+        const result =
+          client.matchReplayFromOrganizationLocationReplayName(fakePath);
+        assert.strictEqual(result, 'replayValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationReplayPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationLocationReplayReplayResult', async () => {
+      const fakePath = '/rendered/path/organizationLocationReplayReplayResult';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        replay: 'replayValue',
+        replay_result: 'replayResultValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationReplayReplayResultPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationReplayReplayResultPath', () => {
+        const result = client.organizationLocationReplayReplayResultPath(
+          'organizationValue',
+          'locationValue',
+          'replayValue',
+          'replayResultValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationReplayReplayResultPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationReplayReplayResultName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationReplayReplayResultName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationReplayReplayResultName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationReplayReplayResultName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReplayFromOrganizationLocationReplayReplayResultName', () => {
+        const result =
+          client.matchReplayFromOrganizationLocationReplayReplayResultName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'replayValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReplayResultFromOrganizationLocationReplayReplayResultName', () => {
+        const result =
+          client.matchReplayResultFromOrganizationLocationReplayReplayResultName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'replayResultValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('organizationPolicy', async () => {
+      const fakePath = '/rendered/path/organizationPolicy';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        policy: 'policyValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.organizationPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationPolicyPath', () => {
+        const result = client.organizationPolicyPath(
+          'organizationValue',
+          'policyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationPolicyPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchOrganizationFromOrganizationPolicyName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationPolicyName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPolicyFromOrganizationPolicyName', () => {
+        const result = client.matchPolicyFromOrganizationPolicyName(fakePath);
+        assert.strictEqual(result, 'policyValue');
+        assert(
+          (
+            client.pathTemplates.organizationPolicyPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectConstraint', async () => {
+      const fakePath = '/rendered/path/projectConstraint';
+      const expectedParameters = {
+        project: 'projectValue',
+        constraint: 'constraintValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectConstraintPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectConstraintPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectConstraintPath', () => {
+        const result = client.projectConstraintPath(
+          'projectValue',
+          'constraintValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectConstraintPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectConstraintName', () => {
+        const result = client.matchProjectFromProjectConstraintName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectConstraintPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchConstraintFromProjectConstraintName', () => {
+        const result =
+          client.matchConstraintFromProjectConstraintName(fakePath);
+        assert.strictEqual(result, 'constraintValue');
+        assert(
+          (
+            client.pathTemplates.projectConstraintPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationReplay', async () => {
+      const fakePath = '/rendered/path/projectLocationReplay';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        replay: 'replayValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationReplayPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationReplayPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationReplayPath', () => {
+        const result = client.projectLocationReplayPath(
+          'projectValue',
+          'locationValue',
+          'replayValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationReplayPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationReplayName', () => {
+        const result =
+          client.matchProjectFromProjectLocationReplayName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationReplayPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationReplayName', () => {
+        const result =
+          client.matchLocationFromProjectLocationReplayName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationReplayPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReplayFromProjectLocationReplayName', () => {
+        const result =
+          client.matchReplayFromProjectLocationReplayName(fakePath);
+        assert.strictEqual(result, 'replayValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationReplayPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationReplayReplayResult', async () => {
+      const fakePath = '/rendered/path/projectLocationReplayReplayResult';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        replay: 'replayValue',
+        replay_result: 'replayResultValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectLocationReplayReplayResultPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationReplayReplayResultPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationReplayReplayResultPath', () => {
+        const result = client.projectLocationReplayReplayResultPath(
+          'projectValue',
+          'locationValue',
+          'replayValue',
+          'replayResultValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationReplayReplayResultPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationReplayReplayResultName', () => {
+        const result =
+          client.matchProjectFromProjectLocationReplayReplayResultName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationReplayReplayResultName', () => {
+        const result =
+          client.matchLocationFromProjectLocationReplayReplayResultName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReplayFromProjectLocationReplayReplayResultName', () => {
+        const result =
+          client.matchReplayFromProjectLocationReplayReplayResultName(fakePath);
+        assert.strictEqual(result, 'replayValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReplayResultFromProjectLocationReplayReplayResultName', () => {
+        const result =
+          client.matchReplayResultFromProjectLocationReplayReplayResultName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'replayResultValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationReplayReplayResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectPolicy', async () => {
+      const fakePath = '/rendered/path/projectPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        policy: 'policyValue',
+      };
+      const client = new simulatorModule.v1.SimulatorClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPolicyPath', () => {
+        const result = client.projectPolicyPath('projectValue', 'policyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectPolicyName', () => {
+        const result = client.matchProjectFromProjectPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchPolicyFromProjectPolicyName', () => {
+        const result = client.matchPolicyFromProjectPolicyName(fakePath);
+        assert.strictEqual(result, 'policyValue');
+        assert(
+          (client.pathTemplates.projectPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+  });
 });

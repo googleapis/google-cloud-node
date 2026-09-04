@@ -39,6 +39,12 @@ function main(toolset) {
    *  If empty, all tools in the toolset will be returned.
    */
   // const toolIds = ['abc','def']
+  /**
+   *  Optional. If true, the returned tools will contain raw descriptions and
+   *  schemas directly from the server, bypassing any stored persistence
+   *  configurations (overrides/snapshots).
+   */
+  // const bypassPersistenceConfig = true
 
   // Imports the Ces library
   const {ToolServiceClient} = require('@google-cloud/ces').v1beta;

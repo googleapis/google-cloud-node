@@ -470,9 +470,19 @@ export class DataPointsServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/googlehealth.activity_and_fitness.readonly',
+      'https://www.googleapis.com/auth/googlehealth.activity_and_fitness.writeonly',
       'https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.readonly',
+      'https://www.googleapis.com/auth/googlehealth.health_metrics_and_measurements.writeonly',
       'https://www.googleapis.com/auth/googlehealth.location.readonly',
+      'https://www.googleapis.com/auth/googlehealth.logged_symptoms.readonly',
+      'https://www.googleapis.com/auth/googlehealth.logged_symptoms.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.mindfulness.readonly',
+      'https://www.googleapis.com/auth/googlehealth.mindfulness.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.nutrition.writeonly',
+      'https://www.googleapis.com/auth/googlehealth.reproductive_health.readonly',
+      'https://www.googleapis.com/auth/googlehealth.reproductive_health.writeonly',
       'https://www.googleapis.com/auth/googlehealth.sleep.readonly',
+      'https://www.googleapis.com/auth/googlehealth.sleep.writeonly',
     ];
   }
 
@@ -686,10 +696,14 @@ export class DataPointsServiceClient {
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2144,12 +2158,14 @@ export class DataPointsServiceClient {
    *
    *   Format: `users/me/dataSourceFamilies/{data_source_family}`
    *
-   *   The supported values are:
-   *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2304,12 +2320,14 @@ export class DataPointsServiceClient {
    *
    *   Format: `users/me/dataSourceFamilies/{data_source_family}`
    *
-   *   The supported values are:
-   *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2387,12 +2405,14 @@ export class DataPointsServiceClient {
    *
    *   Format: `users/me/dataSourceFamilies/{data_source_family}`
    *
-   *   The supported values are:
-   *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2452,7 +2472,7 @@ export class DataPointsServiceClient {
    *   The maximum range for all other data types is 90 days.
    * @param {google.protobuf.Duration} request.windowSize
    *   Required. The size of the time window to group data points into before
-   *   applying the aggregation functions.
+   *   applying the aggregation functions. Must be at least 1 second.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of data points to return.
    *   If unspecified, at most 1440 data points will be returned.
@@ -2471,10 +2491,14 @@ export class DataPointsServiceClient {
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2612,7 +2636,7 @@ export class DataPointsServiceClient {
    *   The maximum range for all other data types is 90 days.
    * @param {google.protobuf.Duration} request.windowSize
    *   Required. The size of the time window to group data points into before
-   *   applying the aggregation functions.
+   *   applying the aggregation functions. Must be at least 1 second.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of data points to return.
    *   If unspecified, at most 1440 data points will be returned.
@@ -2631,10 +2655,14 @@ export class DataPointsServiceClient {
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2695,7 +2723,7 @@ export class DataPointsServiceClient {
    *   The maximum range for all other data types is 90 days.
    * @param {google.protobuf.Duration} request.windowSize
    *   Required. The size of the time window to group data points into before
-   *   applying the aggregation functions.
+   *   applying the aggregation functions. Must be at least 1 second.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of data points to return.
    *   If unspecified, at most 1440 data points will be returned.
@@ -2714,10 +2742,14 @@ export class DataPointsServiceClient {
    *
    *   The supported values are:
    *
-   *   - `users/me/dataSourceFamilies/all-sources` - default value
-   *   - `users/me/dataSourceFamilies/google-wearables` - tracker devices
-   *   - `users/me/dataSourceFamilies/google-sources` - Google first party
-   *     sources
+   *   - `users/me/dataSourceFamilies/all-sources` - Default value. Includes data
+   *   from all available data sources.
+   *   - `users/me/dataSourceFamilies/google-wearables` - Includes data from
+   *   Google and Fitbit tracker devices (such as Fitbit trackers and Pixel
+   *   Watch). Excludes manually logged data.
+   *   - `users/me/dataSourceFamilies/google-sources` - Includes first-party
+   *   Google data, such as data from tracker devices, manually logged data, and
+   *   Health Connect.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

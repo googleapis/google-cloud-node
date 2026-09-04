@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +53,7 @@ export class ModelServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('generativelanguage');
@@ -57,10 +66,10 @@ export class ModelServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  modelServiceStub?: Promise<{[name: string]: Function}>;
+  modelServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ModelServiceClient.
@@ -101,21 +110,42 @@ export class ModelServiceClient {
    *     const client = new ModelServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ModelServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'generativelanguage.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +170,7 @@ export class ModelServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,10 +184,7 @@ export class ModelServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -179,31 +206,25 @@ export class ModelServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       cachedContentPathTemplate: new this._gaxModule.PathTemplate(
-        'cachedContents/{id}'
+        'cachedContents/{id}',
       ),
       chunkPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}/documents/{document}/chunks/{chunk}'
+        'corpora/{corpus}/documents/{document}/chunks/{chunk}',
       ),
-      corpusPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}'
-      ),
+      corpusPathTemplate: new this._gaxModule.PathTemplate('corpora/{corpus}'),
       corpusPermissionsPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}/permissions/{permission}'
+        'corpora/{corpus}/permissions/{permission}',
       ),
       documentPathTemplate: new this._gaxModule.PathTemplate(
-        'corpora/{corpus}/documents/{document}'
+        'corpora/{corpus}/documents/{document}',
       ),
-      filePathTemplate: new this._gaxModule.PathTemplate(
-        'files/{file}'
-      ),
-      modelPathTemplate: new this._gaxModule.PathTemplate(
-        'models/{model}'
-      ),
+      filePathTemplate: new this._gaxModule.PathTemplate('files/{file}'),
+      modelPathTemplate: new this._gaxModule.PathTemplate('models/{model}'),
       tunedModelPathTemplate: new this._gaxModule.PathTemplate(
-        'tunedModels/{tuned_model}'
+        'tunedModels/{tuned_model}',
       ),
       tunedModelPermissionsPathTemplate: new this._gaxModule.PathTemplate(
-        'tunedModels/{tuned_model}/permissions/{permission}'
+        'tunedModels/{tuned_model}/permissions/{permission}',
       ),
     };
 
@@ -211,10 +232,16 @@ export class ModelServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listModels:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'models'),
-      listTunedModels:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tunedModels')
+      listModels: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'models',
+      ),
+      listTunedModels: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tunedModels',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -223,31 +250,64 @@ export class ModelServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta/{name=batches/*}:cancel',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta/{name=batches/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=tunedModels/*/operations/*}',additional_bindings: [{get: '/v1beta/{name=generatedFiles/*/operations/*}',},{get: '/v1beta/{name=batches/*}',},{get: '/v1beta/{name=models/*/operations/*}',},{get: '/v1beta/{name=corpora/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=tunedModels/*}/operations',additional_bindings: [{get: '/v1beta/{name=batches}',},{get: '/v1beta/{name=models/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1beta/{name=batches/*}:cancel',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1beta/{name=batches/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1beta/{name=tunedModels/*/operations/*}',
+          additional_bindings: [
+            { get: '/v1beta/{name=generatedFiles/*/operations/*}' },
+            { get: '/v1beta/{name=batches/*}' },
+            { get: '/v1beta/{name=models/*/operations/*}' },
+            { get: '/v1beta/{name=corpora/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1beta/{name=tunedModels/*}/operations',
+          additional_bindings: [
+            { get: '/v1beta/{name=batches}' },
+            { get: '/v1beta/{name=models/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createTunedModelResponse = protoFilesRoot.lookup(
-      '.google.ai.generativelanguage.v1beta.TunedModel') as gax.protobuf.Type;
+      '.google.ai.generativelanguage.v1beta.TunedModel',
+    ) as gax.protobuf.Type;
     const createTunedModelMetadata = protoFilesRoot.lookup(
-      '.google.ai.generativelanguage.v1beta.CreateTunedModelMetadata') as gax.protobuf.Type;
+      '.google.ai.generativelanguage.v1beta.CreateTunedModelMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createTunedModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createTunedModelResponse.decode.bind(createTunedModelResponse),
-        createTunedModelMetadata.decode.bind(createTunedModelMetadata))
+        createTunedModelMetadata.decode.bind(createTunedModelMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.ai.generativelanguage.v1beta.ModelService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.ai.generativelanguage.v1beta.ModelService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -278,28 +338,42 @@ export class ModelServiceClient {
     // Put together the "service stub" for
     // google.ai.generativelanguage.v1beta.ModelService.
     this.modelServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.ai.generativelanguage.v1beta.ModelService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.ai.generativelanguage.v1beta.ModelService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.ai.generativelanguage.v1beta.ModelService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.ai.generativelanguage.v1beta
+            .ModelService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const modelServiceStubMethods =
-        ['getModel', 'listModels', 'getTunedModel', 'listTunedModels', 'createTunedModel', 'updateTunedModel', 'deleteTunedModel'];
+    const modelServiceStubMethods = [
+      'getModel',
+      'listModels',
+      'getTunedModel',
+      'listTunedModels',
+      'createTunedModel',
+      'updateTunedModel',
+      'deleteTunedModel',
+    ];
     for (const methodName of modelServiceStubMethods) {
       const callPromise = this.modelServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -309,7 +383,7 @@ export class ModelServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -324,8 +398,14 @@ export class ModelServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -336,8 +416,14 @@ export class ModelServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'generativelanguage.googleapis.com';
   }
@@ -377,8 +463,9 @@ export class ModelServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -389,595 +476,874 @@ export class ModelServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets information about a specific `Model` such as its version number, token
- * limits,
- * [parameters](https://ai.google.dev/gemini-api/docs/models/generative-models#model-parameters)
- * and other metadata. Refer to the [Gemini models
- * guide](https://ai.google.dev/gemini-api/docs/models/gemini) for detailed
- * model information.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the model.
- *
- *   This name should match a model name returned by the `ListModels` method.
- *
- *   Format: `models/{model}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Model|Model}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/model_service.get_model.js</caption>
- * region_tag:generativelanguage_v1beta_generated_ModelService_GetModel_async
- */
+  /**
+   * Gets information about a specific `Model` such as its version number, token
+   * limits,
+   * [parameters](https://ai.google.dev/gemini-api/docs/models/generative-models#model-parameters)
+   * and other metadata. Refer to the [Gemini models
+   * guide](https://ai.google.dev/gemini-api/docs/models/gemini) for detailed
+   * model information.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model.
+   *
+   *   This name should match a model name returned by the `ListModels` method.
+   *
+   *   Format: `models/{model}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/model_service.get_model.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_ModelService_GetModel_async
+   */
   getModel(
-      request?: protos.google.ai.generativelanguage.v1beta.IGetModelRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IModel,
-        protos.google.ai.generativelanguage.v1beta.IGetModelRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IGetModelRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IModel,
+      protos.google.ai.generativelanguage.v1beta.IGetModelRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getModel(
-      request: protos.google.ai.generativelanguage.v1beta.IGetModelRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.IModel,
-          protos.google.ai.generativelanguage.v1beta.IGetModelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IGetModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.IModel,
+      | protos.google.ai.generativelanguage.v1beta.IGetModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getModel(
-      request: protos.google.ai.generativelanguage.v1beta.IGetModelRequest,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.IModel,
-          protos.google.ai.generativelanguage.v1beta.IGetModelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IGetModelRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.IModel,
+      | protos.google.ai.generativelanguage.v1beta.IGetModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getModel(
-      request?: protos.google.ai.generativelanguage.v1beta.IGetModelRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IGetModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ai.generativelanguage.v1beta.IModel,
-          protos.google.ai.generativelanguage.v1beta.IGetModelRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ai.generativelanguage.v1beta.IModel,
-          protos.google.ai.generativelanguage.v1beta.IGetModelRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IModel,
-        protos.google.ai.generativelanguage.v1beta.IGetModelRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IGetModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.IModel,
+      | protos.google.ai.generativelanguage.v1beta.IGetModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IModel,
+      protos.google.ai.generativelanguage.v1beta.IGetModelRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getModel request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ai.generativelanguage.v1beta.IModel,
-        protos.google.ai.generativelanguage.v1beta.IGetModelRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.IModel,
+          | protos.google.ai.generativelanguage.v1beta.IGetModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getModel(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ai.generativelanguage.v1beta.IModel,
-        protos.google.ai.generativelanguage.v1beta.IGetModelRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getModel response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.IModel,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IGetModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getModel response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets information about a specific TunedModel.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the model.
- *
- *   Format: `tunedModels/my-model-id`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/model_service.get_tuned_model.js</caption>
- * region_tag:generativelanguage_v1beta_generated_ModelService_GetTunedModel_async
- */
+  /**
+   * Gets information about a specific TunedModel.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model.
+   *
+   *   Format: `tunedModels/my-model-id`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/model_service.get_tuned_model.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_ModelService_GetTunedModel_async
+   */
   getTunedModel(
-      request?: protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ITunedModel,
-        protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getTunedModel(
-      request: protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ITunedModel,
-          protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      | protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTunedModel(
-      request: protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ITunedModel,
-          protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      | protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTunedModel(
-      request?: protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ai.generativelanguage.v1beta.ITunedModel,
-          protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ai.generativelanguage.v1beta.ITunedModel,
-          protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ITunedModel,
-        protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      | protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getTunedModel request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ai.generativelanguage.v1beta.ITunedModel,
-        protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.ITunedModel,
+          | protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTunedModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getTunedModel(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ai.generativelanguage.v1beta.ITunedModel,
-        protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getTunedModel response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getTunedModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.ITunedModel,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IGetTunedModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTunedModel response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a tuned model.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.ai.generativelanguage.v1beta.TunedModel} request.tunedModel
- *   Required. The tuned model to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/model_service.update_tuned_model.js</caption>
- * region_tag:generativelanguage_v1beta_generated_ModelService_UpdateTunedModel_async
- */
+  /**
+   * Updates a tuned model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ai.generativelanguage.v1beta.TunedModel} request.tunedModel
+   *   Required. The tuned model to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/model_service.update_tuned_model.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_ModelService_UpdateTunedModel_async
+   */
   updateTunedModel(
-      request?: protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ITunedModel,
-        protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateTunedModel(
-      request: protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ITunedModel,
-          protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      | protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTunedModel(
-      request: protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest,
-      callback: Callback<
-          protos.google.ai.generativelanguage.v1beta.ITunedModel,
-          protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest,
+    callback: Callback<
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      | protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTunedModel(
-      request?: protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ai.generativelanguage.v1beta.ITunedModel,
-          protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ai.generativelanguage.v1beta.ITunedModel,
-          protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ITunedModel,
-        protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      | protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ITunedModel,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'tuned_model.name': request.tunedModel!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'tuned_model.name': request.tunedModel!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateTunedModel request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ai.generativelanguage.v1beta.ITunedModel,
-        protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ai.generativelanguage.v1beta.ITunedModel,
+          | protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateTunedModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateTunedModel(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ai.generativelanguage.v1beta.ITunedModel,
-        protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateTunedModel response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateTunedModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ai.generativelanguage.v1beta.ITunedModel,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IUpdateTunedModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTunedModel response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a tuned model.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the model.
- *   Format: `tunedModels/my-model-id`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/model_service.delete_tuned_model.js</caption>
- * region_tag:generativelanguage_v1beta_generated_ModelService_DeleteTunedModel_async
- */
+  /**
+   * Deletes a tuned model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model.
+   *   Format: `tunedModels/my-model-id`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/model_service.delete_tuned_model.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_ModelService_DeleteTunedModel_async
+   */
   deleteTunedModel(
-      request?: protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteTunedModel(
-      request: protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTunedModel(
-      request: protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTunedModel(
-      request?: protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteTunedModel request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteTunedModel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteTunedModel(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteTunedModel response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteTunedModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ai.generativelanguage.v1beta.IDeleteTunedModelRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTunedModel response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a tuned model.
- * Check intermediate tuning progress (if any) through the
- * [google.longrunning.Operations] service.
- *
- * Access status and results through the Operations service.
- * Example:
- *   GET /v1/tunedModels/az2mb0bpw6i/operations/000-111-222
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} [request.tunedModelId]
- *   Optional. The unique id for the tuned model if specified.
- *   This value should be up to 40 characters, the first character must be a
- *   letter, the last could be a letter or a number. The id must match the
- *   regular expression: `[a-z]([a-z0-9-]{0,38}[a-z0-9])?`.
- * @param {google.ai.generativelanguage.v1beta.TunedModel} request.tunedModel
- *   Required. The tuned model to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/model_service.create_tuned_model.js</caption>
- * region_tag:generativelanguage_v1beta_generated_ModelService_CreateTunedModel_async
- */
+  /**
+   * Creates a tuned model.
+   * Check intermediate tuning progress (if any) through the
+   * [google.longrunning.Operations] service.
+   *
+   * Access status and results through the Operations service.
+   * Example:
+   *   GET /v1/tunedModels/az2mb0bpw6i/operations/000-111-222
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.tunedModelId]
+   *   Optional. The unique id for the tuned model if specified.
+   *   This value should be up to 40 characters, the first character must be a
+   *   letter, the last could be a letter or a number. The id must match the
+   *   regular expression: `[a-z]([a-z0-9-]{0,38}[a-z0-9])?`.
+   * @param {google.ai.generativelanguage.v1beta.TunedModel} request.tunedModel
+   *   Required. The tuned model to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/model_service.create_tuned_model.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_ModelService_CreateTunedModel_async
+   */
   createTunedModel(
-      request?: protos.google.ai.generativelanguage.v1beta.ICreateTunedModelRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.ai.generativelanguage.v1beta.ITunedModel, protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.ICreateTunedModelRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.ITunedModel,
+        protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createTunedModel(
-      request: protos.google.ai.generativelanguage.v1beta.ICreateTunedModelRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.ITunedModel, protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.ICreateTunedModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.ITunedModel,
+        protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTunedModel(
-      request: protos.google.ai.generativelanguage.v1beta.ICreateTunedModelRequest,
-      callback: Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.ITunedModel, protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ai.generativelanguage.v1beta.ICreateTunedModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.ITunedModel,
+        protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTunedModel(
-      request?: protos.google.ai.generativelanguage.v1beta.ICreateTunedModelRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.ITunedModel, protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.ITunedModel, protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.ai.generativelanguage.v1beta.ITunedModel, protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.ai.generativelanguage.v1beta.ICreateTunedModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.ai.generativelanguage.v1beta.ITunedModel,
+            protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.ITunedModel,
+        protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.ai.generativelanguage.v1beta.ITunedModel,
+        protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.ai.generativelanguage.v1beta.ITunedModel, protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.ai.generativelanguage.v1beta.ITunedModel,
+            protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createTunedModel response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createTunedModel request %j', request);
-    return this.innerApiCalls.createTunedModel(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.ai.generativelanguage.v1beta.ITunedModel, protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createTunedModel response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createTunedModel(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.ai.generativelanguage.v1beta.ITunedModel,
+            protos.google.ai.generativelanguage.v1beta.ICreateTunedModelMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTunedModel response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createTunedModel()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/model_service.create_tuned_model.js</caption>
- * region_tag:generativelanguage_v1beta_generated_ModelService_CreateTunedModel_async
- */
-  async checkCreateTunedModelProgress(name: string): Promise<LROperation<protos.google.ai.generativelanguage.v1beta.TunedModel, protos.google.ai.generativelanguage.v1beta.CreateTunedModelMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createTunedModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/model_service.create_tuned_model.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_ModelService_CreateTunedModel_async
+   */
+  async checkCreateTunedModelProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.ai.generativelanguage.v1beta.TunedModel,
+      protos.google.ai.generativelanguage.v1beta.CreateTunedModelMetadata
+    >
+  > {
     this._log.info('createTunedModel long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createTunedModel, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.ai.generativelanguage.v1beta.TunedModel, protos.google.ai.generativelanguage.v1beta.CreateTunedModelMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createTunedModel,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.ai.generativelanguage.v1beta.TunedModel,
+      protos.google.ai.generativelanguage.v1beta.CreateTunedModelMetadata
+    >;
   }
- /**
- * Lists the [`Model`s](https://ai.google.dev/gemini-api/docs/models/gemini)
- * available through the Gemini API.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of `Models` to return (per page).
- *
- *   If unspecified, 50 models will be returned per page.
- *   This method returns at most 1000 models per page, even if you pass a larger
- *   page_size.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListModels` call.
- *
- *   Provide the `page_token` returned by one request as an argument to the next
- *   request to retrieve the next page.
- *
- *   When paginating, all other parameters provided to `ListModels` must match
- *   the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.Model|Model}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listModelsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists the [`Model`s](https://ai.google.dev/gemini-api/docs/models/gemini)
+   * available through the Gemini API.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of `Models` to return (per page).
+   *
+   *   If unspecified, 50 models will be returned per page.
+   *   This method returns at most 1000 models per page, even if you pass a larger
+   *   page_size.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListModels` call.
+   *
+   *   Provide the `page_token` returned by one request as an argument to the next
+   *   request to retrieve the next page.
+   *
+   *   When paginating, all other parameters provided to `ListModels` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.Model|Model}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listModels(
-      request?: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IModel[],
-        protos.google.ai.generativelanguage.v1beta.IListModelsRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListModelsResponse
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IModel[],
+      protos.google.ai.generativelanguage.v1beta.IListModelsRequest | null,
+      protos.google.ai.generativelanguage.v1beta.IListModelsResponse,
+    ]
+  >;
   listModels(
-      request: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListModelsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.IModel>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListModelsResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.IModel
+    >,
+  ): void;
   listModels(
-      request: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-      callback: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListModelsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.IModel>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+    callback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListModelsResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.IModel
+    >,
+  ): void;
   listModels(
-      request?: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListModelsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.IModel>,
-      callback?: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListModelsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.IModel>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.IModel[],
-        protos.google.ai.generativelanguage.v1beta.IListModelsRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListModelsResponse
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IListModelsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.IModel
+        >,
+    callback?: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListModelsResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.IModel
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.IModel[],
+      protos.google.ai.generativelanguage.v1beta.IListModelsRequest | null,
+      protos.google.ai.generativelanguage.v1beta.IListModelsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-      protos.google.ai.generativelanguage.v1beta.IListModelsResponse|null|undefined,
-      protos.google.ai.generativelanguage.v1beta.IModel>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+          | protos.google.ai.generativelanguage.v1beta.IListModelsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.IModel
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listModels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -986,214 +1352,246 @@ export class ModelServiceClient {
     this._log.info('listModels request %j', request);
     return this.innerApiCalls
       .listModels(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.ai.generativelanguage.v1beta.IModel[],
-        protos.google.ai.generativelanguage.v1beta.IListModelsRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListModelsResponse
-      ]) => {
-        this._log.info('listModels values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1beta.IModel[],
+          protos.google.ai.generativelanguage.v1beta.IListModelsRequest | null,
+          protos.google.ai.generativelanguage.v1beta.IListModelsResponse,
+        ]) => {
+          this._log.info('listModels values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listModels`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of `Models` to return (per page).
- *
- *   If unspecified, 50 models will be returned per page.
- *   This method returns at most 1000 models per page, even if you pass a larger
- *   page_size.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListModels` call.
- *
- *   Provide the `page_token` returned by one request as an argument to the next
- *   request to retrieve the next page.
- *
- *   When paginating, all other parameters provided to `ListModels` must match
- *   the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.Model|Model} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listModelsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listModels`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of `Models` to return (per page).
+   *
+   *   If unspecified, 50 models will be returned per page.
+   *   This method returns at most 1000 models per page, even if you pass a larger
+   *   page_size.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListModels` call.
+   *
+   *   Provide the `page_token` returned by one request as an argument to the next
+   *   request to retrieve the next page.
+   *
+   *   When paginating, all other parameters provided to `ListModels` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.Model|Model} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listModelsStream(
-      request?: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listModels stream %j', request);
     return this.descriptors.page.listModels.createStream(
       this.innerApiCalls.listModels as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listModels`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.pageSize
- *   The maximum number of `Models` to return (per page).
- *
- *   If unspecified, 50 models will be returned per page.
- *   This method returns at most 1000 models per page, even if you pass a larger
- *   page_size.
- * @param {string} request.pageToken
- *   A page token, received from a previous `ListModels` call.
- *
- *   Provide the `page_token` returned by one request as an argument to the next
- *   request to retrieve the next page.
- *
- *   When paginating, all other parameters provided to `ListModels` must match
- *   the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.ai.generativelanguage.v1beta.Model|Model}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/model_service.list_models.js</caption>
- * region_tag:generativelanguage_v1beta_generated_ModelService_ListModels_async
- */
+  /**
+   * Equivalent to `listModels`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.pageSize
+   *   The maximum number of `Models` to return (per page).
+   *
+   *   If unspecified, 50 models will be returned per page.
+   *   This method returns at most 1000 models per page, even if you pass a larger
+   *   page_size.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListModels` call.
+   *
+   *   Provide the `page_token` returned by one request as an argument to the next
+   *   request to retrieve the next page.
+   *
+   *   When paginating, all other parameters provided to `ListModels` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.ai.generativelanguage.v1beta.Model|Model}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/model_service.list_models.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_ModelService_ListModels_async
+   */
   listModelsAsync(
-      request?: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.ai.generativelanguage.v1beta.IModel>{
+    request?: protos.google.ai.generativelanguage.v1beta.IListModelsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.ai.generativelanguage.v1beta.IModel> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listModels iterate %j', request);
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.ai.generativelanguage.v1beta.IModel>;
   }
- /**
- * Lists created tuned models.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of `TunedModels` to return (per page).
- *   The service may return fewer tuned models.
- *
- *   If unspecified, at most 10 tuned models will be returned.
- *   This method returns at most 1000 models per page, even if you pass a larger
- *   page_size.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListTunedModels` call.
- *
- *   Provide the `page_token` returned by one request as an argument to the next
- *   request to retrieve the next page.
- *
- *   When paginating, all other parameters provided to `ListTunedModels`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. A filter is a full text search over the tuned model's description
- *   and display name. By default, results will not include tuned models shared
- *   with everyone.
- *
- *   Additional operators:
- *     - owner:me
- *     - writers:me
- *     - readers:me
- *     - readers:everyone
- *
- *   Examples:
- *     "owner:me" returns all tuned models to which caller has owner role
- *     "readers:me" returns all tuned models to which caller has reader role
- *     "readers:everyone" returns all tuned models that are shared with everyone
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listTunedModelsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists created tuned models.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `TunedModels` to return (per page).
+   *   The service may return fewer tuned models.
+   *
+   *   If unspecified, at most 10 tuned models will be returned.
+   *   This method returns at most 1000 models per page, even if you pass a larger
+   *   page_size.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListTunedModels` call.
+   *
+   *   Provide the `page_token` returned by one request as an argument to the next
+   *   request to retrieve the next page.
+   *
+   *   When paginating, all other parameters provided to `ListTunedModels`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. A filter is a full text search over the tuned model's description
+   *   and display name. By default, results will not include tuned models shared
+   *   with everyone.
+   *
+   *   Additional operators:
+   *     - owner:me
+   *     - writers:me
+   *     - readers:me
+   *     - readers:everyone
+   *
+   *   Examples:
+   *     "owner:me" returns all tuned models to which caller has owner role
+   *     "readers:me" returns all tuned models to which caller has reader role
+   *     "readers:everyone" returns all tuned models that are shared with everyone
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTunedModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listTunedModels(
-      request?: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ITunedModel[],
-        protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse
-      ]>;
+    request?: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ITunedModel[],
+      protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest | null,
+      protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse,
+    ]
+  >;
   listTunedModels(
-      request: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.ITunedModel>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.ITunedModel
+    >,
+  ): void;
   listTunedModels(
-      request: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-      callback: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.ITunedModel>): void;
+    request: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+    callback: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.ITunedModel
+    >,
+  ): void;
   listTunedModels(
-      request?: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.ITunedModel>,
-      callback?: PaginationCallback<
-          protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-          protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse|null|undefined,
-          protos.google.ai.generativelanguage.v1beta.ITunedModel>):
-      Promise<[
-        protos.google.ai.generativelanguage.v1beta.ITunedModel[],
-        protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse
-      ]>|void {
+          | protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.ITunedModel
+        >,
+    callback?: PaginationCallback<
+      protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+      | protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse
+      | null
+      | undefined,
+      protos.google.ai.generativelanguage.v1beta.ITunedModel
+    >,
+  ): Promise<
+    [
+      protos.google.ai.generativelanguage.v1beta.ITunedModel[],
+      protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest | null,
+      protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-      protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse|null|undefined,
-      protos.google.ai.generativelanguage.v1beta.ITunedModel>|undefined = callback
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+          | protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse
+          | null
+          | undefined,
+          protos.google.ai.generativelanguage.v1beta.ITunedModel
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTunedModels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1202,147 +1600,153 @@ export class ModelServiceClient {
     this._log.info('listTunedModels request %j', request);
     return this.innerApiCalls
       .listTunedModels(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.ai.generativelanguage.v1beta.ITunedModel[],
-        protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest|null,
-        protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse
-      ]) => {
-        this._log.info('listTunedModels values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ai.generativelanguage.v1beta.ITunedModel[],
+          protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest | null,
+          protos.google.ai.generativelanguage.v1beta.IListTunedModelsResponse,
+        ]) => {
+          this._log.info('listTunedModels values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listTunedModels`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of `TunedModels` to return (per page).
- *   The service may return fewer tuned models.
- *
- *   If unspecified, at most 10 tuned models will be returned.
- *   This method returns at most 1000 models per page, even if you pass a larger
- *   page_size.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListTunedModels` call.
- *
- *   Provide the `page_token` returned by one request as an argument to the next
- *   request to retrieve the next page.
- *
- *   When paginating, all other parameters provided to `ListTunedModels`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. A filter is a full text search over the tuned model's description
- *   and display name. By default, results will not include tuned models shared
- *   with everyone.
- *
- *   Additional operators:
- *     - owner:me
- *     - writers:me
- *     - readers:me
- *     - readers:everyone
- *
- *   Examples:
- *     "owner:me" returns all tuned models to which caller has owner role
- *     "readers:me" returns all tuned models to which caller has reader role
- *     "readers:everyone" returns all tuned models that are shared with everyone
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listTunedModelsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listTunedModels`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `TunedModels` to return (per page).
+   *   The service may return fewer tuned models.
+   *
+   *   If unspecified, at most 10 tuned models will be returned.
+   *   This method returns at most 1000 models per page, even if you pass a larger
+   *   page_size.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListTunedModels` call.
+   *
+   *   Provide the `page_token` returned by one request as an argument to the next
+   *   request to retrieve the next page.
+   *
+   *   When paginating, all other parameters provided to `ListTunedModels`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. A filter is a full text search over the tuned model's description
+   *   and display name. By default, results will not include tuned models shared
+   *   with everyone.
+   *
+   *   Additional operators:
+   *     - owner:me
+   *     - writers:me
+   *     - readers:me
+   *     - readers:everyone
+   *
+   *   Examples:
+   *     "owner:me" returns all tuned models to which caller has owner role
+   *     "readers:me" returns all tuned models to which caller has reader role
+   *     "readers:everyone" returns all tuned models that are shared with everyone
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTunedModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listTunedModelsStream(
-      request?: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTunedModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTunedModels stream %j', request);
     return this.descriptors.page.listTunedModels.createStream(
       this.innerApiCalls.listTunedModels as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listTunedModels`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of `TunedModels` to return (per page).
- *   The service may return fewer tuned models.
- *
- *   If unspecified, at most 10 tuned models will be returned.
- *   This method returns at most 1000 models per page, even if you pass a larger
- *   page_size.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListTunedModels` call.
- *
- *   Provide the `page_token` returned by one request as an argument to the next
- *   request to retrieve the next page.
- *
- *   When paginating, all other parameters provided to `ListTunedModels`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. A filter is a full text search over the tuned model's description
- *   and display name. By default, results will not include tuned models shared
- *   with everyone.
- *
- *   Additional operators:
- *     - owner:me
- *     - writers:me
- *     - readers:me
- *     - readers:everyone
- *
- *   Examples:
- *     "owner:me" returns all tuned models to which caller has owner role
- *     "readers:me" returns all tuned models to which caller has reader role
- *     "readers:everyone" returns all tuned models that are shared with everyone
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/model_service.list_tuned_models.js</caption>
- * region_tag:generativelanguage_v1beta_generated_ModelService_ListTunedModels_async
- */
+  /**
+   * Equivalent to `listTunedModels`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `TunedModels` to return (per page).
+   *   The service may return fewer tuned models.
+   *
+   *   If unspecified, at most 10 tuned models will be returned.
+   *   This method returns at most 1000 models per page, even if you pass a larger
+   *   page_size.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListTunedModels` call.
+   *
+   *   Provide the `page_token` returned by one request as an argument to the next
+   *   request to retrieve the next page.
+   *
+   *   When paginating, all other parameters provided to `ListTunedModels`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. A filter is a full text search over the tuned model's description
+   *   and display name. By default, results will not include tuned models shared
+   *   with everyone.
+   *
+   *   Additional operators:
+   *     - owner:me
+   *     - writers:me
+   *     - readers:me
+   *     - readers:everyone
+   *
+   *   Examples:
+   *     "owner:me" returns all tuned models to which caller has owner role
+   *     "readers:me" returns all tuned models to which caller has reader role
+   *     "readers:everyone" returns all tuned models that are shared with everyone
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.ai.generativelanguage.v1beta.TunedModel|TunedModel}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/model_service.list_tuned_models.js</caption>
+   * region_tag:generativelanguage_v1beta_generated_ModelService_ListTunedModels_async
+   */
   listTunedModelsAsync(
-      request?: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.ai.generativelanguage.v1beta.ITunedModel>{
+    request?: protos.google.ai.generativelanguage.v1beta.IListTunedModelsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.ai.generativelanguage.v1beta.ITunedModel> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listTunedModels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTunedModels iterate %j', request);
     return this.descriptors.page.listTunedModels.asyncIterate(
       this.innerApiCalls['listTunedModels'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.ai.generativelanguage.v1beta.ITunedModel>;
   }
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1385,22 +1789,22 @@ export class ModelServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1435,15 +1839,15 @@ export class ModelServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1477,7 +1881,7 @@ export class ModelServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1490,25 +1894,24 @@ export class ModelServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1547,22 +1950,22 @@ export class ModelServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1576,7 +1979,7 @@ export class ModelServiceClient {
    * @param {string} id
    * @returns {string} Resource name string.
    */
-  cachedContentPath(id:string) {
+  cachedContentPath(id: string) {
     return this.pathTemplates.cachedContentPathTemplate.render({
       id: id,
     });
@@ -1590,7 +1993,8 @@ export class ModelServiceClient {
    * @returns {string} A string representing the id.
    */
   matchIdFromCachedContentName(cachedContentName: string) {
-    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName).id;
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .id;
   }
 
   /**
@@ -1601,7 +2005,7 @@ export class ModelServiceClient {
    * @param {string} chunk
    * @returns {string} Resource name string.
    */
-  chunkPath(corpus:string,document:string,chunk:string) {
+  chunkPath(corpus: string, document: string, chunk: string) {
     return this.pathTemplates.chunkPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -1648,7 +2052,7 @@ export class ModelServiceClient {
    * @param {string} corpus
    * @returns {string} Resource name string.
    */
-  corpusPath(corpus:string) {
+  corpusPath(corpus: string) {
     return this.pathTemplates.corpusPathTemplate.render({
       corpus: corpus,
     });
@@ -1672,7 +2076,7 @@ export class ModelServiceClient {
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  corpusPermissionsPath(corpus:string,permission:string) {
+  corpusPermissionsPath(corpus: string, permission: string) {
     return this.pathTemplates.corpusPermissionsPathTemplate.render({
       corpus: corpus,
       permission: permission,
@@ -1687,7 +2091,9 @@ export class ModelServiceClient {
    * @returns {string} A string representing the corpus.
    */
   matchCorpusFromCorpusPermissionsName(corpusPermissionsName: string) {
-    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).corpus;
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(
+      corpusPermissionsName,
+    ).corpus;
   }
 
   /**
@@ -1698,7 +2104,9 @@ export class ModelServiceClient {
    * @returns {string} A string representing the permission.
    */
   matchPermissionFromCorpusPermissionsName(corpusPermissionsName: string) {
-    return this.pathTemplates.corpusPermissionsPathTemplate.match(corpusPermissionsName).permission;
+    return this.pathTemplates.corpusPermissionsPathTemplate.match(
+      corpusPermissionsName,
+    ).permission;
   }
 
   /**
@@ -1708,7 +2116,7 @@ export class ModelServiceClient {
    * @param {string} document
    * @returns {string} Resource name string.
    */
-  documentPath(corpus:string,document:string) {
+  documentPath(corpus: string, document: string) {
     return this.pathTemplates.documentPathTemplate.render({
       corpus: corpus,
       document: document,
@@ -1743,7 +2151,7 @@ export class ModelServiceClient {
    * @param {string} file
    * @returns {string} Resource name string.
    */
-  filePath(file:string) {
+  filePath(file: string) {
     return this.pathTemplates.filePathTemplate.render({
       file: file,
     });
@@ -1766,7 +2174,7 @@ export class ModelServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(model:string) {
+  modelPath(model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       model: model,
     });
@@ -1789,7 +2197,7 @@ export class ModelServiceClient {
    * @param {string} tuned_model
    * @returns {string} Resource name string.
    */
-  tunedModelPath(tunedModel:string) {
+  tunedModelPath(tunedModel: string) {
     return this.pathTemplates.tunedModelPathTemplate.render({
       tuned_model: tunedModel,
     });
@@ -1803,7 +2211,8 @@ export class ModelServiceClient {
    * @returns {string} A string representing the tuned_model.
    */
   matchTunedModelFromTunedModelName(tunedModelName: string) {
-    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName).tuned_model;
+    return this.pathTemplates.tunedModelPathTemplate.match(tunedModelName)
+      .tuned_model;
   }
 
   /**
@@ -1813,7 +2222,7 @@ export class ModelServiceClient {
    * @param {string} permission
    * @returns {string} Resource name string.
    */
-  tunedModelPermissionsPath(tunedModel:string,permission:string) {
+  tunedModelPermissionsPath(tunedModel: string, permission: string) {
     return this.pathTemplates.tunedModelPermissionsPathTemplate.render({
       tuned_model: tunedModel,
       permission: permission,
@@ -1827,8 +2236,12 @@ export class ModelServiceClient {
    *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the tuned_model.
    */
-  matchTunedModelFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
-    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).tuned_model;
+  matchTunedModelFromTunedModelPermissionsName(
+    tunedModelPermissionsName: string,
+  ) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(
+      tunedModelPermissionsName,
+    ).tuned_model;
   }
 
   /**
@@ -1838,8 +2251,12 @@ export class ModelServiceClient {
    *   A fully-qualified path representing tuned_model_permissions resource.
    * @returns {string} A string representing the permission.
    */
-  matchPermissionFromTunedModelPermissionsName(tunedModelPermissionsName: string) {
-    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(tunedModelPermissionsName).permission;
+  matchPermissionFromTunedModelPermissionsName(
+    tunedModelPermissionsName: string,
+  ) {
+    return this.pathTemplates.tunedModelPermissionsPathTemplate.match(
+      tunedModelPermissionsName,
+    ).permission;
   }
 
   /**
@@ -1850,7 +2267,7 @@ export class ModelServiceClient {
    */
   close(): Promise<void> {
     if (this.modelServiceStub && !this._terminated) {
-      return this.modelServiceStub.then(stub => {
+      return this.modelServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

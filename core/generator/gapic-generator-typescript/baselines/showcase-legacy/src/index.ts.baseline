@@ -19,7 +19,7 @@
 import * as v1beta1 from './v1beta1';
 const EchoClient = v1beta1.EchoClient;
 type EchoClient = v1beta1.EchoClient;
-export { v1beta1, EchoClient };
-export default { v1beta1, EchoClient };
+export {v1beta1, EchoClient};
+export default {v1beta1, EchoClient};
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

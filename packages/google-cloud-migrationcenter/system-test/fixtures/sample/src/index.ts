@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {MigrationCenterClient} from '@google-cloud/migrationcenter';
+import { MigrationCenterClient } from '@google-cloud/migrationcenter';
 
 // check that the client class type name can be used
 function doStuffWithMigrationCenterClient(client: MigrationCenterClient) {

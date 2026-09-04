@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { BigQueryStorageClient } from './big_query_storage_client';
+export {BigQueryStorageClient} from './big_query_storage_client';

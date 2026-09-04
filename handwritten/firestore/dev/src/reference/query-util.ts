@@ -69,7 +69,7 @@ export class QueryUtil<
     explainOptions?: firestore.ExplainOptions,
   ): Promise<QueryResponse<ReturnType<Template['_createSnapshot']>>> {
     // Capture the error stack to preserve stack tracing across async calls.
-    const stack = Error().stack!;
+    const callsiteError = Error();
 
     return new Promise((resolve, reject) => {
       const docs: Array<QueryDocumentSnapshot<AppModelType, DbModelType>> = [];
@@ -84,7 +84,7 @@ export class QueryUtil<
         explainOptions,
       )
         .on('error', err => {
-          reject(wrapError(err, stack));
+          reject(wrapError(err, callsiteError.stack!));
         })
         .on('data', (data: QueryStreamElement<AppModelType, DbModelType>) => {
           if (data.transaction) {

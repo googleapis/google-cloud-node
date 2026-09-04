@@ -29,7 +29,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent value of QuotaInfo resources.
+   *  Required. Identifier. Parent value of QuotaInfo resources.
    *  Listing across different resource containers (such as 'projects/-') is not
    *  allowed.
    *  Example names:

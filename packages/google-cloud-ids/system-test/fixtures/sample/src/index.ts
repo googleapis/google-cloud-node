@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {IDSClient} from '@google-cloud/ids';
+import { IDSClient } from '@google-cloud/ids';
 
 // check that the client class type name can be used
 function doStuffWithIDSClient(client: IDSClient) {

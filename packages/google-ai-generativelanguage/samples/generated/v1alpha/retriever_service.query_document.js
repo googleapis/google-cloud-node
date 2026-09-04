@@ -74,7 +74,7 @@ function main(name, query) {
   // const metadataFilters = [1,2,3,4]
 
   // Imports the Generativelanguage library
-  const {RetrieverServiceClient} = require('@google-cloud/generativelanguage').v1alpha;
+  const {RetrieverServiceClient} = require('@google-ai/generativelanguage').v1alpha;
 
   // Instantiates a client
   const generativelanguageClient = new RetrieverServiceClient();

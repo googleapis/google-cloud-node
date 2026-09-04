@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AlloyDBAdminClient} from './alloy_d_b_admin_client';
-export {AlloyDBCSQLAdminClient} from './alloy_d_b_c_s_q_l_admin_client';
+export { AlloyDBAdminClient } from './alloy_d_b_admin_client';
+export { AlloyDBCSQLAdminClient } from './alloy_d_b_c_s_q_l_admin_client';

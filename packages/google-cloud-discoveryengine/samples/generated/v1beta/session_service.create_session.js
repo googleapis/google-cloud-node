@@ -37,6 +37,14 @@ function main(parent, session) {
    *  Required. The session to create.
    */
   // const session = {}
+  /**
+   *  Optional. The ID to use for the session, which will become the final
+   *  component of the session's resource name.
+   *  This value should be 1-63 characters, and valid characters
+   *  are /[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/. If not specified, a unique ID will
+   *  be generated.
+   */
+  // const sessionId = 'abc123'
 
   // Imports the Discoveryengine library
   const {SessionServiceClient} = require('@google-cloud/discoveryengine').v1beta;

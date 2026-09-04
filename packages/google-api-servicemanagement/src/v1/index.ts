@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ServiceManagerClient} from './service_manager_client';
+export { ServiceManagerClient } from './service_manager_client';

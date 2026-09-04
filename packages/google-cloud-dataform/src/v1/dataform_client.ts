@@ -3275,6 +3275,9 @@ export class DataformClient {
    *   The request object that will be sent.
    * @param {string} request.workspace
    *   Required. The workspace's name.
+   * @param {google.cloud.dataform.v1.PipelineConfig} [request.pipelineConfig]
+   *   Optional. The pipeline options which defines the pipeline type and path
+   *   within the Git repository.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8636,7 +8639,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.teamFolder
-   *   Required. Name of the team_folder whose contents to list.
+   *   Required. Resource name of the TeamFolder to list contents for.
    *   Format: `projects/* /locations/* /teamFolders/*`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -8655,14 +8658,16 @@ export class DataformClient {
    *   order. Supported keywords: `display_name` (default), `create_time`,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8783,7 +8788,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.teamFolder
-   *   Required. Name of the team_folder whose contents to list.
+   *   Required. Resource name of the TeamFolder to list contents for.
    *   Format: `projects/* /locations/* /teamFolders/*`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -8802,14 +8807,16 @@ export class DataformClient {
    *   order. Supported keywords: `display_name` (default), `create_time`,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -8853,7 +8860,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.teamFolder
-   *   Required. Name of the team_folder whose contents to list.
+   *   Required. Resource name of the TeamFolder to list contents for.
    *   Format: `projects/* /locations/* /teamFolders/*`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -8872,14 +8879,16 @@ export class DataformClient {
    *   order. Supported keywords: `display_name` (default), `create_time`,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -8926,9 +8935,9 @@ export class DataformClient {
    *   Required. Location in which to query TeamFolders.
    *   Format: `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of TeamFolders to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
+   *   Optional. Maximum number of `TeamFolders` to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick a default
+   *   of `page_size` = 50.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `SearchTeamFolders` call.
    *   Provide this to retrieve the subsequent page.
@@ -8940,14 +8949,16 @@ export class DataformClient {
    *   Optional. Field to additionally sort results by.
    *   Supported keywords: `display_name` (default), `create_time`,
    *   `last_modified_time`. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -9071,9 +9082,9 @@ export class DataformClient {
    *   Required. Location in which to query TeamFolders.
    *   Format: `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of TeamFolders to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
+   *   Optional. Maximum number of `TeamFolders` to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick a default
+   *   of `page_size` = 50.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `SearchTeamFolders` call.
    *   Provide this to retrieve the subsequent page.
@@ -9085,14 +9096,16 @@ export class DataformClient {
    *   Optional. Field to additionally sort results by.
    *   Supported keywords: `display_name` (default), `create_time`,
    *   `last_modified_time`. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9139,9 +9152,9 @@ export class DataformClient {
    *   Required. Location in which to query TeamFolders.
    *   Format: `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of TeamFolders to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
+   *   Optional. Maximum number of `TeamFolders` to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick a default
+   *   of `page_size` = 50.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `SearchTeamFolders` call.
    *   Provide this to retrieve the subsequent page.
@@ -9153,14 +9166,16 @@ export class DataformClient {
    *   Optional. Field to additionally sort results by.
    *   Supported keywords: `display_name` (default), `create_time`,
    *   `last_modified_time`. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -9203,7 +9218,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.folder
-   *   Required. Name of the folder whose contents to list.
+   *   Required. Resource name of the Folder to list contents for.
    *   Format: projects/* /locations/* /folders/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9222,14 +9237,16 @@ export class DataformClient {
    *   order. Supported keywords: display_name (default), create_time,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -9350,7 +9367,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.folder
-   *   Required. Name of the folder whose contents to list.
+   *   Required. Resource name of the Folder to list contents for.
    *   Format: projects/* /locations/* /folders/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9369,14 +9386,16 @@ export class DataformClient {
    *   order. Supported keywords: display_name (default), create_time,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9420,7 +9439,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.folder
-   *   Required. Name of the folder whose contents to list.
+   *   Required. Resource name of the Folder to list contents for.
    *   Format: projects/* /locations/* /folders/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9439,14 +9458,16 @@ export class DataformClient {
    *   order. Supported keywords: display_name (default), create_time,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -9491,7 +9512,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.location
-   *   Required. Location of the user root folder whose contents to list.
+   *   Required. Location of the user root folder to list contents for.
    *   Format: projects/* /locations/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9509,14 +9530,16 @@ export class DataformClient {
    *   Will order Folders before Repositories, and then by `order_by` in ascending
    *   order. Supported keywords: display_name (default), created_at,
    *   last_modified_at. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -9637,7 +9660,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.location
-   *   Required. Location of the user root folder whose contents to list.
+   *   Required. Location of the user root folder to list contents for.
    *   Format: projects/* /locations/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9655,14 +9678,16 @@ export class DataformClient {
    *   Will order Folders before Repositories, and then by `order_by` in ascending
    *   order. Supported keywords: display_name (default), created_at,
    *   last_modified_at. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9706,7 +9731,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.location
-   *   Required. Location of the user root folder whose contents to list.
+   *   Required. Location of the user root folder to list contents for.
    *   Format: projects/* /locations/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9724,14 +9749,16 @@ export class DataformClient {
    *   Will order Folders before Repositories, and then by `order_by` in ascending
    *   order. Supported keywords: display_name (default), created_at,
    *   last_modified_at. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

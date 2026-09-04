@@ -65,6 +65,16 @@
                 "getMetrics"
               ]
             },
+            "GetPolicy": {
+              "methods": [
+                "getPolicy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "updatePolicy"
+              ]
+            },
             "CreateFirewallPolicy": {
               "methods": [
                 "createFirewallPolicy"
@@ -190,6 +200,16 @@
             "GetMetrics": {
               "methods": [
                 "getMetrics"
+              ]
+            },
+            "GetPolicy": {
+              "methods": [
+                "getPolicy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "updatePolicy"
               ]
             },
             "CreateFirewallPolicy": {
