@@ -24,6 +24,7 @@ import * as sinon from 'sinon';
 import echoProtoJson = require('../fixtures/echo.json');
 import {GrpcClient} from '../../src/fallback';
 import {ClientStubOptions, GoogleAuth, GoogleError} from '../../src';
+import {generateServiceStub} from '../../src/fallbackServiceStub';
 import {PassThroughClient} from 'google-auth-library';
 import {setMockFallbackResponse} from './utils';
 
@@ -527,8 +528,125 @@ describe('grpc-fallback', () => {
 
     call.cancel();
 
-    // @ts-ignore
-    assert.strictEqual(createdAbortControllers[0].abortCalled, true);
+    assert.strictEqual(
+      (createdAbortControllers[0] as AbortController & {abortCalled: boolean})
+        .abortCalled,
+      true,
+    );
+  });
+
+  it('should abort unary fallback fetch when deadline expires', async () => {
+    const stub = generateServiceStub(
+      {echo: echoService.methods.Echo as protobuf.Method},
+      'https',
+      'foo.example.com',
+      443,
+      {
+        fetch: async () => new Promise(() => {}),
+      } as unknown as GoogleAuth,
+      () => ({
+        url: 'https://foo.example.com/v1beta1/echo:echo',
+        headers: {},
+        body: '{}',
+        method: 'POST' as const,
+      }),
+      () => {
+        throw new Error('responseDecoder should not be reached');
+      },
+      false,
+      false,
+    );
+
+    stub.echo(
+      {content: 'content'},
+      {},
+      {deadline: new Date(Date.now() + 5)},
+      () => {},
+    );
+
+    await new Promise(resolve => setTimeout(resolve, 20));
+
+    assert.strictEqual(
+      (createdAbortControllers[0] as AbortController & {abortCalled: boolean})
+        .abortCalled,
+      true,
+    );
+  });
+
+  it('should abort server-streaming fallback fetch when deadline expires', async () => {
+    const stub = generateServiceStub(
+      {expand: echoService.methods.Expand as protobuf.Method},
+      'https',
+      'foo.example.com',
+      443,
+      {
+        fetch: async () => new Promise(() => {}),
+      } as unknown as GoogleAuth,
+      () => ({
+        url: 'https://foo.example.com/v1beta1/echo:expand',
+        headers: {},
+        body: '{}',
+        method: 'POST' as const,
+      }),
+      () => {
+        throw new Error('responseDecoder should not be reached');
+      },
+      false,
+      false,
+    );
+
+    stub.expand(
+      {content: 'content'},
+      {},
+      {deadline: new Date(Date.now() + 5)},
+      () => {},
+    );
+
+    await new Promise(resolve => setTimeout(resolve, 20));
+
+    assert.strictEqual(
+      (createdAbortControllers[0] as AbortController & {abortCalled: boolean})
+        .abortCalled,
+      true,
+    );
+  });
+
+  it('should abort the underlying fetch when canceling a server stream', () => {
+    const stub = generateServiceStub(
+      {expand: echoService.methods.Expand as protobuf.Method},
+      'https',
+      'foo.example.com',
+      443,
+      {
+        fetch: async () => new Promise(() => {}),
+      } as unknown as GoogleAuth,
+      () => ({
+        url: 'https://foo.example.com/v1beta1/echo:expand',
+        headers: {},
+        body: '{}',
+        method: 'POST' as const,
+      }),
+      () => {
+        throw new Error('responseDecoder should not be reached');
+      },
+      false,
+      false,
+    );
+
+    const call = stub.expand(
+      {content: 'content'},
+      {},
+      {},
+      () => {},
+    );
+
+    call.cancel();
+
+    assert.strictEqual(
+      (createdAbortControllers[0] as AbortController & {abortCalled: boolean})
+        .abortCalled,
+      true,
+    );
   });
 
   it('should have close method', async () => {
