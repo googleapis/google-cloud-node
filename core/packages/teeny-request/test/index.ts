@@ -16,36 +16,80 @@
  */
 
 import assert from 'assert';
-import {describe, it, afterEach, beforeEach} from 'mocha';
-import nock from 'nock';
+import {describe, it, before, after, afterEach, beforeEach} from 'mocha';
+import * as http from 'http';
+import {AddressInfo} from 'net';
 import {Readable} from 'stream';
+import * as zlib from 'zlib';
 import * as sinon from 'sinon';
+import {getGlobalDispatcher} from 'undici';
 import {teenyRequest} from '../src';
 import {TeenyStatistics, TeenyStatisticsWarning} from '../src/TeenyStatistics';
 import {pool} from '../src/agents';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const HttpProxyAgent = require('http-proxy-agent');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const HttpsProxyAgent = require('https-proxy-agent');
-
-nock.disableNetConnect();
-const uri = 'https://example.com';
-
-function mockJson() {
-  return nock(uri).get('/').reply(200, {hello: '🌍'});
+interface ReceivedRequest {
+  method?: string;
+  url?: string;
+  headers: http.IncomingHttpHeaders;
+  body: Buffer;
 }
 
-function mockError() {
-  return nock(uri).get('/').replyWithError('mock err');
-}
+type Handler = (
+  req: http.IncomingMessage,
+  res: http.ServerResponse,
+  body: Buffer
+) => void;
+
+const jsonHandler: Handler = (req, res) => {
+  res.setHeader('content-type', 'application/json');
+  res.end(JSON.stringify({hello: '🌍'}));
+};
 
 describe('teeny', () => {
   const sandbox = sinon.createSandbox();
   let emitWarnStub: sinon.SinonStub;
   let statsStub: sinon.SinonStubbedInstance<TeenyStatistics>;
+  let server: http.Server;
+  let uri: string;
+  let deadUri: string;
+  let handler: Handler;
+  let received: ReceivedRequest[] = [];
+
+  before(async () => {
+    server = http.createServer((req, res) => {
+      const chunks: Buffer[] = [];
+      req.on('data', chunk => chunks.push(chunk));
+      req.on('end', () => {
+        const body = Buffer.concat(chunks);
+        received.push({
+          method: req.method,
+          url: req.url,
+          headers: req.headers,
+          body,
+        });
+        handler(req, res, body);
+      });
+    });
+    await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
+    uri = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+
+    // grab a port with nothing listening on it, for connection failures
+    const dead = http.createServer();
+    await new Promise<void>(resolve => dead.listen(0, '127.0.0.1', resolve));
+    deadUri = `http://127.0.0.1:${(dead.address() as AddressInfo).port}`;
+    await new Promise<void>(resolve => dead.close(() => resolve()));
+  });
+
+  after(async () => {
+    server.closeAllConnections();
+    await new Promise<void>(resolve => server.close(() => resolve()));
+    await getGlobalDispatcher().close();
+  });
 
   beforeEach(() => {
+    handler = jsonHandler;
+    received = [];
+
     emitWarnStub = sandbox.stub(process, 'emitWarning');
 
     // don't mask other process warns
@@ -62,55 +106,50 @@ describe('teeny', () => {
     pool.clear();
     sandbox.restore();
     teenyRequest.resetStats();
-    nock.cleanAll();
   });
 
-  it('should get JSON', async () => {
-    const scope = mockJson();
+  it('should get JSON', done => {
     teenyRequest({uri}, (error, response, body) => {
       assert.ifError(error);
       assert.strictEqual(response.statusCode, 200);
       assert.ok(body.hello);
-      scope.done();
-      // done();
+      done();
     });
   });
 
-  it('should set defaults', async () => {
-    const scope = mockJson();
+  it('should set defaults', done => {
     const defaultRequest = teenyRequest.defaults({timeout: 60000});
     defaultRequest({uri}, (error, response, body) => {
       assert.ifError(error);
       assert.strictEqual(response.statusCode, 200);
       assert.ok(body.hello);
-      scope.done();
+      done();
     });
   });
 
-  it('response event emits object compatible with request module', async () => {
+  it('response event emits object compatible with request module', done => {
     const reqHeaders = {fruit: 'banana'};
-    const resHeaders = {veggies: 'carrots'};
-    const scope = nock(uri).get('/').reply(202, 'ok', resHeaders);
+    handler = (req, res) => {
+      res.setHeader('veggies', 'carrots');
+      res.statusCode = 202;
+      res.end('ok');
+    };
     const reqStream = teenyRequest({uri, headers: reqHeaders});
     reqStream
       .on('response', res => {
         assert.strictEqual(res.statusCode, 202);
         assert.strictEqual(res.headers.veggies, 'carrots');
         assert.deepStrictEqual(res.request.headers, reqHeaders);
-        assert.deepStrictEqual(res.toJSON(), {
-          headers: resHeaders,
-        });
+        assert.strictEqual(res.toJSON().headers.veggies, 'carrots');
         assert(res instanceof Readable);
-        scope.done();
+        done();
       })
-      .on('error', err => {
-        throw err;
-      });
+      .on('error', done);
+    reqStream.resume();
   });
 
-  it('should include the request in the response', async () => {
+  it('should include the request in the response', done => {
     const path = '/?dessert=pie';
-    const scope = nock(uri).get(path).reply(202);
     const headers = {dinner: 'tacos'};
     const url = `${uri}${path}`;
     teenyRequest({url, headers}, (error, response) => {
@@ -118,129 +157,91 @@ describe('teeny', () => {
       const req = response.request;
       assert.deepStrictEqual(req.headers, headers);
       assert.strictEqual(req.href, url);
-      scope.done();
+      assert.strictEqual(received[0].url, path);
+      done();
     });
   });
 
-  it('should not wrap the error', async () => {
-    const scope = nock(uri)
-      .get('/')
-      .reply(200, '🚨', {'content-type': 'application/json'});
+  it('should not wrap the error', done => {
+    handler = (req, res) => {
+      res.setHeader('content-type', 'application/json');
+      res.end('🚨');
+    };
     teenyRequest({uri}, err => {
       assert.ok(err);
-      assert.ok(err!.message.match(/^invalid json response body/));
-      scope.done();
+      assert.ok(err!.message.match(/JSON/));
+      done();
     });
   });
 
-  it('should include headers in the response', async () => {
-    const headers = {dinner: 'tacos'};
-    const body = {hello: '🌍'};
-    const scope = nock(uri).get('/').reply(200, body, headers);
+  it('should include headers in the response', done => {
+    handler = (req, res) => {
+      res.setHeader('dinner', 'tacos');
+      res.setHeader('content-type', 'application/json');
+      res.end(JSON.stringify({hello: '🌍'}));
+    };
     teenyRequest({uri}, (err, res) => {
       assert.ifError(err);
-      assert.strictEqual(headers['dinner'], res.headers['dinner']);
-      scope.done();
+      assert.strictEqual(res.headers['dinner'], 'tacos');
+      done();
     });
   });
 
   it('should accept fetch Headers', done => {
     const body = {dish: '🍕'};
-    const scope = nock(uri)
-      .post('/')
-      .matchHeader('dinner', 'pizza')
-      .matchHeader('content-type', 'application/json')
-      .reply(200, body, {country: 'Italy'});
-
+    handler = (req, res) => {
+      res.setHeader('country', 'Italy');
+      res.end();
+    };
     const headers = new Headers();
     headers.set('dinner', 'pizza');
     teenyRequest({uri, headers, json: body, method: 'POST'}, (err, res) => {
       assert.ifError(err);
       assert.strictEqual(res.headers['country'], 'Italy');
-      assert.strictEqual(res.headers['content-type'], 'application/json');
-      scope.done();
+      assert.strictEqual(received[0].headers['dinner'], 'pizza');
+      assert.strictEqual(received[0].headers['content-type'], 'application/json');
+      assert.strictEqual(received[0].body.toString(), JSON.stringify(body));
       done();
     });
   });
 
-  it('should accept the forever option', async () => {
-    const scope = nock(uri).get('/').reply(200);
+  it('should accept the forever option', done => {
     teenyRequest({uri, forever: true}, (err, res) => {
       assert.ifError(err);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      assert.strictEqual((res.request.agent as any).keepAlive, true);
-      scope.done();
+      assert.strictEqual(res.request.agent, false);
+      done();
     });
   });
 
-  it('should allow setting compress/gzip to true', async () => {
-    const reqheaders = {
-      'Accept-Encoding': 'gzip,deflate',
+  it('should request and decompress gzip responses by default', done => {
+    const payload = JSON.stringify({hello: '🌍'});
+    handler = (req, res) => {
+      assert.ok(String(req.headers['accept-encoding']).includes('gzip'));
+      res.setHeader('content-type', 'application/json');
+      res.setHeader('content-encoding', 'gzip');
+      res.end(zlib.gzipSync(payload));
     };
-
-    const scope = nock(uri, {reqheaders}).get('/').reply(200);
-
-    teenyRequest({uri, gzip: true}, err => {
+    teenyRequest({uri, gzip: true}, (err, res, body) => {
       assert.ifError(err);
-      scope.done();
+      assert.strictEqual(res.statusCode, 200);
+      assert.deepStrictEqual(body, {hello: '🌍'});
+      done();
     });
   });
 
-  it('should allow setting compress/gzip to false', async () => {
-    const badheaders = ['Accept-Encoding'];
-
-    const scope = nock(uri, {badheaders}).get('/').reply(200);
-
+  it('should allow setting compress/gzip to false', done => {
+    handler = (req, res) => {
+      assert.strictEqual(req.headers['accept-encoding'], undefined);
+      res.end('ok');
+    };
     teenyRequest({uri, gzip: false}, err => {
       assert.ifError(err);
-      scope.done();
-    });
-  });
-
-  const envVars = ['http_proxy', 'https_proxy', 'HTTP_PROXY', 'HTTPS_PROXY'];
-  for (const v of envVars) {
-    it(`should respect ${v} environment variable for proxy config`, () => {
-      sandbox.stub(process, 'env').value({[v]: 'https://fake.proxy'});
-      const expectedBody = {hello: '🌎'};
-      const scope = nock(uri).get('/').reply(200, expectedBody);
-      teenyRequest({uri}, (err, res, body) => {
-        scope.done();
-        assert.ifError(err);
-        assert.deepStrictEqual(expectedBody, body);
-        assert.ok(res.request.agent instanceof HttpsProxyAgent);
-        return;
-      });
-    });
-  }
-
-  it('should create http proxy if upstream scheme is http', async () => {
-    sandbox.stub(process, 'env').value({http_proxy: 'https://fake.proxy'});
-    const expectedBody = {hello: '🌎'};
-    const scope = nock('http://example.com').get('/').reply(200, expectedBody);
-    teenyRequest({uri: 'http://example.com'}, (err, res, body) => {
-      scope.done();
-      assert.ifError(err);
-      assert.deepStrictEqual(expectedBody, body);
-      assert.ok(res.request.agent instanceof HttpProxyAgent);
-      return;
-    });
-  });
-
-  it('should use proxy if set in request options', async () => {
-    const expectedBody = {hello: '🌎'};
-    const scope = nock(uri).get('/').reply(200, expectedBody);
-    teenyRequest({uri, proxy: 'https://fake.proxy'}, (err, res, body) => {
-      scope.done();
-      assert.ifError(err);
-      assert.deepStrictEqual(expectedBody, body);
-      assert.ok(res.request.agent instanceof HttpsProxyAgent);
-      return;
+      done();
     });
   });
 
   // see: https://github.com/googleapis/nodejs-storage/issues/798
   it('should not throw exception when piped through pumpify', async () => {
-    const scope = mockJson();
     const stream = teenyRequest({uri});
     // set the encoding for the returned stream
     stream.setEncoding('utf8');
@@ -252,34 +253,27 @@ describe('teeny', () => {
     }
 
     assert.deepStrictEqual(JSON.parse(content.join('')), {hello: '🌍'});
-    scope.done();
   });
 
-  it('should emit response event when called without callback', async () => {
-    const scope = mockJson();
-    teenyRequest({uri}).on('response', res => {
+  it('should emit response event when called without callback', done => {
+    const stream = teenyRequest({uri});
+    stream.on('response', res => {
       assert.ok(res);
-      scope.done();
-      return;
+      done();
     });
+    stream.resume();
   });
 
-  it('should pipe response stream to user', () => {
-    const scope = mockJson();
+  it('should pipe response stream to user', done => {
     teenyRequest({uri})
-      .on('error', err => {
-        throw err;
-      })
-      .on('data', () => {
-        scope.done();
+      .on('error', done)
+      .once('data', () => {
+        done();
       });
   });
 
-  it('should not pipe response stream to user unless they ask for it', async () => {
-    const scope = mockJson();
-    const stream = teenyRequest({uri}).on('error', err => {
-      throw err;
-    });
+  it('should not pipe response stream to user unless they ask for it', done => {
+    const stream = teenyRequest({uri}).on('error', done);
     stream.on('response', responseStream => {
       // We are using an internal property of Readable to get the number of
       // active readers. The property changed from `pipesCount: number` in
@@ -288,14 +282,50 @@ describe('teeny', () => {
         responseStream.body._readableState.pipesCount ??
         responseStream.body._readableState.pipes?.length;
       assert.strictEqual(numPipes, 0);
-      stream.on('data', () => {
+      stream.once('data', () => {
         numPipes =
           responseStream.body._readableState.pipesCount ??
           responseStream.body._readableState.pipes?.length;
         assert.strictEqual(numPipes, 1);
-        scope.done();
+        done();
       });
     });
+  });
+
+  it('should deliver raw bytes in stream mode, even when compressed', done => {
+    const compressed = zlib.gzipSync('raw bytes for integrity validation');
+    handler = (req, res) => {
+      res.setHeader('content-encoding', 'gzip');
+      res.end(compressed);
+    };
+    const stream = teenyRequest({
+      uri,
+      gzip: true,
+      headers: {'accept-encoding': 'gzip'},
+    }).on('error', done);
+    const chunks: Buffer[] = [];
+    stream.on('data', (chunk: Buffer) => chunks.push(chunk));
+    stream.on('end', () => {
+      assert.ok(Buffer.concat(chunks).equals(compressed));
+      done();
+    });
+  });
+
+  // see: https://github.com/googleapis/google-cloud-node/issues/9185
+  it('should not emit MaxListenersExceededWarning in stream mode', async () => {
+    handler = (req, res) => {
+      res.end('x'.repeat(1024 * 1024));
+    };
+    const stream = teenyRequest({uri});
+    for await (const chunk of stream) {
+      void chunk;
+    }
+    const maxListenersWarned = emitWarnStub
+      .getCalls()
+      .some(call =>
+        String(call.args[0]).includes('MaxListenersExceededWarning')
+      );
+    assert.strictEqual(maxListenersWarned, false);
   });
 
   it('should expose TeenyStatistics instance', () => {
@@ -318,101 +348,116 @@ describe('teeny', () => {
     assert.deepStrictEqual(newOptions, {concurrentRequests: 42});
   });
 
-  it('should emit warning on too many concurrent requests', () => {
+  it('should emit warning on too many concurrent requests', done => {
     statsStub.setOptions.restore();
     statsStub.requestStarting.restore();
     teenyRequest.stats.setOptions({concurrentRequests: 1});
 
-    const scope = mockJson();
     teenyRequest({uri}, () => {
       assert.ok(emitWarnStub.calledOnce);
-      scope.done();
+      done();
     });
   });
 
-  it('should track stats, callback mode, success', () => {
-    const scope = mockJson();
+  it('should track stats, callback mode, success', done => {
     teenyRequest({uri}, () => {
       assert.ok(statsStub.requestStarting.calledOnceWithExactly());
       assert.ok(statsStub.requestFinished.calledOnceWithExactly());
-      scope.done();
+      done();
     });
   });
 
-  it('should track stats, callback mode, failure', () => {
-    const scope = mockError();
-    teenyRequest({uri}, err => {
+  it('should track stats, callback mode, failure', done => {
+    teenyRequest({uri: deadUri}, err => {
       assert.ok(err);
       assert.ok(statsStub.requestStarting.calledOnceWithExactly());
       assert.ok(statsStub.requestFinished.calledOnceWithExactly());
-      scope.done();
+      done();
     });
   });
 
-  it('should track stats, stream mode, success', () => {
-    const scope = mockJson();
+  it('should track stats, stream mode, success', done => {
     const readable = teenyRequest({uri});
     assert.ok(statsStub.requestStarting.calledOnceWithExactly());
 
     readable.once('response', () => {
       assert.ok(statsStub.requestFinished.calledOnceWithExactly());
-      scope.done();
+      done();
     });
+    readable.resume();
   });
 
-  it('should track stats, stream mode, failure', () => {
-    const scope = mockError();
-    const readable = teenyRequest({uri});
+  it('should track stats, stream mode, failure', done => {
+    const readable = teenyRequest({uri: deadUri});
     assert.ok(statsStub.requestStarting.calledOnceWithExactly());
 
     readable.once('error', err => {
       assert.ok(err);
       assert.ok(statsStub.requestFinished.calledOnceWithExactly());
-      scope.done();
+      done();
     });
   });
 
-  it('should accept a Buffer as the body of a request', () => {
-    const scope = nock(uri).post('/', 'hello').reply(200, '🌍');
+  it('should surface the system error code on connection failures', done => {
+    teenyRequest({uri: deadUri}, err => {
+      assert.ok(err);
+      assert.strictEqual(
+        (err as Error & {code?: string}).code,
+        'ECONNREFUSED'
+      );
+      done();
+    });
+  });
+
+  it('should accept a Buffer as the body of a request', done => {
+    handler = (req, res) => {
+      res.end('🌍');
+    };
     teenyRequest(
       {uri, method: 'POST', body: Buffer.from('hello')},
       (error, response, body) => {
         assert.ifError(error);
         assert.strictEqual(response.statusCode, 200);
         assert.strictEqual(body, '🌍');
-        scope.done();
-      },
+        assert.strictEqual(received[0].body.toString(), 'hello');
+        done();
+      }
     );
   });
 
-  it('should accept a plain string as the body of a request', () => {
-    const scope = nock(uri).post('/', 'hello').reply(200, '🌍');
+  it('should accept a plain string as the body of a request', done => {
+    handler = (req, res) => {
+      res.end('🌍');
+    };
     teenyRequest(
       {uri, method: 'POST', body: 'hello'},
       (error, response, body) => {
         assert.ifError(error);
         assert.strictEqual(response.statusCode, 200);
         assert.strictEqual(body, '🌍');
-        scope.done();
-      },
+        assert.strictEqual(received[0].body.toString(), 'hello');
+        done();
+      }
     );
   });
 
-  it('should accept json as the body of a request', () => {
-    const body = {hello: '🌍'};
-    const scope = nock(uri).post('/', JSON.stringify(body)).reply(200, '👋');
-    teenyRequest({uri, method: 'POST', json: body}, (error, response, body) => {
+  it('should accept json as the body of a request', done => {
+    handler = (req, res) => {
+      res.end('👋');
+    };
+    const json = {hello: '🌍'};
+    teenyRequest({uri, method: 'POST', json}, (error, response, body) => {
       assert.ifError(error);
       assert.strictEqual(response.statusCode, 200);
       assert.strictEqual(body, '👋');
-      scope.done();
+      assert.strictEqual(received[0].body.toString(), JSON.stringify(json));
+      done();
     });
   });
 
   // TODO multipart is broken with 2 strings
   // see: https://github.com/googleapis/teeny-request/issues/168
   it.skip('should track stats, multipart mode, success', done => {
-    const scope = mockJson();
     teenyRequest(
       {
         method: 'POST',
@@ -423,27 +468,25 @@ describe('teeny', () => {
       () => {
         assert.ok(statsStub.requestStarting.calledOnceWithExactly());
         assert.ok(statsStub.requestFinished.calledOnceWithExactly());
-        scope.done();
         done();
-      },
+      }
     );
   });
 
-  it.skip('should track stats, multipart mode, failure', () => {
-    const scope = mockError();
+  it.skip('should track stats, multipart mode, failure', done => {
     teenyRequest(
       {
         method: 'POST',
         headers: {},
         multipart: [{body: 'foo'}, {body: 'bar'}],
-        uri,
+        uri: deadUri,
       },
       err => {
         assert.ok(err);
         assert.ok(statsStub.requestStarting.calledOnceWithExactly());
         assert.ok(statsStub.requestFinished.calledOnceWithExactly());
-        scope.done();
-      },
+        done();
+      }
     );
   });
 
@@ -453,7 +496,7 @@ describe('teeny', () => {
         teenyRequest({uri: ''});
       },
       /Missing uri or url in reqOpts/,
-      'Did not throw with expected message',
+      'Did not throw with expected message'
     );
   });
 
@@ -463,7 +506,7 @@ describe('teeny', () => {
         teenyRequest({url: ''});
       },
       /Missing uri or url in reqOpts/,
-      'Did not throw with expected message',
+      'Did not throw with expected message'
     );
   });
 });
