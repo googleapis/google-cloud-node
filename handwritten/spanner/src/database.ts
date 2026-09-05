@@ -2996,7 +2996,7 @@ class Database extends common.GrpcServiceObject {
             safeMeasure(
               `5b_Server_Execution_To_First_Data_${reqId}`,
               `M3_gcp_header_recv_${reqId}`,
-              `M3_gcp_data_recv_${reqId}`,
+              `M3_grpc_data_recv_raw_${reqId}`,
             );
             safeMeasure(
               `5_True_External_Flight_To_Data_${reqId}`,

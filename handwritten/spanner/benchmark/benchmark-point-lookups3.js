@@ -329,7 +329,7 @@ async function main(instanceId, databaseId, projectId, workersArg, queriesArg) {
     '   - Pre (4a) : Encoding JS objects into Protobuf bytes, generating HTTP/2 frames, socket write.',
   );
   console.log(
-    '   - Post (4b): [Unmeasured] Protobuf decode occurs in uninstrumented C++ HTTP/2 native bindings.',
+    '   - Post (4b): Protobuf decode occurs in JS layer before passing to GCP.',
   );
   console.log(
     '===================================================================\n',
