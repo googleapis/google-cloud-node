@@ -672,9 +672,27 @@ export class Gaxios implements FetchCompliance {
   static async #getFetch() {
     const hasWindow = typeof window !== 'undefined' && !!window;
 
-    this.#fetch ||= hasWindow
-      ? window.fetch
-      : (await import('node-fetch')).default;
+    if (!this.#fetch) {
+      if (hasWindow) {
+        this.#fetch = window.fetch;
+      } else if (typeof globalThis.fetch === 'function') {
+        // Prefer native fetch when available (Node.js 18+).
+        //
+        // Dynamically importing `node-fetch` can fail in newer Node.js
+        // runtimes (e.g. 24.15+ with undici >=7.24.4) because internal changes
+        // to the native fetch implementation cause `import("node-fetch").default`
+        // to return a non-callable value, resulting in:
+        //   TypeError: fetchImpl is not a function
+        //
+        // Node.js 18+ ships a stable global `fetch` that is fully compatible
+        // with the Fetch API, so we prefer it and avoid the `node-fetch`
+        // import entirely when it is available.
+        this.#fetch = globalThis.fetch.bind(globalThis);
+      } else {
+        // Fallback: older Node.js versions without a global fetch.
+        this.#fetch = (await import('node-fetch')).default;
+      }
+    }
 
     return this.#fetch;
   }
