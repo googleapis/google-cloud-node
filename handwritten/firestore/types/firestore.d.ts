@@ -2838,6 +2838,58 @@ declare namespace FirebaseFirestore {
      */
     static vector(values?: number[]): VectorValue;
     /**
+     * Returns `true` if the provided value is a sentinel returned by
+     * {@link FieldValue.serverTimestamp}.
+     *
+     * @param value The value to check.
+     * @returns `true` if `value` is a server-timestamp sentinel.
+     */
+    static isServerTimestamp(value: unknown): value is FieldValue;
+    /**
+     * Returns `true` if the provided value is a sentinel returned by
+     * {@link FieldValue.increment}. This includes sentinels produced with a
+     * negative operand; use {@link FieldValue.isDecrement} to narrow further
+     * to decrement-style operations.
+     *
+     * @param value The value to check.
+     * @returns `true` if `value` is an increment sentinel.
+     */
+    static isIncrement(value: unknown): value is FieldValue;
+    /**
+     * Returns `true` if the provided value is a sentinel returned by
+     * {@link FieldValue.increment} with a negative operand. Every value that
+     * satisfies `isDecrement` also satisfies {@link FieldValue.isIncrement}.
+     *
+     * @param value The value to check.
+     * @returns `true` if `value` is an increment sentinel with a negative
+     * operand.
+     */
+    static isDecrement(value: unknown): value is FieldValue;
+    /**
+     * Returns `true` if the provided value is a sentinel returned by
+     * {@link FieldValue.arrayUnion}.
+     *
+     * @param value The value to check.
+     * @returns `true` if `value` is an array-union sentinel.
+     */
+    static isArrayUnion(value: unknown): value is FieldValue;
+    /**
+     * Returns `true` if the provided value is a sentinel returned by
+     * {@link FieldValue.arrayRemove}.
+     *
+     * @param value The value to check.
+     * @returns `true` if `value` is an array-remove sentinel.
+     */
+    static isArrayRemove(value: unknown): value is FieldValue;
+    /**
+     * Returns `true` if the provided value is a sentinel returned by
+     * {@link FieldValue.delete}.
+     *
+     * @param value The value to check.
+     * @returns `true` if `value` is a delete sentinel.
+     */
+    static isDelete(value: unknown): value is FieldValue;
+    /**
      * Returns true if this `FieldValue` is equal to the provided one.
      *
      * @param other The `FieldValue` to compare against.
