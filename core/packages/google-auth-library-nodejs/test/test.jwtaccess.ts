@@ -219,4 +219,35 @@ describe('jwtaccess', () => {
       client.getCachedKey();
     }, /Scopes or url must be provided/);
   });
+
+  it('should isolate cache by scopes and URLs when retrieving request headers', async () => {
+    const client = new JWTAccess(email, keys.private);
+    const testUri1 = 'http:/example.com/service1';
+    const testUri2 = 'http:/example.com/service2';
+
+    // 1. Different scopes for the same URL should return different tokens
+    const headersScope1 = client.getRequestHeaders(testUri1, undefined, 'scope1');
+    const tokenScope1 = headersScope1.get('authorization');
+    assert(tokenScope1);
+
+    const headersScope2 = client.getRequestHeaders(testUri1, undefined, 'scope2');
+    const tokenScope2 = headersScope2.get('authorization');
+    assert(tokenScope2);
+    assert.notStrictEqual(tokenScope1, tokenScope2);
+
+    // 2. Different URLs (without scopes) should return different tokens (different audience)
+    const headersUrl1 = client.getRequestHeaders(testUri1);
+    const tokenUrl1 = headersUrl1.get('authorization');
+    assert(tokenUrl1);
+
+    const headersUrl2 = client.getRequestHeaders(testUri2);
+    const tokenUrl2 = headersUrl2.get('authorization');
+    assert(tokenUrl2);
+    assert.notStrictEqual(tokenUrl1, tokenUrl2);
+
+    // 3. Verify cache hit works for the exact same parameters
+    const headersScope1Cached = client.getRequestHeaders(testUri1, undefined, 'scope1');
+    const tokenScope1Cached = headersScope1Cached.get('authorization');
+    assert.strictEqual(tokenScope1, tokenScope1Cached);
+  });
 });
