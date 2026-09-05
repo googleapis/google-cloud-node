@@ -580,7 +580,7 @@ class CheckpointStream extends Transform {
   }
 
   /**
-   * Buffers chunks and flushes queue asynchronously on checkpoints or when max limit is reached.
+   * Buffers chunks and flushes queue synchronously on checkpoints or when max limit is reached.
    *
    * @param {google.spanner.v1.PartialResultSet} chunk The chunk to transform.
    * @param {string} enc Encoding (unused).
@@ -605,30 +605,19 @@ class CheckpointStream extends Transform {
       return callback();
     }
 
-    this._flushQueue(callback);
+    this._flushQueue();
+    callback();
   }
 
   /**
-   * Flushes queued chunks asynchronously using `setImmediate` to avoid blocking the event loop.
+   * Flushes queued chunks synchronously to prevent state races on retry/reset.
    *
    * @private
-   * @param {Function} callback Callback to call when all chunks are flushed.
    */
-  private _flushQueue(callback: () => void): void {
-    const loop = () => {
-      if (this.destroyed) {
-        return callback();
-      }
-
-      if (this.queue.length > 0) {
-        this.push(this.queue.shift());
-        setImmediate(loop);
-      } else {
-        callback();
-      }
-    };
-
-    loop();
+  private _flushQueue(): void {
+    while (this.queue.length > 0 && !this.destroyed) {
+      this.push(this.queue.shift());
+    }
   }
 
   /**
@@ -637,9 +626,8 @@ class CheckpointStream extends Transform {
    * @param {Error} err The error to destroy the stream with.
    */
   flushAndDestroy(err: Error): void {
-    this._flushQueue(() => {
-      this.destroy(err);
-    });
+    this._flushQueue();
+    this.destroy(err);
   }
 
   /**
@@ -655,7 +643,8 @@ class CheckpointStream extends Transform {
    * @param {Function} callback Callback to call when flushing is complete.
    */
   _flush(callback: () => void): void {
-    this._flushQueue(callback);
+    this._flushQueue();
+    callback();
   }
 }
 

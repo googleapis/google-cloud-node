@@ -979,6 +979,67 @@ describe('PartialResultStream', () => {
 
       fakeStream.push(RESULT_WITH_TOKEN);
     });
+
+    it('should not drop buffered checkpointed chunks when a retry occurs during flush', done => {
+      const firstStream = through.obj();
+      const secondStream = through.obj();
+      const requestFnStub = sandbox.stub();
+
+      const token1 = 'token1';
+      // Chunks 1 to 3 have no token; Chunk 4 has token1
+      const chunk1 = Object.assign({}, RESULT, {resumeToken: ''});
+      const chunk2 = Object.assign({}, RESULT, {resumeToken: ''});
+      const chunk3 = Object.assign({}, RESULT, {resumeToken: ''});
+      const chunk4 = Object.assign({}, RESULT, {resumeToken: token1});
+      // Chunk 5 is returned after retry
+      const chunk5 = Object.assign({}, RESULT, {resumeToken: 'token2'});
+
+      requestFnStub.onCall(0).callsFake(() => {
+        setImmediate(() => {
+          firstStream.push(chunk1);
+          firstStream.push(chunk2);
+          firstStream.push(chunk3);
+          firstStream.push(chunk4); // Checkpoint hit: queue has 4 items
+          // Simulate network blip immediately after sending chunk4
+          firstStream.emit('error', {
+            code: grpc.status.UNAVAILABLE,
+            message: 'Unavailable',
+          } as grpc.ServiceError);
+        });
+        return firstStream;
+      });
+
+      requestFnStub.onCall(1).callsFake(resumeToken => {
+        try {
+          assert.strictEqual(resumeToken, token1, 'Must resume from token1');
+        } catch (e) {
+          done(e);
+        }
+        setImmediate(() => {
+          secondStream.push(chunk5);
+          secondStream.end();
+        });
+        return secondStream;
+      });
+
+      const receivedRows: Row[] = [];
+      partialResultStream(requestFnStub)
+        .on('data', (row: any) => receivedRows.push(row))
+        .on('error', done)
+        .on('end', () => {
+          try {
+            // Must receive all 4 rows from the checkpointed batch + 1 from retry = 5 total
+            assert.strictEqual(
+              receivedRows.length,
+              5,
+              'All checkpointed rows must be delivered without being dropped by retry reset()',
+            );
+            done();
+          } catch (e) {
+            done(e);
+          }
+        });
+    });
   });
 });
 
