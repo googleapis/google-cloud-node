@@ -1,0 +1,13 @@
+{
+  "extends": "gts/tsconfig-google.json",
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "outDir": "build/esm",
+    "esModuleInterop": true,
+    "types": ["node", "mocha"]
+  },
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "build"]
+}
