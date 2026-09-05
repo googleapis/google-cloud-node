@@ -16,19 +16,21 @@
  */
 
 import {Agent, AgentOptions as HttpsAgentOptions} from 'https';
-import {AgentOptions as HttpAgentOptions} from 'http';
-import type * as f from 'node-fetch' with {'resolution-mode': 'import'};
+import {AgentOptions as HttpAgentOptions, STATUS_CODES} from 'http';
 import {PassThrough, Readable, pipeline} from 'stream';
-import {getAgent} from './agents';
+import {promisify} from 'util';
+import * as zlib from 'zlib';
+import {Dispatcher, request as undiciRequest} from 'undici';
+import {getDispatcher} from './agents';
 import {TeenyStatistics} from './TeenyStatistics';
 import {randomUUID} from 'crypto';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const streamEvents = require('stream-events');
 
-import type nodeFetch from 'node-fetch' with {'resolution-mode': 'import'};
-
-const fetch = (...args: Parameters<typeof nodeFetch>) =>
-  import('node-fetch').then(({default: fetch}) => fetch(...args));
+const gunzip = promisify(zlib.gunzip);
+const inflate = promisify(zlib.inflate);
+const inflateRaw = promisify(zlib.inflateRaw);
+const brotliDecompress = promisify(zlib.brotliDecompress);
 
 export interface CoreOptions {
   method?: string;
@@ -90,47 +92,65 @@ interface Headers {
   [index: string]: any;
 }
 
+interface UndiciRequestOptions {
+  method: string;
+  headers: Headers;
+  body?: string | Buffer | Readable;
+  dispatcher: Dispatcher;
+  headersTimeout?: number;
+  bodyTimeout?: number;
+}
+
 /**
- * Convert options from Request to Fetch format
+ * Set a header, replacing any casing variant of it.
+ * @private
+ */
+function setHeader(headers: Headers, name: string, value: string) {
+  for (const key of Object.keys(headers)) {
+    if (key.toLowerCase() === name.toLowerCase()) {
+      delete headers[key];
+    }
+  }
+  headers[name] = value;
+}
+
+/**
+ * Check whether a header is set, in any casing.
+ * @private
+ */
+function hasHeader(headers: Headers, name: string) {
+  return Object.keys(headers).some(
+    key => key.toLowerCase() === name.toLowerCase()
+  );
+}
+
+/**
+ * Convert options from Request to undici format
  * @private
  * @param reqOpts Request options
  */
-function requestToFetchOptions(reqOpts: Options) {
-  const options: f.RequestInit = {
-    method: reqOpts.method || 'GET',
-    ...(reqOpts.timeout && {timeout: reqOpts.timeout}),
-    ...(typeof reqOpts.gzip === 'boolean' && {compress: reqOpts.gzip}),
-  };
-
-  if (typeof reqOpts.json === 'object') {
-    // Add Content-type: application/json header
-    reqOpts.headers = reqOpts.headers || {};
-    if (reqOpts.headers instanceof globalThis.Headers) {
-      reqOpts.headers.set('Content-Type', 'application/json');
-    } else {
-      reqOpts.headers['Content-Type'] = 'application/json';
+function requestToUndiciOptions(reqOpts: Options) {
+  let headers: Headers = {};
+  if (reqOpts.headers instanceof globalThis.Headers) {
+    for (const pair of reqOpts.headers.entries()) {
+      headers[pair[0]] = pair[1];
     }
-
-    // Set body to JSON representation of value
-    options.body = JSON.stringify(reqOpts.json);
-  } else {
-    if (Buffer.isBuffer(reqOpts.body)) {
-      options.body = reqOpts.body;
-    } else if (typeof reqOpts.body !== 'string') {
-      options.body = JSON.stringify(reqOpts.body);
-    } else {
-      options.body = reqOpts.body;
-    }
+  } else if (reqOpts.headers) {
+    headers = {...reqOpts.headers};
   }
 
-  if (reqOpts.headers instanceof globalThis.Headers) {
-    options.headers = {};
-    for (const pair of reqOpts.headers.entries()) {
-      options.headers[pair[0]] = pair[1];
-    }
+  let body: string | Buffer | Readable | undefined;
+  if (typeof reqOpts.json === 'object') {
+    setHeader(headers, 'Content-Type', 'application/json');
+    body = JSON.stringify(reqOpts.json);
   } else {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    options.headers = reqOpts.headers as any;
+    if (Buffer.isBuffer(reqOpts.body)) {
+      body = reqOpts.body;
+    } else if (typeof reqOpts.body !== 'string') {
+      body = JSON.stringify(reqOpts.body);
+    } else {
+      body = reqOpts.body;
+    }
   }
 
   let uri = ((reqOpts as OptionsWithUri).uri ||
@@ -147,37 +167,148 @@ function requestToFetchOptions(reqOpts: Options) {
     uri = uri + '?' + params;
   }
 
-  options.agent = getAgent(uri, reqOpts);
+  const options: UndiciRequestOptions = {
+    method: reqOpts.method || 'GET',
+    // copied so that `userHeaders` stays as the caller provided them
+    headers: {...headers},
+    body,
+    dispatcher: getDispatcher(uri, reqOpts),
+    ...(reqOpts.timeout && {
+      headersTimeout: reqOpts.timeout,
+      bodyTimeout: reqOpts.timeout,
+    }),
+  };
 
-  return {uri, options};
+  return {uri, options, userHeaders: headers};
 }
 
 /**
- * Convert a response from `fetch` to `request` format.
+ * Surface the underlying system error code (e.g. ECONNRESET) that undici
+ * wraps in its own error types, since downstream retry logic keys off
+ * `err.code`.
  * @private
- * @param opts The `request` options used to create the request.
- * @param res The Fetch response
+ */
+function normalizeError(err: Error): Error {
+  const error = err as Error & {code?: unknown; cause?: {code?: unknown}};
+  const causeCode = error?.cause?.code;
+  if (
+    typeof causeCode === 'string' &&
+    (error.code === undefined || String(error.code).startsWith('UND_'))
+  ) {
+    error.code = causeCode;
+  }
+  return error;
+}
+
+/**
+ * Convert a response from `undici` to `request` format.
+ * @private
+ * @param uri The request uri.
+ * @param userHeaders The request headers as provided by the caller.
+ * @param res The undici response
  * @returns A `request` response object
  */
-function fetchToRequestResponse(opts: f.RequestInit, res: f.Response) {
+function undiciToRequestResponse(
+  uri: string,
+  userHeaders: Headers,
+  res: Dispatcher.ResponseData
+) {
   const request = {} as Request;
-  request.agent = (opts.agent as Agent) || false;
-  request.headers = (opts.headers || {}) as Headers;
-  request.href = res.url;
-  // headers need to be converted from a map to an obj
-  const resHeaders = {} as Headers;
-  res.headers.forEach((value, key) => (resHeaders[key] = value));
+  // connection pooling is managed by undici dispatchers, so there is no
+  // per-request http.Agent to expose
+  request.agent = false;
+  request.headers = userHeaders;
+  const history = (res.context as {history?: URL[]} | undefined)?.history;
+  request.href = history?.length ? String(history[history.length - 1]) : uri;
+  const resHeaders = {...res.headers} as Headers;
 
   const response = Object.assign(res.body as {}, {
-    statusCode: res.status,
-    statusMessage: res.statusText,
+    statusCode: res.statusCode,
+    statusMessage: STATUS_CODES[res.statusCode] || '',
     request,
-    body: res.body,
     headers: resHeaders,
     toJSON: () => ({headers: resHeaders}),
+  }) as unknown as Response;
+  // undici's response body has a getter-only `body` property (the web
+  // stream accessor), so it cannot be set through Object.assign
+  Object.defineProperty(response, 'body', {
+    value: res.body,
+    writable: true,
+    enumerable: true,
+    configurable: true,
   });
 
-  return response as Response;
+  return response;
+}
+
+/**
+ * Read the response body into a string, decompressing it if requested
+ * (undici, unlike fetch, hands back the raw bytes).
+ * @private
+ */
+async function readResponseBody(
+  res: Dispatcher.ResponseData,
+  decompress: boolean
+): Promise<string> {
+  const raw = Buffer.from(await res.body.arrayBuffer());
+  if (!decompress || raw.length === 0) {
+    return raw.toString();
+  }
+  const encoding = String(res.headers['content-encoding'] || '').toLowerCase();
+  if (encoding === 'gzip' || encoding === 'x-gzip') {
+    return (await gunzip(raw)).toString();
+  }
+  if (encoding === 'br') {
+    return (await brotliDecompress(raw)).toString();
+  }
+  if (encoding === 'deflate') {
+    try {
+      return (await inflate(raw)).toString();
+    } catch {
+      // some servers send raw deflate data without the zlib wrapper
+      return (await inflateRaw(raw)).toString();
+    }
+  }
+  return raw.toString();
+}
+
+/**
+ * Read a callback-mode response and invoke the callback with it.
+ * @private
+ */
+function handleCallbackResponse(
+  uri: string,
+  userHeaders: Headers,
+  res: Dispatcher.ResponseData,
+  decompress: boolean,
+  callback: RequestCallback
+) {
+  const header = String(res.headers['content-type'] || '');
+  const response = undiciToRequestResponse(uri, userHeaders, res);
+  readResponseBody(res, decompress).then(
+    text => {
+      if (
+        (header === 'application/json' ||
+          header === 'application/json; charset=utf-8') &&
+        response.statusCode !== 204
+      ) {
+        try {
+          const json = JSON.parse(text);
+          response.body = json;
+          callback(null, response, json);
+        } catch (err) {
+          callback(err as Error, response, text);
+        }
+        return;
+      }
+
+      response.body = text;
+      callback(null, response, text);
+    },
+    err => {
+      callback(normalizeError(err), response, undefined);
+    }
+  );
 }
 
 /**
@@ -214,9 +345,17 @@ function teenyRequest(reqOpts: Options): Request;
 function teenyRequest(reqOpts: Options, callback: RequestCallback): void;
 function teenyRequest(
   reqOpts: Options,
-  callback?: RequestCallback,
+  callback?: RequestCallback
 ): Request | void {
-  const {uri, options} = requestToFetchOptions(reqOpts);
+  const {uri, options, userHeaders} = requestToUndiciOptions(reqOpts);
+
+  // Callback mode transparently decompresses unless the caller opted out,
+  // like node-fetch did. Stream mode never does: consumers rely on getting
+  // the raw bytes (e.g. for integrity validation).
+  const decompress = reqOpts.gzip !== false && callback !== undefined;
+  if (decompress && !hasHeader(options.headers, 'Accept-Encoding')) {
+    options.headers['Accept-Encoding'] = 'gzip, deflate, br';
+  }
 
   const multipart = reqOpts.multipart as RequestPart[];
   if (reqOpts.multipart && multipart.length === 2) {
@@ -225,48 +364,24 @@ function teenyRequest(
       throw new Error('Multipart without callback is not implemented.');
     }
     const boundary: string = randomUUID();
-    (options.headers as Headers)['Content-Type'] =
-      `multipart/related; boundary=${boundary}`;
+    setHeader(
+      options.headers,
+      'Content-Type',
+      `multipart/related; boundary=${boundary}`
+    );
     options.body = createMultipartStream(boundary, multipart);
 
     // Multipart upload
     teenyRequest.stats.requestStarting();
-    fetch(uri, options).then(
+    undiciRequest(uri, options).then(
       res => {
         teenyRequest.stats.requestFinished();
-        const header = res.headers.get('content-type');
-        const response = fetchToRequestResponse(options, res);
-        const body = response.body;
-        if (
-          header === 'application/json' ||
-          header === 'application/json; charset=utf-8'
-        ) {
-          res.json().then(
-            json => {
-              response.body = json;
-              callback(null, response, json);
-            },
-            (err: Error) => {
-              callback(err, response, body);
-            },
-          );
-          return;
-        }
-
-        res.text().then(
-          text => {
-            response.body = text;
-            callback(null, response, text);
-          },
-          err => {
-            callback(err, response, body);
-          },
-        );
+        handleCallbackResponse(uri, userHeaders, res, decompress, callback);
       },
       err => {
         teenyRequest.stats.requestFinished();
-        callback(err, null!, null);
-      },
+        callback(normalizeError(err), null!, null);
+      }
     );
     return;
   }
@@ -274,94 +389,60 @@ function teenyRequest(
   if (callback === undefined) {
     // Stream mode
     const requestStream = streamEvents(new PassThrough());
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let responseStream: any;
+    let responseStream: Readable | undefined;
+    let piped = false;
+    const pipeResponse = () => {
+      piped = true;
+      pipeline(responseStream!, requestStream, () => {});
+    };
     requestStream.once('reading', () => {
       if (responseStream) {
-        pipeline(responseStream, requestStream, () => {});
+        pipeResponse();
       } else {
-        requestStream.once('response', () => {
-          pipeline(responseStream, requestStream, () => {});
-        });
+        requestStream.once('response', pipeResponse);
       }
     });
-    options.compress = false;
+    // a consumer tearing the stream down without reading it must abort
+    // the in-flight request, or the socket would be left occupied
+    requestStream.once('close', () => {
+      if (!piped && responseStream) {
+        responseStream.destroy();
+      }
+    });
 
     teenyRequest.stats.requestStarting();
-    fetch(uri, options).then(
+    undiciRequest(uri, options).then(
       res => {
         teenyRequest.stats.requestFinished();
         responseStream = res.body;
 
-        // node-fetch v3's internal pipeline listeners plus the wiring below
-        // legitimately exceed the default limit of 10, warning on every
-        // streamed response
-        // see: https://github.com/googleapis/google-cloud-node/issues/9185
-        responseStream.setMaxListeners(0);
-
         responseStream.on('error', (err: Error) => {
-          requestStream.emit('error', err);
+          requestStream.emit('error', normalizeError(err));
         });
 
-        const response = fetchToRequestResponse(options, res);
+        const response = undiciToRequestResponse(uri, userHeaders, res);
         requestStream.emit('response', response);
       },
       err => {
         teenyRequest.stats.requestFinished();
-        requestStream.emit('error', err);
-      },
+        requestStream.emit('error', normalizeError(err));
+      }
     );
 
-    // fetch doesn't supply the raw HTTP stream, instead it
-    // returns a PassThrough piped from the HTTP response
-    // stream.
     return requestStream as Request;
   }
 
   // GET or POST with callback
   teenyRequest.stats.requestStarting();
-  fetch(uri, options).then(
+  undiciRequest(uri, options).then(
     res => {
       teenyRequest.stats.requestFinished();
-      const header = res.headers.get('content-type');
-      const response = fetchToRequestResponse(options, res);
-      const body = response.body;
-      if (
-        header === 'application/json' ||
-        header === 'application/json; charset=utf-8'
-      ) {
-        if (response.statusCode === 204) {
-          // Probably a DELETE
-          callback(null, response, body);
-          return;
-        }
-        res.json().then(
-          json => {
-            response.body = json;
-            callback(null, response, json);
-          },
-          err => {
-            callback(err, response, body);
-          },
-        );
-        return;
-      }
-
-      res.text().then(
-        text => {
-          const response = fetchToRequestResponse(options, res);
-          response.body = text;
-          callback(null, response, text);
-        },
-        err => {
-          callback(err, response, body);
-        },
-      );
+      handleCallbackResponse(uri, userHeaders, res, decompress, callback);
     },
     err => {
       teenyRequest.stats.requestFinished();
-      callback(err, null!, null);
-    },
+      callback(normalizeError(err), null!, null);
+    }
   );
   return;
 }
