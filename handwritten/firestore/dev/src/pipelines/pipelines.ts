@@ -290,6 +290,15 @@ export class PipelineSource implements firestore.Pipelines.PipelineSource {
       );
     }
 
+    // A reference created by this Firestore instance necessarily targets the
+    // same database, so there is nothing to compare. This also avoids reading
+    // `formattedName`, which requires the project ID and throws if the client
+    // has not been initialized yet (the project ID may only be detected when
+    // the first request is issued).
+    if (reference.firestore === this.db) {
+      return true;
+    }
+
     const refDbId = reference.firestore.formattedName;
     if (refDbId !== this.db.formattedName) {
       throw new Error(
