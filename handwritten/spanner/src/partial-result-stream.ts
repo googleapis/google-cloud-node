@@ -15,11 +15,8 @@
  */
 
 import {GrpcService} from './common-grpc/service';
-import * as checkpointStream from 'checkpoint-stream';
-import * as eventsIntercept from 'events-intercept';
-import mergeStream = require('merge-stream');
 import {common as p} from 'protobufjs';
-import {Readable, Transform} from 'stream';
+import {PassThrough, Readable, Transform} from 'stream';
 import * as streamEvents from 'stream-events';
 import {grpc, CallOptions} from 'google-gax';
 import {DeadlineError, isRetryableInternalError} from './transaction-runner';
@@ -27,7 +24,6 @@ import {DeadlineError, isRetryableInternalError} from './transaction-runner';
 import {codec, JSONOptions, Json, Field, Value} from './codec';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
-import * as stream from 'stream';
 import {isDefined, isEmpty, isString} from './helper';
 
 const originalDecode = codec.decode;
@@ -555,6 +551,104 @@ export class PartialResultStream extends Transform implements ResultEvents {
 }
 
 /**
+ * A custom Transform stream that buffers PartialResultSet chunks and flushes them
+ * asynchronously to prevent blocking the event loop.
+ *
+ * It holds chunks in a queue until a "checkpoint" is reached (as determined by
+ * `isCheckpointFn`) or until the queue exceeds `maxQueued` items.
+ *
+ * This matches the legacy behavior of buffering chunks and flushing them
+ * asynchronously using `setImmediate` to yield control back to the event loop,
+ * preventing long-running synchronous loops from blocking other processing.
+ *
+ * @private
+ */
+class CheckpointStream extends Transform {
+  private queue: google.spanner.v1.PartialResultSet[] = [];
+  private maxQueued: number;
+  private isCheckpointFn: (
+    chunk: google.spanner.v1.PartialResultSet,
+  ) => boolean;
+
+  constructor(options: {
+    maxQueued?: number;
+    isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet) => boolean;
+  }) {
+    super({objectMode: true});
+    this.maxQueued = options.maxQueued ?? 10;
+    this.isCheckpointFn = options.isCheckpointFn;
+  }
+
+  /**
+   * Buffers chunks and flushes queue synchronously on checkpoints or when max limit is reached.
+   *
+   * @param {google.spanner.v1.PartialResultSet} chunk The chunk to transform.
+   * @param {string} enc Encoding (unused).
+   * @param {Function} callback Callback to signal completion of transformation.
+   */
+  _transform(
+    chunk: google.spanner.v1.PartialResultSet,
+    enc: string,
+    callback: () => void,
+  ): void {
+    this.queue.push(chunk);
+    const isCheckpoint = this.isCheckpointFn(chunk);
+    let shouldFlush = false;
+    if (isCheckpoint) {
+      this.emit('checkpoint', chunk);
+      shouldFlush = true;
+    } else if (this.queue.length > this.maxQueued) {
+      shouldFlush = true;
+    }
+
+    if (!shouldFlush) {
+      return callback();
+    }
+
+    this._flushQueue();
+    callback();
+  }
+
+  /**
+   * Flushes queued chunks synchronously to prevent state races on retry/reset.
+   *
+   * @private
+   */
+  private _flushQueue(): void {
+    while (this.queue.length > 0 && !this.destroyed) {
+      this.push(this.queue.shift());
+    }
+  }
+
+  /**
+   * Flushes remaining queued chunks before destroying the stream with the provided error.
+   *
+   * @param {Error} err The error to destroy the stream with.
+   */
+  flushAndDestroy(err: Error): void {
+    this._flushQueue();
+    this.destroy(err);
+  }
+
+  /**
+   * Clears the queue without flushing, useful when retrying and discarding partial data.
+   */
+  reset(): void {
+    this.queue = [];
+  }
+
+  /**
+   * Flushes all remaining queued chunks when the stream ends.
+   *
+   * @param {Function} callback Callback to call when flushing is complete.
+   */
+  _flush(callback: () => void): void {
+    this._flushQueue();
+    callback();
+  }
+}
+
+/**
  * Rows returned from queries may be chunked, requiring them to be stitched
  * together. This function returns a stream that will properly assemble these
  * rows, as well as retry after an error. Rows are only emitted if they hit a
@@ -578,24 +672,25 @@ export function partialResultStream(
   const maxQueued = 10;
   let lastResumeToken: ResumeToken;
   let lastRequestStream: Readable;
+  let errorListener: (err: grpc.ServiceError) => void;
   const startTime = Date.now();
   const timeout = options?.gaxOptions?.timeout ?? Infinity;
 
-  // mergeStream allows multiple streams to be connected into one. This is good;
+  // requestsStream allows multiple streams to be connected into one. This is good;
   // if we need to retry a request and pipe more data to the user's stream.
   // We also add an additional stream that can be used to flush any remaining
   // items in the checkpoint stream that have been received, and that did not
   // contain a resume token.
-  const requestsStream = mergeStream();
-  const flushStream = new stream.PassThrough({objectMode: true});
-  requestsStream.add(flushStream);
+  const requestsStream = new PassThrough({objectMode: true});
+  const flushStream = new PassThrough({objectMode: true});
+  flushStream.pipe(requestsStream);
   const partialRSStream = new PartialResultStream(options);
   const userStream = streamEvents(partialRSStream);
   // We keep track of the number of PartialResultSets that did not include a
   // resume token, as that is an indication whether it is safe to retry the
   // stream halfway.
   let withoutCheckpointCount = 0;
-  const batchAndSplitOnTokenStream = checkpointStream.obj({
+  const batchAndSplitOnTokenStream = new CheckpointStream({
     maxQueued,
     isCheckpointFn: (chunk: google.spanner.v1.PartialResultSet): boolean => {
       const withCheckpoint = _hasResumeToken(chunk);
@@ -617,26 +712,42 @@ export function partialResultStream(
       // then push `null` to end the stream.
       flushStream.push({resumeToken: '_'});
       flushStream.push(null);
-      requestsStream.end();
     });
   };
+
+  const destroyRequestStream = (): void => {
+    if (lastRequestStream) {
+      lastRequestStream.removeListener('end', endListener);
+      lastRequestStream.removeAllListeners('error');
+      lastRequestStream.on('error', () => {});
+      lastRequestStream.unpipe(requestsStream);
+      lastRequestStream.destroy();
+    }
+  };
+
   const makeRequest = (): void => {
     if (isDefined(lastResumeToken) && lastResumeToken.length > 0) {
       partialRSStream._resetPendingValues();
     }
     lastRequestStream = requestFn(lastResumeToken);
     lastRequestStream.on('end', endListener);
-    requestsStream.add(lastRequestStream);
+    errorListener = (err: grpc.ServiceError) => {
+      destroyRequestStream();
+      setImmediate(() => retry(err));
+    };
+    lastRequestStream.on('error', errorListener);
+    lastRequestStream.pipe(requestsStream, {end: false});
   };
 
   const retry = (err: grpc.ServiceError): void => {
+    destroyRequestStream();
     const elapsed = Date.now() - startTime;
     if (elapsed >= timeout) {
       // The timeout has reached so this will flush any rows the
       // checkpoint stream has queued. After that, we will destroy the
       // user's stream with the Deadline exceeded error.
       setImmediate(() =>
-        batchAndSplitOnTokenStream.destroy(new DeadlineError(err)),
+        batchAndSplitOnTokenStream.flushAndDestroy(new DeadlineError(err)),
       );
       return;
     }
@@ -653,14 +764,10 @@ export function partialResultStream(
       // This is not a retryable error so this will flush any rows the
       // checkpoint stream has queued. After that, we will destroy the
       // user's stream with the same error.
-      setImmediate(() => batchAndSplitOnTokenStream.destroy(err));
+      setImmediate(() => batchAndSplitOnTokenStream.flushAndDestroy(err));
       return;
     }
 
-    if (lastRequestStream) {
-      lastRequestStream.removeListener('end', endListener);
-      lastRequestStream.destroy();
-    }
     // Delay the retry until all the values that are already in the stream
     // pipeline have been handled. This ensures that the checkpoint stream is
     // reset to the correct point. Calling .reset() directly here could cause
@@ -674,15 +781,12 @@ export function partialResultStream(
   };
 
   userStream.once('reading', makeRequest);
-  eventsIntercept.patch(requestsStream);
-
-  // need types for events-intercept
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (requestsStream as any).intercept('error', err =>
-    // Retry __after__ all pending data has been processed to ensure that the
-    // checkpoint stream is reset at the correct position.
-    setImmediate(() => retry(err)),
-  );
+  userStream.once('close', () => {
+    destroyRequestStream();
+    requestsStream.destroy();
+    flushStream.destroy();
+    batchAndSplitOnTokenStream.destroy();
+  });
 
   return (
     requestsStream
