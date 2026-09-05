@@ -179,4 +179,138 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
       executePipelineRequest,
     );
   });
+
+  it('serializes atomic execute option', async () => {
+    const spy = sinon.fake.returns(stream());
+    const firestore = await createInstance({
+      executePipeline: spy,
+    });
+
+    await firestore
+      .pipeline()
+      .collection('foo')
+      .execute({
+        atomic: true,
+      });
+
+    const executePipelineRequest: IExecutePipelineRequest = {
+      database: 'projects/test-project/databases/(default)',
+      newTransaction: {
+        readWrite: {},
+      },
+      autoCommitTransaction: true,
+      structuredPipeline: {
+        options: {},
+        pipeline: {
+          stages: [
+            {
+              args: [
+                {
+                  referenceValue: '/foo',
+                },
+              ],
+              name: 'collection',
+              options: {},
+            },
+          ],
+        },
+      },
+    };
+    expect(spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).to.deep.equal(
+      executePipelineRequest,
+    );
+  });
+
+  it('does not serialize atomic when atomic is false', async () => {
+    const spy = sinon.fake.returns(stream());
+    const firestore = await createInstance({
+      executePipeline: spy,
+    });
+
+    await firestore
+      .pipeline()
+      .collection('foo')
+      .execute({
+        atomic: false,
+      });
+
+    const executePipelineRequest: IExecutePipelineRequest = {
+      database: 'projects/test-project/databases/(default)',
+      structuredPipeline: {
+        options: {},
+        pipeline: {
+          stages: [
+            {
+              args: [
+                {
+                  referenceValue: '/foo',
+                },
+              ],
+              name: 'collection',
+              options: {},
+            },
+          ],
+        },
+      },
+    };
+    expect(spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).to.deep.equal(
+      executePipelineRequest,
+    );
+  });
+
+  it('serializes DML stages (delete, update, insert, upsert, literals)', async () => {
+    const spy = sinon.fake.returns(stream());
+    const firestore = await createInstance({
+      executePipeline: spy,
+    });
+
+    await firestore
+      .pipeline()
+      .literals([{foo: 'bar'}])
+      .insert({collection: 'foo', documentId: 'doc1'})
+      .update()
+      .upsert([], {collection: 'bar'})
+      .delete()
+      .execute();
+
+    const stages =
+      spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+        'pipeline'
+      ]['stages'];
+
+    expect(stages.length).to.equal(5);
+    expect(stages[0].name).to.equal('literals');
+    expect(stages[0].args).to.deep.equal([
+      {
+        mapValue: {
+          fields: {
+            foo: {stringValue: 'bar'},
+          },
+        },
+      },
+    ]);
+
+    expect(stages[1].name).to.equal('insert');
+    expect(stages[1].options).to.deep.equal({
+      collection: {referenceValue: '/foo'},
+      document_id: {fieldReferenceValue: 'doc1'},
+    });
+
+    expect(stages[2].name).to.equal('update');
+    expect(stages[2].args).to.deep.equal([
+      {
+        mapValue: {
+          fields: {},
+        },
+      },
+    ]);
+
+    expect(stages[3].name).to.equal('upsert');
+    expect(stages[3].options).to.deep.equal({
+      collection: {referenceValue: '/bar'},
+    });
+
+    expect(stages[4].name).to.equal('delete');
+  });
 });
+
