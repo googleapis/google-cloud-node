@@ -18,7 +18,19 @@ import * as firestore from '@google-cloud/firestore';
 
 import * as proto from '../protos/firestore_v1_proto_api';
 
-import {DeleteTransform, FieldTransform, VectorValue} from './field-value';
+import {
+  Bytes,
+  BsonTimestamp,
+  DeleteTransform,
+  FieldTransform,
+  Int32Value,
+  MaxKey,
+  MinKey,
+  BsonObjectId,
+  RegexValue,
+  VectorValue,
+  Decimal128Value,
+} from './field-value';
 import {detectGoogleProtobufValueType, detectValueType} from './convert';
 import {GeoPoint} from './geo-point';
 import {DocumentReference, Firestore} from './index';
@@ -31,9 +43,21 @@ import {Pipeline} from './pipelines';
 
 import api = proto.google.firestore.v1;
 import {
+  RESERVED_BSON_BINARY_KEY,
+  RESERVED_INT32_KEY,
   RESERVED_MAP_KEY,
   RESERVED_MAP_KEY_VECTOR_VALUE,
+  RESERVED_MAX_KEY,
+  RESERVED_MIN_KEY,
+  RESERVED_BSON_OBJECT_ID_KEY,
+  RESERVED_REGEX_KEY,
+  RESERVED_REGEX_OPTIONS_KEY,
+  RESERVED_REGEX_PATTERN_KEY,
+  RESERVED_BSON_TIMESTAMP_INCREMENT_KEY,
+  RESERVED_BSON_TIMESTAMP_KEY,
+  RESERVED_BSON_TIMESTAMP_SECONDS_KEY,
   VECTOR_MAP_VECTORS_KEY,
+  RESERVED_DECIMAL128_KEY,
 } from './map-type';
 import {google} from '../protos/firestore_v1_proto_api';
 import IMapValue = google.firestore.v1.IMapValue;
@@ -195,7 +219,17 @@ export class Serializer {
       };
     }
 
-    if (val instanceof VectorValue) {
+    if (
+      val instanceof VectorValue ||
+      val instanceof RegexValue ||
+      val instanceof Int32Value ||
+      val instanceof Decimal128Value ||
+      val instanceof BsonTimestamp ||
+      val instanceof Bytes ||
+      val instanceof BsonObjectId ||
+      val instanceof MinKey ||
+      val instanceof MaxKey
+    ) {
       return val._toProto(this);
     }
 
@@ -310,6 +344,152 @@ export class Serializer {
   }
 
   /**
+   * @private
+   */
+  encodeMinKey(): api.IValue {
+    // A Firestore MinKey is a map with reserved key/value pairs.
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_MIN_KEY]: {
+            nullValue: 'NULL_VALUE',
+          },
+        },
+      },
+    };
+  }
+
+  /**
+   * @private
+   */
+  encodeMaxKey(): api.IValue {
+    // A Firestore MaxKey is a map with reserved key/value pairs.
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_MAX_KEY]: {
+            nullValue: 'NULL_VALUE',
+          },
+        },
+      },
+    };
+  }
+
+  /**
+   * @private
+   */
+  encodeRegex(pattern: string, options: string): api.IValue {
+    // A Firestore Regex is a map with reserved key/value pairs.
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_REGEX_KEY]: {
+            mapValue: {
+              fields: {
+                [RESERVED_REGEX_PATTERN_KEY]: {
+                  stringValue: pattern,
+                },
+                [RESERVED_REGEX_OPTIONS_KEY]: {
+                  stringValue: options,
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  }
+
+  /**
+   * @private
+   */
+  encodeBsonObjectId(value: string): api.IValue {
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_BSON_OBJECT_ID_KEY]: {
+            stringValue: value,
+          },
+        },
+      },
+    };
+  }
+
+  /**
+   * @private
+   */
+  encodeInt32(value: number): api.IValue {
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_INT32_KEY]: {
+            integerValue: value,
+          },
+        },
+      },
+    };
+  }
+
+  /**
+   * @private
+   */
+  encodeDecimal128(value: string): api.IValue {
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_DECIMAL128_KEY]: {
+            stringValue: value,
+          },
+        },
+      },
+    };
+  }
+
+  /**
+   * @private
+   */
+  encodeBsonTimestamp(seconds: number, increment: number): api.IValue {
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_BSON_TIMESTAMP_KEY]: {
+            mapValue: {
+              fields: {
+                [RESERVED_BSON_TIMESTAMP_SECONDS_KEY]: {
+                  integerValue: seconds,
+                },
+                [RESERVED_BSON_TIMESTAMP_INCREMENT_KEY]: {
+                  integerValue: increment,
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  }
+
+  /**
+   * @private
+   */
+  encodeBsonBinaryData(subtype: number, data: Uint8Array): api.IValue {
+    const subtypeAndData = new Uint8Array(data.length + 1);
+    // This converts the subtype from `number` to a byte.
+    subtypeAndData[0] = subtype;
+    // Concatenate the rest of the data starting at index 1.
+    subtypeAndData.set(data, /* offset */ 1);
+    return {
+      mapValue: {
+        fields: {
+          [RESERVED_BSON_BINARY_KEY]: {
+            bytesValue: subtypeAndData,
+          },
+        },
+      },
+    };
+  }
+
+  /**
    * Decodes a single Firestore 'Value' Protobuf.
    *
    * @private
@@ -375,6 +555,30 @@ export class Serializer {
       case 'vectorValue': {
         const fields = proto.mapValue!.fields!;
         return VectorValue._fromProto(fields[VECTOR_MAP_VECTORS_KEY]);
+      }
+      case 'minKeyValue': {
+        return MinKey.instance();
+      }
+      case 'maxKeyValue': {
+        return MaxKey.instance();
+      }
+      case 'regexValue': {
+        return RegexValue._fromProto(proto);
+      }
+      case 'bsonObjectIdValue': {
+        return BsonObjectId._fromProto(proto);
+      }
+      case 'int32Value': {
+        return Int32Value._fromProto(proto);
+      }
+      case 'decimal128Value': {
+        return Decimal128Value._fromProto(proto);
+      }
+      case 'bsonTimestampValue': {
+        return BsonTimestamp._fromProto(proto);
+      }
+      case 'bsonBinaryValue': {
+        return Bytes._fromProto(proto);
       }
       case 'geoPointValue': {
         return GeoPoint.fromProto(proto.geoPointValue!);
@@ -547,7 +751,17 @@ export function validateUserInput(
           'If you want to ignore undefined values, enable `ignoreUndefinedProperties`.',
       );
     }
-  } else if (value instanceof VectorValue) {
+  } else if (
+    value instanceof VectorValue ||
+    value instanceof RegexValue ||
+    value instanceof BsonObjectId ||
+    value instanceof Int32Value ||
+    value instanceof Decimal128Value ||
+    value instanceof BsonTimestamp ||
+    value instanceof Bytes ||
+    value instanceof MinKey ||
+    value instanceof MaxKey
+  ) {
     // OK
   } else if (value instanceof DeleteTransform) {
     if (inArray) {

@@ -39,6 +39,14 @@ import {
   FieldValue,
   Firestore,
   GeoPoint,
+  MinKey,
+  MaxKey,
+  Int32Value,
+  Decimal128Value,
+  BsonTimestamp,
+  Bytes,
+  BsonObjectId,
+  RegexValue,
   Query,
   QueryDocumentSnapshot,
   setLogFunction,
@@ -62,6 +70,7 @@ import {CollectionGroup} from '../src/collection-group';
 import IBundleElement = firestore.IBundleElement;
 import {Filter} from '../src/filter';
 import {IndexTestHelper} from './index_test_helper';
+import {addEqualityMatcher} from './euqality_matcher';
 
 use(chaiAsPromised);
 
@@ -8713,5 +8722,649 @@ describe('Types test', () => {
         });
       });
     });
+  });
+});
+
+describe.skipClassic('non-native Firestore types', () => {
+  addEqualityMatcher();
+  let firestore: Firestore;
+  let randomCol: CollectionReference;
+  let doc: DocumentReference;
+
+  beforeEach(async () => {
+    randomCol = getTestRoot();
+    firestore = randomCol.firestore;
+    doc = randomCol.doc();
+  });
+
+  afterEach(() => verifyInstance(firestore));
+
+  async function getFirstSnapshot(query: Query): Promise<QuerySnapshot> {
+    const deferred = new DeferredPromise<QuerySnapshot>();
+    deferred.promise = new Promise((resolve, reject) => {
+      deferred.resolve = resolve;
+      deferred.reject = reject;
+    });
+
+    const unsubscribe = query.onSnapshot(
+      snapshot => {
+        deferred.resolve(snapshot);
+      },
+      err => {
+        deferred.reject(err);
+      },
+    );
+
+    const snapshot_1 = await deferred.promise!;
+    unsubscribe();
+    return snapshot_1 as QuerySnapshot;
+  }
+
+  interface TypeWithEquality {
+    isEqual(other: TypeWithEquality): boolean;
+  }
+
+  async function addDocs(docs: {
+    [key: string]: DocumentData;
+  }): Promise<WriteResult[]> {
+    const futures = [];
+    for (const key of Object.keys(docs)) {
+      futures.push(randomCol.doc(key).set(docs[key]));
+    }
+    return Promise.all(futures);
+  }
+
+  function toDataArray(docSet: QuerySnapshot): DocumentData[] {
+    return docSet.docs.map(d => d.data());
+  }
+
+  function toIds(docSet: QuerySnapshot): string[] {
+    return docSet.docs.map(d => d.id);
+  }
+
+  async function checkRoundTrip<T extends TypeWithEquality>(originalValue: T) {
+    await doc.set({key: originalValue});
+    const getResult = await doc.get();
+    expect(getResult.data()).to.not.be.undefined;
+    const roundTripValue: T = getResult.data()!['key'];
+    expect(roundTripValue.isEqual(originalValue)).to.be.true;
+  }
+
+  it('round trip a min key value', async () => {
+    await doc.set({key: MinKey.instance()});
+    const getResult = await doc.get();
+    expect(getResult.data()).to.not.be.undefined;
+    const roundTripValue = getResult.data()!['key'];
+    expect(roundTripValue === MinKey.instance()).to.be.true;
+    expect(roundTripValue === MaxKey.instance()).to.be.false;
+  });
+
+  it('round trip a max key value', async () => {
+    await doc.set({key: MaxKey.instance()});
+    const getResult = await doc.get();
+    expect(getResult.data()).to.not.be.undefined;
+    const roundTripValue = getResult.data()!['key'];
+    expect(roundTripValue === MinKey.instance()).to.be.false;
+    expect(roundTripValue === MaxKey.instance()).to.be.true;
+  });
+
+  it('round trip an object id value', async () => {
+    await checkRoundTrip(new BsonObjectId('507f191e810c19729de860ea'));
+  });
+
+  it('round trip a regex value', async () => {
+    await checkRoundTrip(new RegexValue('^foo', 'i'));
+  });
+
+  it('round trip a 32-bit integer', async () => {
+    await checkRoundTrip(new Int32Value(-57));
+    await checkRoundTrip(new Int32Value(0));
+    await checkRoundTrip(new Int32Value(57));
+  });
+
+  it('round trip a 128-bit decimal', async () => {
+    await checkRoundTrip(new Decimal128Value('NaN'));
+    await checkRoundTrip(new Decimal128Value('-Infinity'));
+    await checkRoundTrip(new Decimal128Value('-1.2e3'));
+    await checkRoundTrip(new Decimal128Value('-4.2e+3'));
+    await checkRoundTrip(new Decimal128Value('-1.2e-3'));
+    await checkRoundTrip(new Decimal128Value('-4.2e-3'));
+    await checkRoundTrip(new Decimal128Value('-1'));
+    await checkRoundTrip(new Decimal128Value('-0'));
+    await checkRoundTrip(new Decimal128Value('0'));
+    await checkRoundTrip(new Decimal128Value('-0.0'));
+    await checkRoundTrip(new Decimal128Value('0.0'));
+    await checkRoundTrip(new Decimal128Value('1'));
+    await checkRoundTrip(new Decimal128Value('1.2e3'));
+    await checkRoundTrip(new Decimal128Value('4.2e+3'));
+    await checkRoundTrip(new Decimal128Value('1.2e-3'));
+    await checkRoundTrip(new Decimal128Value('4.2e-3'));
+    await checkRoundTrip(new Decimal128Value('Infinity'));
+    await checkRoundTrip(
+      new Decimal128Value('0.1234567890123456789012345678901234'),
+    );
+    await checkRoundTrip(
+      new Decimal128Value('1234567890123456789012345678901234'),
+    );
+    await checkRoundTrip(
+      new Decimal128Value('-0.1234567890123456789012345678901234'),
+    );
+    await checkRoundTrip(
+      new Decimal128Value('-1234567890123456789012345678901234'),
+    );
+  });
+
+  it('invalid decimal128 gets rejected', async () => {
+    const docRef = randomCol.doc();
+    let errorMessage = '';
+    try {
+      await docRef.set({key: new Decimal128Value('')});
+    } catch (err) {
+      errorMessage = err?.message;
+    }
+    expect(errorMessage).to.contains('Invalid decimal128 string');
+
+    try {
+      errorMessage = '';
+      await docRef.set({key: new Decimal128Value('1 23. 4')});
+    } catch (err) {
+      errorMessage = err?.message;
+    }
+    expect(errorMessage).to.contains('Invalid decimal128 string');
+
+    try {
+      errorMessage = '';
+      await docRef.set({key: new Decimal128Value('abc')});
+    } catch (err) {
+      errorMessage = err?.message;
+    }
+    expect(errorMessage).to.contains('Invalid decimal128 string');
+  });
+
+  it('round trip a BSON timestamp', async () => {
+    await checkRoundTrip(new BsonTimestamp(57, 1));
+  });
+
+  it('round trip BSON binary data', async () => {
+    await checkRoundTrip(Bytes.fromUint8Array(Buffer.from([5, 6, 7]), 128));
+  });
+
+  it('invalid 32-bit integer gets rejected', async () => {
+    let error1: Error | null = null;
+    try {
+      await doc.set({key: new Int32Value(2147483648)});
+    } catch (e) {
+      error1 = e;
+    }
+
+    expect(error1).to.not.be.null;
+    expect(error1!.message).to.contain(
+      "The field '__int__' value (2,147,483,648) is too large to be converted to a 32-bit integer",
+    );
+
+    let error2: Error | null = null;
+    try {
+      await doc.set({key: new Int32Value(-2147483650)});
+    } catch (e) {
+      error2 = e;
+    }
+    expect(error2).to.not.be.null;
+    expect(error2!.message).to.contain(
+      "The field '__int__' value (-2,147,483,650) is too large to be converted to a 32-bit integer.",
+    );
+  });
+
+  it('BSON timestamp larger than 32-bit integer gets rejected', async () => {
+    let error: Error | null = null;
+    try {
+      await doc.set({key: new BsonTimestamp(4294967296, 2)});
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.not.be.null;
+    expect(error!.message).to.contain(
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
+    );
+
+    error = null;
+    try {
+      await doc.set({key: new BsonTimestamp(2, 4294967296)});
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.not.be.null;
+    expect(error!.message).to.contain(
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
+    );
+  });
+
+  it('negative BSON timestamp gets rejected', async () => {
+    let error: Error | null = null;
+    try {
+      await doc.set({key: new BsonTimestamp(-1, 2)});
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.not.be.null;
+    expect(error!.message).to.contain(
+      "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
+    );
+
+    error = null;
+    try {
+      await doc.set({key: new BsonTimestamp(1, -2)});
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.not.be.null;
+    expect(error!.message).to.contain(
+      "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
+    );
+  });
+
+  it('invalid regex value gets rejected', async () => {
+    let error: Error | null = null;
+    try {
+      await doc.set({key: new RegexValue('foo', 'a')});
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.not.be.null;
+    expect(error!.message).to.contain(
+      "Invalid regex option 'a'. Supported options are 'i', 'm', 's', 'u', and 'x'.",
+    );
+  });
+
+  it('invalid bsonObjectId value gets rejected', async () => {
+    let error: Error | null = null;
+    try {
+      await doc.set({key: new BsonObjectId('foo')});
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.not.be.null;
+    expect(error!.message).to.contain(
+      'Object ID hex string has incorrect length.',
+    );
+  });
+
+  it('invalid Bytes subtype gets rejected', async () => {
+    let error: Error | null = null;
+    try {
+      await doc.set({
+        key: Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1234),
+      });
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.not.be.null;
+    expect(error!.message).to.contain(
+      'The subtype for Bytes must be a value in the inclusive [0, 255] range.',
+    );
+  });
+
+  it('can filter and order objectIds', async () => {
+    const testDocs = {
+      a: {key: new BsonObjectId('507f191e810c19729de860ea')},
+      b: {key: new BsonObjectId('507f191e810c19729de860eb')},
+      c: {key: new BsonObjectId('507f191e810c19729de860ec')},
+    };
+
+    await addDocs(testDocs);
+    let orderedQuery = randomCol
+      .where('key', '>', new BsonObjectId('507f191e810c19729de860ea'))
+      .orderBy('key', 'desc');
+
+    let snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+
+    orderedQuery = randomCol
+      .where('key', 'in', [
+        new BsonObjectId('507f191e810c19729de860ea'),
+        new BsonObjectId('507f191e810c19729de860eb'),
+      ])
+      .orderBy('key', 'desc');
+
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['b'], testDocs['a']]);
+  });
+
+  it('can filter and order Int32 values', async () => {
+    const testDocs = {
+      a: {key: new Int32Value(-1)},
+      b: {key: new Int32Value(1)},
+      c: {key: new Int32Value(2)},
+    };
+    await addDocs(testDocs);
+    let orderedQuery = randomCol
+      .where('key', '>=', new Int32Value(1))
+      .orderBy('key', 'desc');
+
+    let snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+
+    orderedQuery = randomCol
+      .where('key', 'not-in', [new Int32Value(1)])
+      .orderBy('key', 'desc');
+
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['a']]);
+  });
+
+  it('can filter and order Decimal128 values', async () => {
+    const testDocs = {
+      a: {key: new Decimal128Value('-1.2e3')},
+      b: {key: new Decimal128Value('0')},
+      c: {key: new Decimal128Value('1.2e-3')},
+      d: {key: new Decimal128Value('NaN')},
+      e: {key: new Decimal128Value('-Infinity')},
+      f: {key: new Decimal128Value('Infinity')},
+    };
+    await addDocs(testDocs);
+    let orderedQuery = randomCol
+      .where('key', '>=', new Decimal128Value('-1.1'))
+      .orderBy('key', 'desc');
+
+    let snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([
+      testDocs['f'],
+      testDocs['c'],
+      testDocs['b'],
+    ]);
+
+    orderedQuery = randomCol
+      .where('key', '!=', new Decimal128Value('0.0'))
+      .orderBy('key', 'desc');
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([
+      testDocs['f'],
+      testDocs['c'],
+      testDocs['a'],
+      testDocs['e'],
+      testDocs['d'],
+    ]);
+
+    orderedQuery = randomCol
+      .where('key', '>', new Decimal128Value('-1.2e-3'))
+      .orderBy('key', 'desc');
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([
+      testDocs['f'],
+      testDocs['c'],
+      testDocs['b'],
+    ]);
+
+    orderedQuery = randomCol
+      .where('key', '!=', new Decimal128Value('NaN'))
+      .orderBy('key');
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([
+      testDocs['e'],
+      testDocs['a'],
+      testDocs['b'],
+      testDocs['c'],
+      testDocs['f'],
+    ]);
+
+    orderedQuery = randomCol
+      .where('key', 'not-in', [
+        new Decimal128Value('1.2e-3'),
+        new Decimal128Value('Infinity'),
+      ])
+      .orderBy('key', 'desc');
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([
+      testDocs['b'],
+      testDocs['a'],
+      testDocs['e'],
+      testDocs['d'],
+    ]);
+  });
+
+  it('can filter and order numerical values ', async () => {
+    const testDocs = {
+      a: {key: new Decimal128Value('-1.2e3')}, // -1200
+      b: {key: new Int32Value(0)},
+      c: {key: new Decimal128Value('1')},
+      d: {key: new Int32Value(1)},
+      e: {key: 1},
+      f: {key: 1.0},
+      g: {key: new Decimal128Value('1.2e-3')}, // 0.0012
+      h: {key: new Int32Value(2)},
+      i: {key: new Decimal128Value('NaN')},
+      j: {key: new Decimal128Value('-Infinity')},
+      k: {key: NaN},
+      l: {key: Infinity},
+    };
+
+    await addDocs(testDocs);
+    let orderedQuery = randomCol.orderBy('key', 'desc');
+    let snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toIds(snapshot)).to.deep.equal([
+      'l', // Infinity
+      'h', // 2
+      'f', // 1.0
+      'e', // 1
+      'd', // 1
+      'c', // 1
+      'g', // 0.0012
+      'b', // 0
+      'a', // -1200
+      'j', // -Infinity
+      'k', // NaN
+      'i', // NaN
+    ]);
+
+    orderedQuery = randomCol
+      .where('key', '!=', new Decimal128Value('1.0'))
+      .orderBy('key', 'desc');
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toIds(snapshot)).to.deep.equal([
+      'l',
+      'h',
+      'g',
+      'b',
+      'a',
+      'j',
+      'k',
+      'i',
+    ]);
+
+    orderedQuery = randomCol.where('key', '==', 1).orderBy('key', 'desc');
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toIds(snapshot)).to.deep.equal(['f', 'e', 'd', 'c']);
+  });
+
+  it('decimal128 values with no 2s complement representation', async () => {
+    const testDocs = {
+      a: {key: new Decimal128Value('-1.1e-3')}, // -0.0011
+      b: {key: new Decimal128Value('1.1')},
+      c: {key: 1.1},
+      d: {key: 1.0},
+      e: {key: new Decimal128Value('1.1e-3')}, // 0.0011
+    };
+
+    await addDocs(testDocs);
+    let orderedQuery = randomCol.where('key', '==', new Decimal128Value('1.1'));
+    let snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toIds(snapshot)).to.deep.equal(['b']);
+
+    orderedQuery = randomCol
+      .where('key', '!=', new Decimal128Value('1.1'))
+      .orderBy('key');
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toIds(snapshot)).to.deep.equal(['a', 'e', 'd', 'c']);
+
+    orderedQuery = randomCol.where('key', '==', 1.1);
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toIds(snapshot)).to.deep.equal(['c']);
+
+    orderedQuery = randomCol.where('key', '!=', 1.1).orderBy('key');
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toIds(snapshot)).to.deep.equal(['a', 'e', 'd', 'b']);
+  });
+
+  it('can filter and order Timestamp values', async () => {
+    const testDocs = {
+      a: {key: new BsonTimestamp(1, 1)},
+      b: {key: new BsonTimestamp(1, 2)},
+      c: {key: new BsonTimestamp(2, 1)},
+    };
+    await addDocs(testDocs);
+
+    let orderedQuery = randomCol
+      .where('key', '>', new BsonTimestamp(1, 1))
+      .orderBy('key', 'desc');
+
+    let snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+
+    orderedQuery = randomCol
+      .where('key', '!=', new BsonTimestamp(1, 1))
+      .orderBy('key', 'desc');
+
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+  });
+
+  it('can filter and order Binary values', async () => {
+    const testDocs = {
+      a: {key: Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1)},
+      b: {key: Bytes.fromUint8Array(new Uint8Array([1, 2, 4]), 1)},
+      c: {key: Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 2)},
+    };
+    await addDocs(testDocs);
+
+    let orderedQuery = randomCol
+      .where('key', '>', Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1))
+      .orderBy('key', 'desc');
+
+    let snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+
+    orderedQuery = randomCol
+      .where('key', '>=', Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1))
+      .where('key', '<', Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 2))
+      .orderBy('key', 'desc');
+
+    snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['b'], testDocs['a']]);
+  });
+
+  it('can filter and order Regex values', async () => {
+    const testDocs = {
+      a: {key: new RegexValue('^bar', 'i')},
+      b: {key: new RegexValue('^bar', 'x')},
+      c: {key: new RegexValue('^baz', 'i')},
+    };
+    await addDocs(testDocs);
+
+    const orderedQuery = randomCol
+      .where(
+        Filter.or(
+          Filter.where('key', '>', new RegexValue('^bar', 'x')),
+          Filter.where('key', '!=', new RegexValue('^bar', 'x')),
+        ),
+      )
+      .orderBy('key', 'desc');
+
+    const snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['a']]);
+  });
+
+  it('can filter and order minKey values', async () => {
+    const testDocs = {
+      a: {key: MinKey.instance()},
+      b: {key: MinKey.instance()},
+      c: {key: MaxKey.instance()},
+      d: {key: null},
+    };
+    await addDocs(testDocs);
+
+    const orderedQuery = randomCol
+      .where('key', '==', MinKey.instance())
+      .orderBy('key', 'desc'); // minKeys are equal, would sort by documentId as secondary order
+
+    const snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['b'], testDocs['a']]);
+  });
+
+  it('can filter and order maxKey values', async () => {
+    const testDocs = {
+      a: {key: MinKey.instance()},
+      b: {key: MaxKey.instance()},
+      c: {key: MaxKey.instance()},
+    };
+    await addDocs(testDocs);
+    const orderedQuery = randomCol
+      .where('key', '==', MaxKey.instance())
+      .orderBy('key', 'desc'); // maxKeys are equal, would sort by documentId as secondary order
+    const snapshot = await getFirstSnapshot(orderedQuery);
+    expect(toDataArray(snapshot)).to.deep.equal([testDocs['c'], testDocs['b']]);
+  });
+
+  it('cross-type order', async () => {
+    await addDocs({
+      t: {key: null},
+      u: {key: MinKey.instance()},
+      c: {key: true},
+      d: {key: NaN},
+      e: {key: new Int32Value(1)},
+      f: {key: 2.0},
+      g: {key: new Decimal128Value('2.01e-5')},
+      h: {key: 3},
+      i: {key: new Timestamp(100, 123456000)},
+      j: {key: new BsonTimestamp(1, 2)},
+      k: {key: 'string'},
+      l: {key: new Uint8Array([0, 1, 255])},
+      m: {key: Bytes.fromUint8Array(new Uint8Array([1, 2, 3]), 1)},
+      n: {key: randomCol.firestore.collection('c1').doc('doc')},
+      o: {key: new BsonObjectId('507f191e810c19729de860ea')},
+      p: {key: new GeoPoint(0, 0)},
+      q: {key: new RegexValue('^foo', 'i')},
+      r: {key: [1, 2]},
+      s: {key: FieldValue.vector([1, 2])},
+      a: {key: {a: 1}},
+      b: {key: MaxKey.instance()},
+    });
+
+    const expectedResult = [
+      'b',
+      'a',
+      's',
+      'r',
+      'q',
+      'p',
+      'o',
+      'n',
+      'm',
+      'l',
+      'k',
+      'j',
+      'i',
+      'h',
+      'f',
+      'e',
+      'g',
+      'd',
+      'c',
+      'u',
+      't',
+    ];
+
+    const result = await getFirstSnapshot(randomCol.orderBy('key', 'desc'));
+    expect(result.docs.map(e => e.id)).to.deep.equal(expectedResult);
+
+    const listenerResult = await getFirstSnapshot(
+      randomCol.orderBy('key', 'desc'),
+    );
+    expect(listenerResult.docs.map(e => e.id)).to.deep.equal(expectedResult);
   });
 });

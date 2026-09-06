@@ -30,6 +30,19 @@ import {
 } from './validate';
 
 import api = proto.google.firestore.v1;
+import {
+  RESERVED_BSON_BINARY_KEY,
+  RESERVED_INT32_KEY,
+  RESERVED_BSON_OBJECT_ID_KEY,
+  RESERVED_REGEX_KEY,
+  RESERVED_REGEX_OPTIONS_KEY,
+  RESERVED_REGEX_PATTERN_KEY,
+  RESERVED_BSON_TIMESTAMP_INCREMENT_KEY,
+  RESERVED_BSON_TIMESTAMP_KEY,
+  RESERVED_BSON_TIMESTAMP_SECONDS_KEY,
+  RESERVED_DECIMAL128_KEY,
+} from './map-type';
+import {Quadruple} from './quadruple';
 
 /**
  * Represent a vector type in Firestore documents.
@@ -80,6 +93,458 @@ export class VectorValue implements firestore.VectorValue {
    */
   isEqual(other: VectorValue): boolean {
     return isPrimitiveArrayEqual(this._values, other._values);
+  }
+}
+
+/**
+ * Represents the Firestore "Min Key" data type.
+ *
+ * @class MinKey
+ */
+export class MinKey implements firestore.MinKey {
+  private static MIN_KEY_VALUE_INSTANCE = new MinKey();
+  readonly type = 'MinKey';
+
+  private constructor() {}
+
+  /**
+   * @private
+   * @internal
+   */
+  static instance(): MinKey {
+    return MinKey.MIN_KEY_VALUE_INSTANCE;
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    return serializer.encodeMinKey();
+  }
+}
+
+/**
+ * Represents the Firestore "Max Key" data type.
+ *
+ * @class MaxKey
+ */
+export class MaxKey implements firestore.MaxKey {
+  private static MAX_KEY_VALUE_INSTANCE = new MaxKey();
+  readonly type = 'MaxKey';
+
+  /**
+   * @private
+   * @internal
+   */
+  private constructor() {}
+
+  /**
+   * @private
+   * @internal
+   */
+  static instance(): MaxKey {
+    return MaxKey.MAX_KEY_VALUE_INSTANCE;
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    return serializer.encodeMaxKey();
+  }
+}
+
+/**
+ * Represents a regular expression type in Firestore documents.
+ *
+ * @class RegexValue
+ */
+export class RegexValue implements firestore.RegexValue {
+  /**
+   * Creates a new regular expression value with the given pattern and options.
+   *
+   * @param pattern - The pattern to use for this regex value.
+   * @param options - The options to use for this regex value.
+   *
+   * @private
+   * @internal
+   */
+  constructor(
+    readonly pattern: string,
+    readonly options: string,
+  ) {}
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    return serializer.encodeRegex(this.pattern, this.options);
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  static _fromProto(proto: api.IValue): RegexValue {
+    const fields = proto.mapValue!.fields;
+    const pattern =
+      fields?.[RESERVED_REGEX_KEY]?.mapValue?.fields?.[
+        RESERVED_REGEX_PATTERN_KEY
+      ]?.stringValue ?? '';
+    const options =
+      fields?.[RESERVED_REGEX_KEY]?.mapValue?.fields?.[
+        RESERVED_REGEX_OPTIONS_KEY
+      ]?.stringValue ?? '';
+    return new RegexValue(pattern, options);
+  }
+
+  /**
+   * Returns `true` if the two regex values have the same pattern and options, returns `false` otherwise.
+   */
+  isEqual(other: RegexValue): boolean {
+    return this.pattern === other.pattern && this.options === other.options;
+  }
+}
+
+/**
+ * Represents a BSON ObjectId type in Firestore documents.
+ *
+ * @class BsonObjectId
+ */
+export class BsonObjectId implements firestore.BsonObjectId {
+  /**
+   * Creates a new BSON ObjectId value with the given value.
+   *
+   * @param value - The 24-character hex string representing the ObjectId.
+   *
+   * @private
+   * @internal
+   */
+  constructor(readonly value: string) {}
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    return serializer.encodeBsonObjectId(this.value);
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  static _fromProto(proto: api.IValue): BsonObjectId {
+    const oid =
+      proto.mapValue!.fields?.[RESERVED_BSON_OBJECT_ID_KEY]?.stringValue ?? '';
+    return new BsonObjectId(oid);
+  }
+
+  /**
+   * Returns `true` if the two BsonObjectId values have the same pattern and options, returns `false` otherwise.
+   */
+  isEqual(other: BsonObjectId): boolean {
+    return this.value === other.value;
+  }
+}
+
+/** Represents a 32-bit integer type in Firestore documents. */
+export class Int32Value implements firestore.Int32Value {
+  /**
+   * Creates a new 32-bit signed integer value.
+   *
+   * @param value - The number whose 32-bit representation will be used.
+   *
+   * Note: values larger than the largest 32-bit signed integer,
+   * or smaller than the smallest 32-bit signed integer are invalid
+   * and will get rejected.
+   *
+   * @private
+   * @internal
+   */
+  constructor(readonly value: number) {}
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    return serializer.encodeInt32(this.value);
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  static _fromProto(proto: api.IValue): Int32Value {
+    const value = Number(
+      proto.mapValue!.fields?.[RESERVED_INT32_KEY]?.integerValue,
+    );
+    return new Int32Value(value);
+  }
+
+  /**
+   * Returns true if this `Int32Value` is equal to the provided one.
+   *
+   * @param other The `Int32Value` to compare against.
+   * @return 'true' if this `Int32Value` is equal to the provided one.
+   */
+  isEqual(other: Int32Value): boolean {
+    return this.value === other.value;
+  }
+}
+
+/** Represents a 128-bit decimal type in Firestore documents. */
+export class Decimal128Value implements firestore.Decimal128Value {
+  /**
+   * Creates a new 128-bit decimal value.
+   *
+   * @param value - The string representation of the 128-bit decimal.
+   *
+   * @private
+   * @internal
+   */
+  constructor(readonly value: string) {}
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    return serializer.encodeDecimal128(this.value);
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  static _fromProto(proto: api.IValue): Decimal128Value {
+    const value =
+      proto.mapValue!.fields?.[RESERVED_DECIMAL128_KEY]?.stringValue || '';
+    return new Decimal128Value(value);
+  }
+
+  /**
+   * Returns true if this `Decimal128Value` is equal to the provided one.
+   *
+   * @param other The `Decimal128Value` to compare against.
+   * @return 'true' if this `Decimal128Value` is equal to the provided one.
+   */
+  isEqual(other: Decimal128Value): boolean {
+    const lhs = Quadruple.fromString(this.value);
+    const rhs = Quadruple.fromString(other.value);
+
+    // Firestore considers -0 and +0 to be equal, but Quadruple does not.
+    if (lhs.isZero() && rhs.isZero()) {
+      return true;
+    }
+
+    return lhs.compareTo(rhs) === 0;
+  }
+}
+
+/** Represents a Request Timestamp type in Firestore documents. */
+export class BsonTimestamp implements firestore.BsonTimestamp {
+  /**
+   * Creates a new BSON Timestamp from the given values.
+   *
+   * @param seconds - The seconds value to be used for this BSON timestamp.
+   * @param increment - The increment value to be used for this BSON timestamp.
+   *
+   * Note: negative values and values larger than the largest 32-bit
+   * unsigned integer are invalid and will get rejected.
+   *
+   * @private
+   * @internal
+   */
+  constructor(
+    readonly seconds: number,
+    readonly increment: number,
+  ) {
+    if (seconds < 0 || seconds > 4294967295) {
+      throw new Error(
+        "BsonTimestamp 'seconds' must be in the range of a 32-bit unsigned integer.",
+      );
+    }
+    if (increment < 0 || increment > 4294967295) {
+      throw new Error(
+        "BsonTimestamp 'increment' must be in the range of a 32-bit unsigned integer.",
+      );
+    }
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    return serializer.encodeBsonTimestamp(this.seconds, this.increment);
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  static _fromProto(proto: api.IValue): BsonTimestamp {
+    const fields = proto.mapValue!.fields?.[RESERVED_BSON_TIMESTAMP_KEY];
+    const seconds = Number(
+      fields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_SECONDS_KEY]
+        ?.integerValue,
+    );
+    const increment = Number(
+      fields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_INCREMENT_KEY]
+        ?.integerValue,
+    );
+    return new BsonTimestamp(seconds, increment);
+  }
+
+  /**
+   * Returns true if this `BsonTimestamp` is equal to the provided one.
+   *
+   * @param other The `BsonTimestamp` to compare against.
+   * @return 'true' if this `BsonTimestamp` is equal to the provided one.
+   */
+  isEqual(other: BsonTimestamp): boolean {
+    return this.seconds === other.seconds && this.increment === other.increment;
+  }
+}
+
+/** An immutable object representing an array of bytes. */
+export class Bytes implements firestore.Bytes {
+  readonly data: Uint8Array;
+
+  private constructor(
+    data: Uint8Array,
+    readonly subtype = 0,
+  ) {
+    if (!Number.isInteger(subtype) || subtype < 0 || subtype > 255) {
+      throw new Error(
+        'The subtype for Bytes must be a value in the inclusive [0, 255] range.',
+      );
+    }
+    this.data = data instanceof Uint8Array ? data : new Uint8Array(data);
+    this.subtype = subtype;
+  }
+
+  /**
+   * Creates a new `Bytes` object from the given Base64 string, converting it to
+   * bytes.
+   *
+   * @param base64 - The Base64 string used to create the `Bytes` object.
+   * @param subtype - Optional subtype value.
+   */
+  static fromBase64String(base64: string, subtype = 0): Bytes {
+    try {
+      const buffer = Buffer.from(base64, 'base64');
+      const data = new Uint8Array(
+        buffer.buffer,
+        buffer.byteOffset,
+        buffer.byteLength,
+      );
+      return new Bytes(data, subtype);
+    } catch (e) {
+      throw new Error('Failed to parse base64 string: ' + e);
+    }
+  }
+
+  /**
+   * Creates a new `Bytes` object from the given Uint8Array.
+   *
+   * @param array - The Uint8Array used to create the `Bytes` object.
+   * @param subtype - Optional subtype value.
+   */
+  static fromUint8Array(array: Uint8Array, subtype = 0): Bytes {
+    return new Bytes(array, subtype);
+  }
+
+  /**
+   * Returns the underlying bytes as a Base64-encoded string.
+   *
+   * @returns The Base64-encoded string created from the `Bytes` object.
+   */
+  toBase64(): string {
+    return Buffer.from(
+      this.data.buffer,
+      this.data.byteOffset,
+      this.data.byteLength,
+    ).toString('base64');
+  }
+
+  /**
+   * Returns the underlying bytes in a new `Uint8Array`.
+   *
+   * @returns The Uint8Array created from the `Bytes` object.
+   */
+  toUint8Array(): Uint8Array {
+    return Uint8Array.from(this.data);
+  }
+
+  /**
+   * Returns a string representation of the `Bytes` object.
+   *
+   * @returns A string representation of the `Bytes` object.
+   */
+  toString(): string {
+    return (
+      'Bytes(base64: ' + this.toBase64() + ', subtype: ' + this.subtype + ')'
+    );
+  }
+
+  /**
+   * Returns true if this `Bytes` object is equal to the provided one.
+   *
+   * @param other - The `Bytes` object to compare against.
+   * @returns true if this `Bytes` object is equal to the provided one.
+   */
+  isEqual(other: any): boolean {
+    if (other instanceof Bytes) {
+      return (
+        this.subtype === other.subtype &&
+        Buffer.from(this.data).equals(other.data)
+      );
+    }
+    if (other instanceof Uint8Array) {
+      return this.subtype === 0 && Buffer.from(this.data).equals(other);
+    }
+    return false;
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  _toProto(serializer: Serializer): api.IValue {
+    if (this.subtype === 0) {
+      return {
+        bytesValue: this.data,
+      };
+    }
+    return serializer.encodeBsonBinaryData(this.subtype, this.data);
+  }
+
+  /**
+   * @private
+   * @internal
+   */
+  static _fromProto(proto: api.IValue): Bytes {
+    const fields = proto.mapValue!.fields?.[RESERVED_BSON_BINARY_KEY];
+    const subtypeAndData = fields?.bytesValue;
+    if (!subtypeAndData) {
+      throw new Error('Received incorrect bytesValue for Bytes');
+    }
+    const bytes =
+      typeof subtypeAndData === 'string'
+        ? Buffer.from(subtypeAndData, 'base64')
+        : subtypeAndData;
+    if (bytes.length === 0) {
+      throw new Error('Received empty bytesValue for Bytes');
+    }
+    const subtype = bytes[0];
+    const data = bytes.slice(1);
+    return new Bytes(data, subtype);
   }
 }
 
