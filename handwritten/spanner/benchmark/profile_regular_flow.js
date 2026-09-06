@@ -287,10 +287,10 @@ async function main() {
     },
     {
       id: 2,
-      name: 'Point select with 32 concurrency (c=32)',
+      name: 'Point select with 2 concurrency (c=2)',
       filename: 'profile_point_select_c32.cpuprofile',
       fn: executePointSelect,
-      concurrency: 32,
+      concurrency: 2,
     },
     {
       id: 3,
