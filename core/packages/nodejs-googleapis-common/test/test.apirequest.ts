@@ -21,7 +21,13 @@ import {URL} from 'url';
 import * as sinon from 'sinon';
 
 import {GlobalOptions, MethodOptions} from '../src/api';
-import {createAPIRequest} from '../src/apirequest';
+import {
+  createAPIRequest,
+  validateUriPathSegment,
+  validateUriPath,
+  encodeWithSlashes,
+  encodeWithoutSlashes,
+} from '../src/apirequest';
 import {GoogleAuth} from 'google-auth-library';
 import {GaxiosResponse} from 'gaxios';
 
@@ -500,6 +506,105 @@ describe('createAPIRequest', () => {
         },
       });
       assert.ok(stub.calledOnce);
+    });
+  });
+
+  describe('URI path validation and encoding helpers', () => {
+    it('validateUriPathSegment should reject . and ..', () => {
+      assert.throws(
+        () => validateUriPathSegment('name', '.'),
+        /Invalid value \. for name/,
+      );
+      assert.throws(
+        () => validateUriPathSegment('name', '..'),
+        /Invalid value \.\. for name/,
+      );
+      assert.doesNotThrow(() => validateUriPathSegment('name', 'valid'));
+      assert.doesNotThrow(() => validateUriPathSegment('name', 'foo/bar'));
+    });
+
+    it('validateUriPath should reject segments that are . or ..', () => {
+      assert.throws(
+        () => validateUriPath('name', '.'),
+        /Value for name must not contain segments that are exactly \. or \.\./,
+      );
+      assert.throws(
+        () => validateUriPath('name', '..'),
+        /Value for name must not contain segments that are exactly \. or \.\./,
+      );
+      assert.throws(
+        () => validateUriPath('name', 'foo/./bar'),
+        /Value for name must not contain segments that are exactly \. or \.\./,
+      );
+      assert.throws(
+        () => validateUriPath('name', 'foo/../bar'),
+        /Value for name must not contain segments that are exactly \. or \.\./,
+      );
+      assert.doesNotThrow(() => validateUriPath('name', 'foo/bar'));
+      assert.doesNotThrow(() => validateUriPath('name', 'foo..bar'));
+    });
+
+    it('encodeWithSlashes should encode slashes and reserved characters', () => {
+      assert.strictEqual(encodeWithSlashes('foo/bar'), 'foo%2Fbar');
+      assert.strictEqual(encodeWithSlashes('a?b#c'), 'a%3Fb%23c');
+    });
+
+    it('encodeWithoutSlashes should preserve slashes but encode reserved characters', () => {
+      assert.strictEqual(encodeWithoutSlashes('foo/bar'), 'foo/bar');
+      assert.strictEqual(encodeWithoutSlashes('a?b#c'), 'a%3Fb%23c');
+    });
+
+    it('should validate standard path params ({param}) against path traversal', async () => {
+      await assert.rejects(
+        createAPIRequest<FakeParams>({
+          options: {url: `${url}/projects/{projectId}`},
+          params: {projectId: '.'},
+          requiredParams: [],
+          pathParams: ['projectId'],
+          context: fakeContext,
+        }),
+        /Invalid value \. for projectId/,
+      );
+
+      await assert.rejects(
+        createAPIRequest<FakeParams>({
+          options: {url: `${url}/projects/{projectId}`},
+          params: {projectId: '..'},
+          requiredParams: [],
+          pathParams: ['projectId'],
+          context: fakeContext,
+        }),
+        /Invalid value \.\. for projectId/,
+      );
+    });
+
+    it('should validate reserved path params ({+param}) against path traversal and encode non-slash characters', async () => {
+      await assert.rejects(
+        createAPIRequest<FakeParams>({
+          options: {url: `${url}/v1/{+name}`},
+          params: {name: 'projects/../locations'},
+          requiredParams: [],
+          pathParams: ['name'],
+          context: fakeContext,
+        }),
+        /Value for name must not contain segments that are exactly \. or \.\./,
+      );
+
+      const scope = nock(url)
+        .get('/v1/projects/p1/locations%3Ffoo%3Dbar')
+        .reply(200, fakeResponse);
+      const res = await createAPIRequest<FakeParams>({
+        options: {url: `${url}/v1/{+name}`},
+        params: {name: 'projects/p1/locations?foo=bar'},
+        requiredParams: [],
+        pathParams: ['name'],
+        context: fakeContext,
+      });
+      scope.done();
+      assert.strictEqual(
+        res.config.url.toString(),
+        `${url}/v1/projects/p1/locations%3Ffoo%3Dbar`,
+      );
     });
   });
 
