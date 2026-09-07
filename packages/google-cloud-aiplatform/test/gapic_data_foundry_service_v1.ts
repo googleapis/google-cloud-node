@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datafoundryserviceModule from '../src';
 
-import { protobuf, IamProtos, LocationProtos } from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -201,7 +201,7 @@ describe('v1.DataFoundryServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataFoundryServiceStub, undefined);
@@ -209,12 +209,12 @@ describe('v1.DataFoundryServiceClient', () => {
       assert(client.dataFoundryServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataFoundryServiceStub);
@@ -223,14 +223,14 @@ describe('v1.DataFoundryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataFoundryServiceStub, undefined);
@@ -239,7 +239,7 @@ describe('v1.DataFoundryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -247,7 +247,7 @@ describe('v1.DataFoundryServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -259,7 +259,7 @@ describe('v1.DataFoundryServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -282,7 +282,7 @@ describe('v1.DataFoundryServiceClient', () => {
   describe('generateSyntheticData', () => {
     it('invokes generateSyntheticData without error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -314,7 +314,7 @@ describe('v1.DataFoundryServiceClient', () => {
 
     it('invokes generateSyntheticData without error using callback', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -361,7 +361,7 @@ describe('v1.DataFoundryServiceClient', () => {
 
     it('invokes generateSyntheticData with error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -395,7 +395,7 @@ describe('v1.DataFoundryServiceClient', () => {
 
     it('invokes generateSyntheticData with closed client', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -408,7 +408,7 @@ describe('v1.DataFoundryServiceClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -420,7 +420,7 @@ describe('v1.DataFoundryServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v1.DataFoundryServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1.DataFoundryServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -498,7 +498,7 @@ describe('v1.DataFoundryServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v1.DataFoundryServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -560,7 +560,7 @@ describe('v1.DataFoundryServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v1.DataFoundryServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -608,7 +608,7 @@ describe('v1.DataFoundryServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -640,7 +640,7 @@ describe('v1.DataFoundryServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -673,7 +673,7 @@ describe('v1.DataFoundryServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.DataFoundryServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -721,7 +721,7 @@ describe('v1.DataFoundryServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1.DataFoundryServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v1.DataFoundryServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1.DataFoundryServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v1.DataFoundryServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -913,7 +913,7 @@ describe('v1.DataFoundryServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -963,7 +963,7 @@ describe('v1.DataFoundryServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v1.DataFoundryServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1127,7 +1127,7 @@ describe('v1.DataFoundryServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1202,7 +1202,7 @@ describe('v1.DataFoundryServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1279,7 +1279,7 @@ describe('v1.DataFoundryServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1344,7 +1344,7 @@ describe('v1.DataFoundryServiceClient', () => {
         context: 'contextValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1419,7 +1419,7 @@ describe('v1.DataFoundryServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1484,7 +1484,7 @@ describe('v1.DataFoundryServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1559,7 +1559,7 @@ describe('v1.DataFoundryServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1624,7 @@ describe('v1.DataFoundryServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1689,7 +1689,7 @@ describe('v1.DataFoundryServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1765,7 +1765,7 @@ describe('v1.DataFoundryServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1847,7 +1847,7 @@ describe('v1.DataFoundryServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1923,7 +1923,7 @@ describe('v1.DataFoundryServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1998,7 +1998,7 @@ describe('v1.DataFoundryServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2062,7 +2062,7 @@ describe('v1.DataFoundryServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2140,7 +2140,7 @@ describe('v1.DataFoundryServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2217,7 +2217,7 @@ describe('v1.DataFoundryServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2293,7 +2293,7 @@ describe('v1.DataFoundryServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2357,7 +2357,7 @@ describe('v1.DataFoundryServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2438,7 +2438,7 @@ describe('v1.DataFoundryServiceClient', () => {
         index: 'indexValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2502,7 +2502,7 @@ describe('v1.DataFoundryServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2565,7 +2565,7 @@ describe('v1.DataFoundryServiceClient', () => {
         location: 'locationValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2616,7 +2616,7 @@ describe('v1.DataFoundryServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2693,7 +2693,7 @@ describe('v1.DataFoundryServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2757,7 +2757,7 @@ describe('v1.DataFoundryServiceClient', () => {
         model: 'modelValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2821,7 +2821,7 @@ describe('v1.DataFoundryServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2901,7 +2901,7 @@ describe('v1.DataFoundryServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2978,7 +2978,7 @@ describe('v1.DataFoundryServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3085,7 +3085,7 @@ describe('v1.DataFoundryServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3150,7 +3150,7 @@ describe('v1.DataFoundryServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3226,7 +3226,7 @@ describe('v1.DataFoundryServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3307,7 +3307,7 @@ describe('v1.DataFoundryServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3372,7 +3372,7 @@ describe('v1.DataFoundryServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3453,7 +3453,7 @@ describe('v1.DataFoundryServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3530,7 +3530,7 @@ describe('v1.DataFoundryServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3594,7 +3594,7 @@ describe('v1.DataFoundryServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3674,7 +3674,7 @@ describe('v1.DataFoundryServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3777,7 +3777,7 @@ describe('v1.DataFoundryServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3901,7 +3901,7 @@ describe('v1.DataFoundryServiceClient', () => {
         model: 'modelValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3992,7 +3992,7 @@ describe('v1.DataFoundryServiceClient', () => {
         model: 'modelValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4045,7 +4045,7 @@ describe('v1.DataFoundryServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4108,7 +4108,7 @@ describe('v1.DataFoundryServiceClient', () => {
         location: 'locationValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4162,7 +4162,7 @@ describe('v1.DataFoundryServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4237,7 +4237,7 @@ describe('v1.DataFoundryServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4303,7 +4303,7 @@ describe('v1.DataFoundryServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4378,7 +4378,7 @@ describe('v1.DataFoundryServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4443,7 +4443,7 @@ describe('v1.DataFoundryServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4520,7 +4520,7 @@ describe('v1.DataFoundryServiceClient', () => {
         event: 'eventValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4607,7 +4607,7 @@ describe('v1.DataFoundryServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4672,7 +4672,7 @@ describe('v1.DataFoundryServiceClient', () => {
         study: 'studyValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4736,7 +4736,7 @@ describe('v1.DataFoundryServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4801,7 +4801,7 @@ describe('v1.DataFoundryServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4897,7 +4897,7 @@ describe('v1.DataFoundryServiceClient', () => {
         run: 'runValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4986,7 +4986,7 @@ describe('v1.DataFoundryServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5109,7 +5109,7 @@ describe('v1.DataFoundryServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5178,7 +5178,7 @@ describe('v1.DataFoundryServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5253,7 +5253,7 @@ describe('v1.DataFoundryServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new datafoundryserviceModule.v1.DataFoundryServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

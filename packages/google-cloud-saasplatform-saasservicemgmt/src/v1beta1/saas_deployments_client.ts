@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class SaasDeploymentsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('saasservicemgmt');
@@ -66,10 +66,10 @@ export class SaasDeploymentsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  saasDeploymentsStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  saasDeploymentsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SaasDeploymentsClient.
@@ -145,7 +145,7 @@ export class SaasDeploymentsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -282,7 +282,7 @@ export class SaasDeploymentsClient {
       'google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -323,7 +323,7 @@ export class SaasDeploymentsClient {
             .v1beta1.SaasDeployments,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -361,7 +361,7 @@ export class SaasDeploymentsClient {
     ];
     for (const methodName of saasDeploymentsStubMethods) {
       const callPromise = this.saasDeploymentsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -565,7 +565,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSaas request %j', request);
@@ -729,7 +729,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSaas request %j', request);
@@ -898,7 +898,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         'saas.name': request.saas!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSaas request %j', request);
@@ -1067,7 +1067,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSaas request %j', request);
@@ -1210,7 +1210,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTenant request %j', request);
@@ -1374,7 +1374,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createTenant request %j', request);
@@ -1543,7 +1543,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         'tenant.name': request.tenant!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateTenant request %j', request);
@@ -1712,7 +1712,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteTenant request %j', request);
@@ -1855,7 +1855,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getUnitKind request %j', request);
@@ -2019,7 +2019,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createUnitKind request %j', request);
@@ -2188,7 +2188,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         'unit_kind.name': request.unitKind!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateUnitKind request %j', request);
@@ -2357,7 +2357,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteUnitKind request %j', request);
@@ -2500,7 +2500,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getUnit request %j', request);
@@ -2664,7 +2664,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createUnit request %j', request);
@@ -2833,7 +2833,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         'unit.name': request.unit!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateUnit request %j', request);
@@ -3002,7 +3002,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteUnit request %j', request);
@@ -3145,7 +3145,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getUnitOperation request %j', request);
@@ -3309,7 +3309,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createUnitOperation request %j', request);
@@ -3478,7 +3478,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         'unit_operation.name': request.unitOperation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateUnitOperation request %j', request);
@@ -3647,7 +3647,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteUnitOperation request %j', request);
@@ -3790,7 +3790,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRelease request %j', request);
@@ -3954,7 +3954,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createRelease request %j', request);
@@ -4123,7 +4123,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         'release.name': request.release!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateRelease request %j', request);
@@ -4292,7 +4292,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteRelease request %j', request);
@@ -4442,7 +4442,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4514,7 +4514,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listSaas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSaas stream %j', request);
@@ -4568,7 +4568,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listSaas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSaas iterate %j', request);
@@ -4677,7 +4677,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4749,7 +4749,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listTenants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTenants stream %j', request);
@@ -4803,7 +4803,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listTenants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTenants iterate %j', request);
@@ -4912,7 +4912,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4984,7 +4984,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listUnitKinds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUnitKinds stream %j', request);
@@ -5038,7 +5038,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listUnitKinds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUnitKinds iterate %j', request);
@@ -5147,7 +5147,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5219,7 +5219,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listUnits'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUnits stream %j', request);
@@ -5273,7 +5273,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listUnits'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUnits iterate %j', request);
@@ -5382,7 +5382,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5454,7 +5454,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listUnitOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUnitOperations stream %j', request);
@@ -5508,7 +5508,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listUnitOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUnitOperations iterate %j', request);
@@ -5617,7 +5617,7 @@ export class SaasDeploymentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5689,7 +5689,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listReleases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReleases stream %j', request);
@@ -5743,7 +5743,7 @@ export class SaasDeploymentsClient {
       });
     const defaultCallSettings = this._defaults['listReleases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReleases iterate %j', request);
@@ -6300,11 +6300,11 @@ export class SaasDeploymentsClient {
    */
   close(): Promise<void> {
     if (this.saasDeploymentsStub && !this._terminated) {
-      return this.saasDeploymentsStub.then((stub) => {
+      return this.saasDeploymentsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as slateserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.SlateServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.SlateServiceClient', () => {
       assert(client.slateServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new slateserviceModule.v1.SlateServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.slateServiceStub);
@@ -274,12 +274,12 @@ describe('v1.SlateServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new slateserviceModule.v1.SlateServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.SlateServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -452,7 +452,7 @@ describe('v1.SlateServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSlate(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1.SlateServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSlate(request), expectedError);
@@ -716,7 +716,7 @@ describe('v1.SlateServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateSlates(request), expectedError);
@@ -852,7 +852,7 @@ describe('v1.SlateServiceClient', () => {
       );
       request.slate.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSlate(request), expectedError);
@@ -984,7 +984,7 @@ describe('v1.SlateServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdateSlates(request), expectedError);
@@ -1117,7 +1117,7 @@ describe('v1.SlateServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchArchiveSlates(request), expectedError);
@@ -1250,7 +1250,7 @@ describe('v1.SlateServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUnarchiveSlates(request), expectedError);
@@ -1260,7 +1260,7 @@ describe('v1.SlateServiceClient', () => {
   describe('listSlates', () => {
     it('invokes listSlates without error', async () => {
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1293,7 +1293,7 @@ describe('v1.SlateServiceClient', () => {
 
     it('invokes listSlates without error using callback', async () => {
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v1.SlateServiceClient', () => {
 
     it('invokes listSlates with error', async () => {
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,7 +1373,7 @@ describe('v1.SlateServiceClient', () => {
 
     it('invokes listSlatesStream without error', async () => {
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1416,15 +1416,15 @@ describe('v1.SlateServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSlatesStream with error', async () => {
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1464,9 +1464,9 @@ describe('v1.SlateServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1507,15 +1507,15 @@ describe('v1.SlateServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSlates with error', async () => {
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1549,9 +1549,9 @@ describe('v1.SlateServiceClient', () => {
       assert(
         (client.descriptors.page.listSlates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1565,7 +1565,7 @@ describe('v1.SlateServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1.SlateServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1698,7 +1698,7 @@ describe('v1.SlateServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1747,7 +1747,7 @@ describe('v1.SlateServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1796,7 +1796,7 @@ describe('v1.SlateServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1845,7 +1845,7 @@ describe('v1.SlateServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1897,7 +1897,7 @@ describe('v1.SlateServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1950,7 +1950,7 @@ describe('v1.SlateServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2003,7 +2003,7 @@ describe('v1.SlateServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2052,7 +2052,7 @@ describe('v1.SlateServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2105,7 +2105,7 @@ describe('v1.SlateServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2157,7 +2157,7 @@ describe('v1.SlateServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2210,7 +2210,7 @@ describe('v1.SlateServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2263,7 +2263,7 @@ describe('v1.SlateServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2320,7 +2320,7 @@ describe('v1.SlateServiceClient', () => {
         company: 'companyValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2369,7 +2369,7 @@ describe('v1.SlateServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2418,7 +2418,7 @@ describe('v1.SlateServiceClient', () => {
         content: 'contentValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2467,7 +2467,7 @@ describe('v1.SlateServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2519,7 +2519,7 @@ describe('v1.SlateServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2571,7 +2571,7 @@ describe('v1.SlateServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2620,7 +2620,7 @@ describe('v1.SlateServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2672,7 +2672,7 @@ describe('v1.SlateServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2729,7 +2729,7 @@ describe('v1.SlateServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2782,7 +2782,7 @@ describe('v1.SlateServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2834,7 +2834,7 @@ describe('v1.SlateServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2897,7 +2897,7 @@ describe('v1.SlateServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2962,7 +2962,7 @@ describe('v1.SlateServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3027,7 +3027,7 @@ describe('v1.SlateServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3089,7 +3089,7 @@ describe('v1.SlateServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3136,7 +3136,7 @@ describe('v1.SlateServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3193,7 +3193,7 @@ describe('v1.SlateServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3246,7 +3246,7 @@ describe('v1.SlateServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3309,7 +3309,7 @@ describe('v1.SlateServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3374,7 +3374,7 @@ describe('v1.SlateServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3426,7 +3426,7 @@ describe('v1.SlateServiceClient', () => {
         label: 'labelValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3475,7 +3475,7 @@ describe('v1.SlateServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3524,7 +3524,7 @@ describe('v1.SlateServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3576,7 +3576,7 @@ describe('v1.SlateServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3628,7 +3628,7 @@ describe('v1.SlateServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3681,7 +3681,7 @@ describe('v1.SlateServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3733,7 +3733,7 @@ describe('v1.SlateServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3785,7 +3785,7 @@ describe('v1.SlateServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3850,7 +3850,7 @@ describe('v1.SlateServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3901,7 +3901,7 @@ describe('v1.SlateServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3940,7 +3940,7 @@ describe('v1.SlateServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3993,7 +3993,7 @@ describe('v1.SlateServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4058,7 +4058,7 @@ describe('v1.SlateServiceClient', () => {
         order: 'orderValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4107,7 +4107,7 @@ describe('v1.SlateServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4156,7 +4156,7 @@ describe('v1.SlateServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4208,7 +4208,7 @@ describe('v1.SlateServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4261,7 +4261,7 @@ describe('v1.SlateServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4324,7 +4324,7 @@ describe('v1.SlateServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4387,7 +4387,7 @@ describe('v1.SlateServiceClient', () => {
         report: 'reportValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4436,7 +4436,7 @@ describe('v1.SlateServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4499,7 +4499,7 @@ describe('v1.SlateServiceClient', () => {
         role: 'roleValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4548,7 +4548,7 @@ describe('v1.SlateServiceClient', () => {
         site: 'siteValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4597,7 +4597,7 @@ describe('v1.SlateServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4646,7 +4646,7 @@ describe('v1.SlateServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4699,7 +4699,7 @@ describe('v1.SlateServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4752,7 +4752,7 @@ describe('v1.SlateServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4809,7 +4809,7 @@ describe('v1.SlateServiceClient', () => {
         team: 'teamValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4858,7 +4858,7 @@ describe('v1.SlateServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4921,7 +4921,7 @@ describe('v1.SlateServiceClient', () => {
         user: 'userValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4970,7 +4970,7 @@ describe('v1.SlateServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5033,7 +5033,7 @@ describe('v1.SlateServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new slateserviceModule.v1.SlateServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

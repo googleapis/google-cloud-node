@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class NetworkServicesClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('networkservices');
@@ -70,12 +70,12 @@ export class NetworkServicesClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  networkServicesStub?: Promise<{ [name: string]: Function }>;
+  networkServicesStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of NetworkServicesClient.
@@ -151,7 +151,7 @@ export class NetworkServicesClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -890,7 +890,7 @@ export class NetworkServicesClient {
       'google.cloud.networkservices.v1.NetworkServices',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -930,7 +930,7 @@ export class NetworkServicesClient {
           (this._protos as any).google.cloud.networkservices.v1.NetworkServices,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -1001,7 +1001,7 @@ export class NetworkServicesClient {
     ];
     for (const methodName of networkServicesStubMethods) {
       const callPromise = this.networkServicesStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -1209,7 +1209,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEndpointPolicy request %j', request);
@@ -1354,7 +1354,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWasmPluginVersion request %j', request);
@@ -1495,7 +1495,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWasmPlugin request %j', request);
@@ -1633,7 +1633,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGateway request %j', request);
@@ -1768,7 +1768,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGrpcRoute request %j', request);
@@ -1906,7 +1906,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getHttpRoute request %j', request);
@@ -2044,7 +2044,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTcpRoute request %j', request);
@@ -2182,7 +2182,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTlsRoute request %j', request);
@@ -2326,7 +2326,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServiceBinding request %j', request);
@@ -2458,7 +2458,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMesh request %j', request);
@@ -2599,7 +2599,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServiceLbPolicy request %j', request);
@@ -2744,7 +2744,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGatewayRouteView request %j', request);
@@ -2889,7 +2889,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMeshRouteView request %j', request);
@@ -3033,7 +3033,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAgentGateway request %j', request);
@@ -3189,7 +3189,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3246,7 +3246,7 @@ export class NetworkServicesClient {
     this._log.info('createEndpointPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3364,7 +3364,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'endpoint_policy.name': request.endpointPolicy!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3421,7 +3421,7 @@ export class NetworkServicesClient {
     this._log.info('updateEndpointPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3534,7 +3534,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3591,7 +3591,7 @@ export class NetworkServicesClient {
     this._log.info('deleteEndpointPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3711,7 +3711,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3768,7 +3768,7 @@ export class NetworkServicesClient {
     this._log.info('createWasmPluginVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3882,7 +3882,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3939,7 +3939,7 @@ export class NetworkServicesClient {
     this._log.info('deleteWasmPluginVersion long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4057,7 +4057,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4114,7 +4114,7 @@ export class NetworkServicesClient {
     this._log.info('createWasmPlugin long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4237,7 +4237,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'wasm_plugin.name': request.wasmPlugin!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4294,7 +4294,7 @@ export class NetworkServicesClient {
     this._log.info('updateWasmPlugin long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4407,7 +4407,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4464,7 +4464,7 @@ export class NetworkServicesClient {
     this._log.info('deleteWasmPlugin long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4581,7 +4581,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4638,7 +4638,7 @@ export class NetworkServicesClient {
     this._log.info('createGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4756,7 +4756,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'gateway.name': request.gateway!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4813,7 +4813,7 @@ export class NetworkServicesClient {
     this._log.info('updateGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4926,7 +4926,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4983,7 +4983,7 @@ export class NetworkServicesClient {
     this._log.info('deleteGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5100,7 +5100,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5157,7 +5157,7 @@ export class NetworkServicesClient {
     this._log.info('createGrpcRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5275,7 +5275,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'grpc_route.name': request.grpcRoute!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5332,7 +5332,7 @@ export class NetworkServicesClient {
     this._log.info('updateGrpcRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5445,7 +5445,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5502,7 +5502,7 @@ export class NetworkServicesClient {
     this._log.info('deleteGrpcRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5621,7 +5621,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5678,7 +5678,7 @@ export class NetworkServicesClient {
     this._log.info('createHttpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5796,7 +5796,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'http_route.name': request.httpRoute!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5853,7 +5853,7 @@ export class NetworkServicesClient {
     this._log.info('updateHttpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5966,7 +5966,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6023,7 +6023,7 @@ export class NetworkServicesClient {
     this._log.info('deleteHttpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6140,7 +6140,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6197,7 +6197,7 @@ export class NetworkServicesClient {
     this._log.info('createTcpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6315,7 +6315,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'tcp_route.name': request.tcpRoute!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6372,7 +6372,7 @@ export class NetworkServicesClient {
     this._log.info('updateTcpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6485,7 +6485,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6542,7 +6542,7 @@ export class NetworkServicesClient {
     this._log.info('deleteTcpRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6659,7 +6659,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6716,7 +6716,7 @@ export class NetworkServicesClient {
     this._log.info('createTlsRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6834,7 +6834,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'tls_route.name': request.tlsRoute!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6891,7 +6891,7 @@ export class NetworkServicesClient {
     this._log.info('updateTlsRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7004,7 +7004,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7061,7 +7061,7 @@ export class NetworkServicesClient {
     this._log.info('deleteTlsRoute long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7178,7 +7178,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7235,7 +7235,7 @@ export class NetworkServicesClient {
     this._log.info('createServiceBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7353,7 +7353,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'service_binding.name': request.serviceBinding!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7410,7 +7410,7 @@ export class NetworkServicesClient {
     this._log.info('updateServiceBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7523,7 +7523,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7580,7 +7580,7 @@ export class NetworkServicesClient {
     this._log.info('deleteServiceBinding long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7697,7 +7697,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7754,7 +7754,7 @@ export class NetworkServicesClient {
     this._log.info('createMesh long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7872,7 +7872,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'mesh.name': request.mesh!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7929,7 +7929,7 @@ export class NetworkServicesClient {
     this._log.info('updateMesh long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8042,7 +8042,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8099,7 +8099,7 @@ export class NetworkServicesClient {
     this._log.info('deleteMesh long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8219,7 +8219,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8276,7 +8276,7 @@ export class NetworkServicesClient {
     this._log.info('createServiceLbPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8394,7 +8394,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'service_lb_policy.name': request.serviceLbPolicy!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8451,7 +8451,7 @@ export class NetworkServicesClient {
     this._log.info('updateServiceLbPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8564,7 +8564,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8621,7 +8621,7 @@ export class NetworkServicesClient {
     this._log.info('deleteServiceLbPolicy long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8738,7 +8738,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8795,7 +8795,7 @@ export class NetworkServicesClient {
     this._log.info('createAgentGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8913,7 +8913,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         'agent_gateway.name': request.agentGateway!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8970,7 +8970,7 @@ export class NetworkServicesClient {
     this._log.info('updateAgentGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9085,7 +9085,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9142,7 +9142,7 @@ export class NetworkServicesClient {
     this._log.info('deleteAgentGateway long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9257,7 +9257,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9332,7 +9332,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listEndpointPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEndpointPolicies stream %j', request);
@@ -9389,7 +9389,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listEndpointPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEndpointPolicies iterate %j', request);
@@ -9502,7 +9502,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9577,7 +9577,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listWasmPluginVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWasmPluginVersions stream %j', request);
@@ -9634,7 +9634,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listWasmPluginVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWasmPluginVersions iterate %j', request);
@@ -9746,7 +9746,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9820,7 +9820,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listWasmPlugins'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWasmPlugins stream %j', request);
@@ -9876,7 +9876,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listWasmPlugins'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWasmPlugins iterate %j', request);
@@ -9983,7 +9983,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10053,7 +10053,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGateways stream %j', request);
@@ -10105,7 +10105,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGateways iterate %j', request);
@@ -10216,7 +10216,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10290,7 +10290,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGrpcRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGrpcRoutes stream %j', request);
@@ -10346,7 +10346,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGrpcRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGrpcRoutes iterate %j', request);
@@ -10459,7 +10459,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10535,7 +10535,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listHttpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listHttpRoutes stream %j', request);
@@ -10593,7 +10593,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listHttpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listHttpRoutes iterate %j', request);
@@ -10704,7 +10704,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10778,7 +10778,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listTcpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTcpRoutes stream %j', request);
@@ -10834,7 +10834,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listTcpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTcpRoutes iterate %j', request);
@@ -10945,7 +10945,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11019,7 +11019,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listTlsRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTlsRoutes stream %j', request);
@@ -11075,7 +11075,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listTlsRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTlsRoutes iterate %j', request);
@@ -11182,7 +11182,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11252,7 +11252,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listServiceBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceBindings stream %j', request);
@@ -11304,7 +11304,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listServiceBindings'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceBindings iterate %j', request);
@@ -11415,7 +11415,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11489,7 +11489,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listMeshes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMeshes stream %j', request);
@@ -11545,7 +11545,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listMeshes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMeshes iterate %j', request);
@@ -11653,7 +11653,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11724,7 +11724,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listServiceLbPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceLbPolicies stream %j', request);
@@ -11777,7 +11777,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listServiceLbPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceLbPolicies iterate %j', request);
@@ -11885,7 +11885,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11956,7 +11956,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGatewayRouteViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGatewayRouteViews stream %j', request);
@@ -12009,7 +12009,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listGatewayRouteViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGatewayRouteViews iterate %j', request);
@@ -12117,7 +12117,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12188,7 +12188,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listMeshRouteViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMeshRouteViews stream %j', request);
@@ -12241,7 +12241,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listMeshRouteViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMeshRouteViews iterate %j', request);
@@ -12352,7 +12352,7 @@ export class NetworkServicesClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12426,7 +12426,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listAgentGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAgentGateways stream %j', request);
@@ -12482,7 +12482,7 @@ export class NetworkServicesClient {
       });
     const defaultCallSettings = this._defaults['listAgentGateways'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAgentGateways iterate %j', request);
@@ -13986,14 +13986,14 @@ export class NetworkServicesClient {
    */
   close(): Promise<void> {
     if (this.networkServicesStub && !this._terminated) {
-      return this.networkServicesStub.then((stub) => {
+      return this.networkServicesStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

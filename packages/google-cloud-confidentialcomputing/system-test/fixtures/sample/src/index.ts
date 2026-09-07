@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { ConfidentialComputingClient } from '@google-cloud/confidentialcomputing';
+import {ConfidentialComputingClient} from '@google-cloud/confidentialcomputing';
 
 // check that the client class type name can be used
 function doStuffWithConfidentialComputingClient(

@@ -30,10 +30,10 @@ import type {
   IamClient,
   IamProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -56,7 +56,7 @@ export class ServiceManagerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('service-management');
@@ -69,10 +69,10 @@ export class ServiceManagerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   operationsClient: gax.OperationsClient;
-  serviceManagerStub?: Promise<{ [name: string]: Function }>;
+  serviceManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ServiceManagerClient.
@@ -148,7 +148,7 @@ export class ServiceManagerClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -343,7 +343,7 @@ export class ServiceManagerClient {
       'google.api.servicemanagement.v1.ServiceManager',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -383,7 +383,7 @@ export class ServiceManagerClient {
           (this._protos as any).google.api.servicemanagement.v1.ServiceManager,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -404,7 +404,7 @@ export class ServiceManagerClient {
     ];
     for (const methodName of serviceManagerStubMethods) {
       const callPromise = this.serviceManagerStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -612,7 +612,7 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getService request %j', request);
@@ -763,7 +763,7 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
         config_id: request.configId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServiceConfig request %j', request);
@@ -917,7 +917,7 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createServiceConfig request %j', request);
@@ -1066,7 +1066,7 @@ export class ServiceManagerClient {
         service_name: request.serviceName ?? '',
         rollout_id: request.rolloutId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getServiceRollout request %j', request);
@@ -1225,7 +1225,7 @@ export class ServiceManagerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateConfigReport request %j', request);
@@ -1381,7 +1381,7 @@ export class ServiceManagerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1438,7 +1438,7 @@ export class ServiceManagerClient {
     this._log.info('createService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1559,7 +1559,7 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1616,7 +1616,7 @@ export class ServiceManagerClient {
     this._log.info('deleteService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1735,7 +1735,7 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1792,7 +1792,7 @@ export class ServiceManagerClient {
     this._log.info('undeleteService long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1925,7 +1925,7 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1982,7 +1982,7 @@ export class ServiceManagerClient {
     this._log.info('submitConfigSource long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2111,7 +2111,7 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2168,7 +2168,7 @@ export class ServiceManagerClient {
     this._log.info('createServiceRollout long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2283,7 +2283,7 @@ export class ServiceManagerClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2354,7 +2354,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServices stream %j', request);
@@ -2407,7 +2407,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listServices'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServices iterate %j', request);
@@ -2515,7 +2515,7 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2585,7 +2585,7 @@ export class ServiceManagerClient {
       });
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceConfigs stream %j', request);
@@ -2637,7 +2637,7 @@ export class ServiceManagerClient {
       });
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceConfigs iterate %j', request);
@@ -2756,7 +2756,7 @@ export class ServiceManagerClient {
       this._gaxModule.routingHeader.fromParams({
         service_name: request.serviceName ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2837,7 +2837,7 @@ export class ServiceManagerClient {
       });
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceRollouts stream %j', request);
@@ -2900,7 +2900,7 @@ export class ServiceManagerClient {
       });
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listServiceRollouts iterate %j', request);
@@ -3279,11 +3279,11 @@ export class ServiceManagerClient {
    */
   close(): Promise<void> {
     if (this.serviceManagerStub && !this._terminated) {
-      return this.serviceManagerStub.then((stub) => {
+      return this.serviceManagerStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

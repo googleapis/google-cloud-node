@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sqldatabasesserviceModule from '../src';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -77,9 +77,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -127,7 +127,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'sqladmin.example.com');
@@ -135,7 +135,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'sqladmin.example.com');
@@ -207,7 +207,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -216,14 +216,14 @@ describe('v1.SqlDatabasesServiceClient', () => {
       assert(client.sqlDatabasesServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sqlDatabasesServiceStub);
@@ -232,15 +232,15 @@ describe('v1.SqlDatabasesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -250,7 +250,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -259,7 +259,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -273,7 +273,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -298,7 +298,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes delete without error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -341,7 +341,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes delete without error using callback', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -400,7 +400,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes delete with error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -440,7 +440,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes delete with closed client', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -464,7 +464,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
       );
       request.database = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.delete(request), expectedError);
@@ -475,7 +475,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes get without error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -517,7 +517,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes get without error using callback', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -574,7 +574,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes get with error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -613,7 +613,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes get with closed client', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -637,7 +637,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
       );
       request.database = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.get(request), expectedError);
@@ -648,7 +648,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes insert without error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -686,7 +686,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes insert without error using callback', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -740,7 +740,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes insert with error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -775,7 +775,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes insert with closed client', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -794,7 +794,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insert(request), expectedError);
@@ -805,7 +805,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes list without error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -842,7 +842,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes list without error using callback', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -894,7 +894,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes list with error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -928,7 +928,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes list with closed client', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -947,7 +947,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
       );
       request.instance = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.list(request), expectedError);
@@ -958,7 +958,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes patch without error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1000,7 +1000,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes patch without error using callback', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1057,7 +1057,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes patch with error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1096,7 +1096,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes patch with closed client', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1120,7 +1120,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
       );
       request.database = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.patch(request), expectedError);
@@ -1131,7 +1131,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes update without error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1174,7 +1174,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes update without error using callback', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1233,7 +1233,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes update with error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1273,7 +1273,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes update with closed client', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1297,7 +1297,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
       );
       request.database = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.update(request), expectedError);
@@ -1307,7 +1307,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1339,7 +1339,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1385,7 +1385,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1422,7 +1422,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1472,7 +1472,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1521,7 +1521,7 @@ describe('v1.SqlDatabasesServiceClient', () => {
       };
       const client = new sqldatabasesserviceModule.v1.SqlDatabasesServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

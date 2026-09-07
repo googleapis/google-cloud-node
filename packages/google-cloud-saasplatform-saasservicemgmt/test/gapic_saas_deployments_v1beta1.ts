@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as saasdeploymentsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -244,7 +244,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.saasDeploymentsStub, undefined);
@@ -252,12 +252,12 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(client.saasDeploymentsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.saasDeploymentsStub);
@@ -266,14 +266,14 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.saasDeploymentsStub, undefined);
@@ -282,7 +282,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -290,7 +290,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -302,7 +302,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -325,7 +325,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('getSaas', () => {
     it('invokes getSaas without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -356,7 +356,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getSaas without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -403,7 +403,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getSaas with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getSaas with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSaas(request), expectedError);
@@ -454,7 +454,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('createSaas', () => {
     it('invokes createSaas without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -485,7 +485,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createSaas without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -532,7 +532,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createSaas with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createSaas with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -576,7 +576,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSaas(request), expectedError);
@@ -586,7 +586,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('updateSaas', () => {
     it('invokes updateSaas without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateSaas without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateSaas with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateSaas with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +712,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.saas.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSaas(request), expectedError);
@@ -722,7 +722,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('deleteSaas', () => {
     it('invokes deleteSaas without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteSaas without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -800,7 +800,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteSaas with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteSaas with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSaas(request), expectedError);
@@ -854,7 +854,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('getTenant', () => {
     it('invokes getTenant without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getTenant without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -932,7 +932,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getTenant with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getTenant with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTenant(request), expectedError);
@@ -983,7 +983,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('createTenant', () => {
     it('invokes createTenant without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createTenant without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1061,7 +1061,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createTenant with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1092,7 +1092,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createTenant with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTenant(request), expectedError);
@@ -1115,7 +1115,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('updateTenant', () => {
     it('invokes updateTenant without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1147,7 +1147,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateTenant without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1195,7 +1195,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateTenant with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateTenant with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1241,7 +1241,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.tenant.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTenant(request), expectedError);
@@ -1251,7 +1251,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('deleteTenant', () => {
     it('invokes deleteTenant without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1282,7 +1282,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteTenant without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1329,7 +1329,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteTenant with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1360,7 +1360,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteTenant with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,7 +1373,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTenant(request), expectedError);
@@ -1383,7 +1383,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('getUnitKind', () => {
     it('invokes getUnitKind without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1414,7 +1414,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getUnitKind without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1461,7 +1461,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getUnitKind with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1492,7 +1492,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getUnitKind with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1505,7 +1505,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUnitKind(request), expectedError);
@@ -1515,7 +1515,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('createUnitKind', () => {
     it('invokes createUnitKind without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1546,7 +1546,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createUnitKind without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1593,7 +1593,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createUnitKind with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1624,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createUnitKind with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1637,7 +1637,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createUnitKind(request), expectedError);
@@ -1647,7 +1647,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('updateUnitKind', () => {
     it('invokes updateUnitKind without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1679,7 +1679,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateUnitKind without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1727,7 +1727,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateUnitKind with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1759,7 +1759,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateUnitKind with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1773,7 +1773,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.unitKind.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateUnitKind(request), expectedError);
@@ -1783,7 +1783,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('deleteUnitKind', () => {
     it('invokes deleteUnitKind without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1814,7 +1814,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteUnitKind without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1861,7 +1861,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteUnitKind with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1892,7 +1892,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteUnitKind with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1905,7 +1905,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteUnitKind(request), expectedError);
@@ -1915,7 +1915,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('getUnit', () => {
     it('invokes getUnit without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1946,7 +1946,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getUnit without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1993,7 +1993,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getUnit with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2021,7 +2021,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getUnit with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2034,7 +2034,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUnit(request), expectedError);
@@ -2044,7 +2044,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('createUnit', () => {
     it('invokes createUnit without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createUnit without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2122,7 +2122,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createUnit with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2153,7 +2153,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createUnit with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2166,7 +2166,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createUnit(request), expectedError);
@@ -2176,7 +2176,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('updateUnit', () => {
     it('invokes updateUnit without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2208,7 +2208,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateUnit without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2256,7 +2256,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateUnit with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2288,7 +2288,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateUnit with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2302,7 +2302,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.unit.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateUnit(request), expectedError);
@@ -2312,7 +2312,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('deleteUnit', () => {
     it('invokes deleteUnit without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2343,7 +2343,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteUnit without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2390,7 +2390,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteUnit with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2421,7 +2421,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteUnit with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2434,7 +2434,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteUnit(request), expectedError);
@@ -2444,7 +2444,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('getUnitOperation', () => {
     it('invokes getUnitOperation without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2475,7 +2475,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getUnitOperation without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2522,7 +2522,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getUnitOperation with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2553,7 +2553,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getUnitOperation with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2566,7 +2566,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUnitOperation(request), expectedError);
@@ -2576,7 +2576,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('createUnitOperation', () => {
     it('invokes createUnitOperation without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createUnitOperation without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2655,7 +2655,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createUnitOperation with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2686,7 +2686,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createUnitOperation with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2699,7 +2699,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createUnitOperation(request), expectedError);
@@ -2709,7 +2709,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('updateUnitOperation', () => {
     it('invokes updateUnitOperation without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2742,7 +2742,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateUnitOperation without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2790,7 +2790,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateUnitOperation with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2822,7 +2822,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateUnitOperation with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2836,7 +2836,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.unitOperation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateUnitOperation(request), expectedError);
@@ -2846,7 +2846,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('deleteUnitOperation', () => {
     it('invokes deleteUnitOperation without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2878,7 +2878,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteUnitOperation without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2925,7 +2925,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteUnitOperation with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2956,7 +2956,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteUnitOperation with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2969,7 +2969,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteUnitOperation(request), expectedError);
@@ -2979,7 +2979,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('getRelease', () => {
     it('invokes getRelease without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3010,7 +3010,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getRelease without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3057,7 +3057,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getRelease with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3088,7 +3088,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes getRelease with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3101,7 +3101,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRelease(request), expectedError);
@@ -3111,7 +3111,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('createRelease', () => {
     it('invokes createRelease without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3142,7 +3142,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createRelease without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3189,7 +3189,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createRelease with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3220,7 +3220,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes createRelease with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3233,7 +3233,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createRelease(request), expectedError);
@@ -3243,7 +3243,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('updateRelease', () => {
     it('invokes updateRelease without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3275,7 +3275,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateRelease without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3323,7 +3323,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateRelease with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3355,7 +3355,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes updateRelease with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3369,7 +3369,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.release.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRelease(request), expectedError);
@@ -3379,7 +3379,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('deleteRelease', () => {
     it('invokes deleteRelease without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3410,7 +3410,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteRelease without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3457,7 +3457,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteRelease with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3488,7 +3488,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes deleteRelease with closed client', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3501,7 +3501,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteRelease(request), expectedError);
@@ -3511,7 +3511,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('listSaas', () => {
     it('invokes listSaas without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3550,7 +3550,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listSaas without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3607,7 +3607,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listSaas with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3635,7 +3635,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listSaasStream without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3690,15 +3690,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listSaas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSaasStream with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3744,15 +3744,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listSaas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSaas without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3793,15 +3793,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listSaas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSaas with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3835,9 +3835,9 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listSaas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3845,7 +3845,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('listTenants', () => {
     it('invokes listTenants without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3884,7 +3884,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listTenants without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3941,7 +3941,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listTenants with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3972,7 +3972,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listTenantsStream without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4027,15 +4027,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listTenants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTenantsStream with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4081,15 +4081,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listTenants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTenants without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4131,15 +4131,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listTenants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTenants with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4174,9 +4174,9 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listTenants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4184,7 +4184,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('listUnitKinds', () => {
     it('invokes listUnitKinds without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4223,7 +4223,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listUnitKinds without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4280,7 +4280,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listUnitKinds with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4311,7 +4311,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listUnitKindsStream without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4366,15 +4366,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnitKinds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listUnitKindsStream with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4418,15 +4418,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnitKinds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUnitKinds without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4468,15 +4468,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnitKinds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUnitKinds with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4509,9 +4509,9 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnitKinds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4519,7 +4519,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('listUnits', () => {
     it('invokes listUnits without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4558,7 +4558,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listUnits without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4615,7 +4615,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listUnits with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4643,7 +4643,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listUnitsStream without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4698,15 +4698,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnits.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listUnitsStream with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4752,15 +4752,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnits.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUnits without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4801,15 +4801,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnits.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUnits with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4843,9 +4843,9 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnits.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4853,7 +4853,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('listUnitOperations', () => {
     it('invokes listUnitOperations without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4893,7 +4893,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listUnitOperations without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4950,7 +4950,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listUnitOperations with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4981,7 +4981,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listUnitOperationsStream without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5036,15 +5036,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnitOperations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listUnitOperationsStream with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5088,15 +5088,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnitOperations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUnitOperations without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5138,15 +5138,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnitOperations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listUnitOperations with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5179,9 +5179,9 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listUnitOperations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5189,7 +5189,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('listReleases', () => {
     it('invokes listReleases without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5228,7 +5228,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listReleases without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5285,7 +5285,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listReleases with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5316,7 +5316,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
 
     it('invokes listReleasesStream without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5371,15 +5371,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listReleases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReleasesStream with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5425,15 +5425,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listReleases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReleases without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5475,15 +5475,15 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listReleases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReleases with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5516,16 +5516,16 @@ describe('v1beta1.SaasDeploymentsClient', () => {
       assert(
         (client.descriptors.page.listReleases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5555,7 +5555,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5599,7 +5599,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5634,7 +5634,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5682,7 +5682,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5729,7 +5729,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         location: 'locationValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5777,7 +5777,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         project: 'projectValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5817,7 +5817,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         release: 'releaseValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5881,7 +5881,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         rollout_id: 'rolloutIdValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5945,7 +5945,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         rollout_kind_id: 'rolloutKindIdValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6009,7 +6009,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         saas: 'saasValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6073,7 +6073,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         tenant: 'tenantValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6137,7 +6137,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         unit: 'unitValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6201,7 +6201,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         unitKind: 'unitKindValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6265,7 +6265,7 @@ describe('v1beta1.SaasDeploymentsClient', () => {
         unitOperation: 'unitOperationValue',
       };
       const client = new saasdeploymentsModule.v1beta1.SaasDeploymentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

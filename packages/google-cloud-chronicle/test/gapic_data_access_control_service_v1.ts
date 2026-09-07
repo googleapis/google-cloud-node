@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dataaccesscontrolserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1.DataAccessControlServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'chronicle.configured.example.com');
@@ -251,7 +251,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataAccessControlServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(client.dataAccessControlServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataAccessControlServiceStub);
@@ -274,15 +274,15 @@ describe('v1.DataAccessControlServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataAccessControlServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.DataAccessControlServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes createDataAccessLabel without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes createDataAccessLabel without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes createDataAccessLabel with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes createDataAccessLabel with closed client', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes getDataAccessLabel without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes getDataAccessLabel without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes getDataAccessLabel with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes getDataAccessLabel with closed client', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataAccessLabel(request), expectedError);
@@ -617,7 +617,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes updateDataAccessLabel without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes updateDataAccessLabel without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes updateDataAccessLabel with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes updateDataAccessLabel with closed client', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       );
       request.dataAccessLabel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -764,7 +764,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes deleteDataAccessLabel without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes deleteDataAccessLabel without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes deleteDataAccessLabel with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes deleteDataAccessLabel with closed client', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -893,7 +893,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -907,7 +907,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes createDataAccessScope without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -940,7 +940,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes createDataAccessScope without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -988,7 +988,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes createDataAccessScope with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1023,7 +1023,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes createDataAccessScope with closed client', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1036,7 +1036,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1050,7 +1050,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes getDataAccessScope without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1083,7 +1083,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes getDataAccessScope without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1131,7 +1131,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes getDataAccessScope with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1163,7 +1163,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes getDataAccessScope with closed client', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataAccessScope(request), expectedError);
@@ -1187,7 +1187,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes updateDataAccessScope without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes updateDataAccessScope without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes updateDataAccessScope with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1306,7 +1306,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes updateDataAccessScope with closed client', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1320,7 +1320,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       );
       request.dataAccessScope.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1334,7 +1334,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes deleteDataAccessScope without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1367,7 +1367,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes deleteDataAccessScope without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes deleteDataAccessScope with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1450,7 +1450,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes deleteDataAccessScope with closed client', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1463,7 +1463,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1477,7 +1477,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes listDataAccessLabels without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1518,7 +1518,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes listDataAccessLabels without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1574,7 +1574,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes listDataAccessLabels with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1606,7 +1606,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes listDataAccessLabelsStream without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1659,16 +1659,16 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataAccessLabelsStream with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1710,16 +1710,16 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessLabels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataAccessLabels without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1760,16 +1760,16 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataAccessLabels with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1802,9 +1802,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessLabels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1813,7 +1813,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes listDataAccessScopes without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1854,7 +1854,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes listDataAccessScopes without error using callback', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes listDataAccessScopes with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1942,7 +1942,7 @@ describe('v1.DataAccessControlServiceClient', () => {
     it('invokes listDataAccessScopesStream without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1995,16 +1995,16 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessScopes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataAccessScopesStream with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2046,16 +2046,16 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessScopes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataAccessScopes without error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2096,16 +2096,16 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessScopes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataAccessScopes with error', async () => {
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2138,9 +2138,9 @@ describe('v1.DataAccessControlServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAccessScopes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2155,7 +2155,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2221,7 +2221,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2298,7 +2298,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2375,7 +2375,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2453,7 +2453,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2531,7 +2531,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2707,7 +2707,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2796,7 +2796,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2892,7 +2892,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2985,7 +2985,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3080,7 +3080,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3144,7 +3144,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3196,7 +3196,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3270,7 +3270,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3312,7 +3312,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3390,7 +3390,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3478,7 +3478,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3555,7 +3555,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3632,7 +3632,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3725,7 +3725,7 @@ describe('v1.DataAccessControlServiceClient', () => {
       };
       const client =
         new dataaccesscontrolserviceModule.v1.DataAccessControlServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

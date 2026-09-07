@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { AuthProviderServiceClient } from '@google-cloud/agentidentity';
+import {AuthProviderServiceClient} from '@google-cloud/agentidentity';
 
 // check that the client class type name can be used
 function doStuffWithAuthProviderServiceClient(

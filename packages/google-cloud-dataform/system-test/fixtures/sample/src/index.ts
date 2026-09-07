@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { DataformClient } from '@google-cloud/dataform';
+import {DataformClient} from '@google-cloud/dataform';
 
 // check that the client class type name can be used
 function doStuffWithDataformClient(client: DataformClient) {

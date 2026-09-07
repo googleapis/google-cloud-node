@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as addressvalidationModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -136,7 +136,7 @@ describe('v1.AddressValidationClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new addressvalidationModule.v1.AddressValidationClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -180,7 +180,7 @@ describe('v1.AddressValidationClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.addressValidationStub, undefined);
@@ -188,12 +188,12 @@ describe('v1.AddressValidationClient', () => {
       assert(client.addressValidationStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.addressValidationStub);
@@ -202,14 +202,14 @@ describe('v1.AddressValidationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.addressValidationStub, undefined);
@@ -218,7 +218,7 @@ describe('v1.AddressValidationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -226,7 +226,7 @@ describe('v1.AddressValidationClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -238,7 +238,7 @@ describe('v1.AddressValidationClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -261,7 +261,7 @@ describe('v1.AddressValidationClient', () => {
   describe('validateAddress', () => {
     it('invokes validateAddress without error', async () => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -278,7 +278,7 @@ describe('v1.AddressValidationClient', () => {
 
     it('invokes validateAddress without error using callback', async () => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -311,7 +311,7 @@ describe('v1.AddressValidationClient', () => {
 
     it('invokes validateAddress with error', async () => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -328,7 +328,7 @@ describe('v1.AddressValidationClient', () => {
 
     it('invokes validateAddress with closed client', async () => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -336,7 +336,7 @@ describe('v1.AddressValidationClient', () => {
         new protos.google.maps.addressvalidation.v1.ValidateAddressRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.validateAddress(request), expectedError);
@@ -346,7 +346,7 @@ describe('v1.AddressValidationClient', () => {
   describe('provideValidationFeedback', () => {
     it('invokes provideValidationFeedback without error', async () => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -364,7 +364,7 @@ describe('v1.AddressValidationClient', () => {
 
     it('invokes provideValidationFeedback without error using callback', async () => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -397,7 +397,7 @@ describe('v1.AddressValidationClient', () => {
 
     it('invokes provideValidationFeedback with error', async () => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -417,7 +417,7 @@ describe('v1.AddressValidationClient', () => {
 
     it('invokes provideValidationFeedback with closed client', async () => {
       const client = new addressvalidationModule.v1.AddressValidationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -425,7 +425,7 @@ describe('v1.AddressValidationClient', () => {
         new protos.google.maps.addressvalidation.v1.ProvideValidationFeedbackRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(

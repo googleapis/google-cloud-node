@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as grafeasModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -240,7 +240,7 @@ describe('v1.GrafeasClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.grafeasStub, undefined);
@@ -248,12 +248,12 @@ describe('v1.GrafeasClient', () => {
       assert(client.grafeasStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.grafeasStub);
@@ -262,14 +262,14 @@ describe('v1.GrafeasClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.grafeasStub, undefined);
@@ -278,7 +278,7 @@ describe('v1.GrafeasClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v1.GrafeasClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v1.GrafeasClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v1.GrafeasClient', () => {
   describe('getOccurrence', () => {
     it('invokes getOccurrence without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes getOccurrence without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes getOccurrence with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes getOccurrence with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getOccurrence(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1.GrafeasClient', () => {
   describe('deleteOccurrence', () => {
     it('invokes deleteOccurrence without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes deleteOccurrence without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes deleteOccurrence with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes deleteOccurrence with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteOccurrence(request), expectedError);
@@ -585,7 +585,7 @@ describe('v1.GrafeasClient', () => {
   describe('createOccurrence', () => {
     it('invokes createOccurrence without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes createOccurrence without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -663,7 +663,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes createOccurrence with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes createOccurrence with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createOccurrence(request), expectedError);
@@ -717,7 +717,7 @@ describe('v1.GrafeasClient', () => {
   describe('batchCreateOccurrences', () => {
     it('invokes batchCreateOccurrences without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -749,7 +749,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes batchCreateOccurrences without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes batchCreateOccurrences with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes batchCreateOccurrences with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -856,7 +856,7 @@ describe('v1.GrafeasClient', () => {
   describe('updateOccurrence', () => {
     it('invokes updateOccurrence without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes updateOccurrence without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes updateOccurrence with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes updateOccurrence with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -978,7 +978,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateOccurrence(request), expectedError);
@@ -988,7 +988,7 @@ describe('v1.GrafeasClient', () => {
   describe('getOccurrenceNote', () => {
     it('invokes getOccurrenceNote without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1019,7 +1019,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes getOccurrenceNote without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes getOccurrenceNote with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1094,7 +1094,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes getOccurrenceNote with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getOccurrenceNote(request), expectedError);
@@ -1117,7 +1117,7 @@ describe('v1.GrafeasClient', () => {
   describe('getNote', () => {
     it('invokes getNote without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1147,7 +1147,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes getNote without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1190,7 +1190,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes getNote with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1217,7 +1217,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes getNote with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1.GrafeasClient', () => {
       ]);
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNote(request), expectedError);
@@ -1239,7 +1239,7 @@ describe('v1.GrafeasClient', () => {
   describe('deleteNote', () => {
     it('invokes deleteNote without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes deleteNote without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1317,7 +1317,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes deleteNote with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1348,7 +1348,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes deleteNote with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1361,7 +1361,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteNote(request), expectedError);
@@ -1371,7 +1371,7 @@ describe('v1.GrafeasClient', () => {
   describe('createNote', () => {
     it('invokes createNote without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1402,7 +1402,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes createNote without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1446,7 +1446,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes createNote with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1477,7 +1477,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes createNote with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1490,7 +1490,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createNote(request), expectedError);
@@ -1500,7 +1500,7 @@ describe('v1.GrafeasClient', () => {
   describe('batchCreateNotes', () => {
     it('invokes batchCreateNotes without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1531,7 +1531,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes batchCreateNotes without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1578,7 +1578,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes batchCreateNotes with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1609,7 +1609,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes batchCreateNotes with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1622,7 +1622,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateNotes(request), expectedError);
@@ -1632,7 +1632,7 @@ describe('v1.GrafeasClient', () => {
   describe('updateNote', () => {
     it('invokes updateNote without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1663,7 +1663,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes updateNote without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1707,7 +1707,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes updateNote with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1738,7 +1738,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes updateNote with closed client', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1751,7 +1751,7 @@ describe('v1.GrafeasClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateNote(request), expectedError);
@@ -1761,7 +1761,7 @@ describe('v1.GrafeasClient', () => {
   describe('listOccurrences', () => {
     it('invokes listOccurrences without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1794,7 +1794,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes listOccurrences without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1843,7 +1843,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes listOccurrences with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1874,7 +1874,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes listOccurrencesStream without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1917,15 +1917,15 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listOccurrences.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listOccurrencesStream with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1963,15 +1963,15 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listOccurrences.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOccurrences without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2006,15 +2006,15 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listOccurrences.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOccurrences with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2046,9 +2046,9 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listOccurrences.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2056,7 +2056,7 @@ describe('v1.GrafeasClient', () => {
   describe('listNotes', () => {
     it('invokes listNotes without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2089,7 +2089,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes listNotes without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2135,7 +2135,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes listNotes with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2163,7 +2163,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes listNotesStream without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,15 +2206,15 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listNotes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNotesStream with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2254,15 +2254,15 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listNotes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNotes without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2296,15 +2296,15 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listNotes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNotes with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,9 +2337,9 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listNotes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2347,7 +2347,7 @@ describe('v1.GrafeasClient', () => {
   describe('listNoteOccurrences', () => {
     it('invokes listNoteOccurrences without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2381,7 +2381,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes listNoteOccurrences without error using callback', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2430,7 +2430,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes listNoteOccurrences with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2461,7 +2461,7 @@ describe('v1.GrafeasClient', () => {
 
     it('invokes listNoteOccurrencesStream without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2504,15 +2504,15 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listNoteOccurrences.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNoteOccurrencesStream with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2550,15 +2550,15 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listNoteOccurrences.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNoteOccurrences without error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2593,15 +2593,15 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listNoteOccurrences.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNoteOccurrences with error', async () => {
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2633,9 +2633,9 @@ describe('v1.GrafeasClient', () => {
       assert(
         (client.descriptors.page.listNoteOccurrences.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2648,7 +2648,7 @@ describe('v1.GrafeasClient', () => {
         note: 'noteValue',
       };
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2697,7 +2697,7 @@ describe('v1.GrafeasClient', () => {
         occurrence: 'occurrenceValue',
       };
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2745,7 +2745,7 @@ describe('v1.GrafeasClient', () => {
         project: 'projectValue',
       };
       const client = new grafeasModule.v1.GrafeasClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

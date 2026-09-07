@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as memorybankserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -286,7 +286,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.memoryBankServiceStub, undefined);
@@ -294,13 +294,13 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       assert(client.memoryBankServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.memoryBankServiceStub);
@@ -309,15 +309,15 @@ describe('v1beta1.MemoryBankServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.memoryBankServiceStub, undefined);
@@ -326,7 +326,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -335,7 +335,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -348,7 +348,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -372,7 +372,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getMemory without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -404,7 +404,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getMemory without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getMemory with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getMemory with closed client', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -494,7 +494,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMemory(request), expectedError);
@@ -505,7 +505,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes retrieveMemories without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -537,7 +537,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes retrieveMemories without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -585,7 +585,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes retrieveMemories with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -617,7 +617,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes retrieveMemories with closed client', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -630,7 +630,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.retrieveMemories(request), expectedError);
@@ -641,7 +641,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes createMemory without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -674,7 +674,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes createMemory without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes createMemory with call error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -761,7 +761,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes createMemory with LRO error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes checkCreateMemoryProgress without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -803,8 +803,8 @@ describe('v1beta1.MemoryBankServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMemoryProgress(
@@ -818,7 +818,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes checkCreateMemoryProgress with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -837,7 +837,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes updateMemory without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes updateMemory without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -927,7 +927,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes updateMemory with call error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes updateMemory with LRO error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -995,7 +995,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes checkUpdateMemoryProgress without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1003,8 +1003,8 @@ describe('v1beta1.MemoryBankServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateMemoryProgress(
@@ -1018,7 +1018,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes checkUpdateMemoryProgress with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1037,7 +1037,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes deleteMemory without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1070,7 +1070,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes deleteMemory without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1125,7 +1125,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes deleteMemory with call error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1157,7 +1157,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes deleteMemory with LRO error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes checkDeleteMemoryProgress without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1199,8 +1199,8 @@ describe('v1beta1.MemoryBankServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteMemoryProgress(
@@ -1214,7 +1214,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes checkDeleteMemoryProgress with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1233,7 +1233,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes generateMemories without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1267,7 +1267,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes generateMemories without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1322,7 +1322,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes generateMemories with call error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1354,7 +1354,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes generateMemories with LRO error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1388,7 +1388,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes checkGenerateMemoriesProgress without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1396,8 +1396,8 @@ describe('v1beta1.MemoryBankServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkGenerateMemoriesProgress(
@@ -1411,7 +1411,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes checkGenerateMemoriesProgress with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1433,7 +1433,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes listMemories without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1473,7 +1473,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes listMemories without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1529,7 +1529,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes listMemories with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1561,7 +1561,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes listMemoriesStream without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1613,16 +1613,16 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       assert(
         (client.descriptors.page.listMemories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMemoriesStream with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1665,16 +1665,16 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       assert(
         (client.descriptors.page.listMemories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMemories without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1715,16 +1715,16 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       assert(
         (client.descriptors.page.listMemories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMemories with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1756,9 +1756,9 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       assert(
         (client.descriptors.page.listMemories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1766,7 +1766,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1797,7 +1797,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1846,7 +1846,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1879,7 +1879,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1948,7 +1948,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1959,7 +1959,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1992,7 +1992,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2026,7 +2026,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2064,7 +2064,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2075,7 +2075,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2111,7 +2111,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2142,7 +2142,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2187,7 +2187,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2223,7 +2223,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2272,7 +2272,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2314,7 +2314,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2336,7 +2336,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2364,7 +2364,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2375,7 +2375,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2400,7 +2400,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2423,7 +2423,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2451,7 +2451,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2462,7 +2462,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2487,7 +2487,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2510,7 +2510,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2538,7 +2538,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2549,7 +2549,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2574,7 +2574,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2610,7 +2610,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2649,7 +2649,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2737,7 +2737,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2815,7 +2815,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2891,7 +2891,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2969,7 +2969,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3035,7 +3035,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3111,7 +3111,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3177,7 +3177,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3253,7 +3253,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3319,7 +3319,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3385,7 +3385,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3462,7 +3462,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3545,7 +3545,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3621,7 +3621,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3687,7 +3687,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3763,7 +3763,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3828,7 +3828,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3894,7 +3894,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3973,7 +3973,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4081,7 +4081,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4160,7 +4160,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4238,7 +4238,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4315,7 +4315,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4380,7 +4380,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4462,7 +4462,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4527,7 +4527,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4593,7 +4593,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4670,7 +4670,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4748,7 +4748,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4813,7 +4813,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4878,7 +4878,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4959,7 +4959,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5037,7 +5037,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5145,7 +5145,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5211,7 +5211,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5304,7 +5304,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5370,7 +5370,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5447,7 +5447,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5529,7 +5529,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5595,7 +5595,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5677,7 +5677,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5743,7 +5743,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5821,7 +5821,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5886,7 +5886,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5967,7 +5967,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6071,7 +6071,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6196,7 +6196,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6288,7 +6288,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6342,7 +6342,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6408,7 +6408,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6483,7 +6483,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6538,7 +6538,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6616,7 +6616,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6703,7 +6703,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6770,7 +6770,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6868,7 +6868,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6944,7 +6944,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7010,7 +7010,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7088,7 +7088,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7176,7 +7176,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7242,7 +7242,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7307,7 +7307,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7373,7 +7373,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7470,7 +7470,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7560,7 +7560,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7684,7 +7684,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7754,7 +7754,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7830,7 +7830,7 @@ describe('v1beta1.MemoryBankServiceClient', () => {
       };
       const client =
         new memorybankserviceModule.v1beta1.MemoryBankServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

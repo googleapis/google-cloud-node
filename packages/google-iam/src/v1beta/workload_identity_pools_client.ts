@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class WorkloadIdentityPoolsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('iam');
@@ -66,10 +66,10 @@ export class WorkloadIdentityPoolsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  workloadIdentityPoolsStub?: Promise<{ [name: string]: Function }>;
+  workloadIdentityPoolsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of WorkloadIdentityPoolsClient.
@@ -146,7 +146,7 @@ export class WorkloadIdentityPoolsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -423,7 +423,7 @@ export class WorkloadIdentityPoolsClient {
       'google.iam.v1beta.WorkloadIdentityPools',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -463,7 +463,7 @@ export class WorkloadIdentityPoolsClient {
           (this._protos as any).google.iam.v1beta.WorkloadIdentityPools,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -483,7 +483,7 @@ export class WorkloadIdentityPoolsClient {
     ];
     for (const methodName of workloadIdentityPoolsStubMethods) {
       const callPromise = this.workloadIdentityPoolsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -685,7 +685,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkloadIdentityPool request %j', request);
@@ -826,7 +826,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkloadIdentityPoolProvider request %j', request);
@@ -993,7 +993,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1050,7 +1050,7 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('createWorkloadIdentityPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1166,7 +1166,7 @@ export class WorkloadIdentityPoolsClient {
         'workload_identity_pool.name':
           request.workloadIdentityPool!.name?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1223,7 +1223,7 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('updateWorkloadIdentityPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1346,7 +1346,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1403,7 +1403,7 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('deleteWorkloadIdentityPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1516,7 +1516,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1579,7 +1579,7 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('undeleteWorkloadIdentityPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1703,7 +1703,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1766,7 +1766,7 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('createWorkloadIdentityPoolProvider long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1882,7 +1882,7 @@ export class WorkloadIdentityPoolsClient {
         'workload_identity_pool_provider.name':
           request.workloadIdentityPoolProvider!.name?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1945,7 +1945,7 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('updateWorkloadIdentityPoolProvider long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2063,7 +2063,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2126,7 +2126,7 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('deleteWorkloadIdentityPoolProvider long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2240,7 +2240,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2303,7 +2303,7 @@ export class WorkloadIdentityPoolsClient {
     this._log.info('undeleteWorkloadIdentityPoolProvider long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2418,7 +2418,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2490,7 +2490,7 @@ export class WorkloadIdentityPoolsClient {
       });
     const defaultCallSettings = this._defaults['listWorkloadIdentityPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkloadIdentityPools stream %j', request);
@@ -2544,7 +2544,7 @@ export class WorkloadIdentityPoolsClient {
       });
     const defaultCallSettings = this._defaults['listWorkloadIdentityPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkloadIdentityPools iterate %j', request);
@@ -2657,7 +2657,7 @@ export class WorkloadIdentityPoolsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2734,7 +2734,7 @@ export class WorkloadIdentityPoolsClient {
     const defaultCallSettings =
       this._defaults['listWorkloadIdentityPoolProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkloadIdentityPoolProviders stream %j', request);
@@ -2790,7 +2790,7 @@ export class WorkloadIdentityPoolsClient {
     const defaultCallSettings =
       this._defaults['listWorkloadIdentityPoolProviders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkloadIdentityPoolProviders iterate %j', request);
@@ -2979,7 +2979,7 @@ export class WorkloadIdentityPoolsClient {
    */
   close(): Promise<void> {
     if (this.workloadIdentityPoolsStub && !this._terminated) {
-      return this.workloadIdentityPoolsStub.then((stub) => {
+      return this.workloadIdentityPoolsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

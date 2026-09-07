@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as tpuModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tpuStub, undefined);
@@ -282,12 +282,12 @@ describe('v2alpha1.TpuClient', () => {
       assert(client.tpuStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.tpuStub);
@@ -296,14 +296,14 @@ describe('v2alpha1.TpuClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tpuStub, undefined);
@@ -312,7 +312,7 @@ describe('v2alpha1.TpuClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v2alpha1.TpuClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v2alpha1.TpuClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('getNode', () => {
     it('invokes getNode without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getNode without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getNode with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getNode with closed client', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v2alpha1.TpuClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNode(request), expectedError);
@@ -484,7 +484,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('getQueuedResource', () => {
     it('invokes getQueuedResource without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getQueuedResource without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getQueuedResource with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getQueuedResource with closed client', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v2alpha1.TpuClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getQueuedResource(request), expectedError);
@@ -616,7 +616,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('generateServiceIdentity', () => {
     it('invokes generateServiceIdentity without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,7 +648,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes generateServiceIdentity without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -695,7 +695,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes generateServiceIdentity with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes generateServiceIdentity with closed client', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v2alpha1.TpuClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -755,7 +755,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('getAcceleratorType', () => {
     it('invokes getAcceleratorType without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -787,7 +787,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getAcceleratorType without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -834,7 +834,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getAcceleratorType with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getAcceleratorType with closed client', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v2alpha1.TpuClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAcceleratorType(request), expectedError);
@@ -888,7 +888,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('getRuntimeVersion', () => {
     it('invokes getRuntimeVersion without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getRuntimeVersion without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getRuntimeVersion with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getRuntimeVersion with closed client', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v2alpha1.TpuClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRuntimeVersion(request), expectedError);
@@ -1020,7 +1020,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('getGuestAttributes', () => {
     it('invokes getGuestAttributes without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1052,7 +1052,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getGuestAttributes without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getGuestAttributes with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1130,7 +1130,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes getGuestAttributes with closed client', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v2alpha1.TpuClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGuestAttributes(request), expectedError);
@@ -1153,7 +1153,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('createNode', () => {
     it('invokes createNode without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes createNode without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes createNode with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes createNode with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkCreateNodeProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1311,8 +1311,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateNodeProgress(
@@ -1325,7 +1325,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkCreateNodeProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1343,7 +1343,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('deleteNode', () => {
     it('invokes deleteNode without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes deleteNode without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1429,7 +1429,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes deleteNode with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1460,7 +1460,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes deleteNode with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1493,7 +1493,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkDeleteNodeProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,8 +1501,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteNodeProgress(
@@ -1515,7 +1515,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkDeleteNodeProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('stopNode', () => {
     it('invokes stopNode without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes stopNode without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1619,7 +1619,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes stopNode with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1650,7 +1650,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes stopNode with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1683,7 +1683,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkStopNodeProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1691,8 +1691,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStopNodeProgress(
@@ -1705,7 +1705,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkStopNodeProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1723,7 +1723,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('startNode', () => {
     it('invokes startNode without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1755,7 +1755,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes startNode without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1809,7 +1809,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes startNode with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1840,7 +1840,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes startNode with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1873,7 +1873,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkStartNodeProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,8 +1881,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartNodeProgress(
@@ -1895,7 +1895,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkStartNodeProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1913,7 +1913,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('updateNode', () => {
     it('invokes updateNode without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1946,7 +1946,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes updateNode without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2001,7 +2001,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes updateNode with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2033,7 +2033,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes updateNode with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2067,7 +2067,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkUpdateNodeProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,8 +2075,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateNodeProgress(
@@ -2089,7 +2089,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkUpdateNodeProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2107,7 +2107,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('performMaintenance', () => {
     it('invokes performMaintenance without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2140,7 +2140,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes performMaintenance without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2194,7 +2194,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes performMaintenance with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2225,7 +2225,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes performMaintenance with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2258,7 +2258,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkPerformMaintenanceProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2266,8 +2266,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPerformMaintenanceProgress(
@@ -2280,7 +2280,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkPerformMaintenanceProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2301,7 +2301,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('createQueuedResource', () => {
     it('invokes createQueuedResource without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2334,7 +2334,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes createQueuedResource without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2388,7 +2388,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes createQueuedResource with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2419,7 +2419,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes createQueuedResource with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2452,7 +2452,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkCreateQueuedResourceProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2460,8 +2460,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateQueuedResourceProgress(
@@ -2474,7 +2474,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkCreateQueuedResourceProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2495,7 +2495,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('deleteQueuedResource', () => {
     it('invokes deleteQueuedResource without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2528,7 +2528,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes deleteQueuedResource without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2582,7 +2582,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes deleteQueuedResource with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2613,7 +2613,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes deleteQueuedResource with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2646,7 +2646,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkDeleteQueuedResourceProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2654,8 +2654,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteQueuedResourceProgress(
@@ -2668,7 +2668,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkDeleteQueuedResourceProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2689,7 +2689,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('resetQueuedResource', () => {
     it('invokes resetQueuedResource without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2722,7 +2722,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes resetQueuedResource without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2776,7 +2776,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes resetQueuedResource with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2807,7 +2807,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes resetQueuedResource with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2840,7 +2840,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkResetQueuedResourceProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2848,8 +2848,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkResetQueuedResourceProgress(
@@ -2862,7 +2862,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkResetQueuedResourceProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2883,7 +2883,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('performMaintenanceQueuedResource', () => {
     it('invokes performMaintenanceQueuedResource without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2917,7 +2917,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes performMaintenanceQueuedResource without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2971,7 +2971,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes performMaintenanceQueuedResource with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3003,7 +3003,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes performMaintenanceQueuedResource with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3034,7 +3034,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkPerformMaintenanceQueuedResourceProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3042,8 +3042,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3057,7 +3057,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkPerformMaintenanceQueuedResourceProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3078,7 +3078,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('simulateMaintenanceEvent', () => {
     it('invokes simulateMaintenanceEvent without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3111,7 +3111,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes simulateMaintenanceEvent without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3165,7 +3165,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes simulateMaintenanceEvent with call error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3199,7 +3199,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes simulateMaintenanceEvent with LRO error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3232,7 +3232,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkSimulateMaintenanceEventProgress without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3240,8 +3240,8 @@ describe('v2alpha1.TpuClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3255,7 +3255,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes checkSimulateMaintenanceEventProgress with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3276,7 +3276,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('listNodes', () => {
     it('invokes listNodes without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3309,7 +3309,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listNodes without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3358,7 +3358,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listNodes with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3386,7 +3386,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listNodesStream without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3429,15 +3429,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNodesStream with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3477,15 +3477,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listNodes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNodes without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3519,15 +3519,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNodes with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3560,9 +3560,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listNodes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3570,7 +3570,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('listQueuedResources', () => {
     it('invokes listQueuedResources without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3610,7 +3610,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listQueuedResources without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3665,7 +3665,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listQueuedResources with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3696,7 +3696,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listQueuedResourcesStream without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3748,15 +3748,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listQueuedResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listQueuedResourcesStream with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3797,15 +3797,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listQueuedResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQueuedResources without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3846,15 +3846,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listQueuedResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listQueuedResources with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3887,9 +3887,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listQueuedResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3897,7 +3897,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('listAcceleratorTypes', () => {
     it('invokes listAcceleratorTypes without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3937,7 +3937,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listAcceleratorTypes without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3992,7 +3992,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listAcceleratorTypes with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4023,7 +4023,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listAcceleratorTypesStream without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4076,15 +4076,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listAcceleratorTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAcceleratorTypesStream with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4126,15 +4126,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listAcceleratorTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAcceleratorTypes without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4175,15 +4175,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listAcceleratorTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAcceleratorTypes with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4216,9 +4216,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listAcceleratorTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4226,7 +4226,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('listRuntimeVersions', () => {
     it('invokes listRuntimeVersions without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4266,7 +4266,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listRuntimeVersions without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4321,7 +4321,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listRuntimeVersions with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4352,7 +4352,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listRuntimeVersionsStream without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4404,15 +4404,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listRuntimeVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRuntimeVersionsStream with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4453,15 +4453,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listRuntimeVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRuntimeVersions without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4502,15 +4502,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listRuntimeVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRuntimeVersions with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4543,9 +4543,9 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listRuntimeVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4553,7 +4553,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('listReservations', () => {
     it('invokes listReservations without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4592,7 +4592,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listReservations without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4647,7 +4647,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listReservations with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4678,7 +4678,7 @@ describe('v2alpha1.TpuClient', () => {
 
     it('invokes listReservationsStream without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4730,15 +4730,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listReservations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReservationsStream with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4779,15 +4779,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listReservations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReservations without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4828,15 +4828,15 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listReservations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReservations with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4868,16 +4868,16 @@ describe('v2alpha1.TpuClient', () => {
       assert(
         (client.descriptors.page.listReservations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4907,7 +4907,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4951,7 +4951,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4986,7 +4986,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5034,7 +5034,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5075,7 +5075,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5096,7 +5096,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5124,7 +5124,7 @@ describe('v2alpha1.TpuClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5134,7 +5134,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5158,7 +5158,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5180,7 +5180,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5208,7 +5208,7 @@ describe('v2alpha1.TpuClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5218,7 +5218,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5242,7 +5242,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5264,7 +5264,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5292,7 +5292,7 @@ describe('v2alpha1.TpuClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5302,7 +5302,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5326,7 +5326,7 @@ describe('v2alpha1.TpuClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5361,7 +5361,7 @@ describe('v2alpha1.TpuClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5397,7 +5397,7 @@ describe('v2alpha1.TpuClient', () => {
         accelerator_type: 'acceleratorTypeValue',
       };
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5461,7 +5461,7 @@ describe('v2alpha1.TpuClient', () => {
         location: 'locationValue',
       };
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5511,7 +5511,7 @@ describe('v2alpha1.TpuClient', () => {
         node: 'nodeValue',
       };
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5573,7 +5573,7 @@ describe('v2alpha1.TpuClient', () => {
         project: 'projectValue',
       };
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5613,7 +5613,7 @@ describe('v2alpha1.TpuClient', () => {
         queued_resource: 'queuedResourceValue',
       };
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5678,7 +5678,7 @@ describe('v2alpha1.TpuClient', () => {
         reservation: 'reservationValue',
       };
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5742,7 +5742,7 @@ describe('v2alpha1.TpuClient', () => {
         runtime_version: 'runtimeVersionValue',
       };
       const client = new tpuModule.v2alpha1.TpuClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

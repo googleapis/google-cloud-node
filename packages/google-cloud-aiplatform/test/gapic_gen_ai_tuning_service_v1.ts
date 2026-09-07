@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as genaituningserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.genAiTuningServiceStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.GenAiTuningServiceClient', () => {
       assert(client.genAiTuningServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.genAiTuningServiceStub);
@@ -301,14 +301,14 @@ describe('v1.GenAiTuningServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.genAiTuningServiceStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('createTuningJob', () => {
     it('invokes createTuningJob without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes createTuningJob without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes createTuningJob with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes createTuningJob with closed client', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.GenAiTuningServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTuningJob(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('getTuningJob', () => {
     it('invokes getTuningJob without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -523,7 +523,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes getTuningJob without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -570,7 +570,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes getTuningJob with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes getTuningJob with closed client', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v1.GenAiTuningServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTuningJob(request), expectedError);
@@ -624,7 +624,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('cancelTuningJob', () => {
     it('invokes cancelTuningJob without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -655,7 +655,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes cancelTuningJob without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes cancelTuningJob with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes cancelTuningJob with closed client', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v1.GenAiTuningServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelTuningJob(request), expectedError);
@@ -756,7 +756,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('rebaseTunedModel', () => {
     it('invokes rebaseTunedModel without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -789,7 +789,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes rebaseTunedModel without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes rebaseTunedModel with call error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes rebaseTunedModel with LRO error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -907,7 +907,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes checkRebaseTunedModelProgress without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -915,8 +915,8 @@ describe('v1.GenAiTuningServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRebaseTunedModelProgress(
@@ -929,7 +929,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes checkRebaseTunedModelProgress with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -950,7 +950,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('listTuningJobs', () => {
     it('invokes listTuningJobs without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -989,7 +989,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes listTuningJobs without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1044,7 +1044,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes listTuningJobs with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1075,7 +1075,7 @@ describe('v1.GenAiTuningServiceClient', () => {
 
     it('invokes listTuningJobsStream without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1127,15 +1127,15 @@ describe('v1.GenAiTuningServiceClient', () => {
       assert(
         (client.descriptors.page.listTuningJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTuningJobsStream with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,15 +1176,15 @@ describe('v1.GenAiTuningServiceClient', () => {
       assert(
         (client.descriptors.page.listTuningJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTuningJobs without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1225,15 +1225,15 @@ describe('v1.GenAiTuningServiceClient', () => {
       assert(
         (client.descriptors.page.listTuningJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTuningJobs with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1265,16 +1265,16 @@ describe('v1.GenAiTuningServiceClient', () => {
       assert(
         (client.descriptors.page.listTuningJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1304,7 +1304,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v1.GenAiTuningServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1352,7 +1352,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1384,7 +1384,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1414,7 +1414,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v1.GenAiTuningServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1462,7 +1462,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1494,7 +1494,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1527,7 +1527,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v1.GenAiTuningServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1575,7 +1575,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1610,7 +1610,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1640,7 +1640,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1684,7 +1684,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1719,7 +1719,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1767,7 +1767,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1808,7 +1808,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1829,7 +1829,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1857,7 +1857,7 @@ describe('v1.GenAiTuningServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1867,7 +1867,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1891,7 +1891,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1913,7 +1913,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1941,7 +1941,7 @@ describe('v1.GenAiTuningServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1951,7 +1951,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1975,7 +1975,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1997,7 +1997,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2025,7 +2025,7 @@ describe('v1.GenAiTuningServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2035,7 +2035,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2059,7 +2059,7 @@ describe('v1.GenAiTuningServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2094,7 +2094,7 @@ describe('v1.GenAiTuningServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2132,7 +2132,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2219,7 +2219,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2296,7 +2296,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2371,7 +2371,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2448,7 +2448,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2513,7 +2513,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         context: 'contextValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2588,7 +2588,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2653,7 +2653,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2728,7 +2728,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2793,7 +2793,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2858,7 +2858,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2934,7 +2934,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3016,7 +3016,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3092,7 +3092,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3167,7 +3167,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3231,7 +3231,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3309,7 +3309,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3386,7 +3386,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3462,7 +3462,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3526,7 +3526,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3607,7 +3607,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         index: 'indexValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3671,7 +3671,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3734,7 +3734,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         location: 'locationValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3785,7 +3785,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3862,7 +3862,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3926,7 +3926,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         model: 'modelValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3990,7 +3990,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4070,7 +4070,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4147,7 +4147,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4254,7 +4254,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4319,7 +4319,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4395,7 +4395,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4476,7 +4476,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4541,7 +4541,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4622,7 +4622,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4699,7 +4699,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4763,7 +4763,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4843,7 +4843,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4946,7 +4946,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5070,7 +5070,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         model: 'modelValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5161,7 +5161,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         model: 'modelValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5214,7 +5214,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5277,7 +5277,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         location: 'locationValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5331,7 +5331,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5406,7 +5406,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5472,7 +5472,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5547,7 +5547,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5612,7 +5612,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5689,7 +5689,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         event: 'eventValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5776,7 +5776,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5841,7 +5841,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         study: 'studyValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5905,7 +5905,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5970,7 +5970,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6066,7 +6066,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         run: 'runValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6155,7 +6155,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6278,7 +6278,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6347,7 +6347,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6422,7 +6422,7 @@ describe('v1.GenAiTuningServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new genaituningserviceModule.v1.GenAiTuningServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

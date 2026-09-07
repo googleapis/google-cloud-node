@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,7 +60,7 @@ export class CloudBuildClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('cloudbuild');
@@ -73,10 +73,10 @@ export class CloudBuildClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  cloudBuildStub?: Promise<{ [name: string]: Function }>;
+  cloudBuildStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CloudBuildClient.
@@ -152,7 +152,7 @@ export class CloudBuildClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -312,7 +312,7 @@ export class CloudBuildClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=operations/**}',
           additional_bindings: [
-            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
           ],
         },
       ];
@@ -406,7 +406,7 @@ export class CloudBuildClient {
       'google.devtools.cloudbuild.v1.CloudBuild',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -446,7 +446,7 @@ export class CloudBuildClient {
           (this._protos as any).google.devtools.cloudbuild.v1.CloudBuild,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -473,7 +473,7 @@ export class CloudBuildClient {
     ];
     for (const methodName of cloudBuildStubMethods) {
       const callPromise = this.cloudBuildStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -683,13 +683,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBuild request %j', request);
@@ -835,13 +835,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelBuild request %j', request);
@@ -991,13 +991,13 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createBuildTrigger request %j', request);
@@ -1148,13 +1148,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getBuildTrigger request %j', request);
@@ -1311,13 +1311,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteBuildTrigger request %j', request);
@@ -1477,13 +1477,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateBuildTrigger request %j', request);
@@ -1638,7 +1638,7 @@ export class CloudBuildClient {
         trigger: request.trigger ?? '',
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('receiveTriggerWebhook request %j', request);
@@ -1785,13 +1785,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkerPool request %j', request);
@@ -1945,13 +1945,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDefaultServiceAccount request %j', request);
@@ -2115,13 +2115,13 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2178,7 +2178,7 @@ export class CloudBuildClient {
     this._log.info('createBuild long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2328,13 +2328,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2391,7 +2391,7 @@ export class CloudBuildClient {
     this._log.info('retryBuild long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2518,13 +2518,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2581,7 +2581,7 @@ export class CloudBuildClient {
     this._log.info('approveBuild long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2716,13 +2716,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2779,7 +2779,7 @@ export class CloudBuildClient {
     this._log.info('runBuildTrigger long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2908,13 +2908,13 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2971,7 +2971,7 @@ export class CloudBuildClient {
     this._log.info('createWorkerPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3103,13 +3103,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3166,7 +3166,7 @@ export class CloudBuildClient {
     this._log.info('deleteWorkerPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3295,13 +3295,13 @@ export class CloudBuildClient {
           );
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3358,7 +3358,7 @@ export class CloudBuildClient {
     this._log.info('updateWorkerPool long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3486,13 +3486,13 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3575,7 +3575,7 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
@@ -3583,7 +3583,7 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuilds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBuilds stream %j', request);
@@ -3648,7 +3648,7 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
@@ -3656,7 +3656,7 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuilds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBuilds iterate %j', request);
@@ -3768,13 +3768,13 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3847,7 +3847,7 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
@@ -3855,7 +3855,7 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuildTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBuildTriggers stream %j', request);
@@ -3910,7 +3910,7 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
@@ -3918,7 +3918,7 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listBuildTriggers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBuildTriggers iterate %j', request);
@@ -4030,13 +4030,13 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4109,7 +4109,7 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
@@ -4117,7 +4117,7 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkerPools stream %j', request);
@@ -4172,7 +4172,7 @@ export class CloudBuildClient {
           .match(RegExp('projects/[^/]+/locations/(?<location>[^/]+)'));
         if (match) {
           const parameterValue = match.groups?.['location'] ?? fieldValue;
-          Object.assign(routingParameter, { location: parameterValue });
+          Object.assign(routingParameter, {location: parameterValue});
         }
       }
     }
@@ -4180,7 +4180,7 @@ export class CloudBuildClient {
       this._gaxModule.routingHeader.fromParams(routingParameter);
     const defaultCallSettings = this._defaults['listWorkerPools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkerPools iterate %j', request);
@@ -4993,7 +4993,7 @@ export class CloudBuildClient {
    */
   close(): Promise<void> {
     if (this.cloudBuildStub && !this._terminated) {
-      return this.cloudBuildStub.then((stub) => {
+      return this.cloudBuildStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as toolsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.toolsStub, undefined);
@@ -245,12 +245,12 @@ describe('v2beta1.ToolsClient', () => {
       assert(client.toolsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.toolsStub);
@@ -259,14 +259,14 @@ describe('v2beta1.ToolsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.toolsStub, undefined);
@@ -275,7 +275,7 @@ describe('v2beta1.ToolsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v2beta1.ToolsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v2beta1.ToolsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v2beta1.ToolsClient', () => {
   describe('createTool', () => {
     it('invokes createTool without error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes createTool without error using callback', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes createTool with error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes createTool with closed client', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v2beta1.ToolsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTool(request), expectedError);
@@ -450,7 +450,7 @@ describe('v2beta1.ToolsClient', () => {
   describe('getTool', () => {
     it('invokes getTool without error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes getTool without error using callback', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -528,7 +528,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes getTool with error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes getTool with closed client', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v2beta1.ToolsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTool(request), expectedError);
@@ -579,7 +579,7 @@ describe('v2beta1.ToolsClient', () => {
   describe('deleteTool', () => {
     it('invokes deleteTool without error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,7 +610,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes deleteTool without error using callback', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes deleteTool with error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -688,7 +688,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes deleteTool with closed client', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v2beta1.ToolsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTool(request), expectedError);
@@ -711,7 +711,7 @@ describe('v2beta1.ToolsClient', () => {
   describe('updateTool', () => {
     it('invokes updateTool without error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes updateTool without error using callback', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -791,7 +791,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes updateTool with error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -823,7 +823,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes updateTool with closed client', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -837,7 +837,7 @@ describe('v2beta1.ToolsClient', () => {
       );
       request.tool.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTool(request), expectedError);
@@ -847,7 +847,7 @@ describe('v2beta1.ToolsClient', () => {
   describe('listTools', () => {
     it('invokes listTools without error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes listTools without error using callback', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -941,7 +941,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes listTools with error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -969,7 +969,7 @@ describe('v2beta1.ToolsClient', () => {
 
     it('invokes listToolsStream without error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1021,15 +1021,15 @@ describe('v2beta1.ToolsClient', () => {
       assert(
         (client.descriptors.page.listTools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listToolsStream with error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1072,15 +1072,15 @@ describe('v2beta1.ToolsClient', () => {
       assert(
         (client.descriptors.page.listTools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTools without error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1120,15 +1120,15 @@ describe('v2beta1.ToolsClient', () => {
       assert(
         (client.descriptors.page.listTools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTools with error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1161,16 +1161,16 @@ describe('v2beta1.ToolsClient', () => {
       assert(
         (client.descriptors.page.listTools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1200,7 +1200,7 @@ describe('v2beta1.ToolsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1244,7 +1244,7 @@ describe('v2beta1.ToolsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1279,7 +1279,7 @@ describe('v2beta1.ToolsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1327,7 +1327,7 @@ describe('v2beta1.ToolsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v2beta1.ToolsClient', () => {
         location: 'locationValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1427,7 +1427,7 @@ describe('v2beta1.ToolsClient', () => {
         generator: 'generatorValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1492,7 +1492,7 @@ describe('v2beta1.ToolsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v2beta1.ToolsClient', () => {
         location: 'locationValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1632,7 +1632,7 @@ describe('v2beta1.ToolsClient', () => {
         project: 'projectValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1670,7 +1670,7 @@ describe('v2beta1.ToolsClient', () => {
         project: 'projectValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1709,7 +1709,7 @@ describe('v2beta1.ToolsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1772,7 +1772,7 @@ describe('v2beta1.ToolsClient', () => {
         environment: 'environmentValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1839,7 +1839,7 @@ describe('v2beta1.ToolsClient', () => {
         context: 'contextValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1965,7 +1965,7 @@ describe('v2beta1.ToolsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2086,7 +2086,7 @@ describe('v2beta1.ToolsClient', () => {
         project: 'projectValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2132,7 +2132,7 @@ describe('v2beta1.ToolsClient', () => {
         intent: 'intentValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2194,7 +2194,7 @@ describe('v2beta1.ToolsClient', () => {
         context: 'contextValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2273,7 +2273,7 @@ describe('v2beta1.ToolsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2349,7 +2349,7 @@ describe('v2beta1.ToolsClient', () => {
         version: 'versionValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2410,7 +2410,7 @@ describe('v2beta1.ToolsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2473,7 +2473,7 @@ describe('v2beta1.ToolsClient', () => {
         message: 'messageValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2552,7 +2552,7 @@ describe('v2beta1.ToolsClient', () => {
         participant: 'participantValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2632,7 +2632,7 @@ describe('v2beta1.ToolsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2697,7 +2697,7 @@ describe('v2beta1.ToolsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2760,7 +2760,7 @@ describe('v2beta1.ToolsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2824,7 +2824,7 @@ describe('v2beta1.ToolsClient', () => {
         document: 'documentValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2902,7 +2902,7 @@ describe('v2beta1.ToolsClient', () => {
         location: 'locationValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2966,7 +2966,7 @@ describe('v2beta1.ToolsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3045,7 +3045,7 @@ describe('v2beta1.ToolsClient', () => {
         environment: 'environmentValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3128,7 +3128,7 @@ describe('v2beta1.ToolsClient', () => {
         context: 'contextValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3274,7 +3274,7 @@ describe('v2beta1.ToolsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3415,7 +3415,7 @@ describe('v2beta1.ToolsClient', () => {
         location: 'locationValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3477,7 +3477,7 @@ describe('v2beta1.ToolsClient', () => {
         intent: 'intentValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3557,7 +3557,7 @@ describe('v2beta1.ToolsClient', () => {
         context: 'contextValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3658,7 +3658,7 @@ describe('v2beta1.ToolsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3763,7 +3763,7 @@ describe('v2beta1.ToolsClient', () => {
         version: 'versionValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3841,7 +3841,7 @@ describe('v2beta1.ToolsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3920,7 +3920,7 @@ describe('v2beta1.ToolsClient', () => {
         message: 'messageValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4021,7 +4021,7 @@ describe('v2beta1.ToolsClient', () => {
         participant: 'participantValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4126,7 +4126,7 @@ describe('v2beta1.ToolsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4209,7 +4209,7 @@ describe('v2beta1.ToolsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4288,7 +4288,7 @@ describe('v2beta1.ToolsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4368,7 +4368,7 @@ describe('v2beta1.ToolsClient', () => {
         document: 'documentValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4473,7 +4473,7 @@ describe('v2beta1.ToolsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4551,7 +4551,7 @@ describe('v2beta1.ToolsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4614,7 +4614,7 @@ describe('v2beta1.ToolsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4678,7 +4678,7 @@ describe('v2beta1.ToolsClient', () => {
         tool: 'toolValue',
       };
       const client = new toolsModule.v2beta1.ToolsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

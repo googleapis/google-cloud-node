@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class MachineLearningRunsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('hypercomputecluster');
@@ -68,11 +68,11 @@ export class MachineLearningRunsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  machineLearningRunsStub?: Promise<{ [name: string]: Function }>;
+  machineLearningRunsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of MachineLearningRunsClient.
@@ -148,7 +148,7 @@ export class MachineLearningRunsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -426,7 +426,7 @@ export class MachineLearningRunsClient {
       'google.cloud.hypercomputecluster.v1alpha.MachineLearningRuns',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -467,7 +467,7 @@ export class MachineLearningRunsClient {
             .MachineLearningRuns,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -495,7 +495,7 @@ export class MachineLearningRunsClient {
     ];
     for (const methodName of machineLearningRunsStubMethods) {
       const callPromise = this.machineLearningRunsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -703,7 +703,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMachineLearningRun request %j', request);
@@ -847,7 +847,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getProfilerTarget request %j', request);
@@ -992,7 +992,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteProfilerTarget request %j', request);
@@ -1136,7 +1136,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getProfilerSession request %j', request);
@@ -1281,7 +1281,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteProfilerSession request %j', request);
@@ -1427,7 +1427,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -1577,7 +1577,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMonitoredEvent request %j', request);
@@ -1731,7 +1731,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1788,7 +1788,7 @@ export class MachineLearningRunsClient {
     this._log.info('createMachineLearningRun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1903,7 +1903,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         'machine_learning_run.name': request.machineLearningRun!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1960,7 +1960,7 @@ export class MachineLearningRunsClient {
     this._log.info('updateMachineLearningRun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2078,7 +2078,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2135,7 +2135,7 @@ export class MachineLearningRunsClient {
     this._log.info('deleteMachineLearningRun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2253,7 +2253,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2310,7 +2310,7 @@ export class MachineLearningRunsClient {
     this._log.info('createProfilerTarget long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2427,7 +2427,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2484,7 +2484,7 @@ export class MachineLearningRunsClient {
     this._log.info('createProfilerSession long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2602,7 +2602,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2659,7 +2659,7 @@ export class MachineLearningRunsClient {
     this._log.info('createMonitoredEvent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2775,7 +2775,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         'monitored_event.name': request.monitoredEvent!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2832,7 +2832,7 @@ export class MachineLearningRunsClient {
     this._log.info('updateMonitoredEvent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2946,7 +2946,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3003,7 +3003,7 @@ export class MachineLearningRunsClient {
     this._log.info('deleteMonitoredEvent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3165,7 +3165,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3287,7 +3287,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listMachineLearningRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMachineLearningRuns stream %j', request);
@@ -3391,7 +3391,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listMachineLearningRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMachineLearningRuns iterate %j', request);
@@ -3502,7 +3502,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3576,7 +3576,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listProfilerTargets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProfilerTargets stream %j', request);
@@ -3632,7 +3632,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listProfilerTargets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProfilerTargets iterate %j', request);
@@ -3743,7 +3743,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3817,7 +3817,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listProfilerSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProfilerSessions stream %j', request);
@@ -3873,7 +3873,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listProfilerSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listProfilerSessions iterate %j', request);
@@ -3984,7 +3984,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -4062,7 +4062,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listProfileSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -4122,7 +4122,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listProfileSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -4243,7 +4243,7 @@ export class MachineLearningRunsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4322,7 +4322,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listMonitoredEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMonitoredEvents stream %j', request);
@@ -4383,7 +4383,7 @@ export class MachineLearningRunsClient {
       });
     const defaultCallSettings = this._defaults['listMonitoredEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMonitoredEvents iterate %j', request);
@@ -5237,11 +5237,11 @@ export class MachineLearningRunsClient {
    */
   close(): Promise<void> {
     if (this.machineLearningRunsStub && !this._terminated) {
-      return this.machineLearningRunsStub.then((stub) => {
+      return this.machineLearningRunsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();
