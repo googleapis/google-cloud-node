@@ -195,10 +195,13 @@ export class StorageTransport {
     try {
       const requestPromise = this.authClient.request<T>({
         adapter: async (opts: GaxiosOptions) => {
+          const urlHasParams = opts.url
+            ? opts.url.toString() !== requestUrl
+            : false;
           const innerOpts = {
             ...opts,
             adapter: undefined,
-            params: undefined,
+            params: urlHasParams ? undefined : opts.params,
           };
           return requestGaxiosInstance.request(innerOpts);
         },
