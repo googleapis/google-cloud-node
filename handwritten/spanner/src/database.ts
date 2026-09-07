@@ -121,6 +121,15 @@ import {
   newAtomicCounter,
 } from './request_id_header';
 
+let globalReqId = 0;
+function safeMeasure(name: string, startMark: string, endMark: string) {
+  try {
+    performance.measure(name, startMark, endMark);
+  } catch (e) {
+    // ignore
+  }
+}
+
 export type GetDatabaseRolesCallback = RequestCallback<
   IDatabaseRole,
   databaseAdmin.spanner.admin.database.v1.IListDatabaseRolesResponse
@@ -2907,6 +2916,17 @@ class Database extends common.GrpcServiceObject {
         ? (optionsOrCallback as TimestampBounds)
         : {};
 
+    const reqId = ++globalReqId;
+    const m1Name = `M1_sdk_start_${reqId}`;
+    const m2Name = `M2_gax_start_${reqId}`;
+    const m3Name = `M3_sdk_data_recv_${reqId}`;
+    const m4Name = `M4_sdk_end_${reqId}`;
+
+    let m3Marked = false;
+
+    // [MARK M1]: SDK Entry Point
+    performance.mark(m1Name);
+
     return startTrace(
       'Database.run',
       {
@@ -2914,8 +2934,23 @@ class Database extends common.GrpcServiceObject {
         ...this._traceConfig,
       },
       span => {
-        this.runStream(query, options)
+        this.runStream(query, options, reqId)
           .on('error', err => {
+            // Clear all marks
+            performance.clearMarks(`M1_sdk_start_${reqId}`);
+            performance.clearMarks(`M2_gax_start_${reqId}`);
+            performance.clearMarks(`M2_gcp_start_${reqId}`);
+            performance.clearMarks(`M2_gcp_end_${reqId}`);
+            performance.clearMarks(`M2_socket_write_${reqId}`);
+            performance.clearMarks(`M3_gcp_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_header_recv_${reqId}`);
+            performance.clearMarks(`M3_gax_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_data_recv_raw_${reqId}`);
+            performance.clearMarks(`M3_grpc_data_recv_${reqId}`);
+            performance.clearMarks(`M3_gcp_data_recv_${reqId}`);
+            performance.clearMarks(`M3_gax_data_recv_${reqId}`);
+            performance.clearMarks(`M3_sdk_data_recv_${reqId}`);
+            performance.clearMarks(`M4_sdk_end_${reqId}`);
             setSpanError(span, err);
             span.end();
             callback!(err as grpc.ServiceError, rows, stats, metadata);
@@ -2927,9 +2962,98 @@ class Database extends common.GrpcServiceObject {
           })
           .on('stats', _stats => (stats = _stats))
           .on('data', row => {
+            // [MARK M3]: First Data Row Chunk Received at SDK layer
+            if (!m3Marked) {
+              m3Marked = true;
+              performance.mark(m3Name);
+            }
             rows.push(row);
           })
           .on('end', () => {
+            performance.mark(m4Name);
+            // Total End-to-End Latency (M1 -> M4):
+            safeMeasure(`0_Total_E2E_${reqId}`, m1Name, m4Name);
+
+            // Symmetrical Outbound (Pre-Processing):
+            safeMeasure(`1a_SDK_PreProcessing_${reqId}`, m1Name, m2Name);
+            safeMeasure(
+              `2a_GAX_PreProcessing_${reqId}`,
+              m2Name,
+              `M2_gcp_start_${reqId}`,
+            );
+            safeMeasure(
+              `3a_grpc_gcp_PreProcessing_${reqId}`,
+              `M2_gcp_start_${reqId}`,
+              `M2_gcp_end_${reqId}`,
+            );
+            safeMeasure(
+              `4a_grpc_js_PreProcessing_${reqId}`,
+              `M2_gcp_end_${reqId}`,
+              `M2_socket_write_${reqId}`,
+            );
+
+            // External Network & Server Times:
+            safeMeasure(
+              `5a_External_Time_To_First_Header_${reqId}`,
+              `M2_socket_write_${reqId}`,
+              `M3_gcp_header_recv_${reqId}`,
+            );
+            safeMeasure(
+              `5b_Server_Execution_To_First_Data_${reqId}`,
+              `M3_gcp_header_recv_${reqId}`,
+              `M3_grpc_data_recv_raw_${reqId}`,
+            );
+            safeMeasure(
+              `5_True_External_Flight_To_Data_${reqId}`,
+              `M2_socket_write_${reqId}`,
+              `M3_grpc_data_recv_raw_${reqId}`,
+            );
+
+            // Inbound Post-Processing (Pure Client CPU):
+            // 1. grpc-gcp intercepts the message FIRST from the inner network layer
+            safeMeasure(
+              `3b_grpc_gcp_PostProcessing_${reqId}`,
+              `M3_gcp_data_recv_${reqId}`,
+              `M3_grpc_data_recv_${reqId}`,
+            );
+            // 2. grpc-js stream emits to GAX, and GAX wraps/emits to Spanner
+            safeMeasure(
+              `2b_GAX_PostProcessing_${reqId}`,
+              `M3_grpc_data_recv_${reqId}`,
+              `M3_gax_data_recv_${reqId}`,
+            );
+            // 3. Spanner SDK (PartialResultStream) decodes the raw chunk into native JS types.
+            // We measure from GAX emitting data to the SDK pushing the decoded row.
+            safeMeasure(
+              `1b_SDK_PostProcessing_${reqId}`,
+              `M3_gax_data_recv_${reqId}`,
+              m3Name,
+            );
+            // 4. grpc-js protobuf decode happens in JS before M3_gcp_data_recv.
+            safeMeasure(
+              `4b_grpc_js_PostProcessing_${reqId}`,
+              `M3_grpc_data_recv_raw_${reqId}`,
+              `M3_gcp_data_recv_${reqId}`,
+            );
+
+            // Backward-compatible coarse metric:
+            safeMeasure(`2_External_${reqId}`, m2Name, m3Name);
+
+            // Clear all marks
+            performance.clearMarks(m1Name);
+            performance.clearMarks(m2Name);
+            performance.clearMarks(`M2_gcp_start_${reqId}`);
+            performance.clearMarks(`M2_gcp_end_${reqId}`);
+            performance.clearMarks(`M2_socket_write_${reqId}`);
+            performance.clearMarks(`M3_gcp_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_header_recv_${reqId}`);
+            performance.clearMarks(`M3_gax_header_recv_${reqId}`);
+            performance.clearMarks(`M3_grpc_data_recv_raw_${reqId}`);
+            performance.clearMarks(`M3_grpc_data_recv_${reqId}`);
+            performance.clearMarks(`M3_gcp_data_recv_${reqId}`);
+            performance.clearMarks(`M3_gax_data_recv_${reqId}`);
+            performance.clearMarks(m3Name);
+            performance.clearMarks(m4Name);
             span.end();
             callback!(null, rows, stats, metadata);
           });
@@ -3152,6 +3276,7 @@ class Database extends common.GrpcServiceObject {
   runStream(
     query: string | ExecuteSqlRequest,
     options?: TimestampBounds,
+    reqId?: number,
   ): PartialResultStream {
     const proxyStream: Transform = through.obj();
     return startTrace(
@@ -3176,8 +3301,18 @@ class Database extends common.GrpcServiceObject {
 
           this._releaseOnEnd(session!, snapshot, span);
 
+          let queryObj: ExecuteSqlRequest;
+          if (typeof query === 'string') {
+            queryObj = { sql: query } as ExecuteSqlRequest;
+          } else {
+            queryObj = Object.assign({}, query) as ExecuteSqlRequest;
+          }
+          queryObj.gaxOptions = Object.assign({}, queryObj.gaxOptions, {
+            reqId,
+          });
+
           let dataReceived = false;
-          let dataStream = snapshot.runStream(query);
+          let dataStream = snapshot.runStream(queryObj, reqId);
 
           const endListener = () => {
             snapshot.end();

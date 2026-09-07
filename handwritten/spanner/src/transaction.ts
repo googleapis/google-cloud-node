@@ -13,34 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {DateStruct, PreciseDate} from '@google-cloud/precise-date';
-import {promisifyAll} from '@google-cloud/promisify';
-import {isEmpty, toArray} from './helper';
+import { performance } from 'perf_hooks';
+import { DateStruct, PreciseDate } from '@google-cloud/precise-date';
+import { promisifyAll } from '@google-cloud/promisify';
+import { isEmpty, toArray } from './helper';
 import Long = require('long');
-import {EventEmitter} from 'events';
-import {grpc, CallOptions, ServiceError, Status, GoogleError} from 'google-gax';
-import {common as p} from 'protobufjs';
-import {finished, Readable, PassThrough, Stream} from 'stream';
+import { EventEmitter } from 'events';
+import { grpc, CallOptions, ServiceError, Status, GoogleError } from 'google-gax';
+import { common as p } from 'protobufjs';
+import { finished, Readable, PassThrough, Stream } from 'stream';
 
-import {codec, Json, JSONOptions, Type, Value} from './codec';
+import { codec, Json, JSONOptions, Type, Value } from './codec';
 import {
   PartialResultStream,
   partialResultStream,
   ResumeToken,
   Row,
 } from './partial-result-stream';
-import {Session} from './session';
-import {Key} from './table';
-import {Span} from './instrument';
-import {google as spannerClient} from '../protos/protos';
-import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
-import {google} from '../protos/protos';
+import { Session } from './session';
+import { Key } from './table';
+import { Span } from './instrument';
+import { google as spannerClient } from '../protos/protos';
+import { NormalCallback, addLeaderAwareRoutingHeader } from './common';
+import { google } from '../protos/protos';
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import IAny = google.protobuf.IAny;
 import IQueryOptions = google.spanner.v1.ExecuteSqlRequest.IQueryOptions;
 import IRequestOptions = google.spanner.v1.IRequestOptions;
-import {Database, Spanner} from '.';
+import { Database, Spanner } from '.';
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 import {
   ObservabilityOptions,
@@ -49,12 +49,36 @@ import {
   setSpanErrorAndException,
   traceConfig,
 } from './instrument';
-import {RunTransactionOptions} from './transaction-runner';
-import {injectRequestIDIntoHeaders, nextNthRequest} from './request_id_header';
+import { RunTransactionOptions } from './transaction-runner';
+import { injectRequestIDIntoHeaders, nextNthRequest } from './request_id_header';
 
 export type Rows = Array<Row | Json>;
 const RETRY_INFO_TYPE = 'type.googleapis.com/google.rpc.retryinfo';
 const RETRY_INFO_BIN = 'google.rpc.retryinfo-bin';
+
+let globalReqId = 0;
+
+function safeMeasure(name: string, startMark: string, endMark: string) {
+  try {
+    performance.measure(name, startMark, endMark);
+  } catch (e) {
+    // Ignore if startMark/endMark is missing on stream error
+  }
+}
+
+/**
+ * Injects a key-value pair into the gaxOpts.otherArgs.options object
+ * without mutating the original.
+ */
+function injectGaxOpt(existingOpts: any, key: string, value: any): any {
+  return Object.assign({}, existingOpts, {
+    otherArgs: Object.assign({}, existingOpts?.otherArgs, {
+      options: Object.assign({}, existingOpts?.otherArgs?.options, {
+        [key]: value,
+      }),
+    }),
+  });
+}
 
 export interface TimestampBounds {
   strong?: boolean;
@@ -124,10 +148,10 @@ export interface CommitOptions {
 
 export interface Statement {
   sql: string;
-  params?: {[param: string]: Value};
-  types?: Type | {[param: string]: Value};
+  params?: { [param: string]: Value };
+  types?: Type | { [param: string]: Value };
   // This property is used internally as a mapping for types. Do not set it manually
-  paramTypes?: {[k: string]: google.spanner.v1.Type} | null;
+  paramTypes?: { [k: string]: google.spanner.v1.Type } | null;
 }
 
 export interface ExecuteSqlRequest extends Statement, RequestOptions {
@@ -301,7 +325,7 @@ export class Snapshot extends EventEmitter {
   requestStream: (config: {}) => Readable;
   session: Session;
   queryOptions?: IQueryOptions;
-  commonHeaders_: {[k: string]: string};
+  commonHeaders_: { [k: string]: string };
   requestOptions?: Pick<IRequestOptions, 'transactionTag'>;
   _observabilityOptions?: ObservabilityOptions;
   _traceConfig: traceConfig;
@@ -365,12 +389,12 @@ export class Snapshot extends EventEmitter {
     this.requestStream = session.requestStream.bind(session);
 
     const readOnly = Snapshot.encodeTimestampBounds(options || {});
-    this._options = {readOnly};
+    this._options = { readOnly };
     this._dbName = (this.session.parent as Database).formattedName_;
     this._waitingRequests = [];
     this._inlineBeginStarted = false;
     this._observabilityOptions = session._observabilityOptions;
-    this.commonHeaders_ = {...session.commonHeaders_};
+    this.commonHeaders_ = { ...session.commonHeaders_ };
     this._traceConfig = {
       opts: this._observabilityOptions,
       dbName: this._dbName,
@@ -456,13 +480,13 @@ export class Snapshot extends EventEmitter {
     } else if (lowPriority.length > 0) {
       // RULE 2: If only 'insert' key(s) exist, find the one with
       // highest number of values
-      const {bestCandidates} = lowPriority.reduce(
+      const { bestCandidates } = lowPriority.reduce(
         (acc, mutation) => {
           const size = mutation.insert?.values?.length || 0;
 
           if (size > acc.maxSize) {
             // New largest size found, start a new list
-            return {maxSize: size, bestCandidates: [mutation]};
+            return { maxSize: size, bestCandidates: [mutation] };
           }
           if (size === acc.maxSize) {
             // Same size as current max, add to list
@@ -898,7 +922,7 @@ export class Snapshot extends EventEmitter {
           if (attempt === 1) {
             span.addEvent('Starting stream');
           } else {
-            span.addEvent('Re-attempting start stream', {attempt: attempt});
+            span.addEvent('Re-attempting start stream', { attempt: attempt });
           }
         } else {
           span.addEvent('Resuming stream', {
@@ -910,7 +934,7 @@ export class Snapshot extends EventEmitter {
         return this.requestStream({
           client: 'SpannerClient',
           method: 'streamingRead',
-          reqOpts: Object.assign({}, reqOpts, {resumeToken}),
+          reqOpts: Object.assign({}, reqOpts, { resumeToken }),
           gaxOpts: gaxOptions,
           headers: injectRequestIDIntoHeaders(
             headers,
@@ -1411,9 +1435,9 @@ export class Snapshot extends EventEmitter {
    *   });
    * ```
    */
-  runStream(query: string | ExecuteSqlRequest): PartialResultStream {
+  runStream(query: string | ExecuteSqlRequest, reqId?: number,): PartialResultStream {
     if (typeof query === 'string') {
-      query = {sql: query} as ExecuteSqlRequest;
+      query = { sql: query } as ExecuteSqlRequest;
     }
 
     query = Object.assign({}, query) as ExecuteSqlRequest;
@@ -1438,7 +1462,7 @@ export class Snapshot extends EventEmitter {
 
     const sanitizeRequest = () => {
       query = query as ExecuteSqlRequest;
-      const {params, paramTypes} = Snapshot.encodeParams(query);
+      const { params, paramTypes } = Snapshot.encodeParams(query);
       const transaction: spannerClient.spanner.v1.ITransactionSelector = {};
       if (this.id) {
         transaction.id = this.id as Uint8Array;
@@ -1494,6 +1518,10 @@ export class Snapshot extends EventEmitter {
       ...query,
       ...this._traceConfig,
     };
+
+    const currentReqId =
+      reqId ?? (query as any)?.gaxOptions?.reqId ?? ++globalReqId;
+
     return startTrace('Snapshot.runStream', traceConfig, span => {
       let attempt = 0;
       const database = this.session.parent as Database;
@@ -1505,7 +1533,7 @@ export class Snapshot extends EventEmitter {
           if (attempt === 1) {
             span.addEvent('Starting stream');
           } else {
-            span.addEvent('Re-attempting start stream', {attempt: attempt});
+            span.addEvent('Re-attempting start stream', { attempt: attempt });
           }
         } else {
           span.addEvent('Resuming stream', {
@@ -1529,8 +1557,8 @@ export class Snapshot extends EventEmitter {
         return this.requestStream({
           client: 'SpannerClient',
           method: 'executeStreamingSql',
-          reqOpts: Object.assign({}, reqOpts, {resumeToken}),
-          gaxOpts: gaxOptions,
+          reqOpts: Object.assign({}, reqOpts, { resumeToken }),
+          gaxOpts: injectGaxOpt(gaxOptions, 'reqId', currentReqId),
           headers: injectRequestIDIntoHeaders(
             headers,
             this.session,
@@ -1658,7 +1686,7 @@ export class Snapshot extends EventEmitter {
     options: TimestampBounds,
   ): spannerClient.spanner.v1.TransactionOptions.IReadOnly {
     const readOnly: spannerClient.spanner.v1.TransactionOptions.IReadOnly = {};
-    const {returnReadTimestamp = true} = options;
+    const { returnReadTimestamp = true } = options;
 
     if (options.minReadTimestamp instanceof PreciseDate) {
       readOnly.minReadTimestamp = (
@@ -1706,8 +1734,8 @@ export class Snapshot extends EventEmitter {
   static encodeParams(request: ExecuteSqlRequest) {
     const typeMap = request.types || {};
 
-    const params: p.IStruct = {fields: request.params?.fields || {}};
-    const paramTypes: {[field: string]: spannerClient.spanner.v1.Type} =
+    const params: p.IStruct = { fields: request.params?.fields || {} };
+    const paramTypes: { [field: string]: spannerClient.spanner.v1.Type } =
       request.paramTypes || {};
 
     if (request.params && !request.params.fields) {
@@ -1744,7 +1772,7 @@ export class Snapshot extends EventEmitter {
       });
     }
 
-    return {params, paramTypes};
+    return { params, paramTypes };
   }
 
   /**
@@ -1780,12 +1808,12 @@ export class Snapshot extends EventEmitter {
     resp: spannerClient.spanner.v1.ITransaction,
     span: Span,
   ): void {
-    const {id, readTimestamp} = resp;
+    const { id, readTimestamp } = resp;
 
     this.id = id!;
     this.metadata = resp;
 
-    span.addEvent('Transaction Creation Done', {id: this.id.toString()});
+    span.addEvent('Transaction Creation Done', { id: this.id.toString() });
 
     if (readTimestamp) {
       this.readTimestampProto = readTimestamp;
@@ -1815,7 +1843,7 @@ export class Snapshot extends EventEmitter {
     // Queue subsequent requests.
     return (resumeToken?: ResumeToken): Readable => {
       const streamProxy = new Readable({
-        read() {},
+        read() { },
       });
 
       this._waitingRequests.push(() => {
@@ -1899,7 +1927,7 @@ export class Dml extends Snapshot {
     callback?: RunUpdateCallback,
   ): void | Promise<RunUpdateResponse> {
     if (typeof query === 'string') {
-      query = {sql: query} as ExecuteSqlRequest;
+      query = { sql: query } as ExecuteSqlRequest;
     }
 
     return startTrace(
@@ -2044,7 +2072,7 @@ export class Transaction extends Dml {
     super(session, undefined, queryOptions);
 
     this._queuedMutations = [];
-    this._options = {readWrite: options};
+    this._options = { readWrite: options };
     this._options.isolationLevel = IsolationLevel.ISOLATION_LEVEL_UNSPECIFIED;
     this.requestOptions = requestOptions;
     this._retryCommit = false;
@@ -2160,11 +2188,11 @@ export class Transaction extends Dml {
     const statements: spannerClient.spanner.v1.ExecuteBatchDmlRequest.IStatement[] =
       queries.map(query => {
         if (typeof query === 'string') {
-          return {sql: query};
+          return { sql: query };
         }
-        const {sql} = query;
-        const {params, paramTypes} = Snapshot.encodeParams(query);
-        return {sql, params, paramTypes};
+        const { sql } = query;
+        const { params, paramTypes } = Snapshot.encodeParams(query);
+        return { sql, params, paramTypes };
       });
 
     const transaction: spannerClient.spanner.v1.ITransactionSelector = {};
@@ -2228,7 +2256,7 @@ export class Transaction extends Dml {
 
           if (err) {
             const rowCounts: number[] = [];
-            batchUpdateError = Object.assign(err, {rowCounts});
+            batchUpdateError = Object.assign(err, { rowCounts });
             setSpanError(span, batchUpdateError);
             span.end();
             callback!(batchUpdateError, rowCounts, resp);
@@ -2237,18 +2265,18 @@ export class Transaction extends Dml {
 
           this._updatePrecommitToken(resp);
 
-          const {resultSets, status} = resp;
+          const { resultSets, status } = resp;
           for (const resultSet of resultSets) {
             if (!this.id && resultSet.metadata?.transaction) {
               this._update(resultSet.metadata.transaction, span);
             }
           }
-          const rowCounts: number[] = resultSets.map(({stats}) => {
+          const rowCounts: number[] = resultSets.map(({ stats }) => {
             return (
               (stats &&
                 Number(
                   stats[
-                    (stats as spannerClient.spanner.v1.ResultSetStats).rowCount!
+                  (stats as spannerClient.spanner.v1.ResultSetStats).rowCount!
                   ],
                 )) ||
               0
@@ -3045,7 +3073,7 @@ function buildMutation(
   });
 
   const mutation: spannerClient.spanner.v1.IMutation = {
-    [method]: {table, columns, values},
+    [method]: { table, columns, values },
   };
   return mutation as spannerClient.spanner.v1.Mutation;
 }
@@ -3065,7 +3093,7 @@ function buildDeleteMutation(
     keys: toArray(keys).map(codec.convertToListValue),
   };
   const mutation: spannerClient.spanner.v1.IMutation = {
-    delete: {table, keySet},
+    delete: { table, keySet },
   };
   return mutation as spannerClient.spanner.v1.Mutation;
 }
@@ -3258,7 +3286,7 @@ export class PartitionedDml extends Dml {
     options = {} as spannerClient.spanner.v1.TransactionOptions.PartitionedDml,
   ) {
     super(session);
-    this._options = {partitionedDml: options};
+    this._options = { partitionedDml: options };
   }
   /**
    * Use option excludeTxnFromChangeStreams to exclude partitionedDml
