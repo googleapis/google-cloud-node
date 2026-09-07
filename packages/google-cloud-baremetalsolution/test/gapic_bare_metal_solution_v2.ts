@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as baremetalsolutionModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v2.BareMetalSolutionClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new baremetalsolutionModule.v2.BareMetalSolutionClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -281,7 +281,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.bareMetalSolutionStub, undefined);
@@ -289,12 +289,12 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(client.bareMetalSolutionStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.bareMetalSolutionStub);
@@ -303,14 +303,14 @@ describe('v2.BareMetalSolutionClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.bareMetalSolutionStub, undefined);
@@ -319,7 +319,7 @@ describe('v2.BareMetalSolutionClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -327,7 +327,7 @@ describe('v2.BareMetalSolutionClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -339,7 +339,7 @@ describe('v2.BareMetalSolutionClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -362,7 +362,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -393,7 +393,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -494,7 +494,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('renameInstance', () => {
     it('invokes renameInstance without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -525,7 +525,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameInstance without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameInstance with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -603,7 +603,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameInstance with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.renameInstance(request), expectedError);
@@ -626,7 +626,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('createSSHKey', () => {
     it('invokes createSSHKey without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createSSHKey without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createSSHKey with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createSSHKey with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSSHKey(request), expectedError);
@@ -758,7 +758,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('deleteSSHKey', () => {
     it('invokes deleteSSHKey without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -789,7 +789,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes deleteSSHKey without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -836,7 +836,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes deleteSSHKey with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes deleteSSHKey with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSSHKey(request), expectedError);
@@ -890,7 +890,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('getVolume', () => {
     it('invokes getVolume without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -921,7 +921,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getVolume without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getVolume with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -996,7 +996,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getVolume with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1009,7 +1009,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVolume(request), expectedError);
@@ -1019,7 +1019,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('renameVolume', () => {
     it('invokes renameVolume without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameVolume without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1097,7 +1097,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameVolume with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1128,7 +1128,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameVolume with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1141,7 +1141,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.renameVolume(request), expectedError);
@@ -1151,7 +1151,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listNetworkUsage', () => {
     it('invokes listNetworkUsage without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1182,7 +1182,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listNetworkUsage without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listNetworkUsage with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1260,7 +1260,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listNetworkUsage with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1273,7 +1273,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listNetworkUsage(request), expectedError);
@@ -1283,7 +1283,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('getNetwork', () => {
     it('invokes getNetwork without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getNetwork without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1361,7 +1361,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getNetwork with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1392,7 +1392,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getNetwork with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1405,7 +1405,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNetwork(request), expectedError);
@@ -1415,7 +1415,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('createVolumeSnapshot', () => {
     it('invokes createVolumeSnapshot without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1447,7 +1447,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createVolumeSnapshot without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1494,7 +1494,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createVolumeSnapshot with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1525,7 +1525,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createVolumeSnapshot with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1538,7 +1538,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createVolumeSnapshot(request), expectedError);
@@ -1548,7 +1548,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('deleteVolumeSnapshot', () => {
     it('invokes deleteVolumeSnapshot without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1580,7 +1580,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes deleteVolumeSnapshot without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1627,7 +1627,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes deleteVolumeSnapshot with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,7 +1658,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes deleteVolumeSnapshot with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1671,7 +1671,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteVolumeSnapshot(request), expectedError);
@@ -1681,7 +1681,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('getVolumeSnapshot', () => {
     it('invokes getVolumeSnapshot without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1712,7 +1712,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getVolumeSnapshot without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1759,7 +1759,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getVolumeSnapshot with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1790,7 +1790,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getVolumeSnapshot with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1803,7 +1803,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVolumeSnapshot(request), expectedError);
@@ -1813,7 +1813,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('getLun', () => {
     it('invokes getLun without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1844,7 +1844,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getLun without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1891,7 +1891,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getLun with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +1919,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getLun with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1932,7 +1932,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLun(request), expectedError);
@@ -1942,7 +1942,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('getNfsShare', () => {
     it('invokes getNfsShare without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1973,7 +1973,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getNfsShare without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2020,7 +2020,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getNfsShare with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2051,7 +2051,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getNfsShare with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2064,7 +2064,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNfsShare(request), expectedError);
@@ -2074,7 +2074,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('renameNfsShare', () => {
     it('invokes renameNfsShare without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2105,7 +2105,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameNfsShare without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2152,7 +2152,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameNfsShare with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2183,7 +2183,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameNfsShare with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2196,7 +2196,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.renameNfsShare(request), expectedError);
@@ -2206,7 +2206,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('submitProvisioningConfig', () => {
     it('invokes submitProvisioningConfig without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2238,7 +2238,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes submitProvisioningConfig without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2285,7 +2285,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes submitProvisioningConfig with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2319,7 +2319,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes submitProvisioningConfig with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2332,7 +2332,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2345,7 +2345,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('getProvisioningConfig', () => {
     it('invokes getProvisioningConfig without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2377,7 +2377,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getProvisioningConfig without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2424,7 +2424,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getProvisioningConfig with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2458,7 +2458,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes getProvisioningConfig with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2471,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2484,7 +2484,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('createProvisioningConfig', () => {
     it('invokes createProvisioningConfig without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2516,7 +2516,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createProvisioningConfig without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2563,7 +2563,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createProvisioningConfig with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2597,7 +2597,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createProvisioningConfig with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2610,7 +2610,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2623,7 +2623,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('updateProvisioningConfig', () => {
     it('invokes updateProvisioningConfig without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2656,7 +2656,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateProvisioningConfig without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2704,7 +2704,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateProvisioningConfig with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2739,7 +2739,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateProvisioningConfig with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2753,7 +2753,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.provisioningConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2766,7 +2766,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('renameNetwork', () => {
     it('invokes renameNetwork without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2797,7 +2797,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameNetwork without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2844,7 +2844,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameNetwork with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2875,7 +2875,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes renameNetwork with closed client', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2888,7 +2888,7 @@ describe('v2.BareMetalSolutionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.renameNetwork(request), expectedError);
@@ -2898,7 +2898,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('updateInstance', () => {
     it('invokes updateInstance without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2932,7 +2932,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateInstance without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2987,7 +2987,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateInstance with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3019,7 +3019,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateInstance with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3053,7 +3053,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkUpdateInstanceProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3061,8 +3061,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInstanceProgress(
@@ -3075,7 +3075,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkUpdateInstanceProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3096,7 +3096,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('resetInstance', () => {
     it('invokes resetInstance without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3129,7 +3129,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes resetInstance without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3183,7 +3183,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes resetInstance with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3214,7 +3214,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes resetInstance with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3247,7 +3247,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkResetInstanceProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3255,8 +3255,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkResetInstanceProgress(
@@ -3269,7 +3269,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkResetInstanceProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3290,7 +3290,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('startInstance', () => {
     it('invokes startInstance without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3323,7 +3323,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes startInstance without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3377,7 +3377,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes startInstance with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3408,7 +3408,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes startInstance with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3441,7 +3441,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkStartInstanceProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3449,8 +3449,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartInstanceProgress(
@@ -3463,7 +3463,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkStartInstanceProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3484,7 +3484,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('stopInstance', () => {
     it('invokes stopInstance without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3516,7 +3516,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes stopInstance without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3570,7 +3570,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes stopInstance with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3601,7 +3601,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes stopInstance with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3634,7 +3634,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkStopInstanceProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3642,8 +3642,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStopInstanceProgress(
@@ -3656,7 +3656,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkStopInstanceProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3674,7 +3674,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('enableInteractiveSerialConsole', () => {
     it('invokes enableInteractiveSerialConsole without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3707,7 +3707,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes enableInteractiveSerialConsole without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3761,7 +3761,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes enableInteractiveSerialConsole with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3795,7 +3795,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes enableInteractiveSerialConsole with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3828,7 +3828,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkEnableInteractiveSerialConsoleProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3836,8 +3836,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3851,7 +3851,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkEnableInteractiveSerialConsoleProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3872,7 +3872,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('disableInteractiveSerialConsole', () => {
     it('invokes disableInteractiveSerialConsole without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3905,7 +3905,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes disableInteractiveSerialConsole without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3959,7 +3959,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes disableInteractiveSerialConsole with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3991,7 +3991,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes disableInteractiveSerialConsole with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4021,7 +4021,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkDisableInteractiveSerialConsoleProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4029,8 +4029,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4044,7 +4044,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkDisableInteractiveSerialConsoleProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4065,7 +4065,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('detachLun', () => {
     it('invokes detachLun without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4097,7 +4097,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes detachLun without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4151,7 +4151,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes detachLun with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4182,7 +4182,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes detachLun with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4215,7 +4215,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkDetachLunProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4223,8 +4223,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDetachLunProgress(
@@ -4237,7 +4237,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkDetachLunProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4255,7 +4255,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('updateVolume', () => {
     it('invokes updateVolume without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4288,7 +4288,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateVolume without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4343,7 +4343,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateVolume with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4375,7 +4375,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateVolume with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4409,7 +4409,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkUpdateVolumeProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4417,8 +4417,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateVolumeProgress(
@@ -4431,7 +4431,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkUpdateVolumeProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4449,7 +4449,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('evictVolume', () => {
     it('invokes evictVolume without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4481,7 +4481,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes evictVolume without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4535,7 +4535,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes evictVolume with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4566,7 +4566,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes evictVolume with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4599,7 +4599,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkEvictVolumeProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4607,8 +4607,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkEvictVolumeProgress(
@@ -4621,7 +4621,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkEvictVolumeProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4639,7 +4639,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('resizeVolume', () => {
     it('invokes resizeVolume without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4671,7 +4671,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes resizeVolume without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4725,7 +4725,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes resizeVolume with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4756,7 +4756,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes resizeVolume with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4789,7 +4789,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkResizeVolumeProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4797,8 +4797,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkResizeVolumeProgress(
@@ -4811,7 +4811,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkResizeVolumeProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4829,7 +4829,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('updateNetwork', () => {
     it('invokes updateNetwork without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4863,7 +4863,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateNetwork without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4918,7 +4918,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateNetwork with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4950,7 +4950,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateNetwork with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4984,7 +4984,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkUpdateNetworkProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4992,8 +4992,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateNetworkProgress(
@@ -5006,7 +5006,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkUpdateNetworkProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5027,7 +5027,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('restoreVolumeSnapshot', () => {
     it('invokes restoreVolumeSnapshot without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5060,7 +5060,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes restoreVolumeSnapshot without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5114,7 +5114,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes restoreVolumeSnapshot with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5148,7 +5148,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes restoreVolumeSnapshot with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5181,7 +5181,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkRestoreVolumeSnapshotProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5189,8 +5189,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreVolumeSnapshotProgress(
@@ -5203,7 +5203,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkRestoreVolumeSnapshotProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5224,7 +5224,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('evictLun', () => {
     it('invokes evictLun without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5256,7 +5256,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes evictLun without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5310,7 +5310,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes evictLun with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5341,7 +5341,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes evictLun with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5374,7 +5374,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkEvictLunProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5382,8 +5382,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkEvictLunProgress(
@@ -5396,7 +5396,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkEvictLunProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5414,7 +5414,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('updateNfsShare', () => {
     it('invokes updateNfsShare without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5448,7 +5448,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateNfsShare without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5503,7 +5503,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateNfsShare with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5535,7 +5535,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes updateNfsShare with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5569,7 +5569,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkUpdateNfsShareProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5577,8 +5577,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateNfsShareProgress(
@@ -5591,7 +5591,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkUpdateNfsShareProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5612,7 +5612,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('createNfsShare', () => {
     it('invokes createNfsShare without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5645,7 +5645,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createNfsShare without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5699,7 +5699,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createNfsShare with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5730,7 +5730,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes createNfsShare with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5763,7 +5763,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkCreateNfsShareProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5771,8 +5771,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateNfsShareProgress(
@@ -5785,7 +5785,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkCreateNfsShareProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5806,7 +5806,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('deleteNfsShare', () => {
     it('invokes deleteNfsShare without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5839,7 +5839,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes deleteNfsShare without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5893,7 +5893,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes deleteNfsShare with call error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5924,7 +5924,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes deleteNfsShare with LRO error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5957,7 +5957,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkDeleteNfsShareProgress without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5965,8 +5965,8 @@ describe('v2.BareMetalSolutionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteNfsShareProgress(
@@ -5979,7 +5979,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes checkDeleteNfsShareProgress with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6000,7 +6000,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6039,7 +6039,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6071,8 +6071,7 @@ describe('v2.BareMetalSolutionClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.baremetalsolution.v2.IInstance[]
-              | null,
+              protos.google.cloud.baremetalsolution.v2.IInstance[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6096,7 +6095,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6127,7 +6126,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6180,15 +6179,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6230,15 +6229,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6280,15 +6279,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6321,9 +6320,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6331,7 +6330,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listSSHKeys', () => {
     it('invokes listSSHKeys without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6370,7 +6369,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listSSHKeys without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6425,7 +6424,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listSSHKeys with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6456,7 +6455,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listSSHKeysStream without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6508,15 +6507,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSSHKeysStream with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6559,15 +6558,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSSHKeys without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6608,15 +6607,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSSHKeys with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6651,9 +6650,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listSSHKeys.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6661,7 +6660,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listVolumes', () => {
     it('invokes listVolumes without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6700,7 +6699,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listVolumes without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6755,7 +6754,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listVolumes with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6786,7 +6785,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listVolumesStream without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6838,15 +6837,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVolumesStream with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6889,15 +6888,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumes without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6938,15 +6937,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumes with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6981,9 +6980,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6991,7 +6990,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listNetworks', () => {
     it('invokes listNetworks without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7030,7 +7029,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listNetworks without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7085,7 +7084,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listNetworks with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7116,7 +7115,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listNetworksStream without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7169,15 +7168,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNetworksStream with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7221,15 +7220,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNetworks without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7270,15 +7269,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNetworks with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7311,9 +7310,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNetworks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7321,7 +7320,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listVolumeSnapshots', () => {
     it('invokes listVolumeSnapshots without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7361,7 +7360,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listVolumeSnapshots without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7393,8 +7392,7 @@ describe('v2.BareMetalSolutionClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[]
-              | null,
+              protos.google.cloud.baremetalsolution.v2.IVolumeSnapshot[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7418,7 +7416,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listVolumeSnapshots with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7449,7 +7447,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listVolumeSnapshotsStream without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7504,15 +7502,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVolumeSnapshotsStream with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7556,15 +7554,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumeSnapshots without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7606,15 +7604,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVolumeSnapshots with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7647,9 +7645,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listVolumeSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7657,7 +7655,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listLuns', () => {
     it('invokes listLuns without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7696,7 +7694,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listLuns without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7751,7 +7749,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listLuns with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7779,7 +7777,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listLunsStream without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7831,15 +7829,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLunsStream with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7882,15 +7880,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLuns without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7930,15 +7928,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLuns with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7971,9 +7969,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listLuns.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7981,7 +7979,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listNfsShares', () => {
     it('invokes listNfsShares without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8020,7 +8018,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listNfsShares without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8052,8 +8050,7 @@ describe('v2.BareMetalSolutionClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.baremetalsolution.v2.INfsShare[]
-              | null,
+              protos.google.cloud.baremetalsolution.v2.INfsShare[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8077,7 +8074,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listNfsShares with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8108,7 +8105,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listNfsSharesStream without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8161,15 +8158,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNfsSharesStream with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8211,15 +8208,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNfsShares without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8261,15 +8258,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNfsShares with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8302,9 +8299,9 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listNfsShares.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8312,7 +8309,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listProvisioningQuotas', () => {
     it('invokes listProvisioningQuotas without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8352,7 +8349,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listProvisioningQuotas without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8409,7 +8406,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listProvisioningQuotas with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8443,7 +8440,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listProvisioningQuotasStream without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8512,7 +8509,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listProvisioningQuotasStream with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8570,7 +8567,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('uses async iteration with listProvisioningQuotas without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8624,7 +8621,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('uses async iteration with listProvisioningQuotas with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8671,7 +8668,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listOSImages', () => {
     it('invokes listOSImages without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8710,7 +8707,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listOSImages without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8765,7 +8762,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listOSImages with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8796,7 +8793,7 @@ describe('v2.BareMetalSolutionClient', () => {
 
     it('invokes listOSImagesStream without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8849,15 +8846,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listOSImagesStream with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8901,15 +8898,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOSImages without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8950,15 +8947,15 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOSImages with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8991,16 +8988,16 @@ describe('v2.BareMetalSolutionClient', () => {
       assert(
         (client.descriptors.page.listOSImages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9030,7 +9027,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9068,7 +9065,7 @@ describe('v2.BareMetalSolutionClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9078,7 +9075,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9110,7 +9107,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9140,7 +9137,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9178,7 +9175,7 @@ describe('v2.BareMetalSolutionClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9188,7 +9185,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9220,7 +9217,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9253,7 +9250,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9291,7 +9288,7 @@ describe('v2.BareMetalSolutionClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9301,7 +9298,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9336,7 +9333,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9366,7 +9363,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9410,7 +9407,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9445,7 +9442,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9493,7 +9490,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9534,7 +9531,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9555,7 +9552,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9583,7 +9580,7 @@ describe('v2.BareMetalSolutionClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9593,7 +9590,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9617,7 +9614,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9639,7 +9636,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9667,7 +9664,7 @@ describe('v2.BareMetalSolutionClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9677,7 +9674,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9701,7 +9698,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9723,7 +9720,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9751,7 +9748,7 @@ describe('v2.BareMetalSolutionClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9761,7 +9758,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9785,7 +9782,7 @@ describe('v2.BareMetalSolutionClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9820,7 +9817,7 @@ describe('v2.BareMetalSolutionClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9856,7 +9853,7 @@ describe('v2.BareMetalSolutionClient', () => {
         instance: 'instanceValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9920,7 +9917,7 @@ describe('v2.BareMetalSolutionClient', () => {
         instance_config: 'instanceConfigValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9985,7 +9982,7 @@ describe('v2.BareMetalSolutionClient', () => {
         instance_quota: 'instanceQuotaValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10050,7 +10047,7 @@ describe('v2.BareMetalSolutionClient', () => {
         lun: 'lunValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10125,7 +10122,7 @@ describe('v2.BareMetalSolutionClient', () => {
         nfs_share: 'nfsShareValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10189,7 +10186,7 @@ describe('v2.BareMetalSolutionClient', () => {
         network: 'networkValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10253,7 +10250,7 @@ describe('v2.BareMetalSolutionClient', () => {
         network_config: 'networkConfigValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10317,7 +10314,7 @@ describe('v2.BareMetalSolutionClient', () => {
         os_image: 'osImageValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10381,7 +10378,7 @@ describe('v2.BareMetalSolutionClient', () => {
         provisioning_config: 'provisioningConfigValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10458,7 +10455,7 @@ describe('v2.BareMetalSolutionClient', () => {
         provisioning_quota: 'provisioningQuotaValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10535,7 +10532,7 @@ describe('v2.BareMetalSolutionClient', () => {
         server_network_template: 'serverNetworkTemplateValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10616,7 +10613,7 @@ describe('v2.BareMetalSolutionClient', () => {
         ssh_key: 'sshKeyValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10680,7 +10677,7 @@ describe('v2.BareMetalSolutionClient', () => {
         volume: 'volumeValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10744,7 +10741,7 @@ describe('v2.BareMetalSolutionClient', () => {
         volume_config: 'volumeConfigValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10809,7 +10806,7 @@ describe('v2.BareMetalSolutionClient', () => {
         snapshot: 'snapshotValue',
       };
       const client = new baremetalsolutionModule.v2.BareMetalSolutionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

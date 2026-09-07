@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as simulatorModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -272,7 +272,7 @@ describe('v1.SimulatorClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.simulatorStub, undefined);
@@ -280,12 +280,12 @@ describe('v1.SimulatorClient', () => {
       assert(client.simulatorStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.simulatorStub);
@@ -294,14 +294,14 @@ describe('v1.SimulatorClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.simulatorStub, undefined);
@@ -310,7 +310,7 @@ describe('v1.SimulatorClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -318,7 +318,7 @@ describe('v1.SimulatorClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -330,7 +330,7 @@ describe('v1.SimulatorClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -353,7 +353,7 @@ describe('v1.SimulatorClient', () => {
   describe('getReplay', () => {
     it('invokes getReplay without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -384,7 +384,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes getReplay without error using callback', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes getReplay with error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes getReplay with closed client', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,7 +472,7 @@ describe('v1.SimulatorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReplay(request), expectedError);
@@ -482,7 +482,7 @@ describe('v1.SimulatorClient', () => {
   describe('createReplay', () => {
     it('invokes createReplay without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes createReplay without error using callback', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes createReplay with call error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes createReplay with LRO error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes checkCreateReplayProgress without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -640,8 +640,8 @@ describe('v1.SimulatorClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateReplayProgress(
@@ -654,7 +654,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes checkCreateReplayProgress with error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -672,7 +672,7 @@ describe('v1.SimulatorClient', () => {
   describe('listReplayResults', () => {
     it('invokes listReplayResults without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes listReplayResults without error using callback', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,8 +743,7 @@ describe('v1.SimulatorClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.policysimulator.v1.IReplayResult[]
-              | null,
+              protos.google.cloud.policysimulator.v1.IReplayResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -768,7 +767,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes listReplayResults with error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +798,7 @@ describe('v1.SimulatorClient', () => {
 
     it('invokes listReplayResultsStream without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -852,15 +851,15 @@ describe('v1.SimulatorClient', () => {
       assert(
         (client.descriptors.page.listReplayResults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReplayResultsStream with error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -902,15 +901,15 @@ describe('v1.SimulatorClient', () => {
       assert(
         (client.descriptors.page.listReplayResults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReplayResults without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -952,15 +951,15 @@ describe('v1.SimulatorClient', () => {
       assert(
         (client.descriptors.page.listReplayResults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReplayResults with error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,16 +992,16 @@ describe('v1.SimulatorClient', () => {
       assert(
         (client.descriptors.page.listReplayResults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1023,7 +1022,7 @@ describe('v1.SimulatorClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1051,7 +1050,7 @@ describe('v1.SimulatorClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1061,7 +1060,7 @@ describe('v1.SimulatorClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1085,7 +1084,7 @@ describe('v1.SimulatorClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,7 +1106,7 @@ describe('v1.SimulatorClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1135,7 +1134,7 @@ describe('v1.SimulatorClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1145,7 +1144,7 @@ describe('v1.SimulatorClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1169,7 +1168,7 @@ describe('v1.SimulatorClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1191,7 +1190,7 @@ describe('v1.SimulatorClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1219,7 +1218,7 @@ describe('v1.SimulatorClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1229,7 +1228,7 @@ describe('v1.SimulatorClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1253,7 +1252,7 @@ describe('v1.SimulatorClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1288,7 +1287,7 @@ describe('v1.SimulatorClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1323,7 +1322,7 @@ describe('v1.SimulatorClient', () => {
         custom_constraint: 'customConstraintValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1380,7 +1379,7 @@ describe('v1.SimulatorClient', () => {
         constraint: 'constraintValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1436,7 +1435,7 @@ describe('v1.SimulatorClient', () => {
         replay: 'replayValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1514,7 +1513,7 @@ describe('v1.SimulatorClient', () => {
         replay_result: 'replayResultValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1609,7 +1608,7 @@ describe('v1.SimulatorClient', () => {
         policy: 'policyValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1660,7 +1659,7 @@ describe('v1.SimulatorClient', () => {
         org_policy_violation: 'orgPolicyViolationValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1755,7 +1754,7 @@ describe('v1.SimulatorClient', () => {
         org_policy_violations_preview: 'orgPolicyViolationsPreviewValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1835,7 +1834,7 @@ describe('v1.SimulatorClient', () => {
         constraint: 'constraintValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1899,7 +1898,7 @@ describe('v1.SimulatorClient', () => {
         replay: 'replayValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1979,7 +1978,7 @@ describe('v1.SimulatorClient', () => {
         replay_result: 'replayResultValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2083,7 +2082,7 @@ describe('v1.SimulatorClient', () => {
         policy: 'policyValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2145,7 +2144,7 @@ describe('v1.SimulatorClient', () => {
         constraint: 'constraintValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2208,7 +2207,7 @@ describe('v1.SimulatorClient', () => {
         replay: 'replayValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2288,7 +2287,7 @@ describe('v1.SimulatorClient', () => {
         replay_result: 'replayResultValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2385,7 +2384,7 @@ describe('v1.SimulatorClient', () => {
         policy: 'policyValue',
       };
       const client = new simulatorModule.v1.SimulatorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

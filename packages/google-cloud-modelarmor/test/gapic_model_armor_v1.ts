@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as modelarmorModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -131,9 +131,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -251,7 +251,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.modelArmorStub, undefined);
@@ -259,12 +259,12 @@ describe('v1.ModelArmorClient', () => {
       assert(client.modelArmorStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.modelArmorStub);
@@ -273,14 +273,14 @@ describe('v1.ModelArmorClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.modelArmorStub, undefined);
@@ -289,7 +289,7 @@ describe('v1.ModelArmorClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -297,7 +297,7 @@ describe('v1.ModelArmorClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -309,7 +309,7 @@ describe('v1.ModelArmorClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -332,7 +332,7 @@ describe('v1.ModelArmorClient', () => {
   describe('getTemplate', () => {
     it('invokes getTemplate without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -363,7 +363,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes getTemplate without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -410,7 +410,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes getTemplate with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -441,7 +441,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes getTemplate with closed client', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -454,7 +454,7 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTemplate(request), expectedError);
@@ -464,7 +464,7 @@ describe('v1.ModelArmorClient', () => {
   describe('createTemplate', () => {
     it('invokes createTemplate without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -495,7 +495,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes createTemplate without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -542,7 +542,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes createTemplate with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -573,7 +573,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes createTemplate with closed client', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v1.ModelArmorClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTemplate(request), expectedError);
@@ -596,7 +596,7 @@ describe('v1.ModelArmorClient', () => {
   describe('updateTemplate', () => {
     it('invokes updateTemplate without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -628,7 +628,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes updateTemplate without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -676,7 +676,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes updateTemplate with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes updateTemplate with closed client', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -722,7 +722,7 @@ describe('v1.ModelArmorClient', () => {
       );
       request.template.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTemplate(request), expectedError);
@@ -732,7 +732,7 @@ describe('v1.ModelArmorClient', () => {
   describe('deleteTemplate', () => {
     it('invokes deleteTemplate without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -763,7 +763,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes deleteTemplate without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -810,7 +810,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes deleteTemplate with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -841,7 +841,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes deleteTemplate with closed client', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -854,7 +854,7 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTemplate(request), expectedError);
@@ -864,7 +864,7 @@ describe('v1.ModelArmorClient', () => {
   describe('getFloorSetting', () => {
     it('invokes getFloorSetting without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes getFloorSetting without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -942,7 +942,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes getFloorSetting with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes getFloorSetting with closed client', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFloorSetting(request), expectedError);
@@ -996,7 +996,7 @@ describe('v1.ModelArmorClient', () => {
   describe('updateFloorSetting', () => {
     it('invokes updateFloorSetting without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1029,7 +1029,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes updateFloorSetting without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes updateFloorSetting with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes updateFloorSetting with closed client', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1123,7 +1123,7 @@ describe('v1.ModelArmorClient', () => {
       );
       request.floorSetting.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFloorSetting(request), expectedError);
@@ -1133,7 +1133,7 @@ describe('v1.ModelArmorClient', () => {
   describe('sanitizeUserPrompt', () => {
     it('invokes sanitizeUserPrompt without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1165,7 +1165,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes sanitizeUserPrompt without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1212,7 +1212,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes sanitizeUserPrompt with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1243,7 +1243,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes sanitizeUserPrompt with closed client', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1256,7 +1256,7 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.sanitizeUserPrompt(request), expectedError);
@@ -1266,7 +1266,7 @@ describe('v1.ModelArmorClient', () => {
   describe('sanitizeModelResponse', () => {
     it('invokes sanitizeModelResponse without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1298,7 +1298,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes sanitizeModelResponse without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes sanitizeModelResponse with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes sanitizeModelResponse with closed client', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1392,7 +1392,7 @@ describe('v1.ModelArmorClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1405,7 +1405,7 @@ describe('v1.ModelArmorClient', () => {
   describe('streamSanitizeUserPrompt', () => {
     it('invokes streamSanitizeUserPrompt without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1450,7 +1450,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes streamSanitizeUserPrompt with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1.ModelArmorClient', () => {
   describe('streamSanitizeModelResponse', () => {
     it('invokes streamSanitizeModelResponse without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1540,7 +1540,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes streamSanitizeModelResponse with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1585,7 +1585,7 @@ describe('v1.ModelArmorClient', () => {
   describe('listTemplates', () => {
     it('invokes listTemplates without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1618,7 +1618,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes listTemplates without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1667,7 +1667,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes listTemplates with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1698,7 +1698,7 @@ describe('v1.ModelArmorClient', () => {
 
     it('invokes listTemplatesStream without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1744,15 +1744,15 @@ describe('v1.ModelArmorClient', () => {
       assert(
         (client.descriptors.page.listTemplates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTemplatesStream with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1793,15 +1793,15 @@ describe('v1.ModelArmorClient', () => {
       assert(
         (client.descriptors.page.listTemplates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTemplates without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1836,15 +1836,15 @@ describe('v1.ModelArmorClient', () => {
       assert(
         (client.descriptors.page.listTemplates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTemplates with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1876,16 +1876,16 @@ describe('v1.ModelArmorClient', () => {
       assert(
         (client.descriptors.page.listTemplates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v1.ModelArmorClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1959,7 +1959,7 @@ describe('v1.ModelArmorClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1994,7 +1994,7 @@ describe('v1.ModelArmorClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2042,7 +2042,7 @@ describe('v1.ModelArmorClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2089,7 +2089,7 @@ describe('v1.ModelArmorClient', () => {
         location: 'locationValue',
       };
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2152,7 +2152,7 @@ describe('v1.ModelArmorClient', () => {
         location: 'locationValue',
       };
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2201,7 +2201,7 @@ describe('v1.ModelArmorClient', () => {
         location: 'locationValue',
       };
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2265,7 +2265,7 @@ describe('v1.ModelArmorClient', () => {
         project: 'projectValue',
       };
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2304,7 +2304,7 @@ describe('v1.ModelArmorClient', () => {
         location: 'locationValue',
       };
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2367,7 +2367,7 @@ describe('v1.ModelArmorClient', () => {
         template: 'templateValue',
       };
       const client = new modelarmorModule.v1.ModelArmorClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class EnvironmentsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('orchestration-airflow');
@@ -66,10 +66,10 @@ export class EnvironmentsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  environmentsStub?: Promise<{ [name: string]: Function }>;
+  environmentsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of EnvironmentsClient.
@@ -145,7 +145,7 @@ export class EnvironmentsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -356,7 +356,7 @@ export class EnvironmentsClient {
       'google.cloud.orchestration.airflow.service.v1.Environments',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -397,7 +397,7 @@ export class EnvironmentsClient {
             .Environments,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -429,7 +429,7 @@ export class EnvironmentsClient {
     ];
     for (const methodName of environmentsStubMethods) {
       const callPromise = this.environmentsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -637,7 +637,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEnvironment request %j', request);
@@ -790,7 +790,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('executeAirflowCommand request %j', request);
@@ -943,7 +943,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('stopAirflowCommand request %j', request);
@@ -1095,7 +1095,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pollAirflowCommand request %j', request);
@@ -1244,7 +1244,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createUserWorkloadsSecret request %j', request);
@@ -1392,7 +1392,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getUserWorkloadsSecret request %j', request);
@@ -1538,7 +1538,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         'user_workloads_secret.name': request.userWorkloadsSecret!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateUserWorkloadsSecret request %j', request);
@@ -1685,7 +1685,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteUserWorkloadsSecret request %j', request);
@@ -1834,7 +1834,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createUserWorkloadsConfigMap request %j', request);
@@ -1981,7 +1981,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getUserWorkloadsConfigMap request %j', request);
@@ -2128,7 +2128,7 @@ export class EnvironmentsClient {
         'user_workloads_config_map.name':
           request.userWorkloadsConfigMap!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateUserWorkloadsConfigMap request %j', request);
@@ -2275,7 +2275,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteUserWorkloadsConfigMap request %j', request);
@@ -2419,7 +2419,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchDatabaseProperties request %j', request);
@@ -2572,7 +2572,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2629,7 +2629,7 @@ export class EnvironmentsClient {
     this._log.info('createEnvironment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2869,7 +2869,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2926,7 +2926,7 @@ export class EnvironmentsClient {
     this._log.info('updateEnvironment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3039,7 +3039,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3096,7 +3096,7 @@ export class EnvironmentsClient {
     this._log.info('deleteEnvironment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3237,7 +3237,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3294,7 +3294,7 @@ export class EnvironmentsClient {
     this._log.info('checkUpgrade long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3413,7 +3413,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3470,7 +3470,7 @@ export class EnvironmentsClient {
     this._log.info('saveSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3601,7 +3601,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3658,7 +3658,7 @@ export class EnvironmentsClient {
     this._log.info('loadSnapshot long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3771,7 +3771,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         environment: request.environment ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3828,7 +3828,7 @@ export class EnvironmentsClient {
     this._log.info('databaseFailover long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3936,7 +3936,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4004,7 +4004,7 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEnvironments stream %j', request);
@@ -4054,7 +4054,7 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEnvironments iterate %j', request);
@@ -4171,7 +4171,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4247,7 +4247,7 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkloads stream %j', request);
@@ -4305,7 +4305,7 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listWorkloads'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkloads iterate %j', request);
@@ -4414,7 +4414,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4483,7 +4483,7 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listUserWorkloadsSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUserWorkloadsSecrets stream %j', request);
@@ -4534,7 +4534,7 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listUserWorkloadsSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUserWorkloadsSecrets iterate %j', request);
@@ -4643,7 +4643,7 @@ export class EnvironmentsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4712,7 +4712,7 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listUserWorkloadsConfigMaps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUserWorkloadsConfigMaps stream %j', request);
@@ -4763,7 +4763,7 @@ export class EnvironmentsClient {
       });
     const defaultCallSettings = this._defaults['listUserWorkloadsConfigMaps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUserWorkloadsConfigMaps iterate %j', request);
@@ -5220,7 +5220,7 @@ export class EnvironmentsClient {
    */
   close(): Promise<void> {
     if (this.environmentsStub && !this._terminated) {
-      return this.environmentsStub.then((stub) => {
+      return this.environmentsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

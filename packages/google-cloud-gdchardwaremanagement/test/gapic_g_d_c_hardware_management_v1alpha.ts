@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as gdchardwaremanagementModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -243,7 +243,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -291,7 +291,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.gDCHardwareManagementStub, undefined);
@@ -299,13 +299,13 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(client.gDCHardwareManagementStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.gDCHardwareManagementStub);
@@ -314,15 +314,15 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.gDCHardwareManagementStub, undefined);
@@ -331,7 +331,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -340,7 +340,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -353,7 +353,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -377,7 +377,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getOrder without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -409,7 +409,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getOrder without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -457,7 +457,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getOrder with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getOrder with closed client', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -499,7 +499,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getOrder(request), expectedError);
@@ -510,7 +510,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getSite without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -542,7 +542,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getSite without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -590,7 +590,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getSite with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getSite with closed client', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSite(request), expectedError);
@@ -643,7 +643,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getHardwareGroup without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -675,7 +675,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getHardwareGroup without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -723,7 +723,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getHardwareGroup with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -755,7 +755,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getHardwareGroup with closed client', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -768,7 +768,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getHardwareGroup(request), expectedError);
@@ -779,7 +779,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getHardware without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -811,7 +811,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getHardware without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -859,7 +859,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getHardware with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -891,7 +891,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getHardware with closed client', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -904,7 +904,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getHardware(request), expectedError);
@@ -915,7 +915,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getComment without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -947,7 +947,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getComment without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -995,7 +995,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getComment with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1027,7 +1027,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getComment with closed client', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1040,7 +1040,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getComment(request), expectedError);
@@ -1051,7 +1051,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes recordActionOnComment without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes recordActionOnComment without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes recordActionOnComment with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1167,7 +1167,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes recordActionOnComment with closed client', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1180,7 +1180,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1194,7 +1194,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getChangeLogEntry without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1226,7 +1226,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getChangeLogEntry without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1274,7 +1274,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getChangeLogEntry with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1306,7 +1306,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getChangeLogEntry with closed client', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1319,7 +1319,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getChangeLogEntry(request), expectedError);
@@ -1330,7 +1330,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getSku without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1362,7 +1362,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getSku without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1410,7 +1410,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getSku with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1439,7 +1439,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getSku with closed client', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSku(request), expectedError);
@@ -1463,7 +1463,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getZone without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getZone without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1543,7 +1543,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getZone with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1572,7 +1572,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getZone with closed client', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1585,7 +1585,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getZone(request), expectedError);
@@ -1596,7 +1596,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createOrder without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createOrder without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1684,7 +1684,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createOrder with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1716,7 +1716,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createOrder with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1750,7 +1750,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateOrderProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1758,8 +1758,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateOrderProgress(
@@ -1773,7 +1773,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateOrderProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1792,7 +1792,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateOrder without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1826,7 +1826,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateOrder without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1882,7 +1882,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateOrder with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1915,7 +1915,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateOrder with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1950,7 +1950,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateOrderProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1958,8 +1958,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateOrderProgress(
@@ -1973,7 +1973,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateOrderProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1992,7 +1992,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteOrder without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2025,7 +2025,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteOrder without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2080,7 +2080,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteOrder with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2112,7 +2112,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteOrder with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2146,7 +2146,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteOrderProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2154,8 +2154,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteOrderProgress(
@@ -2169,7 +2169,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteOrderProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2188,7 +2188,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes submitOrder without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2221,7 +2221,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes submitOrder without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2276,7 +2276,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes submitOrder with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2308,7 +2308,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes submitOrder with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2342,7 +2342,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkSubmitOrderProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2350,8 +2350,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSubmitOrderProgress(
@@ -2365,7 +2365,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkSubmitOrderProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2384,7 +2384,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes cancelOrder without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2417,7 +2417,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes cancelOrder without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2472,7 +2472,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes cancelOrder with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2504,7 +2504,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes cancelOrder with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2538,7 +2538,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCancelOrderProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2546,8 +2546,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCancelOrderProgress(
@@ -2561,7 +2561,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCancelOrderProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2580,7 +2580,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createSite without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2613,7 +2613,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createSite without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2668,7 +2668,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createSite with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2700,7 +2700,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createSite with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2734,7 +2734,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateSiteProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2742,8 +2742,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSiteProgress(
@@ -2757,7 +2757,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateSiteProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2776,7 +2776,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateSite without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2810,7 +2810,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateSite without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2866,7 +2866,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateSite with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2899,7 +2899,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateSite with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2934,7 +2934,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateSiteProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2942,8 +2942,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSiteProgress(
@@ -2957,7 +2957,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateSiteProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2976,7 +2976,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteSite without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3009,7 +3009,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteSite without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3064,7 +3064,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteSite with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3096,7 +3096,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteSite with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3130,7 +3130,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteSiteProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3138,8 +3138,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSiteProgress(
@@ -3153,7 +3153,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteSiteProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3172,7 +3172,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createHardwareGroup without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3206,7 +3206,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createHardwareGroup without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3261,7 +3261,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createHardwareGroup with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3293,7 +3293,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createHardwareGroup with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3327,7 +3327,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateHardwareGroupProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3335,8 +3335,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateHardwareGroupProgress(
@@ -3350,7 +3350,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateHardwareGroupProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3372,7 +3372,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateHardwareGroup without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3407,7 +3407,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateHardwareGroup without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3463,7 +3463,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateHardwareGroup with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3496,7 +3496,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateHardwareGroup with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3531,7 +3531,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateHardwareGroupProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3539,8 +3539,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateHardwareGroupProgress(
@@ -3554,7 +3554,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateHardwareGroupProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3576,7 +3576,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteHardwareGroup without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3610,7 +3610,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteHardwareGroup without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3665,7 +3665,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteHardwareGroup with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3697,7 +3697,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteHardwareGroup with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3731,7 +3731,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteHardwareGroupProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3739,8 +3739,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteHardwareGroupProgress(
@@ -3754,7 +3754,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteHardwareGroupProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3776,7 +3776,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createHardware without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3810,7 +3810,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createHardware without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3865,7 +3865,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createHardware with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3897,7 +3897,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createHardware with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3931,7 +3931,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateHardwareProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3939,8 +3939,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateHardwareProgress(
@@ -3954,7 +3954,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateHardwareProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3976,7 +3976,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateHardware without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4011,7 +4011,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateHardware without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4067,7 +4067,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateHardware with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4100,7 +4100,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateHardware with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4135,7 +4135,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateHardwareProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4143,8 +4143,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateHardwareProgress(
@@ -4158,7 +4158,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateHardwareProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4180,7 +4180,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteHardware without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4214,7 +4214,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteHardware without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4269,7 +4269,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteHardware with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4301,7 +4301,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteHardware with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4335,7 +4335,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteHardwareProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4343,8 +4343,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteHardwareProgress(
@@ -4358,7 +4358,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteHardwareProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4380,7 +4380,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createComment without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4414,7 +4414,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createComment without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4469,7 +4469,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createComment with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4501,7 +4501,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createComment with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4535,7 +4535,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateCommentProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4543,8 +4543,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCommentProgress(
@@ -4558,7 +4558,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateCommentProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4580,7 +4580,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createZone without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4613,7 +4613,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createZone without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4668,7 +4668,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createZone with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4700,7 +4700,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes createZone with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4734,7 +4734,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateZoneProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4742,8 +4742,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateZoneProgress(
@@ -4757,7 +4757,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkCreateZoneProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4776,7 +4776,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateZone without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4810,7 +4810,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateZone without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4866,7 +4866,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateZone with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4899,7 +4899,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes updateZone with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4934,7 +4934,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateZoneProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4942,8 +4942,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateZoneProgress(
@@ -4957,7 +4957,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkUpdateZoneProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4976,7 +4976,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteZone without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5009,7 +5009,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteZone without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5064,7 +5064,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteZone with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5096,7 +5096,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteZone with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5130,7 +5130,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteZoneProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5138,8 +5138,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteZoneProgress(
@@ -5153,7 +5153,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkDeleteZoneProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5172,7 +5172,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes signalZoneState without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5206,7 +5206,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes signalZoneState without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5261,7 +5261,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes signalZoneState with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5293,7 +5293,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes signalZoneState with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5327,7 +5327,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkSignalZoneStateProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5335,8 +5335,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSignalZoneStateProgress(
@@ -5350,7 +5350,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkSignalZoneStateProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5372,7 +5372,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes requestOrderDateChange without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5406,7 +5406,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes requestOrderDateChange without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5461,7 +5461,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes requestOrderDateChange with call error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5496,7 +5496,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes requestOrderDateChange with LRO error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5530,7 +5530,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkRequestOrderDateChangeProgress without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5538,8 +5538,8 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRequestOrderDateChangeProgress(
@@ -5553,7 +5553,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes checkRequestOrderDateChangeProgress with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5575,7 +5575,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listOrders without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5615,7 +5615,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listOrders without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5647,8 +5647,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[]
-              | null,
+              protos.google.cloud.gdchardwaremanagement.v1alpha.IOrder[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5673,7 +5672,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listOrders with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5705,7 +5704,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listOrdersStream without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5760,16 +5759,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listOrders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listOrdersStream with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5815,16 +5814,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listOrders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOrders without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5866,16 +5865,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listOrders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOrders with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5910,9 +5909,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listOrders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5921,7 +5920,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listSites without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5961,7 +5960,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listSites without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5993,8 +5992,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[]
-              | null,
+              protos.google.cloud.gdchardwaremanagement.v1alpha.ISite[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6019,7 +6017,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listSites with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6048,7 +6046,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listSitesStream without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6103,16 +6101,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSites.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSitesStream with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6158,16 +6156,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSites.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSites without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6208,16 +6206,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSites.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSites with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6251,9 +6249,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSites.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6262,7 +6260,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listHardwareGroups without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6303,7 +6301,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listHardwareGroups without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6361,7 +6359,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listHardwareGroups with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6393,7 +6391,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listHardwareGroupsStream without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6448,16 +6446,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listHardwareGroupsStream with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6501,16 +6499,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardwareGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHardwareGroups without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6552,16 +6550,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHardwareGroups with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6594,9 +6592,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardwareGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6605,7 +6603,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listHardware without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6645,7 +6643,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listHardware without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6703,7 +6701,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listHardware with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6735,7 +6733,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listHardwareStream without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6790,16 +6788,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardware.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listHardwareStream with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6845,16 +6843,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardware.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHardware without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6896,16 +6894,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardware.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listHardware with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6938,9 +6936,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listHardware.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6949,7 +6947,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listComments without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6989,7 +6987,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listComments without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7047,7 +7045,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listComments with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7079,7 +7077,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listCommentsStream without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7134,16 +7132,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listComments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCommentsStream with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7189,16 +7187,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listComments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listComments without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7240,16 +7238,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listComments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listComments with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7282,9 +7280,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listComments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7293,7 +7291,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listChangeLogEntries without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7334,7 +7332,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listChangeLogEntries without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7392,7 +7390,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listChangeLogEntries with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7424,7 +7422,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listChangeLogEntriesStream without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7479,16 +7477,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listChangeLogEntriesStream with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7532,16 +7530,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listChangeLogEntries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChangeLogEntries without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7583,16 +7581,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChangeLogEntries with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7625,9 +7623,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listChangeLogEntries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7636,7 +7634,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listSkus without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7676,7 +7674,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listSkus without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7708,8 +7706,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[]
-              | null,
+              protos.google.cloud.gdchardwaremanagement.v1alpha.ISku[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7734,7 +7731,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listSkus with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7763,7 +7760,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listSkusStream without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7816,16 +7813,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSkusStream with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7869,16 +7866,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSkus.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkus without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7919,16 +7916,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSkus with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7962,9 +7959,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listSkus.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7973,7 +7970,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listZones without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8013,7 +8010,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listZones without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8045,8 +8042,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[]
-              | null,
+              protos.google.cloud.gdchardwaremanagement.v1alpha.IZone[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8071,7 +8067,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listZones with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8100,7 +8096,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes listZonesStream without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8155,16 +8151,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listZonesStream with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8210,16 +8206,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listZones without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8260,16 +8256,16 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listZones with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8303,9 +8299,9 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8313,7 +8309,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8344,7 +8340,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8389,7 +8385,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8425,7 +8421,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8474,7 +8470,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8516,7 +8512,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8538,7 +8534,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -8566,7 +8562,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8577,7 +8573,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -8602,7 +8598,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8625,7 +8621,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -8653,7 +8649,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8664,7 +8660,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -8689,7 +8685,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8712,7 +8708,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -8740,7 +8736,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8751,7 +8747,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -8776,7 +8772,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -8812,7 +8808,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8850,7 +8846,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -8928,7 +8924,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9004,7 +9000,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9070,7 +9066,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9145,7 +9141,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9196,7 +9192,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9259,7 +9255,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9300,7 +9296,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9365,7 +9361,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -9430,7 +9426,7 @@ describe('v1alpha.GDCHardwareManagementClient', () => {
       };
       const client =
         new gdchardwaremanagementModule.v1alpha.GDCHardwareManagementClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

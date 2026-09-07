@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as uptimecheckserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -241,7 +241,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.uptimeCheckServiceStub, undefined);
@@ -249,12 +249,12 @@ describe('v3.UptimeCheckServiceClient', () => {
       assert(client.uptimeCheckServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.uptimeCheckServiceStub);
@@ -263,14 +263,14 @@ describe('v3.UptimeCheckServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.uptimeCheckServiceStub, undefined);
@@ -279,7 +279,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -287,7 +287,7 @@ describe('v3.UptimeCheckServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -299,7 +299,7 @@ describe('v3.UptimeCheckServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -322,7 +322,7 @@ describe('v3.UptimeCheckServiceClient', () => {
   describe('getUptimeCheckConfig', () => {
     it('invokes getUptimeCheckConfig without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes getUptimeCheckConfig without error using callback', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes getUptimeCheckConfig with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -432,7 +432,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes getUptimeCheckConfig with closed client', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -445,7 +445,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getUptimeCheckConfig(request), expectedError);
@@ -455,7 +455,7 @@ describe('v3.UptimeCheckServiceClient', () => {
   describe('createUptimeCheckConfig', () => {
     it('invokes createUptimeCheckConfig without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes createUptimeCheckConfig without error using callback', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -534,7 +534,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes createUptimeCheckConfig with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes createUptimeCheckConfig with closed client', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -581,7 +581,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -594,7 +594,7 @@ describe('v3.UptimeCheckServiceClient', () => {
   describe('updateUptimeCheckConfig', () => {
     it('invokes updateUptimeCheckConfig without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -627,7 +627,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes updateUptimeCheckConfig without error using callback', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -675,7 +675,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes updateUptimeCheckConfig with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes updateUptimeCheckConfig with closed client', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -724,7 +724,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       );
       request.uptimeCheckConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -737,7 +737,7 @@ describe('v3.UptimeCheckServiceClient', () => {
   describe('deleteUptimeCheckConfig', () => {
     it('invokes deleteUptimeCheckConfig without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -769,7 +769,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes deleteUptimeCheckConfig without error using callback', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -816,7 +816,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes deleteUptimeCheckConfig with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -850,7 +850,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes deleteUptimeCheckConfig with closed client', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -863,7 +863,7 @@ describe('v3.UptimeCheckServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -876,7 +876,7 @@ describe('v3.UptimeCheckServiceClient', () => {
   describe('listUptimeCheckConfigs', () => {
     it('invokes listUptimeCheckConfigs without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -916,7 +916,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes listUptimeCheckConfigs without error using callback', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes listUptimeCheckConfigs with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes listUptimeCheckConfigsStream without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1071,7 +1071,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes listUptimeCheckConfigsStream with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1126,7 +1126,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('uses async iteration with listUptimeCheckConfigs without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1179,7 +1179,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('uses async iteration with listUptimeCheckConfigs with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v3.UptimeCheckServiceClient', () => {
   describe('listUptimeCheckIps', () => {
     it('invokes listUptimeCheckIps without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes listUptimeCheckIps without error using callback', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1280,7 +1280,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes listUptimeCheckIps with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1297,7 +1297,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes listUptimeCheckIpsStream without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1338,7 +1338,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('invokes listUptimeCheckIpsStream with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,7 +1374,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('uses async iteration with listUptimeCheckIps without error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1404,7 +1404,7 @@ describe('v3.UptimeCheckServiceClient', () => {
 
     it('uses async iteration with listUptimeCheckIps with error', async () => {
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1438,7 +1438,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,7 +1501,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1579,7 +1579,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1644,7 +1644,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         group: 'groupValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1693,7 +1693,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1758,7 +1758,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1808,7 +1808,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1890,7 +1890,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1955,7 +1955,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2019,7 +2019,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2101,7 +2101,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2166,7 +2166,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         group: 'groupValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2228,7 +2228,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2293,7 +2293,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2357,7 +2357,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2443,7 +2443,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2507,7 +2507,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         project: 'projectValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2546,7 +2546,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         alert_policy: 'alertPolicyValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2609,7 +2609,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         condition: 'conditionValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2686,7 +2686,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         channel_descriptor: 'channelDescriptorValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2751,7 +2751,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         group: 'groupValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2800,7 +2800,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         notification_channel: 'notificationChannelValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2865,7 +2865,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         service: 'serviceValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2918,7 +2918,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         service_level_objective: 'serviceLevelObjectiveValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3000,7 +3000,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         uptime_check_config: 'uptimeCheckConfigValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3065,7 +3065,7 @@ describe('v3.UptimeCheckServiceClient', () => {
         snooze: 'snoozeValue',
       };
       const client = new uptimecheckserviceModule.v3.UptimeCheckServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

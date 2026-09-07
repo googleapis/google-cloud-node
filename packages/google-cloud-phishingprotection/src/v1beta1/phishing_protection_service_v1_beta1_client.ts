@@ -27,7 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -49,7 +49,7 @@ export class PhishingProtectionServiceV1Beta1Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('phishing-protection');
@@ -62,9 +62,9 @@ export class PhishingProtectionServiceV1Beta1Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  phishingProtectionServiceV1Beta1Stub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  phishingProtectionServiceV1Beta1Stub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PhishingProtectionServiceV1Beta1Client.
@@ -141,7 +141,7 @@ export class PhishingProtectionServiceV1Beta1Client {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -211,7 +211,7 @@ export class PhishingProtectionServiceV1Beta1Client {
       'google.cloud.phishingprotection.v1beta1.PhishingProtectionServiceV1Beta1',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -252,14 +252,14 @@ export class PhishingProtectionServiceV1Beta1Client {
             .PhishingProtectionServiceV1Beta1,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const phishingProtectionServiceV1Beta1StubMethods = ['reportPhishing'];
     for (const methodName of phishingProtectionServiceV1Beta1StubMethods) {
       const callPromise = this.phishingProtectionServiceV1Beta1Stub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -472,7 +472,7 @@ export class PhishingProtectionServiceV1Beta1Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reportPhishing request %j', request);
@@ -558,7 +558,7 @@ export class PhishingProtectionServiceV1Beta1Client {
    */
   close(): Promise<void> {
     if (this.phishingProtectionServiceV1Beta1Stub && !this._terminated) {
-      return this.phishingProtectionServiceV1Beta1Stub.then((stub) => {
+      return this.phishingProtectionServiceV1Beta1Stub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

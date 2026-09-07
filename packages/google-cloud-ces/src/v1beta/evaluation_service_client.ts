@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class EvaluationServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('ces');
@@ -68,11 +68,11 @@ export class EvaluationServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  evaluationServiceStub?: Promise<{ [name: string]: Function }>;
+  evaluationServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of EvaluationServiceClient.
@@ -148,7 +148,7 @@ export class EvaluationServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -456,7 +456,7 @@ export class EvaluationServiceClient {
       'google.cloud.ces.v1beta.EvaluationService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -496,7 +496,7 @@ export class EvaluationServiceClient {
           (this._protos as any).google.cloud.ces.v1beta.EvaluationService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -539,7 +539,7 @@ export class EvaluationServiceClient {
     ];
     for (const methodName of evaluationServiceStubMethods) {
       const callPromise = this.evaluationServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -755,7 +755,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('uploadEvaluationAudio request %j', request);
@@ -900,7 +900,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEvaluation request %j', request);
@@ -1048,7 +1048,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEvaluationDataset request %j', request);
@@ -1188,7 +1188,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'evaluation.name': request.evaluation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEvaluation request %j', request);
@@ -1331,7 +1331,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'evaluation_dataset.name': request.evaluationDataset!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEvaluationDataset request %j', request);
@@ -1481,7 +1481,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvaluation request %j', request);
@@ -1615,7 +1615,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvaluationResult request %j', request);
@@ -1763,7 +1763,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvaluationDataset request %j', request);
@@ -1894,7 +1894,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluation request %j', request);
@@ -2028,7 +2028,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluationResult request %j', request);
@@ -2165,7 +2165,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluationDataset request %j', request);
@@ -2302,7 +2302,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluationRun request %j', request);
@@ -2442,7 +2442,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluationExpectation request %j', request);
@@ -2594,7 +2594,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEvaluationExpectation request %j', request);
@@ -2741,7 +2741,7 @@ export class EvaluationServiceClient {
         'evaluation_expectation.name':
           request.evaluationExpectation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEvaluationExpectation request %j', request);
@@ -2889,7 +2889,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvaluationExpectation request %j', request);
@@ -3040,7 +3040,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createScheduledEvaluationRun request %j', request);
@@ -3183,7 +3183,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getScheduledEvaluationRun request %j', request);
@@ -3330,7 +3330,7 @@ export class EvaluationServiceClient {
         'scheduled_evaluation_run.name':
           request.scheduledEvaluationRun!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateScheduledEvaluationRun request %j', request);
@@ -3476,7 +3476,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteScheduledEvaluationRun request %j', request);
@@ -3619,7 +3619,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         app: request.app ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testPersonaVoice request %j', request);
@@ -3807,7 +3807,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         app: request.app ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3864,7 +3864,7 @@ export class EvaluationServiceClient {
     this._log.info('runEvaluation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3984,7 +3984,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         conversation: request.conversation ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4041,7 +4041,7 @@ export class EvaluationServiceClient {
     this._log.info('generateEvaluation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4165,7 +4165,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4222,7 +4222,7 @@ export class EvaluationServiceClient {
     this._log.info('importEvaluations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4334,7 +4334,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4391,7 +4391,7 @@ export class EvaluationServiceClient {
     this._log.info('deleteEvaluationRun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4514,7 +4514,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4571,7 +4571,7 @@ export class EvaluationServiceClient {
     this._log.info('exportEvaluations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4688,7 +4688,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4745,7 +4745,7 @@ export class EvaluationServiceClient {
     this._log.info('exportEvaluationRuns long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4863,7 +4863,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4920,7 +4920,7 @@ export class EvaluationServiceClient {
     this._log.info('exportEvaluationResults long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5034,7 +5034,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         evaluation_result_id: request.evaluationResultId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5091,7 +5091,7 @@ export class EvaluationServiceClient {
     this._log.info('runEvaluationResultMetrics long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5223,7 +5223,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5315,7 +5315,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluations stream %j', request);
@@ -5389,7 +5389,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluations iterate %j', request);
@@ -5510,7 +5510,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5594,7 +5594,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationResults stream %j', request);
@@ -5660,7 +5660,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationResults iterate %j', request);
@@ -5778,7 +5778,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5859,7 +5859,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationDatasets stream %j', request);
@@ -5922,7 +5922,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationDatasets iterate %j', request);
@@ -6040,7 +6040,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6121,7 +6121,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationRuns stream %j', request);
@@ -6184,7 +6184,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationRuns iterate %j', request);
@@ -6303,7 +6303,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6385,7 +6385,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationExpectations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationExpectations stream %j', request);
@@ -6449,7 +6449,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationExpectations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationExpectations iterate %j', request);
@@ -6572,7 +6572,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6658,7 +6658,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listScheduledEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScheduledEvaluationRuns stream %j', request);
@@ -6726,7 +6726,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listScheduledEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScheduledEvaluationRuns iterate %j', request);
@@ -8317,11 +8317,11 @@ export class EvaluationServiceClient {
    */
   close(): Promise<void> {
     if (this.evaluationServiceStub && !this._terminated) {
-      return this.evaluationServiceStub.then((stub) => {
+      return this.evaluationServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

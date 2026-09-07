@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,7 +58,7 @@ export class ConfigClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('config');
@@ -71,12 +71,12 @@ export class ConfigClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  configStub?: Promise<{ [name: string]: Function }>;
+  configStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ConfigClient.
@@ -152,7 +152,7 @@ export class ConfigClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -541,7 +541,7 @@ export class ConfigClient {
       'google.cloud.config.v1.Config',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -581,7 +581,7 @@ export class ConfigClient {
           (this._protos as any).google.cloud.config.v1.Config,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -627,7 +627,7 @@ export class ConfigClient {
     ];
     for (const methodName of configStubMethods) {
       const callPromise = this.configStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -823,7 +823,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDeployment request %j', request);
@@ -950,7 +950,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRevision request %j', request);
@@ -1076,7 +1076,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getResource request %j', request);
@@ -1220,7 +1220,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('exportDeploymentStatefile request %j', request);
@@ -1359,7 +1359,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('exportRevisionStatefile request %j', request);
@@ -1498,7 +1498,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('importStatefile request %j', request);
@@ -1630,7 +1630,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteStatefile request %j', request);
@@ -1759,7 +1759,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('exportLockInfo request %j', request);
@@ -1886,7 +1886,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPreview request %j', request);
@@ -2020,7 +2020,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('exportPreviewResult request %j', request);
@@ -2156,7 +2156,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTerraformVersion request %j', request);
@@ -2292,7 +2292,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getResourceChange request %j', request);
@@ -2422,7 +2422,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getResourceDrift request %j', request);
@@ -2558,7 +2558,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAutoMigrationConfig request %j', request);
@@ -2697,7 +2697,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDeploymentGroup request %j', request);
@@ -2840,7 +2840,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDeploymentGroupRevision request %j', request);
@@ -3010,7 +3010,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3067,7 +3067,7 @@ export class ConfigClient {
     this._log.info('createDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3204,7 +3204,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         'deployment.name': request.deployment!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3261,7 +3261,7 @@ export class ConfigClient {
     this._log.info('updateDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3396,7 +3396,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3453,7 +3453,7 @@ export class ConfigClient {
     this._log.info('deleteDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3566,7 +3566,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3623,7 +3623,7 @@ export class ConfigClient {
     this._log.info('lockDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3738,7 +3738,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3795,7 +3795,7 @@ export class ConfigClient {
     this._log.info('unlockDeployment long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3926,7 +3926,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3983,7 +3983,7 @@ export class ConfigClient {
     this._log.info('createPreview long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4110,7 +4110,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4167,7 +4167,7 @@ export class ConfigClient {
     this._log.info('deletePreview long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4282,7 +4282,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         'auto_migration_config.name': request.autoMigrationConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4339,7 +4339,7 @@ export class ConfigClient {
     this._log.info('updateAutoMigrationConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4472,7 +4472,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4529,7 +4529,7 @@ export class ConfigClient {
     this._log.info('createDeploymentGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4667,7 +4667,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         'deployment_group.name': request.deploymentGroup!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4724,7 +4724,7 @@ export class ConfigClient {
     this._log.info('updateDeploymentGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4861,7 +4861,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4918,7 +4918,7 @@ export class ConfigClient {
     this._log.info('deleteDeploymentGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5049,7 +5049,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5106,7 +5106,7 @@ export class ConfigClient {
     this._log.info('provisionDeploymentGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5238,7 +5238,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5295,7 +5295,7 @@ export class ConfigClient {
     this._log.info('deprovisionDeploymentGroup long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5426,7 +5426,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5522,7 +5522,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeployments stream %j', request);
@@ -5600,7 +5600,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeployments iterate %j', request);
@@ -5727,7 +5727,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5823,7 +5823,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRevisions stream %j', request);
@@ -5901,7 +5901,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRevisions iterate %j', request);
@@ -6020,7 +6020,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6108,7 +6108,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResources stream %j', request);
@@ -6178,7 +6178,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listResources'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResources iterate %j', request);
@@ -6306,7 +6306,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6402,7 +6402,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listPreviews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPreviews stream %j', request);
@@ -6480,7 +6480,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listPreviews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPreviews iterate %j', request);
@@ -6602,7 +6602,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6686,7 +6686,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listTerraformVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTerraformVersions stream %j', request);
@@ -6752,7 +6752,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listTerraformVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTerraformVersions iterate %j', request);
@@ -6879,7 +6879,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6969,7 +6969,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listResourceChanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResourceChanges stream %j', request);
@@ -7041,7 +7041,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listResourceChanges'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResourceChanges iterate %j', request);
@@ -7168,7 +7168,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7258,7 +7258,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listResourceDrifts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResourceDrifts stream %j', request);
@@ -7330,7 +7330,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listResourceDrifts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listResourceDrifts iterate %j', request);
@@ -7464,7 +7464,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7561,7 +7561,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listDeploymentGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeploymentGroups stream %j', request);
@@ -7640,7 +7640,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listDeploymentGroups'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeploymentGroups iterate %j', request);
@@ -7755,7 +7755,7 @@ export class ConfigClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7831,7 +7831,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listDeploymentGroupRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeploymentGroupRevisions stream %j', request);
@@ -7889,7 +7889,7 @@ export class ConfigClient {
       });
     const defaultCallSettings = this._defaults['listDeploymentGroupRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDeploymentGroupRevisions iterate %j', request);
@@ -9115,14 +9115,14 @@ export class ConfigClient {
    */
   close(): Promise<void> {
     if (this.configStub && !this._terminated) {
-      return this.configStub.then((stub) => {
+      return this.configStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

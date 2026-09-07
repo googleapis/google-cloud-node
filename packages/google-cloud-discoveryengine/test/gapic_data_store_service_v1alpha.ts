@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datastoreserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -284,7 +284,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataStoreServiceStub, undefined);
@@ -292,12 +292,12 @@ describe('v1alpha.DataStoreServiceClient', () => {
       assert(client.dataStoreServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataStoreServiceStub);
@@ -306,14 +306,14 @@ describe('v1alpha.DataStoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataStoreServiceStub, undefined);
@@ -322,7 +322,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -330,7 +330,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -342,7 +342,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -365,7 +365,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('getDataStore', () => {
     it('invokes getDataStore without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes getDataStore without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes getDataStore with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes getDataStore with closed client', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -487,7 +487,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataStore(request), expectedError);
@@ -497,7 +497,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('updateDataStore', () => {
     it('invokes updateDataStore without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes updateDataStore without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes updateDataStore with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes updateDataStore with closed client', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -623,7 +623,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
       );
       request.dataStore.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataStore(request), expectedError);
@@ -633,7 +633,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('getDocumentProcessingConfig', () => {
     it('invokes getDocumentProcessingConfig without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -665,7 +665,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes getDocumentProcessingConfig without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +712,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes getDocumentProcessingConfig with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes getDocumentProcessingConfig with closed client', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -759,7 +759,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -772,7 +772,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('updateDocumentProcessingConfig', () => {
     it('invokes updateDocumentProcessingConfig without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -805,7 +805,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes updateDocumentProcessingConfig without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -853,7 +853,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes updateDocumentProcessingConfig with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes updateDocumentProcessingConfig with closed client', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -902,7 +902,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
       );
       request.documentProcessingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -915,7 +915,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('createDataStore', () => {
     it('invokes createDataStore without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -948,7 +948,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes createDataStore without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes createDataStore with call error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1033,7 +1033,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes createDataStore with LRO error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1066,7 +1066,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes checkCreateDataStoreProgress without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1074,8 +1074,8 @@ describe('v1alpha.DataStoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDataStoreProgress(
@@ -1088,7 +1088,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes checkCreateDataStoreProgress with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('deleteDataStore', () => {
     it('invokes deleteDataStore without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes deleteDataStore without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes deleteDataStore with call error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes deleteDataStore with LRO error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1260,7 +1260,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes checkDeleteDataStoreProgress without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1268,8 +1268,8 @@ describe('v1alpha.DataStoreServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDataStoreProgress(
@@ -1282,7 +1282,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes checkDeleteDataStoreProgress with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('listDataStores', () => {
     it('invokes listDataStores without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes listDataStores without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,8 +1374,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1alpha.IDataStore[]
-              | null,
+              protos.google.cloud.discoveryengine.v1alpha.IDataStore[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1399,7 +1398,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes listDataStores with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1430,7 +1429,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
 
     it('invokes listDataStoresStream without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1483,15 +1482,15 @@ describe('v1alpha.DataStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataStoresStream with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,15 +1532,15 @@ describe('v1alpha.DataStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataStores without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1583,15 +1582,15 @@ describe('v1alpha.DataStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataStores with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,16 +1623,16 @@ describe('v1alpha.DataStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1663,7 +1662,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1707,7 +1706,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1742,7 +1741,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1790,7 +1789,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1831,7 +1830,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1852,7 +1851,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1880,7 +1879,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1890,7 +1889,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1914,7 +1913,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1936,7 +1935,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1964,7 +1963,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1974,7 +1973,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1998,7 +1997,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2020,7 +2019,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2048,7 +2047,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2058,7 +2057,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2082,7 +2081,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2117,7 +2116,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2152,7 +2151,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         location: 'locationValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2202,7 +2201,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         collection: 'collectionValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2267,7 +2266,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2342,7 +2341,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2404,7 +2403,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         project: 'projectValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2445,7 +2444,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2549,7 +2548,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         document: 'documentValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2696,7 +2695,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2859,7 +2858,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         control: 'controlValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2985,7 +2984,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3112,7 +3111,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3238,7 +3237,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3347,7 +3346,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3473,7 +3472,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3601,7 +3600,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3746,7 +3745,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3871,7 +3870,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3980,7 +3979,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4106,7 +4105,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         control: 'controlValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4232,7 +4231,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4358,7 +4357,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4485,7 +4484,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4628,7 +4627,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4751,7 +4750,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4832,7 +4831,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         document: 'documentValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4959,7 +4958,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5101,7 +5100,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         control: 'controlValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5196,7 +5195,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5303,7 +5302,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5409,7 +5408,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5498,7 +5497,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5591,7 +5590,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5698,7 +5697,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5822,7 +5821,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5919,7 +5918,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6008,7 +6007,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6115,7 +6114,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         sample_query: 'sampleQueryValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6190,7 +6189,7 @@ describe('v1alpha.DataStoreServiceClient', () => {
         sample_query_set: 'sampleQuerySetValue',
       };
       const client = new datastoreserviceModule.v1alpha.DataStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

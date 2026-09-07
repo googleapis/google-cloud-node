@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as autoscalingpolicyserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos } from 'google-gax';
+import {protobuf, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'dataproc.configured.example.com');
@@ -251,7 +251,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.autoscalingPolicyServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       assert(client.autoscalingPolicyServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.autoscalingPolicyServiceStub);
@@ -274,15 +274,15 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.autoscalingPolicyServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes createAutoscalingPolicy without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes createAutoscalingPolicy without error using callback', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes createAutoscalingPolicy with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes createAutoscalingPolicy with closed client', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes updateAutoscalingPolicy without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes updateAutoscalingPolicy without error using callback', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes updateAutoscalingPolicy with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes updateAutoscalingPolicy with closed client', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       );
       request.policy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -627,7 +627,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes getAutoscalingPolicy without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes getAutoscalingPolicy without error using callback', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes getAutoscalingPolicy with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes getAutoscalingPolicy with closed client', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAutoscalingPolicy(request), expectedError);
@@ -764,7 +764,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes deleteAutoscalingPolicy without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes deleteAutoscalingPolicy without error using callback', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes deleteAutoscalingPolicy with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -880,7 +880,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes deleteAutoscalingPolicy with closed client', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -893,7 +893,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -907,7 +907,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes listAutoscalingPolicies without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -948,7 +948,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes listAutoscalingPolicies without error using callback', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -980,8 +980,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataproc.v1.IAutoscalingPolicy[]
-              | null,
+              protos.google.cloud.dataproc.v1.IAutoscalingPolicy[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1006,7 +1005,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes listAutoscalingPolicies with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1041,7 +1040,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes listAutoscalingPoliciesStream without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1109,7 +1108,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes listAutoscalingPoliciesStream with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1166,7 +1165,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('uses async iteration with listAutoscalingPolicies without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1221,7 +1220,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('uses async iteration with listAutoscalingPolicies with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1268,7 +1267,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1299,7 +1298,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1337,7 +1336,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1348,7 +1347,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1381,7 +1380,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1412,7 +1411,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1450,7 +1449,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1461,7 +1460,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1494,7 +1493,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1528,7 +1527,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1566,7 +1565,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1577,7 +1576,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1620,7 +1619,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1684,7 +1683,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1736,7 +1735,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1810,7 +1809,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1851,7 +1850,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1933,7 +1932,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2013,7 +2012,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2093,7 +2092,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2173,7 +2172,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2238,7 +2237,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       };
       const client =
         new autoscalingpolicyserviceModule.v1.AutoscalingPolicyServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

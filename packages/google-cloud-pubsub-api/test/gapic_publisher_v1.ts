@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as publisherModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos } from 'google-gax';
+import {protobuf, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v1.PublisherClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.publisherStub, undefined);
@@ -245,12 +245,12 @@ describe('v1.PublisherClient', () => {
       assert(client.publisherStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.publisherStub);
@@ -259,14 +259,14 @@ describe('v1.PublisherClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.publisherStub, undefined);
@@ -275,7 +275,7 @@ describe('v1.PublisherClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v1.PublisherClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v1.PublisherClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v1.PublisherClient', () => {
   describe('createTopic', () => {
     it('invokes createTopic without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -348,7 +348,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes createTopic without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -394,7 +394,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes createTopic with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes createTopic with closed client', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1.PublisherClient', () => {
       ]);
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTopic(request), expectedError);
@@ -446,7 +446,7 @@ describe('v1.PublisherClient', () => {
   describe('updateTopic', () => {
     it('invokes updateTopic without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes updateTopic without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -526,7 +526,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes updateTopic with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes updateTopic with closed client', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v1.PublisherClient', () => {
       );
       request.topic.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTopic(request), expectedError);
@@ -582,7 +582,7 @@ describe('v1.PublisherClient', () => {
   describe('publish', () => {
     it('invokes publish without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes publish without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes publish with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -688,7 +688,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes publish with closed client', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -701,7 +701,7 @@ describe('v1.PublisherClient', () => {
       );
       request.topic = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.publish(request), expectedError);
@@ -711,7 +711,7 @@ describe('v1.PublisherClient', () => {
   describe('getTopic', () => {
     it('invokes getTopic without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes getTopic without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -789,7 +789,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes getTopic with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -817,7 +817,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes getTopic with closed client', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1.PublisherClient', () => {
       );
       request.topic = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTopic(request), expectedError);
@@ -840,7 +840,7 @@ describe('v1.PublisherClient', () => {
   describe('deleteTopic', () => {
     it('invokes deleteTopic without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes deleteTopic without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -918,7 +918,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes deleteTopic with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes deleteTopic with closed client', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v1.PublisherClient', () => {
       );
       request.topic = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTopic(request), expectedError);
@@ -972,7 +972,7 @@ describe('v1.PublisherClient', () => {
   describe('detachSubscription', () => {
     it('invokes detachSubscription without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes detachSubscription without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1051,7 +1051,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes detachSubscription with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1082,7 +1082,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes detachSubscription with closed client', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1095,7 +1095,7 @@ describe('v1.PublisherClient', () => {
       );
       request.subscription = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.detachSubscription(request), expectedError);
@@ -1105,7 +1105,7 @@ describe('v1.PublisherClient', () => {
   describe('listTopics', () => {
     it('invokes listTopics without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopics without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1187,7 +1187,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopics with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1218,7 +1218,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopicsStream without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1261,15 +1261,15 @@ describe('v1.PublisherClient', () => {
       assert(
         (client.descriptors.page.listTopics.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTopicsStream with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1309,15 +1309,15 @@ describe('v1.PublisherClient', () => {
       assert(
         (client.descriptors.page.listTopics.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTopics without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1352,15 +1352,15 @@ describe('v1.PublisherClient', () => {
       assert(
         (client.descriptors.page.listTopics.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTopics with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1394,9 +1394,9 @@ describe('v1.PublisherClient', () => {
       assert(
         (client.descriptors.page.listTopics.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1404,7 +1404,7 @@ describe('v1.PublisherClient', () => {
   describe('listTopicSubscriptions', () => {
     it('invokes listTopicSubscriptions without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1434,7 +1434,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopicSubscriptions without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1476,7 +1476,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopicSubscriptions with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1510,7 +1510,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopicSubscriptionsStream without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopicSubscriptionsStream with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1615,7 +1615,7 @@ describe('v1.PublisherClient', () => {
 
     it('uses async iteration with listTopicSubscriptions without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1658,7 +1658,7 @@ describe('v1.PublisherClient', () => {
 
     it('uses async iteration with listTopicSubscriptions with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1704,7 +1704,7 @@ describe('v1.PublisherClient', () => {
   describe('listTopicSnapshots', () => {
     it('invokes listTopicSnapshots without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1734,7 +1734,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopicSnapshots without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1776,7 +1776,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopicSnapshots with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1807,7 +1807,7 @@ describe('v1.PublisherClient', () => {
 
     it('invokes listTopicSnapshotsStream without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1846,15 +1846,15 @@ describe('v1.PublisherClient', () => {
       assert(
         (client.descriptors.page.listTopicSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTopicSnapshotsStream with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1892,15 +1892,15 @@ describe('v1.PublisherClient', () => {
       assert(
         (client.descriptors.page.listTopicSnapshots.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTopicSnapshots without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1931,15 +1931,15 @@ describe('v1.PublisherClient', () => {
       assert(
         (client.descriptors.page.listTopicSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTopicSnapshots with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1971,16 +1971,16 @@ describe('v1.PublisherClient', () => {
       assert(
         (client.descriptors.page.listTopicSnapshots.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2010,7 +2010,7 @@ describe('v1.PublisherClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2048,7 +2048,7 @@ describe('v1.PublisherClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2058,7 +2058,7 @@ describe('v1.PublisherClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2090,7 +2090,7 @@ describe('v1.PublisherClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2120,7 +2120,7 @@ describe('v1.PublisherClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2158,7 +2158,7 @@ describe('v1.PublisherClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2168,7 +2168,7 @@ describe('v1.PublisherClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2200,7 +2200,7 @@ describe('v1.PublisherClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2233,7 +2233,7 @@ describe('v1.PublisherClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2271,7 +2271,7 @@ describe('v1.PublisherClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2281,7 +2281,7 @@ describe('v1.PublisherClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2324,7 +2324,7 @@ describe('v1.PublisherClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2397,7 +2397,7 @@ describe('v1.PublisherClient', () => {
         project: 'projectValue',
       };
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2436,7 +2436,7 @@ describe('v1.PublisherClient', () => {
         topic: 'topicValue',
       };
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2485,7 +2485,7 @@ describe('v1.PublisherClient', () => {
         schema: 'schemaValue',
       };
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2534,7 +2534,7 @@ describe('v1.PublisherClient', () => {
         snapshot: 'snapshotValue',
       };
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2583,7 +2583,7 @@ describe('v1.PublisherClient', () => {
         subscription: 'subscriptionValue',
       };
       const client = new publisherModule.v1.PublisherClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as migrationcenterModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.migrationCenterStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.MigrationCenterClient', () => {
       assert(client.migrationCenterStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.migrationCenterStub);
@@ -301,14 +301,14 @@ describe('v1.MigrationCenterClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.migrationCenterStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.MigrationCenterClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.MigrationCenterClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.MigrationCenterClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getAsset', () => {
     it('invokes getAsset without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getAsset without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getAsset with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getAsset with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAsset(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('updateAsset', () => {
     it('invokes updateAsset without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateAsset without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateAsset with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateAsset with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.asset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAsset(request), expectedError);
@@ -625,7 +625,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('batchUpdateAssets', () => {
     it('invokes batchUpdateAssets without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -656,7 +656,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes batchUpdateAssets without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -703,7 +703,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes batchUpdateAssets with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes batchUpdateAssets with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdateAssets(request), expectedError);
@@ -757,7 +757,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('deleteAsset', () => {
     it('invokes deleteAsset without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -788,7 +788,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteAsset without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteAsset with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -866,7 +866,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteAsset with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -879,7 +879,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAsset(request), expectedError);
@@ -889,7 +889,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('batchDeleteAssets', () => {
     it('invokes batchDeleteAssets without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -920,7 +920,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes batchDeleteAssets without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -967,7 +967,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes batchDeleteAssets with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes batchDeleteAssets with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchDeleteAssets(request), expectedError);
@@ -1021,7 +1021,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('reportAssetFrames', () => {
     it('invokes reportAssetFrames without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1052,7 +1052,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes reportAssetFrames without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes reportAssetFrames with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1130,7 +1130,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes reportAssetFrames with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.reportAssetFrames(request), expectedError);
@@ -1153,7 +1153,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('aggregateAssetsValues', () => {
     it('invokes aggregateAssetsValues without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes aggregateAssetsValues without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1232,7 +1232,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes aggregateAssetsValues with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1266,7 +1266,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes aggregateAssetsValues with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1279,7 +1279,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1292,7 +1292,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getImportJob', () => {
     it('invokes getImportJob without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1323,7 +1323,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getImportJob without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1370,7 +1370,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getImportJob with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getImportJob with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1414,7 +1414,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getImportJob(request), expectedError);
@@ -1424,7 +1424,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getImportDataFile', () => {
     it('invokes getImportDataFile without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1455,7 +1455,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getImportDataFile without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1502,7 +1502,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getImportDataFile with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getImportDataFile with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1546,7 +1546,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getImportDataFile(request), expectedError);
@@ -1556,7 +1556,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getGroup', () => {
     it('invokes getGroup without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1587,7 +1587,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getGroup without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getGroup with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1662,7 +1662,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getGroup with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1675,7 +1675,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGroup(request), expectedError);
@@ -1685,7 +1685,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getErrorFrame', () => {
     it('invokes getErrorFrame without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1716,7 +1716,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getErrorFrame without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1763,7 +1763,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getErrorFrame with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1794,7 +1794,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getErrorFrame with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1807,7 +1807,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getErrorFrame(request), expectedError);
@@ -1817,7 +1817,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getSource', () => {
     it('invokes getSource without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1848,7 +1848,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getSource without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1895,7 +1895,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getSource with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1923,7 +1923,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getSource with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1936,7 +1936,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSource(request), expectedError);
@@ -1946,7 +1946,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getPreferenceSet', () => {
     it('invokes getPreferenceSet without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1977,7 +1977,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getPreferenceSet without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2024,7 +2024,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getPreferenceSet with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2055,7 +2055,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getPreferenceSet with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2068,7 +2068,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPreferenceSet(request), expectedError);
@@ -2078,7 +2078,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getSettings', () => {
     it('invokes getSettings without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2109,7 +2109,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getSettings without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2156,7 +2156,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getSettings with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2187,7 +2187,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getSettings with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2200,7 +2200,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSettings(request), expectedError);
@@ -2210,7 +2210,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getReportConfig', () => {
     it('invokes getReportConfig without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2241,7 +2241,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getReportConfig without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2288,7 +2288,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getReportConfig with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2319,7 +2319,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getReportConfig with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2332,7 +2332,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReportConfig(request), expectedError);
@@ -2342,7 +2342,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getReport', () => {
     it('invokes getReport without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2373,7 +2373,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getReport without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2420,7 +2420,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getReport with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2448,7 +2448,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes getReport with closed client', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2461,7 +2461,7 @@ describe('v1.MigrationCenterClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReport(request), expectedError);
@@ -2471,7 +2471,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('createImportJob', () => {
     it('invokes createImportJob without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2504,7 +2504,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createImportJob without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2558,7 +2558,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createImportJob with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2589,7 +2589,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createImportJob with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2622,7 +2622,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateImportJobProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2630,8 +2630,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateImportJobProgress(
@@ -2644,7 +2644,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateImportJobProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2665,7 +2665,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('deleteImportJob', () => {
     it('invokes deleteImportJob without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2698,7 +2698,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteImportJob without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2752,7 +2752,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteImportJob with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2783,7 +2783,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteImportJob with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2816,7 +2816,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteImportJobProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2824,8 +2824,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteImportJobProgress(
@@ -2838,7 +2838,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteImportJobProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2859,7 +2859,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('updateImportJob', () => {
     it('invokes updateImportJob without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2893,7 +2893,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateImportJob without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2948,7 +2948,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateImportJob with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2980,7 +2980,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateImportJob with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3014,7 +3014,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdateImportJobProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3022,8 +3022,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateImportJobProgress(
@@ -3036,7 +3036,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdateImportJobProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3057,7 +3057,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('validateImportJob', () => {
     it('invokes validateImportJob without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3090,7 +3090,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes validateImportJob without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3144,7 +3144,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes validateImportJob with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3175,7 +3175,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes validateImportJob with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3208,7 +3208,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkValidateImportJobProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3216,8 +3216,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkValidateImportJobProgress(
@@ -3230,7 +3230,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkValidateImportJobProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3251,7 +3251,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('runImportJob', () => {
     it('invokes runImportJob without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3283,7 +3283,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes runImportJob without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3337,7 +3337,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes runImportJob with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3368,7 +3368,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes runImportJob with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3401,7 +3401,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkRunImportJobProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3409,8 +3409,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunImportJobProgress(
@@ -3423,7 +3423,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkRunImportJobProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3441,7 +3441,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('createImportDataFile', () => {
     it('invokes createImportDataFile without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3474,7 +3474,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createImportDataFile without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3528,7 +3528,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createImportDataFile with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3559,7 +3559,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createImportDataFile with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3592,7 +3592,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateImportDataFileProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3600,8 +3600,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateImportDataFileProgress(
@@ -3614,7 +3614,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateImportDataFileProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3635,7 +3635,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('deleteImportDataFile', () => {
     it('invokes deleteImportDataFile without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3668,7 +3668,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteImportDataFile without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3722,7 +3722,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteImportDataFile with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3753,7 +3753,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteImportDataFile with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3786,7 +3786,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteImportDataFileProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3794,8 +3794,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteImportDataFileProgress(
@@ -3808,7 +3808,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteImportDataFileProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3829,7 +3829,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('createGroup', () => {
     it('invokes createGroup without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3861,7 +3861,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createGroup without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3915,7 +3915,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createGroup with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3946,7 +3946,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createGroup with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3979,7 +3979,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateGroupProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3987,8 +3987,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateGroupProgress(
@@ -4001,7 +4001,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateGroupProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4019,7 +4019,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('updateGroup', () => {
     it('invokes updateGroup without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4052,7 +4052,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateGroup without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4107,7 +4107,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateGroup with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4139,7 +4139,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateGroup with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4173,7 +4173,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdateGroupProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4181,8 +4181,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateGroupProgress(
@@ -4195,7 +4195,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdateGroupProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4213,7 +4213,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('deleteGroup', () => {
     it('invokes deleteGroup without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4245,7 +4245,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteGroup without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4299,7 +4299,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteGroup with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4330,7 +4330,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteGroup with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4363,7 +4363,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteGroupProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4371,8 +4371,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteGroupProgress(
@@ -4385,7 +4385,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteGroupProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4403,7 +4403,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('addAssetsToGroup', () => {
     it('invokes addAssetsToGroup without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4436,7 +4436,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes addAssetsToGroup without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4490,7 +4490,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes addAssetsToGroup with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4521,7 +4521,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes addAssetsToGroup with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4554,7 +4554,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkAddAssetsToGroupProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4562,8 +4562,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAddAssetsToGroupProgress(
@@ -4576,7 +4576,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkAddAssetsToGroupProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4597,7 +4597,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('removeAssetsFromGroup', () => {
     it('invokes removeAssetsFromGroup without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4630,7 +4630,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes removeAssetsFromGroup without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4684,7 +4684,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes removeAssetsFromGroup with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4718,7 +4718,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes removeAssetsFromGroup with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4751,7 +4751,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkRemoveAssetsFromGroupProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4759,8 +4759,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRemoveAssetsFromGroupProgress(
@@ -4773,7 +4773,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkRemoveAssetsFromGroupProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4794,7 +4794,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('createSource', () => {
     it('invokes createSource without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4826,7 +4826,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createSource without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4880,7 +4880,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createSource with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4911,7 +4911,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createSource with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4944,7 +4944,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateSourceProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4952,8 +4952,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSourceProgress(
@@ -4966,7 +4966,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateSourceProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4984,7 +4984,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('updateSource', () => {
     it('invokes updateSource without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5017,7 +5017,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateSource without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5072,7 +5072,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateSource with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5104,7 +5104,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateSource with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5138,7 +5138,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdateSourceProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5146,8 +5146,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSourceProgress(
@@ -5160,7 +5160,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdateSourceProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5178,7 +5178,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('deleteSource', () => {
     it('invokes deleteSource without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5210,7 +5210,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteSource without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5264,7 +5264,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteSource with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5295,7 +5295,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteSource with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5328,7 +5328,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteSourceProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5336,8 +5336,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSourceProgress(
@@ -5350,7 +5350,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteSourceProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5368,7 +5368,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('createPreferenceSet', () => {
     it('invokes createPreferenceSet without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5401,7 +5401,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createPreferenceSet without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5455,7 +5455,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createPreferenceSet with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5486,7 +5486,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createPreferenceSet with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5519,7 +5519,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreatePreferenceSetProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5527,8 +5527,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePreferenceSetProgress(
@@ -5541,7 +5541,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreatePreferenceSetProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5562,7 +5562,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('updatePreferenceSet', () => {
     it('invokes updatePreferenceSet without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5596,7 +5596,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updatePreferenceSet without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5651,7 +5651,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updatePreferenceSet with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5683,7 +5683,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updatePreferenceSet with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5717,7 +5717,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdatePreferenceSetProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5725,8 +5725,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdatePreferenceSetProgress(
@@ -5739,7 +5739,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdatePreferenceSetProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5760,7 +5760,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('deletePreferenceSet', () => {
     it('invokes deletePreferenceSet without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5793,7 +5793,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deletePreferenceSet without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5847,7 +5847,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deletePreferenceSet with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5878,7 +5878,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deletePreferenceSet with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5911,7 +5911,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeletePreferenceSetProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5919,8 +5919,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePreferenceSetProgress(
@@ -5933,7 +5933,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeletePreferenceSetProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5954,7 +5954,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('updateSettings', () => {
     it('invokes updateSettings without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5988,7 +5988,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateSettings without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6043,7 +6043,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateSettings with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6075,7 +6075,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes updateSettings with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6109,7 +6109,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdateSettingsProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6117,8 +6117,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSettingsProgress(
@@ -6131,7 +6131,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkUpdateSettingsProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6152,7 +6152,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('createReportConfig', () => {
     it('invokes createReportConfig without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6185,7 +6185,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createReportConfig without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6239,7 +6239,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createReportConfig with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6270,7 +6270,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createReportConfig with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6303,7 +6303,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateReportConfigProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6311,8 +6311,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateReportConfigProgress(
@@ -6325,7 +6325,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateReportConfigProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6346,7 +6346,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('deleteReportConfig', () => {
     it('invokes deleteReportConfig without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6379,7 +6379,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteReportConfig without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6433,7 +6433,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteReportConfig with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6464,7 +6464,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteReportConfig with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6497,7 +6497,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteReportConfigProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6505,8 +6505,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteReportConfigProgress(
@@ -6519,7 +6519,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteReportConfigProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6540,7 +6540,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('createReport', () => {
     it('invokes createReport without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6572,7 +6572,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createReport without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6626,7 +6626,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createReport with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6657,7 +6657,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes createReport with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6690,7 +6690,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateReportProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6698,8 +6698,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateReportProgress(
@@ -6712,7 +6712,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkCreateReportProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6730,7 +6730,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('deleteReport', () => {
     it('invokes deleteReport without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6762,7 +6762,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteReport without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6816,7 +6816,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteReport with call error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6847,7 +6847,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes deleteReport with LRO error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6880,7 +6880,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteReportProgress without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6888,8 +6888,8 @@ describe('v1.MigrationCenterClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteReportProgress(
@@ -6902,7 +6902,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes checkDeleteReportProgress with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6920,7 +6920,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listAssets', () => {
     it('invokes listAssets without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6959,7 +6959,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listAssets without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7014,7 +7014,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listAssets with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7045,7 +7045,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listAssetsStream without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7097,15 +7097,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAssetsStream with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7148,15 +7148,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7197,15 +7197,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7239,9 +7239,9 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7249,7 +7249,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listImportJobs', () => {
     it('invokes listImportJobs without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7288,7 +7288,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listImportJobs without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7343,7 +7343,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listImportJobs with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7374,7 +7374,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listImportJobsStream without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7427,15 +7427,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listImportJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listImportJobsStream with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7477,15 +7477,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listImportJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listImportJobs without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7526,15 +7526,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listImportJobs with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7567,9 +7567,9 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7577,7 +7577,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listImportDataFiles', () => {
     it('invokes listImportDataFiles without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7617,7 +7617,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listImportDataFiles without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7649,8 +7649,7 @@ describe('v1.MigrationCenterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.migrationcenter.v1.IImportDataFile[]
-              | null,
+              protos.google.cloud.migrationcenter.v1.IImportDataFile[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7674,7 +7673,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listImportDataFiles with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7705,7 +7704,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listImportDataFilesStream without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7758,15 +7757,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listImportDataFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listImportDataFilesStream with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7808,15 +7807,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listImportDataFiles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listImportDataFiles without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7858,15 +7857,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listImportDataFiles with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7899,9 +7898,9 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listImportDataFiles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7909,7 +7908,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listGroups', () => {
     it('invokes listGroups without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7948,7 +7947,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listGroups without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8003,7 +8002,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listGroups with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8034,7 +8033,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listGroupsStream without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8086,15 +8085,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGroupsStream with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8137,15 +8136,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroups without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8186,15 +8185,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGroups with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8228,9 +8227,9 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8238,7 +8237,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listErrorFrames', () => {
     it('invokes listErrorFrames without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8277,7 +8276,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listErrorFrames without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8309,8 +8308,7 @@ describe('v1.MigrationCenterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.migrationcenter.v1.IErrorFrame[]
-              | null,
+              protos.google.cloud.migrationcenter.v1.IErrorFrame[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8334,7 +8332,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listErrorFrames with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8365,7 +8363,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listErrorFramesStream without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8418,15 +8416,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listErrorFrames.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listErrorFramesStream with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8468,15 +8466,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listErrorFrames.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listErrorFrames without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8518,15 +8516,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listErrorFrames.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listErrorFrames with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8559,9 +8557,9 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listErrorFrames.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8569,7 +8567,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listSources', () => {
     it('invokes listSources without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8608,7 +8606,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listSources without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8663,7 +8661,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listSources with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8694,7 +8692,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listSourcesStream without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8746,15 +8744,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSourcesStream with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8797,15 +8795,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSources without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8846,15 +8844,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSources with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8888,9 +8886,9 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8898,7 +8896,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listPreferenceSets', () => {
     it('invokes listPreferenceSets without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8938,7 +8936,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listPreferenceSets without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8970,8 +8968,7 @@ describe('v1.MigrationCenterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.migrationcenter.v1.IPreferenceSet[]
-              | null,
+              protos.google.cloud.migrationcenter.v1.IPreferenceSet[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8995,7 +8992,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listPreferenceSets with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9026,7 +9023,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listPreferenceSetsStream without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9079,15 +9076,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listPreferenceSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPreferenceSetsStream with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9129,15 +9126,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listPreferenceSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPreferenceSets without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9179,15 +9176,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPreferenceSets with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9220,9 +9217,9 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listPreferenceSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9230,7 +9227,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listReportConfigs', () => {
     it('invokes listReportConfigs without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9269,7 +9266,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listReportConfigs without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9301,8 +9298,7 @@ describe('v1.MigrationCenterClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.migrationcenter.v1.IReportConfig[]
-              | null,
+              protos.google.cloud.migrationcenter.v1.IReportConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -9326,7 +9322,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listReportConfigs with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9357,7 +9353,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listReportConfigsStream without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9410,15 +9406,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReportConfigsStream with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9460,15 +9456,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReportConfigs without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9510,15 +9506,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReportConfigs with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9551,9 +9547,9 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listReportConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -9561,7 +9557,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listReports', () => {
     it('invokes listReports without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9600,7 +9596,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listReports without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9655,7 +9651,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listReports with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9686,7 +9682,7 @@ describe('v1.MigrationCenterClient', () => {
 
     it('invokes listReportsStream without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9738,15 +9734,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReportsStream with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9789,15 +9785,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listReports.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReports without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9838,15 +9834,15 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReports with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9880,16 +9876,16 @@ describe('v1.MigrationCenterClient', () => {
       assert(
         (client.descriptors.page.listReports.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9919,7 +9915,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9963,7 +9959,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9998,7 +9994,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10046,7 +10042,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10087,7 +10083,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10108,7 +10104,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10136,7 +10132,7 @@ describe('v1.MigrationCenterClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -10146,7 +10142,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10170,7 +10166,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10192,7 +10188,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10220,7 +10216,7 @@ describe('v1.MigrationCenterClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -10230,7 +10226,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10254,7 +10250,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10276,7 +10272,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10304,7 +10300,7 @@ describe('v1.MigrationCenterClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -10314,7 +10310,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10338,7 +10334,7 @@ describe('v1.MigrationCenterClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -10373,7 +10369,7 @@ describe('v1.MigrationCenterClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10409,7 +10405,7 @@ describe('v1.MigrationCenterClient', () => {
         asset: 'assetValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10474,7 +10470,7 @@ describe('v1.MigrationCenterClient', () => {
         error_frame: 'errorFrameValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10549,7 +10545,7 @@ describe('v1.MigrationCenterClient', () => {
         group: 'groupValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10614,7 +10610,7 @@ describe('v1.MigrationCenterClient', () => {
         import_data_file: 'importDataFileValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10690,7 +10686,7 @@ describe('v1.MigrationCenterClient', () => {
         import_job: 'importJobValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10753,7 +10749,7 @@ describe('v1.MigrationCenterClient', () => {
         location: 'locationValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10803,7 +10799,7 @@ describe('v1.MigrationCenterClient', () => {
         preference_set: 'preferenceSetValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10865,7 +10861,7 @@ describe('v1.MigrationCenterClient', () => {
         project: 'projectValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10906,7 +10902,7 @@ describe('v1.MigrationCenterClient', () => {
         report: 'reportValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10981,7 +10977,7 @@ describe('v1.MigrationCenterClient', () => {
         report_config: 'reportConfigValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11044,7 +11040,7 @@ describe('v1.MigrationCenterClient', () => {
         location: 'locationValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11094,7 +11090,7 @@ describe('v1.MigrationCenterClient', () => {
         source: 'sourceValue',
       };
       const client = new migrationcenterModule.v1.MigrationCenterClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

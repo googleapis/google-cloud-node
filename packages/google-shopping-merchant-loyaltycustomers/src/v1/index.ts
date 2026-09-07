@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { LoyaltyCustomerMatchServiceClient } from './loyalty_customer_match_service_client';
+export {LoyaltyCustomerMatchServiceClient} from './loyalty_customer_match_service_client';

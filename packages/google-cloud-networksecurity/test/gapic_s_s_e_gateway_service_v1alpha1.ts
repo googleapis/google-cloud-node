@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as ssegatewayserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -290,7 +290,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sSEGatewayServiceStub, undefined);
@@ -298,13 +298,13 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       assert(client.sSEGatewayServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sSEGatewayServiceStub);
@@ -313,15 +313,15 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.sSEGatewayServiceStub, undefined);
@@ -330,7 +330,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -339,7 +339,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -352,7 +352,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -376,7 +376,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getPartnerSSEGateway without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -409,7 +409,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getPartnerSSEGateway without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -457,7 +457,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getPartnerSSEGateway with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getPartnerSSEGateway with closed client', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPartnerSSEGateway(request), expectedError);
@@ -513,7 +513,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getSSEGatewayReference without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -546,7 +546,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getSSEGatewayReference without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -594,7 +594,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getSSEGatewayReference with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -629,7 +629,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getSSEGatewayReference with closed client', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -642,7 +642,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -656,7 +656,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes createPartnerSSEGateway without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -690,7 +690,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes createPartnerSSEGateway without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -745,7 +745,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes createPartnerSSEGateway with call error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes createPartnerSSEGateway with LRO error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -814,7 +814,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes checkCreatePartnerSSEGatewayProgress without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -822,8 +822,8 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -838,7 +838,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes checkCreatePartnerSSEGatewayProgress with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes deletePartnerSSEGateway without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -894,7 +894,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes deletePartnerSSEGateway without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes deletePartnerSSEGateway with call error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -984,7 +984,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes deletePartnerSSEGateway with LRO error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes checkDeletePartnerSSEGatewayProgress without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1026,8 +1026,8 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1042,7 +1042,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes checkDeletePartnerSSEGatewayProgress with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1064,7 +1064,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes updatePartnerSSEGateway without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes updatePartnerSSEGateway without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1155,7 +1155,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes updatePartnerSSEGateway with call error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes updatePartnerSSEGateway with LRO error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1226,7 +1226,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes checkUpdatePartnerSSEGatewayProgress without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1234,8 +1234,8 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1250,7 +1250,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes checkUpdatePartnerSSEGatewayProgress with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listPartnerSSEGateways without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1313,7 +1313,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listPartnerSSEGateways without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1371,7 +1371,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listPartnerSSEGateways with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listPartnerSSEGatewaysStream without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1476,7 +1476,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listPartnerSSEGatewaysStream with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1535,7 +1535,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('uses async iteration with listPartnerSSEGateways without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1590,7 +1590,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('uses async iteration with listPartnerSSEGateways with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1638,7 +1638,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listSSEGatewayReferences without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1679,7 +1679,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listSSEGatewayReferences without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1737,7 +1737,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listSSEGatewayReferences with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1772,7 +1772,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listSSEGatewayReferencesStream without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1842,7 +1842,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes listSSEGatewayReferencesStream with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1901,7 +1901,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('uses async iteration with listSSEGatewayReferences without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1956,7 +1956,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('uses async iteration with listSSEGatewayReferences with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2003,7 +2003,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2034,7 +2034,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2072,7 +2072,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2083,7 +2083,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2116,7 +2116,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2147,7 +2147,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2185,7 +2185,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2196,7 +2196,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2229,7 +2229,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2263,7 +2263,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2301,7 +2301,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2312,7 +2312,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2348,7 +2348,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2379,7 +2379,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2424,7 +2424,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2460,7 +2460,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2509,7 +2509,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2551,7 +2551,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2573,7 +2573,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2601,7 +2601,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2612,7 +2612,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2637,7 +2637,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2660,7 +2660,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2688,7 +2688,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2699,7 +2699,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2724,7 +2724,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2747,7 +2747,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2775,7 +2775,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2786,7 +2786,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2811,7 +2811,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2847,7 +2847,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2884,7 +2884,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2963,7 +2963,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3028,7 +3028,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3109,7 +3109,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3175,7 +3175,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3253,7 +3253,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3334,7 +3334,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3417,7 +3417,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3514,7 +3514,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3593,7 +3593,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3675,7 +3675,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3758,7 +3758,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3841,7 +3841,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3892,7 +3892,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3971,7 +3971,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4053,7 +4053,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4136,7 +4136,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4220,7 +4220,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4308,7 +4308,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4393,7 +4393,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4481,7 +4481,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4559,7 +4559,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4623,7 +4623,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4664,7 +4664,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4746,7 +4746,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4826,7 +4826,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4910,7 +4910,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4975,7 +4975,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5040,7 +5040,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5119,7 +5119,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5185,7 +5185,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5264,7 +5264,7 @@ describe('v1alpha1.SSEGatewayServiceClient', () => {
       };
       const client =
         new ssegatewayserviceModule.v1alpha1.SSEGatewayServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

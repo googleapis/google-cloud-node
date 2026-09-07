@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as catalogserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.catalogServiceStub, undefined);
@@ -284,12 +284,12 @@ describe('v1.CatalogServiceClient', () => {
       assert(client.catalogServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.catalogServiceStub);
@@ -298,14 +298,14 @@ describe('v1.CatalogServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.catalogServiceStub, undefined);
@@ -314,7 +314,7 @@ describe('v1.CatalogServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1.CatalogServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1.CatalogServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('getEntryType', () => {
     it('invokes getEntryType without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntryType without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntryType with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntryType with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEntryType(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('getAspectType', () => {
     it('invokes getAspectType without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getAspectType without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getAspectType with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getAspectType with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAspectType(request), expectedError);
@@ -621,7 +621,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('getEntryGroup', () => {
     it('invokes getEntryGroup without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntryGroup without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntryGroup with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntryGroup with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEntryGroup(request), expectedError);
@@ -753,7 +753,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('createEntry', () => {
     it('invokes createEntry without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntry without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntry with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntry with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEntry(request), expectedError);
@@ -885,7 +885,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('updateEntry', () => {
     it('invokes updateEntry without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -917,7 +917,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntry without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntry with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntry with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.entry.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEntry(request), expectedError);
@@ -1021,7 +1021,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('deleteEntry', () => {
     it('invokes deleteEntry without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1052,7 +1052,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntry without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntry with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1130,7 +1130,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntry with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteEntry(request), expectedError);
@@ -1153,7 +1153,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('getEntry', () => {
     it('invokes getEntry without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1184,7 +1184,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntry without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntry with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1259,7 +1259,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntry with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEntry(request), expectedError);
@@ -1282,7 +1282,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('lookupEntry', () => {
     it('invokes lookupEntry without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1313,7 +1313,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes lookupEntry without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1360,7 +1360,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes lookupEntry with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1391,7 +1391,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes lookupEntry with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1404,7 +1404,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.lookupEntry(request), expectedError);
@@ -1414,7 +1414,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('modifyEntry', () => {
     it('invokes modifyEntry without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1445,7 +1445,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes modifyEntry without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1492,7 +1492,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes modifyEntry with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1523,7 +1523,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes modifyEntry with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1536,7 +1536,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.modifyEntry(request), expectedError);
@@ -1546,7 +1546,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('getMetadataJob', () => {
     it('invokes getMetadataJob without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1577,7 +1577,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getMetadataJob without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1624,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getMetadataJob with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getMetadataJob with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1668,7 +1668,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMetadataJob(request), expectedError);
@@ -1678,7 +1678,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('cancelMetadataJob', () => {
     it('invokes cancelMetadataJob without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1709,7 +1709,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes cancelMetadataJob without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1756,7 +1756,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes cancelMetadataJob with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1787,7 +1787,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes cancelMetadataJob with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelMetadataJob(request), expectedError);
@@ -1810,7 +1810,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('createEntryLink', () => {
     it('invokes createEntryLink without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1841,7 +1841,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntryLink without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1888,7 +1888,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntryLink with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +1919,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntryLink with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1932,7 +1932,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEntryLink(request), expectedError);
@@ -1942,7 +1942,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('updateEntryLink', () => {
     it('invokes updateEntryLink without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,7 +1974,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntryLink without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2022,7 +2022,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntryLink with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2054,7 +2054,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntryLink with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2068,7 +2068,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.entryLink.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEntryLink(request), expectedError);
@@ -2078,7 +2078,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('deleteEntryLink', () => {
     it('invokes deleteEntryLink without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2109,7 +2109,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntryLink without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2156,7 +2156,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntryLink with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2187,7 +2187,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntryLink with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2200,7 +2200,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteEntryLink(request), expectedError);
@@ -2210,7 +2210,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('lookupContext', () => {
     it('invokes lookupContext without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2241,7 +2241,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes lookupContext without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2288,7 +2288,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes lookupContext with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2319,7 +2319,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes lookupContext with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2332,7 +2332,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.lookupContext(request), expectedError);
@@ -2342,7 +2342,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('getEntryLink', () => {
     it('invokes getEntryLink without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2373,7 +2373,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntryLink without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2420,7 +2420,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntryLink with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2451,7 +2451,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getEntryLink with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2464,7 +2464,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEntryLink(request), expectedError);
@@ -2474,7 +2474,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('getMetadataFeed', () => {
     it('invokes getMetadataFeed without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2505,7 +2505,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getMetadataFeed without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2552,7 +2552,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getMetadataFeed with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2583,7 +2583,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes getMetadataFeed with closed client', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2596,7 +2596,7 @@ describe('v1.CatalogServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMetadataFeed(request), expectedError);
@@ -2606,7 +2606,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('createEntryType', () => {
     it('invokes createEntryType without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2639,7 +2639,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntryType without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2693,7 +2693,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntryType with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2724,7 +2724,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntryType with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2757,7 +2757,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateEntryTypeProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2765,8 +2765,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEntryTypeProgress(
@@ -2779,7 +2779,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateEntryTypeProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2800,7 +2800,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('updateEntryType', () => {
     it('invokes updateEntryType without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2834,7 +2834,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntryType without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2889,7 +2889,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntryType with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2921,7 +2921,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntryType with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2955,7 +2955,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkUpdateEntryTypeProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2963,8 +2963,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateEntryTypeProgress(
@@ -2977,7 +2977,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkUpdateEntryTypeProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2998,7 +2998,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('deleteEntryType', () => {
     it('invokes deleteEntryType without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3031,7 +3031,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntryType without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3085,7 +3085,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntryType with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3116,7 +3116,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntryType with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3149,7 +3149,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkDeleteEntryTypeProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3157,8 +3157,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEntryTypeProgress(
@@ -3171,7 +3171,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkDeleteEntryTypeProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3192,7 +3192,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('createAspectType', () => {
     it('invokes createAspectType without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3225,7 +3225,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createAspectType without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3279,7 +3279,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createAspectType with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3310,7 +3310,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createAspectType with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3343,7 +3343,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateAspectTypeProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3351,8 +3351,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAspectTypeProgress(
@@ -3365,7 +3365,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateAspectTypeProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3386,7 +3386,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('updateAspectType', () => {
     it('invokes updateAspectType without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3420,7 +3420,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateAspectType without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3475,7 +3475,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateAspectType with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3507,7 +3507,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateAspectType with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3541,7 +3541,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkUpdateAspectTypeProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3549,8 +3549,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAspectTypeProgress(
@@ -3563,7 +3563,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkUpdateAspectTypeProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3584,7 +3584,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('deleteAspectType', () => {
     it('invokes deleteAspectType without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3617,7 +3617,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteAspectType without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3671,7 +3671,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteAspectType with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3702,7 +3702,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteAspectType with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3735,7 +3735,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkDeleteAspectTypeProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3743,8 +3743,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAspectTypeProgress(
@@ -3757,7 +3757,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkDeleteAspectTypeProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3778,7 +3778,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('createEntryGroup', () => {
     it('invokes createEntryGroup without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3811,7 +3811,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntryGroup without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3865,7 +3865,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntryGroup with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3896,7 +3896,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createEntryGroup with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3929,7 +3929,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateEntryGroupProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3937,8 +3937,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEntryGroupProgress(
@@ -3951,7 +3951,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateEntryGroupProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3972,7 +3972,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('updateEntryGroup', () => {
     it('invokes updateEntryGroup without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4006,7 +4006,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntryGroup without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4061,7 +4061,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntryGroup with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4093,7 +4093,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateEntryGroup with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4127,7 +4127,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkUpdateEntryGroupProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4135,8 +4135,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateEntryGroupProgress(
@@ -4149,7 +4149,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkUpdateEntryGroupProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4170,7 +4170,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('deleteEntryGroup', () => {
     it('invokes deleteEntryGroup without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4203,7 +4203,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntryGroup without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4257,7 +4257,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntryGroup with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4288,7 +4288,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteEntryGroup with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4321,7 +4321,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkDeleteEntryGroupProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4329,8 +4329,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEntryGroupProgress(
@@ -4343,7 +4343,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkDeleteEntryGroupProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4364,7 +4364,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('createMetadataJob', () => {
     it('invokes createMetadataJob without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4397,7 +4397,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createMetadataJob without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4451,7 +4451,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createMetadataJob with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4482,7 +4482,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createMetadataJob with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4515,7 +4515,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateMetadataJobProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4523,8 +4523,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMetadataJobProgress(
@@ -4537,7 +4537,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateMetadataJobProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4558,7 +4558,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('createMetadataFeed', () => {
     it('invokes createMetadataFeed without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4591,7 +4591,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createMetadataFeed without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4645,7 +4645,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createMetadataFeed with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4676,7 +4676,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes createMetadataFeed with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4709,7 +4709,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateMetadataFeedProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4717,8 +4717,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMetadataFeedProgress(
@@ -4731,7 +4731,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkCreateMetadataFeedProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4752,7 +4752,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('deleteMetadataFeed', () => {
     it('invokes deleteMetadataFeed without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4785,7 +4785,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteMetadataFeed without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4839,7 +4839,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteMetadataFeed with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4870,7 +4870,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes deleteMetadataFeed with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4903,7 +4903,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkDeleteMetadataFeedProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4911,8 +4911,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteMetadataFeedProgress(
@@ -4925,7 +4925,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkDeleteMetadataFeedProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4946,7 +4946,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('updateMetadataFeed', () => {
     it('invokes updateMetadataFeed without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4980,7 +4980,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateMetadataFeed without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5035,7 +5035,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateMetadataFeed with call error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5067,7 +5067,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes updateMetadataFeed with LRO error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5101,7 +5101,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkUpdateMetadataFeedProgress without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5109,8 +5109,8 @@ describe('v1.CatalogServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateMetadataFeedProgress(
@@ -5123,7 +5123,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes checkUpdateMetadataFeedProgress with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5144,7 +5144,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('listEntryTypes', () => {
     it('invokes listEntryTypes without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5177,7 +5177,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listEntryTypes without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5226,7 +5226,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listEntryTypes with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5257,7 +5257,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listEntryTypesStream without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5303,15 +5303,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntryTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEntryTypesStream with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5352,15 +5352,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntryTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntryTypes without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5395,15 +5395,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntryTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntryTypes with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5435,9 +5435,9 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntryTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5445,7 +5445,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('listAspectTypes', () => {
     it('invokes listAspectTypes without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5478,7 +5478,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listAspectTypes without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5527,7 +5527,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listAspectTypes with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5558,7 +5558,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listAspectTypesStream without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5604,15 +5604,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listAspectTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAspectTypesStream with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5653,15 +5653,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listAspectTypes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAspectTypes without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5696,15 +5696,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listAspectTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAspectTypes with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5736,9 +5736,9 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listAspectTypes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5746,7 +5746,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('listEntryGroups', () => {
     it('invokes listEntryGroups without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5779,7 +5779,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listEntryGroups without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5828,7 +5828,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listEntryGroups with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5859,7 +5859,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listEntryGroupsStream without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5905,15 +5905,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntryGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEntryGroupsStream with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5954,15 +5954,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntryGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntryGroups without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5997,15 +5997,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntryGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntryGroups with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6037,9 +6037,9 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntryGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6047,7 +6047,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('listEntries', () => {
     it('invokes listEntries without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6080,7 +6080,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listEntries without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6129,7 +6129,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listEntries with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6160,7 +6160,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listEntriesStream without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6203,15 +6203,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEntriesStream with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6251,15 +6251,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntries without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6294,15 +6294,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEntries with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6336,9 +6336,9 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listEntries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6346,7 +6346,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('searchEntries', () => {
     it('invokes searchEntries without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6385,7 +6385,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes searchEntries without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6417,8 +6417,7 @@ describe('v1.CatalogServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dataplex.v1.ISearchEntriesResult[]
-              | null,
+              protos.google.cloud.dataplex.v1.ISearchEntriesResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6442,7 +6441,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes searchEntries with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6473,7 +6472,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes searchEntriesStream without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6526,15 +6525,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.searchEntries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchEntriesStream with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6576,15 +6575,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.searchEntries.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchEntries without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6626,15 +6625,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.searchEntries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchEntries with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6667,9 +6666,9 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.searchEntries.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6677,7 +6676,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('listMetadataJobs', () => {
     it('invokes listMetadataJobs without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6716,7 +6715,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listMetadataJobs without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6771,7 +6770,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listMetadataJobs with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6802,7 +6801,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listMetadataJobsStream without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6854,15 +6853,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listMetadataJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMetadataJobsStream with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6903,15 +6902,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listMetadataJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMetadataJobs without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6952,15 +6951,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listMetadataJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMetadataJobs with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6992,9 +6991,9 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listMetadataJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7002,7 +7001,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('lookupEntryLinks', () => {
     it('invokes lookupEntryLinks without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7035,7 +7034,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes lookupEntryLinks without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7084,7 +7083,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes lookupEntryLinks with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7115,7 +7114,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes lookupEntryLinksStream without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7161,15 +7160,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.lookupEntryLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes lookupEntryLinksStream with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7210,15 +7209,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.lookupEntryLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with lookupEntryLinks without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7253,15 +7252,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.lookupEntryLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with lookupEntryLinks with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7293,9 +7292,9 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.lookupEntryLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7303,7 +7302,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('listMetadataFeeds', () => {
     it('invokes listMetadataFeeds without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7342,7 +7341,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listMetadataFeeds without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7397,7 +7396,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listMetadataFeeds with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7428,7 +7427,7 @@ describe('v1.CatalogServiceClient', () => {
 
     it('invokes listMetadataFeedsStream without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7480,15 +7479,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listMetadataFeeds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMetadataFeedsStream with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7529,15 +7528,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listMetadataFeeds.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMetadataFeeds without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7578,15 +7577,15 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listMetadataFeeds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMetadataFeeds with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7618,16 +7617,16 @@ describe('v1.CatalogServiceClient', () => {
       assert(
         (client.descriptors.page.listMetadataFeeds.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7657,7 +7656,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7701,7 +7700,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7736,7 +7735,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7784,7 +7783,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7825,7 +7824,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7846,7 +7845,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7874,7 +7873,7 @@ describe('v1.CatalogServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7884,7 +7883,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7908,7 +7907,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7930,7 +7929,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7958,7 +7957,7 @@ describe('v1.CatalogServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7968,7 +7967,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7992,7 +7991,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8014,7 +8013,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8042,7 +8041,7 @@ describe('v1.CatalogServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8052,7 +8051,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8076,7 +8075,7 @@ describe('v1.CatalogServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8111,7 +8110,7 @@ describe('v1.CatalogServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8147,7 +8146,7 @@ describe('v1.CatalogServiceClient', () => {
         aspect_type: 'aspectTypeValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8213,7 +8212,7 @@ describe('v1.CatalogServiceClient', () => {
         asset: 'assetValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8299,7 +8298,7 @@ describe('v1.CatalogServiceClient', () => {
         change_request: 'changeRequestValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8364,7 +8363,7 @@ describe('v1.CatalogServiceClient', () => {
         content: 'contentValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8440,7 +8439,7 @@ describe('v1.CatalogServiceClient', () => {
         data_asset: 'dataAssetValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8516,7 +8515,7 @@ describe('v1.CatalogServiceClient', () => {
         data_attribute_id: 'dataAttributeIdValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8592,7 +8591,7 @@ describe('v1.CatalogServiceClient', () => {
         data_attribute_binding_id: 'dataAttributeBindingIdValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8673,7 +8672,7 @@ describe('v1.CatalogServiceClient', () => {
         data_product: 'dataProductValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8737,7 +8736,7 @@ describe('v1.CatalogServiceClient', () => {
         dataScan: 'dataScanValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8802,7 +8801,7 @@ describe('v1.CatalogServiceClient', () => {
         job: 'jobValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8877,7 +8876,7 @@ describe('v1.CatalogServiceClient', () => {
         data_taxonomy_id: 'dataTaxonomyIdValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8941,7 +8940,7 @@ describe('v1.CatalogServiceClient', () => {
         encryption_config: 'encryptionConfigValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9012,7 +9011,7 @@ describe('v1.CatalogServiceClient', () => {
         entity: 'entityValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9099,7 +9098,7 @@ describe('v1.CatalogServiceClient', () => {
         entry: 'entryValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9174,7 +9173,7 @@ describe('v1.CatalogServiceClient', () => {
         entry_group: 'entryGroupValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9239,7 +9238,7 @@ describe('v1.CatalogServiceClient', () => {
         entry_link: 'entryLinkValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9314,7 +9313,7 @@ describe('v1.CatalogServiceClient', () => {
         entry_type: 'entryTypeValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9379,7 +9378,7 @@ describe('v1.CatalogServiceClient', () => {
         environment: 'environmentValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9454,7 +9453,7 @@ describe('v1.CatalogServiceClient', () => {
         glossary: 'glossaryValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9519,7 +9518,7 @@ describe('v1.CatalogServiceClient', () => {
         glossary_category: 'glossaryCategoryValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9599,7 +9598,7 @@ describe('v1.CatalogServiceClient', () => {
         glossary_term: 'glossaryTermValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9676,7 +9675,7 @@ describe('v1.CatalogServiceClient', () => {
         job: 'jobValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9762,7 +9761,7 @@ describe('v1.CatalogServiceClient', () => {
         lake: 'lakeValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9825,7 +9824,7 @@ describe('v1.CatalogServiceClient', () => {
         location: 'locationValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9875,7 +9874,7 @@ describe('v1.CatalogServiceClient', () => {
         metadata_feed: 'metadataFeedValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9939,7 +9938,7 @@ describe('v1.CatalogServiceClient', () => {
         metadataJob: 'metadataJobValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10006,7 +10005,7 @@ describe('v1.CatalogServiceClient', () => {
         partition: 'partitionValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10104,7 +10103,7 @@ describe('v1.CatalogServiceClient', () => {
         action: 'actionValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10200,7 +10199,7 @@ describe('v1.CatalogServiceClient', () => {
         action: 'actionValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10310,7 +10309,7 @@ describe('v1.CatalogServiceClient', () => {
         action: 'actionValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10440,7 +10439,7 @@ describe('v1.CatalogServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10527,7 +10526,7 @@ describe('v1.CatalogServiceClient', () => {
         task: 'taskValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10603,7 +10602,7 @@ describe('v1.CatalogServiceClient', () => {
         zone: 'zoneValue',
       };
       const client = new catalogserviceModule.v1.CatalogServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as answerrecordsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.answerRecordsStub, undefined);
@@ -247,12 +247,12 @@ describe('v2beta1.AnswerRecordsClient', () => {
       assert(client.answerRecordsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.answerRecordsStub);
@@ -261,14 +261,14 @@ describe('v2beta1.AnswerRecordsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.answerRecordsStub, undefined);
@@ -277,7 +277,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
   describe('getAnswerRecord', () => {
     it('invokes getAnswerRecord without error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -353,7 +353,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('invokes getAnswerRecord without error using callback', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -402,7 +402,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('invokes getAnswerRecord with error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -435,7 +435,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('invokes getAnswerRecord with closed client', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -449,7 +449,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnswerRecord(request), expectedError);
@@ -460,7 +460,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
   describe('updateAnswerRecord', () => {
     it('invokes updateAnswerRecord without error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -493,7 +493,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('invokes updateAnswerRecord without error using callback', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -541,7 +541,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('invokes updateAnswerRecord with error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -573,7 +573,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('invokes updateAnswerRecord with closed client', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -587,7 +587,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
       );
       request.answerRecord.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAnswerRecord(request), expectedError);
@@ -597,7 +597,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
   describe('listAnswerRecords', () => {
     it('invokes listAnswerRecords without error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -636,7 +636,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('invokes listAnswerRecords without error using callback', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -668,8 +668,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2beta1.IAnswerRecord[]
-              | null,
+              protos.google.cloud.dialogflow.v2beta1.IAnswerRecord[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -693,7 +692,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('invokes listAnswerRecords with error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -724,7 +723,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
 
     it('invokes listAnswerRecordsStream without error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -777,15 +776,15 @@ describe('v2beta1.AnswerRecordsClient', () => {
       assert(
         (client.descriptors.page.listAnswerRecords.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAnswerRecordsStream with error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -827,15 +826,15 @@ describe('v2beta1.AnswerRecordsClient', () => {
       assert(
         (client.descriptors.page.listAnswerRecords.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnswerRecords without error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -877,15 +876,15 @@ describe('v2beta1.AnswerRecordsClient', () => {
       assert(
         (client.descriptors.page.listAnswerRecords.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAnswerRecords with error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -918,16 +917,16 @@ describe('v2beta1.AnswerRecordsClient', () => {
       assert(
         (client.descriptors.page.listAnswerRecords.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +956,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1001,7 +1000,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1036,7 +1035,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1084,7 +1083,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1131,7 +1130,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         location: 'locationValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1184,7 +1183,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         generator: 'generatorValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1249,7 +1248,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1340,7 +1339,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         project: 'projectValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1378,7 +1377,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         project: 'projectValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,7 +1416,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1480,7 +1479,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         environment: 'environmentValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1547,7 +1546,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         context: 'contextValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1673,7 +1672,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1794,7 +1793,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         project: 'projectValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1840,7 +1839,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         intent: 'intentValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1902,7 +1901,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         context: 'contextValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1981,7 +1980,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2057,7 +2056,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         version: 'versionValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2118,7 +2117,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2180,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         message: 'messageValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2260,7 +2259,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         participant: 'participantValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2340,7 +2339,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2405,7 +2404,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2468,7 +2467,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2532,7 +2531,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         document: 'documentValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2610,7 +2609,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         location: 'locationValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2674,7 +2673,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2753,7 +2752,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         environment: 'environmentValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2836,7 +2835,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         context: 'contextValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2982,7 +2981,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3123,7 +3122,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         location: 'locationValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3185,7 +3184,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         intent: 'intentValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3265,7 +3264,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         context: 'contextValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3366,7 +3365,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3471,7 +3470,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         version: 'versionValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3549,7 +3548,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3628,7 +3627,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         message: 'messageValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3729,7 +3728,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         participant: 'participantValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3834,7 +3833,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3917,7 +3916,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3996,7 +3995,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4076,7 +4075,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         document: 'documentValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4181,7 +4180,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4259,7 +4258,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4322,7 +4321,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4386,7 +4385,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         tool: 'toolValue',
       };
       const client = new answerrecordsModule.v2beta1.AnswerRecordsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

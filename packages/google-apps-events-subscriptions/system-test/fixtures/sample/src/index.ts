@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { SubscriptionsServiceClient } from '@google-cloud/subscriptions';
+import {SubscriptionsServiceClient} from '@google-cloud/subscriptions';
 
 // check that the client class type name can be used
 function doStuffWithSubscriptionsServiceClient(

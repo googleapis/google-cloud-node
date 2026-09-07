@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as agentregistryModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.agentRegistryStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.AgentRegistryClient', () => {
       assert(client.agentRegistryStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.agentRegistryStub);
@@ -301,14 +301,14 @@ describe('v1.AgentRegistryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.agentRegistryStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.AgentRegistryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.AgentRegistryClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.AgentRegistryClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('getAgent', () => {
     it('invokes getAgent without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getAgent without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getAgent with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getAgent with closed client', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.AgentRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAgent(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('getEndpoint', () => {
     it('invokes getEndpoint without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getEndpoint without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getEndpoint with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getEndpoint with closed client', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v1.AgentRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEndpoint(request), expectedError);
@@ -621,7 +621,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('getMcpServer', () => {
     it('invokes getMcpServer without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getMcpServer without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getMcpServer with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getMcpServer with closed client', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.AgentRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMcpServer(request), expectedError);
@@ -753,7 +753,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('getService', () => {
     it('invokes getService without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getService without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getService with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getService with closed client', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.AgentRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getService(request), expectedError);
@@ -885,7 +885,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('getBinding', () => {
     it('invokes getBinding without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -916,7 +916,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getBinding without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -963,7 +963,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getBinding with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -994,7 +994,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes getBinding with closed client', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1007,7 +1007,7 @@ describe('v1.AgentRegistryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBinding(request), expectedError);
@@ -1017,7 +1017,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('createService', () => {
     it('invokes createService without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes createService without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1104,7 +1104,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes createService with call error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes createService with LRO error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1168,7 +1168,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkCreateServiceProgress without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1176,8 +1176,8 @@ describe('v1.AgentRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateServiceProgress(
@@ -1190,7 +1190,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkCreateServiceProgress with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1211,7 +1211,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('updateService', () => {
     it('invokes updateService without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes updateService without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1300,7 +1300,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes updateService with call error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1332,7 +1332,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes updateService with LRO error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1366,7 +1366,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkUpdateServiceProgress without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1374,8 +1374,8 @@ describe('v1.AgentRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateServiceProgress(
@@ -1388,7 +1388,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkUpdateServiceProgress with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1409,7 +1409,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('deleteService', () => {
     it('invokes deleteService without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes deleteService without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1496,7 +1496,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes deleteService with call error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1527,7 +1527,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes deleteService with LRO error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1560,7 +1560,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkDeleteServiceProgress without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1568,8 +1568,8 @@ describe('v1.AgentRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteServiceProgress(
@@ -1582,7 +1582,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkDeleteServiceProgress with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1603,7 +1603,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('createBinding', () => {
     it('invokes createBinding without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1636,7 +1636,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes createBinding without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1690,7 +1690,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes createBinding with call error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1721,7 +1721,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes createBinding with LRO error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkCreateBindingProgress without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1762,8 +1762,8 @@ describe('v1.AgentRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBindingProgress(
@@ -1776,7 +1776,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkCreateBindingProgress with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1797,7 +1797,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('updateBinding', () => {
     it('invokes updateBinding without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1831,7 +1831,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes updateBinding without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1886,7 +1886,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes updateBinding with call error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1918,7 +1918,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes updateBinding with LRO error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1952,7 +1952,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkUpdateBindingProgress without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1960,8 +1960,8 @@ describe('v1.AgentRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBindingProgress(
@@ -1974,7 +1974,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkUpdateBindingProgress with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1995,7 +1995,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('deleteBinding', () => {
     it('invokes deleteBinding without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2028,7 +2028,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes deleteBinding without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2082,7 +2082,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes deleteBinding with call error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2113,7 +2113,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes deleteBinding with LRO error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2146,7 +2146,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkDeleteBindingProgress without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2154,8 +2154,8 @@ describe('v1.AgentRegistryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBindingProgress(
@@ -2168,7 +2168,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes checkDeleteBindingProgress with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2189,7 +2189,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('listAgents', () => {
     it('invokes listAgents without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2222,7 +2222,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listAgents without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2271,7 +2271,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listAgents with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2302,7 +2302,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listAgentsStream without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2348,15 +2348,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAgentsStream with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2399,15 +2399,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAgents without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2442,15 +2442,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAgents with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2484,9 +2484,9 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2494,7 +2494,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('searchAgents', () => {
     it('invokes searchAgents without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2527,7 +2527,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes searchAgents without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2576,7 +2576,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes searchAgents with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2607,7 +2607,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes searchAgentsStream without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2653,15 +2653,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.searchAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchAgentsStream with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2704,15 +2704,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.searchAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAgents without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2747,15 +2747,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.searchAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAgents with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2787,9 +2787,9 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.searchAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2797,7 +2797,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('listEndpoints', () => {
     it('invokes listEndpoints without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2836,7 +2836,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listEndpoints without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2891,7 +2891,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listEndpoints with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2922,7 +2922,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listEndpointsStream without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2974,15 +2974,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEndpointsStream with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3023,15 +3023,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEndpoints without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3072,15 +3072,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEndpoints with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3112,9 +3112,9 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listEndpoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3122,7 +3122,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('listMcpServers', () => {
     it('invokes listMcpServers without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3161,7 +3161,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listMcpServers without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3216,7 +3216,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listMcpServers with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3247,7 +3247,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listMcpServersStream without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3299,15 +3299,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMcpServersStream with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3348,15 +3348,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMcpServers without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3397,15 +3397,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMcpServers with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3437,9 +3437,9 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listMcpServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3447,7 +3447,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('searchMcpServers', () => {
     it('invokes searchMcpServers without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3486,7 +3486,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes searchMcpServers without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3541,7 +3541,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes searchMcpServers with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3572,7 +3572,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes searchMcpServersStream without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3624,15 +3624,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.searchMcpServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchMcpServersStream with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3673,15 +3673,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.searchMcpServers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchMcpServers without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3722,15 +3722,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.searchMcpServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchMcpServers with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3762,9 +3762,9 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.searchMcpServers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3772,7 +3772,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('listServices', () => {
     it('invokes listServices without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3811,7 +3811,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listServices without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3866,7 +3866,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listServices with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3897,7 +3897,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listServicesStream without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3949,15 +3949,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listServicesStream with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4000,15 +4000,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4049,15 +4049,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listServices with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4089,9 +4089,9 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listServices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4099,7 +4099,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('listBindings', () => {
     it('invokes listBindings without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4138,7 +4138,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listBindings without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4193,7 +4193,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listBindings with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4224,7 +4224,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes listBindingsStream without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4276,15 +4276,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBindingsStream with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4327,15 +4327,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listBindings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBindings without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4376,15 +4376,15 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBindings with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4416,9 +4416,9 @@ describe('v1.AgentRegistryClient', () => {
       assert(
         (client.descriptors.page.listBindings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4426,7 +4426,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('fetchAvailableBindings', () => {
     it('invokes fetchAvailableBindings without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4466,7 +4466,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes fetchAvailableBindings without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4521,7 +4521,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes fetchAvailableBindings with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4555,7 +4555,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes fetchAvailableBindingsStream without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4621,7 +4621,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('invokes fetchAvailableBindingsStream with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4676,7 +4676,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('uses async iteration with fetchAvailableBindings without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4729,7 +4729,7 @@ describe('v1.AgentRegistryClient', () => {
 
     it('uses async iteration with fetchAvailableBindings with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4774,7 +4774,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4804,7 +4804,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4848,7 +4848,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4883,7 +4883,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4931,7 +4931,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4972,7 +4972,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4993,7 +4993,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5021,7 +5021,7 @@ describe('v1.AgentRegistryClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5031,7 +5031,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5055,7 +5055,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5077,7 +5077,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5105,7 +5105,7 @@ describe('v1.AgentRegistryClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5115,7 +5115,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5139,7 +5139,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5161,7 +5161,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5189,7 +5189,7 @@ describe('v1.AgentRegistryClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5199,7 +5199,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5223,7 +5223,7 @@ describe('v1.AgentRegistryClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5258,7 +5258,7 @@ describe('v1.AgentRegistryClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5294,7 +5294,7 @@ describe('v1.AgentRegistryClient', () => {
         agent: 'agentValue',
       };
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5358,7 +5358,7 @@ describe('v1.AgentRegistryClient', () => {
         binding: 'bindingValue',
       };
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5422,7 +5422,7 @@ describe('v1.AgentRegistryClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5485,7 +5485,7 @@ describe('v1.AgentRegistryClient', () => {
         location: 'locationValue',
       };
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5535,7 +5535,7 @@ describe('v1.AgentRegistryClient', () => {
         mcp_server: 'mcpServerValue',
       };
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5597,7 +5597,7 @@ describe('v1.AgentRegistryClient', () => {
         project: 'projectValue',
       };
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5637,7 +5637,7 @@ describe('v1.AgentRegistryClient', () => {
         service: 'serviceValue',
       };
       const client = new agentregistryModule.v1.AgentRegistryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

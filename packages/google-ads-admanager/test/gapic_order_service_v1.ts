@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as orderserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.OrderServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -260,12 +260,12 @@ describe('v1.OrderServiceClient', () => {
       assert(client.orderServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new orderserviceModule.v1.OrderServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.orderServiceStub);
@@ -274,12 +274,12 @@ describe('v1.OrderServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new orderserviceModule.v1.OrderServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -290,7 +290,7 @@ describe('v1.OrderServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -452,7 +452,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getOrder(request), expectedError);
@@ -584,7 +584,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateOrders(request), expectedError);
@@ -716,7 +716,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdateOrders(request), expectedError);
@@ -849,7 +849,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchApproveOrders(request), expectedError);
@@ -985,7 +985,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1124,7 +1124,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1268,7 +1268,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1414,7 +1414,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1549,7 +1549,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchPauseOrders(request), expectedError);
@@ -1681,7 +1681,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchResumeOrders(request), expectedError);
@@ -1817,7 +1817,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1955,7 +1955,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2091,7 +2091,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchArchiveOrders(request), expectedError);
@@ -2224,7 +2224,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUnarchiveOrders(request), expectedError);
@@ -2356,7 +2356,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchDeleteOrders(request), expectedError);
@@ -2492,7 +2492,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2636,7 +2636,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2772,7 +2772,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchRetractOrders(request), expectedError);
@@ -2913,7 +2913,7 @@ describe('v1.OrderServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2926,7 +2926,7 @@ describe('v1.OrderServiceClient', () => {
   describe('listOrders', () => {
     it('invokes listOrders without error', async () => {
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2959,7 +2959,7 @@ describe('v1.OrderServiceClient', () => {
 
     it('invokes listOrders without error using callback', async () => {
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3008,7 +3008,7 @@ describe('v1.OrderServiceClient', () => {
 
     it('invokes listOrders with error', async () => {
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3039,7 +3039,7 @@ describe('v1.OrderServiceClient', () => {
 
     it('invokes listOrdersStream without error', async () => {
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3082,15 +3082,15 @@ describe('v1.OrderServiceClient', () => {
       assert(
         (client.descriptors.page.listOrders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listOrdersStream with error', async () => {
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3130,9 +3130,9 @@ describe('v1.OrderServiceClient', () => {
       assert(
         (client.descriptors.page.listOrders.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -3173,15 +3173,15 @@ describe('v1.OrderServiceClient', () => {
       assert(
         (client.descriptors.page.listOrders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listOrders with error', async () => {
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3215,9 +3215,9 @@ describe('v1.OrderServiceClient', () => {
       assert(
         (client.descriptors.page.listOrders.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3231,7 +3231,7 @@ describe('v1.OrderServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3295,7 +3295,7 @@ describe('v1.OrderServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3364,7 +3364,7 @@ describe('v1.OrderServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3413,7 +3413,7 @@ describe('v1.OrderServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3462,7 +3462,7 @@ describe('v1.OrderServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3511,7 +3511,7 @@ describe('v1.OrderServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3563,7 +3563,7 @@ describe('v1.OrderServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3616,7 +3616,7 @@ describe('v1.OrderServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3669,7 +3669,7 @@ describe('v1.OrderServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3718,7 +3718,7 @@ describe('v1.OrderServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3771,7 +3771,7 @@ describe('v1.OrderServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3823,7 +3823,7 @@ describe('v1.OrderServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3876,7 +3876,7 @@ describe('v1.OrderServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3929,7 +3929,7 @@ describe('v1.OrderServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3986,7 +3986,7 @@ describe('v1.OrderServiceClient', () => {
         company: 'companyValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4035,7 +4035,7 @@ describe('v1.OrderServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4084,7 +4084,7 @@ describe('v1.OrderServiceClient', () => {
         content: 'contentValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4133,7 +4133,7 @@ describe('v1.OrderServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4185,7 +4185,7 @@ describe('v1.OrderServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4237,7 +4237,7 @@ describe('v1.OrderServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4286,7 +4286,7 @@ describe('v1.OrderServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4338,7 +4338,7 @@ describe('v1.OrderServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4395,7 +4395,7 @@ describe('v1.OrderServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4448,7 +4448,7 @@ describe('v1.OrderServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4500,7 +4500,7 @@ describe('v1.OrderServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4563,7 +4563,7 @@ describe('v1.OrderServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4628,7 +4628,7 @@ describe('v1.OrderServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4693,7 +4693,7 @@ describe('v1.OrderServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4755,7 +4755,7 @@ describe('v1.OrderServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4802,7 +4802,7 @@ describe('v1.OrderServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4859,7 +4859,7 @@ describe('v1.OrderServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4912,7 +4912,7 @@ describe('v1.OrderServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4975,7 +4975,7 @@ describe('v1.OrderServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5040,7 +5040,7 @@ describe('v1.OrderServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5092,7 +5092,7 @@ describe('v1.OrderServiceClient', () => {
         label: 'labelValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5141,7 +5141,7 @@ describe('v1.OrderServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5190,7 +5190,7 @@ describe('v1.OrderServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5242,7 +5242,7 @@ describe('v1.OrderServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5294,7 +5294,7 @@ describe('v1.OrderServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5347,7 +5347,7 @@ describe('v1.OrderServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5399,7 +5399,7 @@ describe('v1.OrderServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5451,7 +5451,7 @@ describe('v1.OrderServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5516,7 +5516,7 @@ describe('v1.OrderServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5567,7 +5567,7 @@ describe('v1.OrderServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5606,7 +5606,7 @@ describe('v1.OrderServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5659,7 +5659,7 @@ describe('v1.OrderServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5724,7 +5724,7 @@ describe('v1.OrderServiceClient', () => {
         order: 'orderValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5773,7 +5773,7 @@ describe('v1.OrderServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5822,7 +5822,7 @@ describe('v1.OrderServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5874,7 +5874,7 @@ describe('v1.OrderServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5927,7 +5927,7 @@ describe('v1.OrderServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5990,7 +5990,7 @@ describe('v1.OrderServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6053,7 +6053,7 @@ describe('v1.OrderServiceClient', () => {
         report: 'reportValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6102,7 +6102,7 @@ describe('v1.OrderServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6165,7 +6165,7 @@ describe('v1.OrderServiceClient', () => {
         role: 'roleValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6214,7 +6214,7 @@ describe('v1.OrderServiceClient', () => {
         site: 'siteValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6263,7 +6263,7 @@ describe('v1.OrderServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6312,7 +6312,7 @@ describe('v1.OrderServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6365,7 +6365,7 @@ describe('v1.OrderServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6418,7 +6418,7 @@ describe('v1.OrderServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6475,7 +6475,7 @@ describe('v1.OrderServiceClient', () => {
         team: 'teamValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6524,7 +6524,7 @@ describe('v1.OrderServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6587,7 +6587,7 @@ describe('v1.OrderServiceClient', () => {
         user: 'userValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6636,7 +6636,7 @@ describe('v1.OrderServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6699,7 +6699,7 @@ describe('v1.OrderServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new orderserviceModule.v1.OrderServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as predictionserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, IamProtos, LocationProtos } from 'google-gax';
+import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -196,7 +196,7 @@ describe('v1.PredictionServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new predictionserviceModule.v1.PredictionServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'aiplatform.configured.example.com');
@@ -237,7 +237,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.predictionServiceStub, undefined);
@@ -245,12 +245,12 @@ describe('v1.PredictionServiceClient', () => {
       assert(client.predictionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.predictionServiceStub);
@@ -259,14 +259,14 @@ describe('v1.PredictionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.predictionServiceStub, undefined);
@@ -275,7 +275,7 @@ describe('v1.PredictionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v1.PredictionServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v1.PredictionServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('predict', () => {
     it('invokes predict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes predict without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes predict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -424,7 +424,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes predict with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -437,7 +437,7 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.endpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.predict(request), expectedError);
@@ -447,7 +447,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('rawPredict', () => {
     it('invokes rawPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes rawPredict without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes rawPredict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -553,7 +553,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes rawPredict with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.endpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.rawPredict(request), expectedError);
@@ -576,7 +576,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('directPredict', () => {
     it('invokes directPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,7 +607,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes directPredict without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -654,7 +654,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes directPredict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -685,7 +685,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes directPredict with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.endpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.directPredict(request), expectedError);
@@ -708,7 +708,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('directRawPredict', () => {
     it('invokes directRawPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes directRawPredict without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -786,7 +786,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes directRawPredict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -817,7 +817,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes directRawPredict with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.endpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.directRawPredict(request), expectedError);
@@ -840,7 +840,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('explain', () => {
     it('invokes explain without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -871,7 +871,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes explain without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -918,7 +918,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes explain with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -946,7 +946,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes explain with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -959,7 +959,7 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.endpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.explain(request), expectedError);
@@ -969,7 +969,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('generateContent', () => {
     it('invokes generateContent without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes generateContent without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes generateContent with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1078,7 +1078,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes generateContent with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateContent(request), expectedError);
@@ -1101,7 +1101,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('embedContent', () => {
     it('invokes embedContent without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,7 +1132,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes embedContent without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1179,7 +1179,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes embedContent with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1210,7 +1210,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes embedContent with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1223,7 +1223,7 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.embedContent(request), expectedError);
@@ -1233,7 +1233,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('streamRawPredict', () => {
     it('invokes streamRawPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1274,7 +1274,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamRawPredict without error and gaxServerStreamingRetries enabled', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -1316,7 +1316,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamRawPredict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1356,7 +1356,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamRawPredict with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1369,11 +1369,11 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.endpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.streamRawPredict(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on('data', (response: protos.google.api.HttpBody) => {
@@ -1396,7 +1396,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('serverStreamingPredict', () => {
     it('invokes serverStreamingPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes serverStreamingPredict without error and gaxServerStreamingRetries enabled', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -1489,7 +1489,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes serverStreamingPredict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1534,7 +1534,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes serverStreamingPredict with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1547,11 +1547,11 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.endpoint = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.serverStreamingPredict(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1579,7 +1579,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('streamGenerateContent', () => {
     it('invokes streamGenerateContent without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1625,7 +1625,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamGenerateContent without error and gaxServerStreamingRetries enabled', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -1672,7 +1672,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamGenerateContent with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1717,7 +1717,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamGenerateContent with closed client', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1730,11 +1730,11 @@ describe('v1.PredictionServiceClient', () => {
       );
       request.model = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.streamGenerateContent(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1762,7 +1762,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('streamDirectPredict', () => {
     it('invokes streamDirectPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1807,7 +1807,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamDirectPredict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1852,7 +1852,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('streamDirectRawPredict', () => {
     it('invokes streamDirectRawPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1897,7 +1897,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamDirectRawPredict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1942,7 +1942,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('streamingPredict', () => {
     it('invokes streamingPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1987,7 +1987,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamingPredict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2032,7 +2032,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('streamingRawPredict', () => {
     it('invokes streamingRawPredict without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2077,7 +2077,7 @@ describe('v1.PredictionServiceClient', () => {
 
     it('invokes streamingRawPredict with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2121,7 +2121,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2151,7 +2151,7 @@ describe('v1.PredictionServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2189,7 +2189,7 @@ describe('v1.PredictionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2199,7 +2199,7 @@ describe('v1.PredictionServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2231,7 +2231,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2261,7 +2261,7 @@ describe('v1.PredictionServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2299,7 +2299,7 @@ describe('v1.PredictionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2309,7 +2309,7 @@ describe('v1.PredictionServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2341,7 +2341,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2374,7 +2374,7 @@ describe('v1.PredictionServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2412,7 +2412,7 @@ describe('v1.PredictionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2422,7 +2422,7 @@ describe('v1.PredictionServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2457,7 +2457,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2487,7 +2487,7 @@ describe('v1.PredictionServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2531,7 +2531,7 @@ describe('v1.PredictionServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2566,7 +2566,7 @@ describe('v1.PredictionServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2614,7 +2614,7 @@ describe('v1.PredictionServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2664,7 +2664,7 @@ describe('v1.PredictionServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2751,7 +2751,7 @@ describe('v1.PredictionServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2828,7 +2828,7 @@ describe('v1.PredictionServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2903,7 +2903,7 @@ describe('v1.PredictionServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2980,7 +2980,7 @@ describe('v1.PredictionServiceClient', () => {
         cached_content: 'cachedContentValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3045,7 +3045,7 @@ describe('v1.PredictionServiceClient', () => {
         context: 'contextValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3120,7 +3120,7 @@ describe('v1.PredictionServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3185,7 +3185,7 @@ describe('v1.PredictionServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3260,7 +3260,7 @@ describe('v1.PredictionServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3325,7 +3325,7 @@ describe('v1.PredictionServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3390,7 +3390,7 @@ describe('v1.PredictionServiceClient', () => {
         dataset_version: 'datasetVersionValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3466,7 +3466,7 @@ describe('v1.PredictionServiceClient', () => {
         deployment_resource_pool: 'deploymentResourcePoolValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3548,7 +3548,7 @@ describe('v1.PredictionServiceClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3624,7 +3624,7 @@ describe('v1.PredictionServiceClient', () => {
         execution: 'executionValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3699,7 +3699,7 @@ describe('v1.PredictionServiceClient', () => {
         feature_group: 'featureGroupValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3763,7 +3763,7 @@ describe('v1.PredictionServiceClient', () => {
         feature_online_store: 'featureOnlineStoreValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3841,7 +3841,7 @@ describe('v1.PredictionServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3918,7 +3918,7 @@ describe('v1.PredictionServiceClient', () => {
         feature_view: 'featureViewValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3994,7 +3994,7 @@ describe('v1.PredictionServiceClient', () => {
         featurestore: 'featurestoreValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4058,7 +4058,7 @@ describe('v1.PredictionServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4139,7 +4139,7 @@ describe('v1.PredictionServiceClient', () => {
         index: 'indexValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4203,7 +4203,7 @@ describe('v1.PredictionServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4268,7 +4268,7 @@ describe('v1.PredictionServiceClient', () => {
         metadata_schema: 'metadataSchemaValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4345,7 +4345,7 @@ describe('v1.PredictionServiceClient', () => {
         metadata_store: 'metadataStoreValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4409,7 +4409,7 @@ describe('v1.PredictionServiceClient', () => {
         model: 'modelValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4473,7 +4473,7 @@ describe('v1.PredictionServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4553,7 +4553,7 @@ describe('v1.PredictionServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4630,7 +4630,7 @@ describe('v1.PredictionServiceClient', () => {
         slice: 'sliceValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4737,7 +4737,7 @@ describe('v1.PredictionServiceClient', () => {
         nas_job: 'nasJobValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4802,7 +4802,7 @@ describe('v1.PredictionServiceClient', () => {
         nas_trial_detail: 'nasTrialDetailValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4878,7 +4878,7 @@ describe('v1.PredictionServiceClient', () => {
         notebook_execution_job: 'notebookExecutionJobValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4959,7 +4959,7 @@ describe('v1.PredictionServiceClient', () => {
         notebook_runtime: 'notebookRuntimeValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5024,7 +5024,7 @@ describe('v1.PredictionServiceClient', () => {
         notebook_runtime_template: 'notebookRuntimeTemplateValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5105,7 +5105,7 @@ describe('v1.PredictionServiceClient', () => {
         persistent_resource: 'persistentResourceValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5182,7 +5182,7 @@ describe('v1.PredictionServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5246,7 +5246,7 @@ describe('v1.PredictionServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5326,7 +5326,7 @@ describe('v1.PredictionServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5429,7 +5429,7 @@ describe('v1.PredictionServiceClient', () => {
         feature: 'featureValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5553,7 +5553,7 @@ describe('v1.PredictionServiceClient', () => {
         model: 'modelValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5644,7 +5644,7 @@ describe('v1.PredictionServiceClient', () => {
         model: 'modelValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5697,7 +5697,7 @@ describe('v1.PredictionServiceClient', () => {
         rag_corpus: 'ragCorpusValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5760,7 +5760,7 @@ describe('v1.PredictionServiceClient', () => {
         location: 'locationValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5814,7 +5814,7 @@ describe('v1.PredictionServiceClient', () => {
         rag_file: 'ragFileValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5889,7 +5889,7 @@ describe('v1.PredictionServiceClient', () => {
         reasoning_engine: 'reasoningEngineValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5955,7 +5955,7 @@ describe('v1.PredictionServiceClient', () => {
         saved_query: 'savedQueryValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6030,7 +6030,7 @@ describe('v1.PredictionServiceClient', () => {
         schedule: 'scheduleValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6095,7 +6095,7 @@ describe('v1.PredictionServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6172,7 +6172,7 @@ describe('v1.PredictionServiceClient', () => {
         event: 'eventValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6259,7 +6259,7 @@ describe('v1.PredictionServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6324,7 +6324,7 @@ describe('v1.PredictionServiceClient', () => {
         study: 'studyValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6388,7 +6388,7 @@ describe('v1.PredictionServiceClient', () => {
         tensorboard: 'tensorboardValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6453,7 +6453,7 @@ describe('v1.PredictionServiceClient', () => {
         experiment: 'experimentValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6549,7 +6549,7 @@ describe('v1.PredictionServiceClient', () => {
         run: 'runValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6638,7 +6638,7 @@ describe('v1.PredictionServiceClient', () => {
         time_series: 'timeSeriesValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6761,7 +6761,7 @@ describe('v1.PredictionServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6830,7 +6830,7 @@ describe('v1.PredictionServiceClient', () => {
         trial: 'trialValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6905,7 +6905,7 @@ describe('v1.PredictionServiceClient', () => {
         tuning_job: 'tuningJobValue',
       };
       const client = new predictionserviceModule.v1.PredictionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

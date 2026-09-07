@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as customfieldserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.CustomFieldServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -262,12 +262,12 @@ describe('v1.CustomFieldServiceClient', () => {
       assert(client.customFieldServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.customFieldServiceStub);
@@ -276,12 +276,12 @@ describe('v1.CustomFieldServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -292,7 +292,7 @@ describe('v1.CustomFieldServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -457,7 +457,7 @@ describe('v1.CustomFieldServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomField(request), expectedError);
@@ -589,7 +589,7 @@ describe('v1.CustomFieldServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCustomField(request), expectedError);
@@ -725,7 +725,7 @@ describe('v1.CustomFieldServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -864,7 +864,7 @@ describe('v1.CustomFieldServiceClient', () => {
       );
       request.customField.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCustomField(request), expectedError);
@@ -1000,7 +1000,7 @@ describe('v1.CustomFieldServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1139,7 +1139,7 @@ describe('v1.CustomFieldServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1278,7 +1278,7 @@ describe('v1.CustomFieldServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1291,7 +1291,7 @@ describe('v1.CustomFieldServiceClient', () => {
   describe('listCustomFields', () => {
     it('invokes listCustomFields without error', async () => {
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1324,7 +1324,7 @@ describe('v1.CustomFieldServiceClient', () => {
 
     it('invokes listCustomFields without error using callback', async () => {
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,7 +1373,7 @@ describe('v1.CustomFieldServiceClient', () => {
 
     it('invokes listCustomFields with error', async () => {
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1404,7 +1404,7 @@ describe('v1.CustomFieldServiceClient', () => {
 
     it('invokes listCustomFieldsStream without error', async () => {
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1450,15 +1450,15 @@ describe('v1.CustomFieldServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomFields.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCustomFieldsStream with error', async () => {
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1499,9 +1499,9 @@ describe('v1.CustomFieldServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomFields.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1542,15 +1542,15 @@ describe('v1.CustomFieldServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomFields.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomFields with error', async () => {
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1582,9 +1582,9 @@ describe('v1.CustomFieldServiceClient', () => {
       assert(
         (client.descriptors.page.listCustomFields.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1598,7 +1598,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1662,7 +1662,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1731,7 +1731,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1780,7 +1780,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1829,7 +1829,7 @@ describe('v1.CustomFieldServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,7 +1878,7 @@ describe('v1.CustomFieldServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1930,7 +1930,7 @@ describe('v1.CustomFieldServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1983,7 +1983,7 @@ describe('v1.CustomFieldServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2036,7 +2036,7 @@ describe('v1.CustomFieldServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2085,7 +2085,7 @@ describe('v1.CustomFieldServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2138,7 +2138,7 @@ describe('v1.CustomFieldServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2190,7 +2190,7 @@ describe('v1.CustomFieldServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2243,7 +2243,7 @@ describe('v1.CustomFieldServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2296,7 +2296,7 @@ describe('v1.CustomFieldServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2353,7 +2353,7 @@ describe('v1.CustomFieldServiceClient', () => {
         company: 'companyValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2402,7 +2402,7 @@ describe('v1.CustomFieldServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2451,7 +2451,7 @@ describe('v1.CustomFieldServiceClient', () => {
         content: 'contentValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2500,7 +2500,7 @@ describe('v1.CustomFieldServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2552,7 +2552,7 @@ describe('v1.CustomFieldServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2604,7 +2604,7 @@ describe('v1.CustomFieldServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2653,7 +2653,7 @@ describe('v1.CustomFieldServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2705,7 +2705,7 @@ describe('v1.CustomFieldServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2762,7 +2762,7 @@ describe('v1.CustomFieldServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2815,7 +2815,7 @@ describe('v1.CustomFieldServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2867,7 +2867,7 @@ describe('v1.CustomFieldServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2930,7 +2930,7 @@ describe('v1.CustomFieldServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2995,7 +2995,7 @@ describe('v1.CustomFieldServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3060,7 +3060,7 @@ describe('v1.CustomFieldServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3122,7 +3122,7 @@ describe('v1.CustomFieldServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3169,7 +3169,7 @@ describe('v1.CustomFieldServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3226,7 +3226,7 @@ describe('v1.CustomFieldServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3279,7 +3279,7 @@ describe('v1.CustomFieldServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3342,7 +3342,7 @@ describe('v1.CustomFieldServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3407,7 +3407,7 @@ describe('v1.CustomFieldServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3459,7 +3459,7 @@ describe('v1.CustomFieldServiceClient', () => {
         label: 'labelValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3508,7 +3508,7 @@ describe('v1.CustomFieldServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3557,7 +3557,7 @@ describe('v1.CustomFieldServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3609,7 +3609,7 @@ describe('v1.CustomFieldServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3661,7 +3661,7 @@ describe('v1.CustomFieldServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3714,7 +3714,7 @@ describe('v1.CustomFieldServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3766,7 +3766,7 @@ describe('v1.CustomFieldServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3818,7 +3818,7 @@ describe('v1.CustomFieldServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3883,7 +3883,7 @@ describe('v1.CustomFieldServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3934,7 +3934,7 @@ describe('v1.CustomFieldServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3973,7 +3973,7 @@ describe('v1.CustomFieldServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4026,7 +4026,7 @@ describe('v1.CustomFieldServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4091,7 +4091,7 @@ describe('v1.CustomFieldServiceClient', () => {
         order: 'orderValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4140,7 +4140,7 @@ describe('v1.CustomFieldServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4189,7 +4189,7 @@ describe('v1.CustomFieldServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4241,7 +4241,7 @@ describe('v1.CustomFieldServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4294,7 +4294,7 @@ describe('v1.CustomFieldServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4357,7 +4357,7 @@ describe('v1.CustomFieldServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4420,7 +4420,7 @@ describe('v1.CustomFieldServiceClient', () => {
         report: 'reportValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4469,7 +4469,7 @@ describe('v1.CustomFieldServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4532,7 +4532,7 @@ describe('v1.CustomFieldServiceClient', () => {
         role: 'roleValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4581,7 +4581,7 @@ describe('v1.CustomFieldServiceClient', () => {
         site: 'siteValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4630,7 +4630,7 @@ describe('v1.CustomFieldServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4679,7 +4679,7 @@ describe('v1.CustomFieldServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4732,7 +4732,7 @@ describe('v1.CustomFieldServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4785,7 +4785,7 @@ describe('v1.CustomFieldServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4842,7 +4842,7 @@ describe('v1.CustomFieldServiceClient', () => {
         team: 'teamValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4891,7 +4891,7 @@ describe('v1.CustomFieldServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4954,7 +4954,7 @@ describe('v1.CustomFieldServiceClient', () => {
         user: 'userValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5003,7 +5003,7 @@ describe('v1.CustomFieldServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5066,7 +5066,7 @@ describe('v1.CustomFieldServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new customfieldserviceModule.v1.CustomFieldServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

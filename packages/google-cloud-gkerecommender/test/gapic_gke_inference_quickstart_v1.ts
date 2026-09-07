@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as gkeinferencequickstartModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -254,7 +254,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.gkeInferenceQuickstartStub, undefined);
@@ -262,13 +262,13 @@ describe('v1.GkeInferenceQuickstartClient', () => {
       assert(client.gkeInferenceQuickstartStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.gkeInferenceQuickstartStub);
@@ -277,15 +277,15 @@ describe('v1.GkeInferenceQuickstartClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.gkeInferenceQuickstartStub, undefined);
@@ -294,7 +294,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes generateOptimizedManifest without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -359,7 +359,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes generateOptimizedManifest without error using callback', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -393,7 +393,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes generateOptimizedManifest with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -414,7 +414,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes generateOptimizedManifest with closed client', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -422,7 +422,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
         new protos.google.cloud.gkerecommender.v1.GenerateOptimizedManifestRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -436,7 +436,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchBenchmarkingData without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchBenchmarkingData without error using callback', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchBenchmarkingData with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -510,7 +510,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchBenchmarkingData with closed client', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
         new protos.google.cloud.gkerecommender.v1.FetchBenchmarkingDataRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -532,7 +532,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModels without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -548,7 +548,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModels without error using callback', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -577,7 +577,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModels with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -595,7 +595,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelsStream without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -630,7 +630,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelsStream with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('uses async iteration with fetchModels without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('uses async iteration with fetchModels with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServers without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServers without error using callback', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -770,7 +770,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServers with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -788,7 +788,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServersStream without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -823,7 +823,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServersStream with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -857,7 +857,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('uses async iteration with fetchModelServers without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -884,7 +884,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('uses async iteration with fetchModelServers with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServerVersions without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -931,7 +931,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServerVersions without error using callback', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServerVersions with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -981,7 +981,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServerVersionsStream without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1019,7 +1019,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchModelServerVersionsStream with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1056,7 +1056,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('uses async iteration with fetchModelServerVersions without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1084,7 +1084,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('uses async iteration with fetchModelServerVersions with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1115,7 +1115,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchProfiles without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1141,7 +1141,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchProfiles without error using callback', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1183,7 +1183,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchProfiles with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1201,7 +1201,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchProfilesStream without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1249,7 +1249,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('invokes fetchProfilesStream with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1286,7 +1286,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('uses async iteration with fetchProfiles without error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1323,7 +1323,7 @@ describe('v1.GkeInferenceQuickstartClient', () => {
     it('uses async iteration with fetchProfiles with error', async () => {
       const client =
         new gkeinferencequickstartModule.v1.GkeInferenceQuickstartClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

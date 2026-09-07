@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { TpuClient } from '@google-cloud/tpu';
+import {TpuClient} from '@google-cloud/tpu';
 
 // check that the client class type name can be used
 function doStuffWithTpuClient(client: TpuClient) {
