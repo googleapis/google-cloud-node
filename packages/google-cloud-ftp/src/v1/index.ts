@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export { CloudFtpClient } from './cloud_ftp_client';
+export {CloudFtpClient} from './cloud_ftp_client';

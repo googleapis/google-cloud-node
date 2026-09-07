@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as conversionsourcesserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
@@ -251,7 +251,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.conversionSourcesServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.ConversionSourcesServiceClient', () => {
       assert(client.conversionSourcesServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.conversionSourcesServiceStub);
@@ -274,15 +274,15 @@ describe('v1.ConversionSourcesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.conversionSourcesServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes createConversionSource without error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes createConversionSource without error using callback', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes createConversionSource with error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes createConversionSource with closed client', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes updateConversionSource without error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -514,7 +514,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes updateConversionSource without error using callback', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes updateConversionSource with error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes updateConversionSource with closed client', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
       );
       request.conversionSource.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -627,7 +627,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes deleteConversionSource without error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes deleteConversionSource without error using callback', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes deleteConversionSource with error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes deleteConversionSource with closed client', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -770,7 +770,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes undeleteConversionSource without error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -803,7 +803,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes undeleteConversionSource without error using callback', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -851,7 +851,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes undeleteConversionSource with error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes undeleteConversionSource with closed client', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -899,7 +899,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -913,7 +913,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes getConversionSource without error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -946,7 +946,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes getConversionSource without error using callback', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -994,7 +994,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes getConversionSource with error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1026,7 +1026,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes getConversionSource with closed client', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1039,7 +1039,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConversionSource(request), expectedError);
@@ -1050,7 +1050,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes listConversionSources without error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes listConversionSources without error using callback', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1149,7 +1149,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes listConversionSources with error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1184,7 +1184,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes listConversionSourcesStream without error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1254,7 +1254,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('invokes listConversionSourcesStream with error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1313,7 +1313,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('uses async iteration with listConversionSources without error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1368,7 +1368,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
     it('uses async iteration with listConversionSources with error', async () => {
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
       };
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1460,7 +1460,7 @@ describe('v1.ConversionSourcesServiceClient', () => {
       };
       const client =
         new conversionsourcesserviceModule.v1.ConversionSourcesServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

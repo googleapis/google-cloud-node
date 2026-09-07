@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as teamserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { GoogleAuth, protobuf } from 'google-gax';
+import {GoogleAuth, protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -134,7 +134,7 @@ describe('v1.TeamServiceClient', () => {
       getClient: sinon.stub().resolves({
         getRequestHeaders: sinon
           .stub()
-          .resolves({ Authorization: 'Bearer SOME_TOKEN' }),
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
       }),
     } as unknown as GoogleAuth;
   });
@@ -258,12 +258,12 @@ describe('v1.TeamServiceClient', () => {
       assert(client.teamServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new teamserviceModule.v1.TeamServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.teamServiceStub);
@@ -272,12 +272,12 @@ describe('v1.TeamServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new teamserviceModule.v1.TeamServiceClient({
         auth: googleAuth,
         projectId: 'bogus',
@@ -288,7 +288,7 @@ describe('v1.TeamServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -450,7 +450,7 @@ describe('v1.TeamServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTeam(request), expectedError);
@@ -582,7 +582,7 @@ describe('v1.TeamServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTeam(request), expectedError);
@@ -714,7 +714,7 @@ describe('v1.TeamServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchCreateTeams(request), expectedError);
@@ -850,7 +850,7 @@ describe('v1.TeamServiceClient', () => {
       );
       request.team.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTeam(request), expectedError);
@@ -982,7 +982,7 @@ describe('v1.TeamServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchUpdateTeams(request), expectedError);
@@ -1115,7 +1115,7 @@ describe('v1.TeamServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchActivateTeams(request), expectedError);
@@ -1248,7 +1248,7 @@ describe('v1.TeamServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.batchDeactivateTeams(request), expectedError);
@@ -1258,7 +1258,7 @@ describe('v1.TeamServiceClient', () => {
   describe('listTeams', () => {
     it('invokes listTeams without error', async () => {
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1291,7 +1291,7 @@ describe('v1.TeamServiceClient', () => {
 
     it('invokes listTeams without error using callback', async () => {
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1340,7 +1340,7 @@ describe('v1.TeamServiceClient', () => {
 
     it('invokes listTeams with error', async () => {
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1368,7 +1368,7 @@ describe('v1.TeamServiceClient', () => {
 
     it('invokes listTeamsStream without error', async () => {
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1411,15 +1411,15 @@ describe('v1.TeamServiceClient', () => {
       assert(
         (client.descriptors.page.listTeams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTeamsStream with error', async () => {
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1459,9 +1459,9 @@ describe('v1.TeamServiceClient', () => {
       assert(
         (client.descriptors.page.listTeams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
@@ -1501,15 +1501,15 @@ describe('v1.TeamServiceClient', () => {
       assert(
         (client.descriptors.page.listTeams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTeams with error', async () => {
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1542,9 +1542,9 @@ describe('v1.TeamServiceClient', () => {
       assert(
         (client.descriptors.page.listTeams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1558,7 +1558,7 @@ describe('v1.TeamServiceClient', () => {
         ad_break: 'adBreakValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1622,7 +1622,7 @@ describe('v1.TeamServiceClient', () => {
         ad_review_center_ad: 'adReviewCenterAdValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1691,7 +1691,7 @@ describe('v1.TeamServiceClient', () => {
         ad_rule: 'adRuleValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1740,7 +1740,7 @@ describe('v1.TeamServiceClient', () => {
         ad_spot: 'adSpotValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1789,7 +1789,7 @@ describe('v1.TeamServiceClient', () => {
         ad_unit: 'adUnitValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1838,7 +1838,7 @@ describe('v1.TeamServiceClient', () => {
         application: 'applicationValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1890,7 +1890,7 @@ describe('v1.TeamServiceClient', () => {
         audience_segment: 'audienceSegmentValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1943,7 +1943,7 @@ describe('v1.TeamServiceClient', () => {
         bandwidth_group: 'bandwidthGroupValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1996,7 +1996,7 @@ describe('v1.TeamServiceClient', () => {
         browser: 'browserValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2045,7 +2045,7 @@ describe('v1.TeamServiceClient', () => {
         browser_language: 'browserLanguageValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2098,7 +2098,7 @@ describe('v1.TeamServiceClient', () => {
         cdn_config: 'cdnConfigValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2150,7 +2150,7 @@ describe('v1.TeamServiceClient', () => {
         child_publisher: 'childPublisherValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2203,7 +2203,7 @@ describe('v1.TeamServiceClient', () => {
         cms_metadata_key: 'cmsMetadataKeyValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2256,7 +2256,7 @@ describe('v1.TeamServiceClient', () => {
         cms_metadata_value: 'cmsMetadataValueValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2313,7 +2313,7 @@ describe('v1.TeamServiceClient', () => {
         company: 'companyValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2362,7 +2362,7 @@ describe('v1.TeamServiceClient', () => {
         contact: 'contactValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2411,7 +2411,7 @@ describe('v1.TeamServiceClient', () => {
         content: 'contentValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2460,7 +2460,7 @@ describe('v1.TeamServiceClient', () => {
         content_bundle: 'contentBundleValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2512,7 +2512,7 @@ describe('v1.TeamServiceClient', () => {
         content_label: 'contentLabelValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2564,7 +2564,7 @@ describe('v1.TeamServiceClient', () => {
         creative: 'creativeValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2613,7 +2613,7 @@ describe('v1.TeamServiceClient', () => {
         creative_set: 'creativeSetValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2665,7 +2665,7 @@ describe('v1.TeamServiceClient', () => {
         creative_template: 'creativeTemplateValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2722,7 +2722,7 @@ describe('v1.TeamServiceClient', () => {
         creative_wrapper: 'creativeWrapperValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2775,7 +2775,7 @@ describe('v1.TeamServiceClient', () => {
         custom_field: 'customFieldValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2827,7 +2827,7 @@ describe('v1.TeamServiceClient', () => {
         custom_targeting_key: 'customTargetingKeyValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2890,7 +2890,7 @@ describe('v1.TeamServiceClient', () => {
         custom_targeting_value: 'customTargetingValueValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2955,7 +2955,7 @@ describe('v1.TeamServiceClient', () => {
         dai_authentication_key: 'daiAuthenticationKeyValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3020,7 +3020,7 @@ describe('v1.TeamServiceClient', () => {
         dai_encoding_profile: 'daiEncodingProfileValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3082,7 +3082,7 @@ describe('v1.TeamServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3129,7 +3129,7 @@ describe('v1.TeamServiceClient', () => {
         device_capability: 'deviceCapabilityValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3186,7 +3186,7 @@ describe('v1.TeamServiceClient', () => {
         device_category: 'deviceCategoryValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3239,7 +3239,7 @@ describe('v1.TeamServiceClient', () => {
         device_manufacturer: 'deviceManufacturerValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3302,7 +3302,7 @@ describe('v1.TeamServiceClient', () => {
         entity_signals_mapping: 'entitySignalsMappingValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3367,7 +3367,7 @@ describe('v1.TeamServiceClient', () => {
         geo_target: 'geoTargetValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3419,7 +3419,7 @@ describe('v1.TeamServiceClient', () => {
         label: 'labelValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3468,7 +3468,7 @@ describe('v1.TeamServiceClient', () => {
         line_item: 'lineItemValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3517,7 +3517,7 @@ describe('v1.TeamServiceClient', () => {
         linked_device: 'linkedDeviceValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3569,7 +3569,7 @@ describe('v1.TeamServiceClient', () => {
         live_stream: 'liveStreamValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3621,7 +3621,7 @@ describe('v1.TeamServiceClient', () => {
         live_stream_event: 'liveStreamEventValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3674,7 +3674,7 @@ describe('v1.TeamServiceClient', () => {
         mobile_carrier: 'mobileCarrierValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3726,7 +3726,7 @@ describe('v1.TeamServiceClient', () => {
         mobile_device: 'mobileDeviceValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3778,7 +3778,7 @@ describe('v1.TeamServiceClient', () => {
         mobile_device_submodel: 'mobileDeviceSubmodelValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3843,7 +3843,7 @@ describe('v1.TeamServiceClient', () => {
         native_style: 'nativeStyleValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3894,7 +3894,7 @@ describe('v1.TeamServiceClient', () => {
         network_code: 'networkCodeValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3933,7 +3933,7 @@ describe('v1.TeamServiceClient', () => {
         operating_system: 'operatingSystemValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3986,7 +3986,7 @@ describe('v1.TeamServiceClient', () => {
         operating_system_version: 'operatingSystemVersionValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4051,7 +4051,7 @@ describe('v1.TeamServiceClient', () => {
         order: 'orderValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4100,7 +4100,7 @@ describe('v1.TeamServiceClient', () => {
         partner: 'partnerValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4149,7 +4149,7 @@ describe('v1.TeamServiceClient', () => {
         placement: 'placementValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4201,7 +4201,7 @@ describe('v1.TeamServiceClient', () => {
         private_auction: 'privateAuctionValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4254,7 +4254,7 @@ describe('v1.TeamServiceClient', () => {
         private_auction_deal: 'privateAuctionDealValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4317,7 +4317,7 @@ describe('v1.TeamServiceClient', () => {
         programmatic_buyer: 'programmaticBuyerValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4380,7 +4380,7 @@ describe('v1.TeamServiceClient', () => {
         report: 'reportValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4429,7 +4429,7 @@ describe('v1.TeamServiceClient', () => {
         rich_media_ads_company: 'richMediaAdsCompanyValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4492,7 +4492,7 @@ describe('v1.TeamServiceClient', () => {
         role: 'roleValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4541,7 +4541,7 @@ describe('v1.TeamServiceClient', () => {
         site: 'siteValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4590,7 +4590,7 @@ describe('v1.TeamServiceClient', () => {
         slate: 'slateValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4639,7 +4639,7 @@ describe('v1.TeamServiceClient', () => {
         suggested_ad_unit: 'suggestedAdUnitValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4692,7 +4692,7 @@ describe('v1.TeamServiceClient', () => {
         targeting_preset: 'targetingPresetValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4745,7 +4745,7 @@ describe('v1.TeamServiceClient', () => {
         taxonomy_category: 'taxonomyCategoryValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4802,7 +4802,7 @@ describe('v1.TeamServiceClient', () => {
         team: 'teamValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4851,7 +4851,7 @@ describe('v1.TeamServiceClient', () => {
         third_party_company: 'thirdPartyCompanyValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4914,7 +4914,7 @@ describe('v1.TeamServiceClient', () => {
         user: 'userValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4963,7 +4963,7 @@ describe('v1.TeamServiceClient', () => {
         viewability_provider: 'viewabilityProviderValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5026,7 +5026,7 @@ describe('v1.TeamServiceClient', () => {
         web_property: 'webPropertyValue',
       };
       const client = new teamserviceModule.v1.TeamServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

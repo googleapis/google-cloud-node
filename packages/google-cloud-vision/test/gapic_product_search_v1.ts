@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as productsearchModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.productSearchStub, undefined);
@@ -279,12 +279,12 @@ describe('v1.ProductSearchClient', () => {
       assert(client.productSearchStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.productSearchStub);
@@ -293,14 +293,14 @@ describe('v1.ProductSearchClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.productSearchStub, undefined);
@@ -309,7 +309,7 @@ describe('v1.ProductSearchClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v1.ProductSearchClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v1.ProductSearchClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v1.ProductSearchClient', () => {
   describe('createProductSet', () => {
     it('invokes createProductSet without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes createProductSet without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes createProductSet with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes createProductSet with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createProductSet(request), expectedError);
@@ -484,7 +484,7 @@ describe('v1.ProductSearchClient', () => {
   describe('getProductSet', () => {
     it('invokes getProductSet without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes getProductSet without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes getProductSet with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes getProductSet with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProductSet(request), expectedError);
@@ -616,7 +616,7 @@ describe('v1.ProductSearchClient', () => {
   describe('updateProductSet', () => {
     it('invokes updateProductSet without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,7 +648,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes updateProductSet without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes updateProductSet with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes updateProductSet with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.productSet.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateProductSet(request), expectedError);
@@ -752,7 +752,7 @@ describe('v1.ProductSearchClient', () => {
   describe('deleteProductSet', () => {
     it('invokes deleteProductSet without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes deleteProductSet without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes deleteProductSet with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes deleteProductSet with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteProductSet(request), expectedError);
@@ -884,7 +884,7 @@ describe('v1.ProductSearchClient', () => {
   describe('createProduct', () => {
     it('invokes createProduct without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -915,7 +915,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes createProduct without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes createProduct with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes createProduct with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createProduct(request), expectedError);
@@ -1016,7 +1016,7 @@ describe('v1.ProductSearchClient', () => {
   describe('getProduct', () => {
     it('invokes getProduct without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes getProduct without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1094,7 +1094,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes getProduct with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1125,7 +1125,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes getProduct with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProduct(request), expectedError);
@@ -1148,7 +1148,7 @@ describe('v1.ProductSearchClient', () => {
   describe('updateProduct', () => {
     it('invokes updateProduct without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1180,7 +1180,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes updateProduct without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1228,7 +1228,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes updateProduct with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1260,7 +1260,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes updateProduct with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1274,7 +1274,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.product.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateProduct(request), expectedError);
@@ -1284,7 +1284,7 @@ describe('v1.ProductSearchClient', () => {
   describe('deleteProduct', () => {
     it('invokes deleteProduct without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1315,7 +1315,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes deleteProduct without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1362,7 +1362,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes deleteProduct with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1393,7 +1393,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes deleteProduct with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteProduct(request), expectedError);
@@ -1416,7 +1416,7 @@ describe('v1.ProductSearchClient', () => {
   describe('createReferenceImage', () => {
     it('invokes createReferenceImage without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes createReferenceImage without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes createReferenceImage with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1526,7 +1526,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes createReferenceImage with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1539,7 +1539,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createReferenceImage(request), expectedError);
@@ -1549,7 +1549,7 @@ describe('v1.ProductSearchClient', () => {
   describe('deleteReferenceImage', () => {
     it('invokes deleteReferenceImage without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1581,7 +1581,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes deleteReferenceImage without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1628,7 +1628,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes deleteReferenceImage with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1659,7 +1659,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes deleteReferenceImage with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1672,7 +1672,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteReferenceImage(request), expectedError);
@@ -1682,7 +1682,7 @@ describe('v1.ProductSearchClient', () => {
   describe('getReferenceImage', () => {
     it('invokes getReferenceImage without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1713,7 +1713,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes getReferenceImage without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1760,7 +1760,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes getReferenceImage with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1791,7 +1791,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes getReferenceImage with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1804,7 +1804,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReferenceImage(request), expectedError);
@@ -1814,7 +1814,7 @@ describe('v1.ProductSearchClient', () => {
   describe('addProductToProductSet', () => {
     it('invokes addProductToProductSet without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1846,7 +1846,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes addProductToProductSet without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1893,7 +1893,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes addProductToProductSet with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1927,7 +1927,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes addProductToProductSet with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1940,7 +1940,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1953,7 +1953,7 @@ describe('v1.ProductSearchClient', () => {
   describe('removeProductFromProductSet', () => {
     it('invokes removeProductFromProductSet without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1985,7 +1985,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes removeProductFromProductSet without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2032,7 +2032,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes removeProductFromProductSet with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2066,7 +2066,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes removeProductFromProductSet with closed client', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2079,7 +2079,7 @@ describe('v1.ProductSearchClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2092,7 +2092,7 @@ describe('v1.ProductSearchClient', () => {
   describe('importProductSets', () => {
     it('invokes importProductSets without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2125,7 +2125,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes importProductSets without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2179,7 +2179,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes importProductSets with call error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2210,7 +2210,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes importProductSets with LRO error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2243,7 +2243,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes checkImportProductSetsProgress without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2251,8 +2251,8 @@ describe('v1.ProductSearchClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportProductSetsProgress(
@@ -2265,7 +2265,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes checkImportProductSetsProgress with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2286,7 +2286,7 @@ describe('v1.ProductSearchClient', () => {
   describe('purgeProducts', () => {
     it('invokes purgeProducts without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2319,7 +2319,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes purgeProducts without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2373,7 +2373,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes purgeProducts with call error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2404,7 +2404,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes purgeProducts with LRO error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2437,7 +2437,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes checkPurgeProductsProgress without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2445,8 +2445,8 @@ describe('v1.ProductSearchClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkPurgeProductsProgress(
@@ -2459,7 +2459,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes checkPurgeProductsProgress with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2480,7 +2480,7 @@ describe('v1.ProductSearchClient', () => {
   describe('listProductSets', () => {
     it('invokes listProductSets without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2513,7 +2513,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProductSets without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2562,7 +2562,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProductSets with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2593,7 +2593,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProductSetsStream without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2639,15 +2639,15 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listProductSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProductSetsStream with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2688,15 +2688,15 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listProductSets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProductSets without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2731,15 +2731,15 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listProductSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProductSets with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2771,9 +2771,9 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listProductSets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2781,7 +2781,7 @@ describe('v1.ProductSearchClient', () => {
   describe('listProducts', () => {
     it('invokes listProducts without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2814,7 +2814,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProducts without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2863,7 +2863,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProducts with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2894,7 +2894,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProductsStream without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2937,15 +2937,15 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listProductsStream with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2985,15 +2985,15 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listProducts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProducts without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3028,15 +3028,15 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listProducts with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3068,9 +3068,9 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listProducts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3078,7 +3078,7 @@ describe('v1.ProductSearchClient', () => {
   describe('listReferenceImages', () => {
     it('invokes listReferenceImages without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3118,7 +3118,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listReferenceImages without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3173,7 +3173,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listReferenceImages with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3204,7 +3204,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listReferenceImagesStream without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3256,15 +3256,15 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listReferenceImages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReferenceImagesStream with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3305,15 +3305,15 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listReferenceImages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReferenceImages without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3354,15 +3354,15 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listReferenceImages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReferenceImages with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3394,9 +3394,9 @@ describe('v1.ProductSearchClient', () => {
       assert(
         (client.descriptors.page.listReferenceImages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3404,7 +3404,7 @@ describe('v1.ProductSearchClient', () => {
   describe('listProductsInProductSet', () => {
     it('invokes listProductsInProductSet without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3438,7 +3438,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProductsInProductSet without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3487,7 +3487,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProductsInProductSet with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3521,7 +3521,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProductsInProductSetStream without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3578,7 +3578,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('invokes listProductsInProductSetStream with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3630,7 +3630,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('uses async iteration with listProductsInProductSet without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3677,7 +3677,7 @@ describe('v1.ProductSearchClient', () => {
 
     it('uses async iteration with listProductsInProductSet with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3722,7 +3722,7 @@ describe('v1.ProductSearchClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3743,7 +3743,7 @@ describe('v1.ProductSearchClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3771,7 +3771,7 @@ describe('v1.ProductSearchClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3781,7 +3781,7 @@ describe('v1.ProductSearchClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3805,7 +3805,7 @@ describe('v1.ProductSearchClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3827,7 +3827,7 @@ describe('v1.ProductSearchClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3855,7 +3855,7 @@ describe('v1.ProductSearchClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3865,7 +3865,7 @@ describe('v1.ProductSearchClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3889,7 +3889,7 @@ describe('v1.ProductSearchClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3911,7 +3911,7 @@ describe('v1.ProductSearchClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3939,7 +3939,7 @@ describe('v1.ProductSearchClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3949,7 +3949,7 @@ describe('v1.ProductSearchClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3973,7 +3973,7 @@ describe('v1.ProductSearchClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4008,7 +4008,7 @@ describe('v1.ProductSearchClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4043,7 +4043,7 @@ describe('v1.ProductSearchClient', () => {
         location: 'locationValue',
       };
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4093,7 +4093,7 @@ describe('v1.ProductSearchClient', () => {
         product: 'productValue',
       };
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4157,7 +4157,7 @@ describe('v1.ProductSearchClient', () => {
         product_set: 'productSetValue',
       };
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4222,7 +4222,7 @@ describe('v1.ProductSearchClient', () => {
         reference_image: 'referenceImageValue',
       };
       const client = new productsearchModule.v1.ProductSearchClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

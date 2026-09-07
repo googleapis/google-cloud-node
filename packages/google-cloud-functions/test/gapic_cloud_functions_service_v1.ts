@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudfunctionsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -291,7 +291,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.cloudFunctionsServiceStub, undefined);
@@ -299,13 +299,13 @@ describe('v1.CloudFunctionsServiceClient', () => {
       assert(client.cloudFunctionsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudFunctionsServiceStub);
@@ -314,15 +314,15 @@ describe('v1.CloudFunctionsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.cloudFunctionsServiceStub, undefined);
@@ -331,7 +331,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -340,7 +340,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -353,7 +353,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -377,7 +377,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getFunction without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -409,7 +409,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getFunction without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -457,7 +457,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getFunction with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getFunction with closed client', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -502,7 +502,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFunction(request), expectedError);
@@ -513,7 +513,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes callFunction without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes callFunction without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes callFunction with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -625,7 +625,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes callFunction with closed client', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -638,7 +638,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.callFunction(request), expectedError);
@@ -649,7 +649,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes generateUploadUrl without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -681,7 +681,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes generateUploadUrl without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes generateUploadUrl with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -761,7 +761,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes generateUploadUrl with closed client', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -774,7 +774,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateUploadUrl(request), expectedError);
@@ -785,7 +785,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes generateDownloadUrl without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -818,7 +818,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes generateDownloadUrl without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -866,7 +866,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes generateDownloadUrl with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -898,7 +898,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes generateDownloadUrl with closed client', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -911,7 +911,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateDownloadUrl(request), expectedError);
@@ -922,7 +922,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -954,7 +954,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1034,7 +1034,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes setIamPolicy with closed client', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1058,7 +1058,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1090,7 +1090,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1170,7 +1170,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getIamPolicy with closed client', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1183,7 +1183,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1194,7 +1194,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1227,7 +1227,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1275,7 +1275,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1307,7 +1307,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes testIamPermissions with closed client', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1320,7 +1320,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1331,7 +1331,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes createFunction without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1365,7 +1365,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes createFunction without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes createFunction with call error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes createFunction with LRO error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1486,7 +1486,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes checkCreateFunctionProgress without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1494,8 +1494,8 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFunctionProgress(
@@ -1509,7 +1509,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes checkCreateFunctionProgress with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1531,7 +1531,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes updateFunction without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1566,7 +1566,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes updateFunction without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1622,7 +1622,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes updateFunction with call error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1655,7 +1655,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes updateFunction with LRO error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1690,7 +1690,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes checkUpdateFunctionProgress without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1698,8 +1698,8 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFunctionProgress(
@@ -1713,7 +1713,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes checkUpdateFunctionProgress with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1735,7 +1735,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes deleteFunction without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1769,7 +1769,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes deleteFunction without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1824,7 +1824,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes deleteFunction with call error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1856,7 +1856,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes deleteFunction with LRO error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1890,7 +1890,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes checkDeleteFunctionProgress without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1898,8 +1898,8 @@ describe('v1.CloudFunctionsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFunctionProgress(
@@ -1913,7 +1913,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes checkDeleteFunctionProgress with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1935,7 +1935,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes listFunctions without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1975,7 +1975,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes listFunctions without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2031,7 +2031,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes listFunctions with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2063,7 +2063,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes listFunctionsStream without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2115,16 +2115,16 @@ describe('v1.CloudFunctionsServiceClient', () => {
       assert(
         (client.descriptors.page.listFunctions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFunctionsStream with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2165,16 +2165,16 @@ describe('v1.CloudFunctionsServiceClient', () => {
       assert(
         (client.descriptors.page.listFunctions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFunctions without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2215,16 +2215,16 @@ describe('v1.CloudFunctionsServiceClient', () => {
       assert(
         (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFunctions with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2256,9 +2256,9 @@ describe('v1.CloudFunctionsServiceClient', () => {
       assert(
         (client.descriptors.page.listFunctions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2266,7 +2266,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2297,7 +2297,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2342,7 +2342,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2378,7 +2378,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2427,7 +2427,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2469,7 +2469,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2491,7 +2491,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2519,7 +2519,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2530,7 +2530,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2555,7 +2555,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2578,7 +2578,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2606,7 +2606,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2617,7 +2617,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2642,7 +2642,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2665,7 +2665,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2693,7 +2693,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2704,7 +2704,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2729,7 +2729,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2765,7 +2765,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2802,7 +2802,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       };
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2868,7 +2868,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       };
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2943,7 +2943,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       };
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2994,7 +2994,7 @@ describe('v1.CloudFunctionsServiceClient', () => {
       };
       const client =
         new cloudfunctionsserviceModule.v1.CloudFunctionsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

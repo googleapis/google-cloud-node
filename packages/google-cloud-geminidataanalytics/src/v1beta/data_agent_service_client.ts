@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class DataAgentServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('geminidataanalytics');
@@ -68,11 +68,11 @@ export class DataAgentServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  dataAgentServiceStub?: Promise<{ [name: string]: Function }>;
+  dataAgentServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataAgentServiceClient.
@@ -148,7 +148,7 @@ export class DataAgentServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -325,7 +325,7 @@ export class DataAgentServiceClient {
       'google.cloud.geminidataanalytics.v1beta.DataAgentService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -366,7 +366,7 @@ export class DataAgentServiceClient {
             .DataAgentService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -385,7 +385,7 @@ export class DataAgentServiceClient {
     ];
     for (const methodName of dataAgentServiceStubMethods) {
       const callPromise = this.dataAgentServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -592,7 +592,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataAgent request %j', request);
@@ -755,7 +755,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDataAgentSync request %j', request);
@@ -920,7 +920,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_agent.name': request.dataAgent!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDataAgentSync request %j', request);
@@ -1077,7 +1077,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteDataAgentSync request %j', request);
@@ -1210,7 +1210,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -1346,7 +1346,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -1511,7 +1511,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1568,7 +1568,7 @@ export class DataAgentServiceClient {
     this._log.info('createDataAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1702,7 +1702,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_agent.name': request.dataAgent!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1759,7 +1759,7 @@ export class DataAgentServiceClient {
     this._log.info('updateDataAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1885,7 +1885,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1942,7 +1942,7 @@ export class DataAgentServiceClient {
     this._log.info('deleteDataAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2063,7 +2063,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2144,7 +2144,7 @@ export class DataAgentServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataAgents stream %j', request);
@@ -2207,7 +2207,7 @@ export class DataAgentServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataAgents iterate %j', request);
@@ -2328,7 +2328,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2411,7 +2411,7 @@ export class DataAgentServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessibleDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccessibleDataAgents stream %j', request);
@@ -2476,7 +2476,7 @@ export class DataAgentServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessibleDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccessibleDataAgents iterate %j', request);
@@ -2962,11 +2962,11 @@ export class DataAgentServiceClient {
    */
   close(): Promise<void> {
     if (this.dataAgentServiceStub && !this._terminated) {
-      return this.dataAgentServiceStub.then((stub) => {
+      return this.dataAgentServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

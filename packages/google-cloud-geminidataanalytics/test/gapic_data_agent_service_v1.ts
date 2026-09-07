@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dataagentserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataAgentServiceStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.DataAgentServiceClient', () => {
       assert(client.dataAgentServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataAgentServiceStub);
@@ -301,14 +301,14 @@ describe('v1.DataAgentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataAgentServiceStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.DataAgentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.DataAgentServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.DataAgentServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('getDataAgent', () => {
     it('invokes getDataAgent without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes getDataAgent without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes getDataAgent with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes getDataAgent with closed client', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.DataAgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataAgent(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('createDataAgentSync', () => {
     it('invokes createDataAgentSync without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes createDataAgentSync without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes createDataAgentSync with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes createDataAgentSync with closed client', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.DataAgentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataAgentSync(request), expectedError);
@@ -625,7 +625,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('updateDataAgentSync', () => {
     it('invokes updateDataAgentSync without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -658,7 +658,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes updateDataAgentSync without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes updateDataAgentSync with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes updateDataAgentSync with closed client', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1.DataAgentServiceClient', () => {
       );
       request.dataAgent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataAgentSync(request), expectedError);
@@ -762,7 +762,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('deleteDataAgentSync', () => {
     it('invokes deleteDataAgentSync without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes deleteDataAgentSync without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -841,7 +841,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes deleteDataAgentSync with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes deleteDataAgentSync with closed client', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1.DataAgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataAgentSync(request), expectedError);
@@ -895,7 +895,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v1.DataAgentServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1027,7 +1027,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1058,7 +1058,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1136,7 +1136,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1149,7 +1149,7 @@ describe('v1.DataAgentServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1159,7 +1159,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('createDataAgent', () => {
     it('invokes createDataAgent without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1192,7 +1192,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes createDataAgent without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1246,7 +1246,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes createDataAgent with call error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes createDataAgent with LRO error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,7 +1310,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes checkCreateDataAgentProgress without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1318,8 +1318,8 @@ describe('v1.DataAgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDataAgentProgress(
@@ -1332,7 +1332,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes checkCreateDataAgentProgress with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1353,7 +1353,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('updateDataAgent', () => {
     it('invokes updateDataAgent without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1387,7 +1387,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes updateDataAgent without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1442,7 +1442,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes updateDataAgent with call error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1474,7 +1474,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes updateDataAgent with LRO error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes checkUpdateDataAgentProgress without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,8 +1516,8 @@ describe('v1.DataAgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDataAgentProgress(
@@ -1530,7 +1530,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes checkUpdateDataAgentProgress with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1551,7 +1551,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('deleteDataAgent', () => {
     it('invokes deleteDataAgent without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes deleteDataAgent without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1638,7 +1638,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes deleteDataAgent with call error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1669,7 +1669,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes deleteDataAgent with LRO error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1702,7 +1702,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes checkDeleteDataAgentProgress without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,8 +1710,8 @@ describe('v1.DataAgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDataAgentProgress(
@@ -1724,7 +1724,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes checkDeleteDataAgentProgress with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1745,7 +1745,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('listDataAgents', () => {
     it('invokes listDataAgents without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1784,7 +1784,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes listDataAgents without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1816,8 +1816,7 @@ describe('v1.DataAgentServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.geminidataanalytics.v1.IDataAgent[]
-              | null,
+              protos.google.cloud.geminidataanalytics.v1.IDataAgent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1841,7 +1840,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes listDataAgents with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1872,7 +1871,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes listDataAgentsStream without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1925,15 +1924,15 @@ describe('v1.DataAgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataAgentsStream with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1975,15 +1974,15 @@ describe('v1.DataAgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataAgents without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2025,15 +2024,15 @@ describe('v1.DataAgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataAgents with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2066,9 +2065,9 @@ describe('v1.DataAgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDataAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2076,7 +2075,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('listAccessibleDataAgents', () => {
     it('invokes listAccessibleDataAgents without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2116,7 +2115,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes listAccessibleDataAgents without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2148,8 +2147,7 @@ describe('v1.DataAgentServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.geminidataanalytics.v1.IDataAgent[]
-              | null,
+              protos.google.cloud.geminidataanalytics.v1.IDataAgent[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2173,7 +2171,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes listAccessibleDataAgents with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2207,7 +2205,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes listAccessibleDataAgentsStream without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2274,7 +2272,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('invokes listAccessibleDataAgentsStream with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2330,7 +2328,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('uses async iteration with listAccessibleDataAgents without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2384,7 +2382,7 @@ describe('v1.DataAgentServiceClient', () => {
 
     it('uses async iteration with listAccessibleDataAgents with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2430,7 +2428,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2460,7 +2458,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2504,7 +2502,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2539,7 +2537,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2587,7 +2585,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2628,7 +2626,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2649,7 +2647,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2677,7 +2675,7 @@ describe('v1.DataAgentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2687,7 +2685,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2711,7 +2709,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2733,7 +2731,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2761,7 +2759,7 @@ describe('v1.DataAgentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2771,7 +2769,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2795,7 +2793,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2817,7 +2815,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2845,7 +2843,7 @@ describe('v1.DataAgentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2855,7 +2853,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2879,7 +2877,7 @@ describe('v1.DataAgentServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2914,7 +2912,7 @@ describe('v1.DataAgentServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2950,7 +2948,7 @@ describe('v1.DataAgentServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3014,7 +3012,7 @@ describe('v1.DataAgentServiceClient', () => {
         data_agent: 'dataAgentValue',
       };
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3077,7 +3075,7 @@ describe('v1.DataAgentServiceClient', () => {
         location: 'locationValue',
       };
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3125,7 +3123,7 @@ describe('v1.DataAgentServiceClient', () => {
         project: 'projectValue',
       };
       const client = new dataagentserviceModule.v1.DataAgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

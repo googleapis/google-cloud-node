@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as ruleserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -269,7 +269,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.ruleServiceStub, undefined);
@@ -277,12 +277,12 @@ describe('v1.RuleServiceClient', () => {
       assert(client.ruleServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.ruleServiceStub);
@@ -291,14 +291,14 @@ describe('v1.RuleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.ruleServiceStub, undefined);
@@ -307,7 +307,7 @@ describe('v1.RuleServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -315,7 +315,7 @@ describe('v1.RuleServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -327,7 +327,7 @@ describe('v1.RuleServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -350,7 +350,7 @@ describe('v1.RuleServiceClient', () => {
   describe('createRule', () => {
     it('invokes createRule without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -381,7 +381,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes createRule without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes createRule with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes createRule with closed client', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,7 +472,7 @@ describe('v1.RuleServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createRule(request), expectedError);
@@ -482,7 +482,7 @@ describe('v1.RuleServiceClient', () => {
   describe('getRule', () => {
     it('invokes getRule without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes getRule without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -560,7 +560,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes getRule with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes getRule with closed client', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1.RuleServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRule(request), expectedError);
@@ -611,7 +611,7 @@ describe('v1.RuleServiceClient', () => {
   describe('updateRule', () => {
     it('invokes updateRule without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -643,7 +643,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes updateRule without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -691,7 +691,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes updateRule with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -723,7 +723,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes updateRule with closed client', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -737,7 +737,7 @@ describe('v1.RuleServiceClient', () => {
       );
       request.rule.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRule(request), expectedError);
@@ -747,7 +747,7 @@ describe('v1.RuleServiceClient', () => {
   describe('deleteRule', () => {
     it('invokes deleteRule without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -778,7 +778,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes deleteRule without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -825,7 +825,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes deleteRule with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes deleteRule with closed client', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -869,7 +869,7 @@ describe('v1.RuleServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteRule(request), expectedError);
@@ -879,7 +879,7 @@ describe('v1.RuleServiceClient', () => {
   describe('verifyRuleText', () => {
     it('invokes verifyRuleText without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -910,7 +910,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes verifyRuleText without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -957,7 +957,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes verifyRuleText with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -988,7 +988,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes verifyRuleText with closed client', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1001,7 +1001,7 @@ describe('v1.RuleServiceClient', () => {
       );
       request.instance = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.verifyRuleText(request), expectedError);
@@ -1011,7 +1011,7 @@ describe('v1.RuleServiceClient', () => {
   describe('getRetrohunt', () => {
     it('invokes getRetrohunt without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes getRetrohunt without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1089,7 +1089,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes getRetrohunt with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1120,7 +1120,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes getRetrohunt with closed client', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1133,7 +1133,7 @@ describe('v1.RuleServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRetrohunt(request), expectedError);
@@ -1143,7 +1143,7 @@ describe('v1.RuleServiceClient', () => {
   describe('getRuleDeployment', () => {
     it('invokes getRuleDeployment without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1174,7 +1174,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes getRuleDeployment without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes getRuleDeployment with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1252,7 +1252,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes getRuleDeployment with closed client', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1265,7 +1265,7 @@ describe('v1.RuleServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRuleDeployment(request), expectedError);
@@ -1275,7 +1275,7 @@ describe('v1.RuleServiceClient', () => {
   describe('updateRuleDeployment', () => {
     it('invokes updateRuleDeployment without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1308,7 +1308,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes updateRuleDeployment without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1356,7 +1356,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes updateRuleDeployment with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1388,7 +1388,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes updateRuleDeployment with closed client', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1402,7 +1402,7 @@ describe('v1.RuleServiceClient', () => {
       );
       request.ruleDeployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRuleDeployment(request), expectedError);
@@ -1412,7 +1412,7 @@ describe('v1.RuleServiceClient', () => {
   describe('createRetrohunt', () => {
     it('invokes createRetrohunt without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1445,7 +1445,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes createRetrohunt without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes createRetrohunt with call error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1530,7 +1530,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes createRetrohunt with LRO error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes checkCreateRetrohuntProgress without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1571,8 +1571,8 @@ describe('v1.RuleServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRetrohuntProgress(
@@ -1585,7 +1585,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes checkCreateRetrohuntProgress with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1606,7 +1606,7 @@ describe('v1.RuleServiceClient', () => {
   describe('listRules', () => {
     it('invokes listRules without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1639,7 +1639,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRules without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1688,7 +1688,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRules with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1716,7 +1716,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRulesStream without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1759,15 +1759,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRulesStream with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1807,15 +1807,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRules.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRules without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1849,15 +1849,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRules with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1890,9 +1890,9 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRules.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1900,7 +1900,7 @@ describe('v1.RuleServiceClient', () => {
   describe('listRuleRevisions', () => {
     it('invokes listRuleRevisions without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1933,7 +1933,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRuleRevisions without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1982,7 +1982,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRuleRevisions with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2013,7 +2013,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRuleRevisionsStream without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2056,15 +2056,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRuleRevisions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRuleRevisionsStream with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2102,15 +2102,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRuleRevisions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRuleRevisions without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2145,15 +2145,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRuleRevisions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRuleRevisions with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2185,9 +2185,9 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRuleRevisions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2195,7 +2195,7 @@ describe('v1.RuleServiceClient', () => {
   describe('listRetrohunts', () => {
     it('invokes listRetrohunts without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2228,7 +2228,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRetrohunts without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2277,7 +2277,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRetrohunts with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2308,7 +2308,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRetrohuntsStream without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2354,15 +2354,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRetrohunts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRetrohuntsStream with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2403,15 +2403,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRetrohunts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRetrohunts without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2446,15 +2446,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRetrohunts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRetrohunts with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2486,9 +2486,9 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRetrohunts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2496,7 +2496,7 @@ describe('v1.RuleServiceClient', () => {
   describe('listRuleDeployments', () => {
     it('invokes listRuleDeployments without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2536,7 +2536,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRuleDeployments without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2591,7 +2591,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRuleDeployments with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2622,7 +2622,7 @@ describe('v1.RuleServiceClient', () => {
 
     it('invokes listRuleDeploymentsStream without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2674,15 +2674,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRuleDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRuleDeploymentsStream with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2723,15 +2723,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRuleDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRuleDeployments without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2772,15 +2772,15 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRuleDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRuleDeployments with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2813,16 +2813,16 @@ describe('v1.RuleServiceClient', () => {
       assert(
         (client.descriptors.page.listRuleDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2843,7 +2843,7 @@ describe('v1.RuleServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2871,7 +2871,7 @@ describe('v1.RuleServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2881,7 +2881,7 @@ describe('v1.RuleServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2905,7 +2905,7 @@ describe('v1.RuleServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2927,7 +2927,7 @@ describe('v1.RuleServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2955,7 +2955,7 @@ describe('v1.RuleServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2965,7 +2965,7 @@ describe('v1.RuleServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2989,7 +2989,7 @@ describe('v1.RuleServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3011,7 +3011,7 @@ describe('v1.RuleServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3039,7 +3039,7 @@ describe('v1.RuleServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -3049,7 +3049,7 @@ describe('v1.RuleServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3073,7 +3073,7 @@ describe('v1.RuleServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -3108,7 +3108,7 @@ describe('v1.RuleServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3144,7 +3144,7 @@ describe('v1.RuleServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3209,7 +3209,7 @@ describe('v1.RuleServiceClient', () => {
         chart: 'chartValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3285,7 +3285,7 @@ describe('v1.RuleServiceClient', () => {
         query: 'queryValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3361,7 +3361,7 @@ describe('v1.RuleServiceClient', () => {
         data_access_label: 'dataAccessLabelValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3438,7 +3438,7 @@ describe('v1.RuleServiceClient', () => {
         data_access_scope: 'dataAccessScopeValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3515,7 +3515,7 @@ describe('v1.RuleServiceClient', () => {
         data_table: 'dataTableValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3591,7 +3591,7 @@ describe('v1.RuleServiceClient', () => {
         data_table_operation_errors: 'dataTableOperationErrorsValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3689,7 +3689,7 @@ describe('v1.RuleServiceClient', () => {
         data_table_row: 'dataTableRowValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3777,7 +3777,7 @@ describe('v1.RuleServiceClient', () => {
           'featuredContentNativeDashboardValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3872,7 +3872,7 @@ describe('v1.RuleServiceClient', () => {
         findings_refinement: 'findingsRefinementValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3964,7 +3964,7 @@ describe('v1.RuleServiceClient', () => {
         findings_refinement: 'findingsRefinementValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4058,7 +4058,7 @@ describe('v1.RuleServiceClient', () => {
         instance: 'instanceValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4121,7 +4121,7 @@ describe('v1.RuleServiceClient', () => {
         location: 'locationValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4172,7 +4172,7 @@ describe('v1.RuleServiceClient', () => {
         dashboard: 'dashboardValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4245,7 +4245,7 @@ describe('v1.RuleServiceClient', () => {
         project: 'projectValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4286,7 +4286,7 @@ describe('v1.RuleServiceClient', () => {
         reference_list: 'referenceListValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4363,7 +4363,7 @@ describe('v1.RuleServiceClient', () => {
         retrohunt: 'retrohuntValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4450,7 +4450,7 @@ describe('v1.RuleServiceClient', () => {
         rule: 'ruleValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4526,7 +4526,7 @@ describe('v1.RuleServiceClient', () => {
         rule: 'ruleValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4602,7 +4602,7 @@ describe('v1.RuleServiceClient', () => {
         rule_execution_error: 'ruleExecutionErrorValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4694,7 +4694,7 @@ describe('v1.RuleServiceClient', () => {
         watchlist: 'watchlistValue',
       };
       const client = new ruleserviceModule.v1.RuleServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

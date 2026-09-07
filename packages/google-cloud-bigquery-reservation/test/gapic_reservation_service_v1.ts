@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as reservationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -244,7 +244,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.reservationServiceStub, undefined);
@@ -252,12 +252,12 @@ describe('v1.ReservationServiceClient', () => {
       assert(client.reservationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.reservationServiceStub);
@@ -266,14 +266,14 @@ describe('v1.ReservationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.reservationServiceStub, undefined);
@@ -282,7 +282,7 @@ describe('v1.ReservationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -290,7 +290,7 @@ describe('v1.ReservationServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -302,7 +302,7 @@ describe('v1.ReservationServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -325,7 +325,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('createReservation', () => {
     it('invokes createReservation without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -356,7 +356,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createReservation without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -403,7 +403,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createReservation with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createReservation with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createReservation(request), expectedError);
@@ -457,7 +457,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('getReservation', () => {
     it('invokes getReservation without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -488,7 +488,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getReservation without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getReservation with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getReservation with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -579,7 +579,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReservation(request), expectedError);
@@ -589,7 +589,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('deleteReservation', () => {
     it('invokes deleteReservation without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -620,7 +620,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteReservation without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteReservation with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteReservation with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteReservation(request), expectedError);
@@ -721,7 +721,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('updateReservation', () => {
     it('invokes updateReservation without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateReservation without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateReservation with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateReservation with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -847,7 +847,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.reservation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateReservation(request), expectedError);
@@ -857,7 +857,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('failoverReservation', () => {
     it('invokes failoverReservation without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -889,7 +889,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes failoverReservation without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -936,7 +936,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes failoverReservation with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -967,7 +967,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes failoverReservation with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -980,7 +980,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.failoverReservation(request), expectedError);
@@ -990,7 +990,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('createCapacityCommitment', () => {
     it('invokes createCapacityCommitment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1022,7 +1022,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createCapacityCommitment without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1069,7 +1069,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createCapacityCommitment with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1103,7 +1103,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createCapacityCommitment with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1116,7 +1116,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1129,7 +1129,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('getCapacityCommitment', () => {
     it('invokes getCapacityCommitment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1161,7 +1161,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getCapacityCommitment without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1208,7 +1208,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getCapacityCommitment with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1242,7 +1242,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getCapacityCommitment with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1255,7 +1255,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1268,7 +1268,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('deleteCapacityCommitment', () => {
     it('invokes deleteCapacityCommitment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1300,7 +1300,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteCapacityCommitment without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1347,7 +1347,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteCapacityCommitment with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1381,7 +1381,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteCapacityCommitment with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1394,7 +1394,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1407,7 +1407,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('updateCapacityCommitment', () => {
     it('invokes updateCapacityCommitment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1440,7 +1440,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateCapacityCommitment without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1488,7 +1488,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateCapacityCommitment with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1523,7 +1523,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateCapacityCommitment with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1537,7 +1537,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.capacityCommitment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1550,7 +1550,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('splitCapacityCommitment', () => {
     it('invokes splitCapacityCommitment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1582,7 +1582,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes splitCapacityCommitment without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes splitCapacityCommitment with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1663,7 +1663,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes splitCapacityCommitment with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1676,7 +1676,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1689,7 +1689,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('mergeCapacityCommitments', () => {
     it('invokes mergeCapacityCommitments without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1721,7 +1721,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes mergeCapacityCommitments without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1768,7 +1768,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes mergeCapacityCommitments with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1802,7 +1802,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes mergeCapacityCommitments with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1815,7 +1815,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1828,7 +1828,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('createAssignment', () => {
     it('invokes createAssignment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1859,7 +1859,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createAssignment without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1906,7 +1906,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createAssignment with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1937,7 +1937,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createAssignment with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1950,7 +1950,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAssignment(request), expectedError);
@@ -1960,7 +1960,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('deleteAssignment', () => {
     it('invokes deleteAssignment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1991,7 +1991,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteAssignment without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2038,7 +2038,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteAssignment with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2069,7 +2069,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteAssignment with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2082,7 +2082,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAssignment(request), expectedError);
@@ -2092,7 +2092,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('moveAssignment', () => {
     it('invokes moveAssignment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2123,7 +2123,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes moveAssignment without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2170,7 +2170,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes moveAssignment with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2201,7 +2201,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes moveAssignment with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2214,7 +2214,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.moveAssignment(request), expectedError);
@@ -2224,7 +2224,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('updateAssignment', () => {
     it('invokes updateAssignment without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2256,7 +2256,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateAssignment without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2304,7 +2304,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateAssignment with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2336,7 +2336,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateAssignment with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2350,7 +2350,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.assignment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAssignment(request), expectedError);
@@ -2360,7 +2360,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('getBiReservation', () => {
     it('invokes getBiReservation without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2391,7 +2391,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getBiReservation without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2438,7 +2438,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getBiReservation with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2469,7 +2469,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getBiReservation with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2482,7 +2482,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBiReservation(request), expectedError);
@@ -2492,7 +2492,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('updateBiReservation', () => {
     it('invokes updateBiReservation without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateBiReservation without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2573,7 +2573,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateBiReservation with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2605,7 +2605,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateBiReservation with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2619,7 +2619,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.biReservation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBiReservation(request), expectedError);
@@ -2629,7 +2629,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2660,7 +2660,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2707,7 +2707,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2738,7 +2738,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getIamPolicy with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2751,7 +2751,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -2761,7 +2761,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2792,7 +2792,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2839,7 +2839,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2870,7 +2870,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes setIamPolicy with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2883,7 +2883,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2893,7 +2893,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2925,7 +2925,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2972,7 +2972,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3003,7 +3003,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes testIamPermissions with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3016,7 +3016,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -3026,7 +3026,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('createReservationGroup', () => {
     it('invokes createReservationGroup without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3058,7 +3058,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createReservationGroup without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3105,7 +3105,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createReservationGroup with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3139,7 +3139,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes createReservationGroup with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3152,7 +3152,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3165,7 +3165,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('getReservationGroup', () => {
     it('invokes getReservationGroup without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3197,7 +3197,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getReservationGroup without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3244,7 +3244,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getReservationGroup with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3275,7 +3275,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes getReservationGroup with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3288,7 +3288,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getReservationGroup(request), expectedError);
@@ -3298,7 +3298,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('deleteReservationGroup', () => {
     it('invokes deleteReservationGroup without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3330,7 +3330,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteReservationGroup without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3377,7 +3377,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteReservationGroup with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3411,7 +3411,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes deleteReservationGroup with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3424,7 +3424,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3437,7 +3437,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('updateReservationGroup', () => {
     it('invokes updateReservationGroup without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3470,7 +3470,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateReservationGroup without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3518,7 +3518,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateReservationGroup with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3553,7 +3553,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes updateReservationGroup with closed client', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3567,7 +3567,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.reservationGroup.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -3580,7 +3580,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('listReservations', () => {
     it('invokes listReservations without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3619,7 +3619,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listReservations without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3651,8 +3651,7 @@ describe('v1.ReservationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.reservation.v1.IReservation[]
-              | null,
+              protos.google.cloud.bigquery.reservation.v1.IReservation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -3676,7 +3675,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listReservations with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3707,7 +3706,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listReservationsStream without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3762,15 +3761,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listReservations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReservationsStream with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3814,15 +3813,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listReservations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReservations without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3864,15 +3863,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listReservations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReservations with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3905,9 +3904,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listReservations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3915,7 +3914,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('listCapacityCommitments', () => {
     it('invokes listCapacityCommitments without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3955,7 +3954,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listCapacityCommitments without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4012,7 +4011,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listCapacityCommitments with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4046,7 +4045,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listCapacityCommitmentsStream without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4115,7 +4114,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listCapacityCommitmentsStream with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4173,7 +4172,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('uses async iteration with listCapacityCommitments without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4227,7 +4226,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('uses async iteration with listCapacityCommitments with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4274,7 +4273,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('listAssignments', () => {
     it('invokes listAssignments without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4313,7 +4312,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listAssignments without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4345,8 +4344,7 @@ describe('v1.ReservationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
-              | null,
+              protos.google.cloud.bigquery.reservation.v1.IAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4370,7 +4368,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listAssignments with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4401,7 +4399,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listAssignmentsStream without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4456,15 +4454,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAssignmentsStream with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4508,15 +4506,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssignments without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4558,15 +4556,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssignments with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4599,9 +4597,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.listAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4609,7 +4607,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('searchAssignments', () => {
     it('invokes searchAssignments without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -4650,7 +4648,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes searchAssignments without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -4683,8 +4681,7 @@ describe('v1.ReservationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
-              | null,
+              protos.google.cloud.bigquery.reservation.v1.IAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4709,7 +4706,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes searchAssignments with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -4742,7 +4739,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes searchAssignmentsStream without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -4799,15 +4796,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchAssignmentsStream with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -4853,15 +4850,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAssignments without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -4905,15 +4902,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAssignments with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -4948,9 +4945,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4958,7 +4955,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('searchAllAssignments', () => {
     it('invokes searchAllAssignments without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4998,7 +4995,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes searchAllAssignments without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5030,8 +5027,7 @@ describe('v1.ReservationServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
-              | null,
+              protos.google.cloud.bigquery.reservation.v1.IAssignment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5055,7 +5051,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes searchAllAssignments with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5086,7 +5082,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes searchAllAssignmentsStream without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5141,15 +5137,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchAllAssignmentsStream with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5193,15 +5189,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAllAssignments without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5243,15 +5239,15 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchAllAssignments with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5284,9 +5280,9 @@ describe('v1.ReservationServiceClient', () => {
       assert(
         (client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5294,7 +5290,7 @@ describe('v1.ReservationServiceClient', () => {
   describe('listReservationGroups', () => {
     it('invokes listReservationGroups without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5334,7 +5330,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listReservationGroups without error using callback', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5391,7 +5387,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listReservationGroups with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5425,7 +5421,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listReservationGroupsStream without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5494,7 +5490,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('invokes listReservationGroupsStream with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5552,7 +5548,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('uses async iteration with listReservationGroups without error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5606,7 +5602,7 @@ describe('v1.ReservationServiceClient', () => {
 
     it('uses async iteration with listReservationGroups with error', async () => {
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5660,7 +5656,7 @@ describe('v1.ReservationServiceClient', () => {
         assignment: 'assignmentValue',
       };
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5734,7 +5730,7 @@ describe('v1.ReservationServiceClient', () => {
         location: 'locationValue',
       };
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5787,7 +5783,7 @@ describe('v1.ReservationServiceClient', () => {
         capacity_commitment: 'capacityCommitmentValue',
       };
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5863,7 +5859,7 @@ describe('v1.ReservationServiceClient', () => {
         location: 'locationValue',
       };
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5911,7 +5907,7 @@ describe('v1.ReservationServiceClient', () => {
         project: 'projectValue',
       };
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5951,7 +5947,7 @@ describe('v1.ReservationServiceClient', () => {
         reservation: 'reservationValue',
       };
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6015,7 +6011,7 @@ describe('v1.ReservationServiceClient', () => {
         reservation_group: 'reservationGroupValue',
       };
       const client = new reservationserviceModule.v1.ReservationServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

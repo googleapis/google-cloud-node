@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as edgecontainerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -279,7 +279,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.edgeContainerStub, undefined);
@@ -287,12 +287,12 @@ describe('v1.EdgeContainerClient', () => {
       assert(client.edgeContainerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.edgeContainerStub);
@@ -301,14 +301,14 @@ describe('v1.EdgeContainerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.edgeContainerStub, undefined);
@@ -317,7 +317,7 @@ describe('v1.EdgeContainerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -325,7 +325,7 @@ describe('v1.EdgeContainerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -337,7 +337,7 @@ describe('v1.EdgeContainerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -360,7 +360,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('getCluster', () => {
     it('invokes getCluster without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -391,7 +391,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getCluster without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getCluster with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getCluster with closed client', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.EdgeContainerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCluster(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('generateAccessToken', () => {
     it('invokes generateAccessToken without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes generateAccessToken without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes generateAccessToken with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes generateAccessToken with closed client', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.EdgeContainerClient', () => {
       );
       request.cluster = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.generateAccessToken(request), expectedError);
@@ -625,7 +625,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('generateOfflineCredential', () => {
     it('invokes generateOfflineCredential without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes generateOfflineCredential without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes generateOfflineCredential with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes generateOfflineCredential with closed client', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1.EdgeContainerClient', () => {
       );
       request.cluster = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -764,7 +764,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('getNodePool', () => {
     it('invokes getNodePool without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getNodePool without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getNodePool with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getNodePool with closed client', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v1.EdgeContainerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNodePool(request), expectedError);
@@ -896,7 +896,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('getMachine', () => {
     it('invokes getMachine without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -927,7 +927,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getMachine without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getMachine with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getMachine with closed client', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1018,7 +1018,7 @@ describe('v1.EdgeContainerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMachine(request), expectedError);
@@ -1028,7 +1028,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('getVpnConnection', () => {
     it('invokes getVpnConnection without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getVpnConnection without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1106,7 +1106,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getVpnConnection with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1137,7 +1137,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getVpnConnection with closed client', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1150,7 +1150,7 @@ describe('v1.EdgeContainerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVpnConnection(request), expectedError);
@@ -1160,7 +1160,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('getServerConfig', () => {
     it('invokes getServerConfig without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getServerConfig without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1238,7 +1238,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getServerConfig with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1269,7 +1269,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes getServerConfig with closed client', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1282,7 +1282,7 @@ describe('v1.EdgeContainerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getServerConfig(request), expectedError);
@@ -1292,7 +1292,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('createCluster', () => {
     it('invokes createCluster without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,7 +1325,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes createCluster without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes createCluster with call error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1410,7 +1410,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes createCluster with LRO error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,7 +1443,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkCreateClusterProgress without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1451,8 +1451,8 @@ describe('v1.EdgeContainerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClusterProgress(
@@ -1465,7 +1465,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkCreateClusterProgress with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1486,7 +1486,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1520,7 +1520,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes updateCluster without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1575,7 +1575,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes updateCluster with call error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1607,7 +1607,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes updateCluster with LRO error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1641,7 +1641,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkUpdateClusterProgress without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1649,8 +1649,8 @@ describe('v1.EdgeContainerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateClusterProgress(
@@ -1663,7 +1663,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkUpdateClusterProgress with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1684,7 +1684,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('upgradeCluster', () => {
     it('invokes upgradeCluster without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1717,7 +1717,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes upgradeCluster without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1771,7 +1771,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes upgradeCluster with call error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1802,7 +1802,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes upgradeCluster with LRO error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkUpgradeClusterProgress without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1843,8 +1843,8 @@ describe('v1.EdgeContainerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpgradeClusterProgress(
@@ -1857,7 +1857,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkUpgradeClusterProgress with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,7 +1878,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1911,7 +1911,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes deleteCluster without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1965,7 +1965,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes deleteCluster with call error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1996,7 +1996,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes deleteCluster with LRO error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,7 +2029,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkDeleteClusterProgress without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2037,8 +2037,8 @@ describe('v1.EdgeContainerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteClusterProgress(
@@ -2051,7 +2051,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkDeleteClusterProgress with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2072,7 +2072,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('createNodePool', () => {
     it('invokes createNodePool without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2105,7 +2105,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes createNodePool without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2159,7 +2159,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes createNodePool with call error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2190,7 +2190,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes createNodePool with LRO error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2223,7 +2223,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkCreateNodePoolProgress without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2231,8 +2231,8 @@ describe('v1.EdgeContainerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateNodePoolProgress(
@@ -2245,7 +2245,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkCreateNodePoolProgress with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2266,7 +2266,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('updateNodePool', () => {
     it('invokes updateNodePool without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2300,7 +2300,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes updateNodePool without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2355,7 +2355,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes updateNodePool with call error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2387,7 +2387,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes updateNodePool with LRO error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2421,7 +2421,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkUpdateNodePoolProgress without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2429,8 +2429,8 @@ describe('v1.EdgeContainerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateNodePoolProgress(
@@ -2443,7 +2443,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkUpdateNodePoolProgress with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2464,7 +2464,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('deleteNodePool', () => {
     it('invokes deleteNodePool without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2497,7 +2497,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes deleteNodePool without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2551,7 +2551,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes deleteNodePool with call error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2582,7 +2582,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes deleteNodePool with LRO error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2615,7 +2615,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkDeleteNodePoolProgress without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2623,8 +2623,8 @@ describe('v1.EdgeContainerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteNodePoolProgress(
@@ -2637,7 +2637,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkDeleteNodePoolProgress with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2658,7 +2658,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('createVpnConnection', () => {
     it('invokes createVpnConnection without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2691,7 +2691,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes createVpnConnection without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2745,7 +2745,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes createVpnConnection with call error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2776,7 +2776,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes createVpnConnection with LRO error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2809,7 +2809,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkCreateVpnConnectionProgress without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2817,8 +2817,8 @@ describe('v1.EdgeContainerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateVpnConnectionProgress(
@@ -2831,7 +2831,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkCreateVpnConnectionProgress with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2852,7 +2852,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('deleteVpnConnection', () => {
     it('invokes deleteVpnConnection without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2885,7 +2885,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes deleteVpnConnection without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2939,7 +2939,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes deleteVpnConnection with call error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2970,7 +2970,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes deleteVpnConnection with LRO error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3003,7 +3003,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkDeleteVpnConnectionProgress without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3011,8 +3011,8 @@ describe('v1.EdgeContainerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteVpnConnectionProgress(
@@ -3025,7 +3025,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes checkDeleteVpnConnectionProgress with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3046,7 +3046,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('listClusters', () => {
     it('invokes listClusters without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3085,7 +3085,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listClusters without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3140,7 +3140,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listClusters with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3171,7 +3171,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listClustersStream without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3223,15 +3223,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listClustersStream with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3274,15 +3274,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3323,15 +3323,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3363,9 +3363,9 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3373,7 +3373,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('listNodePools', () => {
     it('invokes listNodePools without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3412,7 +3412,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listNodePools without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3467,7 +3467,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listNodePools with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3498,7 +3498,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listNodePoolsStream without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3550,15 +3550,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listNodePools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNodePoolsStream with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3599,15 +3599,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listNodePools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNodePools without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3648,15 +3648,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listNodePools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNodePools with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3688,9 +3688,9 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listNodePools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3698,7 +3698,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('listMachines', () => {
     it('invokes listMachines without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3737,7 +3737,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listMachines without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3792,7 +3792,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listMachines with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3823,7 +3823,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listMachinesStream without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3875,15 +3875,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listMachines.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMachinesStream with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3926,15 +3926,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listMachines.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMachines without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3975,15 +3975,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listMachines.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMachines with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4015,9 +4015,9 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listMachines.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4025,7 +4025,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('listVpnConnections', () => {
     it('invokes listVpnConnections without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4065,7 +4065,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listVpnConnections without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4097,8 +4097,7 @@ describe('v1.EdgeContainerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.edgecontainer.v1.IVpnConnection[]
-              | null,
+              protos.google.cloud.edgecontainer.v1.IVpnConnection[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4122,7 +4121,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listVpnConnections with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4153,7 +4152,7 @@ describe('v1.EdgeContainerClient', () => {
 
     it('invokes listVpnConnectionsStream without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4206,15 +4205,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listVpnConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVpnConnectionsStream with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4256,15 +4255,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listVpnConnections.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVpnConnections without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4306,15 +4305,15 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listVpnConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVpnConnections with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4347,16 +4346,16 @@ describe('v1.EdgeContainerClient', () => {
       assert(
         (client.descriptors.page.listVpnConnections.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4386,7 +4385,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4430,7 +4429,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4465,7 +4464,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4513,7 +4512,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4554,7 +4553,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4575,7 +4574,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4603,7 +4602,7 @@ describe('v1.EdgeContainerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4613,7 +4612,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4637,7 +4636,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4659,7 +4658,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4687,7 +4686,7 @@ describe('v1.EdgeContainerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4697,7 +4696,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4721,7 +4720,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4743,7 +4742,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4771,7 +4770,7 @@ describe('v1.EdgeContainerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -4781,7 +4780,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4805,7 +4804,7 @@ describe('v1.EdgeContainerClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -4840,7 +4839,7 @@ describe('v1.EdgeContainerClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4876,7 +4875,7 @@ describe('v1.EdgeContainerClient', () => {
         cluster: 'clusterValue',
       };
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4939,7 +4938,7 @@ describe('v1.EdgeContainerClient', () => {
         location: 'locationValue',
       };
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4989,7 +4988,7 @@ describe('v1.EdgeContainerClient', () => {
         machine: 'machineValue',
       };
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5054,7 +5053,7 @@ describe('v1.EdgeContainerClient', () => {
         node_pool: 'nodePoolValue',
       };
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5127,7 +5126,7 @@ describe('v1.EdgeContainerClient', () => {
         project: 'projectValue',
       };
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5167,7 +5166,7 @@ describe('v1.EdgeContainerClient', () => {
         vpn_connection: 'vpnConnectionValue',
       };
       const client = new edgecontainerModule.v1.EdgeContainerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as gkehubModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -269,7 +269,7 @@ describe('v1.GkeHubClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.gkeHubStub, undefined);
@@ -277,12 +277,12 @@ describe('v1.GkeHubClient', () => {
       assert(client.gkeHubStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.gkeHubStub);
@@ -291,14 +291,14 @@ describe('v1.GkeHubClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.gkeHubStub, undefined);
@@ -307,7 +307,7 @@ describe('v1.GkeHubClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -315,7 +315,7 @@ describe('v1.GkeHubClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -327,7 +327,7 @@ describe('v1.GkeHubClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -350,7 +350,7 @@ describe('v1.GkeHubClient', () => {
   describe('getMembership', () => {
     it('invokes getMembership without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -381,7 +381,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getMembership without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getMembership with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getMembership with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -472,7 +472,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMembership(request), expectedError);
@@ -482,7 +482,7 @@ describe('v1.GkeHubClient', () => {
   describe('getFeature', () => {
     it('invokes getFeature without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getFeature without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -560,7 +560,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getFeature with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getFeature with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -604,7 +604,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFeature(request), expectedError);
@@ -614,7 +614,7 @@ describe('v1.GkeHubClient', () => {
   describe('generateConnectManifest', () => {
     it('invokes generateConnectManifest without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes generateConnectManifest without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes generateConnectManifest with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -727,7 +727,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes generateConnectManifest with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -740,7 +740,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -753,7 +753,7 @@ describe('v1.GkeHubClient', () => {
   describe('getFleet', () => {
     it('invokes getFleet without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getFleet without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getFleet with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -859,7 +859,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getFleet with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -872,7 +872,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFleet(request), expectedError);
@@ -882,7 +882,7 @@ describe('v1.GkeHubClient', () => {
   describe('getScopeNamespace', () => {
     it('invokes getScopeNamespace without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -913,7 +913,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getScopeNamespace without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -960,7 +960,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getScopeNamespace with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -991,7 +991,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getScopeNamespace with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getScopeNamespace(request), expectedError);
@@ -1014,7 +1014,7 @@ describe('v1.GkeHubClient', () => {
   describe('getScopeRBACRoleBinding', () => {
     it('invokes getScopeRBACRoleBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1046,7 +1046,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getScopeRBACRoleBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1093,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getScopeRBACRoleBinding with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1127,7 +1127,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getScopeRBACRoleBinding with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1140,7 +1140,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1153,7 +1153,7 @@ describe('v1.GkeHubClient', () => {
   describe('getScope', () => {
     it('invokes getScope without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1184,7 +1184,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getScope without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getScope with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1259,7 +1259,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getScope with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getScope(request), expectedError);
@@ -1282,7 +1282,7 @@ describe('v1.GkeHubClient', () => {
   describe('getMembershipBinding', () => {
     it('invokes getMembershipBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getMembershipBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1361,7 +1361,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getMembershipBinding with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1392,7 +1392,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getMembershipBinding with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1405,7 +1405,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getMembershipBinding(request), expectedError);
@@ -1415,7 +1415,7 @@ describe('v1.GkeHubClient', () => {
   describe('getMembershipRBACRoleBinding', () => {
     it('invokes getMembershipRBACRoleBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1447,7 +1447,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getMembershipRBACRoleBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1494,7 +1494,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getMembershipRBACRoleBinding with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1528,7 +1528,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes getMembershipRBACRoleBinding with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1541,7 +1541,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1554,7 +1554,7 @@ describe('v1.GkeHubClient', () => {
   describe('generateMembershipRBACRoleBindingYAML', () => {
     it('invokes generateMembershipRBACRoleBindingYAML without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1587,7 +1587,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes generateMembershipRBACRoleBindingYAML without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes generateMembershipRBACRoleBindingYAML with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1666,7 +1666,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes generateMembershipRBACRoleBindingYAML with closed client', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1679,7 +1679,7 @@ describe('v1.GkeHubClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1692,7 +1692,7 @@ describe('v1.GkeHubClient', () => {
   describe('createMembership', () => {
     it('invokes createMembership without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1725,7 +1725,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createMembership without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1779,7 +1779,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createMembership with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1810,7 +1810,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createMembership with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1843,7 +1843,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateMembershipProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1851,8 +1851,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateMembershipProgress(
@@ -1865,7 +1865,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateMembershipProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1886,7 +1886,7 @@ describe('v1.GkeHubClient', () => {
   describe('createFeature', () => {
     it('invokes createFeature without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1919,7 +1919,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createFeature without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1973,7 +1973,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createFeature with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2004,7 +2004,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createFeature with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2037,7 +2037,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateFeatureProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2045,8 +2045,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFeatureProgress(
@@ -2059,7 +2059,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateFeatureProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2080,7 +2080,7 @@ describe('v1.GkeHubClient', () => {
   describe('deleteMembership', () => {
     it('invokes deleteMembership without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2113,7 +2113,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteMembership without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2167,7 +2167,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteMembership with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2198,7 +2198,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteMembership with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2231,7 +2231,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteMembershipProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2239,8 +2239,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteMembershipProgress(
@@ -2253,7 +2253,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteMembershipProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2274,7 +2274,7 @@ describe('v1.GkeHubClient', () => {
   describe('deleteFeature', () => {
     it('invokes deleteFeature without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2307,7 +2307,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteFeature without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2361,7 +2361,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteFeature with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2392,7 +2392,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteFeature with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2425,7 +2425,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteFeatureProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2433,8 +2433,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFeatureProgress(
@@ -2447,7 +2447,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteFeatureProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2468,7 +2468,7 @@ describe('v1.GkeHubClient', () => {
   describe('updateMembership', () => {
     it('invokes updateMembership without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2501,7 +2501,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateMembership without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2555,7 +2555,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateMembership with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2586,7 +2586,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateMembership with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2619,7 +2619,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateMembershipProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2627,8 +2627,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateMembershipProgress(
@@ -2641,7 +2641,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateMembershipProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2662,7 +2662,7 @@ describe('v1.GkeHubClient', () => {
   describe('updateFeature', () => {
     it('invokes updateFeature without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2695,7 +2695,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateFeature without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2749,7 +2749,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateFeature with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2780,7 +2780,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateFeature with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2813,7 +2813,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateFeatureProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2821,8 +2821,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFeatureProgress(
@@ -2835,7 +2835,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateFeatureProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2856,7 +2856,7 @@ describe('v1.GkeHubClient', () => {
   describe('createFleet', () => {
     it('invokes createFleet without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2888,7 +2888,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createFleet without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2942,7 +2942,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createFleet with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2973,7 +2973,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createFleet with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3006,7 +3006,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateFleetProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3014,8 +3014,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFleetProgress(
@@ -3028,7 +3028,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateFleetProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3046,7 +3046,7 @@ describe('v1.GkeHubClient', () => {
   describe('updateFleet', () => {
     it('invokes updateFleet without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3079,7 +3079,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateFleet without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3134,7 +3134,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateFleet with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3166,7 +3166,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateFleet with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3200,7 +3200,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateFleetProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3208,8 +3208,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFleetProgress(
@@ -3222,7 +3222,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateFleetProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3240,7 +3240,7 @@ describe('v1.GkeHubClient', () => {
   describe('deleteFleet', () => {
     it('invokes deleteFleet without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3272,7 +3272,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteFleet without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3326,7 +3326,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteFleet with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3357,7 +3357,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteFleet with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3390,7 +3390,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteFleetProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3398,8 +3398,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFleetProgress(
@@ -3412,7 +3412,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteFleetProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3430,7 +3430,7 @@ describe('v1.GkeHubClient', () => {
   describe('createScopeNamespace', () => {
     it('invokes createScopeNamespace without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3463,7 +3463,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createScopeNamespace without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3517,7 +3517,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createScopeNamespace with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3548,7 +3548,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createScopeNamespace with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3581,7 +3581,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateScopeNamespaceProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3589,8 +3589,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateScopeNamespaceProgress(
@@ -3603,7 +3603,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateScopeNamespaceProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3624,7 +3624,7 @@ describe('v1.GkeHubClient', () => {
   describe('updateScopeNamespace', () => {
     it('invokes updateScopeNamespace without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3658,7 +3658,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateScopeNamespace without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3713,7 +3713,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateScopeNamespace with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3745,7 +3745,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateScopeNamespace with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3779,7 +3779,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateScopeNamespaceProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3787,8 +3787,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateScopeNamespaceProgress(
@@ -3801,7 +3801,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateScopeNamespaceProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3822,7 +3822,7 @@ describe('v1.GkeHubClient', () => {
   describe('deleteScopeNamespace', () => {
     it('invokes deleteScopeNamespace without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3855,7 +3855,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteScopeNamespace without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3909,7 +3909,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteScopeNamespace with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3940,7 +3940,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteScopeNamespace with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3973,7 +3973,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteScopeNamespaceProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3981,8 +3981,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteScopeNamespaceProgress(
@@ -3995,7 +3995,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteScopeNamespaceProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4016,7 +4016,7 @@ describe('v1.GkeHubClient', () => {
   describe('createScopeRBACRoleBinding', () => {
     it('invokes createScopeRBACRoleBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4049,7 +4049,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createScopeRBACRoleBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4103,7 +4103,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createScopeRBACRoleBinding with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4137,7 +4137,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createScopeRBACRoleBinding with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4170,7 +4170,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateScopeRBACRoleBindingProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4178,8 +4178,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4193,7 +4193,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateScopeRBACRoleBindingProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4214,7 +4214,7 @@ describe('v1.GkeHubClient', () => {
   describe('updateScopeRBACRoleBinding', () => {
     it('invokes updateScopeRBACRoleBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4248,7 +4248,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateScopeRBACRoleBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4303,7 +4303,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateScopeRBACRoleBinding with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4338,7 +4338,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateScopeRBACRoleBinding with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4372,7 +4372,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateScopeRBACRoleBindingProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4380,8 +4380,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4395,7 +4395,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateScopeRBACRoleBindingProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4416,7 +4416,7 @@ describe('v1.GkeHubClient', () => {
   describe('deleteScopeRBACRoleBinding', () => {
     it('invokes deleteScopeRBACRoleBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4449,7 +4449,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteScopeRBACRoleBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4503,7 +4503,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteScopeRBACRoleBinding with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4537,7 +4537,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteScopeRBACRoleBinding with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4570,7 +4570,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteScopeRBACRoleBindingProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4578,8 +4578,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4593,7 +4593,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteScopeRBACRoleBindingProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4614,7 +4614,7 @@ describe('v1.GkeHubClient', () => {
   describe('createScope', () => {
     it('invokes createScope without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4646,7 +4646,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createScope without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4700,7 +4700,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createScope with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4731,7 +4731,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createScope with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4764,7 +4764,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateScopeProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4772,8 +4772,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateScopeProgress(
@@ -4786,7 +4786,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateScopeProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4804,7 +4804,7 @@ describe('v1.GkeHubClient', () => {
   describe('updateScope', () => {
     it('invokes updateScope without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4837,7 +4837,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateScope without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4892,7 +4892,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateScope with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4924,7 +4924,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateScope with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4958,7 +4958,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateScopeProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4966,8 +4966,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateScopeProgress(
@@ -4980,7 +4980,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateScopeProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4998,7 +4998,7 @@ describe('v1.GkeHubClient', () => {
   describe('deleteScope', () => {
     it('invokes deleteScope without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5030,7 +5030,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteScope without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5084,7 +5084,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteScope with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5115,7 +5115,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteScope with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5148,7 +5148,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteScopeProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5156,8 +5156,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteScopeProgress(
@@ -5170,7 +5170,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteScopeProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5188,7 +5188,7 @@ describe('v1.GkeHubClient', () => {
   describe('createMembershipBinding', () => {
     it('invokes createMembershipBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5221,7 +5221,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createMembershipBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5275,7 +5275,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createMembershipBinding with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5309,7 +5309,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createMembershipBinding with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5342,7 +5342,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateMembershipBindingProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5350,8 +5350,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5365,7 +5365,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateMembershipBindingProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5386,7 +5386,7 @@ describe('v1.GkeHubClient', () => {
   describe('updateMembershipBinding', () => {
     it('invokes updateMembershipBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5420,7 +5420,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateMembershipBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5475,7 +5475,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateMembershipBinding with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5510,7 +5510,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateMembershipBinding with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5544,7 +5544,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateMembershipBindingProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5552,8 +5552,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5567,7 +5567,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateMembershipBindingProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5588,7 +5588,7 @@ describe('v1.GkeHubClient', () => {
   describe('deleteMembershipBinding', () => {
     it('invokes deleteMembershipBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5621,7 +5621,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteMembershipBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5675,7 +5675,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteMembershipBinding with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5709,7 +5709,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteMembershipBinding with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5742,7 +5742,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteMembershipBindingProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5750,8 +5750,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5765,7 +5765,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteMembershipBindingProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5786,7 +5786,7 @@ describe('v1.GkeHubClient', () => {
   describe('createMembershipRBACRoleBinding', () => {
     it('invokes createMembershipRBACRoleBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5819,7 +5819,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createMembershipRBACRoleBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5873,7 +5873,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createMembershipRBACRoleBinding with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5905,7 +5905,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes createMembershipRBACRoleBinding with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5935,7 +5935,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateMembershipRBACRoleBindingProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5943,8 +5943,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5958,7 +5958,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkCreateMembershipRBACRoleBindingProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5979,7 +5979,7 @@ describe('v1.GkeHubClient', () => {
   describe('updateMembershipRBACRoleBinding', () => {
     it('invokes updateMembershipRBACRoleBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6013,7 +6013,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateMembershipRBACRoleBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6068,7 +6068,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateMembershipRBACRoleBinding with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6101,7 +6101,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes updateMembershipRBACRoleBinding with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6132,7 +6132,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateMembershipRBACRoleBindingProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6140,8 +6140,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6155,7 +6155,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkUpdateMembershipRBACRoleBindingProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6176,7 +6176,7 @@ describe('v1.GkeHubClient', () => {
   describe('deleteMembershipRBACRoleBinding', () => {
     it('invokes deleteMembershipRBACRoleBinding without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6209,7 +6209,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteMembershipRBACRoleBinding without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6263,7 +6263,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteMembershipRBACRoleBinding with call error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6295,7 +6295,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes deleteMembershipRBACRoleBinding with LRO error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6325,7 +6325,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteMembershipRBACRoleBindingProgress without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6333,8 +6333,8 @@ describe('v1.GkeHubClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -6348,7 +6348,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes checkDeleteMembershipRBACRoleBindingProgress with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6369,7 +6369,7 @@ describe('v1.GkeHubClient', () => {
   describe('listMemberships', () => {
     it('invokes listMemberships without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6402,7 +6402,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMemberships without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6451,7 +6451,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMemberships with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6482,7 +6482,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMembershipsStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6528,15 +6528,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listMemberships.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listMembershipsStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6577,15 +6577,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listMemberships.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMemberships without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6620,15 +6620,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listMemberships.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listMemberships with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6660,9 +6660,9 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listMemberships.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6670,7 +6670,7 @@ describe('v1.GkeHubClient', () => {
   describe('listBoundMemberships', () => {
     it('invokes listBoundMemberships without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6704,7 +6704,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listBoundMemberships without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6753,7 +6753,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listBoundMemberships with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6784,7 +6784,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listBoundMembershipsStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6830,15 +6830,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listBoundMemberships.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBoundMembershipsStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6879,15 +6879,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listBoundMemberships.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBoundMemberships without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6922,15 +6922,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listBoundMemberships.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBoundMemberships with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6962,9 +6962,9 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listBoundMemberships.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6972,7 +6972,7 @@ describe('v1.GkeHubClient', () => {
   describe('listFeatures', () => {
     it('invokes listFeatures without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7005,7 +7005,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listFeatures without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7054,7 +7054,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listFeatures with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7085,7 +7085,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listFeaturesStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7128,15 +7128,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFeaturesStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7176,15 +7176,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listFeatures.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeatures without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7219,15 +7219,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFeatures with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7259,9 +7259,9 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listFeatures.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7269,7 +7269,7 @@ describe('v1.GkeHubClient', () => {
   describe('listFleets', () => {
     it('invokes listFleets without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7302,7 +7302,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listFleets without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7351,7 +7351,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listFleets with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7382,7 +7382,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listFleetsStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7425,15 +7425,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listFleets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFleetsStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7473,15 +7473,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listFleets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFleets without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7516,15 +7516,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listFleets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFleets with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7558,9 +7558,9 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listFleets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7568,7 +7568,7 @@ describe('v1.GkeHubClient', () => {
   describe('listScopeNamespaces', () => {
     it('invokes listScopeNamespaces without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7602,7 +7602,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopeNamespaces without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7651,7 +7651,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopeNamespaces with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7682,7 +7682,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopeNamespacesStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7728,15 +7728,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listScopeNamespaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listScopeNamespacesStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7777,15 +7777,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listScopeNamespaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScopeNamespaces without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7820,15 +7820,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listScopeNamespaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScopeNamespaces with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7860,9 +7860,9 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listScopeNamespaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7870,7 +7870,7 @@ describe('v1.GkeHubClient', () => {
   describe('listScopeRBACRoleBindings', () => {
     it('invokes listScopeRBACRoleBindings without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7910,7 +7910,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopeRBACRoleBindings without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7965,7 +7965,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopeRBACRoleBindings with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7999,7 +7999,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopeRBACRoleBindingsStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8065,7 +8065,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopeRBACRoleBindingsStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8120,7 +8120,7 @@ describe('v1.GkeHubClient', () => {
 
     it('uses async iteration with listScopeRBACRoleBindings without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8173,7 +8173,7 @@ describe('v1.GkeHubClient', () => {
 
     it('uses async iteration with listScopeRBACRoleBindings with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8219,7 +8219,7 @@ describe('v1.GkeHubClient', () => {
   describe('listScopes', () => {
     it('invokes listScopes without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8252,7 +8252,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopes without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8301,7 +8301,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopes with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8332,7 +8332,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listScopesStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8375,15 +8375,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listScopes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listScopesStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8423,15 +8423,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listScopes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScopes without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8466,15 +8466,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listScopes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listScopes with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8508,9 +8508,9 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listScopes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8518,7 +8518,7 @@ describe('v1.GkeHubClient', () => {
   describe('listPermittedScopes', () => {
     it('invokes listPermittedScopes without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8552,7 +8552,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listPermittedScopes without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8601,7 +8601,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listPermittedScopes with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8632,7 +8632,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listPermittedScopesStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8675,15 +8675,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listPermittedScopes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPermittedScopesStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8721,15 +8721,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listPermittedScopes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPermittedScopes without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8764,15 +8764,15 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listPermittedScopes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPermittedScopes with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8804,9 +8804,9 @@ describe('v1.GkeHubClient', () => {
       assert(
         (client.descriptors.page.listPermittedScopes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8814,7 +8814,7 @@ describe('v1.GkeHubClient', () => {
   describe('listMembershipBindings', () => {
     it('invokes listMembershipBindings without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8854,7 +8854,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMembershipBindings without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8909,7 +8909,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMembershipBindings with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8943,7 +8943,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMembershipBindingsStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9009,7 +9009,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMembershipBindingsStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9064,7 +9064,7 @@ describe('v1.GkeHubClient', () => {
 
     it('uses async iteration with listMembershipBindings without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9117,7 +9117,7 @@ describe('v1.GkeHubClient', () => {
 
     it('uses async iteration with listMembershipBindings with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9164,7 +9164,7 @@ describe('v1.GkeHubClient', () => {
   describe('listMembershipRBACRoleBindings', () => {
     it('invokes listMembershipRBACRoleBindings without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9204,7 +9204,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMembershipRBACRoleBindings without error using callback', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9259,7 +9259,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMembershipRBACRoleBindings with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9293,7 +9293,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMembershipRBACRoleBindingsStream without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9362,7 +9362,7 @@ describe('v1.GkeHubClient', () => {
 
     it('invokes listMembershipRBACRoleBindingsStream with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9420,7 +9420,7 @@ describe('v1.GkeHubClient', () => {
 
     it('uses async iteration with listMembershipRBACRoleBindings without error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9473,7 +9473,7 @@ describe('v1.GkeHubClient', () => {
 
     it('uses async iteration with listMembershipRBACRoleBindings with error', async () => {
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9525,7 +9525,7 @@ describe('v1.GkeHubClient', () => {
         feature: 'featureValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9588,7 +9588,7 @@ describe('v1.GkeHubClient', () => {
         location: 'locationValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9638,7 +9638,7 @@ describe('v1.GkeHubClient', () => {
         membership: 'membershipValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9703,7 +9703,7 @@ describe('v1.GkeHubClient', () => {
         membershipbinding: 'membershipbindingValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9796,7 +9796,7 @@ describe('v1.GkeHubClient', () => {
         namespace: 'namespaceValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9871,7 +9871,7 @@ describe('v1.GkeHubClient', () => {
         fleet: 'fleetValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9948,7 +9948,7 @@ describe('v1.GkeHubClient', () => {
         project: 'projectValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9988,7 +9988,7 @@ describe('v1.GkeHubClient', () => {
         fleet: 'fleetValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10068,7 +10068,7 @@ describe('v1.GkeHubClient', () => {
         rbacrolebinding: 'rbacrolebindingValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10174,7 +10174,7 @@ describe('v1.GkeHubClient', () => {
         rbacrolebinding: 'rbacrolebindingValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10274,7 +10274,7 @@ describe('v1.GkeHubClient', () => {
         scope: 'scopeValue',
       };
       const client = new gkehubModule.v1.GkeHubClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

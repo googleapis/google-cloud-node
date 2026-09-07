@@ -30,10 +30,10 @@ import type {
   IamClient,
   IamProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class JobControllerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataproc');
@@ -68,11 +68,11 @@ export class JobControllerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  jobControllerStub?: Promise<{ [name: string]: Function }>;
+  jobControllerStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of JobControllerClient.
@@ -148,7 +148,7 @@ export class JobControllerClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -358,28 +358,28 @@ export class JobControllerClient {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1/{name=projects/*/regions/*/operations/*}:cancel',
           additional_bindings: [
-            { post: '/v1/{name=projects/*/locations/*/operations/*}:cancel' },
+            {post: '/v1/{name=projects/*/locations/*/operations/*}:cancel'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/regions/*/operations/*}',
           additional_bindings: [
-            { delete: '/v1/{name=projects/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=projects/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/regions/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/regions/*/operations}',
           additional_bindings: [
-            { get: '/v1/{name=projects/*/locations/*/operations}' },
+            {get: '/v1/{name=projects/*/locations/*/operations}'},
           ],
         },
       ];
@@ -407,7 +407,7 @@ export class JobControllerClient {
       'google.cloud.dataproc.v1.JobController',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -447,7 +447,7 @@ export class JobControllerClient {
           (this._protos as any).google.cloud.dataproc.v1.JobController,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -462,7 +462,7 @@ export class JobControllerClient {
     ];
     for (const methodName of jobControllerStubMethods) {
       const callPromise = this.jobControllerStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -674,7 +674,7 @@ export class JobControllerClient {
         project_id: request.projectId?.toString() ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('submitJob request %j', request);
@@ -805,7 +805,7 @@ export class JobControllerClient {
         region: request.region ?? '',
         job_id: request.jobId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getJob request %j', request);
@@ -945,7 +945,7 @@ export class JobControllerClient {
         region: request.region ?? '',
         job_id: request.jobId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateJob request %j', request);
@@ -1080,7 +1080,7 @@ export class JobControllerClient {
         region: request.region ?? '',
         job_id: request.jobId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelJob request %j', request);
@@ -1212,7 +1212,7 @@ export class JobControllerClient {
         region: request.region ?? '',
         job_id: request.jobId?.toString() ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteJob request %j', request);
@@ -1376,7 +1376,7 @@ export class JobControllerClient {
         project_id: request.projectId?.toString() ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1433,7 +1433,7 @@ export class JobControllerClient {
     this._log.info('submitJobAsOperation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1563,7 +1563,7 @@ export class JobControllerClient {
         project_id: request.projectId?.toString() ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1659,7 +1659,7 @@ export class JobControllerClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listJobs stream %j', request);
@@ -1739,7 +1739,7 @@ export class JobControllerClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listJobs iterate %j', request);
@@ -2611,11 +2611,11 @@ export class JobControllerClient {
    */
   close(): Promise<void> {
     if (this.jobControllerStub && !this._terminated) {
-      return this.jobControllerStub.then((stub) => {
+      return this.jobControllerStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

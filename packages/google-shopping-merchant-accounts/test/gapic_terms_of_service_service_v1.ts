@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as termsofserviceserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -188,7 +188,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.termsOfServiceServiceStub, undefined);
@@ -196,13 +196,13 @@ describe('v1.TermsOfServiceServiceClient', () => {
       assert(client.termsOfServiceServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.termsOfServiceServiceStub);
@@ -211,15 +211,15 @@ describe('v1.TermsOfServiceServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.termsOfServiceServiceStub, undefined);
@@ -228,7 +228,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -237,7 +237,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -250,7 +250,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -274,7 +274,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes getTermsOfService without error', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -306,7 +306,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes getTermsOfService without error using callback', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes getTermsOfService with error', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes getTermsOfService with closed client', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTermsOfService(request), expectedError);
@@ -410,7 +410,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes retrieveLatestTermsOfService without error', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes retrieveLatestTermsOfService without error using callback', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes retrieveLatestTermsOfService with error', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes retrieveLatestTermsOfService with closed client', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -492,7 +492,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
         new protos.google.shopping.merchant.accounts.v1.RetrieveLatestTermsOfServiceRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -506,7 +506,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes acceptTermsOfService without error', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -539,7 +539,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes acceptTermsOfService without error using callback', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -587,7 +587,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes acceptTermsOfService with error', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -619,7 +619,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
     it('invokes acceptTermsOfService with closed client', async () => {
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.acceptTermsOfService(request), expectedError);
@@ -647,7 +647,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -687,7 +687,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -737,7 +737,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -800,7 +800,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -852,7 +852,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -894,7 +894,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -940,7 +940,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -982,7 +982,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1022,7 +1022,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1077,7 +1077,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1124,7 +1124,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1180,7 +1180,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1335,7 +1335,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1398,7 +1398,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1461,7 +1461,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1560,7 +1560,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1602,7 +1602,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1704,7 +1704,7 @@ describe('v1.TermsOfServiceServiceClient', () => {
       };
       const client =
         new termsofserviceserviceModule.v1.TermsOfServiceServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

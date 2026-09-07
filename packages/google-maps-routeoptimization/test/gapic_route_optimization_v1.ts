@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as routeoptimizationModule from '../src';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -109,9 +109,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -191,7 +191,7 @@ describe('v1.RouteOptimizationClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new routeoptimizationModule.v1.RouteOptimizationClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -235,7 +235,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.routeOptimizationStub, undefined);
@@ -243,12 +243,12 @@ describe('v1.RouteOptimizationClient', () => {
       assert(client.routeOptimizationStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.routeOptimizationStub);
@@ -257,14 +257,14 @@ describe('v1.RouteOptimizationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.routeOptimizationStub, undefined);
@@ -273,7 +273,7 @@ describe('v1.RouteOptimizationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -281,7 +281,7 @@ describe('v1.RouteOptimizationClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -293,7 +293,7 @@ describe('v1.RouteOptimizationClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -316,7 +316,7 @@ describe('v1.RouteOptimizationClient', () => {
   describe('optimizeTours', () => {
     it('invokes optimizeTours without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -347,7 +347,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes optimizeTours without error using callback', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -394,7 +394,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes optimizeTours with error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -425,7 +425,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes optimizeTours with closed client', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -438,7 +438,7 @@ describe('v1.RouteOptimizationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.optimizeTours(request), expectedError);
@@ -448,7 +448,7 @@ describe('v1.RouteOptimizationClient', () => {
   describe('batchOptimizeTours', () => {
     it('invokes batchOptimizeTours without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes batchOptimizeTours without error using callback', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes batchOptimizeTours with call error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes batchOptimizeTours with LRO error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes checkBatchOptimizeToursProgress without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -607,8 +607,8 @@ describe('v1.RouteOptimizationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchOptimizeToursProgress(
@@ -621,7 +621,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes checkBatchOptimizeToursProgress with error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -642,7 +642,7 @@ describe('v1.RouteOptimizationClient', () => {
   describe('optimizeToursLongRunning', () => {
     it('invokes optimizeToursLongRunning without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -675,7 +675,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes optimizeToursLongRunning without error using callback', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes optimizeToursLongRunning with call error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -763,7 +763,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes optimizeToursLongRunning with LRO error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes checkOptimizeToursLongRunningProgress without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -804,8 +804,8 @@ describe('v1.RouteOptimizationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -819,7 +819,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes checkOptimizeToursLongRunningProgress with error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v1.RouteOptimizationClient', () => {
   describe('optimizeToursUri', () => {
     it('invokes optimizeToursUri without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes optimizeToursUri without error using callback', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -927,7 +927,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes optimizeToursUri with call error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -958,7 +958,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes optimizeToursUri with LRO error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -991,7 +991,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes checkOptimizeToursUriProgress without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,8 +999,8 @@ describe('v1.RouteOptimizationClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkOptimizeToursUriProgress(
@@ -1013,7 +1013,7 @@ describe('v1.RouteOptimizationClient', () => {
 
     it('invokes checkOptimizeToursUriProgress with error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1033,7 +1033,7 @@ describe('v1.RouteOptimizationClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v1.RouteOptimizationClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1082,7 +1082,7 @@ describe('v1.RouteOptimizationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1092,7 +1092,7 @@ describe('v1.RouteOptimizationClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1116,7 +1116,7 @@ describe('v1.RouteOptimizationClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.RouteOptimizationClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1166,7 +1166,7 @@ describe('v1.RouteOptimizationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1176,7 +1176,7 @@ describe('v1.RouteOptimizationClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1200,7 +1200,7 @@ describe('v1.RouteOptimizationClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1222,7 +1222,7 @@ describe('v1.RouteOptimizationClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1250,7 +1250,7 @@ describe('v1.RouteOptimizationClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1260,7 +1260,7 @@ describe('v1.RouteOptimizationClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1284,7 +1284,7 @@ describe('v1.RouteOptimizationClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1319,7 +1319,7 @@ describe('v1.RouteOptimizationClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new routeoptimizationModule.v1.RouteOptimizationClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

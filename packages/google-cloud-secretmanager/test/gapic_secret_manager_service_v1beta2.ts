@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as secretmanagerserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -254,7 +254,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.secretManagerServiceStub, undefined);
@@ -262,13 +262,13 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(client.secretManagerServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.secretManagerServiceStub);
@@ -277,15 +277,15 @@ describe('v1beta2.SecretManagerServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.secretManagerServiceStub, undefined);
@@ -294,7 +294,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes createSecret without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes createSecret without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes createSecret with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes createSecret with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSecret(request), expectedError);
@@ -476,7 +476,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes addSecretVersion without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -508,7 +508,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes addSecretVersion without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes addSecretVersion with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes addSecretVersion with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addSecretVersion(request), expectedError);
@@ -612,7 +612,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getSecret without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -644,7 +644,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getSecret without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -692,7 +692,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getSecret with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -721,7 +721,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getSecret with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSecret(request), expectedError);
@@ -745,7 +745,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes updateSecret without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -778,7 +778,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes updateSecret without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -827,7 +827,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes updateSecret with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes updateSecret with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.secret.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSecret(request), expectedError);
@@ -885,7 +885,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes deleteSecret without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -917,7 +917,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes deleteSecret without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes deleteSecret with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes deleteSecret with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSecret(request), expectedError);
@@ -1021,7 +1021,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getSecretVersion without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1053,7 +1053,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getSecretVersion without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1101,7 +1101,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getSecretVersion with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1133,7 +1133,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getSecretVersion with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSecretVersion(request), expectedError);
@@ -1157,7 +1157,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes accessSecretVersion without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1190,7 +1190,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes accessSecretVersion without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1238,7 +1238,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes accessSecretVersion with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes accessSecretVersion with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1283,7 +1283,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.accessSecretVersion(request), expectedError);
@@ -1294,7 +1294,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes disableSecretVersion without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1327,7 +1327,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes disableSecretVersion without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1375,7 +1375,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes disableSecretVersion with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1407,7 +1407,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes disableSecretVersion with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1420,7 +1420,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.disableSecretVersion(request), expectedError);
@@ -1431,7 +1431,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes enableSecretVersion without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1464,7 +1464,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes enableSecretVersion without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1512,7 +1512,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes enableSecretVersion with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1544,7 +1544,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes enableSecretVersion with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1557,7 +1557,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.enableSecretVersion(request), expectedError);
@@ -1568,7 +1568,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes destroySecretVersion without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1601,7 +1601,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes destroySecretVersion without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1649,7 +1649,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes destroySecretVersion with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1681,7 +1681,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes destroySecretVersion with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1694,7 +1694,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.destroySecretVersion(request), expectedError);
@@ -1705,7 +1705,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1737,7 +1737,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1785,7 +1785,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1817,7 +1817,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes setIamPolicy with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1830,7 +1830,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1841,7 +1841,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1873,7 +1873,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1921,7 +1921,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1953,7 +1953,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getIamPolicy with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1966,7 +1966,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1977,7 +1977,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2010,7 +2010,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2058,7 +2058,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2090,7 +2090,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes testIamPermissions with closed client', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2103,7 +2103,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -2114,7 +2114,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes listSecrets without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2154,7 +2154,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes listSecrets without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2210,7 +2210,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes listSecrets with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2242,7 +2242,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes listSecretsStream without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2295,16 +2295,16 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSecretsStream with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2348,16 +2348,16 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSecrets without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2398,16 +2398,16 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSecrets with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2442,9 +2442,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecrets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2453,7 +2453,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes listSecretVersions without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2494,7 +2494,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes listSecretVersions without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2526,8 +2526,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.secretmanager.v1beta2.ISecretVersion[]
-              | null,
+              protos.google.cloud.secretmanager.v1beta2.ISecretVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2552,7 +2551,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes listSecretVersions with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2584,7 +2583,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes listSecretVersionsStream without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2639,16 +2638,16 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSecretVersionsStream with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2692,16 +2691,16 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSecretVersions without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2743,16 +2742,16 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSecretVersions with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2785,9 +2784,9 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       assert(
         (client.descriptors.page.listSecretVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2795,7 +2794,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2826,7 +2825,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2871,7 +2870,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2907,7 +2906,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2956,7 +2955,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3003,7 +3002,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       };
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3045,7 +3044,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       };
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3146,7 +3145,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       };
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3226,7 +3225,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       };
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3305,7 +3304,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       };
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3355,7 +3354,7 @@ describe('v1beta2.SecretManagerServiceClient', () => {
       };
       const client =
         new secretmanagerserviceModule.v1beta2.SecretManagerServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

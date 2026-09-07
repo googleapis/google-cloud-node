@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform, PassThrough } from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class WarehouseClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('visionai');
@@ -70,12 +70,12 @@ export class WarehouseClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  warehouseStub?: Promise<{ [name: string]: Function }>;
+  warehouseStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of WarehouseClient.
@@ -151,7 +151,7 @@ export class WarehouseClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -398,7 +398,7 @@ export class WarehouseClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=projects/*/locations/*/warehouseOperations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/warehouseOperations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/corpora/*/assets/*/operations/*}',
             },
@@ -411,7 +411,7 @@ export class WarehouseClient {
             {
               get: '/v1/{name=projects/*/locations/*/corpora/*/indexes/*/operations/*}',
             },
-            { get: '/v1/{name=projects/*/locations/*/corpora/*/operations/*}' },
+            {get: '/v1/{name=projects/*/locations/*/corpora/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',
             },
@@ -633,7 +633,7 @@ export class WarehouseClient {
       'google.cloud.visionai.v1.Warehouse',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -673,7 +673,7 @@ export class WarehouseClient {
           (this._protos as any).google.cloud.visionai.v1.Warehouse,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -744,11 +744,11 @@ export class WarehouseClient {
     ];
     for (const methodName of warehouseStubMethods) {
       const callPromise = this.warehouseStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -964,7 +964,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAsset request %j', request);
@@ -1098,7 +1098,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'asset.name': request.asset!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAsset request %j', request);
@@ -1226,7 +1226,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAsset request %j', request);
@@ -1362,7 +1362,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateRetrievalUrl request %j', request);
@@ -1493,7 +1493,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIndex request %j', request);
@@ -1617,7 +1617,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCorpus request %j', request);
@@ -1745,7 +1745,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'corpus.name': request.corpus!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCorpus request %j', request);
@@ -1874,7 +1874,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteCorpus request %j', request);
@@ -2012,7 +2012,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDataSchema request %j', request);
@@ -2150,7 +2150,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'data_schema.name': request.dataSchema!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDataSchema request %j', request);
@@ -2280,7 +2280,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataSchema request %j', request);
@@ -2416,7 +2416,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteDataSchema request %j', request);
@@ -2562,7 +2562,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAnnotation request %j', request);
@@ -2692,7 +2692,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAnnotation request %j', request);
@@ -2831,7 +2831,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'annotation.name': request.annotation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAnnotation request %j', request);
@@ -2967,7 +2967,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAnnotation request %j', request);
@@ -3102,7 +3102,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('clipAsset request %j', request);
@@ -3238,7 +3238,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateHlsUri request %j', request);
@@ -3395,7 +3395,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSearchConfig request %j', request);
@@ -3552,7 +3552,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'search_config.name': request.searchConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSearchConfig request %j', request);
@@ -3691,7 +3691,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSearchConfig request %j', request);
@@ -3830,7 +3830,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSearchConfig request %j', request);
@@ -3973,7 +3973,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSearchHypernym request %j', request);
@@ -4116,7 +4116,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'search_hypernym.name': request.searchHypernym!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSearchHypernym request %j', request);
@@ -4255,7 +4255,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSearchHypernym request %j', request);
@@ -4391,7 +4391,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSearchHypernym request %j', request);
@@ -4528,7 +4528,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIndexEndpoint request %j', request);
@@ -4657,7 +4657,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCollection request %j', request);
@@ -4803,7 +4803,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'collection.name': request.collection!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateCollection request %j', request);
@@ -4937,7 +4937,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'item.collection': request.item!.collection ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addCollectionItem request %j', request);
@@ -5071,7 +5071,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'item.collection': request.item!.collection ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('removeCollectionItem request %j', request);
@@ -5140,7 +5140,7 @@ export class WarehouseClient {
    * region_tag:warehouse-visionai_v1_generated_Warehouse_IngestAsset_async
    */
   ingestAsset(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('ingestAsset stream %j', options);
@@ -5248,7 +5248,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5305,7 +5305,7 @@ export class WarehouseClient {
     this._log.info('deleteAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5430,7 +5430,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5487,7 +5487,7 @@ export class WarehouseClient {
     this._log.info('uploadAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5601,7 +5601,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5658,7 +5658,7 @@ export class WarehouseClient {
     this._log.info('analyzeAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5777,7 +5777,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5834,7 +5834,7 @@ export class WarehouseClient {
     this._log.info('indexAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -5953,7 +5953,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6010,7 +6010,7 @@ export class WarehouseClient {
     this._log.info('removeIndexAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6134,7 +6134,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6191,7 +6191,7 @@ export class WarehouseClient {
     this._log.info('createIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6312,7 +6312,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'index.name': request.index!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6369,7 +6369,7 @@ export class WarehouseClient {
     this._log.info('updateIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6484,7 +6484,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6541,7 +6541,7 @@ export class WarehouseClient {
     this._log.info('deleteIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6655,7 +6655,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6712,7 +6712,7 @@ export class WarehouseClient {
     this._log.info('createCorpus long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -6826,7 +6826,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6883,7 +6883,7 @@ export class WarehouseClient {
     this._log.info('analyzeCorpus long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7004,7 +7004,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7061,7 +7061,7 @@ export class WarehouseClient {
     this._log.info('importAssets long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7183,7 +7183,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7240,7 +7240,7 @@ export class WarehouseClient {
     this._log.info('createIndexEndpoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7360,7 +7360,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         'index_endpoint.name': request.indexEndpoint!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7417,7 +7417,7 @@ export class WarehouseClient {
     this._log.info('updateIndexEndpoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7529,7 +7529,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7586,7 +7586,7 @@ export class WarehouseClient {
     this._log.info('deleteIndexEndpoint long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7702,7 +7702,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7759,7 +7759,7 @@ export class WarehouseClient {
     this._log.info('deployIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7873,7 +7873,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7930,7 +7930,7 @@ export class WarehouseClient {
     this._log.info('undeployIndex long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8053,7 +8053,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8110,7 +8110,7 @@ export class WarehouseClient {
     this._log.info('createCollection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8223,7 +8223,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8280,7 +8280,7 @@ export class WarehouseClient {
     this._log.info('deleteCollection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8395,7 +8395,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8476,7 +8476,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssets stream %j', request);
@@ -8539,7 +8539,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssets iterate %j', request);
@@ -8657,7 +8657,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         index: request.index ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8738,7 +8738,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['viewIndexedAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('viewIndexedAssets stream %j', request);
@@ -8801,7 +8801,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['viewIndexedAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('viewIndexedAssets iterate %j', request);
@@ -8908,7 +8908,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8984,7 +8984,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIndexes stream %j', request);
@@ -9042,7 +9042,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIndexes iterate %j', request);
@@ -9154,7 +9154,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9235,7 +9235,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCorpora stream %j', request);
@@ -9298,7 +9298,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listCorpora'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCorpora iterate %j', request);
@@ -9410,7 +9410,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9485,7 +9485,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listDataSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataSchemas stream %j', request);
@@ -9542,7 +9542,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listDataSchemas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataSchemas iterate %j', request);
@@ -9670,7 +9670,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9761,7 +9761,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listAnnotations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnnotations stream %j', request);
@@ -9834,7 +9834,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listAnnotations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnnotations iterate %j', request);
@@ -9947,7 +9947,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10023,7 +10023,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listSearchConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSearchConfigs stream %j', request);
@@ -10081,7 +10081,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listSearchConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSearchConfigs iterate %j', request);
@@ -10194,7 +10194,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10270,7 +10270,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listSearchHypernyms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSearchHypernyms stream %j', request);
@@ -10328,7 +10328,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listSearchHypernyms'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSearchHypernyms iterate %j', request);
@@ -10451,7 +10451,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         corpus: request.corpus ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10543,7 +10543,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['searchAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchAssets stream %j', request);
@@ -10617,7 +10617,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['searchAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchAssets iterate %j', request);
@@ -10737,7 +10737,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         index_endpoint: request.indexEndpoint ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10820,7 +10820,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['searchIndexEndpoint'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchIndexEndpoint stream %j', request);
@@ -10885,7 +10885,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['searchIndexEndpoint'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchIndexEndpoint iterate %j', request);
@@ -11004,7 +11004,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11086,7 +11086,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIndexEndpoints stream %j', request);
@@ -11150,7 +11150,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIndexEndpoints iterate %j', request);
@@ -11261,7 +11261,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11335,7 +11335,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listCollections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCollections stream %j', request);
@@ -11391,7 +11391,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['listCollections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCollections iterate %j', request);
@@ -11503,7 +11503,7 @@ export class WarehouseClient {
       this._gaxModule.routingHeader.fromParams({
         collection: request.collection ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11578,7 +11578,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['viewCollectionItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('viewCollectionItems stream %j', request);
@@ -11635,7 +11635,7 @@ export class WarehouseClient {
       });
     const defaultCallSettings = this._defaults['viewCollectionItems'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('viewCollectionItems iterate %j', request);
@@ -13475,14 +13475,14 @@ export class WarehouseClient {
    */
   close(): Promise<void> {
     if (this.warehouseStub && !this._terminated) {
-      return this.warehouseStub.then((stub) => {
+      return this.warehouseStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

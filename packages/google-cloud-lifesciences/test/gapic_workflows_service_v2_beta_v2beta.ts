@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as workflowsservicev2betaModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -105,9 +105,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -194,7 +194,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -242,7 +242,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.workflowsServiceV2BetaStub, undefined);
@@ -250,13 +250,13 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
       assert(client.workflowsServiceV2BetaStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.workflowsServiceV2BetaStub);
@@ -265,15 +265,15 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.workflowsServiceV2BetaStub, undefined);
@@ -282,7 +282,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -291,7 +291,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -304,7 +304,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -328,7 +328,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes runPipeline without error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -361,7 +361,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes runPipeline without error using callback', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -416,7 +416,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes runPipeline with call error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -448,7 +448,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes runPipeline with LRO error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes checkRunPipelineProgress without error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -490,8 +490,8 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRunPipelineProgress(
@@ -505,7 +505,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes checkRunPipelineProgress with error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -523,7 +523,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -554,7 +554,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -635,7 +635,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -684,7 +684,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -776,7 +776,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -787,7 +787,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -812,7 +812,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -863,7 +863,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -874,7 +874,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -899,7 +899,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -922,7 +922,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -950,7 +950,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -961,7 +961,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -986,7 +986,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1022,7 +1022,7 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as tenantserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tenantServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v4.TenantServiceClient', () => {
       assert(client.tenantServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.tenantServiceStub);
@@ -261,14 +261,14 @@ describe('v4.TenantServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.tenantServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v4.TenantServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v4.TenantServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v4.TenantServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v4.TenantServiceClient', () => {
   describe('createTenant', () => {
     it('invokes createTenant without error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes createTenant without error using callback', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes createTenant with error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes createTenant with closed client', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v4.TenantServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTenant(request), expectedError);
@@ -452,7 +452,7 @@ describe('v4.TenantServiceClient', () => {
   describe('getTenant', () => {
     it('invokes getTenant without error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes getTenant without error using callback', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes getTenant with error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes getTenant with closed client', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v4.TenantServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTenant(request), expectedError);
@@ -581,7 +581,7 @@ describe('v4.TenantServiceClient', () => {
   describe('updateTenant', () => {
     it('invokes updateTenant without error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes updateTenant without error using callback', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes updateTenant with error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes updateTenant with closed client', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v4.TenantServiceClient', () => {
       );
       request.tenant.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTenant(request), expectedError);
@@ -717,7 +717,7 @@ describe('v4.TenantServiceClient', () => {
   describe('deleteTenant', () => {
     it('invokes deleteTenant without error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes deleteTenant without error using callback', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes deleteTenant with error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes deleteTenant with closed client', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v4.TenantServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTenant(request), expectedError);
@@ -849,7 +849,7 @@ describe('v4.TenantServiceClient', () => {
   describe('listTenants', () => {
     it('invokes listTenants without error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes listTenants without error using callback', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -931,7 +931,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes listTenants with error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v4.TenantServiceClient', () => {
 
     it('invokes listTenantsStream without error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,15 +1005,15 @@ describe('v4.TenantServiceClient', () => {
       assert(
         (client.descriptors.page.listTenants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTenantsStream with error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1053,15 +1053,15 @@ describe('v4.TenantServiceClient', () => {
       assert(
         (client.descriptors.page.listTenants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTenants without error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1096,15 +1096,15 @@ describe('v4.TenantServiceClient', () => {
       assert(
         (client.descriptors.page.listTenants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTenants with error', async () => {
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,9 +1138,9 @@ describe('v4.TenantServiceClient', () => {
       assert(
         (client.descriptors.page.listTenants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1154,7 +1154,7 @@ describe('v4.TenantServiceClient', () => {
         company: 'companyValue',
       };
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1218,7 +1218,7 @@ describe('v4.TenantServiceClient', () => {
         job: 'jobValue',
       };
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1280,7 +1280,7 @@ describe('v4.TenantServiceClient', () => {
         project: 'projectValue',
       };
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1319,7 +1319,7 @@ describe('v4.TenantServiceClient', () => {
         tenant: 'tenantValue',
       };
       const client = new tenantserviceModule.v4.TenantServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

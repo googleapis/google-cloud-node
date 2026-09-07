@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as clustermanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.clusterManagerStub, undefined);
@@ -247,12 +247,12 @@ describe('v1.ClusterManagerClient', () => {
       assert(client.clusterManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.clusterManagerStub);
@@ -261,14 +261,14 @@ describe('v1.ClusterManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.clusterManagerStub, undefined);
@@ -277,7 +277,7 @@ describe('v1.ClusterManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1.ClusterManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1.ClusterManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('listClusters', () => {
     it('invokes listClusters without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -361,7 +361,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listClusters without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listClusters with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -459,7 +459,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listClusters with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listClusters(request), expectedError);
@@ -492,7 +492,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('getCluster', () => {
     it('invokes getCluster without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -538,7 +538,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getCluster without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getCluster with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getCluster with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -674,7 +674,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCluster(request), expectedError);
@@ -684,7 +684,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('createCluster', () => {
     it('invokes createCluster without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes createCluster without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes createCluster with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -823,7 +823,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes createCluster with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -846,7 +846,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCluster(request), expectedError);
@@ -856,7 +856,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -902,7 +902,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes updateCluster without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes updateCluster with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1010,7 +1010,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes updateCluster with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1038,7 +1038,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCluster(request), expectedError);
@@ -1048,7 +1048,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('updateNodePool', () => {
     it('invokes updateNodePool without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes updateNodePool without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1166,7 +1166,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes updateNodePool with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1217,7 +1217,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes updateNodePool with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateNodePool(request), expectedError);
@@ -1260,7 +1260,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setNodePoolAutoscaling', () => {
     it('invokes setNodePoolAutoscaling without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1312,7 +1312,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNodePoolAutoscaling without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNodePoolAutoscaling with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1433,7 +1433,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNodePoolAutoscaling with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1466,7 +1466,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1479,7 +1479,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setLoggingService', () => {
     it('invokes setLoggingService without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1525,7 +1525,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLoggingService without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1587,7 +1587,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLoggingService with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1633,7 +1633,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLoggingService with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,7 +1661,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setLoggingService(request), expectedError);
@@ -1671,7 +1671,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setMonitoringService', () => {
     it('invokes setMonitoringService without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1718,7 +1718,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setMonitoringService without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1780,7 +1780,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setMonitoringService with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1826,7 +1826,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setMonitoringService with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1854,7 +1854,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setMonitoringService(request), expectedError);
@@ -1864,7 +1864,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setAddonsConfig', () => {
     it('invokes setAddonsConfig without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setAddonsConfig without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1972,7 +1972,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setAddonsConfig with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2018,7 +2018,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setAddonsConfig with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2046,7 +2046,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setAddonsConfig(request), expectedError);
@@ -2056,7 +2056,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setLocations', () => {
     it('invokes setLocations without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2104,7 +2104,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLocations without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2168,7 +2168,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLocations with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2216,7 +2216,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLocations with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2245,7 +2245,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setLocations(request), expectedError);
@@ -2256,7 +2256,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('updateMaster', () => {
     it('invokes updateMaster without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2302,7 +2302,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes updateMaster without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2364,7 +2364,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes updateMaster with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2410,7 +2410,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes updateMaster with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2438,7 +2438,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateMaster(request), expectedError);
@@ -2448,7 +2448,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setMasterAuth', () => {
     it('invokes setMasterAuth without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2494,7 +2494,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setMasterAuth without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2556,7 +2556,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setMasterAuth with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2602,7 +2602,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setMasterAuth with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2630,7 +2630,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setMasterAuth(request), expectedError);
@@ -2640,7 +2640,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2686,7 +2686,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes deleteCluster without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2748,7 +2748,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes deleteCluster with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2794,7 +2794,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes deleteCluster with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2822,7 +2822,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCluster(request), expectedError);
@@ -2832,7 +2832,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('listOperations', () => {
     it('invokes listOperations without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2873,7 +2873,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listOperations without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2930,7 +2930,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listOperations with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2971,7 +2971,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listOperations with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2994,7 +2994,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listOperations(request), expectedError);
@@ -3004,7 +3004,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3050,7 +3050,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getOperation without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3112,7 +3112,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getOperation with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3158,7 +3158,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getOperation with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3186,7 +3186,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.operationId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getOperation(request), expectedError);
@@ -3196,7 +3196,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3242,7 +3242,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes cancelOperation without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3304,7 +3304,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes cancelOperation with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3350,7 +3350,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes cancelOperation with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3378,7 +3378,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.operationId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelOperation(request), expectedError);
@@ -3388,7 +3388,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('getServerConfig', () => {
     it('invokes getServerConfig without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3429,7 +3429,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getServerConfig without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3486,7 +3486,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getServerConfig with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3527,7 +3527,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getServerConfig with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3550,7 +3550,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getServerConfig(request), expectedError);
@@ -3560,7 +3560,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('getJSONWebKeys', () => {
     it('invokes getJSONWebKeys without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3591,7 +3591,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getJSONWebKeys without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3638,7 +3638,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getJSONWebKeys with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3669,7 +3669,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getJSONWebKeys with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3682,7 +3682,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getJSONWebKeys(request), expectedError);
@@ -3692,7 +3692,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('listNodePools', () => {
     it('invokes listNodePools without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3738,7 +3738,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listNodePools without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3800,7 +3800,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listNodePools with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3846,7 +3846,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listNodePools with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3874,7 +3874,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.listNodePools(request), expectedError);
@@ -3884,7 +3884,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('getNodePool', () => {
     it('invokes getNodePool without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3935,7 +3935,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getNodePool without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4002,7 +4002,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getNodePool with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4053,7 +4053,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes getNodePool with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4086,7 +4086,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getNodePool(request), expectedError);
@@ -4096,7 +4096,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('createNodePool', () => {
     it('invokes createNodePool without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4142,7 +4142,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes createNodePool without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4204,7 +4204,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes createNodePool with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4250,7 +4250,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes createNodePool with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4278,7 +4278,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createNodePool(request), expectedError);
@@ -4288,7 +4288,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('deleteNodePool', () => {
     it('invokes deleteNodePool without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4339,7 +4339,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes deleteNodePool without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4406,7 +4406,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes deleteNodePool with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4457,7 +4457,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes deleteNodePool with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4490,7 +4490,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteNodePool(request), expectedError);
@@ -4500,7 +4500,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('completeNodePoolUpgrade', () => {
     it('invokes completeNodePoolUpgrade without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4532,7 +4532,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes completeNodePoolUpgrade without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4579,7 +4579,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes completeNodePoolUpgrade with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4613,7 +4613,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes completeNodePoolUpgrade with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4626,7 +4626,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4639,7 +4639,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('rollbackNodePoolUpgrade', () => {
     it('invokes rollbackNodePoolUpgrade without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4691,7 +4691,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes rollbackNodePoolUpgrade without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4758,7 +4758,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes rollbackNodePoolUpgrade with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4812,7 +4812,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes rollbackNodePoolUpgrade with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4845,7 +4845,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -4858,7 +4858,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setNodePoolManagement', () => {
     it('invokes setNodePoolManagement without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4910,7 +4910,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNodePoolManagement without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4977,7 +4977,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNodePoolManagement with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5031,7 +5031,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNodePoolManagement with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5064,7 +5064,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -5077,7 +5077,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setLabels', () => {
     it('invokes setLabels without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5123,7 +5123,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLabels without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5185,7 +5185,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLabels with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5228,7 +5228,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLabels with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5256,7 +5256,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setLabels(request), expectedError);
@@ -5266,7 +5266,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setLegacyAbac', () => {
     it('invokes setLegacyAbac without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5312,7 +5312,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLegacyAbac without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5374,7 +5374,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLegacyAbac with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5420,7 +5420,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setLegacyAbac with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5448,7 +5448,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setLegacyAbac(request), expectedError);
@@ -5458,7 +5458,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('startIPRotation', () => {
     it('invokes startIPRotation without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5504,7 +5504,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes startIPRotation without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5566,7 +5566,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes startIPRotation with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5612,7 +5612,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes startIPRotation with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5640,7 +5640,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.startIPRotation(request), expectedError);
@@ -5650,7 +5650,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('completeIPRotation', () => {
     it('invokes completeIPRotation without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5697,7 +5697,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes completeIPRotation without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5759,7 +5759,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes completeIPRotation with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5805,7 +5805,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes completeIPRotation with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5833,7 +5833,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.completeIPRotation(request), expectedError);
@@ -5843,7 +5843,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setNodePoolSize', () => {
     it('invokes setNodePoolSize without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5894,7 +5894,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNodePoolSize without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5961,7 +5961,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNodePoolSize with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6012,7 +6012,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNodePoolSize with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6045,7 +6045,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setNodePoolSize(request), expectedError);
@@ -6055,7 +6055,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setNetworkPolicy', () => {
     it('invokes setNetworkPolicy without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6101,7 +6101,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNetworkPolicy without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6163,7 +6163,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNetworkPolicy with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6209,7 +6209,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setNetworkPolicy with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6237,7 +6237,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setNetworkPolicy(request), expectedError);
@@ -6247,7 +6247,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('setMaintenancePolicy', () => {
     it('invokes setMaintenancePolicy without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6294,7 +6294,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setMaintenancePolicy without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6356,7 +6356,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setMaintenancePolicy with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6402,7 +6402,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes setMaintenancePolicy with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6430,7 +6430,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.setMaintenancePolicy(request), expectedError);
@@ -6440,7 +6440,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('checkAutopilotCompatibility', () => {
     it('invokes checkAutopilotCompatibility without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6472,7 +6472,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes checkAutopilotCompatibility without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6519,7 +6519,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes checkAutopilotCompatibility with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6553,7 +6553,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes checkAutopilotCompatibility with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6566,7 +6566,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6579,7 +6579,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('fetchClusterUpgradeInfo', () => {
     it('invokes fetchClusterUpgradeInfo without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6611,7 +6611,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes fetchClusterUpgradeInfo without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6658,7 +6658,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes fetchClusterUpgradeInfo with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6692,7 +6692,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes fetchClusterUpgradeInfo with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6705,7 +6705,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6718,7 +6718,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('fetchNodePoolUpgradeInfo', () => {
     it('invokes fetchNodePoolUpgradeInfo without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6750,7 +6750,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes fetchNodePoolUpgradeInfo without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6797,7 +6797,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes fetchNodePoolUpgradeInfo with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6831,7 +6831,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes fetchNodePoolUpgradeInfo with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6844,7 +6844,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6857,7 +6857,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('completeControlPlaneUpgrade', () => {
     it('invokes completeControlPlaneUpgrade without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6889,7 +6889,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes completeControlPlaneUpgrade without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6936,7 +6936,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes completeControlPlaneUpgrade with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6970,7 +6970,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes completeControlPlaneUpgrade with closed client', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6983,7 +6983,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -6996,7 +6996,7 @@ describe('v1.ClusterManagerClient', () => {
   describe('listUsableSubnetworks', () => {
     it('invokes listUsableSubnetworks without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7036,7 +7036,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listUsableSubnetworks without error using callback', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7091,7 +7091,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listUsableSubnetworks with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7125,7 +7125,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listUsableSubnetworksStream without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7191,7 +7191,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('invokes listUsableSubnetworksStream with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7246,7 +7246,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('uses async iteration with listUsableSubnetworks without error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7299,7 +7299,7 @@ describe('v1.ClusterManagerClient', () => {
 
     it('uses async iteration with listUsableSubnetworks with error', async () => {
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7351,7 +7351,7 @@ describe('v1.ClusterManagerClient', () => {
         ca_pool: 'caPoolValue',
       };
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7417,7 +7417,7 @@ describe('v1.ClusterManagerClient', () => {
         crypto_key_version: 'cryptoKeyVersionValue',
       };
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7507,7 +7507,7 @@ describe('v1.ClusterManagerClient', () => {
         subnetwork: 'subnetworkValue',
       };
       const client = new clustermanagerModule.v1.ClusterManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

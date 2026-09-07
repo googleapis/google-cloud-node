@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as lustreModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v1.LustreClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.lustreStub, undefined);
@@ -282,12 +282,12 @@ describe('v1.LustreClient', () => {
       assert(client.lustreStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.lustreStub);
@@ -296,14 +296,14 @@ describe('v1.LustreClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.lustreStub, undefined);
@@ -312,7 +312,7 @@ describe('v1.LustreClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v1.LustreClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v1.LustreClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v1.LustreClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v1.LustreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -487,7 +487,7 @@ describe('v1.LustreClient', () => {
   describe('createInstance', () => {
     it('invokes createInstance without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes createInstance without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes createInstance with call error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes createInstance with LRO error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -638,7 +638,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkCreateInstanceProgress without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,8 +646,8 @@ describe('v1.LustreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceProgress(
@@ -660,7 +660,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkCreateInstanceProgress with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -681,7 +681,7 @@ describe('v1.LustreClient', () => {
   describe('updateInstance', () => {
     it('invokes updateInstance without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -715,7 +715,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes updateInstance without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -770,7 +770,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes updateInstance with call error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -802,7 +802,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes updateInstance with LRO error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -836,7 +836,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkUpdateInstanceProgress without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,8 +844,8 @@ describe('v1.LustreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInstanceProgress(
@@ -858,7 +858,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkUpdateInstanceProgress with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -879,7 +879,7 @@ describe('v1.LustreClient', () => {
   describe('deleteInstance', () => {
     it('invokes deleteInstance without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -912,7 +912,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes deleteInstance without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes deleteInstance with call error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes deleteInstance with LRO error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1030,7 +1030,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkDeleteInstanceProgress without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1038,8 +1038,8 @@ describe('v1.LustreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteInstanceProgress(
@@ -1052,7 +1052,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkDeleteInstanceProgress with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1073,7 +1073,7 @@ describe('v1.LustreClient', () => {
   describe('importData', () => {
     it('invokes importData without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes importData without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes importData with call error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1190,7 +1190,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes importData with LRO error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1223,7 +1223,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkImportDataProgress without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,8 +1231,8 @@ describe('v1.LustreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportDataProgress(
@@ -1245,7 +1245,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkImportDataProgress with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1263,7 +1263,7 @@ describe('v1.LustreClient', () => {
   describe('exportData', () => {
     it('invokes exportData without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1295,7 +1295,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes exportData without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1349,7 +1349,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes exportData with call error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1380,7 +1380,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes exportData with LRO error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1413,7 +1413,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkExportDataProgress without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1421,8 +1421,8 @@ describe('v1.LustreClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportDataProgress(
@@ -1435,7 +1435,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes checkExportDataProgress with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1453,7 +1453,7 @@ describe('v1.LustreClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1486,7 +1486,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1535,7 +1535,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1566,7 +1566,7 @@ describe('v1.LustreClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1612,15 +1612,15 @@ describe('v1.LustreClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1661,15 +1661,15 @@ describe('v1.LustreClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1704,15 +1704,15 @@ describe('v1.LustreClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1744,16 +1744,16 @@ describe('v1.LustreClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1783,7 +1783,7 @@ describe('v1.LustreClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1827,7 +1827,7 @@ describe('v1.LustreClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1862,7 +1862,7 @@ describe('v1.LustreClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1910,7 +1910,7 @@ describe('v1.LustreClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1951,7 +1951,7 @@ describe('v1.LustreClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1972,7 +1972,7 @@ describe('v1.LustreClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2000,7 +2000,7 @@ describe('v1.LustreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2010,7 +2010,7 @@ describe('v1.LustreClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2034,7 +2034,7 @@ describe('v1.LustreClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2056,7 +2056,7 @@ describe('v1.LustreClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2084,7 +2084,7 @@ describe('v1.LustreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2094,7 +2094,7 @@ describe('v1.LustreClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2118,7 +2118,7 @@ describe('v1.LustreClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2140,7 +2140,7 @@ describe('v1.LustreClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2168,7 +2168,7 @@ describe('v1.LustreClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2178,7 +2178,7 @@ describe('v1.LustreClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2202,7 +2202,7 @@ describe('v1.LustreClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2237,7 +2237,7 @@ describe('v1.LustreClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2273,7 +2273,7 @@ describe('v1.LustreClient', () => {
         instance: 'instanceValue',
       };
       const client = new lustreModule.v1.LustreClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

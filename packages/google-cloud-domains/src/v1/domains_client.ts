@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -53,7 +53,7 @@ export class DomainsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('domains');
@@ -66,10 +66,10 @@ export class DomainsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  domainsStub?: Promise<{ [name: string]: Function }>;
+  domainsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DomainsClient.
@@ -145,7 +145,7 @@ export class DomainsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -375,7 +375,7 @@ export class DomainsClient {
       'google.cloud.domains.v1.Domains',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -415,7 +415,7 @@ export class DomainsClient {
           (this._protos as any).google.cloud.domains.v1.Domains,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -438,7 +438,7 @@ export class DomainsClient {
     ];
     for (const methodName of domainsStubMethods) {
       const callPromise = this.domainsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -639,7 +639,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchDomains request %j', request);
@@ -782,7 +782,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('retrieveRegisterParameters request %j', request);
@@ -932,7 +932,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('retrieveTransferParameters request %j', request);
@@ -1064,7 +1064,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRegistration request %j', request);
@@ -1209,7 +1209,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('retrieveAuthorizationCode request %j', request);
@@ -1350,7 +1350,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resetAuthorizationCode request %j', request);
@@ -1530,7 +1530,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1587,7 +1587,7 @@ export class DomainsClient {
     this._log.info('registerDomain long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1741,7 +1741,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1798,7 +1798,7 @@ export class DomainsClient {
     this._log.info('transferDomain long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1919,7 +1919,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         'registration.name': request.registration!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1976,7 +1976,7 @@ export class DomainsClient {
     this._log.info('updateRegistration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2095,7 +2095,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2158,7 +2158,7 @@ export class DomainsClient {
     this._log.info('configureManagementSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2285,7 +2285,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2342,7 +2342,7 @@ export class DomainsClient {
     this._log.info('configureDnsSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2467,7 +2467,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         registration: request.registration ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2524,7 +2524,7 @@ export class DomainsClient {
     this._log.info('configureContactSettings long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2645,7 +2645,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2702,7 +2702,7 @@ export class DomainsClient {
     this._log.info('exportRegistration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2833,7 +2833,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2890,7 +2890,7 @@ export class DomainsClient {
     this._log.info('deleteRegistration long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3016,7 +3016,7 @@ export class DomainsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3102,7 +3102,7 @@ export class DomainsClient {
       });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRegistrations stream %j', request);
@@ -3170,7 +3170,7 @@ export class DomainsClient {
       });
     const defaultCallSettings = this._defaults['listRegistrations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRegistrations iterate %j', request);
@@ -3280,7 +3280,7 @@ export class DomainsClient {
    */
   close(): Promise<void> {
     if (this.domainsStub && !this._terminated) {
-      return this.domainsStub.then((stub) => {
+      return this.domainsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

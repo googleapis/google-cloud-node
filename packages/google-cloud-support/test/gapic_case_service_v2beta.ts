@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as caseserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.caseServiceStub, undefined);
@@ -250,12 +250,12 @@ describe('v2beta.CaseServiceClient', () => {
       assert(client.caseServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.caseServiceStub);
@@ -264,14 +264,14 @@ describe('v2beta.CaseServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.caseServiceStub, undefined);
@@ -280,7 +280,7 @@ describe('v2beta.CaseServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v2beta.CaseServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v2beta.CaseServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v2beta.CaseServiceClient', () => {
   describe('getCase', () => {
     it('invokes getCase without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes getCase without error using callback', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes getCase with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes getCase with closed client', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v2beta.CaseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCase(request), expectedError);
@@ -452,7 +452,7 @@ describe('v2beta.CaseServiceClient', () => {
   describe('createCase', () => {
     it('invokes createCase without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes createCase without error using callback', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes createCase with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes createCase with closed client', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v2beta.CaseServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCase(request), expectedError);
@@ -584,7 +584,7 @@ describe('v2beta.CaseServiceClient', () => {
   describe('updateCase', () => {
     it('invokes updateCase without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes updateCase without error using callback', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes updateCase with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes updateCase with closed client', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v2beta.CaseServiceClient', () => {
       );
       request.case.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCase(request), expectedError);
@@ -720,7 +720,7 @@ describe('v2beta.CaseServiceClient', () => {
   describe('escalateCase', () => {
     it('invokes escalateCase without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes escalateCase without error using callback', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes escalateCase with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes escalateCase with closed client', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v2beta.CaseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.escalateCase(request), expectedError);
@@ -852,7 +852,7 @@ describe('v2beta.CaseServiceClient', () => {
   describe('closeCase', () => {
     it('invokes closeCase without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -883,7 +883,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes closeCase without error using callback', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes closeCase with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -958,7 +958,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes closeCase with closed client', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v2beta.CaseServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.closeCase(request), expectedError);
@@ -981,7 +981,7 @@ describe('v2beta.CaseServiceClient', () => {
   describe('listCases', () => {
     it('invokes listCases without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes listCases without error using callback', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1063,7 +1063,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes listCases with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1091,7 +1091,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes listCasesStream without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1137,15 +1137,15 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.listCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCasesStream with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1188,15 +1188,15 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.listCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCases without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1230,15 +1230,15 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.listCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCases with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1271,9 +1271,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.listCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1281,7 +1281,7 @@ describe('v2beta.CaseServiceClient', () => {
   describe('searchCases', () => {
     it('invokes searchCases without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1314,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes searchCases without error using callback', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1363,7 +1363,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes searchCases with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1394,7 +1394,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes searchCasesStream without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1440,15 +1440,15 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.searchCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchCasesStream with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1491,15 +1491,15 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.searchCases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchCases without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1534,15 +1534,15 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.searchCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchCases with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1576,9 +1576,9 @@ describe('v2beta.CaseServiceClient', () => {
       assert(
         (client.descriptors.page.searchCases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1586,7 +1586,7 @@ describe('v2beta.CaseServiceClient', () => {
   describe('searchCaseClassifications', () => {
     it('invokes searchCaseClassifications without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1612,7 +1612,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes searchCaseClassifications without error using callback', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1638,8 +1638,7 @@ describe('v2beta.CaseServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.support.v2beta.ICaseClassification[]
-              | null,
+              protos.google.cloud.support.v2beta.ICaseClassification[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1655,7 +1654,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes searchCaseClassifications with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1675,7 +1674,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes searchCaseClassificationsStream without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1726,7 +1725,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('invokes searchCaseClassificationsStream with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1766,7 +1765,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('uses async iteration with searchCaseClassifications without error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1804,7 +1803,7 @@ describe('v2beta.CaseServiceClient', () => {
 
     it('uses async iteration with searchCaseClassifications with error', async () => {
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1839,7 +1838,7 @@ describe('v2beta.CaseServiceClient', () => {
         organization: 'organizationValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,7 +1877,7 @@ describe('v2beta.CaseServiceClient', () => {
         case: 'caseValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1935,7 +1934,7 @@ describe('v2beta.CaseServiceClient', () => {
         attachment_id: 'attachmentIdValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2016,7 +2015,7 @@ describe('v2beta.CaseServiceClient', () => {
         comment: 'commentValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2095,7 +2094,7 @@ describe('v2beta.CaseServiceClient', () => {
         email_message: 'emailMessageValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2175,7 +2174,7 @@ describe('v2beta.CaseServiceClient', () => {
         case: 'caseValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2225,7 +2224,7 @@ describe('v2beta.CaseServiceClient', () => {
         attachment_id: 'attachmentIdValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2304,7 +2303,7 @@ describe('v2beta.CaseServiceClient', () => {
         comment: 'commentValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2380,7 +2379,7 @@ describe('v2beta.CaseServiceClient', () => {
         email_message: 'emailMessageValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2458,7 +2457,7 @@ describe('v2beta.CaseServiceClient', () => {
         support_event_subscription: 'supportEventSubscriptionValue',
       };
       const client = new caseserviceModule.v2beta.CaseServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

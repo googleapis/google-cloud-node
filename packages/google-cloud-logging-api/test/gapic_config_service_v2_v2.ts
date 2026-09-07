@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as configservicev2Module from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configServiceV2Stub, undefined);
@@ -279,12 +279,12 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(client.configServiceV2Stub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.configServiceV2Stub);
@@ -293,14 +293,14 @@ describe('v2.ConfigServiceV2Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configServiceV2Stub, undefined);
@@ -309,7 +309,7 @@ describe('v2.ConfigServiceV2Client', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v2.ConfigServiceV2Client', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v2.ConfigServiceV2Client', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getBucket', () => {
     it('invokes getBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -458,7 +458,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBucket(request), expectedError);
@@ -481,7 +481,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createBucket', () => {
     it('invokes createBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -512,7 +512,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -559,7 +559,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -590,7 +590,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -603,7 +603,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createBucket(request), expectedError);
@@ -613,7 +613,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateBucket', () => {
     it('invokes updateBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -644,7 +644,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -691,7 +691,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -722,7 +722,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -735,7 +735,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBucket(request), expectedError);
@@ -745,7 +745,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteBucket', () => {
     it('invokes deleteBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -776,7 +776,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -823,7 +823,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -854,7 +854,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -867,7 +867,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteBucket(request), expectedError);
@@ -877,7 +877,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('undeleteBucket', () => {
     it('invokes undeleteBucket without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -908,7 +908,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes undeleteBucket without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -955,7 +955,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes undeleteBucket with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -986,7 +986,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes undeleteBucket with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.undeleteBucket(request), expectedError);
@@ -1009,7 +1009,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getView', () => {
     it('invokes getView without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1040,7 +1040,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getView without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1087,7 +1087,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getView with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1115,7 +1115,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getView with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1128,7 +1128,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getView(request), expectedError);
@@ -1138,7 +1138,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createView', () => {
     it('invokes createView without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1169,7 +1169,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createView without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1216,7 +1216,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createView with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1247,7 +1247,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createView with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1260,7 +1260,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createView(request), expectedError);
@@ -1270,7 +1270,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateView', () => {
     it('invokes updateView without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1301,7 +1301,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateView without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1348,7 +1348,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateView with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,7 +1379,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateView with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1392,7 +1392,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateView(request), expectedError);
@@ -1402,7 +1402,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteView', () => {
     it('invokes deleteView without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1433,7 +1433,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteView without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1480,7 +1480,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteView with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1511,7 +1511,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteView with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1524,7 +1524,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteView(request), expectedError);
@@ -1534,7 +1534,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getSink', () => {
     it('invokes getSink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1565,7 +1565,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1612,7 +1612,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1640,7 +1640,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1653,7 +1653,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.sinkName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSink(request), expectedError);
@@ -1663,7 +1663,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createSink', () => {
     it('invokes createSink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1694,7 +1694,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createSink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1741,7 +1741,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createSink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1772,7 +1772,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createSink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1785,7 +1785,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSink(request), expectedError);
@@ -1795,7 +1795,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateSink', () => {
     it('invokes updateSink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1826,7 +1826,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1873,7 +1873,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1904,7 +1904,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1917,7 +1917,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.sinkName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSink(request), expectedError);
@@ -1927,7 +1927,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteSink', () => {
     it('invokes deleteSink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1958,7 +1958,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteSink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2005,7 +2005,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteSink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2036,7 +2036,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteSink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2049,7 +2049,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.sinkName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSink(request), expectedError);
@@ -2059,7 +2059,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getLink', () => {
     it('invokes getLink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2090,7 +2090,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getLink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2137,7 +2137,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getLink with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2165,7 +2165,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getLink with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2178,7 +2178,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLink(request), expectedError);
@@ -2188,7 +2188,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getExclusion', () => {
     it('invokes getExclusion without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2219,7 +2219,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getExclusion without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2266,7 +2266,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getExclusion with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2297,7 +2297,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getExclusion with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2310,7 +2310,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getExclusion(request), expectedError);
@@ -2320,7 +2320,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createExclusion', () => {
     it('invokes createExclusion without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2351,7 +2351,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createExclusion without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2398,7 +2398,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createExclusion with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2429,7 +2429,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createExclusion with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2442,7 +2442,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createExclusion(request), expectedError);
@@ -2452,7 +2452,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateExclusion', () => {
     it('invokes updateExclusion without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2483,7 +2483,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateExclusion without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2530,7 +2530,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateExclusion with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2561,7 +2561,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateExclusion with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2574,7 +2574,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateExclusion(request), expectedError);
@@ -2584,7 +2584,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteExclusion', () => {
     it('invokes deleteExclusion without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2615,7 +2615,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteExclusion without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2662,7 +2662,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteExclusion with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2693,7 +2693,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteExclusion with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2706,7 +2706,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteExclusion(request), expectedError);
@@ -2716,7 +2716,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getCmekSettings', () => {
     it('invokes getCmekSettings without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2747,7 +2747,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getCmekSettings without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2794,7 +2794,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getCmekSettings with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2825,7 +2825,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getCmekSettings with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2838,7 +2838,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCmekSettings(request), expectedError);
@@ -2848,7 +2848,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateCmekSettings', () => {
     it('invokes updateCmekSettings without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2880,7 +2880,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateCmekSettings without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2927,7 +2927,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateCmekSettings with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2958,7 +2958,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateCmekSettings with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2971,7 +2971,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCmekSettings(request), expectedError);
@@ -2981,7 +2981,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('getSettings', () => {
     it('invokes getSettings without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3012,7 +3012,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSettings without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3059,7 +3059,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSettings with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3090,7 +3090,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes getSettings with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3103,7 +3103,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSettings(request), expectedError);
@@ -3113,7 +3113,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateSettings', () => {
     it('invokes updateSettings without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3144,7 +3144,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSettings without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3191,7 +3191,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSettings with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3222,7 +3222,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateSettings with closed client', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3235,7 +3235,7 @@ describe('v2.ConfigServiceV2Client', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSettings(request), expectedError);
@@ -3245,7 +3245,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createBucketAsync', () => {
     it('invokes createBucketAsync without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3278,7 +3278,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucketAsync without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3332,7 +3332,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucketAsync with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3363,7 +3363,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createBucketAsync with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3396,7 +3396,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCreateBucketAsyncProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3404,8 +3404,8 @@ describe('v2.ConfigServiceV2Client', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBucketAsyncProgress(
@@ -3418,7 +3418,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCreateBucketAsyncProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3439,7 +3439,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('updateBucketAsync', () => {
     it('invokes updateBucketAsync without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3472,7 +3472,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucketAsync without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3526,7 +3526,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucketAsync with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3557,7 +3557,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes updateBucketAsync with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3590,7 +3590,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkUpdateBucketAsyncProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3598,8 +3598,8 @@ describe('v2.ConfigServiceV2Client', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBucketAsyncProgress(
@@ -3612,7 +3612,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkUpdateBucketAsyncProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3633,7 +3633,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('createLink', () => {
     it('invokes createLink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3665,7 +3665,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createLink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3719,7 +3719,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createLink with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3750,7 +3750,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes createLink with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3783,7 +3783,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCreateLinkProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3791,8 +3791,8 @@ describe('v2.ConfigServiceV2Client', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateLinkProgress(
@@ -3805,7 +3805,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCreateLinkProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3823,7 +3823,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteLink', () => {
     it('invokes deleteLink without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3855,7 +3855,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteLink without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3909,7 +3909,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteLink with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3940,7 +3940,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes deleteLink with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3973,7 +3973,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkDeleteLinkProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3981,8 +3981,8 @@ describe('v2.ConfigServiceV2Client', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteLinkProgress(
@@ -3995,7 +3995,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkDeleteLinkProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4013,7 +4013,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('copyLogEntries', () => {
     it('invokes copyLogEntries without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4032,7 +4032,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes copyLogEntries without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4072,7 +4072,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes copyLogEntries with call error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4089,7 +4089,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes copyLogEntries with LRO error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4108,7 +4108,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCopyLogEntriesProgress without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4116,8 +4116,8 @@ describe('v2.ConfigServiceV2Client', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCopyLogEntriesProgress(
@@ -4130,7 +4130,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes checkCopyLogEntriesProgress with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4151,7 +4151,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listBuckets', () => {
     it('invokes listBuckets without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4184,7 +4184,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listBuckets without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4233,7 +4233,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listBuckets with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4264,7 +4264,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listBucketsStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4307,15 +4307,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listBuckets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBucketsStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4355,15 +4355,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listBuckets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBuckets without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4398,15 +4398,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listBuckets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBuckets with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4440,9 +4440,9 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listBuckets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4450,7 +4450,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listViews', () => {
     it('invokes listViews without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4483,7 +4483,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listViews without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4532,7 +4532,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listViews with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4560,7 +4560,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listViewsStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4603,15 +4603,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listViewsStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4651,15 +4651,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listViews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listViews without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4693,15 +4693,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listViews with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4734,9 +4734,9 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listViews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4744,7 +4744,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listSinks', () => {
     it('invokes listSinks without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4777,7 +4777,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listSinks without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4826,7 +4826,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listSinks with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4854,7 +4854,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listSinksStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4897,15 +4897,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listSinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSinksStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4945,15 +4945,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listSinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSinks without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4987,15 +4987,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listSinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSinks with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5028,9 +5028,9 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listSinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5038,7 +5038,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listLinks', () => {
     it('invokes listLinks without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5071,7 +5071,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listLinks without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5120,7 +5120,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listLinks with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5148,7 +5148,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listLinksStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5191,15 +5191,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLinksStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5239,15 +5239,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLinks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLinks without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5281,15 +5281,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLinks with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5322,9 +5322,9 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listLinks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5332,7 +5332,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listExclusions', () => {
     it('invokes listExclusions without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5365,7 +5365,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listExclusions without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5414,7 +5414,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listExclusions with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5445,7 +5445,7 @@ describe('v2.ConfigServiceV2Client', () => {
 
     it('invokes listExclusionsStream without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5488,15 +5488,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listExclusions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listExclusionsStream with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5534,15 +5534,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listExclusions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExclusions without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5577,15 +5577,15 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listExclusions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExclusions with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5617,16 +5617,16 @@ describe('v2.ConfigServiceV2Client', () => {
       assert(
         (client.descriptors.page.listExclusions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5647,7 +5647,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5675,7 +5675,7 @@ describe('v2.ConfigServiceV2Client', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5685,7 +5685,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5709,7 +5709,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5731,7 +5731,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5759,7 +5759,7 @@ describe('v2.ConfigServiceV2Client', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5769,7 +5769,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5793,7 +5793,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5815,7 +5815,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5843,7 +5843,7 @@ describe('v2.ConfigServiceV2Client', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5853,7 +5853,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5877,7 +5877,7 @@ describe('v2.ConfigServiceV2Client', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5912,7 +5912,7 @@ describe('v2.ConfigServiceV2Client', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5946,7 +5946,7 @@ describe('v2.ConfigServiceV2Client', () => {
         billing_account: 'billingAccountValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5996,7 +5996,7 @@ describe('v2.ConfigServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6060,7 +6060,7 @@ describe('v2.ConfigServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6140,7 +6140,7 @@ describe('v2.ConfigServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6237,7 +6237,7 @@ describe('v2.ConfigServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6332,7 +6332,7 @@ describe('v2.ConfigServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6393,7 +6393,7 @@ describe('v2.ConfigServiceV2Client', () => {
         billing_account: 'billingAccountValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6439,7 +6439,7 @@ describe('v2.ConfigServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6500,7 +6500,7 @@ describe('v2.ConfigServiceV2Client', () => {
         folder: 'folderValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6545,7 +6545,7 @@ describe('v2.ConfigServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6598,7 +6598,7 @@ describe('v2.ConfigServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6676,7 +6676,7 @@ describe('v2.ConfigServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6771,7 +6771,7 @@ describe('v2.ConfigServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6864,7 +6864,7 @@ describe('v2.ConfigServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6912,7 +6912,7 @@ describe('v2.ConfigServiceV2Client', () => {
         folder: 'folderValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6951,7 +6951,7 @@ describe('v2.ConfigServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7000,7 +7000,7 @@ describe('v2.ConfigServiceV2Client', () => {
         location: 'locationValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7049,7 +7049,7 @@ describe('v2.ConfigServiceV2Client', () => {
         metric: 'metricValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7097,7 +7097,7 @@ describe('v2.ConfigServiceV2Client', () => {
         organization: 'organizationValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7143,7 +7143,7 @@ describe('v2.ConfigServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7207,7 +7207,7 @@ describe('v2.ConfigServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7287,7 +7287,7 @@ describe('v2.ConfigServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7382,7 +7382,7 @@ describe('v2.ConfigServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7475,7 +7475,7 @@ describe('v2.ConfigServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7527,7 +7527,7 @@ describe('v2.ConfigServiceV2Client', () => {
         organization: 'organizationValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7573,7 +7573,7 @@ describe('v2.ConfigServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7628,7 +7628,7 @@ describe('v2.ConfigServiceV2Client', () => {
         project: 'projectValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7666,7 +7666,7 @@ describe('v2.ConfigServiceV2Client', () => {
         project: 'projectValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7711,7 +7711,7 @@ describe('v2.ConfigServiceV2Client', () => {
         exclusion: 'exclusionValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7767,7 +7767,7 @@ describe('v2.ConfigServiceV2Client', () => {
         bucket: 'bucketValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7847,7 +7847,7 @@ describe('v2.ConfigServiceV2Client', () => {
         link: 'linkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7942,7 +7942,7 @@ describe('v2.ConfigServiceV2Client', () => {
         view: 'viewValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8035,7 +8035,7 @@ describe('v2.ConfigServiceV2Client', () => {
         log: 'logValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8083,7 +8083,7 @@ describe('v2.ConfigServiceV2Client', () => {
         project: 'projectValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8122,7 +8122,7 @@ describe('v2.ConfigServiceV2Client', () => {
         sink: 'sinkValue',
       };
       const client = new configservicev2Module.v2.ConfigServiceV2Client({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,7 +59,7 @@ export class DataplexServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataplex');
@@ -72,11 +72,11 @@ export class DataplexServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  dataplexServiceStub?: Promise<{ [name: string]: Function }>;
+  dataplexServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataplexServiceClient.
@@ -152,7 +152,7 @@ export class DataplexServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -628,21 +628,21 @@ export class DataplexServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+            {get: '/v1/{name=organizations/*/locations/*}/operations'},
           ],
         },
       ];
@@ -791,7 +791,7 @@ export class DataplexServiceClient {
       'google.cloud.dataplex.v1.DataplexService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -831,7 +831,7 @@ export class DataplexServiceClient {
           (this._protos as any).google.cloud.dataplex.v1.DataplexService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -866,7 +866,7 @@ export class DataplexServiceClient {
     ];
     for (const methodName of dataplexServiceStubMethods) {
       const callPromise = this.dataplexServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -1065,7 +1065,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getLake request %j', request);
@@ -1190,7 +1190,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getZone request %j', request);
@@ -1315,7 +1315,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAsset request %j', request);
@@ -1440,7 +1440,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTask request %j', request);
@@ -1581,7 +1581,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('runTask request %j', request);
@@ -1706,7 +1706,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getJob request %j', request);
@@ -1831,7 +1831,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelJob request %j', request);
@@ -1992,7 +1992,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2049,7 +2049,7 @@ export class DataplexServiceClient {
     this._log.info('createLake long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2167,7 +2167,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'lake.name': request.lake!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2224,7 +2224,7 @@ export class DataplexServiceClient {
     this._log.info('updateLake long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2338,7 +2338,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2395,7 +2395,7 @@ export class DataplexServiceClient {
     this._log.info('deleteLake long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2523,7 +2523,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2580,7 +2580,7 @@ export class DataplexServiceClient {
     this._log.info('createZone long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2698,7 +2698,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'zone.name': request.zone!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2755,7 +2755,7 @@ export class DataplexServiceClient {
     this._log.info('updateZone long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2869,7 +2869,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2926,7 +2926,7 @@ export class DataplexServiceClient {
     this._log.info('deleteZone long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3053,7 +3053,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3110,7 +3110,7 @@ export class DataplexServiceClient {
     this._log.info('createAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3228,7 +3228,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'asset.name': request.asset!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3285,7 +3285,7 @@ export class DataplexServiceClient {
     this._log.info('updateAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3399,7 +3399,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3456,7 +3456,7 @@ export class DataplexServiceClient {
     this._log.info('deleteAsset long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3576,7 +3576,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3633,7 +3633,7 @@ export class DataplexServiceClient {
     this._log.info('createTask long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3751,7 +3751,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'task.name': request.task!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3808,7 +3808,7 @@ export class DataplexServiceClient {
     this._log.info('updateTask long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3921,7 +3921,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3978,7 +3978,7 @@ export class DataplexServiceClient {
     this._log.info('deleteTask long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4087,7 +4087,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4162,7 +4162,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listLakes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLakes stream %j', request);
@@ -4221,7 +4221,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listLakes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLakes iterate %j', request);
@@ -4325,7 +4325,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4398,7 +4398,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listLakeActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLakeActions stream %j', request);
@@ -4453,7 +4453,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listLakeActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listLakeActions iterate %j', request);
@@ -4558,7 +4558,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4632,7 +4632,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listZones stream %j', request);
@@ -4690,7 +4690,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listZones iterate %j', request);
@@ -4794,7 +4794,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4867,7 +4867,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listZoneActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listZoneActions stream %j', request);
@@ -4922,7 +4922,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listZoneActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listZoneActions iterate %j', request);
@@ -5030,7 +5030,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5107,7 +5107,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssets stream %j', request);
@@ -5166,7 +5166,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssets iterate %j', request);
@@ -5270,7 +5270,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5343,7 +5343,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssetActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssetActions stream %j', request);
@@ -5398,7 +5398,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listAssetActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAssetActions iterate %j', request);
@@ -5503,7 +5503,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5577,7 +5577,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTasks stream %j', request);
@@ -5635,7 +5635,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTasks iterate %j', request);
@@ -5737,7 +5737,7 @@ export class DataplexServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5808,7 +5808,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listJobs stream %j', request);
@@ -5863,7 +5863,7 @@ export class DataplexServiceClient {
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listJobs iterate %j', request);
@@ -8392,11 +8392,11 @@ export class DataplexServiceClient {
    */
   close(): Promise<void> {
     if (this.dataplexServiceStub && !this._terminated) {
-      return this.dataplexServiceStub.then((stub) => {
+      return this.dataplexServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

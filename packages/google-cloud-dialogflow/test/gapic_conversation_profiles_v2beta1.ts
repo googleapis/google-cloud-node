@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as conversationprofilesModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -288,7 +288,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.conversationProfilesStub, undefined);
@@ -296,13 +296,13 @@ describe('v2beta1.ConversationProfilesClient', () => {
       assert(client.conversationProfilesStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.conversationProfilesStub);
@@ -311,15 +311,15 @@ describe('v2beta1.ConversationProfilesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.conversationProfilesStub, undefined);
@@ -328,7 +328,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -337,7 +337,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -350,7 +350,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -374,7 +374,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getConversationProfile without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -407,7 +407,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getConversationProfile without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -455,7 +455,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getConversationProfile with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -490,7 +490,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getConversationProfile with closed client', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -503,7 +503,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -517,7 +517,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes createConversationProfile without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -550,7 +550,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes createConversationProfile without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes createConversationProfile with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -633,7 +633,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes createConversationProfile with closed client', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -660,7 +660,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes updateConversationProfile without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes updateConversationProfile without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes updateConversationProfile with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -779,7 +779,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes updateConversationProfile with closed client', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -793,7 +793,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       );
       request.conversationProfile.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -807,7 +807,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes deleteConversationProfile without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -840,7 +840,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes deleteConversationProfile without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes deleteConversationProfile with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -923,7 +923,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes deleteConversationProfile with closed client', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -936,7 +936,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -950,7 +950,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes setSuggestionFeatureConfig without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -984,7 +984,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes setSuggestionFeatureConfig without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1039,7 +1039,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes setSuggestionFeatureConfig with call error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1074,7 +1074,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes setSuggestionFeatureConfig with LRO error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes checkSetSuggestionFeatureConfigProgress without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1116,8 +1116,8 @@ describe('v2beta1.ConversationProfilesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1132,7 +1132,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes checkSetSuggestionFeatureConfigProgress with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1154,7 +1154,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes clearSuggestionFeatureConfig without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1188,7 +1188,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes clearSuggestionFeatureConfig without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1243,7 +1243,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes clearSuggestionFeatureConfig with call error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1278,7 +1278,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes clearSuggestionFeatureConfig with LRO error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1312,7 +1312,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes checkClearSuggestionFeatureConfigProgress without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1320,8 +1320,8 @@ describe('v2beta1.ConversationProfilesClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1336,7 +1336,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes checkClearSuggestionFeatureConfigProgress with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1358,7 +1358,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes listConversationProfiles without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1399,7 +1399,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes listConversationProfiles without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1457,7 +1457,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes listConversationProfiles with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1492,7 +1492,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes listConversationProfilesStream without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1562,7 +1562,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes listConversationProfilesStream with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1621,7 +1621,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('uses async iteration with listConversationProfiles without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1676,7 +1676,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('uses async iteration with listConversationProfiles with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1723,7 +1723,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1799,7 +1799,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1884,7 +1884,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1926,7 +1926,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1948,7 +1948,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1976,7 +1976,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1987,7 +1987,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2012,7 +2012,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2035,7 +2035,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2063,7 +2063,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2074,7 +2074,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2099,7 +2099,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2122,7 +2122,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2150,7 +2150,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2161,7 +2161,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2186,7 +2186,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -2222,7 +2222,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2259,7 +2259,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2336,7 +2336,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2390,7 +2390,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2456,7 +2456,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2548,7 +2548,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2587,7 +2587,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2627,7 +2627,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2691,7 +2691,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2759,7 +2759,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2886,7 +2886,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3008,7 +3008,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3055,7 +3055,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3118,7 +3118,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3198,7 +3198,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3275,7 +3275,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3337,7 +3337,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3401,7 +3401,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3481,7 +3481,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3562,7 +3562,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3628,7 +3628,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3692,7 +3692,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3757,7 +3757,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3836,7 +3836,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3901,7 +3901,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3981,7 +3981,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4065,7 +4065,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4212,7 +4212,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4354,7 +4354,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4417,7 +4417,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4498,7 +4498,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4600,7 +4600,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4706,7 +4706,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4785,7 +4785,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4865,7 +4865,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4967,7 +4967,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5073,7 +5073,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5157,7 +5157,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5237,7 +5237,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5318,7 +5318,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5424,7 +5424,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5503,7 +5503,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5567,7 +5567,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5632,7 +5632,7 @@ describe('v2beta1.ConversationProfilesClient', () => {
       };
       const client =
         new conversationprofilesModule.v2beta1.ConversationProfilesClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

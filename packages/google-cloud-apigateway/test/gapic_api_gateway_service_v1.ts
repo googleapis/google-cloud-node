@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as apigatewayserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -231,7 +231,7 @@ describe('v1.ApiGatewayServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'apigateway.configured.example.com');
@@ -272,7 +272,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.apiGatewayServiceStub, undefined);
@@ -280,12 +280,12 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(client.apiGatewayServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.apiGatewayServiceStub);
@@ -294,14 +294,14 @@ describe('v1.ApiGatewayServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.apiGatewayServiceStub, undefined);
@@ -310,7 +310,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -318,7 +318,7 @@ describe('v1.ApiGatewayServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -330,7 +330,7 @@ describe('v1.ApiGatewayServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -353,7 +353,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('getGateway', () => {
     it('invokes getGateway without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -384,7 +384,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes getGateway without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes getGateway with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -462,7 +462,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes getGateway with closed client', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -475,7 +475,7 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGateway(request), expectedError);
@@ -485,7 +485,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('getApi', () => {
     it('invokes getApi without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes getApi without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes getApi with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes getApi with closed client', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -604,7 +604,7 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApi(request), expectedError);
@@ -614,7 +614,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('getApiConfig', () => {
     it('invokes getApiConfig without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -645,7 +645,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes getApiConfig without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -692,7 +692,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes getApiConfig with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -723,7 +723,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes getApiConfig with closed client', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v1.ApiGatewayServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApiConfig(request), expectedError);
@@ -746,7 +746,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('createGateway', () => {
     it('invokes createGateway without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -779,7 +779,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes createGateway without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes createGateway with call error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes createGateway with LRO error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -897,7 +897,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkCreateGatewayProgress without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -905,8 +905,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateGatewayProgress(
@@ -919,7 +919,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkCreateGatewayProgress with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -940,7 +940,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('updateGateway', () => {
     it('invokes updateGateway without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -974,7 +974,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes updateGateway without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1029,7 +1029,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes updateGateway with call error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1061,7 +1061,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes updateGateway with LRO error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1095,7 +1095,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkUpdateGatewayProgress without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1103,8 +1103,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateGatewayProgress(
@@ -1117,7 +1117,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkUpdateGatewayProgress with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('deleteGateway', () => {
     it('invokes deleteGateway without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1171,7 +1171,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes deleteGateway without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes deleteGateway with call error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1256,7 +1256,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes deleteGateway with LRO error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1289,7 +1289,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkDeleteGatewayProgress without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1297,8 +1297,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteGatewayProgress(
@@ -1311,7 +1311,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkDeleteGatewayProgress with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1332,7 +1332,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('createApi', () => {
     it('invokes createApi without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1364,7 +1364,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes createApi without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1418,7 +1418,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes createApi with call error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1449,7 +1449,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes createApi with LRO error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1482,7 +1482,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkCreateApiProgress without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1490,8 +1490,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateApiProgress(
@@ -1504,7 +1504,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkCreateApiProgress with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1522,7 +1522,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('updateApi', () => {
     it('invokes updateApi without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1555,7 +1555,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes updateApi without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1610,7 +1610,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes updateApi with call error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1642,7 +1642,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes updateApi with LRO error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1676,7 +1676,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkUpdateApiProgress without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1684,8 +1684,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateApiProgress(
@@ -1698,7 +1698,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkUpdateApiProgress with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1716,7 +1716,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('deleteApi', () => {
     it('invokes deleteApi without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1748,7 +1748,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes deleteApi without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1802,7 +1802,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes deleteApi with call error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1833,7 +1833,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes deleteApi with LRO error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1866,7 +1866,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkDeleteApiProgress without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1874,8 +1874,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteApiProgress(
@@ -1888,7 +1888,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkDeleteApiProgress with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1906,7 +1906,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('createApiConfig', () => {
     it('invokes createApiConfig without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1939,7 +1939,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes createApiConfig without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1993,7 +1993,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes createApiConfig with call error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2024,7 +2024,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes createApiConfig with LRO error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2057,7 +2057,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkCreateApiConfigProgress without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2065,8 +2065,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateApiConfigProgress(
@@ -2079,7 +2079,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkCreateApiConfigProgress with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2100,7 +2100,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('updateApiConfig', () => {
     it('invokes updateApiConfig without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2134,7 +2134,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes updateApiConfig without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2189,7 +2189,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes updateApiConfig with call error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2221,7 +2221,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes updateApiConfig with LRO error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2255,7 +2255,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkUpdateApiConfigProgress without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2263,8 +2263,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateApiConfigProgress(
@@ -2277,7 +2277,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkUpdateApiConfigProgress with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2298,7 +2298,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('deleteApiConfig', () => {
     it('invokes deleteApiConfig without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2331,7 +2331,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes deleteApiConfig without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2385,7 +2385,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes deleteApiConfig with call error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2416,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes deleteApiConfig with LRO error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2449,7 +2449,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkDeleteApiConfigProgress without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2457,8 +2457,8 @@ describe('v1.ApiGatewayServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteApiConfigProgress(
@@ -2471,7 +2471,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes checkDeleteApiConfigProgress with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2492,7 +2492,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('listGateways', () => {
     it('invokes listGateways without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes listGateways without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2574,7 +2574,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes listGateways with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2605,7 +2605,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes listGatewaysStream without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2651,15 +2651,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGatewaysStream with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2702,15 +2702,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listGateways.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGateways without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2745,15 +2745,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGateways with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2785,9 +2785,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listGateways.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2795,7 +2795,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('listApis', () => {
     it('invokes listApis without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2828,7 +2828,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes listApis without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2877,7 +2877,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes listApis with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2905,7 +2905,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes listApisStream without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2948,15 +2948,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listApis.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listApisStream with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2996,15 +2996,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listApis.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApis without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3038,15 +3038,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listApis.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApis with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3079,9 +3079,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listApis.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3089,7 +3089,7 @@ describe('v1.ApiGatewayServiceClient', () => {
   describe('listApiConfigs', () => {
     it('invokes listApiConfigs without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3128,7 +3128,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes listApiConfigs without error using callback', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3183,7 +3183,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes listApiConfigs with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3214,7 +3214,7 @@ describe('v1.ApiGatewayServiceClient', () => {
 
     it('invokes listApiConfigsStream without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3266,15 +3266,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listApiConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listApiConfigsStream with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3315,15 +3315,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listApiConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApiConfigs without error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3364,15 +3364,15 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listApiConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApiConfigs with error', async () => {
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3404,9 +3404,9 @@ describe('v1.ApiGatewayServiceClient', () => {
       assert(
         (client.descriptors.page.listApiConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3419,7 +3419,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         api: 'apiValue',
       };
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3469,7 +3469,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         api_config: 'apiConfigValue',
       };
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3533,7 +3533,7 @@ describe('v1.ApiGatewayServiceClient', () => {
         gateway: 'gatewayValue',
       };
       const client = new apigatewayserviceModule.v1.ApiGatewayServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

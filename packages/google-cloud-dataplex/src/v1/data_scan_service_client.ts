@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +57,7 @@ export class DataScanServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataplex');
@@ -70,11 +70,11 @@ export class DataScanServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  dataScanServiceStub?: Promise<{ [name: string]: Function }>;
+  dataScanServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataScanServiceClient.
@@ -150,7 +150,7 @@ export class DataScanServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -596,21 +596,21 @@ export class DataScanServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
           additional_bindings: [
-            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+            {get: '/v1/{name=organizations/*/locations/*}/operations'},
           ],
         },
       ];
@@ -660,7 +660,7 @@ export class DataScanServiceClient {
       'google.cloud.dataplex.v1.DataScanService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -700,7 +700,7 @@ export class DataScanServiceClient {
           (this._protos as any).google.cloud.dataplex.v1.DataScanService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -718,7 +718,7 @@ export class DataScanServiceClient {
     ];
     for (const methodName of dataScanServiceStubMethods) {
       const callPromise = this.dataScanServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -923,7 +923,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataScan request %j', request);
@@ -1056,7 +1056,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('runDataScan request %j', request);
@@ -1189,7 +1189,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataScanJob request %j', request);
@@ -1326,7 +1326,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelDataScanJob request %j', request);
@@ -1474,7 +1474,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('generateDataQualityRules request %j', request);
@@ -1641,7 +1641,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1698,7 +1698,7 @@ export class DataScanServiceClient {
     this._log.info('createDataScan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1817,7 +1817,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_scan.name': request.dataScan!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1874,7 +1874,7 @@ export class DataScanServiceClient {
     this._log.info('updateDataScan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1993,7 +1993,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2050,7 +2050,7 @@ export class DataScanServiceClient {
     this._log.info('deleteDataScan long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2164,7 +2164,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2244,7 +2244,7 @@ export class DataScanServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataScans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataScans stream %j', request);
@@ -2306,7 +2306,7 @@ export class DataScanServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataScans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataScans iterate %j', request);
@@ -2437,7 +2437,7 @@ export class DataScanServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2531,7 +2531,7 @@ export class DataScanServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataScanJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataScanJobs stream %j', request);
@@ -2607,7 +2607,7 @@ export class DataScanServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataScanJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataScanJobs iterate %j', request);
@@ -5136,11 +5136,11 @@ export class DataScanServiceClient {
    */
   close(): Promise<void> {
     if (this.dataScanServiceStub && !this._terminated) {
-      return this.dataScanServiceStub.then((stub) => {
+      return this.dataScanServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();
