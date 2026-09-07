@@ -538,7 +538,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
     if (isBucket(this.parent)) {
       // TODO: remove any suppression during follow up PR to improve type safety.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      url = `${this.parent.baseUrl}/${(this.parent as any).id}${url}`;
+      url = `${this.parent.baseUrl}/${(this.parent as any).name}${url}`;
     }
 
     const body = Object.assign({}, methodConfig.reqOpts?.body, metadata);

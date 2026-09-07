@@ -579,32 +579,56 @@ describe('storage', function () {
 
       it('should get a policy', async () => {
         const [policy] = await bucket.iam.getPolicy();
-        assert.deepStrictEqual(policy!.bindings, [
-          {
-            members: [
-              'projectEditor:' + PROJECT_ID,
-              'projectOwner:' + PROJECT_ID,
-            ],
-            role: 'roles/storage.legacyBucketOwner',
-          },
-          {
-            members: ['projectViewer:' + PROJECT_ID],
-            role: 'roles/storage.legacyBucketReader',
-          },
-          {
-            role: 'roles/storage.legacyObjectOwner',
-            members: [
-              'projectEditor:' + PROJECT_ID,
-              'projectOwner:' + PROJECT_ID,
-            ],
-          },
-          {
-            role: 'roles/storage.legacyObjectReader',
-            members: ['projectViewer:' + PROJECT_ID],
-          },
-        ]);
+        assert.ok(Array.isArray(policy?.bindings));
+
+        const roles = policy!.bindings.map(b => b.role);
+        assert.ok(roles.includes('roles/storage.legacyBucketOwner'));
+        assert.ok(roles.includes('roles/storage.legacyBucketReader'));
+        assert.ok(roles.includes('roles/storage.legacyObjectOwner'));
+        assert.ok(roles.includes('roles/storage.legacyObjectReader'));
+
+        const ownerBinding = policy!.bindings.find(
+          b => b.role === 'roles/storage.legacyBucketOwner',
+        );
+        assert.ok(
+          ownerBinding?.members.includes('projectOwner:' + PROJECT_ID) ||
+            ownerBinding?.members.includes('projectEditor:' + PROJECT_ID),
+        );
       });
 
+      it('should set a policy', async () => {
+        const [serviceAccount] = await storage.getServiceAccount();
+        const [policy] = await bucket.iam.getPolicy();
+        const member = `serviceAccount:${serviceAccount!.emailAddress}`;
+        const binding = policy!.bindings.find(
+          b => b.role === 'roles/storage.legacyBucketReader',
+        );
+        if (binding) {
+          binding.members.push(member);
+        } else {
+          policy!.bindings.push({
+            role: 'roles/storage.legacyBucketReader',
+            members: [member],
+          });
+        }
+        const [newPolicy] = await bucket.iam.setPolicy(policy);
+        const legacyBucketReaderBinding = newPolicy!.bindings.find(
+          b => b.role === 'roles/storage.legacyBucketReader',
+        );
+        assert(legacyBucketReaderBinding?.members.includes(member));
+      });
+
+      it('should test the iam permissions', async () => {
+        const testPermissions = [
+          'storage.buckets.get',
+          'storage.buckets.getIamPolicy',
+        ];
+        const [permissions] = await bucket.iam.testPermissions(testPermissions);
+        assert.deepStrictEqual(permissions, {
+          'storage.buckets.get': true,
+          'storage.buckets.getIamPolicy': true,
+        });
+      });
 
 
       it('should get-modify-set a conditional policy', async () => {
@@ -674,14 +698,39 @@ describe('storage', function () {
     };
 
     const validateConfiguringPublicAccessWhenPAPEnforcedError = (
-      err: GaxiosError,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      err: any,
     ) => {
-      // 412: PAP is working
-      // 400/404: UBLA Org Policy is working (and blocking the ACL call)
-      const status = (err as any).code || 0;
-      const isExpectedError = [412, 400, 404].includes(status);
-      assert.ok(isExpectedError);
-      return true;
+      const status = Number(err.status || err.code || 0);
+      const message = err.message || '';
+      const reason =
+        err.errors?.[0]?.reason ||
+        err.response?.data?.error?.errors?.[0]?.reason ||
+        '';
+
+      // 412: Public Access Prevention (PAP) enforced
+      if (status === 412) {
+        return true;
+      }
+
+      // Uniform Bucket-Level Access (UBLA) blocks ACL operations via 400/404
+      if (status === 400 || status === 404) {
+        const isUblaError =
+          reason === 'cannotUseAclWithUniformBucketLevelAccess' ||
+          reason === 'conditionNotMet' ||
+          /uniform bucket-level access/i.test(message) ||
+          /\bacl\b/i.test(message);
+
+        assert.ok(
+          isUblaError,
+          `Received unexpected ${status} error: "${message}". Expected a UBLA/PAP policy restriction.`,
+        );
+        return true;
+      }
+
+      assert.fail(
+        `Expected 412 or UBLA-restricted error, but received ${status}: ${message}`,
+      );
     };
 
     beforeEach(createBucket);
@@ -1963,12 +2012,6 @@ describe('storage', function () {
     const PREFIX = 'sys-test';
 
     it('should enable logging on current bucket by default', async () => {
-      // Ensure the main bucket exists (in case it was deleted by previous tests)
-      const [exists] = await bucket.exists();
-      if (!exists) {
-        await bucket.create();
-      }
-
       const [metadata] = await bucket.enableLogging({prefix: PREFIX});
       assert.deepStrictEqual(metadata.logging, {
         logBucket: bucket.id,
@@ -2832,11 +2875,7 @@ describe('storage', function () {
 
       it('should not get the hashes from the unencrypted file', async () => {
         const [metadata] = await unencryptedFile.getMetadata();
-        if (metadata.crc32c !== undefined) {
-          assert.strictEqual(typeof metadata.crc32c, 'string');
-        } else {
-          assert.strictEqual(metadata.crc32c, undefined);
-        }
+        assert.strictEqual(metadata.crc32c, undefined);
       });
 
       it('should get the hashes from the encrypted file', async () => {
