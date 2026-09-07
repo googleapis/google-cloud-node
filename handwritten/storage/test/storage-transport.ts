@@ -444,5 +444,84 @@ describe('Storage Transport', () => {
         true,
       );
     });
+
+    it('should retain query parameters in adapter if url was not modified', async () => {
+      const gaxios = new Gaxios();
+      let capturedOpts: any;
+      sandbox.stub(gaxios, 'request').callsFake(async (opts: any) => {
+        capturedOpts = opts;
+        return {data: {}, headers: new Map(), status: 200} as any;
+      });
+      const customTransport = new StorageTransport({
+        apiEndpoint: baseUrl,
+        baseUrl,
+        authClient: authClientStub,
+        gaxiosInstance: gaxios,
+        projectId: 'project-id',
+        retryOptions: {
+          maxRetries: 3,
+          retryDelayMultiplier: 2,
+          maxRetryDelay: 100,
+          totalTimeout: 1000,
+          retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+        },
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.callsFake(async (opts: any) => {
+        return opts.adapter(opts);
+      });
+
+      await customTransport.makeRequest({
+        method: 'GET',
+        url: '/test',
+        queryParameters: {foo: 'bar'},
+      });
+
+      assert.deepStrictEqual(capturedOpts.params, {foo: 'bar'});
+    });
+
+    it('should clear params in adapter if url already has params serialized', async () => {
+      const gaxios = new Gaxios();
+      let capturedOpts: any;
+      sandbox.stub(gaxios, 'request').callsFake(async (opts: any) => {
+        capturedOpts = opts;
+        return {data: {}, headers: new Map(), status: 200} as any;
+      });
+      const customTransport = new StorageTransport({
+        apiEndpoint: baseUrl,
+        baseUrl,
+        authClient: authClientStub,
+        gaxiosInstance: gaxios,
+        projectId: 'project-id',
+        retryOptions: {
+          maxRetries: 3,
+          retryDelayMultiplier: 2,
+          maxRetryDelay: 100,
+          totalTimeout: 1000,
+          retryableErrorFn: RETRYABLE_ERR_FN_DEFAULT,
+        },
+        scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+        packageJson: {name: 'test-package', version: '1.0.0'},
+      });
+      const requestStub = authClientStub.request as sinon.SinonStub;
+      requestStub.callsFake(async (opts: any) => {
+        const preparedOpts = {
+          ...opts,
+          url: `${opts.url}?foo=bar`,
+        };
+        return opts.adapter(preparedOpts);
+      });
+
+      await customTransport.makeRequest({
+        method: 'GET',
+        url: '/test',
+        queryParameters: {foo: 'bar'},
+      });
+
+      assert.strictEqual(capturedOpts.params, undefined);
+      assert.strictEqual(capturedOpts.url, `${baseUrl}/test?foo=bar`);
+    });
   });
 });
